@@ -1,0 +1,27 @@
+{
+  "ampauthdem": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-ampawesome-ampauthdem-210514-authRole",
+      "UnauthRoleArn": "arn:aws:iam::133649168996:role/amplify-ampawesome-ampauthdem-210514-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::133649168996:role/amplify-ampawesome-ampauthdem-210514-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-ampawesome-ampauthdem-210514-deployment",
+      "UnauthRoleName": "amplify-ampawesome-ampauthdem-210514-unauthRole",
+      "StackName": "amplify-ampawesome-ampauthdem-210514",
+      "StackId": "arn:aws:cloudformation:us-east-1:133649168996:stack/amplify-ampawesome-ampauthdem-210514/e9ce6120-bf69-11eb-83ba-0a39c55408a9",
+      "AmplifyAppId": "d17xiixc3hlvbd"
+    },
+    "categories": {
+      "auth": {
+        "ampawesome25bde1df": {},
+        "userPoolGroups": {}
+      },
+      "function": {
+        "AdminQueries21e6a057": {
+          "deploymentBucketName": "amplify-ampawesome-ampauthdem-210514-deployment",
+          "s3Key": "amplify-builds/AdminQueries21e6a057-31363042675a64775268-build.zip"
+        }
+      }
+    }
+  }
+}
