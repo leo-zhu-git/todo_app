@@ -4,8 +4,10 @@ import 'package:flutter/rendering.dart';
 import 'package:todo_app/model/taskclass.dart';
 import 'package:todo_app/util/dbhelper.dart';
 import 'package:intl/intl.dart';
+import 'package:todo_app/util/mysql_dbhelper.dart';
 
 DbHelper dbHelper = DbHelper();
+MySql_DBHelper mysqlDBhelper = MySql_DBHelper();
 
 DateTime currentDate = DateTime.now();
 String formattedDate = DateFormat('yyyymmdd').format(currentDate);
@@ -509,8 +511,8 @@ class TaskDetailState extends State //<TaskDetail>
               children: [
                 RaisedButton(
                     onPressed: () {
-                    //  Navigator.pop(context);
-                    Navigator.of(context).pushNamed('/dashboard');
+                      //  Navigator.pop(context);
+                      Navigator.of(context).pushNamed('/dashboard');
                     },
                     child: Text(
                       'Cancel',
@@ -533,12 +535,9 @@ class TaskDetailState extends State //<TaskDetail>
                       task.action1 = _selectedAction1 == null
                           ? ""
                           : _selectedAction1.toString();
-                      task.context1 = _selectedCategory == null
+                      task.context1 = _selectedContext1 == null
                           ? ""
                           : _selectedContext1.toString();
-                      task.location1 = _selectedLocation1 == null
-                          ? ""
-                          : _selectedLocation1.toString();
                       task.tag1 =
                           _selectedTag1 == null ? "" : _selectedTag1.toString();
 //                      task.goal1 = _selectedGoal1 == null
@@ -547,8 +546,20 @@ class TaskDetailState extends State //<TaskDetail>
                       task.dateDue = _todoDateController.text;
                       task.timeDue = _todoTimeController.text;
                       task.isDone = 0;
+                      if (task.isDone == 0) {
+                        task.status = "Open";
+                      } else {
+                        task.status = "Completed";
+                      }
+                      //task.lastModified = DateTime.parse(
+                      //DateFormat("yyyy-MM-dd HH:mm:ss")
+                      //.format(DateTime.now()));
+
+                      task.lastModified = DateFormat("yyyy-MM-dd HH:mm:ss")
+                          .format(DateTime.now());
 
                       var result;
+                      mysqlDBhelper.syncTaskDataToMySql();
 
                       print(task.id);
                       if (task.id != null) {
@@ -576,8 +587,8 @@ class TaskDetailState extends State //<TaskDetail>
                           ),
                         ),
                       );
-                     
-                     Navigator.of(context).pushNamed('/dashboard');
+
+                      Navigator.of(context).pushNamed('/dashboard');
                     },
                     color: Colors.brown[900],
                     child: Text(

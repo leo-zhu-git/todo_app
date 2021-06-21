@@ -12,20 +12,16 @@ import 'package:flutter_login/flutter_login.dart';
 import 'screens/entry.dart';
 import 'screens/confirm.dart';
 import 'screens/confirm_reset.dart';
-import 'package:todo_app/model/todouser.dart';
-import 'package:todo_app/util/dbhelper.dart';
 
-import 'helpers/configure_amplify.dart';
 //import 'package:todo_app/screens/ExpandApp.dart';
 
 void main() {
 //  runApp(MyApp());
- // runApp(new TileApp1());
- //runApp(Swipe());
+  // runApp(new TileApp1());
+  //runApp(Swipe());
+
   runApp(MyApp());
 }
-
-
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -35,9 +31,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Todo',
       debugShowCheckedModeBanner: false,
-      
       theme: ThemeData(
-        primarySwatch:  Colors.deepOrange,
+        primarySwatch: Colors.deepOrange,
       ),
       onGenerateRoute: (settings) {
         if (settings.name == '/confirm') {
@@ -62,25 +57,18 @@ class MyApp extends StatelessWidget {
             transitionsBuilder: (_, __, ___, child) => child,
           );
         }
-         if (settings.name == '/customizeview') {
+        if (settings.name == '/customizeview') {
           return PageRouteBuilder(
             pageBuilder: (_, __, ___) => CustomizeView(),
             transitionsBuilder: (_, __, ___, child) => child,
           );
         }
-       
-        return MaterialPageRoute(builder: (_) => EntryScreen());
 
+        return MaterialPageRoute(builder: (_) => EntryScreen());
       },
-    
-    
-    
     );
   }
-
 }
-
-
 
 //Comented by KK to use AMpliyfy Login
 // class MyApp extends StatelessWidget {
@@ -103,7 +91,7 @@ class MyApp extends StatelessWidget {
 //           '/customizeview': (BuildContext context) => new CustomizeView(),
 //         },
 //         home: new MyHomePage(),
-        
+
 //       ),
 //     );
 //   }

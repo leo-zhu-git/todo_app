@@ -12,6 +12,7 @@ import 'package:todo_app/model/category.dart';
 import 'package:todo_app/model/context1.dart';
 import 'package:todo_app/model/todouser.dart';
 import 'package:todo_app/model/globals.dart' as globals;
+import 'package:todo_app/screens/taskdetail.dart';
 
 class DbHelper {
   static final DbHelper _dbHelper = DbHelper._internal();
@@ -31,6 +32,8 @@ class DbHelper {
   String colTimeDue = 'timeDue';
   String colIsDone = 'isDone';
   String colDateDone = 'dateDone';
+  String colStatus = 'status';
+  String colLastModified = 'lastModified';
 
   String tblCustomSettings = "customSettings";
   String colsort1 = "sort1";
@@ -63,7 +66,7 @@ class DbHelper {
 
   Future<Database> initializeDb() async {
     Directory dir = await getApplicationDocumentsDirectory();
-    String path = dir.path + "todo_V140.db";
+    String path = dir.path + "todo_V153.db";
     var dbTodovn = await openDatabase(path, version: 1, onCreate: _createDb);
     return dbTodovn;
   }
@@ -74,7 +77,7 @@ class DbHelper {
             " $colCategory TEXT, $colAction1 TEXT, " +
             "$colContext1 TEXT, $colLocation1 TEXT, $colTag1 TEXT, $colGoal1 TEXT, " +
             " $colPriorityint INTEGER, $colPrioritytxt TEXT, $colDateDue TEXT, $colTimeDue TEXT, " +
-            " $colIsDone INTEGER, $colDateDone TEXT)");
+            " $colIsDone INTEGER, $colDateDone TEXT, $colStatus TEXT, $colLastModified TEXT)");
 
 //this table need to include hash key to track users.... i would say all the tables
     await db.execute(
@@ -120,6 +123,22 @@ class DbHelper {
     return result;
   }
 
+  Future<List> getTasksByID(String taskID) async {
+    Database db = await this.db;
+    var result = await db
+//        .rawQuery("SELECT * FROM  where $colLastModified order by $colDateDue ASC");
+        .rawQuery("SELECT * FROM todo where $colId = $taskID");
+    return result;
+  }
+
+  Future<List> getTasksFromLastFewDays() async {
+    Database db = await this.db;
+    var result = await db
+//        .rawQuery("SELECT * FROM  where $colLastModified order by $colDateDue ASC");
+        .rawQuery("SELECT * FROM todo");
+    return result;
+  }
+
   Future<List> getTasks() async {
     Database db = await this.db;
     var result = await db
@@ -129,7 +148,13 @@ class DbHelper {
     return result;
   }
 
-  Future<List> getTasksSort(String colSort1, String colOrder1, String colSort2, String colOrder2, String colSort3, String colOrder3,
+  Future<List> getTasksSort(
+      String colSort1,
+      String colOrder1,
+      String colSort2,
+      String colOrder2,
+      String colSort3,
+      String colOrder3,
       int showCompleted) async {
     Database db = await this.db;
     if (showCompleted == 1) {
@@ -487,7 +512,7 @@ class DbHelper {
 
 //############################# User Table ##############################################
 
- Future<int> insertUser(todoUser todouser) async {
+  Future<int> insertUser(todoUser todouser) async {
     Database db = await this.db;
 
     var result = await db.insert('todouser', todouser.todouserMap());
@@ -500,4 +525,10 @@ class DbHelper {
     return result;
   }
 
+  Future<String> getUserID() async {
+    Database db = await this.db;
+    var result = await db.rawQuery("SELECT userid FROM todouser");
+    var userid = result[0]['userid'];
+    return userid;
+  }
 }

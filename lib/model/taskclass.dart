@@ -25,11 +25,13 @@ class Task {
   String _timeDue;
   int _isDone;
   String _dateDone;
+  String _status;
+  String _lastModified;
   String _main1;
   String _main2;
   String _sec1;
   String _sec2;
-  String _sec3; 
+  String _sec3;
 
   Task(
       this._title,
@@ -46,6 +48,8 @@ class Task {
       this._timeDue,
       this._isDone,
       this._dateDone,
+      this._status,
+      this._lastModified,
       this._main1,
       this._main2,
       this._sec1,
@@ -67,6 +71,8 @@ class Task {
       this._timeDue,
       this._isDone,
       this._dateDone,
+      this._status,
+      this._lastModified,
       this._main1,
       this._main2,
       this._sec1,
@@ -87,6 +93,8 @@ class Task {
   String get timeDue => _timeDue;
   int get isDone => _isDone;
   String get dateDone => _dateDone;
+  String get status => _status;
+  String get lastModified => _lastModified;
   String get main1 => _main1;
   String get main2 => _main2;
   String get sec1 => _sec1;
@@ -153,6 +161,14 @@ class Task {
     this._dateDone = newDateDone;
   }
 
+  set status(String newStatus) {
+    this._status = newStatus;
+  }
+
+  set lastModified(String newLastModified) {
+    this._lastModified = newLastModified;
+  }
+
   set main1(String newMain1) {
     this._main1 = newMain1;
   }
@@ -189,6 +205,8 @@ class Task {
   String colIsDone = '';
   String colDateDone = '';
   String colMain1 = '';
+  String colStatus = '';
+  String colLastModified = '';
 
   Map<String, dynamic> toMap() {
     var map = Map<String, dynamic>();
@@ -206,6 +224,8 @@ class Task {
     map['timeDue'] = _timeDue;
     map['isDone'] = _isDone;
     map['dateDone'] = _dateDone;
+    map['status'] = _status;
+    map['lastModified'] = _lastModified;
 
     if (_id != null) {
       map['id'] = _id;
@@ -230,6 +250,8 @@ class Task {
     this._timeDue = o['timeDue'];
     this._isDone = o['isDone'];
     this._dateDone = o['dateDone'];
+    this._status = o['dateDone'];
+    this._lastModified = o['dateDone'];
     this._main1 = o['main1'];
     this._main2 = o['main2'];
     this._sec1 = o['sec1'];

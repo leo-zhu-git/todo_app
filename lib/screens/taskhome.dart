@@ -10,12 +10,14 @@ import 'package:todo_app/screens/taskdetail.dart';
 import 'package:intl/intl.dart';
 import 'package:todo_app/util/drawer_navigation.dart';
 import 'package:todo_app/model/globals.dart' as globals;
+import 'package:todo_app/util/mysql_dbhelper.dart';
 
 DateTime currentDate = DateTime.now();
 DateFormat formatter = DateFormat('yyyy-mm-dd');
 String formattedDate = DateFormat('yyyy-mm-dd').format(currentDate);
 var isChecked = false;
 CustomSettings customSetting;
+MySql_DBHelper mysqlDBhelper = MySql_DBHelper();
 
 class TaskHome extends StatefulWidget {
   @override
@@ -83,7 +85,9 @@ class TaskHomeState extends State {
                 icon: Icon(Icons.add, color: Colors.white),
                 onPressed: () {
                   navigateToDetail(Task("", "", "", "", "", "", "", "", 0, "",
-                      "", "", 0, "", "", "", "", "", ""));
+                      "", "", 0, "", "", "", "", "", "", "", ""));
+
+                  mysqlDBhelper.syncTaskDataFromMySql();
                 },
               ),
               IconButton(
@@ -238,6 +242,7 @@ class TaskHomeState extends State {
           getSortColumn(_sort3),
           getOrderColumn(_order3),
           globals.showCompleted);
+      // final tasksFuture = helper.getTasksFromLastFewDays();
       tasksFuture.then((result) {
         List<Task> taskList = List<Task>();
         List<DisplayTask> displaytaskList = List<DisplayTask>();
