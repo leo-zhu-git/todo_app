@@ -47,7 +47,7 @@ class MySql_DBHelper {
         String dbUserID = swiperDataList[i]['TaskUserId'].toString();
         String appTaskID = dbTaskID.substring(dbUserID.length, dbTaskID.length);
         print(appTaskID);
-        print("woaibeijingtiananmen");
+        print("woaibeijingtiananmen,jalsdjflksdjf");
         Task task = Task.withId(
             int.parse(appTaskID),
             swiperDataList[i]['TaskTitle'],
