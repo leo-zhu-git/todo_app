@@ -4,10 +4,8 @@ import 'package:flutter/rendering.dart';
 import 'package:todo_app/model/taskclass.dart';
 import 'package:todo_app/util/dbhelper.dart';
 import 'package:intl/intl.dart';
-import 'package:todo_app/util/mysql_dbhelper.dart';
 
 DbHelper dbHelper = DbHelper();
-MySql_DBHelper mysqlDBhelper = MySql_DBHelper();
 
 DateTime currentDate = DateTime.now();
 String formattedDate = DateFormat('yyyymmdd').format(currentDate);
