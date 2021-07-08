@@ -559,7 +559,6 @@ class TaskDetailState extends State //<TaskDetail>
                           .format(DateTime.now());
 
                       var result;
-                      mysqlDBhelper.syncTaskDataToMySql();
 
                       print(task.id);
                       if (task.id != null) {
