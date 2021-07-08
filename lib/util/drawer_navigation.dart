@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/screens/sync.dart';
 import 'package:todo_app/screens/taskhome.dart';
 import 'package:todo_app/screens/action1s_screen.dart';
 import 'package:todo_app/screens/categories_screen.dart';
@@ -106,6 +107,16 @@ class _DrawerNagivation extends State<DrawerNagivation> {
               title: Text('Tags'),
                onTap: () => Navigator.of(context).push(
                    MaterialPageRoute(builder: (context) => Tag1sScreen())),
+            ),
+            Divider(),
+            Column(
+              children: _tag1List),
+
+            ListTile(
+              leading: Icon(Icons.sync),
+              title: Text('Sync'),
+               onTap: () => Navigator.of(context).push(
+                   MaterialPageRoute(builder: (context) => SyncScreen())),
             ),
             Divider(),
             Column(

@@ -53,7 +53,7 @@ class TaskHomeState extends State {
       appBar: AppBar(
         backgroundColor: Colors.brown[900],
         elevation: 8,
-        title: Center(child: Text('HomeComing')),
+        title: Center(child: Text('Home')),
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.help, color: Colors.white),
