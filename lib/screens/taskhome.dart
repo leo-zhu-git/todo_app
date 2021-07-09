@@ -87,7 +87,7 @@ class TaskHomeState extends State {
                   navigateToDetail(Task("", "", "", "", "", "", "", "", 0, "",
                       "", "", 0, "", "", "", "", "", "", "", ""));
 
-                  mysqlDBhelper.syncTaskDataFromMySql();
+//                  mysqlDBhelper.syncTaskDataFromMySql();
                 },
               ),
               IconButton(
