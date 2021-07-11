@@ -89,6 +89,61 @@ class MySql_DBHelper {
     });
   }
 
+  void syncTaskDataFromMySqlLastSevenDays() async {
+    final tasksRequest = request('getLastSevenDaystasks', formData: null);
+
+    tasksRequest.then((value) {
+      final data = json.decode(value.toString());
+      List<Map> swiperDataList = (data['Tasks'] as List).cast();
+
+      var count = swiperDataList.length;
+      print(count);
+
+      for (int i = 0; i < swiperDataList.length; i++) {
+        String dbTaskID = swiperDataList[i]['TaskID'].toString();
+        String dbUserID = swiperDataList[i]['TaskUserId'].toString();
+        String appTaskID = dbTaskID.substring(dbUserID.length, dbTaskID.length);
+        // print(appTaskID);
+        // print("woaibeijingtiananmen");
+        Task task = Task.withId(
+            int.parse(appTaskID),
+            swiperDataList[i]['TaskTitle'],
+            swiperDataList[i]['TaskDesc'],
+            swiperDataList[i]['TaskCategory'],
+            swiperDataList[i]['TaskAction'],
+            swiperDataList[i]['TaskContext'],
+            swiperDataList[i]['TaskLocation'],
+            swiperDataList[i]['TaskTag'],
+            swiperDataList[i]['TaskGole'],
+            int.parse(swiperDataList[i]['TaskPriorityint']),
+            swiperDataList[i]['TaskProiortyText'],
+            swiperDataList[i]['TaskDateDue'],
+            swiperDataList[i]['TaskTimeDue'],
+            int.parse(swiperDataList[i]['TaskIsDone']),
+            swiperDataList[i]['TaskDateDone'],
+            swiperDataList[i]['TaskStatus'],
+            swiperDataList[i]['LastModified'],
+            "",
+            "",
+            "",
+            "",
+            "");
+        final tasksFuture = helper.getTasksByID(appTaskID);
+        tasksFuture.then((result) {
+          count = result.length;
+
+          if (count > 0) {
+            helper.updateTask(task);
+            //helper.deleteTask(swiperDataList[i]['TaskID']);
+          } else {
+            helper.insertTask(task);
+            //helper.deleteTask(swiperDataList[i]['TaskID']);
+          }
+        });
+      }
+    });
+  }
+
   // void syncActionData() async {
   //   final tasksRequest = request('actionContent', formData: null);
 
@@ -164,7 +219,30 @@ class MySql_DBHelper {
   // }
 
   void syncTaskDataToMySql() async {
-    final dbTaskFuture = helper.getTasksFromLastFewDays();
+    final dbTaskFuture = helper.getTasksFromLastFewDays(7);
+    dbTaskFuture.then((result) {
+      for (int i = 0; i < result.length; i++) {
+        print(result[i]);
+        print(result[i]["id"]);
+        print("title::::" + result[i]["title"]);
+        print(result[i]["description"]);
+        print(result[i]["category"]);
+        print(result[i]["action1"]);
+        print(result[i]["context1"]);
+        print(result[i]["tag1"]);
+        print(result[i]["goal1"]);
+        print(result[i]["priorityvalue"]);
+        print(result[i]["prioritytext"]);
+        print(result[i]["dateDue"]);
+        print(result[i]["isDone"]);
+        print(result[i]["dateDone"]);
+        final tasksRequest = request('contextSaveContent', formData: result[i]);
+      }
+    });
+  }
+
+  void syncLastSevenDaysTasksToMySql() async {
+    final dbTaskFuture = helper.getTasksFromLastFewDays(7);
     dbTaskFuture.then((result) {
       for (int i = 0; i < result.length; i++) {
         print(result[i]);
