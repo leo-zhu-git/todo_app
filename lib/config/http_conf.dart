@@ -4,5 +4,6 @@ const servicePath = {
   'actionContent': base_url + 'getActionContent',
   'contextContent': base_url + 'getContextContent',
   'contextSaveContent': base_url + 'getContextSaveContent',
+  'getAllTasks': base_url + 'getAllTasks',
+  'getLastSevenDaystasks': base_url + 'getLastSevenDaystasks',
 };
-const userID = "";

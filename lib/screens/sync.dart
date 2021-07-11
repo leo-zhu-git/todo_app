@@ -153,7 +153,7 @@ class _SyncScreenState extends State<SyncScreen> {
                 FlatButton(
                   onPressed: () async {
                     if (_option == 0) {
-                      mysqlDBhelper.syncTaskDataToMySql();
+                      mysqlDBhelper.syncTaskDataFromMySqlLastSevenDays();
                       _showSuccessSnackBar(Container(
                         color: Colors.tealAccent[100],
                         height: 40,
@@ -172,7 +172,7 @@ class _SyncScreenState extends State<SyncScreen> {
                         ),
                       ));
                     } else {
-                      mysqlDBhelper.syncTaskDataFromMySql();
+                      mysqlDBhelper.syncLastSevenDaysTasksToMySql();
                       Navigator.pop(context);
                       _showSuccessSnackBar(Container(
                         color: Colors.tealAccent[100],

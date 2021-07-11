@@ -66,7 +66,8 @@ class DbHelper {
 
   Future<Database> initializeDb() async {
     Directory dir = await getApplicationDocumentsDirectory();
-    String path = dir.path + "todo_V1531.db";
+    String path = dir.path + "todo_V1532.db";
+    print(path);
     var dbTodovn = await openDatabase(path, version: 1, onCreate: _createDb);
     return dbTodovn;
   }
@@ -131,11 +132,21 @@ class DbHelper {
     return result;
   }
 
-  Future<List> getTasksFromLastFewDays() async {
+  Future<List> getAllTasks() async {
     Database db = await this.db;
     var result = await db
 //        .rawQuery("SELECT * FROM  where $colLastModified order by $colDateDue ASC");
         .rawQuery("SELECT * FROM todo");
+    return result;
+  }
+
+  Future<List> getTasksFromLastFewDays(int days) async {
+    Database db = await this.db;
+    var result = await db
+//        .rawQuery("SELECT * FROM  where $colLastModified order by $colDateDue ASC");
+        .rawQuery(
+            "SELECT * FROM todo where (julianday(Date('now')) - julianday(date($colLastModified)) > 3)");
+
     return result;
   }
 
@@ -241,6 +252,13 @@ class DbHelper {
     int result;
     Database db = await this.db;
     result = await db.rawDelete('DELETE FROM $tblTodo WHERE $colId = $id');
+    return result;
+  }
+
+  Future<int> deleteAllTask(int id) async {
+    int result;
+    Database db = await this.db;
+    result = await db.rawDelete('DELETE FROM $tblTodo WHERE $colId <> 0');
     return result;
   }
 
