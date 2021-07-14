@@ -56,8 +56,9 @@ class TaskHomeState extends State {
         title: Center(child: Text('Home')),
         actions: <Widget>[
           IconButton(
-            icon: const Icon(Icons.help, color: Colors.white),
-            tooltip: 'Help',
+            icon: const Icon(Icons.sync, color: Colors.white),
+            tooltip: 'Sync',
+// LZ's code for sync
             onPressed: () {},
           ),
         ],
