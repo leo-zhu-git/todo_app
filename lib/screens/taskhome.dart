@@ -53,7 +53,7 @@ class TaskHomeState extends State {
       appBar: AppBar(
         backgroundColor: Colors.brown[900],
         elevation: 8,
-        title: Center(child: Text('Home')),
+          title: Center(child: Text('View ('+ count.toString()+')')), 
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.sync, color: Colors.white),
@@ -230,6 +230,7 @@ class TaskHomeState extends State {
     int _order1 = globals.order1 != null ? globals.order1 : 0;
     int _order2 = globals.order2 != null ? globals.order2 : 0;
     int _order3 = globals.order3 != null ? globals.order3 : 0;
+    int _showDueDate = globals.showDueDate != null ? globals.showDueDate : 0; 
 
     var countDone = 0;
     final dbFuture = helper.initializeDb();
@@ -242,6 +243,7 @@ class TaskHomeState extends State {
           getOrderColumn(_order2),
           getSortColumn(_sort3),
           getOrderColumn(_order3),
+          getDueDateColumn(_showDueDate),
           globals.showCompleted);
       // final tasksFuture = helper.getTasksFromLastFewDays();
       tasksFuture.then((result) {
@@ -625,6 +627,40 @@ class TaskHomeState extends State {
 
       default:
         return "title";
+        break;
+    }
+  }
+
+  //Sort column names are defined here but if there is any changes in column name update here
+  String getDueDateColumn(int column) {
+    switch (column) {
+      case 0:
+        return "Today";
+        break;
+      case 1:
+        return "Tomorrow";
+        break;
+      case 2:
+        return "Next 7 days";
+        break;
+      case 3:
+        return "Next 30 days";
+        break;
+      case 4:
+        return "Any Due Date";
+        break;
+      case 5:
+        return "No Due Date";
+        break;
+      case 6:
+        return "Overdue";
+        break;
+      case 7:
+        return "All";
+        break;
+
+      default:
+        return "Today";
         break;
     }
   }

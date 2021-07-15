@@ -617,10 +617,9 @@ class TaskSearchState extends State {
             taskList.add(Task.fromObject(result[i]));
             debugPrint(taskList[i].description);
 
-
-            /////////////////
+          /////////////////
           /// display main1
-////////////////
+          ////////////////
           switch (globals.showMain1) {
             case 0:
               {

@@ -87,7 +87,7 @@ class _WipeScreenState extends State<WipeScreen> {
           ActionChip(
               elevation: 6.0,
               padding: EdgeInsets.all(20.0),
-              backgroundColor: Colors.blue[100],
+              backgroundColor: Colors.pink[100],
               label: Center(child: Text('Force DEVICE->DATABASE wipe')),
               onPressed: () {
                 _optionText =
@@ -98,7 +98,7 @@ class _WipeScreenState extends State<WipeScreen> {
           SizedBox(height: 20.0),
           ActionChip(
               elevation: 6.0,
-              backgroundColor: Colors.blue[100],
+              backgroundColor: Colors.pink[100],
               padding: EdgeInsets.all(20.0),
               label: Center(child: Text('Force DATABASE->DEVICE wipe')),
               onPressed: () {
@@ -185,7 +185,7 @@ class _WipeScreenState extends State<WipeScreen> {
                               color: Colors.black,
                             )),
                             Text(
-                              ' DATABASE->DEVICE wipfe SUCCESSFUL ',
+                              ' DATABASE->DEVICE wipe SUCCESSFUL ',
                               style: (TextStyle(color: Colors.black)),
                             ),
                           ],

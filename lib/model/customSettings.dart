@@ -12,6 +12,7 @@ class CustomSettings {
   String _fieldToDisplay4;
   String _fieldToDisplay5;
   bool _showCompletedTask;
+  String _showDueDateTask;
 
   CustomSettings(
       this._sort1,
@@ -25,7 +26,8 @@ class CustomSettings {
       this._fieldToDisplay3,
       this._fieldToDisplay4,
       this._fieldToDisplay5,
-      this._showCompletedTask);
+      this._showCompletedTask,
+      this._showDueDateTask);
   CustomSettings.withId(
       this._id,
       this._sort1,
@@ -39,7 +41,8 @@ class CustomSettings {
       this._fieldToDisplay3,
       this._fieldToDisplay4,
       this._fieldToDisplay5,
-      this._showCompletedTask);
+      this._showCompletedTask,
+      this._showDueDateTask);
   int get id => _id;
   String get sort1 => _sort1;
   String get order1 => _order1;
@@ -53,6 +56,7 @@ class CustomSettings {
   String get fieldToDisplay4 => _fieldToDisplay4;
   String get fieldToDisplay5 => _fieldToDisplay5;
   bool get showCompletedTask => _showCompletedTask;
+  String get showDueDateTask => _showDueDateTask;
 
   set sort1(String newsort1) {
     this._sort1 = newsort1;
@@ -102,6 +106,10 @@ class CustomSettings {
     this._showCompletedTask = newshowCompletedTask;
   }
 
+  set showDueDateTask(String newshowDueDateTask) {
+    this._showDueDateTask = newshowDueDateTask;
+  }
+
   Map<String, dynamic> toMap() {
     var map = Map<String, dynamic>();
 
@@ -117,6 +125,7 @@ class CustomSettings {
     map['fieldToDisplay4'] = _fieldToDisplay4;
     map['fieldToDisplay5'] = _fieldToDisplay5;
     map['showCompletedTask'] = _showCompletedTask;
+    map['showDueDateTask'] = _showDueDateTask;
 
     if (_id != null) {
       map['id'] = _id;
@@ -139,5 +148,6 @@ class CustomSettings {
     this._fieldToDisplay4 = o['fieldToDisplay4'];
     this._fieldToDisplay5 = o['fieldToDisplay5'];
     this._showCompletedTask = o['showCompletedTask'] == 0 ? false : true;
+    this._showDueDateTask = o['showDueDateTask'];
   }
 }

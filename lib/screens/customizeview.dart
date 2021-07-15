@@ -45,6 +45,25 @@ class CompletedItem {
   }
 }
 
+class DueDateItem {
+  int id;
+  String name;
+
+  DueDateItem(this.id, this.name);
+  static List<DueDateItem> getDueDate() {
+    return <DueDateItem>[
+      DueDateItem(0, 'Today'),
+      DueDateItem(1, 'Tomorrow'),
+      DueDateItem(2, 'Next 7 days'),
+      DueDateItem(3, 'Next 30 days'),
+      DueDateItem(4, 'Any Due Date'),
+      DueDateItem(5, 'No Due Date'),
+      DueDateItem(6, 'Overdue'),
+      DueDateItem(7, 'All'),
+    ];
+  }
+}
+
 class SortOrder {
   int id;
   String name;
@@ -63,9 +82,13 @@ class _CustomizeViewState extends State //State<CustomizeView>
   List<SortItem> _sort = SortItem.getSort();
   List<SortOrder> _order = SortOrder.getOrder();
   List<CompletedItem> _completed = CompletedItem.getCompleted();
-  List<DropdownMenuItem<SortItem>> _dropdownMenuItemsSort;
-  List<DropdownMenuItem<SortOrder>> _dropdownMenuSortOrder;
+  List<DueDateItem> _dueDate = DueDateItem.getDueDate(); 
   List<DropdownMenuItem<CompletedItem>> _dropdownCompletedItems;
+  List<DropdownMenuItem<SortItem>> _dropdownMenuItemsSort;
+  List<DropdownMenuItem<DueDateItem>> _dropdownDueDateItems; 
+  List<DropdownMenuItem<SortOrder>> _dropdownMenuSortOrder;
+  CompletedItem _selectedShowCompleted;
+  DueDateItem _selectedShowDueDate; 
   SortItem _selectedSort1;
   SortOrder _selectedOrder1;
   SortItem _selectedSort2;
@@ -77,7 +100,6 @@ class _CustomizeViewState extends State //State<CustomizeView>
   SortItem _selectedSec1;
   SortItem _selectedSec2;
   SortItem _selectedSec3;
-  CompletedItem _selectedShowCompleted;
   DbHelper helper = DbHelper();
   CustomSettings customSetting;
 
@@ -87,8 +109,32 @@ class _CustomizeViewState extends State //State<CustomizeView>
     _dropdownMenuItemsSort = buildDropdownMenuItems(_sort);
     _dropdownMenuSortOrder  = buildDropdownMenuOrder(_order);
     _dropdownCompletedItems = buildDropdownCompletedItems(_completed);
+    _dropdownDueDateItems = buildDropdownDueDateItems(_dueDate);
 
+    ////////////////////////////
+    /// show - due date
+    ////////////////////////////
+    if (globals.showDueDate == null) {
+      _selectedShowDueDate = _dropdownDueDateItems[0].value;
+      globals.showDueDate = 0;
+    } else
+      _selectedShowDueDate =
+          _dropdownDueDateItems[globals.showDueDate].value;
+
+    ////////////////////////////
+    /// show - completed
+    ////////////////////////////
+    if (globals.showCompleted == null) {
+      _selectedShowCompleted = _dropdownCompletedItems[0].value;
+      globals.showCompleted = 0;
+    } else
+      _selectedShowCompleted =
+          _dropdownCompletedItems[globals.showCompleted].value;
+    ////////////////////////////
+
+    ////////////////////////////
     //Sort
+    ////////////////////////////
     if (globals.sort1 == null) {
       _selectedSort1 = _dropdownMenuItemsSort[2].value;
       globals.sort1 = 2;
@@ -129,7 +175,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
           _dropdownMenuSortOrder[globals.order3].value;
 
     ////////////////////////////
-    /// display
+    /// show
     ////////////////////////////
     if (globals.showMain1 == null) {
       _selectedMain1 = _dropdownMenuItemsSort[2].value;
@@ -156,17 +202,6 @@ class _CustomizeViewState extends State //State<CustomizeView>
       globals.showSec3 = 2;
     } else
       _selectedSec3 = _dropdownMenuItemsSort[globals.showSec3].value;
-    ////////////////////////////
-    /// show completed
-    ////////////////////////////
-    if (globals.showCompleted == null) {
-      _selectedShowCompleted = _dropdownCompletedItems[0].value;
-      globals.showCompleted = 0;
-    } else
-      _selectedShowCompleted =
-          _dropdownCompletedItems[globals.showCompleted].value;
-    ////////////////////////////
-    ///
 
     _getCustomSettings();
 
@@ -199,7 +234,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
     return order;
   }
 
-  List<DropdownMenuItem<CompletedItem>> buildDropdownCompletedItems(
+    List<DropdownMenuItem<CompletedItem>> buildDropdownCompletedItems(
       List completedItems) {
     List<DropdownMenuItem<CompletedItem>> items = List();
     for (CompletedItem completedItem in completedItems) {
@@ -207,6 +242,21 @@ class _CustomizeViewState extends State //State<CustomizeView>
         DropdownMenuItem(
           value: completedItem,
           child: Text(completedItem.name),
+        ),
+      );
+    }
+    return items;
+  }
+
+
+  List<DropdownMenuItem<DueDateItem>> buildDropdownDueDateItems(
+      List dueDateItems) {
+    List<DropdownMenuItem<DueDateItem>> items = List();
+    for (DueDateItem dueDateItem in dueDateItems) {
+      items.add(
+        DropdownMenuItem(
+          value: dueDateItem,
+          child: Text(dueDateItem.name),
         ),
       );
     }
@@ -229,7 +279,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
       appBar: new AppBar(
         backgroundColor: Colors.brown[900],
         automaticallyImplyLeading: false,
-        title: Center(child: Text('Customize View')),
+        title: Center(child: Text('View - Filter, Sort, Show')),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -237,9 +287,55 @@ class _CustomizeViewState extends State //State<CustomizeView>
           child: Column(
             children: [
 ///////////////////////////
+//  Filter Due Date
+///////////////////////////
+              Text("Filter - Due Date"),
+
+              new Container(
+                margin: const EdgeInsets.all(2.0),
+                decoration: BoxDecoration(
+                    shape: BoxShape.rectangle, color: Colors.blue[100]),
+                child: DropdownButtonFormField(
+                  items: _dropdownDueDateItems,
+                  hint: Text('Filter by Due Date'),
+                  value: _selectedShowDueDate,
+                  onChanged: (selectedDueDateItems) {
+                    setState(() {
+                      _selectedShowDueDate = selectedDueDateItems;
+                    });
+                  },
+                ),
+              ),
+
+///////////////////////////
+//  Filter Completed
+///////////////////////////
+              Text("Filter - Completed Tasks"),
+
+              new Container(
+                margin: const EdgeInsets.all(2.0),
+                decoration: BoxDecoration(
+                    shape: BoxShape.rectangle, color: Colors.blue[100]),
+                child: DropdownButtonFormField(
+                  items: _dropdownCompletedItems,
+                  hint: Text('Filter by Completed Tasks'),
+                  value: _selectedShowCompleted,
+                  onChanged: (selectedCompletedItems) {
+                    setState(() {
+                      _selectedShowCompleted = selectedCompletedItems;
+                    });
+                  },
+                ),
+              ),
+
+              SizedBox(
+                height: 20,
+              ),
+
+///////////////////////////
 //  SORT ORDER 1
 ///////////////////////////
-              Text("Sort Order 1"),
+              Text("Sort 1"),
 ///////////////////////////
 //  SORT ORDER 1
 ///////////////////////////
@@ -268,7 +364,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
                 child: DropdownButtonFormField(
                   value: _selectedOrder1,
                   items: _dropdownMenuSortOrder,
-                  hint: Text('Sort Order 1 Ascending/Descending'),
+                  hint: Text('Sort 1 Ascending/Descending'),
                   onChanged: (selectedOrder) {
                     setState(() {
                       _selectedOrder1 = selectedOrder;
@@ -279,14 +375,14 @@ class _CustomizeViewState extends State //State<CustomizeView>
 ///////////////////////////
 //  SORT ORDER 2
 ///////////////////////////
-              Text("Sort Order 2"),
+              Text("Sort 2"),
               new Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.pink[100]),
                 child: DropdownButtonFormField(
                   items: _dropdownMenuItemsSort,
-                  hint: Text('Sort Order 2'),
+                  hint: Text('Sort 2'),
                   value: _selectedSort2,
                   onChanged: (selectedSort) {
                     setState(() {
@@ -305,7 +401,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
                 child: DropdownButtonFormField(
                   value: _selectedOrder2,
                   items: _dropdownMenuSortOrder,
-                  hint: Text('Sort Order 2 Ascending/Descending'),
+                  hint: Text('Sort 2 Ascending/Descending'),
                   onChanged: (selectedOrder) {
                     setState(() {
                       _selectedOrder2 = selectedOrder;
@@ -316,14 +412,14 @@ class _CustomizeViewState extends State //State<CustomizeView>
 ///////////////////////////
 //  SORT ORDER 3
 ///////////////////////////
-              Text("Sort Order 3"),
+              Text("Sort 3"),
               new Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.pink[100]),
                 child: DropdownButtonFormField(
                   items: _dropdownMenuItemsSort,
-                  hint: Text('Sort Order 3'),
+                  hint: Text('Sort 3'),
                   value: _selectedSort3,
                   onChanged: (selectedSort) {
                     setState(() {
@@ -354,9 +450,9 @@ class _CustomizeViewState extends State //State<CustomizeView>
               SizedBox(
                 height: 20,
               ),
-              Text("Field To Display - Main line"),
+              Text("Show - Main line"),
 ///////////////////////////
-//  Display Main 1
+//  Show Main 1
 ///////////////////////////
               new Container(
                 margin: const EdgeInsets.all(2.0),
@@ -374,7 +470,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
                 ),
               ),
 ///////////////////////////
-//  Display Main 2
+//  Show Main 2
 ///////////////////////////
 //              new Container(
 //                margin: const EdgeInsets.all(2.0),
@@ -392,9 +488,9 @@ class _CustomizeViewState extends State //State<CustomizeView>
 //                ),
 //              ),
 ///////////////////////////
-//  Display Secondary 1
+//  Show Secondary 1
 ///////////////////////////
-              Text("Fields To Display - Second Line"),
+              Text("Show - Second Line"),
               new Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
@@ -411,7 +507,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
                 ),
               ),
 ///////////////////////////
-//  Display Secondary 2
+//  Show Secondary 2
 ///////////////////////////
               new Container(
                 margin: const EdgeInsets.all(2.0),
@@ -429,7 +525,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
                 ),
               ),
 ///////////////////////////
-//  Display Secondary 3
+//  Show Secondary 3
 ///////////////////////////
               new Container(
                 margin: const EdgeInsets.all(2.0),
@@ -447,33 +543,10 @@ class _CustomizeViewState extends State //State<CustomizeView>
                 ),
               ),
 
-///////////////////////////
-//  Show Completed
-///////////////////////////
               SizedBox(
                 height: 20,
               ),
-              Text("Show Completed Tasks"),
 
-              new Container(
-                margin: const EdgeInsets.all(2.0),
-                decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.blue[100]),
-                child: DropdownButtonFormField(
-                  items: _dropdownCompletedItems,
-                  hint: Text('Show Completed Tasks'),
-                  value: _selectedShowCompleted,
-                  onChanged: (selectedCompletedItems) {
-                    setState(() {
-                      _selectedShowCompleted = selectedCompletedItems;
-                    });
-                  },
-                ),
-              ),
-
-              SizedBox(
-                height: 20,
-              ),
 
               /// form - save or cancel
               Row(
@@ -520,10 +593,13 @@ class _CustomizeViewState extends State //State<CustomizeView>
                           print(globals.showSec3);
                           if (_selectedShowCompleted != null)
                             globals.showCompleted = _selectedShowCompleted.id;
+                          if (_selectedShowDueDate != null)
+                            globals.showDueDate = _selectedShowDueDate.id;
+
 //Save
                           if (customSetting == null) {
                             customSetting = new CustomSettings(
-                                '', '', '', '','','','', '', '', '', '', false);
+                                '', '', '', '','','','', '', '', '', '', false,'');
                           }
 
                           customSetting.sort1 = _selectedSort1 == null
@@ -559,6 +635,9 @@ class _CustomizeViewState extends State //State<CustomizeView>
                           customSetting.fieldToDisplay5 = _selectedSec3 == null
                               ? ""
                               : _selectedSec3.id.toString();
+                          customSetting.showDueDateTask = _selectedShowDueDate == null
+                              ? ""
+                              : _selectedShowDueDate.id.toString();
                           if (_selectedShowCompleted == null) {
                             customSetting.showCompletedTask = false;
                           } else {
@@ -692,7 +771,12 @@ class _CustomizeViewState extends State //State<CustomizeView>
         } else
           _selectedShowCompleted = _dropdownCompletedItems[0].value;
       }
-    }
+        if (customSetting.showDueDateTask == true) {
+          _selectedShowDueDate = _dropdownDueDateItems[0].value;
+          globals.showDueDate = 0;
+        } else
+          _selectedShowDueDate = _dropdownDueDateItems[0].value;
+      }
     setState(() {
       customSetting = customSetting;
     });
