@@ -48,6 +48,7 @@ class DbHelper {
   String colfieldToDisplay4 = 'fieldToDisplay4';
   String colfieldToDisplay5 = 'fieldToDisplay5';
   String colshowCompletedTask = 'showCompletedTask';
+  String colshowDueDateTask = 'showDueDateTask';
 
   DbHelper._internal();
 
@@ -67,7 +68,10 @@ class DbHelper {
   Future<Database> initializeDb() async {
     Directory dir = await getApplicationDocumentsDirectory();
     String path = dir.path + "todo_V1532.db";
-    print(path);
+// <<<<<<< HEAD
+//     print(path);
+// =======
+// >>>>>>> bd41ba8c11d876c998cc25b5140b747922b0dc9f
     var dbTodovn = await openDatabase(path, version: 1, onCreate: _createDb);
     return dbTodovn;
   }
@@ -85,7 +89,7 @@ class DbHelper {
         "CREATE TABLE $tblCustomSettings($colId INTEGER PRIMARY KEY, $colsort1 TEXT, $colorder1 TEXT, $colsort2 TEXT, " +
             "$colorder2 TEXT, $colsort3 TEXT, $colorder3 TEXT, $colfieldToDisplay1 TEXT,$colfieldToDisplay2 TEXT, " +
             "$colfieldToDisplay3 TEXT,$colfieldToDisplay4 TEXT,$colfieldToDisplay5 TEXT," +
-            " $colshowCompletedTask INTEGER)");
+            " $colshowCompletedTask INTEGER, $colshowDueDateTask)");
 
     // Create table categories
     await db.execute(
@@ -166,6 +170,7 @@ class DbHelper {
       String colOrder2,
       String colSort3,
       String colOrder3,
+      String colDueDate,
       int showCompleted) async {
     Database db = await this.db;
     if (showCompleted == 1) {
@@ -191,6 +196,7 @@ class DbHelper {
     Database db = await this.db;
 
     int showcompleted = globals.showCompleted;
+    int showDueDate = globals.showDueDate;
     String queryStr = "";
     if (showcompleted == 1) {
       queryStr =
@@ -205,6 +211,14 @@ class DbHelper {
 //  {
 //    queryStr = queryStr + " AND $colPrioritytxt = '$searchPriorityTxt'";
 //  }
+
+////////////////////////
+    /// filter by due date
+///////////////////////
+    if (showDueDate == 0) {
+      queryStr = queryStr + " AND $colshowDueDateTask = '2021-07-15";
+    }
+
     if (searchCategory.trim() != "") {
       queryStr =
           queryStr + " AND $colCategory = '$searchCategory' AND $colIsDone = 0";

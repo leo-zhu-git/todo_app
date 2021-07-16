@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/screens/sync.dart';
+import 'package:todo_app/screens/wipe.dart';
 import 'package:todo_app/screens/taskhome.dart';
 import 'package:todo_app/screens/action1s_screen.dart';
 import 'package:todo_app/screens/categories_screen.dart';
@@ -109,29 +109,18 @@ class _DrawerNagivation extends State<DrawerNagivation> {
                    MaterialPageRoute(builder: (context) => Tag1sScreen())),
             ),
             Divider(),
-            Column(
-              children: _tag1List),
-
             ListTile(
-              leading: Icon(Icons.sync),
-              title: Text('Sync'),
+              leading: Icon(Icons.cloud_download_outlined),
+              title: Text('Wipe'),
                onTap: () => Navigator.of(context).push(
-                   MaterialPageRoute(builder: (context) => SyncScreen())),
+                   MaterialPageRoute(builder: (context) => WipeScreen())),
             ),
             Divider(),
-            Column(
-              children: _tag1List,
+            ListTile(
+              leading: Icon(Icons.help_outlined),
+              title: Text('Help'),
+               onTap: () {},
             ),
-//            ListTile(
-//              leading: Icon(Icons.golf_course_outlined),
-//              title: Text('Goals'),
-//               onTap: () => Navigator.of(context).push(
-//                   MaterialPageRoute(builder: (context) => Goal1sScreen())),
-//            ),
-//            Divider(),
-//            Column(
-//              children: _goal1List,
-//            )
           ],
         ),
       ),

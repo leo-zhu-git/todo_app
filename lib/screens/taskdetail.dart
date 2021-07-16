@@ -560,7 +560,7 @@ class TaskDetailState extends State //<TaskDetail>
 //<<<<<<< HEAD
 //                      mysqlDBhelper.syncTaskDataToMySql();
 //=======
-//>>>>>>> bbd660f62817a657ab9f13b93c3fb21d3c8f28aa
+//  >>>>>>> bbd660f62817a657ab9f13b93c3fb21d3c8f28aa
 
                       print(task.id);
                       if (task.id != null) {

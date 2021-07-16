@@ -12,3 +12,4 @@ int showSec1;
 int showSec2;
 int showSec3;
 int showCompleted;
+int showDueDate; 
