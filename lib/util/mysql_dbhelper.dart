@@ -32,13 +32,13 @@ class MySql_DBHelper {
     return _db;
   }
 
-  void syncTaskDataFromMySql() async {
+  void wipeTaskDataFromMySql() async {
     final tasksRequest = request('homePageContent', formData: null);
 
     tasksRequest.then((value) {
       final data = json.decode(value.toString());
       List<Map> swiperDataList = (data['Tasks'] as List).cast();
-
+      helper.deleteAllTask();
       var count = swiperDataList.length;
       print(count);
 
@@ -73,18 +73,21 @@ class MySql_DBHelper {
             "");
 
         print(task);
-        final tasksFuture = helper.getTasksByID(appTaskID);
-        tasksFuture.then((result) {
-          count = result.length;
 
-          if (count > 0) {
-            helper.updateTask(task);
-            //helper.deleteTask(swiperDataList[i]['TaskID']);
-          } else {
-            helper.insertTask(task);
-            //helper.deleteTask(swiperDataList[i]['TaskID']);
-          }
-        });
+        helper.insertTask(task);
+
+        // final tasksFuture = helper.getTasksByID(appTaskID);
+        // tasksFuture.then((result) {
+        //   count = result.length;
+
+        //   if (count > 0) {
+        //     helper.updateTask(task);
+        //     //helper.deleteTask(swiperDataList[i]['TaskID']);
+        //   } else {
+        //     helper.insertTask(task);
+        //     //helper.deleteTask(swiperDataList[i]['TaskID']);
+        //   }
+        // });
       }
     });
   }
@@ -219,7 +222,7 @@ class MySql_DBHelper {
   // }
 
   void syncTaskDataToMySql() async {
-    final dbTaskFuture = helper.getTasksFromLastFewDays(7);
+    final dbTaskFuture = helper.getAllTasks();
     dbTaskFuture.then((result) {
       for (int i = 0; i < result.length; i++) {
         print(result[i]);
@@ -242,7 +245,7 @@ class MySql_DBHelper {
   }
 
   void syncLastSevenDaysTasksToMySql() async {
-    final dbTaskFuture = helper.getTasksFromLastFewDays(7);
+    final dbTaskFuture = helper.getAllTasks();
     dbTaskFuture.then((result) {
       for (int i = 0; i < result.length; i++) {
         print(result[i]);

@@ -53,7 +53,7 @@ class TaskHomeState extends State {
       appBar: AppBar(
         backgroundColor: Colors.brown[900],
         elevation: 8,
-          title: Center(child: Text('View ('+ count.toString()+')')), 
+        title: Center(child: Text('View (' + count.toString() + ')')),
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.sync, color: Colors.white),
@@ -230,7 +230,7 @@ class TaskHomeState extends State {
     int _order1 = globals.order1 != null ? globals.order1 : 0;
     int _order2 = globals.order2 != null ? globals.order2 : 0;
     int _order3 = globals.order3 != null ? globals.order3 : 0;
-    int _showDueDate = globals.showDueDate != null ? globals.showDueDate : 0; 
+    int _showDueDate = globals.showDueDate != null ? globals.showDueDate : 0;
 
     var countDone = 0;
     final dbFuture = helper.initializeDb();

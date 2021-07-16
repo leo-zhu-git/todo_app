@@ -269,7 +269,7 @@ class DbHelper {
     return result;
   }
 
-  Future<int> deleteAllTask(int id) async {
+  Future<int> deleteAllTask() async {
     int result;
     Database db = await this.db;
     result = await db.rawDelete('DELETE FROM $tblTodo WHERE $colId <> 0');

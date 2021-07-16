@@ -153,7 +153,7 @@ class _WipeScreenState extends State<WipeScreen> {
                 FlatButton(
                   onPressed: () async {
                     if (_option == 0) {
-                      mysqlDBhelper.syncTaskDataFromMySqlLastSevenDays();
+                      mysqlDBhelper.wipeTaskDataToMySql();
                       _showSuccessSnackBar(Container(
                         color: Colors.tealAccent[100],
                         height: 40,
@@ -172,7 +172,7 @@ class _WipeScreenState extends State<WipeScreen> {
                         ),
                       ));
                     } else {
-                      mysqlDBhelper.syncLastSevenDaysTasksToMySql();
+                      mysqlDBhelper.wipeTaskDataFromMySql();
                       Navigator.pop(context);
                       _showSuccessSnackBar(Container(
                         color: Colors.tealAccent[100],
