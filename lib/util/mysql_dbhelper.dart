@@ -221,7 +221,7 @@ class MySql_DBHelper {
   //   });
   // }
 
-  void syncTaskDataToMySql() async {
+  void wipeTaskDataToMySql() async {
     final dbTaskFuture = helper.getAllTasks();
     dbTaskFuture.then((result) {
       for (int i = 0; i < result.length; i++) {
