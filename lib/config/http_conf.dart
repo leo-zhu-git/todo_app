@@ -5,5 +5,6 @@ const servicePath = {
   'contextContent': base_url + 'getContextContent',
   'contextSaveContent': base_url + 'getContextSaveContent',
   'getAllTasks': base_url + 'getAllTasks',
-  'getLastSevenDaystasks': base_url + 'getLastSevenDaystasks',
+  'wipeTasksfromDevice': base_url + 'wipeTasksfromDevice',
+  'deleteAllTasks': base_url + 'deleteAllTasks',
 };

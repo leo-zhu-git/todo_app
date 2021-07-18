@@ -33,7 +33,7 @@ class MySql_DBHelper {
   }
 
   void wipeTaskDataFromMySql() async {
-    final tasksRequest = request('homePageContent', formData: null);
+    final tasksRequest = await request('homePageContent', formData: null);
 
     tasksRequest.then((value) {
       final data = json.decode(value.toString());
@@ -221,7 +221,8 @@ class MySql_DBHelper {
   //   });
   // }
 
-  void wipeTaskDataToMySql() async {
+  void wipeTaskDataToMySql() {
+    this.deleteAllTaskFromMySQL();
     final dbTaskFuture = helper.getAllTasks();
     dbTaskFuture.then((result) {
       for (int i = 0; i < result.length; i++) {
@@ -239,9 +240,13 @@ class MySql_DBHelper {
         print(result[i]["dateDue"]);
         print(result[i]["isDone"]);
         print(result[i]["dateDone"]);
-        final tasksRequest = request('contextSaveContent', formData: result[i]);
+        request('wipeTasksfromDevice', formData: result[i]);
       }
     });
+  }
+
+  void deleteAllTaskFromMySQL() {
+    request('deleteAllTasks', formData: null);
   }
 
   void syncLastSevenDaysTasksToMySql() async {
