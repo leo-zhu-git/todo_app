@@ -59,7 +59,9 @@ class TaskHomeState extends State {
             icon: const Icon(Icons.sync, color: Colors.white),
             tooltip: 'Sync',
 // LZ's code for sync
-            onPressed: () {},
+            onPressed: () {
+              mysqlDBhelper.syncTasks();
+            },
           ),
         ],
       ),
@@ -118,6 +120,7 @@ class TaskHomeState extends State {
                 DateTime now = DateTime.now();
                 String formattedDate = DateFormat('yyyy-mm-dd').format(now);
                 this.tasklist[position].isDone = 1;
+                this.tasklist[position].status = "Completed";
                 this.tasklist[position].dateDone = formattedDate;
                 dbHelper.updateTask(tasklist[position]);
                 this.tasklist.removeAt(position);
@@ -205,10 +208,12 @@ class TaskHomeState extends State {
                             DateFormat('yyyy-mm-dd').format(now);
                         if (value == true) {
                           this.tasklist[position].isDone = 1;
+                          this.tasklist[position].status = "Completed";
                           this.tasklist[position].dateDone = formattedDate;
                           dbHelper.updateTask(tasklist[position]);
                         } else {
                           this.tasklist[position].isDone = 0;
+                          this.tasklist[position].status = "Open";
                           this.tasklist[position].dateDone = '';
                           dbHelper.updateTask(tasklist[position]);
                         }
