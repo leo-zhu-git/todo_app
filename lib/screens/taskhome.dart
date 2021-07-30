@@ -224,27 +224,28 @@ class TaskHomeState extends State {
   }
 
   void getData() {
-    int _sort1 = globals.sort1 != null ? globals.sort1 : 0;
-    int _sort2 = globals.sort2 != null ? globals.sort2 : 1;
-    int _sort3 = globals.sort3 != null ? globals.sort3 : 2;
-    int _order1 = globals.order1 != null ? globals.order1 : 0;
-    int _order2 = globals.order2 != null ? globals.order2 : 0;
-    int _order3 = globals.order3 != null ? globals.order3 : 0;
-    int _showDueDate = globals.showDueDate != null ? globals.showDueDate : 0;
+    int _sortField1 = globals.sortField1 != null ? globals.sortField1 : 0;
+    int _sortField2 = globals.sortField2 != null ? globals.sortField2 : 1;
+    int _sortField3 = globals.sortField3 != null ? globals.sortField3 : 2;
+    int _sortOrder1 = globals.sortOrder1 != null ? globals.sortOrder1 : 0;
+    int _sortOrder2 = globals.sortOrder2 != null ? globals.sortOrder2 : 0;
+    int _sortOrder3 = globals.sortOrder3 != null ? globals.sortOrder3 : 0;
+    int _filterDateDue = globals.filterDateDue != null ? globals.filterDateDue : 0;
+    int _filterIsDone = globals.filterIsDone != null ? globals.filterIsDone : 0;
 
     var countDone = 0;
     final dbFuture = helper.initializeDb();
 
     dbFuture.then((result) {
       final tasksFuture = helper.getTasksSort(
-          getSortColumn(_sort1),
-          getOrderColumn(_order1),
-          getSortColumn(_sort2),
-          getOrderColumn(_order2),
-          getSortColumn(_sort3),
-          getOrderColumn(_order3),
-          getDueDateColumn(_showDueDate),
-          globals.showCompleted);
+          getSortColumn(_sortField1),
+          getOrderColumn(_sortOrder1),
+          getSortColumn(_sortField2),
+          getOrderColumn(_sortOrder2),
+          getSortColumn(_sortField3),
+          getOrderColumn(_sortOrder3),
+          getDueDateColumn(_filterDateDue),
+          globals.filterIsDone);
       // final tasksFuture = helper.getTasksFromLastFewDays();
       tasksFuture.then((result) {
         List<Task> taskList = List<Task>();
@@ -558,33 +559,36 @@ class TaskHomeState extends State {
     if (_customSetting.length > 0) {
       customSetting = CustomSettings.fromObject(_customSetting[0]);
       if (customSetting != null && customSetting.id != null) {
-        if (customSetting.sort1 != "") {
-          globals.sort1 =
-              int.parse(customSetting.sort1); //convert it to session variables
+        if (customSetting.sortField1 != "") {
+          globals.sortField1 =
+              int.parse(customSetting.sortField1); //convert it to session variables
         }
-        if (customSetting.sort2 != "") {
-          globals.sort2 = int.parse(customSetting.sort2);
+        if (customSetting.sortField2 != "") {
+          globals.sortField2 = int.parse(customSetting.sortField2);
         }
-        if (customSetting.sort3 != "") {
-          globals.sort3 = int.parse(customSetting.sort3);
+        if (customSetting.sortField3 != "") {
+          globals.sortField3 = int.parse(customSetting.sortField3);
         }
-        if (customSetting.fieldToDisplay1 != "") {
-          globals.showMain1 = int.parse(customSetting.fieldToDisplay1);
+        if (customSetting.showMain1 != "") {
+          globals.showMain1 = int.parse(customSetting.showMain1);
         }
-        if (customSetting.fieldToDisplay2 != "") {
-          globals.showMain2 = int.parse(customSetting.fieldToDisplay2);
+        if (customSetting.showMain2 != "") {
+          globals.showMain2 = int.parse(customSetting.showMain2);
         }
-        if (customSetting.fieldToDisplay3 != "") {
-          globals.showSec1 = int.parse(customSetting.fieldToDisplay3);
+        if (customSetting.showSec1 != "") {
+          globals.showSec1 = int.parse(customSetting.showSec1);
         }
-        if (customSetting.fieldToDisplay4 != "") {
-          globals.showSec2 = int.parse(customSetting.fieldToDisplay4);
+        if (customSetting.showSec2 != "") {
+          globals.showSec2 = int.parse(customSetting.showSec2);
         }
-        if (customSetting.fieldToDisplay5 != "") {
-          globals.showSec3 = int.parse(customSetting.fieldToDisplay5);
+        if (customSetting.showSec3 != "") {
+          globals.showSec3 = int.parse(customSetting.showSec3);
         }
-        if (customSetting.showCompletedTask == true) {
-          globals.showCompleted = 1;
+        if (customSetting.filterIsDone == true) {
+          globals.filterIsDone = 1;
+        }
+        if (customSetting.filterDateDue == "") {
+          globals.filterDateDue = 1;
         }
       }
       getData();

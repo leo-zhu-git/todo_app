@@ -36,19 +36,19 @@ class DbHelper {
   String colLastModified = 'lastModified';
 
   String tblCustomSettings = "customSettings";
-  String colsort1 = "sort1";
-  String colorder1 = "order1";
-  String colsort2 = "sort2";
-  String colorder2 = "order2";
-  String colsort3 = "sort3";
-  String colorder3 = "order3";
-  String colfieldToDisplay1 = 'fieldToDisplay1';
-  String colfieldToDisplay2 = 'fieldToDisplay2';
-  String colfieldToDisplay3 = 'fieldToDisplay3';
-  String colfieldToDisplay4 = 'fieldToDisplay4';
-  String colfieldToDisplay5 = 'fieldToDisplay5';
-  String colshowCompletedTask = 'showCompletedTask';
-  String colshowDueDateTask = 'showDueDateTask';
+  String colsortField1 = "sortField1";
+  String colsortOrder1 = "sortOrder1";
+  String colsortField2 = "sortField2";
+  String colsortOrder2 = "sortOrder2";
+  String colsortField3 = "sortField3";
+  String colsortOrder3 = "sortOrder3";
+  String colshowMain1 = 'showMain1';
+  String colshowMain2 = 'showMain2';
+  String colshowSec1 = 'showSec1';
+  String colshowSec2 = 'showSec2';
+  String colshowSec3 = 'showSec3';
+  String colfilterIsDone = 'filterIsDone';
+  String colfilterDateDue = 'filterDateDue';
 
   DbHelper._internal();
 
@@ -67,7 +67,7 @@ class DbHelper {
 
   Future<Database> initializeDb() async {
     Directory dir = await getApplicationDocumentsDirectory();
-    String path = dir.path + "todo_V1532.db";
+    String path = dir.path + "todo_V1533.db";
 // <<<<<<< HEAD
 //     print(path);
 // =======
@@ -86,10 +86,10 @@ class DbHelper {
 
 //this table need to include hash key to track users.... i would say all the tables
     await db.execute(
-        "CREATE TABLE $tblCustomSettings($colId INTEGER PRIMARY KEY, $colsort1 TEXT, $colorder1 TEXT, $colsort2 TEXT, " +
-            "$colorder2 TEXT, $colsort3 TEXT, $colorder3 TEXT, $colfieldToDisplay1 TEXT,$colfieldToDisplay2 TEXT, " +
-            "$colfieldToDisplay3 TEXT,$colfieldToDisplay4 TEXT,$colfieldToDisplay5 TEXT," +
-            " $colshowCompletedTask INTEGER, $colshowDueDateTask)");
+        "CREATE TABLE $tblCustomSettings($colId INTEGER PRIMARY KEY, $colsortField1 TEXT, $colsortOrder1 TEXT, $colsortField2 TEXT, " +
+            "$colsortOrder2 TEXT, $colsortField3 TEXT, $colsortOrder3 TEXT, $colshowMain1 TEXT,$colshowMain2 TEXT, " +
+            "$colshowSec1 TEXT,$colshowSec2 TEXT,$colshowSec3 TEXT," +
+            " $colfilterIsDone INTEGER, $colfilterDateDue)");
 
     // Create table categories
     await db.execute(
@@ -159,27 +159,27 @@ class DbHelper {
     var result = await db
 //        .rawQuery("SELECT * FROM $tblTodo order by $colDateDue ASC");
         .rawQuery(
-            "SELECT * FROM $tblTodo where ($colIsDone != 1) order by $colCategory $colorder1, $colDateDue ASC, $colTimeDue $colorder2, $colTitle $colorder3");
+            "SELECT * FROM $tblTodo where ($colIsDone != 1) order by $colCategory $colsortOrder1, $colDateDue ASC, $colTimeDue $colsortOrder2, $colTitle $colsortOrder3");
     return result;
   }
 
   Future<List> getTasksSort(
-      String colSort1,
-      String colOrder1,
-      String colSort2,
-      String colOrder2,
-      String colSort3,
-      String colOrder3,
-      String colDueDate,
-      int showCompleted) async {
+      String colsortField1,
+      String colsortOrder1,
+      String colsortField2,
+      String colsortOrder2,
+      String colsortField3,
+      String colsortOrder3,
+      String colfilterDateDue,
+      int colfilterIsDone) async {
     Database db = await this.db;
-    if (showCompleted == 1) {
+    if (colfilterIsDone == 1) {
       var result = await db.rawQuery(
-          "SELECT * FROM $tblTodo order by $colSort1 $colOrder1, $colSort2 $colOrder2, $colSort3 $colOrder3");
+          "SELECT * FROM $tblTodo order by $colsortField1 $colsortOrder1, $colsortField2 $colsortOrder2, $colsortField3 $colsortOrder3");
       return result;
     } else {
       var result = await db.rawQuery(
-          "SELECT * FROM $tblTodo where ($colIsDone == 0) order by $colSort1 $colOrder1, $colSort2 $colOrder2, $colSort3 $colOrder3");
+          "SELECT * FROM $tblTodo where ($colfilterIsDone == 0) order by $colsortField1 $colsortOrder1, $colsortField2 $colsortOrder2, $colsortField3 $colsortOrder3");
       return result;
     }
   }
@@ -195,17 +195,17 @@ class DbHelper {
       String searchTag1) async {
     Database db = await this.db;
 
-    int showcompleted = globals.showCompleted;
-    int showDueDate = globals.showDueDate;
+    int filterIsDone = globals.filterIsDone;
+    int filterDateDue = globals.filterDateDue;
     String queryStr = "";
-    if (showcompleted == 1) {
+    if (filterIsDone == 1) {
       queryStr =
           "SELECT * FROM $tblTodo WHERE ($colTitle LIKE '%$searchText%' OR $colDescription LIKE '%$searchText%') ";
 
       // queryStr = queryStr + " AND $colIsDone = 0";
     } else {
       queryStr =
-          "SELECT * FROM $tblTodo WHERE ($colTitle LIKE '%$searchText%' OR $colDescription LIKE '%$searchText%') AND $colIsDone = $showcompleted";
+          "SELECT * FROM $tblTodo WHERE ($colTitle LIKE '%$searchText%' OR $colDescription LIKE '%$searchText%') AND $colIsDone = $filterIsDone";
     }
 //  if (searchPriorityTxt.trim() != "")
 //  {
@@ -213,10 +213,10 @@ class DbHelper {
 //  }
 
 ////////////////////////
-    /// filter by due date
+    /// filter by date due
 ///////////////////////
-    if (showDueDate == 0) {
-      queryStr = queryStr + " AND $colshowDueDateTask = '2021-07-15";
+    if (filterDateDue == 0) {
+      queryStr = queryStr + " AND $colfilterDateDue = '2021-07-30";
     }
 
     if (searchCategory.trim() != "") {
@@ -243,6 +243,7 @@ class DbHelper {
 //    queryStr = queryStr + " AND $colGoal1 = '$searchGoal1'";
 //  }
 
+    print(queryStr);
     var result = await db.rawQuery(queryStr);
     return result;
   }

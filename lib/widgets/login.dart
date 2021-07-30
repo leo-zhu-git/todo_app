@@ -23,8 +23,8 @@ class _LoginState extends State<Login> {
   Future<String> _onLogin(LoginData data) async {
     bool _amplifyConfigured = false;
     
-    if (Amplify.isConfigured == false)
-    {
+  //rt  if (Amplify.isConfigured == false)
+  //rt  {
       Amplify.addPlugin(AmplifyAuthCognito());
       try {
             await Amplify.configure(amplifyconfig);
@@ -34,7 +34,7 @@ class _LoginState extends State<Login> {
           }on AmplifyAlreadyConfiguredException {
               print("Amplify was already configured. Looks like app restarted on android.");
           } 
-    }
+  //rt  }
     //
     final CognitoAuthSession  res = await Amplify.Auth.fetchAuthSession(); 
     if (res.isSignedIn) {
@@ -77,8 +77,8 @@ class _LoginState extends State<Login> {
   Future<String> _onRecoverPassword(BuildContext context, String email) async {
     bool _amplifyConfigured = false;
     
-    if (Amplify.isConfigured == false)
-    {
+  //rt  if (Amplify.isConfigured == false)
+  //rt  {
       Amplify.addPlugin(AmplifyAuthCognito());
       try {
             await Amplify.configure(amplifyconfig);
@@ -88,7 +88,7 @@ class _LoginState extends State<Login> {
           }on AmplifyAlreadyConfiguredException {
               print("Amplify was already configured. Looks like app restarted on android.");
           } 
-    }
+  //rt  }
     //
     final CognitoAuthSession  res = await Amplify.Auth.fetchAuthSession(); 
     if (res.isSignedIn) {
@@ -112,8 +112,8 @@ class _LoginState extends State<Login> {
   Future<String> _onSignup(LoginData data) async {
      bool _amplifyConfigured = false;
     
-    if (Amplify.isConfigured == false)
-    {
+//rt    if (Amplify.isConfigured == false)
+//rt    {
       Amplify.addPlugin(AmplifyAuthCognito());
       try {
             await Amplify.configure(amplifyconfig);
@@ -123,7 +123,7 @@ class _LoginState extends State<Login> {
           }on AmplifyAlreadyConfiguredException {
               print("Amplify was already configured. Looks like app restarted on android.");
           } 
-    }
+  //rt  }
     //
     final CognitoAuthSession  res = await Amplify.Auth.fetchAuthSession(); 
     if (res.isSignedIn) {

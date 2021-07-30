@@ -1,131 +1,131 @@
 class CustomSettings {
   int _id;
-  String _sort1;
-  String _order1;
-  String _sort2;
-  String _order2;
-  String _sort3;
-  String _order3;
-  String _fieldToDisplay1;
-  String _fieldToDisplay2;
-  String _fieldToDisplay3;
-  String _fieldToDisplay4;
-  String _fieldToDisplay5;
-  bool _showCompletedTask;
-  String _showDueDateTask;
+  String _sortField1;
+  String _sortOrder1;
+  String _sortField2;
+  String _sortOrder2;
+  String _sortField3;
+  String _sortOrder3;
+  String _showMain1;
+  String _showMain2;
+  String _showSec1;
+  String _showSec2;
+  String _showSec3;
+  bool _filterIsDone;
+  String _filterDateDue;
 
   CustomSettings(
-      this._sort1,
-      this._order1,
-      this._sort2,
-      this._order2,
-      this._sort3,
-      this._order3,
-      this._fieldToDisplay1,
-      this._fieldToDisplay2,
-      this._fieldToDisplay3,
-      this._fieldToDisplay4,
-      this._fieldToDisplay5,
-      this._showCompletedTask,
-      this._showDueDateTask);
+      this._sortField1,
+      this._sortOrder1,
+      this._sortField2,
+      this._sortOrder2,
+      this._sortField3,
+      this._sortOrder3,
+      this._showMain1,
+      this._showMain2,
+      this._showSec1,
+      this._showSec2,
+      this._showSec3,
+      this._filterIsDone,
+      this._filterDateDue);
   CustomSettings.withId(
       this._id,
-      this._sort1,
-      this._order1,
-      this._sort2,
-      this._order2,
-      this._sort3,
-      this._order3,
-      this._fieldToDisplay1,
-      this._fieldToDisplay2,
-      this._fieldToDisplay3,
-      this._fieldToDisplay4,
-      this._fieldToDisplay5,
-      this._showCompletedTask,
-      this._showDueDateTask);
+      this._sortField1,
+      this._sortOrder1,
+      this._sortField2,
+      this._sortOrder2,
+      this._sortField3,
+      this._sortOrder3,
+      this._showMain1,
+      this._showMain2,
+      this._showSec1,
+      this._showSec2,
+      this._showSec3,
+      this._filterIsDone,
+      this._filterDateDue);
   int get id => _id;
-  String get sort1 => _sort1;
-  String get order1 => _order1;
-  String get sort2 => _sort2;
-  String get order2 => _order2;
-  String get sort3 => _sort3;
-  String get order3 => _order3;
-  String get fieldToDisplay1 => _fieldToDisplay1;
-  String get fieldToDisplay2 => _fieldToDisplay2;
-  String get fieldToDisplay3 => _fieldToDisplay3;
-  String get fieldToDisplay4 => _fieldToDisplay4;
-  String get fieldToDisplay5 => _fieldToDisplay5;
-  bool get showCompletedTask => _showCompletedTask;
-  String get showDueDateTask => _showDueDateTask;
+  String get sortField1 => _sortField1;
+  String get sortOrder1 => _sortOrder1;
+  String get sortField2 => _sortField2;
+  String get sortOrder2 => _sortOrder2;
+  String get sortField3 => _sortField3;
+  String get sortOrder3 => _sortOrder3;
+  String get showMain1 => _showMain1;
+  String get showMain2 => _showMain2;
+  String get showSec1 => _showSec1;
+  String get showSec2 => _showSec2;
+  String get showSec3 => _showSec3;
+  bool get filterIsDone => _filterIsDone;
+  String get filterDateDue => _filterDateDue;
 
-  set sort1(String newsort1) {
-    this._sort1 = newsort1;
+  set sortField1(String newSortField1) {
+    this._sortField1 = newSortField1;
   }
 
-  set order1(String neworder1) {
-    this._order1 = neworder1;
+  set sortOrder1(String newSortOrder1) {
+    this._sortOrder1 = newSortOrder1;
   }
 
-  set sort2(String newsort2) {
-    this._sort2 = newsort2;
+  set sortField2(String newSortField2) {
+    this._sortField2 = newSortField2;
   }
 
-  set order2(String neworder2) {
-    this._order2 = neworder2;
+  set sortOrder2(String newSortOrder2) {
+    this._sortOrder2 = newSortOrder2;
   }
 
-  set sort3(String newsort3) {
-    this._sort3 = newsort3;
+  set sortField3(String newSortField3) {
+    this._sortField3 = newSortField3;
   }
 
-  set order3(String neworder3) {
-    this._order3 = neworder3;
+  set sortOrder3(String newSortOrder3) {
+    this._sortOrder3 = newSortOrder3;
   }
 
-  set fieldToDisplay1(String newfieldToDisplay1) {
-    this._fieldToDisplay1 = newfieldToDisplay1;
+  set showMain1(String newShowMain1) {
+    this._showMain1 = newShowMain1;
   }
 
-  set fieldToDisplay2(String newfieldToDisplay2) {
-    this._fieldToDisplay2 = newfieldToDisplay2;
+  set showMain2(String newShowMain2) {
+    this._showMain2 = newShowMain2;
   }
 
-  set fieldToDisplay3(String newfieldToDisplay3) {
-    this._fieldToDisplay3 = newfieldToDisplay3;
+  set showSec1(String newShowSec1) {
+    this._showSec1 = newShowSec1;
   }
 
-  set fieldToDisplay4(String newfieldToDisplay4) {
-    this._fieldToDisplay4 = newfieldToDisplay4;
+  set showSec2(String newShowSec2) {
+    this._showSec2 = newShowSec2;
   }
 
-  set fieldToDisplay5(String newfieldToDisplay5) {
-    this._fieldToDisplay5 = newfieldToDisplay5;
+  set showSec3(String newShowSec3) {
+    this._showSec3 = newShowSec3;
   }
 
-  set showCompletedTask(bool newshowCompletedTask) {
-    this._showCompletedTask = newshowCompletedTask;
+  set filterIsDone(bool newFilterIsDone) {
+    this._filterIsDone = newFilterIsDone;
   }
 
-  set showDueDateTask(String newshowDueDateTask) {
-    this._showDueDateTask = newshowDueDateTask;
+  set filterDateDue(String newFilterDateDue) {
+    this._filterDateDue = newFilterDateDue;
   }
 
   Map<String, dynamic> toMap() {
     var map = Map<String, dynamic>();
 
-    map['sort1'] = _sort1;
-    map['order1'] = _order1;
-    map['sort2'] = _sort2;
-    map['order2'] = _order2;
-    map['sort3'] = _sort3;
-    map['order3'] = _order3;
-    map['fieldToDisplay1'] = _fieldToDisplay1;
-    map['fieldToDisplay2'] = _fieldToDisplay2;
-    map['fieldToDisplay3'] = _fieldToDisplay3;
-    map['fieldToDisplay4'] = _fieldToDisplay4;
-    map['fieldToDisplay5'] = _fieldToDisplay5;
-    map['showCompletedTask'] = _showCompletedTask;
-    map['showDueDateTask'] = _showDueDateTask;
+    map['sortField1'] = _sortField1;
+    map['sortOrder1'] = _sortOrder1;
+    map['sortField2'] = _sortField2;
+    map['sortOrder2'] = _sortOrder2;
+    map['sortField3'] = _sortField3;
+    map['sortOrder3'] = _sortOrder3;
+    map['showMain1'] = _showMain1;
+    map['showMain2'] = _showMain2;
+    map['showSec1'] = _showSec1;
+    map['showSec2'] = _showSec2;
+    map['showSec3'] = _showSec3;
+    map['filterIsDone'] = _filterIsDone;
+    map['filterDateDue'] = _filterDateDue;
 
     if (_id != null) {
       map['id'] = _id;
@@ -136,18 +136,18 @@ class CustomSettings {
 
   CustomSettings.fromObject(dynamic o) {
     this._id = o['id'];
-    this._sort1 = o['sort1'];
-    this._order1 = o['order1'];
-    this._sort2 = o['sort2'];
-    this._order2 = o['order2'];
-    this._sort3 = o['sort3'];
-    this._order3 = o['order3'];
-    this._fieldToDisplay1 = o['fieldToDisplay1'];
-    this._fieldToDisplay2 = o['fieldToDisplay2'];
-    this._fieldToDisplay3 = o['fieldToDisplay3'];
-    this._fieldToDisplay4 = o['fieldToDisplay4'];
-    this._fieldToDisplay5 = o['fieldToDisplay5'];
-    this._showCompletedTask = o['showCompletedTask'] == 0 ? false : true;
-    this._showDueDateTask = o['showDueDateTask'];
+    this._sortField1 = o['sortField1'];
+    this._sortOrder1 = o['sortOrder1'];
+    this._sortField2 = o['sortField2'];
+    this._sortOrder2 = o['sortOrder2'];
+    this._sortField3 = o['sortField3'];
+    this._sortOrder3 = o['sortOrder3'];
+    this._showMain1 = o['showMain1'];
+    this._showMain2 = o['showMain2'];
+    this._showSec1 = o['showSec1'];
+    this._showSec2 = o['showSec2'];
+    this._showSec3 = o['showSec3'];
+    this._filterIsDone = o['filterIsDone'] == 0 ? false : true;
+    this._filterDateDue = o['filterDateDue'];
   }
 }

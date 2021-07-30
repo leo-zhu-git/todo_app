@@ -32,34 +32,34 @@ class SortItem {
   }
 }
 
-class CompletedItem {
+class FilterIsDone {
   int id;
   String name;
 
-  CompletedItem(this.id, this.name);
-  static List<CompletedItem> getCompleted() {
-    return <CompletedItem>[
-      CompletedItem(0, 'Hide'),
-      CompletedItem(1, 'Show'),
+  FilterIsDone(this.id, this.name);
+  static List<FilterIsDone> getIsDone() {
+    return <FilterIsDone>[
+      FilterIsDone(0, 'Hide'),
+      FilterIsDone(1, 'Show'),
     ];
   }
 }
 
-class DueDateItem {
+class FilterDateDue {
   int id;
   String name;
 
-  DueDateItem(this.id, this.name);
-  static List<DueDateItem> getDueDate() {
-    return <DueDateItem>[
-      DueDateItem(0, 'Today'),
-      DueDateItem(1, 'Tomorrow'),
-      DueDateItem(2, 'Next 7 days'),
-      DueDateItem(3, 'Next 30 days'),
-      DueDateItem(4, 'Any Due Date'),
-      DueDateItem(5, 'No Due Date'),
-      DueDateItem(6, 'Overdue'),
-      DueDateItem(7, 'All'),
+  FilterDateDue(this.id, this.name);
+  static List<FilterDateDue> getDateDue() {
+    return <FilterDateDue>[
+      FilterDateDue(0, 'Today'),
+      FilterDateDue(1, 'Tomorrow'),
+      FilterDateDue(2, 'Next 7 days'),
+      FilterDateDue(3, 'Next 30 days'),
+      FilterDateDue(4, 'Any Due Date'),
+      FilterDateDue(5, 'No Due Date'),
+      FilterDateDue(6, 'Overdue'),
+      FilterDateDue(7, 'All'),
     ];
   }
 }
@@ -81,25 +81,25 @@ class _CustomizeViewState extends State //State<CustomizeView>
 {
   List<SortItem> _sort = SortItem.getSort();
   List<SortOrder> _order = SortOrder.getOrder();
-  List<CompletedItem> _completed = CompletedItem.getCompleted();
-  List<DueDateItem> _dueDate = DueDateItem.getDueDate(); 
-  List<DropdownMenuItem<CompletedItem>> _dropdownCompletedItems;
+  List<FilterIsDone> _filterIsDone = FilterIsDone.getIsDone();
+  List<FilterDateDue> _filterDateDue = FilterDateDue.getDateDue(); 
   List<DropdownMenuItem<SortItem>> _dropdownMenuItemsSort;
-  List<DropdownMenuItem<DueDateItem>> _dropdownDueDateItems; 
   List<DropdownMenuItem<SortOrder>> _dropdownMenuSortOrder;
-  CompletedItem _selectedShowCompleted;
-  DueDateItem _selectedShowDueDate; 
-  SortItem _selectedSort1;
-  SortOrder _selectedOrder1;
-  SortItem _selectedSort2;
-  SortOrder _selectedOrder2;
-  SortItem _selectedSort3;
-  SortOrder _selectedOrder3; 
-  SortItem _selectedMain1;
-  SortItem _selectedMain2;
-  SortItem _selectedSec1;
-  SortItem _selectedSec2;
-  SortItem _selectedSec3;
+  List<DropdownMenuItem<FilterIsDone>> _dropdownFilterIsDone;
+  List<DropdownMenuItem<FilterDateDue>> _dropdownFilterDateDue; 
+  FilterIsDone _selectedFilterIsDone;
+  FilterDateDue _selectedFilterDateDue; 
+  SortItem _selectedSortField1;
+  SortOrder _selectedSortOrder1;
+  SortItem _selectedSortField2;
+  SortOrder _selectedSortOrder2;
+  SortItem _selectedSortField3;
+  SortOrder _selectedSortOrder3; 
+  SortItem _selectedShowMain1;
+  SortItem _selectedShowMain2;
+  SortItem _selectedShowSec1;
+  SortItem _selectedShowSec2;
+  SortItem _selectedShowSec3;
   DbHelper helper = DbHelper();
   CustomSettings customSetting;
 
@@ -108,100 +108,97 @@ class _CustomizeViewState extends State //State<CustomizeView>
   void initState() {
     _dropdownMenuItemsSort = buildDropdownMenuItems(_sort);
     _dropdownMenuSortOrder  = buildDropdownMenuOrder(_order);
-    _dropdownCompletedItems = buildDropdownCompletedItems(_completed);
-    _dropdownDueDateItems = buildDropdownDueDateItems(_dueDate);
+    _dropdownFilterIsDone = buildDropdownFilterIsDone(_filterIsDone);
+    _dropdownFilterDateDue = buildDropdownFilterDateDue(_filterDateDue);
 
     ////////////////////////////
-    /// show - due date
+    /// filter - date due
     ////////////////////////////
-    if (globals.showDueDate == null) {
-      _selectedShowDueDate = _dropdownDueDateItems[0].value;
-      globals.showDueDate = 0;
+    if (globals.filterDateDue == null) {
+      _selectedFilterDateDue = _dropdownFilterDateDue[0].value;
+      globals.filterDateDue = 0;
     } else
-      _selectedShowDueDate =
-          _dropdownDueDateItems[globals.showDueDate].value;
-
-    ////////////////////////////
-    /// show - completed
-    ////////////////////////////
-    if (globals.showCompleted == null) {
-      _selectedShowCompleted = _dropdownCompletedItems[0].value;
-      globals.showCompleted = 0;
-    } else
-      _selectedShowCompleted =
-          _dropdownCompletedItems[globals.showCompleted].value;
-    ////////////////////////////
+      _selectedFilterDateDue =
+          _dropdownFilterDateDue[globals.filterDateDue].value;
 
     ////////////////////////////
-    //Sort
+    /// filter - is done
     ////////////////////////////
-    if (globals.sort1 == null) {
-      _selectedSort1 = _dropdownMenuItemsSort[2].value;
-      globals.sort1 = 2;
+    if (globals.filterIsDone == null) {
+      _selectedFilterIsDone = _dropdownFilterIsDone[0].value;
+      globals.filterIsDone = 0;
     } else
-      _selectedSort1 = _dropdownMenuItemsSort[globals.sort1].value;
+      _selectedFilterIsDone =
+          _dropdownFilterIsDone[globals.filterIsDone].value;
 
-    if (globals.order1 == null) {
-      _selectedOrder1 = _dropdownMenuSortOrder[0].value;
-      globals.order1 = 0;
+    ////////////////////////////
+    // Sort and Order
+    ////////////////////////////
+    if (globals.sortField1 == null) {
+      _selectedSortField1 = _dropdownMenuItemsSort[2].value;
+      globals.sortField1 = 2;
     } else
-      _selectedOrder1 =
-          _dropdownMenuSortOrder[globals.order1].value;
+      _selectedSortField1 = _dropdownMenuItemsSort[globals.sortField1].value;
 
+    if (globals.sortOrder1 == null) {
+      _selectedSortOrder1 = _dropdownMenuSortOrder[0].value;
+      globals.sortOrder1 = 0;
+    } else
+      _selectedSortOrder1 =
+          _dropdownMenuSortOrder[globals.sortOrder1].value;
 
-    if (globals.sort2 == null) {
-      _selectedSort2 = _dropdownMenuItemsSort[3].value;
-      globals.sort2 = 3;
+    if (globals.sortField2 == null) {
+      _selectedSortField2 = _dropdownMenuItemsSort[3].value;
+      globals.sortField2 = 3;
     } else
-      _selectedSort2 = _dropdownMenuItemsSort[globals.sort2].value;
-    if (globals.order2 == null) {
-      _selectedOrder2 = _dropdownMenuSortOrder[0].value;
-      globals.order2 = 0;
+      _selectedSortField2 = _dropdownMenuItemsSort[globals.sortField2].value;
+    if (globals.sortOrder2 == null) {
+      _selectedSortOrder2 = _dropdownMenuSortOrder[0].value;
+      globals.sortOrder2 = 0;
     } else
-      _selectedOrder2 =
-          _dropdownMenuSortOrder[globals.order2].value;
+      _selectedSortOrder2 =
+          _dropdownMenuSortOrder[globals.sortOrder2].value;
 
-
-    if (globals.sort3 == null) {
-      _selectedSort3 = _dropdownMenuItemsSort[0].value;
-      globals.sort3 = 0;
+    if (globals.sortField3 == null) {
+      _selectedSortField3 = _dropdownMenuItemsSort[0].value;
+      globals.sortField3 = 0;
     } else
-      _selectedSort3 = _dropdownMenuItemsSort[globals.sort3].value;
-    if (globals.order3 == null) {
-      _selectedOrder3 = _dropdownMenuSortOrder[0].value;
-      globals.order3 = 0;
+      _selectedSortField3 = _dropdownMenuItemsSort[globals.sortField3].value;
+    if (globals.sortOrder3 == null) {
+      _selectedSortOrder3 = _dropdownMenuSortOrder[0].value;
+      globals.sortOrder3 = 0;
     } else
-      _selectedOrder3 =
-          _dropdownMenuSortOrder[globals.order3].value;
+      _selectedSortOrder3 =
+          _dropdownMenuSortOrder[globals.sortOrder3].value;
 
     ////////////////////////////
     /// show
     ////////////////////////////
     if (globals.showMain1 == null) {
-      _selectedMain1 = _dropdownMenuItemsSort[2].value;
+      _selectedShowMain1 = _dropdownMenuItemsSort[2].value;
       globals.showMain1 = 2;
     } else
-      _selectedMain1 = _dropdownMenuItemsSort[globals.showMain1].value;
+      _selectedShowMain1 = _dropdownMenuItemsSort[globals.showMain1].value;
     if (globals.showMain2 == null) {
-      _selectedMain2 = _dropdownMenuItemsSort[2].value;
+      _selectedShowMain2 = _dropdownMenuItemsSort[2].value;
       globals.showMain2 = 2;
     } else
-      _selectedMain2 = _dropdownMenuItemsSort[globals.showMain2].value;
+      _selectedShowMain2 = _dropdownMenuItemsSort[globals.showMain2].value;
     if (globals.showSec1 == null) {
-      _selectedSec1 = _dropdownMenuItemsSort[2].value;
+      _selectedShowSec1 = _dropdownMenuItemsSort[2].value;
       globals.showSec1 = 2;
     } else
-      _selectedSec1 = _dropdownMenuItemsSort[globals.showSec1].value;
+      _selectedShowSec1 = _dropdownMenuItemsSort[globals.showSec1].value;
     if (globals.showSec2 == null) {
-      _selectedSec2 = _dropdownMenuItemsSort[2].value;
+      _selectedShowSec2 = _dropdownMenuItemsSort[2].value;
       globals.showSec2 = 2;
     } else
-      _selectedSec2 = _dropdownMenuItemsSort[globals.showSec2].value;
+      _selectedShowSec2 = _dropdownMenuItemsSort[globals.showSec2].value;
     if (globals.showSec3 == null) {
-      _selectedSec3 = _dropdownMenuItemsSort[2].value;
+      _selectedShowSec3 = _dropdownMenuItemsSort[2].value;
       globals.showSec3 = 2;
     } else
-      _selectedSec3 = _dropdownMenuItemsSort[globals.showSec3].value;
+      _selectedShowSec3 = _dropdownMenuItemsSort[globals.showSec3].value;
 
     _getCustomSettings();
 
@@ -234,14 +231,14 @@ class _CustomizeViewState extends State //State<CustomizeView>
     return order;
   }
 
-    List<DropdownMenuItem<CompletedItem>> buildDropdownCompletedItems(
-      List completedItems) {
-    List<DropdownMenuItem<CompletedItem>> items = List();
-    for (CompletedItem completedItem in completedItems) {
+    List<DropdownMenuItem<FilterIsDone>> buildDropdownFilterIsDone(
+      List filterIsDoneItems) {
+    List<DropdownMenuItem<FilterIsDone>> items = List();
+    for (FilterIsDone filterIsDone in filterIsDoneItems) {
       items.add(
         DropdownMenuItem(
-          value: completedItem,
-          child: Text(completedItem.name),
+          value: filterIsDone,
+          child: Text(filterIsDone.name),
         ),
       );
     }
@@ -249,14 +246,14 @@ class _CustomizeViewState extends State //State<CustomizeView>
   }
 
 
-  List<DropdownMenuItem<DueDateItem>> buildDropdownDueDateItems(
-      List dueDateItems) {
-    List<DropdownMenuItem<DueDateItem>> items = List();
-    for (DueDateItem dueDateItem in dueDateItems) {
+  List<DropdownMenuItem<FilterDateDue>> buildDropdownFilterDateDue(
+      List filterDateDueItems) {
+    List<DropdownMenuItem<FilterDateDue>> items = List();
+    for (FilterDateDue filterDateDue in filterDateDueItems) {
       items.add(
         DropdownMenuItem(
-          value: dueDateItem,
-          child: Text(dueDateItem.name),
+          value: filterDateDue,
+          child: Text(filterDateDue.name),
         ),
       );
     }
@@ -287,7 +284,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
           child: Column(
             children: [
 ///////////////////////////
-//  Filter Due Date
+//  Filter Date Due
 ///////////////////////////
               Text("Filter - Due Date"),
 
@@ -296,33 +293,33 @@ class _CustomizeViewState extends State //State<CustomizeView>
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.blue[100]),
                 child: DropdownButtonFormField(
-                  items: _dropdownDueDateItems,
+                  items: _dropdownFilterDateDue,
                   hint: Text('Filter by Due Date'),
-                  value: _selectedShowDueDate,
+                  value: _selectedFilterDateDue,
                   onChanged: (selectedDueDateItems) {
                     setState(() {
-                      _selectedShowDueDate = selectedDueDateItems;
+                      _selectedFilterDateDue = _selectedFilterDateDue;
                     });
                   },
                 ),
               ),
 
 ///////////////////////////
-//  Filter Completed
+//  Filter Is Done
 ///////////////////////////
-              Text("Filter - Completed Tasks"),
+              Text("Filter - Is Done"),
 
               new Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.blue[100]),
                 child: DropdownButtonFormField(
-                  items: _dropdownCompletedItems,
-                  hint: Text('Filter by Completed Tasks'),
-                  value: _selectedShowCompleted,
-                  onChanged: (selectedCompletedItems) {
+                  items: _dropdownFilterIsDone,
+                  hint: Text('Filter by Is Done Tasks'),
+                  value: _selectedFilterIsDone,
+                  onChanged: (selectedFilterIsDone) {
                     setState(() {
-                      _selectedShowCompleted = selectedCompletedItems;
+                      _selectedFilterIsDone = selectedFilterIsDone;
                     });
                   },
                 ),
@@ -344,12 +341,12 @@ class _CustomizeViewState extends State //State<CustomizeView>
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.pink[100]),
                 child: DropdownButtonFormField(
-                  value: _selectedSort1,
+                  value: _selectedSortField1,
                   items: _dropdownMenuItemsSort,
                   hint: Text('Sort Order 1'),
                   onChanged: (selectedSort) {
                     setState(() {
-                      _selectedSort1 = selectedSort;
+                      _selectedSortField1 = selectedSort;
                     });
                   },
                 ),
@@ -362,12 +359,12 @@ class _CustomizeViewState extends State //State<CustomizeView>
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.pink[100]),
                 child: DropdownButtonFormField(
-                  value: _selectedOrder1,
+                  value: _selectedSortOrder1,
                   items: _dropdownMenuSortOrder,
                   hint: Text('Sort 1 Ascending/Descending'),
                   onChanged: (selectedOrder) {
                     setState(() {
-                      _selectedOrder1 = selectedOrder;
+                      _selectedSortOrder1 = selectedOrder;
                     });
                   },
                 ),
@@ -383,10 +380,10 @@ class _CustomizeViewState extends State //State<CustomizeView>
                 child: DropdownButtonFormField(
                   items: _dropdownMenuItemsSort,
                   hint: Text('Sort 2'),
-                  value: _selectedSort2,
+                  value: _selectedSortField2,
                   onChanged: (selectedSort) {
                     setState(() {
-                      _selectedSort2 = selectedSort;
+                      _selectedSortField2 = selectedSort;
                     });
                   },
                 ),
@@ -399,12 +396,12 @@ class _CustomizeViewState extends State //State<CustomizeView>
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.pink[100]),
                 child: DropdownButtonFormField(
-                  value: _selectedOrder2,
+                  value: _selectedSortOrder2,
                   items: _dropdownMenuSortOrder,
                   hint: Text('Sort 2 Ascending/Descending'),
                   onChanged: (selectedOrder) {
                     setState(() {
-                      _selectedOrder2 = selectedOrder;
+                      _selectedSortOrder2 = selectedOrder;
                     });
                   },
                 ),
@@ -420,10 +417,10 @@ class _CustomizeViewState extends State //State<CustomizeView>
                 child: DropdownButtonFormField(
                   items: _dropdownMenuItemsSort,
                   hint: Text('Sort 3'),
-                  value: _selectedSort3,
+                  value: _selectedSortField3,
                   onChanged: (selectedSort) {
                     setState(() {
-                      _selectedSort3 = selectedSort;
+                      _selectedSortField3 = selectedSort;
                     });
                   },
                 ),
@@ -436,12 +433,12 @@ class _CustomizeViewState extends State //State<CustomizeView>
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.pink[100]),
                 child: DropdownButtonFormField(
-                  value: _selectedOrder3,
+                  value: _selectedSortOrder3,
                   items: _dropdownMenuSortOrder,
                   hint: Text('Sort Order 3 Ascending/Descending'),
                   onChanged: (selectedOrder) {
                     setState(() {
-                      _selectedOrder3 = selectedOrder;
+                      _selectedSortOrder3 = selectedOrder;
                     });
                   },
                 ),
@@ -461,10 +458,10 @@ class _CustomizeViewState extends State //State<CustomizeView>
                 child: DropdownButtonFormField(
                   items: _dropdownMenuItemsSort,
                   hint: Text('Display Main1'),
-                  value: _selectedMain1,
+                  value: _selectedShowMain1,
                   onChanged: (selectedShow) {
                     setState(() {
-                      _selectedMain1 = selectedShow;
+                      _selectedShowMain1 = selectedShow;
                     });
                   },
                 ),
@@ -498,10 +495,10 @@ class _CustomizeViewState extends State //State<CustomizeView>
                 child: DropdownButtonFormField(
                   items: _dropdownMenuItemsSort,
                   hint: Text('Display Secondary1'),
-                  value: _selectedSec1,
+                  value: _selectedShowSec1,
                   onChanged: (selectedShow) {
                     setState(() {
-                      _selectedSec1 = selectedShow;
+                      _selectedShowSec1 = selectedShow;
                     });
                   },
                 ),
@@ -516,10 +513,10 @@ class _CustomizeViewState extends State //State<CustomizeView>
                 child: DropdownButtonFormField(
                   items: _dropdownMenuItemsSort,
                   hint: Text('Display Secondary2'),
-                  value: _selectedSec2,
+                  value: _selectedShowSec2,
                   onChanged: (selectedShow) {
                     setState(() {
-                      _selectedSec2 = selectedShow;
+                      _selectedShowSec2 = selectedShow;
                     });
                   },
                 ),
@@ -534,10 +531,10 @@ class _CustomizeViewState extends State //State<CustomizeView>
                 child: DropdownButtonFormField(
                   items: _dropdownMenuItemsSort,
                   hint: Text('Display Secondary3'),
-                  value: _selectedSec3,
+                  value: _selectedShowSec3,
                   onChanged: (selectedShow) {
                     setState(() {
-                      _selectedSec3 = selectedShow;
+                      _selectedShowSec3 = selectedShow;
                     });
                   },
                 ),
@@ -564,37 +561,37 @@ class _CustomizeViewState extends State //State<CustomizeView>
                   RaisedButton(
                       onPressed: () {
                         setState(() {
-                          if (_selectedSort1 != null)
-                            globals.sort1 = _selectedSort1.id;
-                          if (_selectedOrder1 != null)
-                            globals.order1 = _selectedOrder1.id;
-                          if (_selectedSort2 != null)
-                            globals.sort2 = _selectedSort2.id;
-                          if (_selectedOrder2 != null)
-                            globals.order2 = _selectedOrder2.id;
-                          if (_selectedSort3 != null)
-                            globals.sort3 = _selectedSort3.id;
-                          if (_selectedOrder3 != null)
-                            globals.order3 = _selectedOrder3.id;
-                          if (_selectedMain1 != null)
-                            globals.showMain1 = _selectedMain1.id;
+                          if (_selectedSortField1 != null)
+                            globals.sortField1 = _selectedSortField1.id;
+                          if (_selectedSortOrder1 != null)
+                            globals.sortOrder1 = _selectedSortOrder1.id;
+                          if (_selectedSortField2 != null)
+                            globals.sortField2 = _selectedSortField2.id;
+                          if (_selectedSortOrder2 != null)
+                            globals.sortOrder2 = _selectedSortOrder2.id;
+                          if (_selectedSortField3 != null)
+                            globals.sortField3 = _selectedSortField3.id;
+                          if (_selectedSortOrder3 != null)
+                            globals.sortOrder3 = _selectedSortOrder3.id;
+                          if (_selectedShowMain1 != null)
+                            globals.showMain1 = _selectedShowMain1.id;
                           print(globals.showMain1);
-                          if (_selectedMain2 != null)
-                            globals.showMain2 = _selectedMain2.id;
+                          if (_selectedShowMain2 != null)
+                            globals.showMain2 = _selectedShowMain2.id;
                           print(globals.showMain2);
-                          if (_selectedSec1 != null)
-                            globals.showSec1 = _selectedSec1.id;
+                          if (_selectedShowSec1 != null)
+                            globals.showSec1 = _selectedShowSec1.id;
                           print(globals.showSec1);
-                          if (_selectedSec2 != null)
-                            globals.showSec2 = _selectedSec2.id;
+                          if (_selectedShowSec2 != null)
+                            globals.showSec2 = _selectedShowSec2.id;
                           print(globals.showSec2);
-                          if (_selectedSec3 != null)
-                            globals.showSec3 = _selectedSec3.id;
+                          if (_selectedShowSec3 != null)
+                            globals.showSec3 = _selectedShowSec3.id;
                           print(globals.showSec3);
-                          if (_selectedShowCompleted != null)
-                            globals.showCompleted = _selectedShowCompleted.id;
-                          if (_selectedShowDueDate != null)
-                            globals.showDueDate = _selectedShowDueDate.id;
+                          if (_selectedFilterIsDone != null)
+                            globals.filterIsDone = _selectedFilterIsDone.id;
+                          if (_selectedFilterDateDue != null)
+                            globals.filterDateDue = _selectedFilterDateDue.id;
 
 //Save
                           if (customSetting == null) {
@@ -602,49 +599,49 @@ class _CustomizeViewState extends State //State<CustomizeView>
                                 '', '', '', '','','','', '', '', '', '', false,'');
                           }
 
-                          customSetting.sort1 = _selectedSort1 == null
+                          customSetting.sortField1 = _selectedSortField1 == null
                               ? ""
-                              : _selectedSort1.id.toString();
-                          customSetting.order1 = _selectedOrder1 == null
+                              : _selectedSortField1.id.toString();
+                          customSetting.sortOrder1 = _selectedSortOrder1 == null
                               ? ""
-                              : _selectedOrder1.id.toString();
-                          customSetting.sort2 = _selectedSort2 == null
+                              : _selectedSortOrder1.id.toString();
+                          customSetting.sortField2 = _selectedSortField2 == null
                               ? ""
-                              : _selectedSort2.id.toString();
-                          customSetting.order2 = _selectedOrder2 == null
+                              : _selectedSortField2.id.toString();
+                          customSetting.sortOrder2 = _selectedSortOrder2 == null
                               ? ""
-                              : _selectedOrder2.id.toString();
-                          customSetting.sort3 = _selectedSort3 == null
+                              : _selectedSortOrder2.id.toString();
+                          customSetting.sortField3 = _selectedSortField3 == null
                               ? ""
-                              : _selectedSort3.id.toString();
-                          customSetting.order3 = _selectedOrder3 == null
+                              : _selectedSortField3.id.toString();
+                          customSetting.sortOrder3 = _selectedSortOrder3 == null
                               ? ""
-                              : _selectedOrder3.id.toString();
-                          customSetting.fieldToDisplay1 = _selectedMain1 == null
+                              : _selectedSortOrder3.id.toString();
+                          customSetting.showMain1 = _selectedShowMain1 == null
                               ? ""
-                              : _selectedMain1.id.toString();
-                          customSetting.fieldToDisplay2 = _selectedMain2 == null
+                              : _selectedShowMain1.id.toString();
+                          customSetting.showMain2 = _selectedShowMain2 == null
                               ? ""
-                              : _selectedMain2.id.toString();
-                          customSetting.fieldToDisplay3 = _selectedSec1 == null
+                              : _selectedShowMain2.id.toString();
+                          customSetting.showSec1 = _selectedShowSec1 == null
                               ? ""
-                              : _selectedSec1.id.toString();
-                          customSetting.fieldToDisplay4 = _selectedSec2 == null
+                              : _selectedShowSec1.id.toString();
+                          customSetting.showSec2 = _selectedShowSec2 == null
                               ? ""
-                              : _selectedSec2.id.toString();
-                          customSetting.fieldToDisplay5 = _selectedSec3 == null
+                              : _selectedShowSec2.id.toString();
+                          customSetting.showSec3 = _selectedShowSec3 == null
                               ? ""
-                              : _selectedSec3.id.toString();
-                          customSetting.showDueDateTask = _selectedShowDueDate == null
+                              : _selectedShowSec3.id.toString();
+                          customSetting.filterDateDue = _selectedFilterDateDue == null
                               ? ""
-                              : _selectedShowDueDate.id.toString();
-                          if (_selectedShowCompleted == null) {
-                            customSetting.showCompletedTask = false;
+                              : _selectedFilterDateDue.id.toString();
+                          if (_selectedFilterIsDone == null) {
+                            customSetting.filterIsDone = false;
                           } else {
-                            if (_selectedShowCompleted.id == 0) {
-                              customSetting.showCompletedTask = false;
+                            if (_selectedFilterIsDone.id == 0) {
+                              customSetting.filterIsDone = false;
                             } else {
-                              customSetting.showCompletedTask = true;
+                              customSetting.filterIsDone = true;
                             }
                           }
 
@@ -657,8 +654,8 @@ class _CustomizeViewState extends State //State<CustomizeView>
                           }
 
 //end of save
-                          print('showCompleted');
-                          print(globals.showCompleted);
+                          print('filterIsDone');
+                          print(globals.filterIsDone);
                         });
                         _showSuccessSnackBar(
                           Container(
@@ -701,81 +698,81 @@ class _CustomizeViewState extends State //State<CustomizeView>
       customSetting = CustomSettings.fromObject(_customSetting[0]);
 
       if (customSetting != null && customSetting.id != null) {
-        if (customSetting.sort1 != "") {
-          _selectedSort1 =
-              _dropdownMenuItemsSort[int.parse(customSetting.sort1)].value;
-          globals.sort1 =
-              int.parse(customSetting.sort1); //convert it to session variables
+        if (customSetting.sortField1 != "") {
+          _selectedSortField1 =
+              _dropdownMenuItemsSort[int.parse(customSetting.sortField1)].value;
+          globals.sortField1 =
+              int.parse(customSetting.sortField1); //convert it to session variables
         }
-        if (customSetting.order1 != "") {
-          _selectedOrder1 =
-              _dropdownMenuSortOrder[int.parse(customSetting.order1)].value;
-          globals.sort1 =
-              int.parse(customSetting.order1); //convert it to session variables
+        if (customSetting.sortOrder1 != "") {
+          _selectedSortOrder1 =
+              _dropdownMenuSortOrder[int.parse(customSetting.sortOrder1)].value;
+          globals.sortField1 =
+              int.parse(customSetting.sortOrder1); //convert it to session variables
         }
-        if (customSetting.sort2 != "") {
-          _selectedSort2 =
-              _dropdownMenuItemsSort[int.parse(customSetting.sort2)].value;
-          globals.sort2 = int.parse(customSetting.sort2);
+        if (customSetting.sortField2 != "") {
+          _selectedSortField2 =
+              _dropdownMenuItemsSort[int.parse(customSetting.sortField2)].value;
+          globals.sortField2 = int.parse(customSetting.sortField2);
         }
-        if (customSetting.order2 != "") {
-          _selectedOrder2 =
-              _dropdownMenuSortOrder[int.parse(customSetting.order2)].value;
-          globals.sort2 =
-              int.parse(customSetting.order2); //convert it to session variables
+        if (customSetting.sortOrder2 != "") {
+          _selectedSortOrder2 =
+              _dropdownMenuSortOrder[int.parse(customSetting.sortOrder2)].value;
+          globals.sortField2 =
+              int.parse(customSetting.sortOrder2); //convert it to session variables
         }
-        if (customSetting.sort3 != "") {
-          _selectedSort3 =
-              _dropdownMenuItemsSort[int.parse(customSetting.sort3)].value;
-          globals.sort3 = int.parse(customSetting.sort3);
+        if (customSetting.sortField3 != "") {
+          _selectedSortField3 =
+              _dropdownMenuItemsSort[int.parse(customSetting.sortField3)].value;
+          globals.sortField3 = int.parse(customSetting.sortField3);
         }
-        if (customSetting.order3 != "") {
-          _selectedOrder3 =
-              _dropdownMenuSortOrder[int.parse(customSetting.order3)].value;
-          globals.sort3 =
-              int.parse(customSetting.order3); //convert it to session variables
+        if (customSetting.sortOrder3 != "") {
+          _selectedSortOrder3 =
+              _dropdownMenuSortOrder[int.parse(customSetting.sortOrder3)].value;
+          globals.sortField3 =
+              int.parse(customSetting.sortOrder3); //convert it to session variables
         }
-        if (customSetting.fieldToDisplay1 != "") {
-          _selectedMain1 =
-              _dropdownMenuItemsSort[int.parse(customSetting.fieldToDisplay1)]
+        if (customSetting.showMain1 != "") {
+          _selectedShowMain1 =
+              _dropdownMenuItemsSort[int.parse(customSetting.showMain1)]
                   .value;
-          globals.showMain1 = int.parse(customSetting.fieldToDisplay1);
+          globals.showMain1 = int.parse(customSetting.showMain1);
         }
-        if (customSetting.fieldToDisplay2 != "") {
-          _selectedMain2 =
-              _dropdownMenuItemsSort[int.parse(customSetting.fieldToDisplay2)]
+        if (customSetting.showMain2 != "") {
+          _selectedShowMain2 =
+              _dropdownMenuItemsSort[int.parse(customSetting.showMain2)]
                   .value;
-          globals.showMain2 = int.parse(customSetting.fieldToDisplay2);
+          globals.showMain2 = int.parse(customSetting.showMain2);
         }
-        if (customSetting.fieldToDisplay3 != "") {
-          _selectedSec1 =
-              _dropdownMenuItemsSort[int.parse(customSetting.fieldToDisplay3)]
+        if (customSetting.showSec1 != "") {
+          _selectedShowSec1 =
+              _dropdownMenuItemsSort[int.parse(customSetting.showSec1)]
                   .value;
-          globals.showSec1 = int.parse(customSetting.fieldToDisplay3);
+          globals.showSec1 = int.parse(customSetting.showSec1);
         }
-        if (customSetting.fieldToDisplay4 != "") {
-          _selectedSec2 =
-              _dropdownMenuItemsSort[int.parse(customSetting.fieldToDisplay4)]
+        if (customSetting.showSec2 != "") {
+          _selectedShowSec2 =
+              _dropdownMenuItemsSort[int.parse(customSetting.showSec2)]
                   .value;
-          globals.showSec2 = int.parse(customSetting.fieldToDisplay4);
+          globals.showSec2 = int.parse(customSetting.showSec2);
         }
-        if (customSetting.fieldToDisplay5 != "") {
-          _selectedSec3 =
-              _dropdownMenuItemsSort[int.parse(customSetting.fieldToDisplay5)]
+        if (customSetting.showSec3 != "") {
+          _selectedShowSec3 =
+              _dropdownMenuItemsSort[int.parse(customSetting.showSec3)]
                   .value;
-          globals.showSec3 = int.parse(customSetting.fieldToDisplay5);
+          globals.showSec3 = int.parse(customSetting.showSec3);
         }
-        if (customSetting.showCompletedTask == true) {
-          _selectedShowCompleted = _dropdownCompletedItems[1].value;
-          globals.showCompleted = 1;
+        if (customSetting.filterIsDone == true) {
+          _selectedFilterIsDone = _dropdownFilterIsDone[1].value;
+          globals.filterIsDone = 1;
         } else
-          _selectedShowCompleted = _dropdownCompletedItems[0].value;
+          _selectedFilterIsDone = _dropdownFilterIsDone[0].value;
       }
-        if (customSetting.showDueDateTask == true) {
-          _selectedShowDueDate = _dropdownDueDateItems[0].value;
-          globals.showDueDate = 0;
+        if (customSetting.filterDateDue == true) {
+          _selectedFilterDateDue = _dropdownFilterDateDue[0].value;
+          globals.filterDateDue = 0;
         } else
-          _selectedShowDueDate = _dropdownDueDateItems[0].value;
+          _selectedFilterDateDue = _dropdownFilterDateDue[0].value;
       }
     setState(() {
       customSetting = customSetting;
