@@ -59,7 +59,7 @@ class TaskHomeState extends State {
             icon: const Icon(Icons.sync, color: Colors.white),
             tooltip: 'Sync',
 // LZ's code for sync
-            onPressed: () {},
+            onPressed: () { },
           ),
         ],
       ),
