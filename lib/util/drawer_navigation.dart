@@ -7,8 +7,7 @@ import 'package:todo_app/screens/context1s_screen.dart';
 import 'package:todo_app/screens/goal1s_screen.dart';
 import 'package:todo_app/screens/location1s_screen.dart';
 import 'package:todo_app/screens/tag1s_screen.dart';
-
-
+import 'package:url_launcher/url_launcher.dart';
 
 class DrawerNagivation extends StatefulWidget {
   @override
@@ -19,7 +18,7 @@ class _DrawerNagivation extends State<DrawerNagivation> {
   List<Widget> _categoryList = List<Widget>();
   //DbHelper dbHelper = new DbHelper();
 
- // CategoryService _categoryService = CategoryService();
+  // CategoryService _categoryService = CategoryService();
 
   List<Widget> _action1List = List<Widget>();
   //Action1Service _action1Service = Action1Service();
@@ -34,7 +33,7 @@ class _DrawerNagivation extends State<DrawerNagivation> {
   //Tag1Service _tag1Service = Tag1Service();
 
   List<Widget> _goal1List = List<Widget>();
- // Goal1Service _goal1Service = Goal1Service();
+  // Goal1Service _goal1Service = Goal1Service();
 
   @override
   initState() {
@@ -64,8 +63,8 @@ class _DrawerNagivation extends State<DrawerNagivation> {
             ListTile(
               leading: Icon(Icons.category),
               title: Text('Categories'),
-               onTap: () => Navigator.of(context).push(
-                   MaterialPageRoute(builder: (context) => CategoriesScreen())),
+              onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => CategoriesScreen())),
             ),
             Divider(),
             Column(
@@ -74,8 +73,8 @@ class _DrawerNagivation extends State<DrawerNagivation> {
             ListTile(
               leading: Icon(Icons.pending_actions_outlined),
               title: Text('Actions'),
-               onTap: () => Navigator.of(context).push(
-                   MaterialPageRoute(builder: (context) => Action1sScreen())),
+              onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => Action1sScreen())),
             ),
             Divider(),
             Column(
@@ -84,8 +83,8 @@ class _DrawerNagivation extends State<DrawerNagivation> {
             ListTile(
               leading: Icon(Icons.filter_alt_outlined),
               title: Text('Contexts'),
-               onTap: () => Navigator.of(context).push(
-                   MaterialPageRoute(builder: (context) => Context1sScreen())),
+              onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => Context1sScreen())),
             ),
             Divider(),
             Column(
@@ -94,36 +93,48 @@ class _DrawerNagivation extends State<DrawerNagivation> {
             ListTile(
               leading: Icon(Icons.add_location_outlined),
               title: Text('Locations'),
-               onTap: () => Navigator.of(context).push(
-                   MaterialPageRoute(builder: (context) => Location1sScreen())),
+              onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => Location1sScreen())),
             ),
-                        Divider(),
+            Divider(),
             Column(
               children: _location1List,
             ),
-
             ListTile(
               leading: Icon(Icons.bookmark_border_rounded),
               title: Text('Tags'),
-               onTap: () => Navigator.of(context).push(
-                   MaterialPageRoute(builder: (context) => Tag1sScreen())),
+              onTap: () => Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => Tag1sScreen())),
             ),
             Divider(),
             ListTile(
               leading: Icon(Icons.cloud_download_outlined),
               title: Text('Wipe'),
-               onTap: () => Navigator.of(context).push(
-                   MaterialPageRoute(builder: (context) => WipeScreen())),
+              onTap: () => Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => WipeScreen())),
             ),
             Divider(),
             ListTile(
               leading: Icon(Icons.help_outlined),
               title: Text('Help'),
-               onTap: () {},
+              onTap: () {
+                _launchURL();
+              },
             ),
           ],
         ),
       ),
     );
   }
+
+  _launchURL() async {
+    const _url =
+        'https://sites.google.com/emerscape.com/2ndhalf-help-center/home';
+    if (await canLaunch(_url)) {
+      await launch(_url);
+    } else {
+      throw 'Could not launch $_url';
+    }
+  }
+
 }
