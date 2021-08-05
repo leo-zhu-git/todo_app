@@ -58,8 +58,8 @@ class FilterDateDue {
       FilterDateDue(3, 'Next 30 days'),
       FilterDateDue(4, 'Any Due Date'),
       FilterDateDue(5, 'No Due Date'),
-      FilterDateDue(6, 'Overdue'),
-      FilterDateDue(7, 'All'),
+      FilterDateDue(6, 'Overdues Only'),
+      FilterDateDue(7, 'All Tasks'),
     ];
   }
 }
@@ -296,9 +296,9 @@ class _CustomizeViewState extends State //State<CustomizeView>
                   items: _dropdownFilterDateDue,
                   hint: Text('Filter by Due Date'),
                   value: _selectedFilterDateDue,
-                  onChanged: (selectedDueDateItems) {
+                  onChanged: (selectedFilterDateDue) {
                     setState(() {
-                      _selectedFilterDateDue = _selectedFilterDateDue;
+                      _selectedFilterDateDue = selectedFilterDateDue;
                     });
                   },
                 ),

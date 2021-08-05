@@ -173,13 +173,51 @@ class DbHelper {
       String colfilterDateDue,
       int colfilterIsDone) async {
     Database db = await this.db;
+
+    String _startDate;
+    String _endDate;
+    if (colfilterDateDue == "Today") {
+      _startDate = "2021-08-06";
+      _endDate = "2021-08-06";
+    } else if (colfilterDateDue == "Tomorrow") {
+      _startDate = "2021-08-07";
+      _endDate = "2021-08-07";
+    } else if (colfilterDateDue == "Next 7 days") {
+      _startDate = "2021-08-05";
+      _endDate = "2021-08-05";
+    } else if (colfilterDateDue == "Next 30 days") {
+      _startDate = "2021-08-05";
+      _endDate = "2021-08-05";
+    } else if (colfilterDateDue == "Any Due Date") {
+      _startDate = "2021-08-05";
+      _endDate = "2021-08-05";
+    } else if (colfilterDateDue == "No Due Date") {
+      _startDate = "2021-08-05";
+      _endDate = "2021-08-05";
+    } else if (colfilterDateDue == "Overdues Only") {
+      _startDate = "2021-08-05";
+      _endDate = "2021-08-05";
+    } else if (colfilterDateDue == "All Tasks") {
+      _startDate = "2021-08-05";
+      _endDate = "2021-08-05";
+    } else {
+      _startDate = "2021-08-05";
+      _endDate = "2021-08-05";
+      
+    }
+    ;
+
+///////////////////
+/// add in filter for date due
+/// ///////////////
+
     if (colfilterIsDone == 1) {
-      var result = await db.rawQuery(
+      var result = await db.rawQuery( // show IsDone
           "SELECT * FROM $tblTodo order by $colsortField1 $colsortOrder1, $colsortField2 $colsortOrder2, $colsortField3 $colsortOrder3");
       return result;
-    } else {
+    } else { // hide IsDone
       var result = await db.rawQuery(
-          "SELECT * FROM $tblTodo where ($colfilterIsDone == 0) order by $colsortField1 $colsortOrder1, $colsortField2 $colsortOrder2, $colsortField3 $colsortOrder3");
+          "SELECT * FROM $tblTodo where ($colIsDone == 0) order by $colsortField1 $colsortOrder1, $colsortField2 $colsortOrder2, $colsortField3 $colsortOrder3");
       return result;
     }
   }

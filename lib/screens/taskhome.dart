@@ -12,6 +12,7 @@ import 'package:todo_app/util/drawer_navigation.dart';
 import 'package:todo_app/model/globals.dart' as globals;
 import 'package:todo_app/util/mysql_dbhelper.dart';
 
+
 DateTime currentDate = DateTime.now();
 DateFormat formatter = DateFormat('yyyy-mm-dd');
 String formattedDate = DateFormat('yyyy-mm-dd').format(currentDate);
@@ -202,7 +203,7 @@ class TaskHomeState extends State {
                       setState(() {
                         DateTime now = DateTime.now();
                         String formattedDate =
-                            DateFormat('yyyy-mm-dd').format(now);
+                            DateFormat('yyyy-MM-dd').format(now);
                         if (value == true) {
                           this.tasklist[position].isDone = 1;
                           this.tasklist[position].dateDone = formattedDate;
@@ -587,8 +588,8 @@ class TaskHomeState extends State {
         if (customSetting.filterIsDone == true) {
           globals.filterIsDone = 1;
         }
-        if (customSetting.filterDateDue == "") {
-          globals.filterDateDue = 1;
+        if (customSetting.filterDateDue == null) {
+          globals.filterDateDue = 0;
         }
       }
       getData();
@@ -657,10 +658,10 @@ class TaskHomeState extends State {
         return "No Due Date";
         break;
       case 6:
-        return "Overdue";
+        return "Overdues Only";
         break;
       case 7:
-        return "All";
+        return "All Tasks";
         break;
 
       default:
