@@ -250,7 +250,7 @@ class Task {
     this._timeDue = o['timeDue'];
     this._isDone = o['isDone'];
     this._dateDone = o['dateDone'];
-    this._status = o['dateDone'];
+    this._status = o['status'];
     this._lastModified = o['lastModified'];
     this._main1 = o['main1'];
     this._main2 = o['main2'];
