@@ -768,11 +768,14 @@ class _CustomizeViewState extends State //State<CustomizeView>
         } else
           _selectedFilterIsDone = _dropdownFilterIsDone[0].value;
       }
-        if (customSetting.filterDateDue == true) {
-          _selectedFilterDateDue = _dropdownFilterDateDue[0].value;
-          globals.filterDateDue = 0;
-        } else
-          _selectedFilterDateDue = _dropdownFilterDateDue[0].value;
+
+        if (customSetting.filterDateDue != "") {
+          _selectedFilterDateDue =
+              _dropdownFilterDateDue[int.parse(customSetting.filterDateDue)]
+                  .value;
+          globals.filterDateDue = int.parse(customSetting.filterDateDue);
+        }  
+
       }
     setState(() {
       customSetting = customSetting;
