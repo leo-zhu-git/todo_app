@@ -68,7 +68,7 @@ class DbHelper {
 
   Future<Database> initializeDb() async {
     Directory dir = await getApplicationDocumentsDirectory();
-    String path = dir.path + "todo_V16.db";
+    String path = dir.path + "todo_V18.db";
 // <<<<<<< HEAD
 //     print(path);
 // =======
@@ -173,33 +173,32 @@ class DbHelper {
       String colsortOrder3,
       String colfilterDateDue,
       int colfilterIsDone) async {
-
 ////////////////
-/// build query 0
-//////////////// 
+    /// build query 0
+////////////////
     Database db = await this.db;
 
     String queryStr = "";
-    queryStr =
-        "SELECT * FROM $tblTodo ";
-        
+    queryStr = "SELECT * FROM $tblTodo ";
+
 ////////////////
-/// build query - add filterIsDone
-//////////////// 
+    /// build query - add filterIsDone
+////////////////
     if (colfilterIsDone == 0) // hide
       queryStr = queryStr + "where ($colIsDone ==0)";
-    else 
+    else
       queryStr = queryStr + "where ($colIsDone not Null)";
-        
+
 ////////////////
-/// build query - add filterDateDue
-//////////////// 
+    /// build query - add filterDateDue
+////////////////
 
     String _startDate;
     String _endDate;
 
     final DateTime _today = DateTime.now();
-    final DateTime _yesterday = DateTime(_today.year, _today.month, _today.day - 1);
+    final DateTime _yesterday =
+        DateTime(_today.year, _today.month, _today.day - 1);
     final DateTime _tomo = DateTime(_today.year, _today.month, _today.day + 1);
     final DateTime _N7D = DateTime(_today.year, _today.month, _today.day + 6);
     final DateTime _N30D = DateTime(_today.year, _today.month, _today.day + 29);
@@ -214,42 +213,39 @@ class DbHelper {
       _startDate = formattedToday;
       _endDate = formattedToday;
       queryStr = queryStr + "and ($colDateDue == '$_startDate')";
-
     } else if (colfilterDateDue == "Tomorrow") {
       _startDate = formattedTomo;
       _endDate = formattedTomo;
       queryStr = queryStr + "and ($colDateDue == '$_startDate')";
-
     } else if (colfilterDateDue == "Next 7 days") {
       _startDate = formattedToday;
       _endDate = formattedN7D;
-      queryStr = queryStr + "and ($colDateDue >= '$_startDate') and ($colDateDue<= '$_endDate')";
-
+      queryStr = queryStr +
+          "and ($colDateDue >= '$_startDate') and ($colDateDue<= '$_endDate')";
     } else if (colfilterDateDue == "Next 30 days") {
       _startDate = formattedToday;
       _endDate = formattedN30D;
-      queryStr = queryStr + "and ($colDateDue >= '$_startDate') and ($colDateDue<= '$_endDate')";
-
+      queryStr = queryStr +
+          "and ($colDateDue >= '$_startDate') and ($colDateDue<= '$_endDate')";
     } else if (colfilterDateDue == "Any Due Date") {
       queryStr = queryStr + "and ($colDateDue != '')";
-
     } else if (colfilterDateDue == "No Due Date") {
       queryStr = queryStr + "and ($colDateDue == '')";
-
     } else if (colfilterDateDue == "Overdues Only") {
       _endDate = formattedYesterday;
-      queryStr = queryStr + "and ($colDateDue <= '$_endDate') and ($colDateDue != '')";
+      queryStr =
+          queryStr + "and ($colDateDue <= '$_endDate') and ($colDateDue != '')";
     } else if (colfilterDateDue == "All Tasks") {
     } else {
-// select all tasks regardless of due dates 
-    };
+// select all tasks regardless of due dates
+    }
+    ;
 
 ////////////////
-/// build query - add order
-//////////////// 
-/// queryStr = queryStr +
-         " order by $colsortField1 $colsortOrder1, $colsortField2 $colsortOrder2, $colsortField3 $colsortOrder3";
-  
+    /// build query - add order
+////////////////
+    /// queryStr = queryStr +
+    " order by $colsortField1 $colsortOrder1, $colsortField2 $colsortOrder2, $colsortField3 $colsortOrder3";
 
     print(queryStr);
     var result = await db.rawQuery(queryStr);
@@ -265,7 +261,6 @@ class DbHelper {
 //          "SELECT * FROM $tblTodo where ($colIsDone == 0 and $colDateDue >= '$_startDate' and $colDateDue <= '$_endDate') order by $colsortField1 $colsortOrder1, $colsortField2 $colsortOrder2, $colsortField3 $colsortOrder3");
 //          "SELECT * FROM $tblTodo where ($colIsDone == 0) order by $colsortField1 $colsortOrder1, $colsortField2 $colsortOrder2, $colsortField3 $colsortOrder3");
 //      return result;
-
   }
 
 //  Future<List> searchTasks(String searchText, String searchPriorityTxt, String searchCategory, String searchAction1,

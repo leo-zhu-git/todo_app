@@ -82,19 +82,19 @@ class _CustomizeViewState extends State //State<CustomizeView>
   List<SortItem> _sort = SortItem.getSort();
   List<SortOrder> _order = SortOrder.getOrder();
   List<FilterIsDone> _filterIsDone = FilterIsDone.getIsDone();
-  List<FilterDateDue> _filterDateDue = FilterDateDue.getDateDue(); 
+  List<FilterDateDue> _filterDateDue = FilterDateDue.getDateDue();
   List<DropdownMenuItem<SortItem>> _dropdownMenuItemsSort;
   List<DropdownMenuItem<SortOrder>> _dropdownMenuSortOrder;
   List<DropdownMenuItem<FilterIsDone>> _dropdownFilterIsDone;
-  List<DropdownMenuItem<FilterDateDue>> _dropdownFilterDateDue; 
+  List<DropdownMenuItem<FilterDateDue>> _dropdownFilterDateDue;
   FilterIsDone _selectedFilterIsDone;
-  FilterDateDue _selectedFilterDateDue; 
+  FilterDateDue _selectedFilterDateDue;
   SortItem _selectedSortField1;
   SortOrder _selectedSortOrder1;
   SortItem _selectedSortField2;
   SortOrder _selectedSortOrder2;
   SortItem _selectedSortField3;
-  SortOrder _selectedSortOrder3; 
+  SortOrder _selectedSortOrder3;
   SortItem _selectedShowMain1;
   SortItem _selectedShowMain2;
   SortItem _selectedShowSec1;
@@ -107,7 +107,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
   @override
   void initState() {
     _dropdownMenuItemsSort = buildDropdownMenuItems(_sort);
-    _dropdownMenuSortOrder  = buildDropdownMenuOrder(_order);
+    _dropdownMenuSortOrder = buildDropdownMenuOrder(_order);
     _dropdownFilterIsDone = buildDropdownFilterIsDone(_filterIsDone);
     _dropdownFilterDateDue = buildDropdownFilterDateDue(_filterDateDue);
 
@@ -128,8 +128,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
       _selectedFilterIsDone = _dropdownFilterIsDone[0].value;
       globals.filterIsDone = 0;
     } else
-      _selectedFilterIsDone =
-          _dropdownFilterIsDone[globals.filterIsDone].value;
+      _selectedFilterIsDone = _dropdownFilterIsDone[globals.filterIsDone].value;
 
     ////////////////////////////
     // Sort and Order
@@ -144,8 +143,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
       _selectedSortOrder1 = _dropdownMenuSortOrder[0].value;
       globals.sortOrder1 = 0;
     } else
-      _selectedSortOrder1 =
-          _dropdownMenuSortOrder[globals.sortOrder1].value;
+      _selectedSortOrder1 = _dropdownMenuSortOrder[globals.sortOrder1].value;
 
     if (globals.sortField2 == null) {
       _selectedSortField2 = _dropdownMenuItemsSort[3].value;
@@ -156,8 +154,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
       _selectedSortOrder2 = _dropdownMenuSortOrder[0].value;
       globals.sortOrder2 = 0;
     } else
-      _selectedSortOrder2 =
-          _dropdownMenuSortOrder[globals.sortOrder2].value;
+      _selectedSortOrder2 = _dropdownMenuSortOrder[globals.sortOrder2].value;
 
     if (globals.sortField3 == null) {
       _selectedSortField3 = _dropdownMenuItemsSort[0].value;
@@ -168,8 +165,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
       _selectedSortOrder3 = _dropdownMenuSortOrder[0].value;
       globals.sortOrder3 = 0;
     } else
-      _selectedSortOrder3 =
-          _dropdownMenuSortOrder[globals.sortOrder3].value;
+      _selectedSortOrder3 = _dropdownMenuSortOrder[globals.sortOrder3].value;
 
     ////////////////////////////
     /// show
@@ -231,7 +227,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
     return order;
   }
 
-    List<DropdownMenuItem<FilterIsDone>> buildDropdownFilterIsDone(
+  List<DropdownMenuItem<FilterIsDone>> buildDropdownFilterIsDone(
       List filterIsDoneItems) {
     List<DropdownMenuItem<FilterIsDone>> items = List();
     for (FilterIsDone filterIsDone in filterIsDoneItems) {
@@ -244,7 +240,6 @@ class _CustomizeViewState extends State //State<CustomizeView>
     }
     return items;
   }
-
 
   List<DropdownMenuItem<FilterDateDue>> buildDropdownFilterDateDue(
       List filterDateDueItems) {
@@ -544,7 +539,6 @@ class _CustomizeViewState extends State //State<CustomizeView>
                 height: 20,
               ),
 
-
               /// form - save or cancel
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -595,8 +589,8 @@ class _CustomizeViewState extends State //State<CustomizeView>
 
 //Save
                           if (customSetting == null) {
-                            customSetting = new CustomSettings(
-                                '', '', '', '','','','', '', '', '', '', false,'');
+                            customSetting = new CustomSettings('', '', '', '',
+                                '', '', '', '', '', '', '', false, '');
                           }
 
                           customSetting.sortField1 = _selectedSortField1 == null
@@ -632,9 +626,10 @@ class _CustomizeViewState extends State //State<CustomizeView>
                           customSetting.showSec3 = _selectedShowSec3 == null
                               ? ""
                               : _selectedShowSec3.id.toString();
-                          customSetting.filterDateDue = _selectedFilterDateDue == null
-                              ? ""
-                              : _selectedFilterDateDue.id.toString();
+                          customSetting.filterDateDue =
+                              _selectedFilterDateDue == null
+                                  ? ""
+                                  : _selectedFilterDateDue.id.toString();
                           if (_selectedFilterIsDone == null) {
                             customSetting.filterIsDone = false;
                           } else {
@@ -698,17 +693,17 @@ class _CustomizeViewState extends State //State<CustomizeView>
       customSetting = CustomSettings.fromObject(_customSetting[0]);
 
       if (customSetting != null && customSetting.id != null) {
-        if (customSetting.sortField1 != "") {
-          _selectedSortField1 =
-              _dropdownMenuItemsSort[int.parse(customSetting.sortField1)].value;
-          globals.sortField1 =
-              int.parse(customSetting.sortField1); //convert it to session variables
-        }
+        // if (customSetting.sortField1 != "") {
+        //   _selectedSortField1 =
+        //       _dropdownMenuItemsSort[int.parse(customSetting.sortField1)].value;
+        //   globals.sortField1 =
+        //       int.parse(customSetting.sortField1); //convert it to session variables
+        // }
         if (customSetting.sortOrder1 != "") {
           _selectedSortOrder1 =
               _dropdownMenuSortOrder[int.parse(customSetting.sortOrder1)].value;
-          globals.sortField1 =
-              int.parse(customSetting.sortOrder1); //convert it to session variables
+          globals.sortField1 = int.parse(
+              customSetting.sortOrder1); //convert it to session variables
         }
         if (customSetting.sortField2 != "") {
           _selectedSortField2 =
@@ -718,8 +713,8 @@ class _CustomizeViewState extends State //State<CustomizeView>
         if (customSetting.sortOrder2 != "") {
           _selectedSortOrder2 =
               _dropdownMenuSortOrder[int.parse(customSetting.sortOrder2)].value;
-          globals.sortField2 =
-              int.parse(customSetting.sortOrder2); //convert it to session variables
+          globals.sortField2 = int.parse(
+              customSetting.sortOrder2); //convert it to session variables
         }
         if (customSetting.sortField3 != "") {
           _selectedSortField3 =
@@ -729,37 +724,32 @@ class _CustomizeViewState extends State //State<CustomizeView>
         if (customSetting.sortOrder3 != "") {
           _selectedSortOrder3 =
               _dropdownMenuSortOrder[int.parse(customSetting.sortOrder3)].value;
-          globals.sortField3 =
-              int.parse(customSetting.sortOrder3); //convert it to session variables
+          globals.sortField3 = int.parse(
+              customSetting.sortOrder3); //convert it to session variables
         }
         if (customSetting.showMain1 != "") {
           _selectedShowMain1 =
-              _dropdownMenuItemsSort[int.parse(customSetting.showMain1)]
-                  .value;
+              _dropdownMenuItemsSort[int.parse(customSetting.showMain1)].value;
           globals.showMain1 = int.parse(customSetting.showMain1);
         }
         if (customSetting.showMain2 != "") {
           _selectedShowMain2 =
-              _dropdownMenuItemsSort[int.parse(customSetting.showMain2)]
-                  .value;
+              _dropdownMenuItemsSort[int.parse(customSetting.showMain2)].value;
           globals.showMain2 = int.parse(customSetting.showMain2);
         }
         if (customSetting.showSec1 != "") {
           _selectedShowSec1 =
-              _dropdownMenuItemsSort[int.parse(customSetting.showSec1)]
-                  .value;
+              _dropdownMenuItemsSort[int.parse(customSetting.showSec1)].value;
           globals.showSec1 = int.parse(customSetting.showSec1);
         }
         if (customSetting.showSec2 != "") {
           _selectedShowSec2 =
-              _dropdownMenuItemsSort[int.parse(customSetting.showSec2)]
-                  .value;
+              _dropdownMenuItemsSort[int.parse(customSetting.showSec2)].value;
           globals.showSec2 = int.parse(customSetting.showSec2);
         }
         if (customSetting.showSec3 != "") {
           _selectedShowSec3 =
-              _dropdownMenuItemsSort[int.parse(customSetting.showSec3)]
-                  .value;
+              _dropdownMenuItemsSort[int.parse(customSetting.showSec3)].value;
           globals.showSec3 = int.parse(customSetting.showSec3);
         }
         if (customSetting.filterIsDone == true) {
@@ -769,14 +759,13 @@ class _CustomizeViewState extends State //State<CustomizeView>
           _selectedFilterIsDone = _dropdownFilterIsDone[0].value;
       }
 
-        if (customSetting.filterDateDue != "") {
-          _selectedFilterDateDue =
-              _dropdownFilterDateDue[int.parse(customSetting.filterDateDue)]
-                  .value;
-          globals.filterDateDue = int.parse(customSetting.filterDateDue);
-        }  
-
+      if (customSetting.filterDateDue != "") {
+        _selectedFilterDateDue =
+            _dropdownFilterDateDue[int.parse(customSetting.filterDateDue)]
+                .value;
+        globals.filterDateDue = int.parse(customSetting.filterDateDue);
       }
+    }
     setState(() {
       customSetting = customSetting;
     });
