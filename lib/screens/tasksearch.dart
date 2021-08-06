@@ -527,11 +527,11 @@ class TaskSearchState extends State {
                                 child: Text(this.tasklist[position].main1 == null ? "" : this.tasklist[position].main1,
                                         overflow: TextOverflow.ellipsis))),
 
-                                 Flexible(
-                            child: Padding(
-                                padding: const EdgeInsets.only(right: 2),
-                                child: Text(this.tasklist[position].main2 == null ? "" : this.tasklist[position].main2,
-                                        overflow: TextOverflow.ellipsis))),
+//                                 Flexible(
+//                            child: Padding(
+//                                padding: const EdgeInsets.only(right: 2),
+//                                child: Text(this.tasklist[position].main2 == null ? "" : this.tasklist[position].main2,
+//                                        overflow: TextOverflow.ellipsis))),
                       ],
                    
                     ),

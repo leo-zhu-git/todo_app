@@ -56,13 +56,12 @@ class TaskHomeState extends State {
         title: Center(child: Text('View (' + count.toString() + ')')),
         actions: <Widget>[
           IconButton(
-            icon: const Icon(Icons.sync, color: Colors.white),
-            tooltip: 'Sync',
+              icon: const Icon(Icons.sync, color: Colors.white),
+              tooltip: 'Sync',
 // LZ's code for sync
-            onPressed: () {
-              mysqlDBhelper.syncTasks();
-            },
-          ),
+              onPressed: () {
+                mysqlDBhelper.syncTasks();
+              }),
         ],
       ),
       body: taskListItems(),
@@ -205,7 +204,7 @@ class TaskHomeState extends State {
                       setState(() {
                         DateTime now = DateTime.now();
                         String formattedDate =
-                            DateFormat('yyyy-mm-dd').format(now);
+                            DateFormat('yyyy-MM-dd').format(now);
                         if (value == true) {
                           this.tasklist[position].isDone = 1;
                           this.tasklist[position].status = "Completed";
@@ -235,7 +234,8 @@ class TaskHomeState extends State {
     int _sortOrder1 = globals.sortOrder1 != null ? globals.sortOrder1 : 0;
     int _sortOrder2 = globals.sortOrder2 != null ? globals.sortOrder2 : 0;
     int _sortOrder3 = globals.sortOrder3 != null ? globals.sortOrder3 : 0;
-    int _filterDateDue = globals.filterDateDue != null ? globals.filterDateDue : 0;
+    int _filterDateDue =
+        globals.filterDateDue != null ? globals.filterDateDue : 0;
     int _filterIsDone = globals.filterIsDone != null ? globals.filterIsDone : 0;
 
     var countDone = 0;
@@ -565,8 +565,8 @@ class TaskHomeState extends State {
       customSetting = CustomSettings.fromObject(_customSetting[0]);
       if (customSetting != null && customSetting.id != null) {
         if (customSetting.sortField1 != "") {
-          globals.sortField1 =
-              int.parse(customSetting.sortField1); //convert it to session variables
+          globals.sortField1 = int.parse(
+              customSetting.sortField1); //convert it to session variables
         }
         if (customSetting.sortField2 != "") {
           globals.sortField2 = int.parse(customSetting.sortField2);
@@ -592,8 +592,8 @@ class TaskHomeState extends State {
         if (customSetting.filterIsDone == true) {
           globals.filterIsDone = 1;
         }
-        if (customSetting.filterDateDue == "") {
-          globals.filterDateDue = 1;
+        if (customSetting.filterDateDue == null) {
+          globals.filterDateDue = 0;
         }
       }
       getData();
@@ -662,10 +662,10 @@ class TaskHomeState extends State {
         return "No Due Date";
         break;
       case 6:
-        return "Overdue";
+        return "Overdues Only";
         break;
       case 7:
-        return "All";
+        return "All Tasks";
         break;
 
       default:

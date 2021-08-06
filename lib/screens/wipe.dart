@@ -154,6 +154,7 @@ class _WipeScreenState extends State<WipeScreen> {
                   onPressed: () async {
                     if (_option == 0) {
                       mysqlDBhelper.wipeTaskDataToMySql();
+                      Navigator.pop(context);
                       _showSuccessSnackBar(Container(
                         color: Colors.tealAccent[100],
                         height: 40,
