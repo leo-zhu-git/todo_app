@@ -588,8 +588,8 @@ class TaskHomeState extends State {
         if (customSetting.filterIsDone == true) {
           globals.filterIsDone = 1;
         }
-        if (customSetting.filterDateDue == null) {
-          globals.filterDateDue = 0;
+        if (customSetting.filterDateDue != "") {
+          globals.filterDateDue = int.parse(customSetting.filterDateDue);
         }
       }
       getData();
