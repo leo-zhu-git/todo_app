@@ -2,6 +2,10 @@ import 'dart:async';
 
 import 'package:intl/intl.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:todo_app/model/action1.dart';
+import 'package:todo_app/model/category.dart';
+import 'package:todo_app/model/context1.dart';
+import 'package:todo_app/model/tag1.dart';
 
 import 'package:todo_app/util/dbhelper.dart';
 import '../service/http_service.dart';
@@ -47,8 +51,8 @@ class MySql_DBHelper {
         String dbTaskID = swiperDataList[i]['TaskID'].toString();
         String dbUserID = swiperDataList[i]['TaskUserId'].toString();
         String appTaskID = dbTaskID.substring(dbUserID.length, dbTaskID.length);
-        print(appTaskID);
-        print("woaibeijingtiananmen");
+        print(dbTaskID);
+
         Task task = Task.withId(
             int.parse(appTaskID),
             swiperDataList[i]['TaskTitle'],
@@ -81,13 +85,13 @@ class MySql_DBHelper {
         // tasksFuture.then((result) {
         //   count = result.length;
 
-        //   if (count > 0) {
-        //     helper.updateTask(task);
-        //     //helper.deleteTask(swiperDataList[i]['TaskID']);
-        //   } else {
-        //     helper.insertTask(task);
-        //     //helper.deleteTask(swiperDataList[i]['TaskID']);
-        //   }
+        if (count > 0) {
+          helper.updateTask(task);
+          //helper.deleteTask(swiperDataList[i]['TaskID']);
+        } else {
+          helper.insertTask(task);
+          //helper.deleteTask(swiperDataList[i]['TaskID']);
+        }
         // });
       }
     });
@@ -148,79 +152,124 @@ class MySql_DBHelper {
     });
   }
 
-  // void syncActionData() async {
-  //   final tasksRequest = request('actionContent', formData: null);
+  void syncCategoriesData() async {
+    helper.deleteAllCategories();
+    final tasksRequest = request('actionContent', formData: null);
 
-  //   tasksRequest.then((value) {
-  //     final data = json.decode(value.toString());
-  //     print(data);
-  //     List<Map> swiperDataList = (data['Actions'] as List).cast();
+    tasksRequest.then((value) {
+      final data = json.decode(value.toString());
+      print(data);
+      List<Map> swiperDataList = (data['Categories'] as List).cast();
 
-  //     var count = swiperDataList.length;
-  //     print(count);
+      var count = swiperDataList.length;
+      print(count);
 
-  //     for (int i = 0; i < swiperDataList.length; i++) {
-  //       Action1 action = new Action1();
-  //       action.id = swiperDataList[i]['ActionId'];
-  //       action.name = swiperDataList[i]['ActionTitle'];
-  //       action.description = swiperDataList[i]['ActionDesc'];
+      for (int i = 0; i < swiperDataList.length; i++) {
+        Category action = new Category();
+        String dbId = swiperDataList[i]['id'].toString();
+        String dbUserID = swiperDataList[i]['userId'].toString();
+        String appId = dbId.substring(dbUserID.length, dbId.length);
+        action.id = int.parse(appId);
+        action.name = swiperDataList[i]['name'];
+        action.description = swiperDataList[i]['desc'];
 
-  //       //print(swiperDataList[i]['TaskTitle']);
-  //       //helper.deleteTask(swiperDataList[i]['TaskID']);
-  //       final actionFuture =
-  //           helper.searchTaskbyID(swiperDataList[i]['ActionId']);
-  //       actionFuture.then((result) {
-  //         count = result.length;
-  //         //for (int i = 0; i < count; i++) {
-  //         //helper.deleteAction(i);
-  //         //}
-  //         if (count > 0) {
-  //           helper.updateAction(action);
-  //           //helper.deleteAction(swiperDataList[i]['TaskID']);
-  //         } else {
-  //           helper.insertAction(action);
-  //           // helper.deleteAction(swiperDataList[i]['TaskID']);
-  //         }
-  //       });
-  //     }
-  //   });
-  // }
+        final actionFuture = helper.getCategoriesbyID(int.parse(appId));
+        actionFuture.then((result) {
+          count = result.length;
+          //for (int i = 0; i < count; i++) {
+          //helper.deleteAction(i);
+          //}
+          if (count > 0) {
+            helper.updateCategories(action);
+            //helper.deleteAction(swiperDataList[i]['TaskID']);
+          } else {
+            helper.insertCategories(action);
+            // helper.deleteAction(swiperDataList[i]['TaskID']);
+          }
+        });
+      }
+    });
+  }
 
-  // void syncContextData() async {
-  //   final tasksRequest = request('contextContent', formData: null);
+  void syncTagsData() async {
+    helper.deleteAllTags();
+    final tasksRequest = request('tagContent', formData: null);
 
-  //   tasksRequest.then((value) {
-  //     final data = json.decode(value.toString());
-  //     print(data);
-  //     List<Map> swiperDataList = (data['Contexts'] as List).cast();
+    tasksRequest.then((value) {
+      final data = json.decode(value.toString());
+      print(data);
+      List<Map> swiperDataList = (data['Tags'] as List).cast();
 
-  //     var count = swiperDataList.length;
-  //     print(count);
+      var count = swiperDataList.length;
+      print(count);
 
-  //     for (int i = 0; i < swiperDataList.length; i++) {
-  //       Context1 context = new Context1();
-  //       context.id = swiperDataList[i]['ContextID'];
-  //       context.name = swiperDataList[i]['ContextTitle'];
-  //       context.description = swiperDataList[i]['ContextDesc'];
+      for (int i = 0; i < swiperDataList.length; i++) {
+        Tag1 tag = new Tag1();
+        String dbId = swiperDataList[i]['id'].toString();
+        String dbUserID = swiperDataList[i]['userId'].toString();
+        String appId = dbId.substring(dbUserID.length, dbId.length);
+        tag.id = int.parse(appId);
+        tag.name = swiperDataList[i]['name'];
+        tag.description = swiperDataList[i]['desc'];
 
-  //       print(swiperDataList[i]['ContextTitle']);
-  //       //helper.deleteTask(swiperDataList[i]['TaskID']);
-  //       final actionFuture =
-  //           helper.getContextbyID(swiperDataList[i]['ContextID']);
-  //       actionFuture.then((result) {
-  //         count = result.length;
+        final tagFuture = helper.getTagsbyID(int.parse(appId));
+        tagFuture.then((result) {
+          count = result.length;
+          for (int i = 0; i < 100; i++) {
+            helper.deleteCategoriesbyID(i);
+            helper.deleteContextbyID(i);
+            helper.deleteTagbyID(i);
+          }
+          if (count > 0) {
+            helper.updateTags(tag);
+            //helper.deleteAction(swiperDataList[i]['TaskID']);
+          } else {
+            helper.insertTags(tag);
+            // helper.deleteAction(swiperDataList[i]['TaskID']);
+          }
+        });
+      }
+    });
+  }
 
-  //         if (count > 0) {
-  //           //helper.deleteContextbyID(swiperDataList[i]['ContextID']);
-  //           helper.updateContext(context);
-  //         } else {
-  //           helper.insertContexts(context);
-  //           //helper.deleteContextbyID(swiperDataList[i]['ContextID']);
-  //         }
-  //       });
-  //     }
-  //   });
-  // }
+  void syncContextData() async {
+    helper.deleteAllContext();
+    final tasksRequest = request('contextContent', formData: null);
+
+    tasksRequest.then((value) {
+      final data = json.decode(value.toString());
+      print(data);
+      List<Map> swiperDataList = (data['Contexts'] as List).cast();
+
+      var count = swiperDataList.length;
+      print(count);
+
+      for (int i = 0; i < swiperDataList.length; i++) {
+        String dbId = swiperDataList[i]['id'].toString();
+        String dbUserID = swiperDataList[i]['userId'].toString();
+        String appId = dbId.substring(dbUserID.length, dbId.length);
+        Context1 context = new Context1();
+        context.id = int.parse(appId);
+        context.name = swiperDataList[i]['name'];
+        context.description = swiperDataList[i]['desc'];
+
+        print(swiperDataList[i]['name']);
+        //helper.deleteTask(swiperDataList[i]['TaskID']);
+        final actionFuture = helper.getContextbyID(int.parse(appId));
+        actionFuture.then((result) {
+          count = result.length;
+
+          if (count > 0) {
+            //helper.deleteContextbyID(swiperDataList[i]['ContextID']);
+            helper.updateContext(context);
+          } else {
+            helper.insertContexts(context);
+            //helper.deleteContextbyID(swiperDataList[i]['ContextID']);
+          }
+        });
+      }
+    });
+  }
 
   void wipeTaskDataToMySql() {
     this.deleteAllTaskFromMySQL();

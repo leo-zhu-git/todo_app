@@ -174,6 +174,10 @@ class _WipeScreenState extends State<WipeScreen> {
                       ));
                     } else {
                       mysqlDBhelper.wipeTaskDataFromMySql();
+                      mysqlDBhelper.syncTagsData();
+                      mysqlDBhelper.syncContextData();
+                      mysqlDBhelper.syncCategoriesData();
+
                       Navigator.pop(context);
                       _showSuccessSnackBar(Container(
                         color: Colors.tealAccent[100],

@@ -9,14 +9,12 @@ class Category {
     mapping['name'] = name;
     mapping['description'] = description;
 
-    return mapping; 
+    return mapping;
   }
 
-  fromobject(dynamic obj)
-  {
+  fromobject(dynamic obj) {
     id = obj['id'];
     name = obj['name'];
     description = obj['description'];
-
   }
 }

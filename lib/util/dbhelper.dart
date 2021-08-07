@@ -68,7 +68,7 @@ class DbHelper {
 
   Future<Database> initializeDb() async {
     Directory dir = await getApplicationDocumentsDirectory();
-    String path = dir.path + "todo_V18.db";
+    String path = dir.path + "todo_V18.3.db";
 // <<<<<<< HEAD
 //     print(path);
 // =======
@@ -424,6 +424,13 @@ class DbHelper {
     return result;
   }
 
+  Future<int> deleteAllCategories() async {
+    int result;
+    Database db = await this.db;
+    result = await db.rawDelete('DELETE FROM categories WHERE id <> 0');
+    return result;
+  }
+
 //######################### ENd of Categories ##########################################
 
 //#########################Context ##########################################
@@ -459,6 +466,13 @@ class DbHelper {
     int result;
     Database db = await this.db;
     result = await db.rawDelete('DELETE FROM context1s WHERE id = $id');
+    return result;
+  }
+
+  Future<int> deleteAllContext() async {
+    int result;
+    Database db = await this.db;
+    result = await db.rawDelete('DELETE FROM context1s WHERE id <> 0');
     return result;
   }
 
@@ -571,6 +585,13 @@ class DbHelper {
     int result;
     Database db = await this.db;
     result = await db.rawDelete('DELETE FROM tag1s WHERE id = $id');
+    return result;
+  }
+
+  Future<int> deleteAllTags() async {
+    int result;
+    Database db = await this.db;
+    result = await db.rawDelete('DELETE FROM tag1s WHERE id <> 0');
     return result;
   }
 
