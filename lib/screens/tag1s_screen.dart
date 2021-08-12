@@ -68,10 +68,10 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
                   onPressed: () => Navigator.pop(context),
                   child: Text(
                     'Cancel',
-                    style: TextStyle(color: Colors.brown[900]),
+                    style: TextStyle(color: Colors.brown[500]),
                   )),
               FlatButton(
-                  color: Colors.brown[900],
+                  color: Colors.brown[500],
                   onPressed: () {
                     _tag1.name = _tag1NameController.text;
                     _tag1.description = _tag1DescriptionController.text;
@@ -138,10 +138,10 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
                   onPressed: () => Navigator.pop(context),
                   child: Text(
                     'Cancel',
-                    style: TextStyle(color: Colors.brown[900]),
+                    style: TextStyle(color: Colors.brown[500]),
                   )),
               FlatButton(
-                color: Colors.brown[900],
+                color: Colors.brown[500],
                 onPressed: () async {
                   _tag1.id = tag1[0]['id'];
                   _tag1.name = _editTag1NameController.text;
@@ -210,7 +210,7 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
             backgroundColor: Colors.pink[100],
             actions: <Widget>[
               FlatButton(
-                  color: Colors.brown[900],
+                  color: Colors.brown[500],
                   onPressed: () => Navigator.pop(context),
                   child: Text('Cancel')),
               FlatButton(
@@ -244,7 +244,7 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
                 },
                 child: Text(
                     'Delete?',
-                    style: TextStyle(color: Colors.brown[900]),
+                    style: TextStyle(color: Colors.brown[500]),
                   ),
               ),
             ],

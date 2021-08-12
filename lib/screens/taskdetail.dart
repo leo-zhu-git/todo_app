@@ -226,7 +226,7 @@ class TaskDetailState extends State //<TaskDetail>
         : _selectedContext1 = null;
     task.location1 != ""
         ? _selectedLocation1 = task.location1
-        : _selectedContext1 = null;
+        : _selectedLocation1 = null;
     task.tag1 != "" ? _selectedTag1 = task.tag1 : _selectedTag1 = null;
     task.goal1 != "" ? _selectedGoal1 = task.goal1 : _selectedGoal1 = null;
     _todoTitleController.text = task.title;

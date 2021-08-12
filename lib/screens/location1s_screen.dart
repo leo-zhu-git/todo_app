@@ -69,10 +69,10 @@ class _Location1sScreenState extends State<Location1sScreen> {
                   onPressed: () => Navigator.pop(context),
                   child: Text(
                     'Cancel',
-                    style: TextStyle(color: Colors.brown[900]),
+                    style: TextStyle(color: Colors.brown[500]),
                   )),
               FlatButton(
-                  color: Colors.brown[900],
+                  color: Colors.brown[500],
                   onPressed: () {
                     _location1.name = _location1NameController.text;
                     _location1.description = _location1DescriptionController.text;
@@ -139,10 +139,10 @@ class _Location1sScreenState extends State<Location1sScreen> {
                   onPressed: () => Navigator.pop(context),
                   child: Text(
                     'Cancel',
-                    style: TextStyle(color: Colors.brown[900]),
+                    style: TextStyle(color: Colors.brown[500]),
                   )),
               FlatButton(
-                color: Colors.brown[900],
+                color: Colors.brown[500],
                 onPressed: () async {
                   _location1.id = location1[0]['id'];
                   _location1.name = _editLocation1NameController.text;
@@ -211,7 +211,7 @@ class _Location1sScreenState extends State<Location1sScreen> {
             backgroundColor: Colors.pink[100],
             actions: <Widget>[
               FlatButton(
-                  color: Colors.brown[900],
+                  color: Colors.brown[500],
                   onPressed: () => Navigator.pop(context),
                   child: Text('Cancel')),
               FlatButton(
@@ -245,7 +245,7 @@ class _Location1sScreenState extends State<Location1sScreen> {
                 },
                 child: Text(
                   'Delete?',
-                  style: TextStyle(color: Colors.brown[900]),
+                  style: TextStyle(color: Colors.brown[500]),
                 ),
               ),
             ],

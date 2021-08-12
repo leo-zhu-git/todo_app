@@ -423,7 +423,7 @@ class TaskHomeState extends State {
               break;
             default:
               {
-                taskList[i].sec1 = taskList[i].title;
+                taskList[i].sec1 = taskList[i].dateDue;
               }
               break;
           }
@@ -479,7 +479,7 @@ class TaskHomeState extends State {
               break;
             default:
               {
-                taskList[i].sec2 = taskList[i].title;
+                taskList[i].sec2 = taskList[i].timeDue;
               }
               break;
           }
@@ -535,7 +535,7 @@ class TaskHomeState extends State {
               break;
             default:
               {
-                taskList[i].sec3 = taskList[i].title;
+                taskList[i].sec3 = taskList[i].category;
               }
               break;
           }
@@ -669,7 +669,7 @@ class TaskHomeState extends State {
         break;
 
       default:
-        return "Today";
+        return "All Tasks";
         break;
     }
   }

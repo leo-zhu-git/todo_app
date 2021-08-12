@@ -69,10 +69,10 @@ class _Context1sScreenState extends State<Context1sScreen> {
                   onPressed: () => Navigator.pop(context),
                   child: Text(
                     'Cancel',
-                    style: TextStyle(color: Colors.brown[900]),
+                    style: TextStyle(color: Colors.brown[500]),
                   )),
               FlatButton(
-                  color: Colors.brown[900],
+                  color: Colors.brown[500],
                   onPressed: () {
                     _context1.name = _context1NameController.text;
                     _context1.description = _context1DescriptionController.text;
@@ -139,10 +139,10 @@ class _Context1sScreenState extends State<Context1sScreen> {
                   onPressed: () => Navigator.pop(context),
                   child: Text(
                     'Cancel',
-                    style: TextStyle(color: Colors.brown[900]),
+                    style: TextStyle(color: Colors.brown[500]),
                   )),
               FlatButton(
-                color: Colors.brown[900],
+                color: Colors.brown[500],
                 onPressed: () async {
                   _context1.id = context1[0]['id'];
                   _context1.name = _editContext1NameController.text;
@@ -211,7 +211,7 @@ class _Context1sScreenState extends State<Context1sScreen> {
             backgroundColor: Colors.pink[100],
             actions: <Widget>[
               FlatButton(
-                  color: Colors.brown[900],
+                  color: Colors.brown[500],
                   onPressed: () => Navigator.pop(context),
                   child: Text('Cancel')),
               FlatButton(
@@ -245,7 +245,7 @@ class _Context1sScreenState extends State<Context1sScreen> {
                 },
                 child: Text(
                   'Delete?',
-                  style: TextStyle(color: Colors.brown[900]),
+                  style: TextStyle(color: Colors.brown[500]),
                 ),
               ),
             ],

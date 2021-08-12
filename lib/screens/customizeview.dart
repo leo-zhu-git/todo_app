@@ -115,8 +115,8 @@ class _CustomizeViewState extends State //State<CustomizeView>
     /// filter - date due
     ////////////////////////////
     if (globals.filterDateDue == null) {
-      _selectedFilterDateDue = _dropdownFilterDateDue[0].value;
-      globals.filterDateDue = 0;
+      _selectedFilterDateDue = _dropdownFilterDateDue[7].value;
+      globals.filterDateDue = 7;
     } else
       _selectedFilterDateDue =
           _dropdownFilterDateDue[globals.filterDateDue].value;
@@ -125,8 +125,8 @@ class _CustomizeViewState extends State //State<CustomizeView>
     /// filter - is done
     ////////////////////////////
     if (globals.filterIsDone == null) {
-      _selectedFilterIsDone = _dropdownFilterIsDone[0].value;
-      globals.filterIsDone = 0;
+      _selectedFilterIsDone = _dropdownFilterIsDone[1].value;
+      globals.filterIsDone = 1;
     } else
       _selectedFilterIsDone = _dropdownFilterIsDone[globals.filterIsDone].value;
 
@@ -171,28 +171,32 @@ class _CustomizeViewState extends State //State<CustomizeView>
     /// show
     ////////////////////////////
     if (globals.showMain1 == null) {
-      _selectedShowMain1 = _dropdownMenuItemsSort[2].value;
-      globals.showMain1 = 2;
+      _selectedShowMain1 = _dropdownMenuItemsSort[0].value;
+      globals.showMain1 = 0;
     } else
       _selectedShowMain1 = _dropdownMenuItemsSort[globals.showMain1].value;
+
     if (globals.showMain2 == null) {
       _selectedShowMain2 = _dropdownMenuItemsSort[2].value;
       globals.showMain2 = 2;
     } else
       _selectedShowMain2 = _dropdownMenuItemsSort[globals.showMain2].value;
+
     if (globals.showSec1 == null) {
       _selectedShowSec1 = _dropdownMenuItemsSort[2].value;
       globals.showSec1 = 2;
     } else
       _selectedShowSec1 = _dropdownMenuItemsSort[globals.showSec1].value;
+
     if (globals.showSec2 == null) {
-      _selectedShowSec2 = _dropdownMenuItemsSort[2].value;
-      globals.showSec2 = 2;
+      _selectedShowSec2 = _dropdownMenuItemsSort[3].value;
+      globals.showSec2 = 3;
     } else
       _selectedShowSec2 = _dropdownMenuItemsSort[globals.showSec2].value;
+
     if (globals.showSec3 == null) {
-      _selectedShowSec3 = _dropdownMenuItemsSort[2].value;
-      globals.showSec3 = 2;
+      _selectedShowSec3 = _dropdownMenuItemsSort[4].value;
+      globals.showSec3 = 4;
     } else
       _selectedShowSec3 = _dropdownMenuItemsSort[globals.showSec3].value;
 

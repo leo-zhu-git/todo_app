@@ -70,10 +70,10 @@ class _Action1sScreenState extends State<Action1sScreen> {
                   onPressed: () => Navigator.pop(context),
                   child: Text(
                     'Cancel',
-                    style: TextStyle(color: Colors.brown[900]),
+                    style: TextStyle(color: Colors.brown[500]),
                   )),
               FlatButton(
-                  color: Colors.brown[900],
+                  color: Colors.brown[500],
                   onPressed: () {
                     _action1.name = _action1NameController.text;
                     _action1.description = _action1DescriptionController.text;
@@ -141,10 +141,10 @@ class _Action1sScreenState extends State<Action1sScreen> {
                   onPressed: () => Navigator.pop(context),
                   child: Text(
                     'Cancel',
-                    style: TextStyle(color: Colors.brown[900]),
+                    style: TextStyle(color: Colors.brown[500]),
                   )),
               FlatButton(
-                color: Colors.brown[900],
+                color: Colors.brown[500],
                 onPressed: () async {
                   _action1.id = action1[0]['id'];
                   _action1.name = _editAction1NameController.text;
@@ -213,7 +213,7 @@ class _Action1sScreenState extends State<Action1sScreen> {
             backgroundColor: Colors.pink[100],
             actions: <Widget>[
               FlatButton(
-                  color: Colors.brown[900],
+                  color: Colors.brown[500],
                   onPressed: () => Navigator.pop(context),
                   child: Text('Cancel')),
               FlatButton(
@@ -247,7 +247,7 @@ class _Action1sScreenState extends State<Action1sScreen> {
                 },
                 child: Text(
                     'Delete?',
-                    style: TextStyle(color: Colors.brown[900]),
+                    style: TextStyle(color: Colors.brown[500]),
                   ),
               ),
             ],

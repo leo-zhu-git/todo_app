@@ -61,8 +61,8 @@ class _WipeScreenState extends State<WipeScreen> {
   rowChips() {
     return Row(
       children: [
-        chipForRow('Force Device->Database Wipe', Colors.blue),
-        chipForRow('Force Database->Device Wipe', Colors.pink),
+        chipForRow('Force Device -> Cloud Wipe', Colors.blue),
+        chipForRow('Force Cloud -> Device Wipe', Colors.pink),
       ],
     );
   }
@@ -70,8 +70,8 @@ class _WipeScreenState extends State<WipeScreen> {
   wrapWidget() {
     return Wrap(
       children: [
-        chipForRow('Force Device->Database Wipe', Colors.orange),
-        chipForRow('Force Database->Device Wipe', Colors.orange),
+        chipForRow('Force Device -> Cloud Wipe', Colors.orange),
+        chipForRow('Force Cloud -> Device Wipe', Colors.orange),
       ],
     );
   }
@@ -88,10 +88,10 @@ class _WipeScreenState extends State<WipeScreen> {
               elevation: 6.0,
               padding: EdgeInsets.all(20.0),
               backgroundColor: Colors.pink[100],
-              label: Center(child: Text('Force DEVICE->DATABASE wipe')),
+              label: Center(child: Text('Force Device -> Cloud wipe')),
               onPressed: () {
                 _optionText =
-                    'All tasks on this DEVICE will be slowly forced down to DATABASE, potentionally overwriting change you have made on backend. Are you sure you want to do this?';
+                    'All tasks on this DEVICE will be slowly forced up to CLOUD, potentionally overwriting change you have made. Are you sure?';
                 _option = 0;
                 _ConfirmDialogue(_option, _optionText);
               }),
@@ -100,10 +100,10 @@ class _WipeScreenState extends State<WipeScreen> {
               elevation: 6.0,
               backgroundColor: Colors.pink[100],
               padding: EdgeInsets.all(20.0),
-              label: Center(child: Text('Force DATABASE->DEVICE wipe')),
+              label: Center(child: Text('Force Cloud -> Device wipe')),
               onPressed: () {
                 _optionText =
-                    'All tasks on DATABASE will be slowly forced up to this DEVICE, potentionally overwriting change you have made on this device. Are you sure you want to do this?';
+                    'All tasks on CLOUD will be slowly forced down to this DEVICE, potentionally overwriting change you have made on this device. Are you sure?';
                 _option = 1;
                 _ConfirmDialogue(_option, _optionText);
               }),
@@ -147,7 +147,7 @@ class _WipeScreenState extends State<WipeScreen> {
               backgroundColor: Colors.pink[100],
               actions: <Widget>[
                 FlatButton(
-                    color: Colors.brown[900],
+                    color: Colors.brown[500],
                     onPressed: () => Navigator.pop(context),
                     child: Text('Cancel')),
                 FlatButton(

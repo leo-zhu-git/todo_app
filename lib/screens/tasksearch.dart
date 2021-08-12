@@ -107,13 +107,14 @@ class TaskSearchState extends State {
   Widget build(BuildContext context) {
     TextStyle textStyle = Theme.of(context).textTheme.title;
     return Scaffold(
+
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
         backgroundColor: Colors.brown[900],
         automaticallyImplyLeading: false,
-        title: Center(child: Text('Task Search')),
+        title: Center(child: Text('Search')),
       ),
-
+      resizeToAvoidBottomInset: false,
       body: Column(
         children: [
           Padding(
@@ -511,7 +512,7 @@ class TaskSearchState extends State {
               color: Colors.red,
             ),
             child: Padding(
-              padding: EdgeInsets.only(top: 8.0, left: 16.0, right: 16.0),
+              padding: EdgeInsets.only(top: 8.0, left: 4.0, right: 4.0),
               child: Card(
                   color: Colors.yellow[200],
                   elevation: 8.0,
@@ -535,29 +536,29 @@ class TaskSearchState extends State {
                       ],
                    
                     ),
-                    subtitle: Row(
-                      children: [
-                       
-                        Flexible(
-                            child: Padding(
-                                padding: const EdgeInsets.only(right: 2),
-                                child: Text(this.tasklist[position].sec1 == null ? "" : this.tasklist[position].sec1,
-                                        overflow: TextOverflow.ellipsis))),
-                      
-                        Flexible(
-                            child: Padding(
-                                padding: const EdgeInsets.only(right: 2),
-                                child: Text(this.tasklist[position].sec2 == null ? "" : this.tasklist[position].sec2,
-                                        overflow: TextOverflow.ellipsis))),
-
-                       Flexible(
-                            child: Padding(
-                                padding: const EdgeInsets.only(right: 2),
-                                child: Text(this.tasklist[position].sec3 == null ? "" : this.tasklist[position].sec3,
-                                        overflow: TextOverflow.ellipsis))),
-                  
-                      ],
-                    ),
+//                    subtitle: Row(
+//                      children: [
+//                       
+//                        Flexible(
+//                            child: Padding(
+//                                padding: const EdgeInsets.only(right: 2),
+//                                child: Text(this.tasklist[position].sec1 == null ? "" : this.tasklist[position].sec1,
+//                                        overflow: TextOverflow.ellipsis))),
+//                      
+//                        Flexible(
+//                            child: Padding(
+//                                padding: const EdgeInsets.only(right: 2),
+//                                child: Text(this.tasklist[position].sec2 == null ? "" : this.tasklist[position].sec2,
+//                                        overflow: TextOverflow.ellipsis))),
+//
+//                       Flexible(
+//                            child: Padding(
+//                                padding: const EdgeInsets.only(right: 2),
+//                                child: Text(this.tasklist[position].sec3 == null ? "" : this.tasklist[position].sec3,
+//                                        overflow: TextOverflow.ellipsis))),
+//                 
+//                      ],
+//                    ),
                     isThreeLine: false,
                     secondary: IconButton(
                       icon: Icon(Icons.more_vert),
