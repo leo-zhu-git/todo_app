@@ -166,7 +166,7 @@ class _WipeScreenState extends State<WipeScreen> {
                               color: Colors.black,
                             )),
                             Text(
-                              ' DEVICE->DATABASE wipe SUCCESSFUL ',
+                              ' DEVICE -> CLOUD wipe SUCCESSFUL ',
                               style: (TextStyle(color: Colors.black)),
                             ),
                           ],
@@ -190,7 +190,7 @@ class _WipeScreenState extends State<WipeScreen> {
                               color: Colors.black,
                             )),
                             Text(
-                              ' DATABASE->DEVICE wipe SUCCESSFUL ',
+                              ' CLOUD ->DEVICE wipe SUCCESSFUL ',
                               style: (TextStyle(color: Colors.black)),
                             ),
                           ],

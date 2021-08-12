@@ -272,6 +272,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
         backgroundColor: Colors.brown[900],
         title: Center(child: Text('Categories')),
       ),
+      resizeToAvoidBottomInset: false,
       body: ListView.builder(
         itemCount: _categoryList.length,
         itemBuilder: (context, index) {
