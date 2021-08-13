@@ -272,7 +272,7 @@ class _Location1sScreenState extends State<Location1sScreen> {
         itemCount: _location1List.length,
         itemBuilder: (context, index) {
           return Padding(
-            padding: EdgeInsets.only(top: 8.0, left: 16.0, right: 16.0),
+            padding: EdgeInsets.only(top: 8.0, left: 4.0, right: 4.0),
             child: Card(
               elevation: 8.0,
               color: Colors.pink[100],
@@ -285,7 +285,11 @@ class _Location1sScreenState extends State<Location1sScreen> {
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(_location1List[index].name),
+                    Flexible(
+                      child: Text(
+                        _location1List[index].name,
+                        overflow: TextOverflow.ellipsis),
+                    ),
                     IconButton(
                         icon: Icon(Icons.delete, color: Colors.grey),
                         onPressed: () {
