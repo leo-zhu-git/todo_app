@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+  import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:todo_app/model/taskclass.dart';
 import 'package:todo_app/util/dbhelper.dart';
@@ -118,7 +118,7 @@ class TaskSearchState extends State {
       body: Column(
         children: [
           Padding(
-            padding: EdgeInsets.all(15.0),
+            padding: EdgeInsets.all(5.0),
             child: TextField(
               controller: searchController,
               style: textStyle,
@@ -136,7 +136,7 @@ class TaskSearchState extends State {
             ),
           ),
           Padding(
-              padding: EdgeInsets.all(2.0),
+              padding: EdgeInsets.all(0.0),
               child: ExpansionTile(
                 title: Text("Advanced Filters"),
 
@@ -177,7 +177,8 @@ class TaskSearchState extends State {
                           DropdownButton<String>(
                               items: _categories.map((String value) {
                                 return DropdownMenuItem<String>(
-                                    value: value, child: Text(value));
+                                    value: value, 
+                                    child: Text(value,));
                               }).toList(),
                               style: _textStyleControls,
                               value: _selectedCategory,

@@ -64,6 +64,19 @@ class FilterDateDue {
   }
 }
 
+class FilterCategory {
+  int id;
+  String name;
+
+  FilterCategory(this.id, this.name);
+  static List<FilterCategory> getCategory() {
+    return <FilterCategory>[
+      FilterCategory(0, '--- All Categories ---'),
+      FilterCategory(1, 'Test'),
+    ];
+  }
+}
+
 class SortOrder {
   int id;
   String name;
@@ -83,12 +96,15 @@ class _CustomizeViewState extends State //State<CustomizeView>
   List<SortOrder> _order = SortOrder.getOrder();
   List<FilterIsDone> _filterIsDone = FilterIsDone.getIsDone();
   List<FilterDateDue> _filterDateDue = FilterDateDue.getDateDue();
+  List<FilterCategory> _filterCategory = FilterCategory.getCategory();
   List<DropdownMenuItem<SortItem>> _dropdownMenuItemsSort;
   List<DropdownMenuItem<SortOrder>> _dropdownMenuSortOrder;
   List<DropdownMenuItem<FilterIsDone>> _dropdownFilterIsDone;
   List<DropdownMenuItem<FilterDateDue>> _dropdownFilterDateDue;
+  List<DropdownMenuItem<FilterCategory>> _dropdownFilterCategory;
   FilterIsDone _selectedFilterIsDone;
   FilterDateDue _selectedFilterDateDue;
+  FilterCategory _selectedFilterCategory; 
   SortItem _selectedSortField1;
   SortOrder _selectedSortOrder1;
   SortItem _selectedSortField2;
@@ -110,6 +126,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
     _dropdownMenuSortOrder = buildDropdownMenuOrder(_order);
     _dropdownFilterIsDone = buildDropdownFilterIsDone(_filterIsDone);
     _dropdownFilterDateDue = buildDropdownFilterDateDue(_filterDateDue);
+    _dropdownFilterCategory = buildDropdownFilterCategory(_filterCategory);
 
     ////////////////////////////
     /// filter - date due
@@ -120,6 +137,16 @@ class _CustomizeViewState extends State //State<CustomizeView>
     } else
       _selectedFilterDateDue =
           _dropdownFilterDateDue[globals.filterDateDue].value;
+
+    ////////////////////////////
+    /// filter - category
+    ////////////////////////////
+    if (globals.filterCategory == null) {
+      _selectedFilterCategory = _dropdownFilterCategory[0].value;
+      globals.filterCategory = 0;
+    } else
+      _selectedFilterCategory =
+          _dropdownFilterCategory[globals.filterCategory].value;
 
     ////////////////////////////
     /// filter - is done
@@ -259,6 +286,20 @@ class _CustomizeViewState extends State //State<CustomizeView>
     return items;
   }
 
+  List<DropdownMenuItem<FilterCategory>> buildDropdownFilterCategory(
+      List filterCategoryItems) {
+    List<DropdownMenuItem<FilterCategory>> items = List();
+    for (FilterCategory filterCategory in filterCategoryItems) {
+      items.add(
+        DropdownMenuItem(
+          value: filterCategory,
+          child: Text(filterCategory.name),
+        ),
+      );
+    }
+    return items;
+  }
+
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
   _showSuccessSnackBar(message) {
     var _snackBar = SnackBar(content: message);
@@ -298,6 +339,27 @@ class _CustomizeViewState extends State //State<CustomizeView>
                   onChanged: (selectedFilterDateDue) {
                     setState(() {
                       _selectedFilterDateDue = selectedFilterDateDue;
+                    });
+                  },
+                ),
+              ),
+
+///////////////////////////
+//  Filter Category
+///////////////////////////
+              Text("Filter - Category"),
+
+              new Container(
+                margin: const EdgeInsets.all(2.0),
+                decoration: BoxDecoration(
+                    shape: BoxShape.rectangle, color: Colors.blue[100]),
+                child: DropdownButtonFormField(
+                  items: _dropdownFilterCategory,
+                  hint: Text('Filter by Category'),
+                  value: _selectedFilterCategory,
+                  onChanged: (selectedFilterCategory) {
+                    setState(() {
+                      _selectedFilterCategory = selectedFilterCategory;
                     });
                   },
                 ),
@@ -590,11 +652,13 @@ class _CustomizeViewState extends State //State<CustomizeView>
                             globals.filterIsDone = _selectedFilterIsDone.id;
                           if (_selectedFilterDateDue != null)
                             globals.filterDateDue = _selectedFilterDateDue.id;
+                          if (_selectedFilterCategory != null)
+                            globals.filterCategory = _selectedFilterCategory.id;
 
 //Save
                           if (customSetting == null) {
                             customSetting = new CustomSettings('', '', '', '',
-                                '', '', '', '', '', '', '', false, '');
+                                '', '', '', '', '', '', '', false, '', '');
                           }
 
                           customSetting.sortField1 = _selectedSortField1 == null
@@ -634,6 +698,10 @@ class _CustomizeViewState extends State //State<CustomizeView>
                               _selectedFilterDateDue == null
                                   ? ""
                                   : _selectedFilterDateDue.id.toString();
+                          customSetting.filterCategory =
+                              _selectedFilterCategory == null
+                                  ? ""
+                                  : _selectedFilterCategory.id.toString();
                           if (_selectedFilterIsDone == null) {
                             customSetting.filterIsDone = false;
                           } else {
@@ -769,6 +837,14 @@ class _CustomizeViewState extends State //State<CustomizeView>
                 .value;
         globals.filterDateDue = int.parse(customSetting.filterDateDue);
       }
+
+      if (customSetting.filterCategory != "") {
+        _selectedFilterCategory =
+            _dropdownFilterCategory[int.parse(customSetting.filterCategory)]
+                .value;
+        globals.filterCategory = int.parse(customSetting.filterCategory);
+      }
+
     }
     setState(() {
       customSetting = customSetting;

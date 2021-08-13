@@ -13,6 +13,7 @@ class CustomSettings {
   String _showSec3;
   bool _filterIsDone;
   String _filterDateDue;
+  String _filterCategory;
 
   CustomSettings(
       this._sortField1,
@@ -27,7 +28,8 @@ class CustomSettings {
       this._showSec2,
       this._showSec3,
       this._filterIsDone,
-      this._filterDateDue);
+      this._filterDateDue,
+      this._filterCategory);
   CustomSettings.withId(
       this._id,
       this._sortField1,
@@ -42,7 +44,8 @@ class CustomSettings {
       this._showSec2,
       this._showSec3,
       this._filterIsDone,
-      this._filterDateDue);
+      this._filterDateDue,
+      this._filterCategory);
   int get id => _id;
   String get sortField1 => _sortField1;
   String get sortOrder1 => _sortOrder1;
@@ -57,6 +60,7 @@ class CustomSettings {
   String get showSec3 => _showSec3;
   bool get filterIsDone => _filterIsDone;
   String get filterDateDue => _filterDateDue;
+  String get filterCategory => _filterCategory;
 
   set sortField1(String newSortField1) {
     this._sortField1 = newSortField1;
@@ -110,6 +114,10 @@ class CustomSettings {
     this._filterDateDue = newFilterDateDue;
   }
 
+  set filterCategory(String newFilterCategory) {
+    this._filterCategory = newFilterCategory;
+  }
+
   Map<String, dynamic> toMap() {
     var map = Map<String, dynamic>();
 
@@ -126,6 +134,7 @@ class CustomSettings {
     map['showSec3'] = _showSec3;
     map['filterIsDone'] = _filterIsDone;
     map['filterDateDue'] = _filterDateDue;
+    map['filterCategory'] = _filterCategory;
 
     if (_id != null) {
       map['id'] = _id;
@@ -149,5 +158,6 @@ class CustomSettings {
     this._showSec3 = o['showSec3'];
     this._filterIsDone = o['filterIsDone'] == 0 ? false : true;
     this._filterDateDue = o['filterDateDue'];
+    this._filterCategory = o['filterCategory'];
   }
 }
