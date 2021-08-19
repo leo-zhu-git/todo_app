@@ -77,6 +77,58 @@ class FilterCategory {
   }
 }
 
+class FilterAction {
+  int id;
+  String name;
+
+  FilterAction(this.id, this.name);
+  static List<FilterAction> getAction() {
+    return <FilterAction>[
+      FilterAction(0, '--- All Actions ---'),
+      FilterAction(1, 'Test'),
+    ];
+  }
+}
+
+class FilterContext {
+  int id;
+  String name;
+
+  FilterContext(this.id, this.name);
+  static List<FilterContext> getContext() {
+    return <FilterContext>[
+      FilterContext(0, '--- All Contexts ---'),
+      FilterContext(1, 'Test'),
+    ];
+  }
+}
+
+class FilterLocation {
+  int id;
+  String name;
+
+  FilterLocation(this.id, this.name);
+  static List<FilterLocation> getLocation() {
+    return <FilterLocation>[
+      FilterLocation(0, '--- All Locations ---'),
+      FilterLocation(1, 'Test'),
+    ];
+  }
+}
+
+class FilterTag {
+  int id;
+  String name;
+
+  FilterTag(this.id, this.name);
+  static List<FilterTag> getTag() {
+    return <FilterTag>[
+      FilterTag(0, '--- All Tags ---'),
+      FilterTag(1, 'Test'),
+    ];
+  }
+}
+
 class SortOrder {
   int id;
   String name;
@@ -97,14 +149,26 @@ class _CustomizeViewState extends State //State<CustomizeView>
   List<FilterIsDone> _filterIsDone = FilterIsDone.getIsDone();
   List<FilterDateDue> _filterDateDue = FilterDateDue.getDateDue();
   List<FilterCategory> _filterCategory = FilterCategory.getCategory();
+  List<FilterAction> _filterAction = FilterAction.getAction();
+  List<FilterContext> _filterContext = FilterContext.getContext();
+  List<FilterLocation> _filterLocation = FilterLocation.getLocation();
+  List<FilterTag> _filterTag = FilterTag.getTag();
   List<DropdownMenuItem<SortItem>> _dropdownMenuItemsSort;
   List<DropdownMenuItem<SortOrder>> _dropdownMenuSortOrder;
   List<DropdownMenuItem<FilterIsDone>> _dropdownFilterIsDone;
   List<DropdownMenuItem<FilterDateDue>> _dropdownFilterDateDue;
   List<DropdownMenuItem<FilterCategory>> _dropdownFilterCategory;
+  List<DropdownMenuItem<FilterAction>> _dropdownFilterAction;
+  List<DropdownMenuItem<FilterContext>> _dropdownFilterContext;
+  List<DropdownMenuItem<FilterLocation>> _dropdownFilterLocation;
+  List<DropdownMenuItem<FilterTag>> _dropdownFilterTag;
   FilterIsDone _selectedFilterIsDone;
   FilterDateDue _selectedFilterDateDue;
   FilterCategory _selectedFilterCategory; 
+  FilterAction _selectedFilterAction; 
+  FilterContext _selectedFilterContext; 
+  FilterLocation _selectedFilterLocation; 
+  FilterTag _selectedFilterTag; 
   SortItem _selectedSortField1;
   SortOrder _selectedSortOrder1;
   SortItem _selectedSortField2;
@@ -127,6 +191,10 @@ class _CustomizeViewState extends State //State<CustomizeView>
     _dropdownFilterIsDone = buildDropdownFilterIsDone(_filterIsDone);
     _dropdownFilterDateDue = buildDropdownFilterDateDue(_filterDateDue);
     _dropdownFilterCategory = buildDropdownFilterCategory(_filterCategory);
+    _dropdownFilterAction = buildDropdownFilterAction(_filterAction);
+    _dropdownFilterContext = buildDropdownFilterContext(_filterContext);
+    _dropdownFilterLocation = buildDropdownFilterLocation(_filterLocation);
+    _dropdownFilterTag = buildDropdownFilterTag(_filterTag);
 
     ////////////////////////////
     /// filter - date due
@@ -147,6 +215,46 @@ class _CustomizeViewState extends State //State<CustomizeView>
     } else
       _selectedFilterCategory =
           _dropdownFilterCategory[globals.filterCategory].value;
+
+    ////////////////////////////
+    /// filter - action
+    ////////////////////////////
+    if (globals.filterAction == null) {
+      _selectedFilterAction = _dropdownFilterAction[0].value;
+      globals.filterAction = 0;
+    } else
+      _selectedFilterAction =
+          _dropdownFilterAction[globals.filterAction].value;
+
+    ////////////////////////////
+    /// filter - context
+    ////////////////////////////
+    if (globals.filterContext == null) {
+      _selectedFilterContext = _dropdownFilterContext[0].value;
+      globals.filterContext = 0;
+    } else
+      _selectedFilterContext =
+          _dropdownFilterContext[globals.filterContext].value;
+
+    ////////////////////////////
+    /// filter - location
+    ////////////////////////////
+    if (globals.filterLocation == null) {
+      _selectedFilterLocation = _dropdownFilterLocation[0].value;
+      globals.filterLocation = 0;
+    } else
+      _selectedFilterLocation =
+          _dropdownFilterLocation[globals.filterLocation].value;
+
+    ////////////////////////////
+    /// filter - tag
+    ////////////////////////////
+    if (globals.filterTag == null) {
+      _selectedFilterTag = _dropdownFilterTag[0].value;
+      globals.filterTag = 0;
+    } else
+      _selectedFilterTag =
+          _dropdownFilterTag[globals.filterTag].value;
 
     ////////////////////////////
     /// filter - is done
@@ -300,6 +408,62 @@ class _CustomizeViewState extends State //State<CustomizeView>
     return items;
   }
 
+  List<DropdownMenuItem<FilterAction>> buildDropdownFilterAction(
+      List filterActionItems) {
+    List<DropdownMenuItem<FilterAction>> items = List();
+    for (FilterAction filterAction in filterActionItems) {
+      items.add(
+        DropdownMenuItem(
+          value: filterAction,
+          child: Text(filterAction.name),
+        ),
+      );
+    }
+    return items;
+  }
+
+  List<DropdownMenuItem<FilterContext>> buildDropdownFilterContext(
+      List filterContextItems) {
+    List<DropdownMenuItem<FilterContext>> items = List();
+    for (FilterContext filterContext in filterContextItems) {
+      items.add(
+        DropdownMenuItem(
+          value: filterContext,
+          child: Text(filterContext.name),
+        ),
+      );
+    }
+    return items;
+  }
+
+  List<DropdownMenuItem<FilterLocation>> buildDropdownFilterLocation(
+      List filterLocationItems) {
+    List<DropdownMenuItem<FilterLocation>> items = List();
+    for (FilterLocation filterLocation in filterLocationItems) {
+      items.add(
+        DropdownMenuItem(
+          value: filterLocation,
+          child: Text(filterLocation.name),
+        ),
+      );
+    }
+    return items;
+  }
+
+  List<DropdownMenuItem<FilterTag>> buildDropdownFilterTag(
+      List filterTagItems) {
+    List<DropdownMenuItem<FilterTag>> items = List();
+    for (FilterTag filterTag in filterTagItems) {
+      items.add(
+        DropdownMenuItem(
+          value: filterTag,
+          child: Text(filterTag.name),
+        ),
+      );
+    }
+    return items;
+  }
+
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
   _showSuccessSnackBar(message) {
     var _snackBar = SnackBar(content: message);
@@ -360,6 +524,90 @@ class _CustomizeViewState extends State //State<CustomizeView>
                   onChanged: (selectedFilterCategory) {
                     setState(() {
                       _selectedFilterCategory = selectedFilterCategory;
+                    });
+                  },
+                ),
+              ),
+
+///////////////////////////
+//  Filter Action
+///////////////////////////
+              Text("Filter - Action"),
+
+              new Container(
+                margin: const EdgeInsets.all(2.0),
+                decoration: BoxDecoration(
+                    shape: BoxShape.rectangle, color: Colors.blue[100]),
+                child: DropdownButtonFormField(
+                  items: _dropdownFilterAction,
+                  hint: Text('Filter by Action'),
+                  value: _selectedFilterAction,
+                  onChanged: (selectedFilterAction) {
+                    setState(() {
+                      _selectedFilterAction = selectedFilterAction;
+                    });
+                  },
+                ),
+              ),
+
+///////////////////////////
+//  Filter Context
+///////////////////////////
+              Text("Filter - Context"),
+
+              new Container(
+                margin: const EdgeInsets.all(2.0),
+                decoration: BoxDecoration(
+                    shape: BoxShape.rectangle, color: Colors.blue[100]),
+                child: DropdownButtonFormField(
+                  items: _dropdownFilterContext,
+                  hint: Text('Filter by Context'),
+                  value: _selectedFilterContext,
+                  onChanged: (selectedFilterContext) {
+                    setState(() {
+                      _selectedFilterContext = selectedFilterContext;
+                    });
+                  },
+                ),
+              ),
+
+///////////////////////////
+//  Filter Location
+///////////////////////////
+              Text("Filter - Location"),
+
+              new Container(
+                margin: const EdgeInsets.all(2.0),
+                decoration: BoxDecoration(
+                    shape: BoxShape.rectangle, color: Colors.blue[100]),
+                child: DropdownButtonFormField(
+                  items: _dropdownFilterLocation,
+                  hint: Text('Filter by Location'),
+                  value: _selectedFilterLocation,
+                  onChanged: (selectedFilterLocation) {
+                    setState(() {
+                      _selectedFilterLocation = selectedFilterLocation;
+                    });
+                  },
+                ),
+              ),
+
+///////////////////////////
+//  Filter Tag
+///////////////////////////
+              Text("Filter - Tag"),
+
+              new Container(
+                margin: const EdgeInsets.all(2.0),
+                decoration: BoxDecoration(
+                    shape: BoxShape.rectangle, color: Colors.blue[100]),
+                child: DropdownButtonFormField(
+                  items: _dropdownFilterTag,
+                  hint: Text('Filter by Tag'),
+                  value: _selectedFilterTag,
+                  onChanged: (selectedFilterTag) {
+                    setState(() {
+                      _selectedFilterTag = selectedFilterTag;
                     });
                   },
                 ),
@@ -654,11 +902,19 @@ class _CustomizeViewState extends State //State<CustomizeView>
                             globals.filterDateDue = _selectedFilterDateDue.id;
                           if (_selectedFilterCategory != null)
                             globals.filterCategory = _selectedFilterCategory.id;
+                          if (_selectedFilterAction != null)
+                            globals.filterAction = _selectedFilterAction.id;
+                          if (_selectedFilterContext != null)
+                            globals.filterContext = _selectedFilterContext.id;
+                          if (_selectedFilterLocation != null)
+                            globals.filterLocation = _selectedFilterLocation.id;
+                          if (_selectedFilterTag != null)
+                            globals.filterTag = _selectedFilterTag.id;
 
 //Save
                           if (customSetting == null) {
                             customSetting = new CustomSettings('', '', '', '',
-                                '', '', '', '', '', '', '', false, '', '');
+                                '', '', '', '', '', '', '', false, '', '', '', '', '', '');
                           }
 
                           customSetting.sortField1 = _selectedSortField1 == null
@@ -702,6 +958,22 @@ class _CustomizeViewState extends State //State<CustomizeView>
                               _selectedFilterCategory == null
                                   ? ""
                                   : _selectedFilterCategory.id.toString();
+                          customSetting.filterAction =
+                              _selectedFilterAction == null
+                                  ? ""
+                                  : _selectedFilterAction.id.toString();
+                          customSetting.filterContext =
+                              _selectedFilterContext == null
+                                  ? ""
+                                  : _selectedFilterContext.id.toString();
+                          customSetting.filterLocation =
+                              _selectedFilterLocation == null
+                                  ? ""
+                                  : _selectedFilterLocation.id.toString();
+                          customSetting.filterTag =
+                              _selectedFilterTag == null
+                                  ? ""
+                                  : _selectedFilterTag.id.toString();
                           if (_selectedFilterIsDone == null) {
                             customSetting.filterIsDone = false;
                           } else {
@@ -836,6 +1108,34 @@ class _CustomizeViewState extends State //State<CustomizeView>
             _dropdownFilterDateDue[int.parse(customSetting.filterDateDue)]
                 .value;
         globals.filterDateDue = int.parse(customSetting.filterDateDue);
+      }
+
+      if (customSetting.filterCategory != "") {
+        _selectedFilterCategory =
+            _dropdownFilterCategory[int.parse(customSetting.filterCategory)]
+                .value;
+        globals.filterCategory = int.parse(customSetting.filterCategory);
+      }
+
+      if (customSetting.filterAction != "") {
+        _selectedFilterAction =
+            _dropdownFilterAction[int.parse(customSetting.filterAction)]
+                .value;
+        globals.filterAction = int.parse(customSetting.filterAction);
+      }
+
+      if (customSetting.filterContext != "") {
+        _selectedFilterContext =
+            _dropdownFilterContext[int.parse(customSetting.filterContext)]
+                .value;
+        globals.filterContext = int.parse(customSetting.filterContext);
+      }
+
+      if (customSetting.filterTag != "") {
+        _selectedFilterTag =
+            _dropdownFilterTag[int.parse(customSetting.filterTag)]
+                .value;
+        globals.filterTag = int.parse(customSetting.filterTag);
       }
 
       if (customSetting.filterCategory != "") {

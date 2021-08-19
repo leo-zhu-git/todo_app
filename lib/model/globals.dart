@@ -14,3 +14,7 @@ int showSec3;
 int filterIsDone;
 int filterDateDue;
 int filterCategory;
+int filterAction;
+int filterContext;
+int filterLocation;
+int filterTag;

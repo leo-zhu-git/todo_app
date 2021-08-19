@@ -14,6 +14,10 @@ class CustomSettings {
   bool _filterIsDone;
   String _filterDateDue;
   String _filterCategory;
+  String _filterAction;
+  String _filterContext;
+  String _filterLocation;
+  String _filterTag;
 
   CustomSettings(
       this._sortField1,
@@ -29,7 +33,11 @@ class CustomSettings {
       this._showSec3,
       this._filterIsDone,
       this._filterDateDue,
-      this._filterCategory);
+      this._filterCategory,
+      this._filterAction,
+      this._filterContext,
+      this._filterLocation,
+      this._filterTag);
   CustomSettings.withId(
       this._id,
       this._sortField1,
@@ -45,7 +53,11 @@ class CustomSettings {
       this._showSec3,
       this._filterIsDone,
       this._filterDateDue,
-      this._filterCategory);
+      this._filterCategory,
+      this._filterAction,
+      this._filterContext,
+      this._filterLocation,
+      this._filterTag);
   int get id => _id;
   String get sortField1 => _sortField1;
   String get sortOrder1 => _sortOrder1;
@@ -61,6 +73,10 @@ class CustomSettings {
   bool get filterIsDone => _filterIsDone;
   String get filterDateDue => _filterDateDue;
   String get filterCategory => _filterCategory;
+  String get filterAction => _filterAction;
+  String get filterContext => _filterContext;
+  String get filterLocation => _filterLocation;
+  String get filterTag => _filterTag; 
 
   set sortField1(String newSortField1) {
     this._sortField1 = newSortField1;
@@ -118,6 +134,22 @@ class CustomSettings {
     this._filterCategory = newFilterCategory;
   }
 
+  set filterAction(String newFilterAction) {
+    this._filterAction = newFilterAction;
+  }
+
+  set filterContext(String newFilterContext) {
+    this._filterContext = newFilterContext;
+  }
+
+  set filterLocation(String newFilterLocation) {
+    this._filterLocation = newFilterLocation;
+  }
+
+  set filterTag(String newFilterTag) {
+    this._filterTag = newFilterTag;
+  }
+
   Map<String, dynamic> toMap() {
     var map = Map<String, dynamic>();
 
@@ -135,6 +167,10 @@ class CustomSettings {
     map['filterIsDone'] = _filterIsDone;
     map['filterDateDue'] = _filterDateDue;
     map['filterCategory'] = _filterCategory;
+    map['filterAction'] = _filterAction;
+    map['filterContext'] = _filterContext;
+    map['filterLocation'] = _filterLocation;
+    map['filterTag'] = _filterTag;
 
     if (_id != null) {
       map['id'] = _id;
@@ -159,5 +195,9 @@ class CustomSettings {
     this._filterIsDone = o['filterIsDone'] == 0 ? false : true;
     this._filterDateDue = o['filterDateDue'];
     this._filterCategory = o['filterCategory'];
+    this._filterCategory = o['filterAction'];
+    this._filterCategory = o['filterContext'];
+    this._filterCategory = o['filterLocation'];
+    this._filterCategory = o['filterTag'];
   }
 }
