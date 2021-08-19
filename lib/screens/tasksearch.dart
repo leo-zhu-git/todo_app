@@ -170,32 +170,36 @@ class TaskSearchState extends State {
 //           ],),
 //#################################Category#####################################################
                       Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text("  Catogory: ", style: _textStyleControls),
-                          Spacer(),
-                          DropdownButton<String>(
-                              items: _categories.map((String value) {
-                                return DropdownMenuItem<String>(
-                                    value: value, 
-                                    child: Text(value,));
-                              }).toList(),
-                              style: _textStyleControls,
-                              value: _selectedCategory,
-                              onChanged: (String newValue) {
-                                setState(() {
-                                  _selectedCategory = newValue;
-                                  searchData(
-                                      _searchText,
-                                      _selectedCategory,
-                                      _selectedAction1,
-                                      _selectedContext1,
-                                      _selectedLocation1,
-                                      _selectedTag1);
-                                });
-                              }),
-                        ],
-                      ),
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text("  Catogory: ", style: _textStyleControls),
+                            Spacer(),
+                            DropdownButton<String>(
+                                items: _categories.map((String value) {
+                                  return DropdownMenuItem<String>(
+                                      value: value, 
+                                      child: Flexible(
+                                        child: Text(value,
+                                        overflow: TextOverflow.ellipsis,),
+                                      ));
+                                }).toList(),
+                                style: _textStyleControls,
+                                value: _selectedCategory,
+                                onChanged: (String newValue) {
+                                  setState(() {
+                                    _selectedCategory = newValue;
+                                    searchData(
+                                        _searchText,
+                                        _selectedCategory,
+                                        _selectedAction1,
+                                        _selectedContext1,
+                                        _selectedLocation1,
+                                        _selectedTag1);
+                                  });
+                                }),
+                          ],
+                        ),
+                      
 //########################################### Action  ######### #################################3
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.center,

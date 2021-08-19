@@ -195,9 +195,9 @@ class CustomSettings {
     this._filterIsDone = o['filterIsDone'] == 0 ? false : true;
     this._filterDateDue = o['filterDateDue'];
     this._filterCategory = o['filterCategory'];
-    this._filterCategory = o['filterAction'];
-    this._filterCategory = o['filterContext'];
-    this._filterCategory = o['filterLocation'];
-    this._filterCategory = o['filterTag'];
+    this._filterAction = o['filterAction'];
+    this._filterContext = o['filterContext'];
+    this._filterLocation = o['filterLocation'];
+    this._filterTag = o['filterTag'];
   }
 }

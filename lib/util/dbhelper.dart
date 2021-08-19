@@ -51,10 +51,10 @@ class DbHelper {
   String colfilterIsDone = 'filterIsDone';
   String colfilterDateDue = 'filterDateDue';
   String colfilterCategory = 'filterCategory';
-  String colfilterAction1 = 'filterAction1';
-  String colfilterContext1 = 'filterContext1';
-  String colfilterLocation1 = 'filterLocation1';
-  String colfilterTag1 = 'filterTag1';
+  String colfilterAction = 'filterAction';
+  String colfilterContext = 'filterContext';
+  String colfilterLocation = 'filterLocation';
+  String colfilterTag = 'filterTag';
 
   DbHelper._internal();
 
@@ -73,7 +73,7 @@ class DbHelper {
 
   Future<Database> initializeDb() async {
     Directory dir = await getApplicationDocumentsDirectory();
-    String path = dir.path + "todo_V18.8.db";
+    String path = dir.path + "todo_V18.b.db";
 // <<<<<<< HEAD
 //     print(path);
 // =======
@@ -95,7 +95,7 @@ class DbHelper {
         "CREATE TABLE $tblCustomSettings($colId INTEGER PRIMARY KEY, $colsortField1 TEXT, $colsortOrder1 TEXT, $colsortField2 TEXT, " +
             "$colsortOrder2 TEXT, $colsortField3 TEXT, $colsortOrder3 TEXT, $colshowMain1 TEXT,$colshowMain2 TEXT, " +
             "$colshowSec1 TEXT,$colshowSec2 TEXT,$colshowSec3 TEXT," +
-            " $colfilterIsDone INTEGER, $colfilterDateDue TEXT, $colCategory TEXT, $colAction1 TEXT, $colContext1 TEXT, $colLocation1 TEXT, $colTag1 TEXT)");
+            " $colfilterIsDone INTEGER, $colfilterDateDue TEXT, $colfilterCategory TEXT, $colfilterAction TEXT, $colfilterContext TEXT, $colfilterLocation TEXT, $colfilterTag TEXT)");
 
     // Create table categories
     await db.execute(
