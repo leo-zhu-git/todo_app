@@ -308,7 +308,7 @@ class TaskDetailState extends State //<TaskDetail>
                   task.description = value;
                 },
                 minLines: 2,
-                maxLines: 3,
+                maxLines: 25,
                 decoration: InputDecoration(
                   labelText: 'Description',
                   hintText: 'Write Todo Description',
