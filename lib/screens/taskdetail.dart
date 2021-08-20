@@ -271,15 +271,15 @@ class TaskDetailState extends State //<TaskDetail>
         automaticallyImplyLeading: false,
         title: Center(child: Text('Todo Detail')),
       ),
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
+      body: SingleChildScrollView(
+        // this will make your body scrollable
         child: Column(
           children: <Widget>[
 ///////////////////////////
 //  WHAT - TITLE
 ///////////////////////////
             Container(
-              margin: const EdgeInsets.all(2.0),
+              margin: const EdgeInsets.all(4.0),
               decoration: new BoxDecoration(
                 color: Colors.green[100],
               ),
@@ -362,7 +362,6 @@ class TaskDetailState extends State //<TaskDetail>
                 ),
               ),
             ),
-
 ///////////////////////////
 //  CATEGORY
 ///////////////////////////
@@ -444,6 +443,20 @@ class TaskDetailState extends State //<TaskDetail>
 ///////////////////////////
 //  LOCATION
 ///////////////////////////
+            // Expanded(
+            //   child: DropdownButtonFormField(
+            //     value: _selectedLocation1,
+            //     items: _location1s,
+            //     hint: Text('Location'),
+            //     onChanged: (value) {
+            //       setState(() {
+            //         _selectedLocation1 = value;
+            //         task.location1 = value;
+            //       });
+            //     },
+            //   ),
+            // ),
+
             Container(
               margin: const EdgeInsets.all(2.0),
               decoration: BoxDecoration(
@@ -499,9 +512,9 @@ class TaskDetailState extends State //<TaskDetail>
 //              ),
 //            ),
 
-            SizedBox(
-              height: 20,
-            ),
+            //KK     // SizedBox(
+            //   height: 20,
+            // ),
 
             /// form - save or cancel
             Row(
@@ -516,7 +529,7 @@ class TaskDetailState extends State //<TaskDetail>
                       'Cancel',
                       style: TextStyle(color: Colors.brown[900]),
                     )),
-                SizedBox(width: 10),
+                //KK SizedBox(width: 10),
                 RaisedButton(
                     onPressed: () async {
                       task.title = _todoTitleController.text;
@@ -572,7 +585,7 @@ class TaskDetailState extends State //<TaskDetail>
                       _showSuccessSnackBar(
                         Container(
                           color: Colors.tealAccent[100],
-                          height: 40,
+                          //KK height: 40,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
