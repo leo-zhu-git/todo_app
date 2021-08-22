@@ -83,11 +83,13 @@ class TaskDetailState extends State //<TaskDetail>
       setState(() {
         _categories.add(DropdownMenuItem(
           child: Text(category['name']),
-          value: category['name'],
+          value: category['id'].toString(),
         ));
       });
     });
   }
+
+  //KK changed the value catergorty from name to id
 
   _loadAction1s() async {
     var action1s = await dbHelper.getActions();
@@ -95,7 +97,7 @@ class TaskDetailState extends State //<TaskDetail>
       setState(() {
         _action1s.add(DropdownMenuItem(
           child: Text(action1['name']),
-          value: action1['name'],
+          value: action1['id'].toString(),
         ));
       });
     });
@@ -107,7 +109,7 @@ class TaskDetailState extends State //<TaskDetail>
       setState(() {
         _context1s.add(DropdownMenuItem(
           child: Text(context1['name']),
-          value: context1['name'],
+          value: context1['id'].toString(),
         ));
       });
     });
@@ -119,7 +121,7 @@ class TaskDetailState extends State //<TaskDetail>
       setState(() {
         _location1s.add(DropdownMenuItem(
           child: Text(location1['name']),
-          value: location1['name'],
+          value: location1['id'].toString(),
         ));
       });
     });
@@ -131,7 +133,7 @@ class TaskDetailState extends State //<TaskDetail>
       setState(() {
         _tag1s.add(DropdownMenuItem(
           child: Text(tag1['name']),
-          value: tag1['name'],
+          value: tag1['id'].toString(),
         ));
       });
     });
@@ -143,7 +145,7 @@ class TaskDetailState extends State //<TaskDetail>
       setState(() {
         _goal1s.add(DropdownMenuItem(
           child: Text(goal1['name']),
-          value: goal1['name'],
+          value: goal1['id'].toString(),
         ));
       });
     });
