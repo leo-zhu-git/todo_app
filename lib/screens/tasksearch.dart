@@ -1,8 +1,9 @@
-  import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:todo_app/model/taskclass.dart';
 import 'package:todo_app/util/dbhelper.dart';
 import 'package:todo_app/screens/taskdetail.dart';
+import 'package:todo_app/model/customDropdownItem.dart';
 import 'package:intl/intl.dart';
 import 'package:todo_app/model/globals.dart' as globals;
 
@@ -20,19 +21,19 @@ class TaskSearch extends StatefulWidget {
 
 class TaskSearchState extends State {
   DbHelper helper = DbHelper();
-  List<String> _categories = [""];  
-  List<String> _action1s = [""];
-  List<String> _context1s = [""];
-  List<String> _location1s = [""];
-  List<String> _tag1s = [""];
+  List<CustomDropdownItem> _categories = [];
+  List<CustomDropdownItem> _action1s = [];
+  List<CustomDropdownItem> _context1s = [];
+  List<CustomDropdownItem> _location1s = [];
+  List<CustomDropdownItem> _tag1s = [];
   List<Task> tasklist;
   int count = 0;
   TextEditingController searchController = TextEditingController();
-  var _selectedCategory = "";
-  var _selectedAction1 = "";
-  var _selectedContext1 = "";
-  var _selectedLocation1 = "";
-  var _selectedTag1 = "";
+  var _selectedCategory = null;
+  var _selectedAction1 = null;
+  var _selectedContext1 = null;
+  var _selectedLocation1 = null;
+  var _selectedTag1 = null;
 //  var _selectedGoal1 = "";
 
   @override
@@ -49,45 +50,92 @@ class TaskSearchState extends State {
   //##################Drop Down Items Load from DB #################################################################
   _loadCategories() async {
     var categories = await helper.getCategories();
+    CustomDropdownItem cus;
+    cus = new CustomDropdownItem();
+    cus.id = null;
+    cus.name = "--Select Category--";
+    _categories.add(cus);
     categories.forEach((category) {
       setState(() {
-        _categories.add(category['name']);
+        cus = new CustomDropdownItem();
+        cus.id = category['id'].toString();
+        String tempCat;
+        if (category['name'].toString().length > 30)
+          tempCat = category['name'].toString().substring(0, 30) + "...";
+        else
+          tempCat = category['name'];
+
+        cus.name = tempCat;
+
+        _categories.add(cus);
       });
     });
   }
 
   _loadAction1s() async {
     var action1s = await helper.getActions();
+    CustomDropdownItem cus;
+    cus = new CustomDropdownItem();
+    cus.id = null;
+    cus.name = "--Select Action--";
+    _action1s.add(cus);
     action1s.forEach((action1) {
       setState(() {
-        _action1s.add(action1['name']);
+        cus = new CustomDropdownItem();
+        cus.id = action1['id'].toString();
+        cus.name = action1['name'];
+        _action1s.add(cus);
       });
     });
   }
 
   _loadContext1s() async {
     var context1s = await helper.getContexts();
+    CustomDropdownItem cus;
+    cus = new CustomDropdownItem();
+    cus.id = null;
+    cus.name = "--Select Context--";
+    _context1s.add(cus);
     context1s.forEach((context1) {
       setState(() {
-        _context1s.add(context1['name']);
+        cus = new CustomDropdownItem();
+        cus.id = context1['id'].toString();
+        cus.name = context1['name'];
+        _context1s.add(cus);
       });
     });
   }
 
   _loadLocation1s() async {
     var location1s = await helper.getLocations();
+    CustomDropdownItem cus;
+    cus = new CustomDropdownItem();
+    cus.id = null;
+    cus.name = "--Select Location--";
+    _location1s.add(cus);
     location1s.forEach((location1) {
       setState(() {
-        _location1s.add(location1['name']);
+        cus = new CustomDropdownItem();
+        cus.id = location1['id'].toString();
+        cus.name = location1['name'];
+        _location1s.add(cus);
       });
     });
   }
 
   _loadTag1s() async {
     var tag1s = await helper.getTags();
+    CustomDropdownItem cus;
+    cus = new CustomDropdownItem();
+    cus.id = null;
+    cus.name = "--Select Tag--";
+    _tag1s.add(cus);
     tag1s.forEach((tag1) {
       setState(() {
-        _tag1s.add(tag1['name']);
+        cus = new CustomDropdownItem();
+        cus.id = tag1['id'].toString();
+        cus.name = tag1['name'];
+        _tag1s.add(cus);
       });
     });
   }
@@ -107,7 +155,6 @@ class TaskSearchState extends State {
   Widget build(BuildContext context) {
     TextStyle textStyle = Theme.of(context).textTheme.title;
     return Scaffold(
-
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
         backgroundColor: Colors.brown[900],
@@ -170,36 +217,37 @@ class TaskSearchState extends State {
 //           ],),
 //#################################Category#####################################################
                       Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text("  Catogory: ", style: _textStyleControls),
-                            Spacer(),
-                            DropdownButton<String>(
-                                items: _categories.map((String value) {
-                                  return DropdownMenuItem<String>(
-                                      value: value, 
-                                      child: Flexible(
-                                        child: Text(value,
-                                        overflow: TextOverflow.ellipsis,),
-                                      ));
-                                }).toList(),
-                                style: _textStyleControls,
-                                value: _selectedCategory,
-                                onChanged: (String newValue) {
-                                  setState(() {
-                                    _selectedCategory = newValue;
-                                    searchData(
-                                        _searchText,
-                                        _selectedCategory,
-                                        _selectedAction1,
-                                        _selectedContext1,
-                                        _selectedLocation1,
-                                        _selectedTag1);
-                                  });
-                                }),
-                          ],
-                        ),
-                      
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text("  Catogory: ", style: _textStyleControls),
+                          Spacer(),
+                          DropdownButton<String>(
+                              items:
+                                  _categories.map((CustomDropdownItem value) {
+                                return DropdownMenuItem<String>(
+                                    value: value.id,
+                                    child: Text(
+                                      value.name,
+                                      overflow: TextOverflow.ellipsis,
+                                    ));
+                              }).toList(),
+                              style: _textStyleControls,
+                              value: _selectedCategory,
+                              onChanged: (String newValue) {
+                                setState(() {
+                                  _selectedCategory = newValue;
+                                  searchData(
+                                      _searchText,
+                                      _selectedCategory,
+                                      _selectedAction1,
+                                      _selectedContext1,
+                                      _selectedLocation1,
+                                      _selectedTag1);
+                                });
+                              }),
+                        ],
+                      ),
+
 //########################################### Action  ######### #################################3
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -210,9 +258,9 @@ class TaskSearchState extends State {
                           ),
                           Spacer(),
                           DropdownButton<String>(
-                            items: _action1s.map((String value) {
+                            items: _action1s.map((CustomDropdownItem value) {
                               return DropdownMenuItem<String>(
-                                  value: value, child: Text(value));
+                                  value: value.id, child: Text(value.name));
                             }).toList(),
                             style: _textStyleControls,
                             value: _selectedAction1,
@@ -242,9 +290,9 @@ class TaskSearchState extends State {
                           ),
                           Spacer(),
                           DropdownButton<String>(
-                            items: _context1s.map((String value) {
+                            items: _context1s.map((CustomDropdownItem value) {
                               return DropdownMenuItem<String>(
-                                  value: value, child: Text(value));
+                                  value: value.id, child: Text(value.name));
                             }).toList(),
                             style: _textStyleControls,
                             value: _selectedContext1,
@@ -273,9 +321,9 @@ class TaskSearchState extends State {
                           ),
                           Spacer(),
                           DropdownButton<String>(
-                            items: _location1s.map((String value) {
+                            items: _location1s.map((CustomDropdownItem value) {
                               return DropdownMenuItem<String>(
-                                  value: value, child: Text(value));
+                                  value: value.id, child: Text(value.name));
                             }).toList(),
                             style: _textStyleControls,
                             value: _selectedLocation1,
@@ -304,9 +352,9 @@ class TaskSearchState extends State {
                           ),
                           Spacer(),
                           DropdownButton<String>(
-                            items: _tag1s.map((String value) {
+                            items: _tag1s.map((CustomDropdownItem value) {
                               return DropdownMenuItem<String>(
-                                  value: value, child: Text(value));
+                                  value: value.id, child: Text(value.name));
                             }).toList(),
                             style: _textStyleControls,
                             value: _selectedTag1,
@@ -355,9 +403,6 @@ class TaskSearchState extends State {
               child: Align(
                   alignment: Alignment.topLeft,
                   child: Text(count.toString() + " Results found.."))),
-          
-          
-
           Expanded(
             child: Container(child: taskListItems()),
           ),
@@ -430,7 +475,7 @@ class TaskSearchState extends State {
   //                               child: Text(this.tasklist[position].main2,
   //                                       overflow: TextOverflow.ellipsis))),
   //                     ],
-                   
+
   //                   ),
   //                   subtitle: Row(
   //                     children: [
@@ -440,7 +485,7 @@ class TaskSearchState extends State {
   //                               padding: const EdgeInsets.only(right: 2),
   //                               child: Text(this.tasklist[position].sec1,
   //                                       overflow: TextOverflow.ellipsis))),
-                      
+
   //                      // SizedBox(width: 5.0),
   //                      // Text(this.tasklist[position].sec2),
   //                       Flexible(
@@ -448,7 +493,7 @@ class TaskSearchState extends State {
   //                               padding: const EdgeInsets.only(right: 2),
   //                               child: Text(this.tasklist[position].sec2,
   //                                       overflow: TextOverflow.ellipsis))),
-                      
+
   //                    //   SizedBox(width: 5.0),
   //                      // Text(this.tasklist[position].sec3),
   //                      Flexible(
@@ -456,7 +501,7 @@ class TaskSearchState extends State {
   //                               padding: const EdgeInsets.only(right: 2),
   //                               child: Text(this.tasklist[position].sec3,
   //                                       overflow: TextOverflow.ellipsis))),
-                  
+
   //                     ],
   //                   ),
   //                   isThreeLine: false,
@@ -526,12 +571,14 @@ class TaskSearchState extends State {
                     title: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-
-                    Flexible(
+                        Flexible(
                             child: Padding(
                                 padding: const EdgeInsets.only(right: 2),
-                                child: Text(this.tasklist[position].main1 == null ? "" : this.tasklist[position].main1,
-                                        overflow: TextOverflow.ellipsis))),
+                                child: Text(
+                                    this.tasklist[position].main1 == null
+                                        ? ""
+                                        : this.tasklist[position].main1,
+                                    overflow: TextOverflow.ellipsis))),
 
 //                                 Flexible(
 //                            child: Padding(
@@ -539,17 +586,16 @@ class TaskSearchState extends State {
 //                                child: Text(this.tasklist[position].main2 == null ? "" : this.tasklist[position].main2,
 //                                        overflow: TextOverflow.ellipsis))),
                       ],
-                   
                     ),
 //                    subtitle: Row(
 //                      children: [
-//                       
+//
 //                        Flexible(
 //                            child: Padding(
 //                                padding: const EdgeInsets.only(right: 2),
 //                                child: Text(this.tasklist[position].sec1 == null ? "" : this.tasklist[position].sec1,
 //                                        overflow: TextOverflow.ellipsis))),
-//                      
+//
 //                        Flexible(
 //                            child: Padding(
 //                                padding: const EdgeInsets.only(right: 2),
@@ -561,7 +607,7 @@ class TaskSearchState extends State {
 //                                padding: const EdgeInsets.only(right: 2),
 //                                child: Text(this.tasklist[position].sec3 == null ? "" : this.tasklist[position].sec3,
 //                                        overflow: TextOverflow.ellipsis))),
-//                 
+//
 //                      ],
 //                    ),
                     isThreeLine: false,
@@ -598,7 +644,7 @@ class TaskSearchState extends State {
     );
   }
 
- void navigateToDetail(Task task) async {
+  void navigateToDetail(Task task) async {
     bool result = await Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => TaskDetail(task)),
@@ -623,286 +669,285 @@ class TaskSearchState extends State {
             taskList.add(Task.fromObject(result[i]));
             debugPrint(taskList[i].description);
 
-          /////////////////
-          /// display main1
-          ////////////////
-          switch (globals.showMain1) {
-            case 0:
-              {
-                taskList[i].main1 = taskList[i].title;
-              }
-              break;
-            case 1:
-              {
-                taskList[i].main1 = taskList[i].description;
-              }
-              break;
-            case 2:
-              {
-                taskList[i].main1 = taskList[i].dateDue;
-              }
-              break;
-            case 3:
-              {
-                taskList[i].main1 = taskList[i].timeDue;
-              }
-              break;
-            case 4:
-              {
-                taskList[i].main1 = taskList[i].category;
-              }
-              break;
-            case 5:
-              {
-                taskList[i].main1 = taskList[i].action1;
-              }
-              break;
-            case 6:
-              {
-                taskList[i].main1 = taskList[i].context1;
-              }
-              break;
-            case 7:
-              {
-                taskList[i].main1 = taskList[i].location1;
-              }
-              break;
-            case 8:
-              {
-                taskList[i].main1 = taskList[i].tag1;
-              }
-              break;
-            default:
-              {
-                taskList[i].main1 = taskList[i].title;
-              }
-              break;
-          }
+            /////////////////
+            /// display main1
+            ////////////////
+            switch (globals.showMain1) {
+              case 0:
+                {
+                  taskList[i].main1 = taskList[i].title;
+                }
+                break;
+              case 1:
+                {
+                  taskList[i].main1 = taskList[i].description;
+                }
+                break;
+              case 2:
+                {
+                  taskList[i].main1 = taskList[i].dateDue;
+                }
+                break;
+              case 3:
+                {
+                  taskList[i].main1 = taskList[i].timeDue;
+                }
+                break;
+              case 4:
+                {
+                  taskList[i].main1 = taskList[i].category;
+                }
+                break;
+              case 5:
+                {
+                  taskList[i].main1 = taskList[i].action1;
+                }
+                break;
+              case 6:
+                {
+                  taskList[i].main1 = taskList[i].context1;
+                }
+                break;
+              case 7:
+                {
+                  taskList[i].main1 = taskList[i].location1;
+                }
+                break;
+              case 8:
+                {
+                  taskList[i].main1 = taskList[i].tag1;
+                }
+                break;
+              default:
+                {
+                  taskList[i].main1 = taskList[i].title;
+                }
+                break;
+            }
 
 /////////////////
-          /// display main2
+            /// display main2
 ////////////////
-          switch (globals.showMain2) {
-            case 0:
-              {
-                taskList[i].main2 = taskList[i].title;
-              }
-              break;
-            case 1:
-              {
-                taskList[i].main2 = taskList[i].description;
-              }
-              break;
-            case 2:
-              {
-                taskList[i].main2 = taskList[i].dateDue;
-              }
-              break;
-            case 3:
-              {
-                taskList[i].main2 = taskList[i].timeDue;
-              }
-              break;
-            case 4:
-              {
-                taskList[i].main2 = taskList[i].category;
-              }
-              break;
-            case 5:
-              {
-                taskList[i].main2 = taskList[i].action1;
-              }
-              break;
-            case 6:
-              {
-                taskList[i].main2 = taskList[i].context1;
-              }
-              break;
-            case 7:
-              {
-                taskList[i].main2 = taskList[i].location1;
-              }
-              break;
-            case 8:
-              {
-                taskList[i].main2 = taskList[i].tag1;
-              }
-              break;
-            default:
-              {
-                taskList[i].main2 = taskList[i].title;
-              }
-              break;
-          }
+            switch (globals.showMain2) {
+              case 0:
+                {
+                  taskList[i].main2 = taskList[i].title;
+                }
+                break;
+              case 1:
+                {
+                  taskList[i].main2 = taskList[i].description;
+                }
+                break;
+              case 2:
+                {
+                  taskList[i].main2 = taskList[i].dateDue;
+                }
+                break;
+              case 3:
+                {
+                  taskList[i].main2 = taskList[i].timeDue;
+                }
+                break;
+              case 4:
+                {
+                  taskList[i].main2 = taskList[i].category;
+                }
+                break;
+              case 5:
+                {
+                  taskList[i].main2 = taskList[i].action1;
+                }
+                break;
+              case 6:
+                {
+                  taskList[i].main2 = taskList[i].context1;
+                }
+                break;
+              case 7:
+                {
+                  taskList[i].main2 = taskList[i].location1;
+                }
+                break;
+              case 8:
+                {
+                  taskList[i].main2 = taskList[i].tag1;
+                }
+                break;
+              default:
+                {
+                  taskList[i].main2 = taskList[i].title;
+                }
+                break;
+            }
 
 /////////////////
-          /// display sec1
+            /// display sec1
 ////////////////
-          switch (globals.showSec1) {
-            case 0:
-              {
-                taskList[i].sec1 = taskList[i].title;
-              }
-              break;
-            case 1:
-              {
-                taskList[i].sec1 = taskList[i].description;
-              }
-              break;
-            case 2:
-              {
-                taskList[i].sec1 = taskList[i].dateDue;
-              }
-              break;
-            case 3:
-              {
-                taskList[i].sec1 = taskList[i].timeDue;
-              }
-              break;
-            case 4:
-              {
-                taskList[i].sec1 = taskList[i].category;
-              }
-              break;
-            case 5:
-              {
-                taskList[i].sec1 = taskList[i].action1;
-              }
-              break;
-            case 6:
-              {
-                taskList[i].sec1 = taskList[i].context1;
-              }
-              break;
-            case 7:
-              {
-                taskList[i].sec1 = taskList[i].location1;
-              }
-              break;
-            case 8:
-              {
-                taskList[i].sec1 = taskList[i].tag1;
-              }
-              break;
-            default:
-              {
-                taskList[i].sec1 = taskList[i].title;
-              }
-              break;
-          }
+            switch (globals.showSec1) {
+              case 0:
+                {
+                  taskList[i].sec1 = taskList[i].title;
+                }
+                break;
+              case 1:
+                {
+                  taskList[i].sec1 = taskList[i].description;
+                }
+                break;
+              case 2:
+                {
+                  taskList[i].sec1 = taskList[i].dateDue;
+                }
+                break;
+              case 3:
+                {
+                  taskList[i].sec1 = taskList[i].timeDue;
+                }
+                break;
+              case 4:
+                {
+                  taskList[i].sec1 = taskList[i].category;
+                }
+                break;
+              case 5:
+                {
+                  taskList[i].sec1 = taskList[i].action1;
+                }
+                break;
+              case 6:
+                {
+                  taskList[i].sec1 = taskList[i].context1;
+                }
+                break;
+              case 7:
+                {
+                  taskList[i].sec1 = taskList[i].location1;
+                }
+                break;
+              case 8:
+                {
+                  taskList[i].sec1 = taskList[i].tag1;
+                }
+                break;
+              default:
+                {
+                  taskList[i].sec1 = taskList[i].title;
+                }
+                break;
+            }
 
 /////////////////
-          /// display sec2
+            /// display sec2
 ////////////////
-          switch (globals.showSec2) {
-            case 0:
-              {
-                taskList[i].sec2 = taskList[i].title;
-              }
-              break;
-            case 1:
-              {
-                taskList[i].sec2 = taskList[i].description;
-              }
-              break;
-            case 2:
-              {
-                taskList[i].sec2 = taskList[i].dateDue;
-              }
-              break;
-            case 3:
-              {
-                taskList[i].sec2 = taskList[i].timeDue;
-              }
-              break;
-            case 4:
-              {
-                taskList[i].sec2 = taskList[i].category;
-              }
-              break;
-            case 5:
-              {
-                taskList[i].sec2 = taskList[i].action1;
-              }
-              break;
-            case 6:
-              {
-                taskList[i].sec2 = taskList[i].context1;
-              }
-              break;
-            case 7:
-              {
-                taskList[i].sec2 = taskList[i].location1;
-              }
-              break;
-            case 8:
-              {
-                taskList[i].sec2 = taskList[i].tag1;
-              }
-              break;
-            default:
-              {
-                taskList[i].sec2 = taskList[i].title;
-              }
-              break;
-          }
+            switch (globals.showSec2) {
+              case 0:
+                {
+                  taskList[i].sec2 = taskList[i].title;
+                }
+                break;
+              case 1:
+                {
+                  taskList[i].sec2 = taskList[i].description;
+                }
+                break;
+              case 2:
+                {
+                  taskList[i].sec2 = taskList[i].dateDue;
+                }
+                break;
+              case 3:
+                {
+                  taskList[i].sec2 = taskList[i].timeDue;
+                }
+                break;
+              case 4:
+                {
+                  taskList[i].sec2 = taskList[i].category;
+                }
+                break;
+              case 5:
+                {
+                  taskList[i].sec2 = taskList[i].action1;
+                }
+                break;
+              case 6:
+                {
+                  taskList[i].sec2 = taskList[i].context1;
+                }
+                break;
+              case 7:
+                {
+                  taskList[i].sec2 = taskList[i].location1;
+                }
+                break;
+              case 8:
+                {
+                  taskList[i].sec2 = taskList[i].tag1;
+                }
+                break;
+              default:
+                {
+                  taskList[i].sec2 = taskList[i].title;
+                }
+                break;
+            }
 
 /////////////////
-          /// display sec3
+            /// display sec3
 ////////////////
-          switch (globals.showSec3) {
-            case 0:
-              {
-                taskList[i].sec3 = taskList[i].title;
-              }
-              break;
-            case 1:
-              {
-                taskList[i].sec3 = taskList[i].description;
-              }
-              break;
-            case 2:
-              {
-                taskList[i].sec3 = taskList[i].dateDue;
-              }
-              break;
-            case 3:
-              {
-                taskList[i].sec3 = taskList[i].timeDue;
-              }
-              break;
-            case 4:
-              {
-                taskList[i].sec3 = taskList[i].category;
-              }
-              break;
-            case 5:
-              {
-                taskList[i].sec3 = taskList[i].action1;
-              }
-              break;
-            case 6:
-              {
-                taskList[i].sec3 = taskList[i].context1;
-              }
-              break;
-            case 7:
-              {
-                taskList[i].sec3 = taskList[i].location1;
-              }
-              break;
-            case 8:
-              {
-                taskList[i].sec3 = taskList[i].tag1;
-              }
-              break;
-            default:
-              {
-                taskList[i].sec3 = taskList[i].title;
-              }
-              break;
-          }
-
+            switch (globals.showSec3) {
+              case 0:
+                {
+                  taskList[i].sec3 = taskList[i].title;
+                }
+                break;
+              case 1:
+                {
+                  taskList[i].sec3 = taskList[i].description;
+                }
+                break;
+              case 2:
+                {
+                  taskList[i].sec3 = taskList[i].dateDue;
+                }
+                break;
+              case 3:
+                {
+                  taskList[i].sec3 = taskList[i].timeDue;
+                }
+                break;
+              case 4:
+                {
+                  taskList[i].sec3 = taskList[i].category;
+                }
+                break;
+              case 5:
+                {
+                  taskList[i].sec3 = taskList[i].action1;
+                }
+                break;
+              case 6:
+                {
+                  taskList[i].sec3 = taskList[i].context1;
+                }
+                break;
+              case 7:
+                {
+                  taskList[i].sec3 = taskList[i].location1;
+                }
+                break;
+              case 8:
+                {
+                  taskList[i].sec3 = taskList[i].tag1;
+                }
+                break;
+              default:
+                {
+                  taskList[i].sec3 = taskList[i].title;
+                }
+                break;
+            }
           }
           setState(() {
             tasklist = taskList;
