@@ -183,7 +183,7 @@ class TaskSearchState extends State {
       body: Column(
         children: [
           Padding(
-            padding: EdgeInsets.all(10.0),
+            padding: EdgeInsets.all(8.0),
             child: TextField(
               controller: searchController,
               style: textStyle,
@@ -197,9 +197,6 @@ class TaskSearchState extends State {
                   border: InputBorder.none, 
                   filled: true, // dont forget this line
                   labelText: "Enter a search term",
-//                  border: OutlineInputBorder(
-//                    borderRadius: BorderRadius.circular(5.0),
-//                  )
                   ),
             ),
           ),
@@ -217,33 +214,12 @@ class TaskSearchState extends State {
                 children: [
                   Column(
                     children: [
-//                Row(
-//                  crossAxisAlignment: CrossAxisAlignment.center,
-//                  children: [
-//                    Text("  Priority: ", style: _textStyleControls),
-//                    Spacer(),
-//                            DropdownButton<String>(
-//
-//                              items: _priorities.map((String value) {
-//                                return DropdownMenuItem<String>(
-//                                    value: value, child: Text(value));
-//                              }).toList(),
-//                              style: _textStyleControls,
-//                              value: _selectedpriority,
-//                              onChanged: (String newValue) {
-//        setState(() {
-//          _selectedpriority = newValue;
-//          searchData(_searchText, _selectedpriority, _selectedCategory, _selectedAction1, _selectedContext1, _selectedLocation1, _selectedTag1, _selectedGoal1);
-//          searchData(_searchText, _selectedCategory, _selectedAction1, _selectedContext1, _selectedLocation1, _selectedTag1);
-//        });}
-//                            ),
-//
-//           ],),
+
 //#################################Category#####################################################
                       Container(
                         margin: EdgeInsets.only(left: 8.0, right: 8.0, bottom: 2.0),
                         decoration: BoxDecoration(
-                            shape: BoxShape.rectangle, color: Colors.pink[100]),
+                            shape: BoxShape.rectangle, color: Colors.blue[100]),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
 
@@ -282,44 +258,46 @@ class TaskSearchState extends State {
                       Container(
                         margin: EdgeInsets.only(top: 2.0, left: 8.0, right: 8.0, bottom: 2.0),
                         decoration: BoxDecoration(
-                            shape: BoxShape.rectangle, color: Colors.pink[100]),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              "  Action: ",
-                              style: _textStyleControls,
-                            ),
-                            Spacer(),
-                            DropdownButton<String>(
-                              items: _action1s.map((CustomDropdownItem value) {
-                                return DropdownMenuItem<String>(
-                                    value: value.id, child: Text(value.name));
-                              }).toList(),
-                              style: _textStyleControls,
-                              value: _selectedAction1,
-                              onChanged: (value) {
-                                setState(() {
-                                  _selectedAction1 = value;
-//                    searchData(_searchText, _selectedpriority, _selectedCategory, _selectedAction1, _selectedContext1, _selectedLocation1, _selectedTag1, _selectedGoal1);
-                                  searchData(
-                                      _searchText,
-                                      _selectedCategory,
-                                      _selectedAction1,
-                                      _selectedContext1,
-                                      _selectedLocation1,
-                                      _selectedTag1);
-                                });
-                              },
-                            )
-                          ],
+                            shape: BoxShape.rectangle, color: Colors.blue[100]),
+                        child: Flexible(
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                "  Action: ",
+                                style: _textStyleControls,
+                              ),
+                              Spacer(),
+                              DropdownButton<String>(
+                                items: _action1s.map((CustomDropdownItem value) {
+                                  return DropdownMenuItem<String>(
+                                      value: value.id, child: Text(value.name));
+                                }).toList(),
+                                style: _textStyleControls,
+                                value: _selectedAction1,
+                                onChanged: (value) {
+                                  setState(() {
+                                    _selectedAction1 = value;
+                        //                    searchData(_searchText, _selectedpriority, _selectedCategory, _selectedAction1, _selectedContext1, _selectedLocation1, _selectedTag1, _selectedGoal1);
+                                    searchData(
+                                        _searchText,
+                                        _selectedCategory,
+                                        _selectedAction1,
+                                        _selectedContext1,
+                                        _selectedLocation1,
+                                        _selectedTag1);
+                                  });
+                                },
+                              )
+                            ],
+                          ),
                         ),
                       ),
 //######### Context  #########
                       Container(
                         margin: EdgeInsets.only(top: 2.0, left: 8.0, right: 8.0, bottom: 2.0),
                         decoration: BoxDecoration(
-                            shape: BoxShape.rectangle, color: Colors.pink[100]),
+                            shape: BoxShape.rectangle, color: Colors.blue[100]),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
@@ -355,7 +333,7 @@ class TaskSearchState extends State {
                       Container(
                         margin: EdgeInsets.only(top: 2.0, left: 8.0, right: 8.0, bottom: 2.0),
                         decoration: BoxDecoration(
-                            shape: BoxShape.rectangle, color: Colors.pink[100]),
+                            shape: BoxShape.rectangle, color: Colors.blue[100]),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
@@ -392,7 +370,7 @@ class TaskSearchState extends State {
                       Container(
                         margin: EdgeInsets.only(top: 2.0, left: 8.0, right: 8.0),
                         decoration: BoxDecoration(
-                            shape: BoxShape.rectangle, color: Colors.pink[100]),
+                            shape: BoxShape.rectangle, color: Colors.blue[100]),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
@@ -424,27 +402,7 @@ class TaskSearchState extends State {
                           ],
                         ),
                       ),
-// //######### Goal  #########
-//    Row(
-//        crossAxisAlignment: CrossAxisAlignment.center,
-//        children: [
-//        Text("  Goal: ", style: _textStyleControls,),
-//        Spacer(),
-//        DropdownButton<String>(
-//                              items: _goal1s.map((String value) {
-//                                return DropdownMenuItem<String>(
-//                                    value: value, child: Text(value));
-//                              }).toList(),
-//                              style: _textStyleControls,
-//                              value: _selectedGoal1,
-//                onChanged: (value) {
-//                  setState(() {
-//                    _selectedGoal1 = value;
-//                  searchData(_searchText, _selectedCategory, _selectedAction1, _selectedContext1, _selectedLocation1, _selectedTag1);
-//                  });
-//               },
-//              )
-//               ],)
+
                     ],
                   )
                 ],
@@ -486,111 +444,7 @@ class TaskSearchState extends State {
     );
   }
 
-  // ListView taskListItems() {
-  //   return ListView.builder(
-  //     itemCount: count,
-  //     itemBuilder: (BuildContext context, int position) {
-  //       return Card(
-  //         color: Colors.yellow[200],
-  //         elevation: 2.0,
-  //         // // child: ListTile(
-  //         // //   leading: Icon(Icons.add_alert),
-  //         // //   title: Text(this.tasklist[position].title),
-  //         // //   subtitle: Text(this.tasklist[position].description +
-  //         // //       " " +
-  //         // //       this.tasklist[position].prioritytext),
-  //         // //   trailing: Icon(Icons.keyboard_arrow_right),
-  //         // //   onTap: () {
-  //         // //      navigateToDetail(this.tasklist[position]);
-  //         // //   },
-  //         // // ),
-  //         //Commented now or revmove the child
-
-  //         child: Padding(
-  //             padding: EdgeInsets.only(top: 8.0, left: 16.0, right: 16.0),
-  //             child: Card(
-  //                 color: Colors.yellow[200],
-  //                 elevation: 8.0,
-  //                 child: CheckboxListTile(
-  //                   controlAffinity: ListTileControlAffinity.leading,
-  //                   title: Row(
-  //                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //                     children: [
-  //                   Flexible(
-  //                           child: Padding(
-  //                               padding: const EdgeInsets.only(right: 2),
-  //                               child: Text(this.tasklist[position].main1,
-  //                                       overflow: TextOverflow.ellipsis))),
-  //                                Flexible(
-  //                           child: Padding(
-  //                               padding: const EdgeInsets.only(right: 2),
-  //                               child: Text(this.tasklist[position].main2,
-  //                                       overflow: TextOverflow.ellipsis))),
-  //                     ],
-
-  //                   ),
-  //                   subtitle: Row(
-  //                     children: [
-  //                      // Text(this.tasklist[position].sec1),
-  //                       Flexible(
-  //                           child: Padding(
-  //                               padding: const EdgeInsets.only(right: 2),
-  //                               child: Text(this.tasklist[position].sec1,
-  //                                       overflow: TextOverflow.ellipsis))),
-
-  //                      // SizedBox(width: 5.0),
-  //                      // Text(this.tasklist[position].sec2),
-  //                       Flexible(
-  //                           child: Padding(
-  //                               padding: const EdgeInsets.only(right: 2),
-  //                               child: Text(this.tasklist[position].sec2,
-  //                                       overflow: TextOverflow.ellipsis))),
-
-  //                    //   SizedBox(width: 5.0),
-  //                      // Text(this.tasklist[position].sec3),
-  //                      Flexible(
-  //                           child: Padding(
-  //                               padding: const EdgeInsets.only(right: 2),
-  //                               child: Text(this.tasklist[position].sec3,
-  //                                       overflow: TextOverflow.ellipsis))),
-
-  //                     ],
-  //                   ),
-  //                   isThreeLine: false,
-  //                   secondary: IconButton(
-  //                     icon: Icon(Icons.more_vert),
-  //                     onPressed: () {
-  //                       navigateToDetail(this.tasklist[position]);
-  //                     },
-  //                   ),
-  //                   dense: true,
-  //                   value: (this.tasklist[position].isDone == 1),
-  //                   onChanged: (value) {
-  //                     setState(() {
-  //                       DateTime now = DateTime.now();
-  //                       String formattedDate =
-  //                           DateFormat('yyyy-mm-dd').format(now);
-  //                       if (value == true) {
-  //                         this.tasklist[position].isDone = 1;
-  //                         this.tasklist[position].dateDone = formattedDate;
-  //                         dbHelper.updateTask(tasklist[position]);
-  //                       } else {
-  //                         this.tasklist[position].isDone = 0;
-  //                         this.tasklist[position].dateDone = '';
-  //                         dbHelper.updateTask(tasklist[position]);
-  //                       }
-  //                     });
-  //                   },
-  //                   activeColor: Colors.brown[900],
-  //                   checkColor: Colors.white,
-  //                   autofocus: true,
-  //                 )),
-  //           )
-  //       );
-  //     },
-  //   );
-  // }
-
+ 
   ListView taskListItems() {
     return ListView.builder(
       itemCount: count,
@@ -614,10 +468,10 @@ class TaskSearchState extends State {
               color: Colors.red,
             ),
             child: Padding(
-              padding: EdgeInsets.only(top: 8.0, left: 4.0, right: 4.0),
+              padding: EdgeInsets.only(top: 1.0, left: 8.0, right: 8.0, bottom: 1.0),
               child: Card(
                   color: Colors.yellow[200],
-                  elevation: 8.0,
+//                  elevation: 8.0,
                   child: CheckboxListTile(
                     controlAffinity: ListTileControlAffinity.leading,
                     title: Row(
@@ -625,43 +479,17 @@ class TaskSearchState extends State {
                       children: [
                         Flexible(
                             child: Padding(
-                                padding: const EdgeInsets.only(right: 2),
+                                padding: const EdgeInsets.only(right: 1),
                                 child: Text(
                                     this.tasklist[position].main1 == null
                                         ? ""
                                         : this.tasklist[position].main1,
                                     overflow: TextOverflow.ellipsis))),
 
-//                                 Flexible(
-//                            child: Padding(
-//                                padding: const EdgeInsets.only(right: 2),
-//                                child: Text(this.tasklist[position].main2 == null ? "" : this.tasklist[position].main2,
-//                                        overflow: TextOverflow.ellipsis))),
+
                       ],
                     ),
-//                    subtitle: Row(
-//                      children: [
-//
-//                        Flexible(
-//                            child: Padding(
-//                                padding: const EdgeInsets.only(right: 2),
-//                                child: Text(this.tasklist[position].sec1 == null ? "" : this.tasklist[position].sec1,
-//                                        overflow: TextOverflow.ellipsis))),
-//
-//                        Flexible(
-//                            child: Padding(
-//                                padding: const EdgeInsets.only(right: 2),
-//                                child: Text(this.tasklist[position].sec2 == null ? "" : this.tasklist[position].sec2,
-//                                        overflow: TextOverflow.ellipsis))),
-//
-//                       Flexible(
-//                            child: Padding(
-//                                padding: const EdgeInsets.only(right: 2),
-//                                child: Text(this.tasklist[position].sec3 == null ? "" : this.tasklist[position].sec3,
-//                                        overflow: TextOverflow.ellipsis))),
-//
-//                      ],
-//                    ),
+
                     isThreeLine: false,
                     secondary: IconButton(
                       icon: Icon(Icons.more_vert),
@@ -701,9 +529,6 @@ class TaskSearchState extends State {
       context,
       MaterialPageRoute(builder: (context) => TaskDetail(task)),
     );
-    // if (result == true) {
-    //   getData();
-    // }
   }
 
   void searchData(String searchText, String category, String action1,

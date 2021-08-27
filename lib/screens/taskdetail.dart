@@ -376,7 +376,7 @@ class TaskDetailState extends State //<TaskDetail>
               margin: EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
               decoration: BoxDecoration(
                 shape: BoxShape.rectangle,
-                color: Colors.blue[200],
+                color: Colors.blue[100],
               ),
               child: TextField(
                 controller: _todoDateController,
@@ -402,7 +402,7 @@ class TaskDetailState extends State //<TaskDetail>
 
               decoration: BoxDecoration(
                 shape: BoxShape.rectangle,
-                color: Colors.blue[200],
+                color: Colors.blue[100],
               ),
               child: TextField(
                 controller: _todoTimeController,
@@ -426,7 +426,7 @@ class TaskDetailState extends State //<TaskDetail>
             Container(
               margin: EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
               decoration: BoxDecoration(
-                  shape: BoxShape.rectangle, color: Colors.pink[100]),
+                  shape: BoxShape.rectangle, color: Colors.blue[100]),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -460,7 +460,7 @@ class TaskDetailState extends State //<TaskDetail>
             Container(
               margin: EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
               decoration: BoxDecoration(
-                  shape: BoxShape.rectangle, color: Colors.pink[100]),
+                  shape: BoxShape.rectangle, color: Colors.blue[100]),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -493,7 +493,7 @@ class TaskDetailState extends State //<TaskDetail>
             Container(
               margin: EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
               decoration: BoxDecoration(
-                  shape: BoxShape.rectangle, color: Colors.pink[100]),
+                  shape: BoxShape.rectangle, color: Colors.blue[100]),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -525,7 +525,7 @@ class TaskDetailState extends State //<TaskDetail>
             Container(
               margin: EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
               decoration: BoxDecoration(
-                  shape: BoxShape.rectangle, color: Colors.pink[100]),
+                  shape: BoxShape.rectangle, color: Colors.blue[100]),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -557,7 +557,7 @@ class TaskDetailState extends State //<TaskDetail>
             Container(
               margin: EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
               decoration: BoxDecoration(
-                  shape: BoxShape.rectangle, color: Colors.pink[100]),
+                  shape: BoxShape.rectangle, color: Colors.blue[100]),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
