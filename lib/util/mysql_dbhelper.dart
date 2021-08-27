@@ -281,56 +281,113 @@ class MySql_DBHelper {
       print(result.length);
 
       for (int i = 0; i < result.length; i++) {
+        print(result[i]);
+        var category = "";
+        var context = "";
+        var tag = "";
+        var isDone = "";
+        var priorityvalue = "";
+        var action = "";
+        var goal = "";
+        var description = "";
+        var location = "";
+        var prioritytext = "";
+        var timeDue = "";
+        var status = "";
+        var lastModified = "";
+        var dateDone = "";
+        var dateDue = "";
+        var title = "";
+        if (result[i]["category"] != null) {
+          category = result[i]["category"].toString();
+        }
+        if (result[i]["tag1"] != null) {
+          tag = result[i]["tag1"].toString();
+        }
+        if (result[i]["context1"] != null) {
+          context = result[i]["context1"].toString();
+        }
+        if (result[i]["isDone"] != null) {
+          isDone = result[i]["isDone"].toString();
+        }
+        if (result[i]["priorityvalue"] != null) {
+          priorityvalue = result[i]["priorityvalue"].toString();
+        }
+        if (result[i]["prioritytext"] != null) {
+          prioritytext = result[i]["prioritytext"];
+        }
+        if (result[i]["timeDue"] != null) {
+          timeDue = result[i]["timeDue"];
+        }
+        if (result[i]["action1"] != null) {
+          action = result[i]["action1"];
+        }
+        if (result[i]["priorityvalue"] != null) {
+          priorityvalue = result[i]["priorityvalue"].toString();
+        }
+        if (result[i]["priorityvalue"] != null) {
+          priorityvalue = result[i]["priorityvalue"].toString();
+        }
+        if (result[i]["priorityvalue"] != null) {
+          priorityvalue = result[i]["priorityvalue"].toString();
+        }
+        if (result[i]["priorityvalue"] != null) {
+          priorityvalue = result[i]["priorityvalue"].toString();
+        }
+        if (result[i]["priorityvalue"] != null) {
+          priorityvalue = result[i]["priorityvalue"].toString();
+        }
+
         String task = '{"taskId":"' +
             result[i]["id"].toString() +
             '",' +
             '"taskTitle":"' +
-            result[i]["title"] +
+            title +
             '",' +
             '"taskDescription":"' +
-            result[i]["description"] +
+            description +
             '",' +
             '"taskCategory":"' +
-            result[i]["category"] +
+            category +
             '",' +
             '"taskAction":"' +
-            result[i]["action1"] +
+            action +
             '",' +
             '"taskContext":"' +
-            result[i]["context1"] +
+            context +
             '",' +
             '"taskLocation":"' +
-            result[i]["location1"] +
+            location +
             '",' +
             '"taskTag":"' +
-            result[i]["tag1"] +
+            tag +
             '",' +
             '"taskGoal":"' +
-            result[i]["goal1"] +
+            goal +
             '",' +
             '"taskDateDue":"' +
-            result[i]["dateDue"] +
+            dateDue +
             '",' +
             '"taskTimeDue":"' +
-            result[i]["timeDue"] +
+            timeDue +
             '",' +
             '"taskIsDone":"' +
-            result[i]["isDone"].toString() +
+            isDone +
             '",' +
             '"taskDateDone":"' +
-            result[i]["dateDone"] +
+            dateDone +
             '",' +
             '"taskProiortyValue":"' +
-            result[i]["priorityvalue"].toString() +
+            priorityvalue +
             '",' +
             '"taskProiortyText":"' +
-            result[i]["prioritytext"] +
+            prioritytext +
             '",' +
             '"taskStatus":"' +
-            result[i]["status"] +
+            status +
             '",' +
             '"taskLastModified":"' +
-            result[i]["lastModified"] +
+            lastModified +
             '"}';
 
         taskList.add(task);
