@@ -273,7 +273,7 @@ class _Action1sScreenState extends State<Action1sScreen> {
         itemCount: _actionList.length,
         itemBuilder: (context, index) {
           return Padding(
-            padding: EdgeInsets.only(top: 8.0, left: 4.0, right: 4.0),
+            padding: EdgeInsets.only(top: 4.0, left: 4.0, right: 4.0),
             child: Card(
               elevation: 8.0,
               color: Colors.blue[100],
