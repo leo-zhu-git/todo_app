@@ -288,23 +288,23 @@ class DbHelper {
 //    queryStr = queryStr + " AND $colPrioritytxt = '$searchPriorityTxt'";
 //  }
 
-    if (searchCategory.trim() != "") {
+    if (searchCategory != null) {
       queryStr =
           queryStr + " AND $colCategory = '$searchCategory' AND $colIsDone = 0";
     }
-    if (searchAction1.trim() != "") {
+    if (searchAction1 != null) {
       queryStr =
           queryStr + " AND $colAction1 = '$searchAction1' AND $colIsDone = 0";
     }
-    if (searchContext1.trim() != "") {
+    if (searchContext1 != null) {
       queryStr =
           queryStr + " AND $colContext1 = '$searchContext1' AND $colIsDone = 0";
     }
-    if (searchLocation1.trim() != "") {
+    if (searchLocation1 != null) {
       queryStr = queryStr +
           " AND $colLocation1 = '$searchLocation1' AND $colIsDone = 0";
     }
-    if (searchTag1.trim() != "") {
+    if (searchTag1 != null) {
       queryStr = queryStr + " AND $colTag1 = '$searchTag1' AND $colIsDone = 0";
     }
 //  if (searchGoal1.trim() != "")

@@ -1,14 +1,21 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:todo_app/model/customDropdownItem.dart';
 import 'package:todo_app/model/taskclass.dart';
 import 'package:todo_app/util/dbhelper.dart';
 import 'package:intl/intl.dart';
+
+import 'tasksearch.dart';
 
 DbHelper dbHelper = DbHelper();
 
 DateTime currentDate = DateTime.now();
 String formattedDate = DateFormat('yyyymmdd').format(currentDate);
+String _searchText = "";
+TextStyle _textStyleControls =
+TextStyle(fontSize: 16.0, fontWeight: FontWeight.w800, color: Colors.black);
+
 
 final List<String> choices = const <String>[
   'Save Task & Back',
@@ -52,12 +59,11 @@ class TaskDetailState extends State //<TaskDetail>
   var _selectedPriorityText;
   int _selectedPriorityValue;
 
-  var _categories = List<DropdownMenuItem>();
-  var _action1s = List<DropdownMenuItem>();
-  var _context1s = List<DropdownMenuItem>();
-  var _location1s = List<DropdownMenuItem>();
-  var _tag1s = List<DropdownMenuItem>();
-  var _goal1s = List<DropdownMenuItem>();
+  List<CustomDropdownItem> _categories = [];
+  List<CustomDropdownItem> _action1s = [];
+  List<CustomDropdownItem> _context1s = [];
+  List<CustomDropdownItem> _location1s = [];
+  List<CustomDropdownItem> _tag1s = [];
   TextEditingController prioritytextController = TextEditingController();
 
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
@@ -73,78 +79,123 @@ class TaskDetailState extends State //<TaskDetail>
     _loadContext1s();
     _loadLocation1s();
     _loadTag1s();
-    _loadGoal1s();
   }
 
 //##################Drop Down Items Load from DB #################################################################
   _loadCategories() async {
-    var categories = await dbHelper.getCategories();
+    var categories = await helper.getCategories();
+    CustomDropdownItem cus;
+    cus = new CustomDropdownItem();
+    cus.id = null;
+    cus.name = "--Select Category--";
+    _categories.add(cus);
     categories.forEach((category) {
       setState(() {
-        _categories.add(DropdownMenuItem(
-          child: Text(category['name']),
-          value: category['name'],
-        ));
+        cus = new CustomDropdownItem();
+        cus.id = category['id'].toString();
+        String tempCat;
+        if (category['name'].toString().length > 30)
+          tempCat = category['name'].toString().substring(0, 30) + "...";
+        else
+          tempCat = category['name'];
+
+        cus.name = tempCat;
+
+        _categories.add(cus);
       });
     });
   }
 
   _loadAction1s() async {
-    var action1s = await dbHelper.getActions();
+    var action1s = await helper.getActions();
+    CustomDropdownItem cus;
+    cus = new CustomDropdownItem();
+    cus.id = null;
+    cus.name = "--Select Action--";
+    _action1s.add(cus);
     action1s.forEach((action1) {
       setState(() {
-        _action1s.add(DropdownMenuItem(
-          child: Text(action1['name']),
-          value: action1['name'],
-        ));
+        cus = new CustomDropdownItem();
+        cus.id = action1['id'].toString();
+        String tempAct;
+        if (action1['name'].toString().length > 30)
+          tempAct = action1['name'].toString().substring(0, 30) + "...";
+        else
+          tempAct = action1['name'];
+
+        cus.name = tempAct;
+        _action1s.add(cus);
       });
     });
   }
 
   _loadContext1s() async {
-    var context1s = await dbHelper.getContexts();
+    var context1s = await helper.getContexts();
+    CustomDropdownItem cus;
+    cus = new CustomDropdownItem();
+    cus.id = null;
+    cus.name = "--Select Context--";
+    _context1s.add(cus);
     context1s.forEach((context1) {
       setState(() {
-        _context1s.add(DropdownMenuItem(
-          child: Text(context1['name']),
-          value: context1['name'],
-        ));
+        cus = new CustomDropdownItem();
+        cus.id = context1['id'].toString();
+        String tempCon;
+        if (context1['name'].toString().length > 30)
+          tempCon = context1['name'].toString().substring(0, 30) + "...";
+        else
+          tempCon = context1['name'];
+
+        cus.name = tempCon;
+
+        _context1s.add(cus);
       });
     });
   }
 
   _loadLocation1s() async {
-    var location1s = await dbHelper.getLocations();
+    var location1s = await helper.getLocations();
+    CustomDropdownItem cus;
+    cus = new CustomDropdownItem();
+    cus.id = null;
+    cus.name = "--Select Location--";
+    _location1s.add(cus);
     location1s.forEach((location1) {
       setState(() {
-        _location1s.add(DropdownMenuItem(
-          child: Text(location1['name']),
-          value: location1['name'],
-        ));
+        cus = new CustomDropdownItem();
+        cus.id = location1['id'].toString();
+        String tempLoc;
+        if (location1['name'].toString().length > 30)
+          tempLoc = location1['name'].toString().substring(0, 30) + "...";
+        else
+          tempLoc = location1['name'];
+
+        cus.name = tempLoc;
+
+        _location1s.add(cus);
       });
     });
   }
 
   _loadTag1s() async {
-    var tag1s = await dbHelper.getTags();
+    var tag1s = await helper.getTags();
+    CustomDropdownItem cus;
+    cus = new CustomDropdownItem();
+    cus.id = null;
+    cus.name = "--Select Tag--";
+    _tag1s.add(cus);
     tag1s.forEach((tag1) {
       setState(() {
-        _tag1s.add(DropdownMenuItem(
-          child: Text(tag1['name']),
-          value: tag1['name'],
-        ));
-      });
-    });
-  }
+        cus = new CustomDropdownItem();
+        cus.id = tag1['id'].toString();
+        String tempTag;
+        if (tag1['name'].toString().length > 30)
+          tempTag = tag1['name'].toString().substring(0, 30) + "...";
+        else
+          tempTag = tag1['name'];
 
-  _loadGoal1s() async {
-    var goal1s = await dbHelper.getGoals();
-    goal1s.forEach((goal1) {
-      setState(() {
-        _goal1s.add(DropdownMenuItem(
-          child: Text(goal1['name']),
-          value: goal1['name'],
-        ));
+        cus.name = tempTag;
+        _tag1s.add(cus);
       });
     });
   }
@@ -271,26 +322,28 @@ class TaskDetailState extends State //<TaskDetail>
         automaticallyImplyLeading: false,
         title: Center(child: Text('Todo Detail')),
       ),
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
+      body: SingleChildScrollView(
+        // this will make your body scrollable
         child: Column(
           children: <Widget>[
 ///////////////////////////
 //  WHAT - TITLE
 ///////////////////////////
             Container(
-              margin: const EdgeInsets.all(2.0),
+              margin: EdgeInsets.only(left: 8.0, right: 8.0, top: 4.0, bottom: 2.0),
+
               decoration: new BoxDecoration(
                 color: Colors.green[100],
               ),
               child: TextField(
+                style: _textStyleControls,
                 controller: _todoTitleController,
                 onChanged: (value) {
                   task.title = value;
                 },
                 decoration: InputDecoration(
-                  labelText: 'Title',
-                  hintText: 'Write Todo title',
+                  labelText: ' Title',
+                  hintText: ' Write Todo title',
                 ),
               ),
             ),
@@ -298,20 +351,21 @@ class TaskDetailState extends State //<TaskDetail>
 //  WHAT - DESCRIPTION
 ///////////////////////////
             Container(
-              margin: const EdgeInsets.all(2.0),
+              margin: EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
               decoration: new BoxDecoration(
                 color: Colors.green[100],
               ),
               child: TextField(
+                style: _textStyleControls,
                 controller: _todoDescriptionController,
                 onChanged: (value) {
                   task.description = value;
                 },
-                minLines: 2,
-                maxLines: 3,
+                minLines: 1,
+                maxLines: 25,
                 decoration: InputDecoration(
-                  labelText: 'Description',
-                  hintText: 'Write Todo Description',
+                  labelText: ' Description',
+                  hintText: ' Write Todo Description',
                 ),
               ),
             ),
@@ -319,16 +373,17 @@ class TaskDetailState extends State //<TaskDetail>
 //  WHEN - DATE DUE
 ///////////////////////////
             Container(
-              margin: const EdgeInsets.all(2.0),
+              margin: EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
               decoration: BoxDecoration(
                 shape: BoxShape.rectangle,
-                color: Colors.blue[200],
+                color: Colors.blue[100],
               ),
               child: TextField(
                 controller: _todoDateController,
+                style: _textStyleControls,
                 decoration: InputDecoration(
-                  labelText: 'Due Date',
-                  hintText: 'Pick a Date',
+                  labelText: ' Due Date',
+                  hintText: ' Pick a Date',
                   prefixIcon: InkWell(
                     onTap: () {
                       _selectedTodoDate(context);
@@ -343,16 +398,18 @@ class TaskDetailState extends State //<TaskDetail>
 //  WHEN - TIME DUE
 ///////////////////////////
             Container(
-              margin: const EdgeInsets.all(2.0),
+              margin: EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+
               decoration: BoxDecoration(
                 shape: BoxShape.rectangle,
-                color: Colors.blue[200],
+                color: Colors.blue[100],
               ),
               child: TextField(
                 controller: _todoTimeController,
+                style: _textStyleControls,
                 decoration: InputDecoration(
-                  labelText: 'Due Time',
-                  hintText: 'Pick a Time',
+                  labelText: ' Due Time',
+                  hintText: ' Pick a Time',
                   prefixIcon: InkWell(
                     onTap: () {
                       _openTimePicker(context);
@@ -362,146 +419,175 @@ class TaskDetailState extends State //<TaskDetail>
                 ),
               ),
             ),
-
 ///////////////////////////
 //  CATEGORY
 ///////////////////////////
+
             Container(
-              margin: const EdgeInsets.all(2.0),
+              margin: EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
               decoration: BoxDecoration(
-                  shape: BoxShape.rectangle, color: Colors.pink[100]),
-              child: DropdownButtonFormField(
-                items: _categories,
-                hint: Text('Category'),
-                value: _selectedCategory,
-                onChanged: (value) {
-                  setState(() {
-                    task.category = value;
-                    _selectedCategory = value;
-                  });
-                },
+                  shape: BoxShape.rectangle, color: Colors.blue[100]),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(" Catogory: ", style: _textStyleControls),
+                  Spacer(),
+                  DropdownButton<String>(
+                      items: _categories.map((CustomDropdownItem value) {
+                        return DropdownMenuItem<String>(
+                            value: value.id,
+                            child: Text(
+                              value.name,
+                              overflow: TextOverflow.ellipsis,
+                            ));
+                      }).toList(),
+                      style: _textStyleControls,
+                      value: _selectedCategory,
+                      onChanged: (String newValue) {
+                        setState(() {
+                          _selectedCategory = newValue;
+                          task.category = newValue;
+                        });
+                      }),
+                ],
               ),
             ),
-///////////////////////////
-//  PRIORITY
-///////////////////////////
-//            Container(
-//              margin: const EdgeInsets.all(2.0),
-//              decoration: BoxDecoration(
-//                  shape: BoxShape.rectangle, color: Colors.pink[100]),
-//              child: DropdownButtonFormField(
-//              //  value: _selectedPriorityValue,
-//               items: _priorities.map((String value){
-//
-//                 return DropdownMenuItem<String> (
-//                 value:value,
-//                 child: Text (value)
-//               );
-//              }).toList(),
-//                hint: Text('Priority'),
-//                 value: retrievePriority(_selectedPriorityValue),
-//                 onChanged: (value)=> updatePriority(value),
-//              ),
-//            ),
+
 ///////////////////////////
 //  ACTION
 ///////////////////////////
+
             Container(
-              margin: const EdgeInsets.all(2.0),
+              margin: EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
               decoration: BoxDecoration(
-                  shape: BoxShape.rectangle, color: Colors.pink[100]),
-              child: DropdownButtonFormField(
-                value: _selectedAction1,
-                items: _action1s,
-                hint: Text('Action'),
-                onChanged: (value) {
-                  setState(() {
-                    _selectedAction1 = value;
-                    task.action1 = value;
-                  });
-                },
+                  shape: BoxShape.rectangle, color: Colors.blue[100]),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(" Action: ", style: _textStyleControls),
+                  Spacer(),
+                  DropdownButton<String>(
+                      items: _action1s.map((CustomDropdownItem value) {
+                        return DropdownMenuItem<String>(
+                            value: value.id,
+                            child: Text(
+                              value.name,
+                              overflow: TextOverflow.ellipsis,
+                            ));
+                      }).toList(),
+                      style: _textStyleControls,
+                      value: _selectedAction1,
+                      onChanged: (String newValue) {
+                        setState(() {
+                          _selectedAction1 = newValue;
+                          task.action1 = newValue;
+                        });
+                      }),
+                ],
               ),
             ),
+
 ///////////////////////////
 //  CONTEXT
 ///////////////////////////
             Container(
-              margin: const EdgeInsets.all(2.0),
+              margin: EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
               decoration: BoxDecoration(
-                  shape: BoxShape.rectangle, color: Colors.pink[100]),
-              child: DropdownButtonFormField(
-                value: _selectedContext1,
-                items: _context1s,
-                hint: Text('Context'),
-                onChanged: (value) {
-                  setState(() {
-                    _selectedContext1 = value;
-                    task.context1 = value;
-                  });
-                },
+                  shape: BoxShape.rectangle, color: Colors.blue[100]),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(" Context: ", style: _textStyleControls),
+                  Spacer(),
+                  DropdownButton<String>(
+                      items: _context1s.map((CustomDropdownItem value) {
+                        return DropdownMenuItem<String>(
+                            value: value.id,
+                            child: Text(
+                              value.name,
+                              overflow: TextOverflow.ellipsis,
+                            ));
+                      }).toList(),
+                      style: _textStyleControls,
+                      value: _selectedContext1,
+                      onChanged: (String newValue) {
+                        setState(() {
+                          _selectedContext1 = newValue;
+                          task.context1 = newValue;
+                        });
+                      }),
+                ],
               ),
             ),
 ///////////////////////////
 //  LOCATION
 ///////////////////////////
             Container(
-              margin: const EdgeInsets.all(2.0),
+              margin: EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
               decoration: BoxDecoration(
-                  shape: BoxShape.rectangle, color: Colors.pink[100]),
-              child: DropdownButtonFormField(
-                value: _selectedLocation1,
-                items: _location1s,
-                hint: Text('Location'),
-                onChanged: (value) {
-                  setState(() {
-                    _selectedLocation1 = value;
-                    task.location1 = value;
-                  });
-                },
+                  shape: BoxShape.rectangle, color: Colors.blue[100]),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(" Location: ", style: _textStyleControls),
+                  Spacer(),
+                  DropdownButton<String>(
+                      items: _location1s.map((CustomDropdownItem value) {
+                        return DropdownMenuItem<String>(
+                            value: value.id,
+                            child: Text(
+                              value.name,
+                              overflow: TextOverflow.ellipsis,
+                            ));
+                      }).toList(),
+                      style: _textStyleControls,
+                      value: _selectedLocation1,
+                      onChanged: (String newValue) {
+                        setState(() {
+                          _selectedLocation1 = newValue;
+                          task.location1 = newValue;
+                        });
+                      }),
+                ],
               ),
             ),
 ///////////////////////////
 //  TAG
 ///////////////////////////
             Container(
-              margin: const EdgeInsets.all(2.0),
+              margin: EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
               decoration: BoxDecoration(
-                  shape: BoxShape.rectangle, color: Colors.pink[100]),
-              child: DropdownButtonFormField(
-                value: _selectedTag1,
-                items: _tag1s,
-                hint: Text('Tag'),
-                onChanged: (value) {
-                  setState(() {
-                    _selectedTag1 = value;
-                    task.tag1 = value;
-                  });
-                },
+                  shape: BoxShape.rectangle, color: Colors.blue[100]),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(" Tag: ", style: _textStyleControls),
+                  Spacer(),
+                  DropdownButton<String>(
+                      items: _tag1s.map((CustomDropdownItem value) {
+                        return DropdownMenuItem<String>(
+                            value: value.id,
+                            child: Text(
+                              value.name,
+                              overflow: TextOverflow.ellipsis,
+                            ));
+                      }).toList(),
+                      style: _textStyleControls,
+                      value: _selectedTag1,
+                      onChanged: (String newValue) {
+                        setState(() {
+                          _selectedTag1 = newValue;
+                          task.tag1 = newValue;
+                        });
+                      }),
+                ],
               ),
             ),
-///////////////////////////
-//  GOAL
-///////////////////////////
-//            Container(
-//              margin: const EdgeInsets.all(2.0),
-//              decoration: BoxDecoration(
-//                  shape: BoxShape.rectangle, color: Colors.pink[100]),
-//              child: DropdownButtonFormField(
-//                value: _selectedGoal1,
-//               items: _goal1s,
-//                hint: Text('Goal'),
-//                onChanged: (value) {
-//                  setState(() {
-//                    _selectedGoal1 = value;
-//                    task.goal1 = value;
-//                  });
-//                },
-//              ),
-//            ),
 
-            SizedBox(
-              height: 20,
-            ),
+
+            //KK     // SizedBox(
+            //   height: 20,
+            // ),
 
             /// form - save or cancel
             Row(
@@ -516,17 +602,11 @@ class TaskDetailState extends State //<TaskDetail>
                       'Cancel',
                       style: TextStyle(color: Colors.brown[900]),
                     )),
-                SizedBox(width: 10),
+                //KK SizedBox(width: 10),
                 RaisedButton(
                     onPressed: () async {
                       task.title = _todoTitleController.text;
                       task.description = _todoDescriptionController.text;
-//                      task.prioritytext = _selectedPriorityText == null
-//                          ? ""
-//                          : _selectedPriorityText;
-//                      task.priorityvalue = _selectedPriorityValue == null
-//                          ? ""
-//                          : _selectedPriorityValue;
                       task.category = _selectedCategory == null
                           ? ""
                           : _selectedCategory.toString();
@@ -538,9 +618,6 @@ class TaskDetailState extends State //<TaskDetail>
                           : _selectedContext1.toString();
                       task.tag1 =
                           _selectedTag1 == null ? "" : _selectedTag1.toString();
-//                      task.goal1 = _selectedGoal1 == null
-//                          ? ""
-//                          : _selectedGoal1.toString();
                       task.dateDue = _todoDateController.text;
                       task.timeDue = _todoTimeController.text;
                       task.isDone = 0;
@@ -572,7 +649,7 @@ class TaskDetailState extends State //<TaskDetail>
                       _showSuccessSnackBar(
                         Container(
                           color: Colors.tealAccent[100],
-                          height: 40,
+                          //KK height: 40,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -604,81 +681,3 @@ class TaskDetailState extends State //<TaskDetail>
     );
   }
 }
-
-// Future<void> _selectWhen(BuildContext context) async {
-//   final DateTime pickedDate = await showDatePicker(
-//     context: context,
-//     initialDate: currentDate,
-//     firstDate: DateTime(2020),
-//     lastDate: DateTime(2050),
-//     builder: (BuildContext context, Widget child) {
-//       return Theme(
-//         data: ThemeData.light().copyWith(
-//           colorScheme: ColorScheme.fromSwatch(
-//             primarySwatch: Colors.teal,
-//             primaryColorDark: Colors.teal,
-//             accentColor: Colors.teal,
-//           ),
-//           dialogBackgroundColor: Colors.white,
-//         ),
-//         child: child,
-//       );
-//     },
-//   );
-//   if (pickedDate != null && pickedDate != currentDate)
-//     setState(() {
-//       currentDate = pickedDate;
-//       formattedDate = DateFormat('yyyymmdd').format(currentDate);
-//     });
-// }
-
-//  String retrievePriority(int value) {
-//    if (value == null)
-//    {
-//      return null;
-//    }else
-//    {
-//    return _priorities[value];
-//    }
-//  }
-
-//  void updatePriority(String value) {
-//    switch (value) {
-//      case "Top":
-//        task.priorityvalue = 3;
-//        task.prioritytext = "Top";
-//        _selectedPriorityValue = 3;
-//        _selectedPriorityText = "Top";
-//        break;
-//      case "High":
-//        task.priorityvalue = 2;
-//        task.prioritytext = "High";
-//         _selectedPriorityValue = 2;
-//        _selectedPriorityText = "High";
-//        break;
-//      case "Medium":
-//        task.priorityvalue = 1;
-//        task.prioritytext = "Medium";
-//         _selectedPriorityValue = 1;
-//       _selectedPriorityText = "Medium";
-//        break;
-//      case "Low":
-//        task.priorityvalue = 0;
-//        task.prioritytext = "Low";
-//         _selectedPriorityValue = 0;
-//        _selectedPriorityText = "Low";
-//        break;
-
-//      default:
-//        task.priorityvalue = null;
-//        task.prioritytext = null;
-//         _selectedPriorityValue = null;
-//        _selectedPriorityText = null;
-//    }
-//    setState(() {
-//        task.prioritytext = value;
-//        task.priorityvalue = _selectedPriorityValue;
-//    });
-//  }
-
-//}

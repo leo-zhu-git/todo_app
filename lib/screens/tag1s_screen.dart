@@ -100,7 +100,7 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
                   },
                   child: Text('Save')),
             ],
-            backgroundColor: Colors.pink[100],
+            backgroundColor: Colors.blue[100],
             title: Text('Tags Form'),
             content: SingleChildScrollView(
               child: Column(
@@ -132,7 +132,7 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
         barrierDismissible: true,
         builder: (param) {
           return AlertDialog(
-            backgroundColor: Colors.pink[100],
+            backgroundColor: Colors.blue[100],
             actions: <Widget>[
               FlatButton(
                   onPressed: () => Navigator.pop(context),
@@ -207,7 +207,7 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
         barrierDismissible: true,
         builder: (param) {
           return AlertDialog(
-            backgroundColor: Colors.pink[100],
+            backgroundColor: Colors.blue[100],
             actions: <Widget>[
               FlatButton(
                   color: Colors.brown[500],
@@ -270,10 +270,10 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
         itemCount: _tag1List.length,
         itemBuilder: (context, index) {
           return Padding(
-            padding: EdgeInsets.only(top: 8.0, left: 4.0, right: 4.0),
+            padding: EdgeInsets.only(top: 4.0, left: 4.0, right: 4.0),
             child: Card(
               elevation: 8.0,
-              color: Colors.pink[100],
+              color: Colors.blue[100],
               child: ListTile(
                 leading: IconButton(
                   icon: Icon(Icons.edit),
