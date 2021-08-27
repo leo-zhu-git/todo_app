@@ -274,24 +274,71 @@ class MySql_DBHelper {
   void wipeTaskDataToMySql() {
     this.deleteAllTaskFromMySQL();
     final dbTaskFuture = helper.getAllTasks();
+
+    var taskList = [];
+    var tasks = {};
     dbTaskFuture.then((result) {
+      print(result.length);
+
       for (int i = 0; i < result.length; i++) {
-        print(result[i]);
-        print(result[i]["id"]);
-        print("title::::" + result[i]["title"]);
-        print(result[i]["description"]);
-        print(result[i]["category"]);
-        print(result[i]["action1"]);
-        print(result[i]["context1"]);
-        print(result[i]["tag1"]);
-        print(result[i]["goal1"]);
-        print(result[i]["priorityvalue"]);
-        print(result[i]["prioritytext"]);
-        print(result[i]["dateDue"]);
-        print(result[i]["isDone"]);
-        print(result[i]["dateDone"]);
-        request('wipeTasksfromDevice', formData: result[i]);
+        String task = '{"taskId":"' +
+            result[i]["id"].toString() +
+            '",' +
+            '"taskTitle":"' +
+            result[i]["title"] +
+            '",' +
+            '"taskDescription":"' +
+            result[i]["description"] +
+            '",' +
+            '"taskCategory":"' +
+            result[i]["category"] +
+            '",' +
+            '"taskAction":"' +
+            result[i]["action1"] +
+            '",' +
+            '"taskContext":"' +
+            result[i]["context1"] +
+            '",' +
+            '"taskLocation":"' +
+            result[i]["location1"] +
+            '",' +
+            '"taskTag":"' +
+            result[i]["tag1"] +
+            '",' +
+            '"taskGoal":"' +
+            result[i]["goal1"] +
+            '",' +
+            '"taskDateDue":"' +
+            result[i]["dateDue"] +
+            '",' +
+            '"taskTimeDue":"' +
+            result[i]["timeDue"] +
+            '",' +
+            '"taskIsDone":"' +
+            result[i]["isDone"].toString() +
+            '",' +
+            '"taskDateDone":"' +
+            result[i]["dateDone"] +
+            '",' +
+            '"taskProiortyValue":"' +
+            result[i]["priorityvalue"].toString() +
+            '",' +
+            '"taskProiortyText":"' +
+            result[i]["prioritytext"] +
+            '",' +
+            '"taskStatus":"' +
+            result[i]["status"] +
+            '",' +
+            '"taskLastModified":"' +
+            result[i]["lastModified"] +
+            '"}';
+
+        taskList.add(task);
       }
+
+      tasks = {"tasks": taskList};
+      print(tasks);
+      request('wipeTasksfromDevice', formData: tasks);
     });
   }
 
