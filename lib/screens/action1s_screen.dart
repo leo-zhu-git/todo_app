@@ -103,7 +103,7 @@ class _Action1sScreenState extends State<Action1sScreen> {
                   },
                   child: Text('Save')),
             ],
-            backgroundColor: Colors.pink[100],
+            backgroundColor: Colors.blue[100],
             title: Text('Actions Form'),
             content: SingleChildScrollView(
               child: Column(
@@ -135,7 +135,7 @@ class _Action1sScreenState extends State<Action1sScreen> {
         barrierDismissible: true,
         builder: (param) {
           return AlertDialog(
-            backgroundColor: Colors.pink[100],
+            backgroundColor: Colors.blue[100],
             actions: <Widget>[
               FlatButton(
                   onPressed: () => Navigator.pop(context),
@@ -210,7 +210,7 @@ class _Action1sScreenState extends State<Action1sScreen> {
         barrierDismissible: true,
         builder: (param) {
           return AlertDialog(
-            backgroundColor: Colors.pink[100],
+            backgroundColor: Colors.blue[100],
             actions: <Widget>[
               FlatButton(
                   color: Colors.brown[500],
@@ -276,7 +276,7 @@ class _Action1sScreenState extends State<Action1sScreen> {
             padding: EdgeInsets.only(top: 8.0, left: 4.0, right: 4.0),
             child: Card(
               elevation: 8.0,
-              color: Colors.pink[100],
+              color: Colors.blue[100],
               child: ListTile(
                 leading: IconButton(
                   icon: Icon(Icons.edit),
@@ -301,7 +301,6 @@ class _Action1sScreenState extends State<Action1sScreen> {
                   ),
                   ],                  
                 ),
-//                subtitle: Text(_actionList[index].description),
               ),
             ),
           );
