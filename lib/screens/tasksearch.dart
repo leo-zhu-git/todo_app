@@ -34,6 +34,7 @@ class TaskSearchState extends State {
   var _selectedContext1 = null;
   var _selectedLocation1 = null;
   var _selectedTag1 = null;
+
 //  var _selectedGoal1 = "";
 
   @override
@@ -53,7 +54,7 @@ class TaskSearchState extends State {
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
-    cus.name = "--Select Category--";
+    cus.name = "-- Select Category --";
     _categories.add(cus);
     categories.forEach((category) {
       setState(() {
@@ -77,13 +78,21 @@ class TaskSearchState extends State {
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
-    cus.name = "--Select Action--";
+    cus.name = "--Select Action--             ";
     _action1s.add(cus);
     action1s.forEach((action1) {
       setState(() {
         cus = new CustomDropdownItem();
         cus.id = action1['id'].toString();
-        cus.name = action1['name'];
+        String tempAct;
+        if (action1['name'].toString().length > 30)
+          tempAct = action1['name'].toString().substring(0, 30) + "...";
+        else
+          tempAct = action1['name'];
+
+        cus.name = tempAct;
+
+
         _action1s.add(cus);
       });
     });
@@ -94,13 +103,18 @@ class TaskSearchState extends State {
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
-    cus.name = "--Select Context--";
+    cus.name = "--Select Context--            ";
     _context1s.add(cus);
     context1s.forEach((context1) {
       setState(() {
         cus = new CustomDropdownItem();
         cus.id = context1['id'].toString();
-        cus.name = context1['name'];
+        String tempCon;
+        if (context1['name'].toString().length > 30)
+          tempCon = context1['name'].toString().substring(0, 30) + "...";
+        else
+          tempCon = context1['name'];
+         cus.name = tempCon;
         _context1s.add(cus);
       });
     });
@@ -111,13 +125,20 @@ class TaskSearchState extends State {
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
-    cus.name = "--Select Location--";
+    cus.name = "--Select Location--           ";
     _location1s.add(cus);
     location1s.forEach((location1) {
       setState(() {
         cus = new CustomDropdownItem();
         cus.id = location1['id'].toString();
-        cus.name = location1['name'];
+        String tempLoc;
+        if (location1['name'].toString().length > 30)
+          tempLoc = location1['name'].toString().substring(0, 30) + "...";
+        else
+          tempLoc = location1['name'];
+
+        cus.name = tempLoc;
+
         _location1s.add(cus);
       });
     });
@@ -128,26 +149,23 @@ class TaskSearchState extends State {
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
-    cus.name = "--Select Tag--";
+    cus.name = "--Select Tag--                ";
     _tag1s.add(cus);
     tag1s.forEach((tag1) {
       setState(() {
         cus = new CustomDropdownItem();
         cus.id = tag1['id'].toString();
-        cus.name = tag1['name'];
+        String tempTag;
+        if (tag1['name'].toString().length > 30)
+          tempTag = tag1['name'].toString().substring(0, 30) + "...";
+        else
+          tempTag = tag1['name'];
+
+        cus.name = tempTag;
         _tag1s.add(cus);
       });
     });
   }
-
-//  _loadGoal1s() async {
-//    var goal1s = await helper.getGoals();
-//    goal1s.forEach((goal1) {
-//      setState(() {
-//        _goal1s.add(goal1['name']);
-//      });
-//    });
-//  }
 
 //##########################################end of Dropdown #################################################################
 
@@ -165,27 +183,33 @@ class TaskSearchState extends State {
       body: Column(
         children: [
           Padding(
-            padding: EdgeInsets.all(5.0),
+            padding: EdgeInsets.all(10.0),
             child: TextField(
               controller: searchController,
               style: textStyle,
               onChanged: (value) {
-//                          searchData(value, _selectedpriority, _selectedCategory, _selectedAction1, _selectedContext1, _selectedLocation1, _selectedTag1, _selectedGoal1);
                 searchData(value, _selectedCategory, _selectedAction1,
                     _selectedContext1, _selectedLocation1, _selectedTag1);
               },
               decoration: InputDecoration(
                   labelStyle: textStyle,
+                  fillColor: Colors.green[100],
+                  border: InputBorder.none, 
+                  filled: true, // dont forget this line
                   labelText: "Enter a search term",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5.0),
-                  )),
+//                  border: OutlineInputBorder(
+//                    borderRadius: BorderRadius.circular(5.0),
+//                  )
+                  ),
             ),
           ),
           Padding(
               padding: EdgeInsets.all(0.0),
               child: ExpansionTile(
-                title: Text("Advanced Filters"),
+                title: Text(
+                  "Advanced Filters",
+                  style: _textStyleControls,
+                ),
 
                 trailing: Icon(Icons.filter_list_outlined),
 
@@ -216,26 +240,68 @@ class TaskSearchState extends State {
 //
 //           ],),
 //#################################Category#####################################################
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text("  Catogory: ", style: _textStyleControls),
-                          Spacer(),
-                          DropdownButton<String>(
-                              items:
-                                  _categories.map((CustomDropdownItem value) {
+                      Container(
+                        margin: EdgeInsets.only(left: 8.0, right: 8.0, bottom: 2.0),
+                        decoration: BoxDecoration(
+                            shape: BoxShape.rectangle, color: Colors.pink[100]),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+
+                          children: [
+                            Text("  Catogory: ", style: _textStyleControls),
+                            Spacer(),
+                            DropdownButton<String>(
+                                items:
+                                    _categories.map((CustomDropdownItem value) {
+                                  return DropdownMenuItem<String>(
+                                      value: value.id,
+                                      child: Text(
+                                        value.name,
+                                        overflow: TextOverflow.ellipsis,
+                                      ));
+                                }).toList(),
+                                style: _textStyleControls,
+                                value: _selectedCategory,
+                                onChanged: (String newValue) {
+                                  setState(() {
+                                    _selectedCategory = newValue;
+                                    searchData(
+                                        _searchText,
+                                        _selectedCategory,
+                                        _selectedAction1,
+                                        _selectedContext1,
+                                        _selectedLocation1,
+                                        _selectedTag1);
+                                  });
+                                }),
+                          ],
+                        ),
+                      ),
+
+//########################################### Action  ######### #################################3
+                      Container(
+                        margin: EdgeInsets.only(top: 2.0, left: 8.0, right: 8.0, bottom: 2.0),
+                        decoration: BoxDecoration(
+                            shape: BoxShape.rectangle, color: Colors.pink[100]),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              "  Action: ",
+                              style: _textStyleControls,
+                            ),
+                            Spacer(),
+                            DropdownButton<String>(
+                              items: _action1s.map((CustomDropdownItem value) {
                                 return DropdownMenuItem<String>(
-                                    value: value.id,
-                                    child: Text(
-                                      value.name,
-                                      overflow: TextOverflow.ellipsis,
-                                    ));
+                                    value: value.id, child: Text(value.name));
                               }).toList(),
                               style: _textStyleControls,
-                              value: _selectedCategory,
-                              onChanged: (String newValue) {
+                              value: _selectedAction1,
+                              onChanged: (value) {
                                 setState(() {
-                                  _selectedCategory = newValue;
+                                  _selectedAction1 = value;
+//                    searchData(_searchText, _selectedpriority, _selectedCategory, _selectedAction1, _selectedContext1, _selectedLocation1, _selectedTag1, _selectedGoal1);
                                   searchData(
                                       _searchText,
                                       _selectedCategory,
@@ -244,134 +310,119 @@ class TaskSearchState extends State {
                                       _selectedLocation1,
                                       _selectedTag1);
                                 });
-                              }),
-                        ],
-                      ),
-
-//########################################### Action  ######### #################################3
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            "  Action: ",
-                            style: _textStyleControls,
-                          ),
-                          Spacer(),
-                          DropdownButton<String>(
-                            items: _action1s.map((CustomDropdownItem value) {
-                              return DropdownMenuItem<String>(
-                                  value: value.id, child: Text(value.name));
-                            }).toList(),
-                            style: _textStyleControls,
-                            value: _selectedAction1,
-                            onChanged: (value) {
-                              setState(() {
-                                _selectedAction1 = value;
-//                    searchData(_searchText, _selectedpriority, _selectedCategory, _selectedAction1, _selectedContext1, _selectedLocation1, _selectedTag1, _selectedGoal1);
-                                searchData(
-                                    _searchText,
-                                    _selectedCategory,
-                                    _selectedAction1,
-                                    _selectedContext1,
-                                    _selectedLocation1,
-                                    _selectedTag1);
-                              });
-                            },
-                          )
-                        ],
+                              },
+                            )
+                          ],
+                        ),
                       ),
 //######### Context  #########
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            "  Context: ",
-                            style: _textStyleControls,
-                          ),
-                          Spacer(),
-                          DropdownButton<String>(
-                            items: _context1s.map((CustomDropdownItem value) {
-                              return DropdownMenuItem<String>(
-                                  value: value.id, child: Text(value.name));
-                            }).toList(),
-                            style: _textStyleControls,
-                            value: _selectedContext1,
-                            onChanged: (value) {
-                              setState(() {
-                                _selectedContext1 = value;
-                                searchData(
-                                    _searchText,
-                                    _selectedCategory,
-                                    _selectedAction1,
-                                    _selectedContext1,
-                                    _selectedLocation1,
-                                    _selectedTag1);
-                              });
-                            },
-                          )
-                        ],
+                      Container(
+                        margin: EdgeInsets.only(top: 2.0, left: 8.0, right: 8.0, bottom: 2.0),
+                        decoration: BoxDecoration(
+                            shape: BoxShape.rectangle, color: Colors.pink[100]),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              "  Context: ",
+                              style: _textStyleControls,
+                            ),
+                            Spacer(),
+                            DropdownButton<String>(
+                              items: _context1s.map((CustomDropdownItem value) {
+                                return DropdownMenuItem<String>(
+                                    value: value.id, child: Text(value.name));
+                              }).toList(),
+                              style: _textStyleControls,
+                              value: _selectedContext1,
+                              onChanged: (value) {
+                                setState(() {
+                                  _selectedContext1 = value;
+                                  searchData(
+                                      _searchText,
+                                      _selectedCategory,
+                                      _selectedAction1,
+                                      _selectedContext1,
+                                      _selectedLocation1,
+                                      _selectedTag1);
+                                });
+                              },
+                            )
+                          ],
+                        ),
                       ),
 // //######### Location  #########
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            "  Location: ",
-                            style: _textStyleControls,
-                          ),
-                          Spacer(),
-                          DropdownButton<String>(
-                            items: _location1s.map((CustomDropdownItem value) {
-                              return DropdownMenuItem<String>(
-                                  value: value.id, child: Text(value.name));
-                            }).toList(),
-                            style: _textStyleControls,
-                            value: _selectedLocation1,
-                            onChanged: (value) {
-                              setState(() {
-                                _selectedLocation1 = value;
-                                searchData(
-                                    _searchText,
-                                    _selectedCategory,
-                                    _selectedAction1,
-                                    _selectedContext1,
-                                    _selectedLocation1,
-                                    _selectedTag1);
-                              });
-                            },
-                          )
-                        ],
+                      Container(
+                        margin: EdgeInsets.only(top: 2.0, left: 8.0, right: 8.0, bottom: 2.0),
+                        decoration: BoxDecoration(
+                            shape: BoxShape.rectangle, color: Colors.pink[100]),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              "  Location: ",
+                              style: _textStyleControls,
+                            ),
+                            Spacer(),
+                            DropdownButton<String>(
+                              items:
+                                  _location1s.map((CustomDropdownItem value) {
+                                return DropdownMenuItem<String>(
+                                    value: value.id, child: Text(value.name));
+                              }).toList(),
+                              style: _textStyleControls,
+                              value: _selectedLocation1,
+                              onChanged: (value) {
+                                setState(() {
+                                  _selectedLocation1 = value;
+                                  searchData(
+                                      _searchText,
+                                      _selectedCategory,
+                                      _selectedAction1,
+                                      _selectedContext1,
+                                      _selectedLocation1,
+                                      _selectedTag1);
+                                });
+                              },
+                            )
+                          ],
+                        ),
                       ),
 // //######### Tag  #########
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            "  Tag: ",
-                            style: _textStyleControls,
-                          ),
-                          Spacer(),
-                          DropdownButton<String>(
-                            items: _tag1s.map((CustomDropdownItem value) {
-                              return DropdownMenuItem<String>(
-                                  value: value.id, child: Text(value.name));
-                            }).toList(),
-                            style: _textStyleControls,
-                            value: _selectedTag1,
-                            onChanged: (value) {
-                              setState(() {
-                                _selectedTag1 = value;
-                                searchData(
-                                    _searchText,
-                                    _selectedCategory,
-                                    _selectedAction1,
-                                    _selectedContext1,
-                                    _selectedLocation1,
-                                    _selectedTag1);
-                              });
-                            },
-                          )
-                        ],
+                      Container(
+                        margin: EdgeInsets.only(top: 2.0, left: 8.0, right: 8.0),
+                        decoration: BoxDecoration(
+                            shape: BoxShape.rectangle, color: Colors.pink[100]),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              "  Tag: ",
+                              style: _textStyleControls,
+                            ),
+                            Spacer(),
+                            DropdownButton<String>(
+                              items: _tag1s.map((CustomDropdownItem value) {
+                                return DropdownMenuItem<String>(
+                                    value: value.id, child: Text(value.name));
+                              }).toList(),
+                              style: _textStyleControls,
+                              value: _selectedTag1,
+                              onChanged: (value) {
+                                setState(() {
+                                  _selectedTag1 = value;
+                                  searchData(
+                                      _searchText,
+                                      _selectedCategory,
+                                      _selectedAction1,
+                                      _selectedContext1,
+                                      _selectedLocation1,
+                                      _selectedTag1);
+                                });
+                              },
+                            )
+                          ],
+                        ),
                       ),
 // //######### Goal  #########
 //    Row(
@@ -399,10 +450,11 @@ class TaskSearchState extends State {
                 ],
               )),
           Padding(
-              padding: EdgeInsets.all(10.0),
+              padding: EdgeInsets.all(8.0),
               child: Align(
                   alignment: Alignment.topLeft,
-                  child: Text(count.toString() + " Results found.."))),
+                  child: Text(count.toString() + " Results found..",
+                      style: _textStyleControls))),
           Expanded(
             child: Container(child: taskListItems()),
           ),
