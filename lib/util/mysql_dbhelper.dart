@@ -322,21 +322,30 @@ class MySql_DBHelper {
         if (result[i]["action1"] != null) {
           action = result[i]["action1"];
         }
-        if (result[i]["priorityvalue"] != null) {
-          priorityvalue = result[i]["priorityvalue"].toString();
+        if (result[i]["dateDue"] != null) {
+          dateDue = result[i]["dateDue"].toString();
         }
-        if (result[i]["priorityvalue"] != null) {
-          priorityvalue = result[i]["priorityvalue"].toString();
+        // if (result[i]["title"] != null) {
+        //   title = result[i]["title"].toString();
+        // }
+        if (result[i]["dateDone"] != null) {
+          dateDone = result[i]["dateDone"].toString();
         }
-        if (result[i]["priorityvalue"] != null) {
-          priorityvalue = result[i]["priorityvalue"].toString();
+        if (result[i]["status"] != null) {
+          status = result[i]["status"].toString();
         }
-        if (result[i]["priorityvalue"] != null) {
-          priorityvalue = result[i]["priorityvalue"].toString();
+        if (result[i]["timeDue"] != null) {
+          timeDue = result[i]["timeDue"].toString();
         }
-        if (result[i]["priorityvalue"] != null) {
-          priorityvalue = result[i]["priorityvalue"].toString();
+        if (result[i]["goal1"] != null) {
+          goal = result[i]["goal1"].toString();
         }
+        if (result[i]["location1"] != null) {
+          timeDue = result[i]["location1"].toString();
+        }
+        // if (result[i]["description"] != null) {
+        //   description = result[i]["description"].toString();
+        // }
 
         String task = '{"taskId":"' +
             result[i]["id"].toString() +

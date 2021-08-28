@@ -146,7 +146,7 @@ class DbHelper {
     Database db = await this.db;
     var result = await db
 //        .rawQuery("SELECT * FROM  where $colLastModified order by $colDateDue ASC");
-        .rawQuery("SELECT * FROM todo ");
+        .rawQuery("SELECT * FROM todo where $colId < 6");
     return result;
   }
 
