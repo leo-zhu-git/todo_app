@@ -73,7 +73,7 @@ class DbHelper {
 
   Future<Database> initializeDb() async {
     Directory dir = await getApplicationDocumentsDirectory();
-    String path = dir.path + "todo_V18.d.db";
+    String path = dir.path + "todo_V18.e.db";
 // <<<<<<< HEAD
 //     print(path);
 // =======
@@ -146,7 +146,7 @@ class DbHelper {
     Database db = await this.db;
     var result = await db
 //        .rawQuery("SELECT * FROM  where $colLastModified order by $colDateDue ASC");
-        .rawQuery("SELECT * FROM todo where $colId < 6");
+        .rawQuery("SELECT * FROM todo");
     return result;
   }
 

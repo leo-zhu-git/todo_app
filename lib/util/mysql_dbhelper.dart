@@ -45,13 +45,12 @@ class MySql_DBHelper {
       helper.deleteAllTask();
       var taskCount = helper.getCount();
       var count = swiperDataList.length;
-      print(count);
+      print("TaskCount:::::: $count");
 
       for (int i = 0; i < swiperDataList.length; i++) {
         String dbTaskID = swiperDataList[i]['TaskID'].toString();
         String dbUserID = swiperDataList[i]['TaskUserId'].toString();
         String appTaskID = dbTaskID.substring(dbUserID.length, dbTaskID.length);
-        print(dbTaskID);
 
         Task task = Task.withId(
             int.parse(appTaskID),
@@ -76,8 +75,10 @@ class MySql_DBHelper {
             "",
             "",
             "");
-
-        print(task);
+        print("TaskID" + appTaskID);
+        print("CategoryID::::::::" + swiperDataList[i]['TaskCategory']);
+        print("ContextID::::::::" + swiperDataList[i]['TaskContext']);
+        print("TagID::::::::" + swiperDataList[i]['TaskTag']);
 
         helper.insertTask(task);
 
@@ -85,13 +86,13 @@ class MySql_DBHelper {
         // tasksFuture.then((result) {
         //   count = result.length;
 
-        if (count > 0) {
-          helper.updateTask(task);
-          //helper.deleteTask(swiperDataList[i]['TaskID']);
-        } else {
-          helper.insertTask(task);
-          //helper.deleteTask(swiperDataList[i]['TaskID']);
-        }
+        // if (count > 0) {
+        //   helper.updateTask(task);
+        //   //helper.deleteTask(swiperDataList[i]['TaskID']);
+        // } else {
+        //   helper.insertTask(task);
+        //   //helper.deleteTask(swiperDataList[i]['TaskID']);
+        // }
         // });
       }
     });
@@ -325,9 +326,9 @@ class MySql_DBHelper {
         if (result[i]["dateDue"] != null) {
           dateDue = result[i]["dateDue"].toString();
         }
-        // if (result[i]["title"] != null) {
-        //   title = result[i]["title"].toString();
-        // }
+        if (result[i]["title"] != null) {
+          title = stringReplace(result[i]["title"]);
+        }
         if (result[i]["dateDone"] != null) {
           dateDone = result[i]["dateDone"].toString();
         }
@@ -343,9 +344,9 @@ class MySql_DBHelper {
         if (result[i]["location1"] != null) {
           timeDue = result[i]["location1"].toString();
         }
-        // if (result[i]["description"] != null) {
-        //   description = result[i]["description"].toString();
-        // }
+        if (result[i]["description"] != null) {
+          description = stringReplace(result[i]["description"]);
+        }
 
         String task = '{"taskId":"' +
             result[i]["id"].toString() +
@@ -424,6 +425,22 @@ class MySql_DBHelper {
   void syncTasks() async {
     this.pushTasksToMySql();
     this.wipeTaskDataFromMySql();
+  }
+
+  String stringReplace(String str) {
+    str = str.replaceAll("\\", "\\\\");
+    str = str.replaceAll("\n", "\\n");
+    str = str.replaceAll("\r", "\\r");
+    str = str.replaceAll("\t", "\\t");
+    str = str.replaceAll("(" ")", "\"\"");
+    str = str.replaceAll(" ", "&nbsp;");
+    str = str.replaceAll("<", "&lt;");
+    str = str.replaceAll(">", "&gt;");
+    str = str.replaceAll('"', '”');
+    str = str.replaceAll('@', 'a:t');
+    str = str.replaceAll("'", '’');
+
+    return str;
   }
 
   // void getTaskData() {
