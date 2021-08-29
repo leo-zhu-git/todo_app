@@ -184,7 +184,16 @@ class DbHelper {
     Database db = await this.db;
 
     String queryStr = "";
-    queryStr = "SELECT * FROM $tblTodo ";
+    queryStr = "SELECT $tblTodo.id,$tblTodo.title,$tblTodo.description,$tblTodo.category,action1,context1,location1,tag1,priorityvalue,prioritytext," +
+        "dateDue,timeDue,isDone,dateDone,status,lastModified,categories.name as categoriesname, " +
+        "action1s.name as action1name,context1s.name as context1name, location1s.name as location1name," +
+        " tag1s.name as tag1name, goal1s.name as goal1name    FROM $tblTodo  " +
+        " LEFT JOIN categories ON  $tblTodo.category = categories.id" +
+        " LEFT JOIN action1s ON $tblTodo.action1 = action1s.id " +
+        " LEFT JOIN context1s ON  $tblTodo.context1 = context1s.id" +
+        " LEFT JOIN location1s ON  $tblTodo.location1 = location1s.id" +
+        " LEFT JOIN tag1s ON  $tblTodo.tag1 = tag1s.id" +
+        " LEFT JOIN goal1s ON  $tblTodo.goal1 = goal1s.id ";
 
 ////////////////
     /// build query - add filterIsDone
