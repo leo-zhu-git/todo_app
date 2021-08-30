@@ -258,7 +258,7 @@ class DbHelper {
 ////////////////
     /// build query - add order
 ////////////////
-    /// queryStr = queryStr +
+    queryStr = queryStr +
     " order by $colsortField1 $colsortOrder1, $colsortField2 $colsortOrder2, $colsortField3 $colsortOrder3";
 
     print(queryStr);

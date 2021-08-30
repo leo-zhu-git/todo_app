@@ -535,7 +535,7 @@ class TaskHomeState extends State {
               break;
             default:
               {
-                taskList[i].sec3 = taskList[i].category;
+                taskList[i].sec3 = taskList[i].categoryText;
               }
               break;
           }

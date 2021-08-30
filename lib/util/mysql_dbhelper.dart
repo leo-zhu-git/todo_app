@@ -122,7 +122,7 @@ class MySql_DBHelper {
             swiperDataList[i]['TaskContext'],
             swiperDataList[i]['TaskLocation'],
             swiperDataList[i]['TaskTag'],
-            swiperDataList[i]['TaskGole'],
+            swiperDataList[i]['TaskGoal'],
             int.parse(swiperDataList[i]['TaskPriorityint']),
             swiperDataList[i]['TaskProiortyText'],
             swiperDataList[i]['TaskDateDue'],
