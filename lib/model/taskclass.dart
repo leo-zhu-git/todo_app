@@ -19,6 +19,12 @@ class Task {
   String _location1;
   String _tag1;
   String _goal1;
+  String _categoryText;
+  String _action1Text;
+  String _context1Text;
+  String _location1Text;
+  String _tag1Text;
+  String _goal1Text;
   int _priorityvalue;
   String _prioritytext;
   String _dateDue;
@@ -87,6 +93,12 @@ class Task {
   String get location1 => _location1;
   String get tag1 => _tag1;
   String get goal1 => _goal1;
+  String get categoryText => _categoryText;
+  String get action1Text => _action1Text;
+  String get context1Text => _context1Text;
+  String get location1Text => _location1Text;
+  String get tag1Text => _tag1Text;
+  String get goal1Text => _goal1Text;
   int get priorityvalue => _priorityvalue;
   String get prioritytext => _prioritytext;
   String get dateDue => _dateDue;
@@ -131,6 +143,30 @@ class Task {
 
   set goal1(String newGoal) {
     this._goal1 = newGoal;
+  }
+
+  set categoryText(String newcategoryText) {
+    this._categoryText = newcategoryText;
+  }
+
+  set action1Text(String newaction1Text) {
+    this._action1Text = newaction1Text;
+  }
+
+  set context1Text(String newcontext1Text) {
+    this._context1Text = newcontext1Text;
+  }
+
+  set location1Text(String newlocationText) {
+    this._location1Text = newlocationText;
+  }
+
+  set tag1Text(String newTagText) {
+    this._tag1Text = newTagText;
+  }
+
+  set goal1Text(String newGoalText) {
+    this._goal1 = newGoalText;
   }
 
   set priorityvalue(int newPriorityv) {
@@ -244,6 +280,12 @@ class Task {
     this._location1 = o['location1'];
     this._tag1 = o['tag1'];
     this._goal1 = o['goal1'];
+    this._categoryText = o['categoriesname'] == null ? "" : o['categoriesname'];
+    this._action1Text = o['action1name'] == null ? "" : o['action1name'];
+    this._context1Text = o['context1name'] == null ? "" : o['context1name'];
+    this._location1Text = o['location1name'] == null ? "" : o['location1name'];
+    this._tag1Text = o['tag1name'] == null ? "" : o['tag1name'];
+    this._goal1Text = o['goal1name'] == null ? "" : o['goal1name'];
     this._priorityvalue = o['priorityvalue'];
     this._prioritytext = o['prioritytext'];
     this._dateDue = o['dateDue'];

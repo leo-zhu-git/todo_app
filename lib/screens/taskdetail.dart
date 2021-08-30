@@ -14,8 +14,7 @@ DateTime currentDate = DateTime.now();
 String formattedDate = DateFormat('yyyymmdd').format(currentDate);
 String _searchText = "";
 TextStyle _textStyleControls =
-TextStyle(fontSize: 16.0, fontWeight: FontWeight.w800, color: Colors.black);
-
+    TextStyle(fontSize: 16.0, fontWeight: FontWeight.w800, color: Colors.black);
 
 final List<String> choices = const <String>[
   'Save Task & Back',
@@ -118,8 +117,8 @@ class TaskDetailState extends State //<TaskDetail>
         cus = new CustomDropdownItem();
         cus.id = action1['id'].toString();
         String tempAct;
-        if (action1['name'].toString().length > 30)
-          tempAct = action1['name'].toString().substring(0, 30) + "...";
+        if (action1['name'].toString().length > 20)
+          tempAct = action1['name'].toString().substring(0, 20) + "...";
         else
           tempAct = action1['name'];
 
@@ -330,8 +329,8 @@ class TaskDetailState extends State //<TaskDetail>
 //  WHAT - TITLE
 ///////////////////////////
             Container(
-              margin: EdgeInsets.only(left: 8.0, right: 8.0, top: 4.0, bottom: 2.0),
-
+              margin:
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 4.0, bottom: 2.0),
               decoration: new BoxDecoration(
                 color: Colors.green[100],
               ),
@@ -351,7 +350,8 @@ class TaskDetailState extends State //<TaskDetail>
 //  WHAT - DESCRIPTION
 ///////////////////////////
             Container(
-              margin: EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+              margin:
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
               decoration: new BoxDecoration(
                 color: Colors.green[100],
               ),
@@ -373,7 +373,8 @@ class TaskDetailState extends State //<TaskDetail>
 //  WHEN - DATE DUE
 ///////////////////////////
             Container(
-              margin: EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+              margin:
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
               decoration: BoxDecoration(
                 shape: BoxShape.rectangle,
                 color: Colors.blue[100],
@@ -398,8 +399,8 @@ class TaskDetailState extends State //<TaskDetail>
 //  WHEN - TIME DUE
 ///////////////////////////
             Container(
-              margin: EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
-
+              margin:
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
               decoration: BoxDecoration(
                 shape: BoxShape.rectangle,
                 color: Colors.blue[100],
@@ -424,7 +425,8 @@ class TaskDetailState extends State //<TaskDetail>
 ///////////////////////////
 
             Container(
-              margin: EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+              margin:
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
               decoration: BoxDecoration(
                   shape: BoxShape.rectangle, color: Colors.blue[100]),
               child: Row(
@@ -458,7 +460,8 @@ class TaskDetailState extends State //<TaskDetail>
 ///////////////////////////
 
             Container(
-              margin: EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+              margin:
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
               decoration: BoxDecoration(
                   shape: BoxShape.rectangle, color: Colors.blue[100]),
               child: Row(
@@ -491,7 +494,8 @@ class TaskDetailState extends State //<TaskDetail>
 //  CONTEXT
 ///////////////////////////
             Container(
-              margin: EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+              margin:
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
               decoration: BoxDecoration(
                   shape: BoxShape.rectangle, color: Colors.blue[100]),
               child: Row(
@@ -523,7 +527,8 @@ class TaskDetailState extends State //<TaskDetail>
 //  LOCATION
 ///////////////////////////
             Container(
-              margin: EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+              margin:
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
               decoration: BoxDecoration(
                   shape: BoxShape.rectangle, color: Colors.blue[100]),
               child: Row(
@@ -555,7 +560,8 @@ class TaskDetailState extends State //<TaskDetail>
 //  TAG
 ///////////////////////////
             Container(
-              margin: EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+              margin:
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
               decoration: BoxDecoration(
                   shape: BoxShape.rectangle, color: Colors.blue[100]),
               child: Row(
@@ -583,7 +589,6 @@ class TaskDetailState extends State //<TaskDetail>
                 ],
               ),
             ),
-
 
             //KK     // SizedBox(
             //   height: 20,

@@ -286,27 +286,27 @@ class TaskHomeState extends State {
               break;
             case 4:
               {
-                taskList[i].main1 = taskList[i].category;
+                taskList[i].main1 = taskList[i].categoryText;
               }
               break;
             case 5:
               {
-                taskList[i].main1 = taskList[i].action1;
+                taskList[i].main1 = taskList[i].action1Text;
               }
               break;
             case 6:
               {
-                taskList[i].main1 = taskList[i].context1;
+                taskList[i].main1 = taskList[i].context1Text;
               }
               break;
             case 7:
               {
-                taskList[i].main1 = taskList[i].location1;
+                taskList[i].main1 = taskList[i].location1Text;
               }
               break;
             case 8:
               {
-                taskList[i].main1 = taskList[i].tag1;
+                taskList[i].main1 = taskList[i].tag1Text;
               }
               break;
             default:
@@ -342,27 +342,27 @@ class TaskHomeState extends State {
               break;
             case 4:
               {
-                taskList[i].main2 = taskList[i].category;
+                taskList[i].main2 = taskList[i].categoryText;
               }
               break;
             case 5:
               {
-                taskList[i].main2 = taskList[i].action1;
+                taskList[i].main2 = taskList[i].action1Text;
               }
               break;
             case 6:
               {
-                taskList[i].main2 = taskList[i].context1;
+                taskList[i].main2 = taskList[i].context1Text;
               }
               break;
             case 7:
               {
-                taskList[i].main2 = taskList[i].location1;
+                taskList[i].main2 = taskList[i].location1Text;
               }
               break;
             case 8:
               {
-                taskList[i].main2 = taskList[i].tag1;
+                taskList[i].main2 = taskList[i].tag1Text;
               }
               break;
             default:
@@ -398,27 +398,27 @@ class TaskHomeState extends State {
               break;
             case 4:
               {
-                taskList[i].sec1 = taskList[i].category;
+                taskList[i].sec1 = taskList[i].categoryText;
               }
               break;
             case 5:
               {
-                taskList[i].sec1 = taskList[i].action1;
+                taskList[i].sec1 = taskList[i].action1Text;
               }
               break;
             case 6:
               {
-                taskList[i].sec1 = taskList[i].context1;
+                taskList[i].sec1 = taskList[i].context1Text;
               }
               break;
             case 7:
               {
-                taskList[i].sec1 = taskList[i].location1;
+                taskList[i].sec1 = taskList[i].location1Text;
               }
               break;
             case 8:
               {
-                taskList[i].sec1 = taskList[i].tag1;
+                taskList[i].sec1 = taskList[i].tag1Text;
               }
               break;
             default:
@@ -454,27 +454,27 @@ class TaskHomeState extends State {
               break;
             case 4:
               {
-                taskList[i].sec2 = taskList[i].category;
+                taskList[i].sec2 = taskList[i].categoryText;
               }
               break;
             case 5:
               {
-                taskList[i].sec2 = taskList[i].action1;
+                taskList[i].sec2 = taskList[i].action1Text;
               }
               break;
             case 6:
               {
-                taskList[i].sec2 = taskList[i].context1;
+                taskList[i].sec2 = taskList[i].context1Text;
               }
               break;
             case 7:
               {
-                taskList[i].sec2 = taskList[i].location1;
+                taskList[i].sec2 = taskList[i].location1Text;
               }
               break;
             case 8:
               {
-                taskList[i].sec2 = taskList[i].tag1;
+                taskList[i].sec2 = taskList[i].tag1Text;
               }
               break;
             default:
@@ -510,27 +510,27 @@ class TaskHomeState extends State {
               break;
             case 4:
               {
-                taskList[i].sec3 = taskList[i].category;
+                taskList[i].sec3 = taskList[i].categoryText;
               }
               break;
             case 5:
               {
-                taskList[i].sec3 = taskList[i].action1;
+                taskList[i].sec3 = taskList[i].action1Text;
               }
               break;
             case 6:
               {
-                taskList[i].sec3 = taskList[i].context1;
+                taskList[i].sec3 = taskList[i].context1Text;
               }
               break;
             case 7:
               {
-                taskList[i].sec3 = taskList[i].location1;
+                taskList[i].sec3 = taskList[i].location1Text;
               }
               break;
             case 8:
               {
-                taskList[i].sec3 = taskList[i].tag1;
+                taskList[i].sec3 = taskList[i].tag1Text;
               }
               break;
             default:
