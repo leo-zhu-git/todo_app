@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
       title: 'Todo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.deepOrange,
+        primarySwatch: Colors.red,
       ),
       onGenerateRoute: (settings) {
         if (settings.name == '/confirm') {
