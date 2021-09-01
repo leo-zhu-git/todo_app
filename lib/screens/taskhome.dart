@@ -88,7 +88,7 @@ class TaskHomeState extends State {
                 onPressed: () {
                   navigateToDetail(Task("", "", "", "", "", "", "", "", 0, "",
                       "", "", 0, "", "", "", "", "", "", "", ""));
-
+                  getData();
 //                  mysqlDBhelper.syncTaskDataFromMySql();
                 },
               ),
@@ -228,9 +228,9 @@ class TaskHomeState extends State {
   }
 
   void getData() {
-    int _sortField1 = globals.sortField1 != null ? globals.sortField1 : 0;
-    int _sortField2 = globals.sortField2 != null ? globals.sortField2 : 1;
-    int _sortField3 = globals.sortField3 != null ? globals.sortField3 : 2;
+    int _sortField1 = globals.sortField1 != null ? globals.sortField1 : 2;
+    int _sortField2 = globals.sortField2 != null ? globals.sortField2 : 4;
+    int _sortField3 = globals.sortField3 != null ? globals.sortField3 : 0;
     int _sortOrder1 = globals.sortOrder1 != null ? globals.sortOrder1 : 0;
     int _sortOrder2 = globals.sortOrder2 != null ? globals.sortOrder2 : 0;
     int _sortOrder3 = globals.sortOrder3 != null ? globals.sortOrder3 : 0;
@@ -553,9 +553,9 @@ class TaskHomeState extends State {
       context,
       MaterialPageRoute(builder: (context) => TaskDetail(task)),
     );
-    if (result == true) {
-      getData();
-    }
+//    if (result == true) {
+    getData();
+//    }
   }
 
   //to get the custom user settings.  this in home now,  but depends on login screen logic we can move this method. KK
@@ -596,8 +596,8 @@ class TaskHomeState extends State {
           globals.filterDateDue = int.parse(customSetting.filterDateDue);
         }
       }
-      getData();
     }
+    getData();
     setState(() {
       customSetting = customSetting;
     });

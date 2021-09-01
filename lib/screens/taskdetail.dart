@@ -600,8 +600,8 @@ class TaskDetailState extends State //<TaskDetail>
               children: [
                 RaisedButton(
                     onPressed: () {
-                      //  Navigator.pop(context);
-                      Navigator.of(context).pushNamed('/dashboard');
+                        Navigator.pop(context);
+//                      Navigator.of(context).pushNamed('/dashboard');
                     },
                     child: Text(
                       'Cancel',
@@ -671,7 +671,8 @@ class TaskDetailState extends State //<TaskDetail>
                         ),
                       );
 
-                      Navigator.of(context).pushNamed('/dashboard');
+                        Navigator.pop(context);
+//                      Navigator.of(context).pushNamed('/dashboard');
                     },
                     color: Colors.brown[900],
                     child: Text(
