@@ -490,7 +490,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
 ///////////////////////////
 //  Filter Date Due
 ///////////////////////////
-              Text("Filter - Due Date"),
+              Text("Filter - Due Date... Is Done"),
 
               new Container(
                 margin: const EdgeInsets.all(2.0),
@@ -511,7 +511,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
 ///////////////////////////
 //  Filter Category
 ///////////////////////////
-              Text("Filter - Category"),
+//              Text("Filter - Category"),
 
               new Container(
                 margin: const EdgeInsets.all(2.0),
@@ -532,7 +532,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
 ///////////////////////////
 //  Filter Action
 ///////////////////////////
-              Text("Filter - Action"),
+//              Text("Filter - Action"),
 
               new Container(
                 margin: const EdgeInsets.all(2.0),
@@ -553,7 +553,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
 ///////////////////////////
 //  Filter Context
 ///////////////////////////
-              Text("Filter - Context"),
+//              Text("Filter - Context"),
 
               new Container(
                 margin: const EdgeInsets.all(2.0),
@@ -574,7 +574,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
 ///////////////////////////
 //  Filter Location
 ///////////////////////////
-              Text("Filter - Location"),
+//              Text("Filter - Location"),
 
               new Container(
                 margin: const EdgeInsets.all(2.0),
@@ -595,7 +595,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
 ///////////////////////////
 //  Filter Tag
 ///////////////////////////
-              Text("Filter - Tag"),
+//              Text("Filter - Tag"),
 
               new Container(
                 margin: const EdgeInsets.all(2.0),
@@ -616,7 +616,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
 ///////////////////////////
 //  Filter Is Done
 ///////////////////////////
-              Text("Filter - Is Done"),
+//              Text("Filter - Is Done"),
 
               new Container(
                 margin: const EdgeInsets.all(2.0),
@@ -641,7 +641,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
 ///////////////////////////
 //  SORT ORDER 1
 ///////////////////////////
-              Text("Sort 1"),
+              Text("Sort - first, second, third"),
 ///////////////////////////
 //  SORT ORDER 1
 ///////////////////////////
@@ -681,7 +681,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
 ///////////////////////////
 //  SORT ORDER 2
 ///////////////////////////
-              Text("Sort 2"),
+//              Text("Sort 2"),
               new Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
@@ -718,7 +718,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
 ///////////////////////////
 //  SORT ORDER 3
 ///////////////////////////
-              Text("Sort 3"),
+//              Text("Sort 3"),
               new Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
@@ -756,7 +756,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
               SizedBox(
                 height: 20,
               ),
-              Text("Show - Main line"),
+              Text("Show - Main and Second Line"),
 ///////////////////////////
 //  Show Main 1
 ///////////////////////////
@@ -796,7 +796,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
 ///////////////////////////
 //  Show Secondary 1
 ///////////////////////////
-              Text("Show - Second Line"),
+//              Text("Show - Second Line"),
               new Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
