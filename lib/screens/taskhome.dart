@@ -176,19 +176,19 @@ class TaskHomeState extends State {
 
                         // SizedBox(width: 5.0),
                         // Text(this.tasklist[position].sec2),
-                        Flexible(
-                            child: Padding(
-                                padding: const EdgeInsets.only(right: 2),
-                                child: Text(this.tasklist[position].sec2,
-                                    overflow: TextOverflow.ellipsis))),
+//                        Flexible(
+//                            child: Padding(
+//                                padding: const EdgeInsets.only(right: 2),
+//                                child: Text(this.tasklist[position].sec2,
+//                                    overflow: TextOverflow.ellipsis))),
 
                         //   SizedBox(width: 5.0),
                         // Text(this.tasklist[position].sec3),
-                        Flexible(
-                            child: Padding(
-                                padding: const EdgeInsets.only(right: 2),
-                                child: Text(this.tasklist[position].sec3,
-                                    overflow: TextOverflow.ellipsis))),
+//                        Flexible(
+//                            child: Padding(
+//                                padding: const EdgeInsets.only(right: 2),
+//                                child: Text(this.tasklist[position].sec3,
+//                                    overflow: TextOverflow.ellipsis))),
                       ],
                     ),
                     isThreeLine: false,
@@ -235,7 +235,7 @@ class TaskHomeState extends State {
     int _sortOrder2 = globals.sortOrder2 != null ? globals.sortOrder2 : 0;
     int _sortOrder3 = globals.sortOrder3 != null ? globals.sortOrder3 : 0;
     int _filterDateDue =
-        globals.filterDateDue != null ? globals.filterDateDue : 0;
+        globals.filterDateDue != null ? globals.filterDateDue : 7;
     int _filterIsDone = globals.filterIsDone != null ? globals.filterIsDone : 0;
 
     var countDone = 0;

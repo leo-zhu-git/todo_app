@@ -224,8 +224,8 @@ class TaskSearchState extends State {
                           crossAxisAlignment: CrossAxisAlignment.center,
 
                           children: [
-                            Text("  Catogory: ", style: _textStyleControls),
-                            Spacer(),
+//                            Text("  Catogory: ", style: _textStyleControls),
+//                            Spacer(),
                             DropdownButton<String>(
                                 items:
                                     _categories.map((CustomDropdownItem value) {
@@ -263,11 +263,11 @@ class TaskSearchState extends State {
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Text(
-                                "  Action: ",
-                                style: _textStyleControls,
-                              ),
-                              Spacer(),
+//                              Text(
+//                                "  Action: ",
+//                                style: _textStyleControls,
+//                              ),
+//                              Spacer(),
                               DropdownButton<String>(
                                 items: _action1s.map((CustomDropdownItem value) {
                                   return DropdownMenuItem<String>(
@@ -301,11 +301,11 @@ class TaskSearchState extends State {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Text(
-                              "  Context: ",
-                              style: _textStyleControls,
-                            ),
-                            Spacer(),
+//                            Text(
+//                              "  Context: ",
+//                              style: _textStyleControls,
+//                            ),
+//                            Spacer(),
                             DropdownButton<String>(
                               items: _context1s.map((CustomDropdownItem value) {
                                 return DropdownMenuItem<String>(
@@ -337,11 +337,11 @@ class TaskSearchState extends State {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Text(
-                              "  Location: ",
-                              style: _textStyleControls,
-                            ),
-                            Spacer(),
+//                            Text(
+//                              "  Location: ",
+//                              style: _textStyleControls,
+//                            ),
+//                            Spacer(),
                             DropdownButton<String>(
                               items:
                                   _location1s.map((CustomDropdownItem value) {
@@ -374,11 +374,11 @@ class TaskSearchState extends State {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Text(
-                              "  Tag: ",
-                              style: _textStyleControls,
-                            ),
-                            Spacer(),
+//                            Text(
+//                              "  Tag: ",
+//                              style: _textStyleControls,
+//                            ),
+//                            Spacer(),
                             DropdownButton<String>(
                               items: _tag1s.map((CustomDropdownItem value) {
                                 return DropdownMenuItem<String>(

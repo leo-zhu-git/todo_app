@@ -815,39 +815,39 @@ class _CustomizeViewState extends State //State<CustomizeView>
 ///////////////////////////
 //  Show Secondary 2
 ///////////////////////////
-              new Container(
-                margin: const EdgeInsets.all(2.0),
-                decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.green[100]),
-                child: DropdownButtonFormField(
-                  items: _dropdownMenuItemsSort,
-                  hint: Text('Display Secondary2'),
-                  value: _selectedShowSec2,
-                  onChanged: (selectedShow) {
-                    setState(() {
-                      _selectedShowSec2 = selectedShow;
-                    });
-                  },
-                ),
-              ),
+//              new Container(
+//                margin: const EdgeInsets.all(2.0),
+//                decoration: BoxDecoration(
+//                    shape: BoxShape.rectangle, color: Colors.green[100]),
+//                child: DropdownButtonFormField(
+//                  items: _dropdownMenuItemsSort,
+//                  hint: Text('Display Secondary2'),
+//                  value: _selectedShowSec2,
+//                  onChanged: (selectedShow) {
+//                    setState(() {
+//                      _selectedShowSec2 = selectedShow;
+//                    });
+//                  },
+//                ),
+//              ),
 ///////////////////////////
 //  Show Secondary 3
 ///////////////////////////
-              new Container(
-                margin: const EdgeInsets.all(2.0),
-                decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.green[100]),
-                child: DropdownButtonFormField(
-                  items: _dropdownMenuItemsSort,
-                  hint: Text('Display Secondary3'),
-                  value: _selectedShowSec3,
-                  onChanged: (selectedShow) {
-                    setState(() {
-                      _selectedShowSec3 = selectedShow;
-                    });
-                  },
-                ),
-              ),
+//              new Container(
+//                margin: const EdgeInsets.all(2.0),
+//                decoration: BoxDecoration(
+//                    shape: BoxShape.rectangle, color: Colors.green[100]),
+//                child: DropdownButtonFormField(
+//                  items: _dropdownMenuItemsSort,
+//                  hint: Text('Display Secondary3'),
+//                  value: _selectedShowSec3,
+//                  onChanged: (selectedShow) {
+//                    setState(() {
+//                      _selectedShowSec3 = selectedShow;
+//                    });
+//                  },
+//                ),
+//              ),
 
               SizedBox(
                 height: 20,
