@@ -196,15 +196,7 @@ class DbHelper {
         " LEFT JOIN goal1s ON  $tblTodo.goal1 = goal1s.id ";
 
 ////////////////
-    /// build query - add filterIsDone
-////////////////
-    if (colfilterIsDone == 0) // hide
-      queryStr = queryStr + "where ($colIsDone ==0)";
-    else
-      queryStr = queryStr + "where ($colIsDone not Null)";
-
-////////////////
-    /// build query - add filterDateDue
+/// build query - add filterDateDue
 ////////////////
 
     String _startDate;
@@ -256,7 +248,24 @@ class DbHelper {
     ;
 
 ////////////////
-    /// build query - add order
+/// build query - add filterIsDone
+////////////////
+    if (colfilterIsDone == 0) // hide
+      queryStr = queryStr + "where ($colIsDone ==0)";
+    else
+      queryStr = queryStr + "where ($colIsDone not Null)";
+
+////////////////
+/// build query - add category
+////////////////
+//    if (colfilterCategory == 0) // hide
+// include all
+//    else
+//      queryStr = queryStr + "where ($colIsDone not Null)";
+;
+
+////////////////
+/// build query - add order by
 ////////////////
     queryStr = queryStr +
     " order by $colsortField1 $colsortOrder1, $colsortField2 $colsortOrder2, $colsortField3 $colsortOrder3";
@@ -292,11 +301,6 @@ class DbHelper {
     queryStr =
         "SELECT * FROM $tblTodo WHERE ($colTitle LIKE '%$searchText%' OR $colDescription LIKE '%$searchText%') ";
 
-    // queryStr = queryStr + " AND $colIsDone = 0";//  if (searchPriorityTxt.trim() != "")
-//  {
-//    queryStr = queryStr + " AND $colPrioritytxt = '$searchPriorityTxt'";
-//  }
-
     if (searchCategory != null) {
       queryStr =
           queryStr + " AND $colCategory = '$searchCategory' AND $colIsDone = 0";
@@ -321,7 +325,6 @@ class DbHelper {
 //    queryStr = queryStr + " AND $colGoal1 = '$searchGoal1'";
 //  }
 
-    print(queryStr);
     var result = await db.rawQuery(queryStr);
     return result;
   }
