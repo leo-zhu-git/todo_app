@@ -200,6 +200,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
   //
   @override
   void initState() {
+    super.initState();
     _dropdownMenuItemsSort = buildDropdownMenuItems(_sort);
     _dropdownMenuSortOrder = buildDropdownMenuOrder(_order);
     _dropdownFilterIsDone = buildDropdownFilterIsDone(_filterIsDone);
@@ -210,6 +211,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
     _loadLocation1s();
     _loadTag1s();
 
+    _getCustomSettings();
     ////////////////////////////
     /// filter - date due
     ////////////////////////////
@@ -228,17 +230,16 @@ class _CustomizeViewState extends State //State<CustomizeView>
       globals.filterIsDone = 1;
     } else
       _selectedFilterIsDone = _dropdownFilterIsDone[globals.filterIsDone].value;
-
-    ////////////////////////////
-    /// filter - category
-    ////////////////////////////
-//    if (globals.filterCategory == null) {
-//      _selectedFilterCategory = _dropdownFilterCategory[0].value;
-//      _selectedFilterCategory = _dropdownFilterCategory[0].value;
-//      globals.filterCategory = 0;
-//    } else
-//      _selectedFilterCategory =
-//          _dropdownFilterCategory[globals.filterCategory].value;
+//kk 3
+    // ////////////////////////////
+    // /// filter - category
+    // ////////////////////////////
+    // if (globals.filterCategory == null) {
+    //   _selectedCategory = null;
+    //   globals.filterCategory = null;
+    // } else
+    //   _selectedCategory = globals.filterCategory.toString();
+    // _dropdownFilterCategory[globals.filterCategory].value;
 
     ////////////////////////////
     /// filter - action
@@ -348,9 +349,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
     } else
       _selectedShowSec3 = _dropdownMenuItemsSort[globals.showSec3].value;
 
-    _getCustomSettings();
-
-    super.initState();
+    // super.initState();
   }
 
   //##################Drop Down Items Load from DB #################################################################
@@ -1061,26 +1060,25 @@ class _CustomizeViewState extends State //State<CustomizeView>
                               customSetting.filterIsDone = true;
                             }
                           }
-
+//KK 4
                           customSetting.filterCategory =
-                              _selectedFilterCategory == null
+                              _selectedCategory == null
                                   ? ""
-                                  : _selectedFilterCategory.id.toString();
-                          customSetting.filterAction =
-                              _selectedFilterAction == null
-                                  ? ""
-                                  : _selectedFilterAction.id.toString();
-                          customSetting.filterContext =
-                              _selectedFilterContext == null
-                                  ? ""
-                                  : _selectedFilterContext.id.toString();
-                          customSetting.filterLocation =
-                              _selectedFilterLocation == null
-                                  ? ""
-                                  : _selectedFilterLocation.id.toString();
-                          customSetting.filterTag = _selectedFilterTag == null
+                                  : _selectedCategory.toString();
+                          customSetting.filterAction = _selectedAction1 == null
                               ? ""
-                              : _selectedFilterTag.id.toString();
+                              : _selectedAction1.toString();
+                          customSetting.filterContext =
+                              _selectedContext1 == null
+                                  ? ""
+                                  : _selectedContext1.toString();
+                          customSetting.filterLocation =
+                              _selectedLocation1 == null
+                                  ? ""
+                                  : _selectedLocation1.toString();
+                          customSetting.filterTag = _selectedTag1 == null
+                              ? ""
+                              : _selectedTag1.toString();
 
                           var result;
 
@@ -1200,37 +1198,46 @@ class _CustomizeViewState extends State //State<CustomizeView>
         globals.filterDateDue = int.parse(customSetting.filterDateDue);
       }
 
-      if (customSetting.filterCategory != "") {
-        _selectedFilterCategory =
-            _dropdownFilterCategory[int.parse(customSetting.filterCategory)]
-                .value;
+      ////////////////////////////
+      /// filter - category
+      ////////////////////////////
+      if (customSetting.filterCategory == "") {
+        _selectedCategory = null;
+        customSetting.filterCategory = null;
+      } else {
+        _selectedCategory = customSetting.filterCategory.toString();
         globals.filterCategory = int.parse(customSetting.filterCategory);
       }
 
-      if (customSetting.filterAction != "") {
-        _selectedFilterAction =
-            _dropdownFilterAction[int.parse(customSetting.filterAction)].value;
+      if (customSetting.filterAction == "") {
+        _selectedAction1 = null;
+        customSetting.filterAction = null;
+      } else {
+        _selectedAction1 = customSetting.filterAction.toString();
         globals.filterAction = int.parse(customSetting.filterAction);
       }
-
-      if (customSetting.filterContext != "") {
-        _selectedFilterContext =
-            _dropdownFilterContext[int.parse(customSetting.filterContext)]
-                .value;
+      if (customSetting.filterContext == "") {
+        _selectedContext1 = null;
+        customSetting.filterContext = null;
+      } else {
+        _selectedContext1 = customSetting.filterContext.toString();
         globals.filterContext = int.parse(customSetting.filterContext);
       }
 
-      if (customSetting.filterTag != "") {
-        _selectedFilterTag =
-            _dropdownFilterTag[int.parse(customSetting.filterTag)].value;
+      if (customSetting.filterTag == "") {
+        _selectedTag1 = null;
+        customSetting.filterTag = null;
+      } else {
+        _selectedTag1 = customSetting.filterTag.toString();
         globals.filterTag = int.parse(customSetting.filterTag);
       }
 
-      if (customSetting.filterCategory != "") {
-        _selectedFilterCategory =
-            _dropdownFilterCategory[int.parse(customSetting.filterCategory)]
-                .value;
-        globals.filterCategory = int.parse(customSetting.filterCategory);
+      if (customSetting.filterLocation == "") {
+        _selectedLocation1 = null;
+        customSetting.filterLocation = null;
+      } else {
+        _selectedLocation1 = customSetting.filterLocation.toString();
+        globals.filterLocation = int.parse(customSetting.filterLocation);
       }
     }
     setState(() {
