@@ -149,11 +149,11 @@ class _CustomizeViewState extends State //State<CustomizeView>
   List<SortOrder> _order = SortOrder.getOrder();
   List<FilterIsDone> _filterIsDone = FilterIsDone.getIsDone();
   List<FilterDateDue> _filterDateDue = FilterDateDue.getDateDue();
-  List<FilterCategory> _filterCategory = FilterCategory.getCategory();
-  List<FilterAction> _filterAction = FilterAction.getAction();
-  List<FilterContext> _filterContext = FilterContext.getContext();
-  List<FilterLocation> _filterLocation = FilterLocation.getLocation();
-  List<FilterTag> _filterTag = FilterTag.getTag();
+//  List<FilterCategory> _filterCategory = FilterCategory.getCategory();
+//  List<FilterAction> _filterAction = FilterAction.getAction();
+//  List<FilterContext> _filterContext = FilterContext.getContext();
+//  List<FilterLocation> _filterLocation = FilterLocation.getLocation();
+//  List<FilterTag> _filterTag = FilterTag.getTag();
   List<DropdownMenuItem<SortItem>> _dropdownMenuItemsSort;
   List<DropdownMenuItem<SortOrder>> _dropdownMenuSortOrder;
   List<DropdownMenuItem<FilterIsDone>> _dropdownFilterIsDone;
@@ -232,50 +232,51 @@ class _CustomizeViewState extends State //State<CustomizeView>
     ////////////////////////////
     /// filter - category
     ////////////////////////////
-    if (globals.filterCategory == null) {
-      _selectedFilterCategory = _dropdownFilterCategory[0].value;
-      globals.filterCategory = 0;
-    } else
-      _selectedFilterCategory =
-          _dropdownFilterCategory[globals.filterCategory].value;
+//    if (globals.filterCategory == null) {
+//      _selectedFilterCategory = _dropdownFilterCategory[0].value;
+//      _selectedFilterCategory = _dropdownFilterCategory[0].value;
+//      globals.filterCategory = 0;
+//    } else
+//      _selectedFilterCategory =
+//          _dropdownFilterCategory[globals.filterCategory].value;
 
     ////////////////////////////
     /// filter - action
     ////////////////////////////
-    if (globals.filterAction == null) {
-      _selectedFilterAction = _dropdownFilterAction[0].value;
-      globals.filterAction = 0;
-    } else
-      _selectedFilterAction = _dropdownFilterAction[globals.filterAction].value;
+//    if (globals.filterAction == null) {
+//      _selectedFilterAction = _dropdownFilterAction[0].value;
+//      globals.filterAction = 0;
+//    } else
+//      _selectedFilterAction = _dropdownFilterAction[globals.filterAction].value;
 
     ////////////////////////////
     /// filter - context
     ////////////////////////////
-    if (globals.filterContext == null) {
-      _selectedFilterContext = _dropdownFilterContext[0].value;
-      globals.filterContext = 0;
-    } else
-      _selectedFilterContext =
-          _dropdownFilterContext[globals.filterContext].value;
+//    if (globals.filterContext == null) {
+//      _selectedFilterContext = _dropdownFilterContext[0].value;
+//      globals.filterContext = 0;
+//    } else
+//      _selectedFilterContext =
+//          _dropdownFilterContext[globals.filterContext].value;
 
     ////////////////////////////
     /// filter - location
     ////////////////////////////
-    if (globals.filterLocation == null) {
-      _selectedFilterLocation = _dropdownFilterLocation[0].value;
-      globals.filterLocation = 0;
-    } else
-      _selectedFilterLocation =
-          _dropdownFilterLocation[globals.filterLocation].value;
+//    if (globals.filterLocation == null) {
+//      _selectedFilterLocation = _dropdownFilterLocation[0].value;
+//      globals.filterLocation = 0;
+//    } else
+//      _selectedFilterLocation =
+//          _dropdownFilterLocation[globals.filterLocation].value;
 
     ////////////////////////////
     /// filter - tag
     ////////////////////////////
-    if (globals.filterTag == null) {
-      _selectedFilterTag = _dropdownFilterTag[0].value;
-      globals.filterTag = 0;
-    } else
-      _selectedFilterTag = _dropdownFilterTag[globals.filterTag].value;
+//    if (globals.filterTag == null) {
+//      _selectedFilterTag = _dropdownFilterTag[0].value;
+//      globals.filterTag = 0;
+//    } else
+//      _selectedFilterTag = _dropdownFilterTag[globals.filterTag].value;
 
     ////////////////////////////
     // Sort and Order

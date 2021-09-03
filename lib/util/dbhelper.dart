@@ -196,7 +196,7 @@ class DbHelper {
         " LEFT JOIN goal1s ON  $tblTodo.goal1 = goal1s.id ";
 
 ////////////////
-/// build query - add filterDateDue
+    /// build query - add filterDateDue
 ////////////////
 
     String _startDate;
@@ -248,7 +248,7 @@ class DbHelper {
     ;
 
 ////////////////
-/// build query - add filterIsDone
+    /// build query - add filterIsDone
 ////////////////
     if (colfilterIsDone == 0) // hide
       queryStr = queryStr + "where ($colIsDone ==0)";
@@ -256,19 +256,21 @@ class DbHelper {
       queryStr = queryStr + "where ($colIsDone not Null)";
 
 ////////////////
-/// build query - add category
+    /// build query - add category
 ////////////////
-//    if (colfilterCategory == 0) // hide
+//    if (colfilterCategory == 0) {
+//    } // hide
 // include all
-//    else
-//      queryStr = queryStr + "where ($colIsDone not Null)";
-;
+//    else {
+//      queryStr = queryStr + "and ($colCategory == $colfilterCategory)";
+//    }
+//    ;
 
 ////////////////
-/// build query - add order by
+    /// build query - add order by
 ////////////////
     queryStr = queryStr +
-    " order by $colsortField1 $colsortOrder1, $colsortField2 $colsortOrder2, $colsortField3 $colsortOrder3";
+        " order by $colsortField1 $colsortOrder1, $colsortField2 $colsortOrder2, $colsortField3 $colsortOrder3";
 
     print(queryStr);
     var result = await db.rawQuery(queryStr);
@@ -320,10 +322,6 @@ class DbHelper {
     if (searchTag1 != null) {
       queryStr = queryStr + " AND $colTag1 = '$searchTag1' AND $colIsDone = 0";
     }
-//  if (searchGoal1.trim() != "")
-//  {
-//    queryStr = queryStr + " AND $colGoal1 = '$searchGoal1'";
-//  }
 
     var result = await db.rawQuery(queryStr);
     return result;
