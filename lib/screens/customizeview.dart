@@ -963,7 +963,11 @@ class _CustomizeViewState extends State //State<CustomizeView>
                                 '',
                                 '',
                                 '',
-                                '');
+                                '', 
+                                "",
+                                "",
+                                "",
+                                "");
                           }
 
                           customSetting.sortField1 = _selectedSortField1 == null

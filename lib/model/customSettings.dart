@@ -18,6 +18,10 @@ class CustomSettings {
   String _filterContext;
   String _filterLocation;
   String _filterTag;
+  String _filterStatus;
+  String _filterPriority;
+  String _filterGoal;
+  String _filterStar;
 
   CustomSettings(
       this._sortField1,
@@ -37,7 +41,11 @@ class CustomSettings {
       this._filterAction,
       this._filterContext,
       this._filterLocation,
-      this._filterTag);
+      this._filterTag,
+      this._filterStatus,
+      this._filterPriority,
+      this._filterGoal,
+      this._filterStar);
   CustomSettings.withId(
       this._id,
       this._sortField1,
@@ -57,7 +65,11 @@ class CustomSettings {
       this._filterAction,
       this._filterContext,
       this._filterLocation,
-      this._filterTag);
+      this._filterTag,
+      this._filterStatus,
+      this._filterPriority,
+      this._filterGoal,
+      this._filterStar);
   int get id => _id;
   String get sortField1 => _sortField1;
   String get sortOrder1 => _sortOrder1;
@@ -76,7 +88,11 @@ class CustomSettings {
   String get filterAction => _filterAction;
   String get filterContext => _filterContext;
   String get filterLocation => _filterLocation;
-  String get filterTag => _filterTag; 
+  String get filterTag => _filterTag;
+  String get filterStatus => _filterStatus;
+  String get filterPriority => _filterPriority;
+  String get filterGoal => _filterGoal;
+  String get filterStar => _filterStar; 
 
   set sortField1(String newSortField1) {
     this._sortField1 = newSortField1;
@@ -150,6 +166,22 @@ class CustomSettings {
     this._filterTag = newFilterTag;
   }
 
+  set filterStatus(String newFilterStatus) {
+    this._filterStatus = newFilterStatus;
+  }
+
+  set filterPriority(String newFilterPriority) {
+    this._filterPriority = newFilterPriority;
+  }
+
+  set filterGoal(String newFilterGoal) {
+    this._filterGoal = newFilterGoal;
+  }
+
+  set filterStar(String newFilterStar) {
+    this._filterStar = newFilterStar;
+  }
+
   Map<String, dynamic> toMap() {
     var map = Map<String, dynamic>();
 
@@ -171,6 +203,10 @@ class CustomSettings {
     map['filterContext'] = _filterContext;
     map['filterLocation'] = _filterLocation;
     map['filterTag'] = _filterTag;
+    map['filterStatus'] = _filterStatus;
+    map['filterPriority'] = _filterPriority;
+    map['filterGoal'] = _filterGoal;
+    map['filterStar'] = _filterStar;
 
     if (_id != null) {
       map['id'] = _id;
@@ -199,5 +235,9 @@ class CustomSettings {
     this._filterContext = o['filterContext'];
     this._filterLocation = o['filterLocation'];
     this._filterTag = o['filterTag'];
+    this._filterStatus = o['filterstatus'];
+    this._filterPriority = o['filterPriority'];
+    this._filterGoal = o['filterGoal'];
+    this._filterStar = o['filterStar'];
   }
 }
