@@ -230,54 +230,6 @@ class _CustomizeViewState extends State //State<CustomizeView>
       globals.filterIsDone = 1;
     } else
       _selectedFilterIsDone = _dropdownFilterIsDone[globals.filterIsDone].value;
-//kk 3
-    // ////////////////////////////
-    // /// filter - category
-    // ////////////////////////////
-    // if (globals.filterCategory == null) {
-    //   _selectedCategory = null;
-    //   globals.filterCategory = null;
-    // } else
-    //   _selectedCategory = globals.filterCategory.toString();
-    // _dropdownFilterCategory[globals.filterCategory].value;
-
-    ////////////////////////////
-    /// filter - action
-    ////////////////////////////
-//    if (globals.filterAction == null) {
-//      _selectedFilterAction = _dropdownFilterAction[0].value;
-//      globals.filterAction = 0;
-//    } else
-//      _selectedFilterAction = _dropdownFilterAction[globals.filterAction].value;
-
-    ////////////////////////////
-    /// filter - context
-    ////////////////////////////
-//    if (globals.filterContext == null) {
-//      _selectedFilterContext = _dropdownFilterContext[0].value;
-//      globals.filterContext = 0;
-//    } else
-//      _selectedFilterContext =
-//          _dropdownFilterContext[globals.filterContext].value;
-
-    ////////////////////////////
-    /// filter - location
-    ////////////////////////////
-//    if (globals.filterLocation == null) {
-//      _selectedFilterLocation = _dropdownFilterLocation[0].value;
-//      globals.filterLocation = 0;
-//    } else
-//      _selectedFilterLocation =
-//          _dropdownFilterLocation[globals.filterLocation].value;
-
-    ////////////////////////////
-    /// filter - tag
-    ////////////////////////////
-//    if (globals.filterTag == null) {
-//      _selectedFilterTag = _dropdownFilterTag[0].value;
-//      globals.filterTag = 0;
-//    } else
-//      _selectedFilterTag = _dropdownFilterTag[globals.filterTag].value;
 
     ////////////////////////////
     // Sort and Order
@@ -1060,7 +1012,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
                               customSetting.filterIsDone = true;
                             }
                           }
-//KK 4
+
                           customSetting.filterCategory =
                               _selectedCategory == null
                                   ? ""
