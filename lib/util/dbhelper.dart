@@ -19,8 +19,8 @@ class DbHelper {
   static final DbHelper _dbHelper = DbHelper._internal();
   String tblTodo = "todo";
   String colId = 'id';
-  String colTitle = 'title';
-  String colDescription = 'description';
+  String colTask = 'task';
+  String colNote = 'note';
   String colCategory = 'category';
   String colAction1 = 'action1';
   String colContext1 = 'context1';
@@ -50,6 +50,10 @@ class DbHelper {
   String colshowSec3 = 'showSec3';
   String colfilterIsDone = 'filterIsDone';
   String colfilterDateDue = 'filterDateDue';
+  String colfilterStatus = 'filterStatus';
+  String colfilterPriority = 'filterPriority';
+  String colfilterGoal = 'filterGaol';
+  String colfilterStar = 'filterStar';
   String colfilterCategory = 'filterCategory';
   String colfilterAction = 'filterAction';
   String colfilterContext = 'filterContext';
@@ -73,18 +77,14 @@ class DbHelper {
 
   Future<Database> initializeDb() async {
     Directory dir = await getApplicationDocumentsDirectory();
-    String path = dir.path + "todo_V18.d.db";
-// <<<<<<< HEAD
-//     print(path);
-// =======
-// >>>>>>> bd41ba8c11d876c998cc25b5140b747922b0dc9f
+    String path = dir.path + "todo_V19.a.db";
     var dbTodovn = await openDatabase(path, version: 1, onCreate: _createDb);
     return dbTodovn;
   }
 
   void _createDb(Database db, int newVersion) async {
     await db.execute(
-        "CREATE TABLE $tblTodo($colId INTEGER PRIMARY KEY, $colTitle TEXT, $colDescription TEXT, " +
+        "CREATE TABLE $tblTodo($colId INTEGER PRIMARY KEY, $colTask TEXT, $colNote TEXT, " +
             " $colCategory TEXT, $colAction1 TEXT, " +
             "$colContext1 TEXT, $colLocation1 TEXT, $colTag1 TEXT, $colGoal1 TEXT, " +
             " $colPriorityint INTEGER, $colPrioritytxt TEXT, $colDateDue TEXT, $colTimeDue TEXT, " +
@@ -95,11 +95,12 @@ class DbHelper {
         "CREATE TABLE $tblCustomSettings($colId INTEGER PRIMARY KEY, $colsortField1 TEXT, $colsortOrder1 TEXT, $colsortField2 TEXT, " +
             "$colsortOrder2 TEXT, $colsortField3 TEXT, $colsortOrder3 TEXT, $colshowMain1 TEXT,$colshowMain2 TEXT, " +
             "$colshowSec1 TEXT,$colshowSec2 TEXT,$colshowSec3 TEXT," +
-            " $colfilterIsDone INTEGER, $colfilterDateDue TEXT, $colfilterCategory TEXT, $colfilterAction TEXT, $colfilterContext TEXT, $colfilterLocation TEXT, $colfilterTag TEXT)");
+            " $colfilterIsDone INTEGER, $colfilterDateDue TEXT, $colfilterCategory TEXT, $colfilterAction TEXT, $colfilterContext TEXT, $colfilterLocation TEXT, $colfilterTag TEXT," +
+            " $colfilterStatus TEXT, $colfilterPriority TEXT, $colfilterGoal TEXT, $colfilterStar TEXT");
 
     // Create table categories
     await db.execute(
-        "CREATE TABLE categories(id INTEGER PRIMARY KEY, name TEXT, description TEXT)");
+        "CREATE TABLE categories(id INTEGER PRIMARY KEY, task TEXT, note TEXT)");
 
     // Create table actions
     await db.execute(
@@ -165,7 +166,7 @@ class DbHelper {
     var result = await db
 //        .rawQuery("SELECT * FROM $tblTodo order by $colDateDue ASC");
         .rawQuery(
-            "SELECT * FROM $tblTodo where ($colIsDone != 1) order by $colCategory $colsortOrder1, $colDateDue ASC, $colTimeDue $colsortOrder2, $colTitle $colsortOrder3");
+            "SELECT * FROM $tblTodo where ($colIsDone != 1) order by $colCategory $colsortOrder1, $colDateDue ASC, $colTimeDue $colsortOrder2, $colTask $colsortOrder3");
     return result;
   }
 
@@ -177,14 +178,15 @@ class DbHelper {
       String colsortField3,
       String colsortOrder3,
       String colfilterDateDue,
-      int colfilterIsDone) async {
+      int colfilterIsDone,
+      String colfilterCategory) async {
 ////////////////
     /// build query 0
 ////////////////
     Database db = await this.db;
 
     String queryStr = "";
-    queryStr = "SELECT $tblTodo.id,$tblTodo.title,$tblTodo.description,$tblTodo.category,action1,context1,location1,tag1,priorityvalue,prioritytext," +
+    queryStr = "SELECT $tblTodo.id,$tblTodo.task,$tblTodo.note,$tblTodo.category,action1,context1,location1,tag1,priorityvalue,prioritytext," +
         "dateDue,timeDue,isDone,dateDone,status,lastModified,categories.name as categoriesname, " +
         "action1s.name as action1name,context1s.name as context1name, location1s.name as location1name," +
         " tag1s.name as tag1name, goal1s.name as goal1name    FROM $tblTodo  " +
@@ -258,13 +260,13 @@ class DbHelper {
 ////////////////
     /// build query - add category
 ////////////////
-//    if (colfilterCategory == 0) {
-//    } // hide
+    if (colfilterCategory == "0") {
+    } // hide
 // include all
-//    else {
-//      queryStr = queryStr + "and ($colCategory == $colfilterCategory)";
-//    }
-//    ;
+    else {
+      queryStr = queryStr + "and ($colCategory == $colfilterCategory)";
+    }
+    ;
 
 ////////////////
     /// build query - add order by
@@ -296,12 +298,13 @@ class DbHelper {
       String searchAction1,
       String searchContext1,
       String searchLocation1,
-      String searchTag1) async {
+      String searchTag1,
+      String searchGoal1) async {
     Database db = await this.db;
 
     String queryStr = "";
     queryStr =
-        "SELECT * FROM $tblTodo WHERE ($colTitle LIKE '%$searchText%' OR $colDescription LIKE '%$searchText%') ";
+        "SELECT * FROM $tblTodo WHERE ($colTask LIKE '%$searchText%' OR $colNote LIKE '%$searchText%') ";
 
     if (searchCategory != null) {
       queryStr =
@@ -321,6 +324,9 @@ class DbHelper {
     }
     if (searchTag1 != null) {
       queryStr = queryStr + " AND $colTag1 = '$searchTag1' AND $colIsDone = 0";
+    }
+    if (searchGoal1 != null) {
+      queryStr = queryStr + " AND $colGoal1 = '$searchGoal1' AND $colIsDone = 0";
     }
 
     var result = await db.rawQuery(queryStr);

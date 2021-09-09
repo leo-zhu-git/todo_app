@@ -86,8 +86,8 @@ class TaskHomeState extends State {
               IconButton(
                 icon: Icon(Icons.add, color: Colors.white),
                 onPressed: () {
-                  navigateToDetail(Task("", "", "", "", "", "", "", "", 0, "",
-                      "", "", 0, "", "", "", "", "", "", "", ""));
+                  navigateToDetail(Task("", "", "", "", "", "", "", "", "", "",
+                      "", "", "", 0, "", "", "", "", "", "", ""));
                   getData();
 //                  mysqlDBhelper.syncTaskDataFromMySql();
                 },
@@ -250,7 +250,8 @@ class TaskHomeState extends State {
           getSortColumn(_sortField3),
           getOrderColumn(_sortOrder3),
           getDueDateColumn(_filterDateDue),
-          globals.filterIsDone);
+          globals.filterIsDone,
+          "0");
       // final tasksFuture = helper.getTasksFromLastFewDays();
       tasksFuture.then((result) {
         List<Task> taskList = List<Task>();
@@ -266,12 +267,12 @@ class TaskHomeState extends State {
           switch (globals.showMain1) {
             case 0:
               {
-                taskList[i].main1 = taskList[i].title;
+                taskList[i].main1 = taskList[i].task;
               }
               break;
             case 1:
               {
-                taskList[i].main1 = taskList[i].description;
+                taskList[i].main1 = taskList[i].note;
               }
               break;
             case 2:
@@ -311,7 +312,7 @@ class TaskHomeState extends State {
               break;
             default:
               {
-                taskList[i].main1 = taskList[i].title;
+                taskList[i].main1 = taskList[i].task;
               }
               break;
           }
@@ -322,12 +323,12 @@ class TaskHomeState extends State {
           switch (globals.showMain2) {
             case 0:
               {
-                taskList[i].main2 = taskList[i].title;
+                taskList[i].main2 = taskList[i].task;
               }
               break;
             case 1:
               {
-                taskList[i].main2 = taskList[i].description;
+                taskList[i].main2 = taskList[i].note;
               }
               break;
             case 2:
@@ -367,7 +368,7 @@ class TaskHomeState extends State {
               break;
             default:
               {
-                taskList[i].main2 = taskList[i].title;
+                taskList[i].main2 = taskList[i].task;
               }
               break;
           }
@@ -378,12 +379,12 @@ class TaskHomeState extends State {
           switch (globals.showSec1) {
             case 0:
               {
-                taskList[i].sec1 = taskList[i].title;
+                taskList[i].sec1 = taskList[i].task;
               }
               break;
             case 1:
               {
-                taskList[i].sec1 = taskList[i].description;
+                taskList[i].sec1 = taskList[i].note;
               }
               break;
             case 2:
@@ -434,12 +435,12 @@ class TaskHomeState extends State {
           switch (globals.showSec2) {
             case 0:
               {
-                taskList[i].sec2 = taskList[i].title;
+                taskList[i].sec2 = taskList[i].task;
               }
               break;
             case 1:
               {
-                taskList[i].sec2 = taskList[i].description;
+                taskList[i].sec2 = taskList[i].note;
               }
               break;
             case 2:
@@ -490,12 +491,12 @@ class TaskHomeState extends State {
           switch (globals.showSec3) {
             case 0:
               {
-                taskList[i].sec3 = taskList[i].title;
+                taskList[i].sec3 = taskList[i].task;
               }
               break;
             case 1:
               {
-                taskList[i].sec3 = taskList[i].description;
+                taskList[i].sec3 = taskList[i].note;
               }
               break;
             case 2:
@@ -607,10 +608,10 @@ class TaskHomeState extends State {
   String getSortColumn(int column) {
     switch (column) {
       case 0:
-        return "title";
+        return "task";
         break;
       case 1:
-        return "description";
+        return "note";
         break;
       case 2:
         return "dateDue";
@@ -635,7 +636,7 @@ class TaskHomeState extends State {
         break;
 
       default:
-        return "title";
+        return "task";
         break;
     }
   }
@@ -673,6 +674,7 @@ class TaskHomeState extends State {
         break;
     }
   }
+
 
 //Sort column names are defined here but if there is any changes in column name update here
   String getOrderColumn(int column) {

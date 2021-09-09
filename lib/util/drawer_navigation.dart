@@ -108,6 +108,13 @@ class _DrawerNagivation extends State<DrawerNagivation> {
             ),
             Divider(),
             ListTile(
+              leading: Icon(Icons.bookmark_border_rounded),
+              title: Text('Goals'),
+              onTap: () => Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => Goal1sScreen())),
+            ),
+            Divider(),
+            ListTile(
               leading: Icon(Icons.cloud_download_outlined),
               title: Text('Wipe'),
               onTap: () => Navigator.of(context)

@@ -166,16 +166,16 @@ class CustomSettings {
     this._filterTag = newFilterTag;
   }
 
+  set filterGoal(String newFilterGoal) {
+    this._filterGoal = newFilterGoal;
+  }
+
   set filterStatus(String newFilterStatus) {
     this._filterStatus = newFilterStatus;
   }
 
   set filterPriority(String newFilterPriority) {
     this._filterPriority = newFilterPriority;
-  }
-
-  set filterGoal(String newFilterGoal) {
-    this._filterGoal = newFilterGoal;
   }
 
   set filterStar(String newFilterStar) {
@@ -235,7 +235,7 @@ class CustomSettings {
     this._filterContext = o['filterContext'];
     this._filterLocation = o['filterLocation'];
     this._filterTag = o['filterTag'];
-    this._filterStatus = o['filterstatus'];
+    this._filterStatus = o['filterStatus'];
     this._filterPriority = o['filterPriority'];
     this._filterGoal = o['filterGoal'];
     this._filterStar = o['filterStar'];

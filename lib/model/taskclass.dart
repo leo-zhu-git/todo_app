@@ -11,8 +11,13 @@ class DisplayTask {
 
 class Task {
   int _id;
-  String _title;
-  String _description;
+  String _task;
+  String _note;
+  String _dateDue;
+  String _timeDue;
+  String _status;
+  String _priority;
+  String _star;
   String _category;
   String _action1;
   String _context1;
@@ -25,13 +30,8 @@ class Task {
   String _location1Text;
   String _tag1Text;
   String _goal1Text;
-  int _priorityvalue;
-  String _prioritytext;
-  String _dateDue;
-  String _timeDue;
   int _isDone;
   String _dateDone;
-  String _status;
   String _lastModified;
   String _main1;
   String _main2;
@@ -40,21 +40,21 @@ class Task {
   String _sec3;
 
   Task(
-      this._title,
-      this._description,
+      this._task,
+      this._note,
+      this._dateDue,
+      this._timeDue,
+      this._status,
+      this._priority,
+      this._star,
       this._category,
       this._action1,
       this._context1,
       this._location1,
       this._tag1,
       this._goal1,
-      this._priorityvalue,
-      this._prioritytext,
-      this._dateDue,
-      this._timeDue,
       this._isDone,
       this._dateDone,
-      this._status,
       this._lastModified,
       this._main1,
       this._main2,
@@ -63,21 +63,21 @@ class Task {
       this._sec3);
   Task.withId(
       this._id,
-      this._title,
-      this._description,
+      this._task,
+      this._note,
+      this._dateDue,
+      this._timeDue,
+      this._status,
+      this._priority,
+      this._star,
       this._category,
       this._action1,
       this._context1,
       this._location1,
       this._tag1,
       this._goal1,
-      this._priorityvalue,
-      this._prioritytext,
-      this._dateDue,
-      this._timeDue,
       this._isDone,
       this._dateDone,
-      this._status,
       this._lastModified,
       this._main1,
       this._main2,
@@ -85,8 +85,13 @@ class Task {
       this._sec2,
       this._sec3);
   int get id => _id;
-  String get title => _title;
-  String get description => _description;
+  String get task => _task;
+  String get note => _note;
+  String get dateDue => _dateDue;
+  String get timeDue => _timeDue;
+  String get status => _status;
+  String get priority => _priority;
+  String get star => _star;
   String get category => _category;
   String get action1 => _action1;
   String get context1 => _context1;
@@ -99,13 +104,8 @@ class Task {
   String get location1Text => _location1Text;
   String get tag1Text => _tag1Text;
   String get goal1Text => _goal1Text;
-  int get priorityvalue => _priorityvalue;
-  String get prioritytext => _prioritytext;
-  String get dateDue => _dateDue;
-  String get timeDue => _timeDue;
   int get isDone => _isDone;
   String get dateDone => _dateDone;
-  String get status => _status;
   String get lastModified => _lastModified;
   String get main1 => _main1;
   String get main2 => _main2;
@@ -113,12 +113,32 @@ class Task {
   String get sec2 => _sec2;
   String get sec3 => _sec3;
 
-  set title(String newTitle) {
-    this._title = newTitle;
+  set task(String newTask) {
+    this._task = newTask;
   }
 
-  set description(String newDescription) {
-    this._description = newDescription;
+  set note(String newNote) {
+    this._note = newNote;
+  }
+
+  set dateDue(String newDatedue) {
+    this._dateDue = newDatedue;
+  }
+
+  set timeDue(String newTimedue) {
+    this._timeDue = newTimedue;
+  }
+
+  set status(String newStatus) {
+    this._status = newStatus;
+  }
+
+  set priority(String newPriority) {
+    this._priority = newPriority;
+  }
+
+  set star(String newStar) {
+    this._star = newStar;
   }
 
   set category(String newcategory) {
@@ -169,36 +189,12 @@ class Task {
     this._goal1 = newGoalText;
   }
 
-  set priorityvalue(int newPriorityv) {
-    // if (newPriorityv >= 0 && newPriorityv <= 3) {
-    this._priorityvalue = newPriorityv;
-    //}
-  }
-
-  set prioritytext(String newPriorityt) {
-    // if (newPriorityt.length <= 255) {
-    this._prioritytext = newPriorityt;
-    //}
-  }
-
-  set dateDue(String newDatedue) {
-    this._dateDue = newDatedue;
-  }
-
-  set timeDue(String newTimedue) {
-    this._timeDue = newTimedue;
-  }
-
   set isDone(int newisDone) {
     this._isDone = newisDone;
   }
 
   set dateDone(String newDateDone) {
     this._dateDone = newDateDone;
-  }
-
-  set status(String newStatus) {
-    this._status = newStatus;
   }
 
   set lastModified(String newLastModified) {
@@ -226,41 +222,41 @@ class Task {
   }
 
   String colId = 'id';
-  String colTitle = 'title';
-  String colDescription = '';
+  String colTask = 'task';
+  String colNote = '';
+  String colDateDue = '';
+  String colTimeDue = '';
+  String colStatus = '';
+  String colPriority = '';
+  String colStar = '';
   String colCategory = '';
   String colAction1 = '';
   String colContext1 = '';
   String colLocation1 = '';
   String colTag1 = '';
   String colGoal1 = '';
-  String colPriorityint = '';
-  String colPrioritytxt = '';
-  String colDateDue = '';
-  String colTimeDue = '';
   String colIsDone = '';
   String colDateDone = '';
   String colMain1 = '';
-  String colStatus = '';
   String colLastModified = '';
 
   Map<String, dynamic> toMap() {
     var map = Map<String, dynamic>();
-    map['title'] = _title;
-    map['description'] = _description;
+    map['task'] = _task;
+    map['note'] = _note;
+    map['dateDue'] = _dateDue;
+    map['timeDue'] = _timeDue;
+    map['status'] = _status;
+    map['priority'] = _priority;
+    map['star'] = _star;
     map['category'] = _category;
     map['action1'] = _action1;
     map['context1'] = _context1;
     map['location1'] = _location1;
     map['tag1'] = _tag1;
     map['goal1'] = _goal1;
-    map['priorityvalue'] = _priorityvalue;
-    map['prioritytext'] = _prioritytext;
-    map['dateDue'] = _dateDue;
-    map['timeDue'] = _timeDue;
     map['isDone'] = _isDone;
     map['dateDone'] = _dateDone;
-    map['status'] = _status;
     map['lastModified'] = _lastModified;
 
     if (_id != null) {
@@ -272,8 +268,13 @@ class Task {
 
   Task.fromObject(dynamic o) {
     this._id = o['id'];
-    this._title = o['title'];
-    this._description = o['description'];
+    this._task = o['task'];
+    this._note = o['note'];
+    this._dateDue = o['dateDue'];
+    this._timeDue = o['timeDue'];
+    this._status = o['status'];
+    this._priority = o['priority'];
+    this._star = o['star'];
     this._category = o['category'];
     this._action1 = o['action1'];
     this._context1 = o['context1'];
@@ -286,13 +287,8 @@ class Task {
     this._location1Text = o['location1name'] == null ? "" : o['location1name'];
     this._tag1Text = o['tag1name'] == null ? "" : o['tag1name'];
     this._goal1Text = o['goal1name'] == null ? "" : o['goal1name'];
-    this._priorityvalue = o['priorityvalue'];
-    this._prioritytext = o['prioritytext'];
-    this._dateDue = o['dateDue'];
-    this._timeDue = o['timeDue'];
     this._isDone = o['isDone'];
     this._dateDone = o['dateDone'];
-    this._status = o['status'];
     this._lastModified = o['lastModified'];
     this._main1 = o['main1'];
     this._main2 = o['main2'];

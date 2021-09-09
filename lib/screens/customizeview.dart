@@ -20,15 +20,19 @@ class SortItem {
   SortItem(this.id, this.name);
   static List<SortItem> getSort() {
     return <SortItem>[
-      SortItem(0, 'Title'),
-      SortItem(1, 'Description'),
+      SortItem(0, 'Task'),
+      SortItem(1, 'Note'),
       SortItem(2, 'Due Date'),
       SortItem(3, 'Due Time'),
-      SortItem(4, 'Category'),
-      SortItem(5, 'Action'),
-      SortItem(6, 'Context'),
-      SortItem(7, 'Location'),
-      SortItem(8, 'Tag'),
+      SortItem(4, 'Status'),
+      SortItem(5, 'Priority'),
+      SortItem(6, 'Star'),
+      SortItem(7, 'Category'),
+      SortItem(8, 'Action'),
+      SortItem(9, 'Context'),
+      SortItem(10, 'Location'),
+      SortItem(11, 'Tag'),
+      SortItem(12, 'Goal'),
     ];
   }
 }
@@ -40,8 +44,8 @@ class FilterIsDone {
   FilterIsDone(this.id, this.name);
   static List<FilterIsDone> getIsDone() {
     return <FilterIsDone>[
-      FilterIsDone(0, 'Hide'),
-      FilterIsDone(1, 'Show'),
+      FilterIsDone(0, '-- Completed Tasks - Show --'),
+      FilterIsDone(1, 'Completed Tasks - Hide'),
     ];
   }
 }
@@ -53,82 +57,67 @@ class FilterDateDue {
   FilterDateDue(this.id, this.name);
   static List<FilterDateDue> getDateDue() {
     return <FilterDateDue>[
-      FilterDateDue(0, 'Today'),
-      FilterDateDue(1, 'Tomorrow'),
-      FilterDateDue(2, 'Next 7 days'),
-      FilterDateDue(3, 'Next 30 days'),
-      FilterDateDue(4, 'Any Due Date'),
-      FilterDateDue(5, 'No Due Date'),
-      FilterDateDue(6, 'Overdues Only'),
-      FilterDateDue(7, 'All Tasks'),
+      FilterDateDue(0, '-- All Tasks --'),
+      FilterDateDue(1, 'Today'),
+      FilterDateDue(2, 'Tomorrow'),
+      FilterDateDue(3, 'Next 7 days'),
+      FilterDateDue(4, 'Next 30 days'),
+      FilterDateDue(5, 'Any Due Date'),
+      FilterDateDue(6, 'No Due Date'),
+      FilterDateDue(7, 'Overdues Only'),
     ];
   }
 }
 
-class FilterCategory {
+class FilterStatus {
   int id;
   String name;
 
-  FilterCategory(this.id, this.name);
-  static List<FilterCategory> getCategory() {
-    return <FilterCategory>[
-      FilterCategory(0, '--- All Categories ---'),
-      FilterCategory(1, 'Test'),
+  FilterStatus(this.id, this.name);
+  static List<FilterStatus> getStatus() {
+    return <FilterStatus>[
+      FilterStatus(0, '-- All Statuses -- '),
+      FilterStatus(1, 'Next Action'),
+      FilterStatus(2, 'Action'),
+      FilterStatus(3, 'Planning'),
+      FilterStatus(4, 'Delegated'),
+      FilterStatus(5, 'Waiting'),
+      FilterStatus(6, 'Hold'),
     ];
   }
 }
 
-class FilterAction {
+
+class FilterPriority {
   int id;
   String name;
 
-  FilterAction(this.id, this.name);
-  static List<FilterAction> getAction() {
-    return <FilterAction>[
-      FilterAction(0, '--- All Actions ---'),
-      FilterAction(1, 'Test'),
+  FilterPriority(this.id, this.name);
+  static List<FilterPriority> getPriority() {
+    return <FilterPriority>[
+      FilterPriority(0, '-- All Priorities --'),
+      FilterPriority(1, 'Low'),
+      FilterPriority(2, 'Medium'),
+      FilterPriority(3, 'High'),
+      FilterPriority(4, 'Top'),
     ];
   }
 }
 
-class FilterContext {
+class FilterStar {
   int id;
   String name;
 
-  FilterContext(this.id, this.name);
-  static List<FilterContext> getContext() {
-    return <FilterContext>[
-      FilterContext(0, '--- All Contexts ---'),
-      FilterContext(1, 'Test'),
+  FilterStar(this.id, this.name);
+  static List<FilterStar> getStar() {
+    return <FilterStar>[
+      FilterStar(0, '-- All Star/ No Star -- '),
+      FilterStar(1, 'No Star'),
+      FilterStar(2, 'Star Only'),
     ];
   }
 }
 
-class FilterLocation {
-  int id;
-  String name;
-
-  FilterLocation(this.id, this.name);
-  static List<FilterLocation> getLocation() {
-    return <FilterLocation>[
-      FilterLocation(0, '--- All Locations ---'),
-      FilterLocation(1, 'Test'),
-    ];
-  }
-}
-
-class FilterTag {
-  int id;
-  String name;
-
-  FilterTag(this.id, this.name);
-  static List<FilterTag> getTag() {
-    return <FilterTag>[
-      FilterTag(0, '--- All Tags ---'),
-      FilterTag(1, 'Test'),
-    ];
-  }
-}
 
 class SortOrder {
   int id;
@@ -149,27 +138,31 @@ class _CustomizeViewState extends State //State<CustomizeView>
   List<SortOrder> _order = SortOrder.getOrder();
   List<FilterIsDone> _filterIsDone = FilterIsDone.getIsDone();
   List<FilterDateDue> _filterDateDue = FilterDateDue.getDateDue();
-//  List<FilterCategory> _filterCategory = FilterCategory.getCategory();
-//  List<FilterAction> _filterAction = FilterAction.getAction();
-//  List<FilterContext> _filterContext = FilterContext.getContext();
-//  List<FilterLocation> _filterLocation = FilterLocation.getLocation();
-//  List<FilterTag> _filterTag = FilterTag.getTag();
+  List<FilterStatus> _filterStatus = FilterStatus.getStatus();
+  List<FilterPriority> _filterPriority = FilterPriority.getPriority();
+  List<FilterStar> _filterStar = FilterStar.getStar();
   List<DropdownMenuItem<SortItem>> _dropdownMenuItemsSort;
   List<DropdownMenuItem<SortOrder>> _dropdownMenuSortOrder;
   List<DropdownMenuItem<FilterIsDone>> _dropdownFilterIsDone;
   List<DropdownMenuItem<FilterDateDue>> _dropdownFilterDateDue;
-  List<DropdownMenuItem<FilterCategory>> _dropdownFilterCategory;
-  List<DropdownMenuItem<FilterAction>> _dropdownFilterAction;
-  List<DropdownMenuItem<FilterContext>> _dropdownFilterContext;
-  List<DropdownMenuItem<FilterLocation>> _dropdownFilterLocation;
-  List<DropdownMenuItem<FilterTag>> _dropdownFilterTag;
+  List<DropdownMenuItem<FilterStatus>> _dropdownFilterStatus;
+  List<DropdownMenuItem<FilterPriority>> _dropdownFilterPriority;
+  List<DropdownMenuItem<FilterStar>> _dropdownFilterStar;
+//  List<DropdownMenuItem<FilterCategory>> _dropdownFilterCategory;
+//  List<DropdownMenuItem<FilterAction>> _dropdownFilterAction;
+//  List<DropdownMenuItem<FilterContext>> _dropdownFilterContext;
+//  List<DropdownMenuItem<FilterLocation>> _dropdownFilterLocation;
+//  List<DropdownMenuItem<FilterTag>> _dropdownFilterTag;
   FilterIsDone _selectedFilterIsDone;
   FilterDateDue _selectedFilterDateDue;
-  FilterCategory _selectedFilterCategory;
-  FilterAction _selectedFilterAction;
-  FilterContext _selectedFilterContext;
-  FilterLocation _selectedFilterLocation;
-  FilterTag _selectedFilterTag;
+  FilterStatus _selectedFilterStatus;
+  FilterPriority _selectedFilterPriority;
+  FilterStar _selectedFilterStar;
+//  FilterCategory _selectedFilterCategory;
+//  FilterAction _selectedFilterAction;
+//  FilterContext _selectedFilterContext;
+//  FilterLocation _selectedFilterLocation;
+//  FilterTag _selectedFilterTag;
   SortItem _selectedSortField1;
   SortOrder _selectedSortOrder1;
   SortItem _selectedSortField2;
@@ -188,6 +181,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
   List<CustomDropdownItem> _context1s = [];
   List<CustomDropdownItem> _location1s = [];
   List<CustomDropdownItem> _tag1s = [];
+  List<CustomDropdownItem> _goal1s = [];
   List<Task> tasklist;
   int count = 0;
   TextEditingController searchController = TextEditingController();
@@ -196,6 +190,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
   var _selectedContext1 = null;
   var _selectedLocation1 = null;
   var _selectedTag1 = null;
+  var _selectedGoal1 = null;
 
   //
   @override
@@ -205,29 +200,63 @@ class _CustomizeViewState extends State //State<CustomizeView>
     _dropdownMenuSortOrder = buildDropdownMenuOrder(_order);
     _dropdownFilterIsDone = buildDropdownFilterIsDone(_filterIsDone);
     _dropdownFilterDateDue = buildDropdownFilterDateDue(_filterDateDue);
+    _dropdownFilterStatus = buildDropdownFilterStatus(_filterStatus);
+    _dropdownFilterPriority = buildDropdownFilterPriority(_filterPriority);
+    _dropdownFilterStar = buildDropdownFilterStar(_filterStar);
     _loadCategories();
     _loadAction1s();
     _loadContext1s();
     _loadLocation1s();
     _loadTag1s();
+    _loadGoal1s();
 
     _getCustomSettings();
     ////////////////////////////
     /// filter - date due
     ////////////////////////////
     if (globals.filterDateDue == null) {
-      _selectedFilterDateDue = _dropdownFilterDateDue[7].value;
-      globals.filterDateDue = 7;
+      _selectedFilterDateDue = _dropdownFilterDateDue[0].value;
+      globals.filterDateDue = 0;
     } else
       _selectedFilterDateDue =
           _dropdownFilterDateDue[globals.filterDateDue].value;
 
     ////////////////////////////
+    /// filter - status
+    ////////////////////////////
+    if (globals.filterStatus == null) {
+      _selectedFilterStatus = _dropdownFilterStatus[0].value;
+      globals.filterStatus = 0;
+    } else
+      _selectedFilterStatus =
+          _dropdownFilterStatus[globals.filterStatus].value;
+
+    ////////////////////////////
+    /// filter - priority
+    ////////////////////////////
+    if (globals.filterPriority == null) {
+      _selectedFilterPriority = _dropdownFilterPriority[0].value;
+      globals.filterPriority = 0;
+    } else
+      _selectedFilterPriority =
+          _dropdownFilterPriority[globals.filterPriority].value;
+
+    ////////////////////////////
+    /// filter - star
+    ////////////////////////////
+    if (globals.filterStar == null) {
+      _selectedFilterStar = _dropdownFilterStar[0].value;
+      globals.filterStar = 0;
+    } else
+      _selectedFilterStar =
+          _dropdownFilterStar[globals.filterStar].value;
+
+    ////////////////////////////
     /// filter - is done
     ////////////////////////////
     if (globals.filterIsDone == null) {
-      _selectedFilterIsDone = _dropdownFilterIsDone[1].value;
-      globals.filterIsDone = 1;
+      _selectedFilterIsDone = _dropdownFilterIsDone[0].value;
+      globals.filterIsDone = 0;
     } else
       _selectedFilterIsDone = _dropdownFilterIsDone[globals.filterIsDone].value;
 
@@ -310,7 +339,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
-    cus.name = "-- Filter Category --";
+    cus.name = "-- All Categories --";
     _categories.add(cus);
     categories.forEach((category) {
       setState(() {
@@ -334,7 +363,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
-    cus.name = "-- Filter Action --             ";
+    cus.name = "-- All Actions --             ";
     _action1s.add(cus);
     action1s.forEach((action1) {
       setState(() {
@@ -358,7 +387,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
-    cus.name = "-- Filter Context --            ";
+    cus.name = "-- All Contexts --            ";
     _context1s.add(cus);
     context1s.forEach((context1) {
       setState(() {
@@ -380,7 +409,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
-    cus.name = "-- Filter Location --           ";
+    cus.name = "-- All Locations --           ";
     _location1s.add(cus);
     location1s.forEach((location1) {
       setState(() {
@@ -404,7 +433,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
-    cus.name = "-- Filter Tag --                ";
+    cus.name = "-- All Tags --                ";
     _tag1s.add(cus);
     tag1s.forEach((tag1) {
       setState(() {
@@ -418,6 +447,29 @@ class _CustomizeViewState extends State //State<CustomizeView>
 
         cus.name = tempTag;
         _tag1s.add(cus);
+      });
+    });
+  }
+
+  _loadGoal1s() async {
+    var goal1s = await helper.getGoals();
+    CustomDropdownItem cus;
+    cus = new CustomDropdownItem();
+    cus.id = null;
+    cus.name = "-- All Goals --                ";
+    _goal1s.add(cus);
+    goal1s.forEach((goal) {
+      setState(() {
+        cus = new CustomDropdownItem();
+        cus.id = goal['id'].toString();
+        String tempGoal;
+        if (goal['name'].toString().length > 30)
+          tempGoal = goal['name'].toString().substring(0, 30) + "...";
+        else
+          tempGoal = goal['name'];
+
+        cus.name = tempGoal;
+        _goal1s.add(cus);
       });
     });
   }
@@ -478,6 +530,48 @@ class _CustomizeViewState extends State //State<CustomizeView>
     return items;
   }
 
+  List<DropdownMenuItem<FilterStatus>> buildDropdownFilterStatus(
+      List filterStatusItems) {
+    List<DropdownMenuItem<FilterStatus>> items = List();
+    for (FilterStatus filterStatus in filterStatusItems) {
+      items.add(
+        DropdownMenuItem(
+          value: filterStatus,
+          child: Text(filterStatus.name),
+        ),
+      );
+    }
+    return items;
+  }
+
+  List<DropdownMenuItem<FilterPriority>> buildDropdownFilterPriority(
+      List filterPriorityItems) {
+    List<DropdownMenuItem<FilterPriority>> items = List();
+    for (FilterPriority filterPriority in filterPriorityItems) {
+      items.add(
+        DropdownMenuItem(
+          value: filterPriority,
+          child: Text(filterPriority.name),
+        ),
+      );
+    }
+    return items;
+  }
+
+  List<DropdownMenuItem<FilterStar>> buildDropdownFilterStar(
+      List filterStarItems) {
+    List<DropdownMenuItem<FilterStar>> items = List();
+    for (FilterStar filterStar in filterStarItems) {
+      items.add(
+        DropdownMenuItem(
+          value: filterStar,
+          child: Text(filterStar.name),
+        ),
+      );
+    }
+    return items;
+  }
+
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
   _showSuccessSnackBar(message) {
     var _snackBar = SnackBar(content: message);
@@ -504,7 +598,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
 ///////////////////////////
 //  Filter Date Due
 ///////////////////////////
-              Text("Filter - Due Date, Completed... Dimensions"),
+              Text("Filter - Reduce tasks to view"),
 
               new Container(
                 margin: const EdgeInsets.all(2.0),
@@ -521,6 +615,66 @@ class _CustomizeViewState extends State //State<CustomizeView>
                   },
                 ),
               ),
+
+///////////////////////////
+//  Filter Status
+///////////////////////////
+
+              new Container(
+                margin: const EdgeInsets.all(2.0),
+                decoration: BoxDecoration(
+                    shape: BoxShape.rectangle, color: Colors.blue[100]),
+                child: DropdownButtonFormField(
+                  items: _dropdownFilterStatus,
+                  hint: Text('Filter by Status'),
+                  value: _selectedFilterStatus,
+                  onChanged: (selectedFilterStatus) {
+                    setState(() {
+                      _selectedFilterStatus = selectedFilterStatus;
+                    });
+                  },
+                ),
+              ),
+
+///////////////////////////
+//  Filter Priority
+///////////////////////////
+
+              new Container(
+                margin: const EdgeInsets.all(2.0),
+                decoration: BoxDecoration(
+                    shape: BoxShape.rectangle, color: Colors.blue[100]),
+                child: DropdownButtonFormField(
+                  items: _dropdownFilterPriority,
+                  hint: Text('Filter by Priority'),
+                  value: _selectedFilterPriority,
+                  onChanged: (selectedFilterPriority) {
+                    setState(() {
+                      _selectedFilterPriority = selectedFilterPriority;
+                    });
+                  },
+                ),
+              ),
+
+///////////////////////////
+//  Filter Star
+///////////////////////////
+              new Container(
+                margin: const EdgeInsets.all(2.0),
+                decoration: BoxDecoration(
+                    shape: BoxShape.rectangle, color: Colors.blue[100]),
+                child: DropdownButtonFormField(
+                  items: _dropdownFilterStar ,
+                  hint: Text('Filter by Star'),
+                  value: _selectedFilterStar,
+                  onChanged: (selectedFilterStar) {
+                    setState(() {
+                      _selectedFilterStar = selectedFilterStar;
+                    });
+                  },
+                ),
+              ),
+
 
 ///////////////////////////
 //  Filter Is Done
@@ -659,6 +813,30 @@ class _CustomizeViewState extends State //State<CustomizeView>
                       onChanged: (value) {
                         setState(() {
                           _selectedTag1 = value;
+                        });
+                      },
+                    )
+                  ],
+                ),
+              ),
+
+// //######### Goal  #########
+              Container(
+                margin: const EdgeInsets.all(2.0),
+                decoration: BoxDecoration(
+                    shape: BoxShape.rectangle, color: Colors.blue[100]),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    DropdownButton<String>(
+                      items: _goal1s.map((CustomDropdownItem value) {
+                        return DropdownMenuItem<String>(
+                            value: value.id, child: Text(value.name));
+                      }).toList(),
+                      value: _selectedGoal1,
+                      onChanged: (value) {
+                        setState(() {
+                          _selectedGoal1 = value;
                         });
                       },
                     )
@@ -932,16 +1110,22 @@ class _CustomizeViewState extends State //State<CustomizeView>
                             globals.filterIsDone = _selectedFilterIsDone.id;
                           if (_selectedFilterDateDue != null)
                             globals.filterDateDue = _selectedFilterDateDue.id;
-                          if (_selectedFilterCategory != null)
-                            globals.filterCategory = _selectedFilterCategory.id;
-                          if (_selectedFilterAction != null)
-                            globals.filterAction = _selectedFilterAction.id;
-                          if (_selectedFilterContext != null)
-                            globals.filterContext = _selectedFilterContext.id;
-                          if (_selectedFilterLocation != null)
-                            globals.filterLocation = _selectedFilterLocation.id;
-                          if (_selectedFilterTag != null)
-                            globals.filterTag = _selectedFilterTag.id;
+                          if (_selectedFilterStatus != null)
+                            globals.filterStatus = _selectedFilterStatus.id;
+                          if (_selectedFilterPriority != null)
+                            globals.filterPriority = _selectedFilterPriority.id;
+                          if (_selectedFilterStar != null)
+                            globals.filterStar = _selectedFilterStar.id;
+//                          if (_selectedFilterCategory != null)
+//                            globals.filterCategory = _selectedFilterCategory.id;
+//                          if (_selectedFilterAction != null)
+//                            globals.filterAction = _selectedFilterAction.id;
+//                          if (_selectedFilterContext != null)
+//                            globals.filterContext = _selectedFilterContext.id;
+//                          if (_selectedFilterLocation != null)
+//                            globals.filterLocation = _selectedFilterLocation.id;
+//                          if (_selectedFilterTag != null)
+//                            globals.filterTag = _selectedFilterTag.id;
 
 //Save
                           if (customSetting == null) {
@@ -1035,6 +1219,10 @@ class _CustomizeViewState extends State //State<CustomizeView>
                           customSetting.filterTag = _selectedTag1 == null
                               ? ""
                               : _selectedTag1.toString();
+                          customSetting.filterGoal = _selectedGoal1 == null
+                              ? ""
+                              : _selectedGoal1.toString();
+
 
                           var result;
 
@@ -1154,6 +1342,27 @@ class _CustomizeViewState extends State //State<CustomizeView>
         globals.filterDateDue = int.parse(customSetting.filterDateDue);
       }
 
+      if (customSetting.filterStatus != "") {
+        _selectedFilterStatus =
+            _dropdownFilterStatus[int.parse(customSetting.filterStatus)]
+                .value;
+        globals.filterStatus = int.parse(customSetting.filterStatus);
+      }
+
+      if (customSetting.filterPriority != "") {
+        _selectedFilterPriority =
+            _dropdownFilterPriority[int.parse(customSetting.filterPriority)]
+                .value;
+        globals.filterPriority = int.parse(customSetting.filterPriority);
+      }
+
+      if (customSetting.filterStar != "") {
+        _selectedFilterStar =
+            _dropdownFilterStar[int.parse(customSetting.filterStar)]
+                .value;
+        globals.filterStar = int.parse(customSetting.filterStar);
+      }
+
       ////////////////////////////
       /// filter - category
       ////////////////////////////
@@ -1186,6 +1395,14 @@ class _CustomizeViewState extends State //State<CustomizeView>
       } else {
         _selectedTag1 = customSetting.filterTag.toString();
         globals.filterTag = int.parse(customSetting.filterTag);
+      }
+
+      if (customSetting.filterGoal == "") {
+        _selectedGoal1 = null;
+        customSetting.filterGoal = null;
+      } else {
+        _selectedGoal1 = customSetting.filterGoal.toString();
+        globals.filterGoal = int.parse(customSetting.filterGoal);
       }
 
       if (customSetting.filterLocation == "") {
