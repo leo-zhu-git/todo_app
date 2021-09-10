@@ -48,17 +48,18 @@ class DbHelper {
   String colshowSec1 = 'showSec1';
   String colshowSec2 = 'showSec2';
   String colshowSec3 = 'showSec3';
-  String colfilterIsDone = 'filterIsDone';
   String colfilterDateDue = 'filterDateDue';
+  String colfilterTimeDue = 'filterTimeDue';
   String colfilterStatus = 'filterStatus';
   String colfilterPriority = 'filterPriority';
-  String colfilterGoal = 'filterGoal';
   String colfilterStar = 'filterStar';
   String colfilterCategory = 'filterCategory';
   String colfilterAction = 'filterAction';
   String colfilterContext = 'filterContext';
   String colfilterLocation = 'filterLocation';
   String colfilterTag = 'filterTag';
+  String colfilterGoal = 'filterGoal';
+  String colfilterIsDone = 'filterIsDone';
 
   DbHelper._internal();
 
@@ -77,7 +78,7 @@ class DbHelper {
 
   Future<Database> initializeDb() async {
     Directory dir = await getApplicationDocumentsDirectory();
-    String path = dir.path + "todo_V19.e.db";
+    String path = dir.path + "todo_V19.j.db";
     var dbTodovn = await openDatabase(path, version: 1, onCreate: _createDb);
     return dbTodovn;
   }
@@ -86,17 +87,19 @@ class DbHelper {
     await db.execute(
         "CREATE TABLE $tblTodo($colId INTEGER PRIMARY KEY, $colTask TEXT, $colNote TEXT, " +
         "$colDateDue TEXT, $colTimeDue TEXT, $colStatus TEXT, $colPriority TEXT, $colStar TEXT, " +
-            " $colCategory TEXT, $colAction1 TEXT, " +
+            "$colCategory TEXT, $colAction1 TEXT, " +
             "$colContext1 TEXT, $colLocation1 TEXT, $colTag1 TEXT, $colGoal1 TEXT, " +
-            " $colIsDone INTEGER, $colDateDone TEXT, $colLastModified TEXT)");
+            "$colIsDone INTEGER, $colDateDone TEXT, $colLastModified TEXT)");
 
 //this table need to include hash key to track users.... i would say all the tables
     await db.execute(
         "CREATE TABLE $tblCustomSettings($colId INTEGER PRIMARY KEY, $colsortField1 TEXT, $colsortOrder1 TEXT, $colsortField2 TEXT, " +
             "$colsortOrder2 TEXT, $colsortField3 TEXT, $colsortOrder3 TEXT, $colshowMain1 TEXT,$colshowMain2 TEXT, " +
             "$colshowSec1 TEXT,$colshowSec2 TEXT,$colshowSec3 TEXT, " +
-            "$colfilterIsDone INTEGER, $colfilterDateDue TEXT, $colfilterCategory TEXT, $colfilterAction TEXT, $colfilterContext TEXT, $colfilterLocation TEXT, $colfilterTag TEXT, " +
-            "$colfilterGoal TEXT, $colfilterStatus TEXT, $colfilterPriority TEXT, $colfilterStar TEXT)");
+            "$colfilterDateDue TEXT, $colfilterTimeDue TEXT, " +
+            "$colfilterStatus TEXT, $colfilterPriority TEXT, $colfilterStar TEXT, "+
+            "$colfilterCategory TEXT, $colfilterAction TEXT, $colfilterContext TEXT, $colfilterLocation TEXT, $colfilterTag TEXT, " +
+            "$colfilterGoal TEXT, $colfilterIsDone INTEGER)");
 
     // Create table categories
     await db.execute(
@@ -138,7 +141,6 @@ class DbHelper {
   Future<List> getTasksByID(String taskID) async {
     Database db = await this.db;
     var result = await db
-//        .rawQuery("SELECT * FROM  where $colLastModified order by $colDateDue ASC");
         .rawQuery("SELECT * FROM todo where $colId = $taskID");
     return result;
   }
@@ -146,7 +148,6 @@ class DbHelper {
   Future<List> getAllTasks() async {
     Database db = await this.db;
     var result = await db
-//        .rawQuery("SELECT * FROM  where $colLastModified order by $colDateDue ASC");
         .rawQuery("SELECT * FROM todo where $colId < 6");
     return result;
   }
@@ -154,7 +155,6 @@ class DbHelper {
   Future<List> getTasksFromLastFewDays(int days) async {
     Database db = await this.db;
     var result = await db
-//        .rawQuery("SELECT * FROM  where $colLastModified order by $colDateDue ASC");
         .rawQuery(
             "SELECT * FROM todo where (julianday(Date('now')) - julianday(date($colLastModified)) > 3)");
 
@@ -164,7 +164,6 @@ class DbHelper {
   Future<List> getTasks() async {
     Database db = await this.db;
     var result = await db
-//        .rawQuery("SELECT * FROM $tblTodo order by $colDateDue ASC");
         .rawQuery(
             "SELECT * FROM $tblTodo where ($colIsDone != 1) order by $colCategory $colsortOrder1, $colDateDue ASC, $colTimeDue $colsortOrder2, $colTask $colsortOrder3");
     return result;
@@ -178,8 +177,10 @@ class DbHelper {
       String colsortField3,
       String colsortOrder3,
       String colfilterDateDue,
+      String colfilterTimeDue,
       int colfilterIsDone,
       String colfilterCategory) async {
+        
 ////////////////
     /// build query 0
 ////////////////
@@ -189,7 +190,7 @@ class DbHelper {
     queryStr = "SELECT $tblTodo.id,$tblTodo.task,$tblTodo.note,status, priority, star, $tblTodo.category,action1,context1,location1,tag1,goal1," +
         "dateDue,timeDue,isDone,dateDone,status,lastModified,categories.name as categoriesname, " +
         "action1s.name as action1name,context1s.name as context1name, location1s.name as location1name," +
-        " tag1s.name as tag1name, goal1s.name as goal1name    FROM $tblTodo  " +
+        " tag1s.name as tag1name, goal1s.name as goal1name  FROM $tblTodo  " +
         " LEFT JOIN categories ON  $tblTodo.category = categories.id" +
         " LEFT JOIN action1s ON $tblTodo.action1 = action1s.id " +
         " LEFT JOIN context1s ON  $tblTodo.context1 = context1s.id" +
@@ -497,43 +498,6 @@ class DbHelper {
 
 //######################### ENd of Contexts ##########################################
 
-//#########################Goal ##########################################
-
-  Future<int> insertGoals(Goal1 goal1s) async {
-    Database db = await this.db;
-
-    var result = await db.insert('goal1s', goal1s.goal1Map());
-    return result;
-  }
-
-  Future<List> getGoals() async {
-    Database db = await this.db;
-    var result = await db.rawQuery("SELECT * FROM goal1s");
-    return result;
-  }
-
-  Future<List> getGoalsbyID(int goal1Id) async {
-    Database db = await this.db;
-    var result = await db.rawQuery("SELECT * FROM goal1s WHERE id=$goal1Id");
-    return result;
-  }
-
-  Future<int> updateGoal(Goal1 goal1s) async {
-    Database db = await this.db;
-    var result = await db.update("goal1s", goal1s.goal1Map(),
-        where: "$colId =?", whereArgs: [goal1s.id]);
-    return result;
-  }
-
-  Future<int> deleteGoalbyID(int id) async {
-    int result;
-    Database db = await this.db;
-    result = await db.rawDelete('DELETE FROM goal1s WHERE id = $id');
-    return result;
-  }
-
-//######################### ENd of Goal ##########################################
-
 //#########################Locations ##########################################
 
   Future<int> insertLocations(Location1 location1s) async {
@@ -616,7 +580,51 @@ class DbHelper {
 
 //######################### ENd of Tag ##########################################
 
-//########################## Custom Settings #########################
+//######################### Goal ##########################################
+
+  Future<int> insertGoals(Goal1 goal1s) async {
+    Database db = await this.db;
+
+    var result = await db.insert('goal1s', goal1s.goal1Map());
+    return result;
+  }
+
+  Future<List> getGoals() async {
+    Database db = await this.db;
+    var result = await db.rawQuery("SELECT * FROM goal1s");
+    return result;
+  }
+
+  Future<List> getGoalsbyID(int goal1s) async {
+    Database db = await this.db;
+    var result = await db.rawQuery("SELECT * FROM goal1s WHERE id=$goal1s");
+    return result;
+  }
+
+  Future<int> updateGoals(Goal1 goal1s) async {
+    Database db = await this.db;
+    var result = await db.update("goal1s", goal1s.goal1Map(),
+        where: "$colId =?", whereArgs: [goal1s.id]);
+    return result;
+  }
+
+  Future<int> deleteGoalbyID(int id) async {
+    int result;
+    Database db = await this.db;
+    result = await db.rawDelete('DELETE FROM goal1s WHERE id = $id');
+    return result;
+  }
+
+  Future<int> deleteAllGoals() async {
+    int result;
+    Database db = await this.db;
+    result = await db.rawDelete('DELETE FROM goal1s WHERE id <> 0');
+    return result;
+  }
+
+//######################### ENd of Goal ##########################################/
+
+///########################## Custom Settings #########################
   Future<int> insertCustomSettings(CustomSettings customSetting) async {
     Database db = await this.db;
 

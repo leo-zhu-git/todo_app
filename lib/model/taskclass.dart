@@ -186,7 +186,7 @@ class Task {
   }
 
   set goal1Text(String newGoalText) {
-    this._goal1 = newGoalText;
+    this._goal1Text = newGoalText;
   }
 
   set isDone(int newisDone) {

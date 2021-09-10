@@ -313,8 +313,8 @@ class _CustomizeViewState extends State //State<CustomizeView>
       _selectedShowMain2 = _dropdownMenuItemsSort[globals.showMain2].value;
 
     if (globals.showSec1 == null) {
-      _selectedShowSec1 = _dropdownMenuItemsSort[2].value;
-      globals.showSec1 = 2;
+      _selectedShowSec1 = _dropdownMenuItemsSort[1].value;
+      globals.showSec1 = 1;
     } else
       _selectedShowSec1 = _dropdownMenuItemsSort[globals.showSec1].value;
 
@@ -1141,7 +1141,6 @@ class _CustomizeViewState extends State //State<CustomizeView>
                                 '',
                                 '',
                                 '',
-                                false,
                                 '',
                                 '',
                                 '',
@@ -1151,7 +1150,8 @@ class _CustomizeViewState extends State //State<CustomizeView>
                                 "",
                                 "",
                                 "",
-                                "");
+                                "",
+                             false,);
                           }
 
                           customSetting.sortField1 = _selectedSortField1 == null

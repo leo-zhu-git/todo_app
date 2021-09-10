@@ -148,7 +148,7 @@ class _Goal1sScreenState extends State<Goal1sScreen> {
                   _goal1.description =
                       _editGoal1DescriptionController.text;
 
-                  var result = await _goal1Service.updateGoal(_goal1);
+                  var result = await _goal1Service.updateGoals(_goal1);
                   print(result);
                   if (result > 0) {
                     Navigator.pop(context);

@@ -456,8 +456,6 @@ class TaskDetailState extends State //<TaskDetail>
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-//                  Text(" Catogory: ", style: _textStyleControls),
-//                  Spacer(),
                   DropdownButton<String>(
                       items: _categories.map((CustomDropdownItem value) {
                         return DropdownMenuItem<String>(
@@ -491,8 +489,6 @@ class TaskDetailState extends State //<TaskDetail>
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-//                  Text(" Action: ", style: _textStyleControls),
-//                  Spacer(),
                   DropdownButton<String>(
                       items: _action1s.map((CustomDropdownItem value) {
                         return DropdownMenuItem<String>(
@@ -525,8 +521,6 @@ class TaskDetailState extends State //<TaskDetail>
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-//                  Text(" Context: ", style: _textStyleControls),
-//                  Spacer(),
                   DropdownButton<String>(
                       items: _context1s.map((CustomDropdownItem value) {
                         return DropdownMenuItem<String>(
@@ -558,8 +552,6 @@ class TaskDetailState extends State //<TaskDetail>
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-//                  Text(" Location: ", style: _textStyleControls),
-//                  Spacer(),
                   DropdownButton<String>(
                       items: _location1s.map((CustomDropdownItem value) {
                         return DropdownMenuItem<String>(
@@ -591,8 +583,6 @@ class TaskDetailState extends State //<TaskDetail>
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-//                  Text(" Tag: ", style: _textStyleControls),
-//                  Spacer(),
                   DropdownButton<String>(
                       items: _tag1s.map((CustomDropdownItem value) {
                         return DropdownMenuItem<String>(
@@ -614,7 +604,37 @@ class TaskDetailState extends State //<TaskDetail>
               ),
             ),
 
-            //KK     // SizedBox(
+///////////////////////////
+//  GOAL
+///////////////////////////
+            Container(
+              margin:
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+              decoration: BoxDecoration(
+                  shape: BoxShape.rectangle, color: Colors.blue[100]),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  DropdownButton<String>(
+                      items: _goal1s.map((CustomDropdownItem value) {
+                        return DropdownMenuItem<String>(
+                            value: value.id,
+                            child: Text(
+                              value.name,
+                              overflow: TextOverflow.ellipsis,
+                            ));
+                      }).toList(),
+                      style: _textStyleControls,
+                      value: _selectedGoal1,
+                      onChanged: (String newValue) {
+                        setState(() {
+                          _selectedGoal1 = newValue;
+                          task.goal1 = newValue;
+                        });
+                      }),
+                ],
+              ),
+            ),            //KK     // SizedBox(
             //   height: 20,
             // ),
 
@@ -647,6 +667,8 @@ class TaskDetailState extends State //<TaskDetail>
                           : _selectedContext1.toString();
                       task.tag1 =
                           _selectedTag1 == null ? "" : _selectedTag1.toString();
+                      task.goal1 =
+                          _selectedGoal1 == null ? "" : _selectedGoal1.toString();
                       task.dateDue = _todoDateController.text;
                       task.timeDue = _todoTimeController.text;
                       task.isDone = 0;

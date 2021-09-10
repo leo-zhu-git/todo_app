@@ -58,7 +58,6 @@ class TaskHomeState extends State {
           IconButton(
               icon: const Icon(Icons.sync, color: Colors.white),
               tooltip: 'Sync',
-// LZ's code for sync
               onPressed: () {
                 mysqlDBhelper.syncTasks();
               }),
@@ -73,10 +72,6 @@ class TaskHomeState extends State {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              //             IconButton(
-              //               icon: Icon(Icons.list, color: Colors.white),
-              //               onPressed: () {},
-              //             ),
               IconButton(
                 icon: Icon(Icons.dashboard_outlined, color: Colors.white),
                 onPressed: () {
@@ -89,7 +84,6 @@ class TaskHomeState extends State {
                   navigateToDetail(Task("", "", "", "", "", "", "", "", "", "",
                       "", "", "", 0, "", "", "", "", "", "", ""));
                   getData();
-//                  mysqlDBhelper.syncTaskDataFromMySql();
                 },
               ),
               IconButton(
@@ -141,16 +135,6 @@ class TaskHomeState extends State {
                     title: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        // Flexible(
-                        //     child: Padding(
-                        //         padding: const EdgeInsets.only(right: 2),
-                        //         child: Row(
-                        //           children: [
-                        //             Text(this.tasklist[position].main1,
-                        //                 overflow: TextOverflow.ellipsis),
-
-                        //           ],
-                        //         ))),
 
                         Flexible(
                             child: Padding(
@@ -158,11 +142,6 @@ class TaskHomeState extends State {
                                 child: Text(this.tasklist[position].main1,
                                     overflow: TextOverflow.ellipsis))),
 
-//                        Flexible(
-//                            child: Padding(
-//                                padding: const EdgeInsets.only(right: 2),
-//                                child: Text(this.tasklist[position].main2,
-//                                    overflow: TextOverflow.ellipsis))),
                       ],
                     ),
                     subtitle: Row(
@@ -174,21 +153,6 @@ class TaskHomeState extends State {
                                 child: Text(this.tasklist[position].sec1,
                                     overflow: TextOverflow.ellipsis))),
 
-                        // SizedBox(width: 5.0),
-                        // Text(this.tasklist[position].sec2),
-//                        Flexible(
-//                            child: Padding(
-//                                padding: const EdgeInsets.only(right: 2),
-//                                child: Text(this.tasklist[position].sec2,
-//                                    overflow: TextOverflow.ellipsis))),
-
-                        //   SizedBox(width: 5.0),
-                        // Text(this.tasklist[position].sec3),
-//                        Flexible(
-//                            child: Padding(
-//                                padding: const EdgeInsets.only(right: 2),
-//                                child: Text(this.tasklist[position].sec3,
-//                                    overflow: TextOverflow.ellipsis))),
                       ],
                     ),
                     isThreeLine: false,
@@ -249,7 +213,8 @@ class TaskHomeState extends State {
           getOrderColumn(_sortOrder2),
           getSortColumn(_sortField3),
           getOrderColumn(_sortOrder3),
-          getDueDateColumn(_filterDateDue),
+          getDateDueColumn(_filterDateDue),
+          getTimeDueColumn(_filterDateDue),
           globals.filterIsDone,
           "0");
       // final tasksFuture = helper.getTasksFromLastFewDays();
@@ -287,88 +252,52 @@ class TaskHomeState extends State {
               break;
             case 4:
               {
-                taskList[i].main1 = taskList[i].categoryText;
+                taskList[i].main1 = taskList[i].status;
               }
               break;
             case 5:
               {
-                taskList[i].main1 = taskList[i].action1Text;
+                taskList[i].main1 = taskList[i].priority;
               }
               break;
             case 6:
               {
-                taskList[i].main1 = taskList[i].context1Text;
+                taskList[i].main1 = taskList[i].star;
               }
               break;
             case 7:
               {
-                taskList[i].main1 = taskList[i].location1Text;
+                taskList[i].main1 = taskList[i].categoryText;
               }
               break;
             case 8:
               {
+                taskList[i].main1 = taskList[i].action1Text;
+              }
+              break;
+            case 9:
+              {
+                taskList[i].main1 = taskList[i].context1Text;
+              }
+              break;
+            case 10:
+              {
+                taskList[i].main1 = taskList[i].location1Text;
+              }
+              break;
+            case 11:
+              {
                 taskList[i].main1 = taskList[i].tag1Text;
+              }
+              break;
+            case 12:
+              {
+                taskList[i].main1 = taskList[i].goal1Text;
               }
               break;
             default:
               {
                 taskList[i].main1 = taskList[i].task;
-              }
-              break;
-          }
-
-/////////////////
-          /// display main2
-////////////////
-          switch (globals.showMain2) {
-            case 0:
-              {
-                taskList[i].main2 = taskList[i].task;
-              }
-              break;
-            case 1:
-              {
-                taskList[i].main2 = taskList[i].note;
-              }
-              break;
-            case 2:
-              {
-                taskList[i].main2 = taskList[i].dateDue;
-              }
-              break;
-            case 3:
-              {
-                taskList[i].main2 = taskList[i].timeDue;
-              }
-              break;
-            case 4:
-              {
-                taskList[i].main2 = taskList[i].categoryText;
-              }
-              break;
-            case 5:
-              {
-                taskList[i].main2 = taskList[i].action1Text;
-              }
-              break;
-            case 6:
-              {
-                taskList[i].main2 = taskList[i].context1Text;
-              }
-              break;
-            case 7:
-              {
-                taskList[i].main2 = taskList[i].location1Text;
-              }
-              break;
-            case 8:
-              {
-                taskList[i].main2 = taskList[i].tag1Text;
-              }
-              break;
-            default:
-              {
-                taskList[i].main2 = taskList[i].task;
               }
               break;
           }
@@ -399,27 +328,47 @@ class TaskHomeState extends State {
               break;
             case 4:
               {
-                taskList[i].sec1 = taskList[i].categoryText;
+                taskList[i].sec1 = taskList[i].status;
               }
               break;
             case 5:
               {
-                taskList[i].sec1 = taskList[i].action1Text;
+                taskList[i].sec1 = taskList[i].priority;
               }
               break;
             case 6:
               {
-                taskList[i].sec1 = taskList[i].context1Text;
+                taskList[i].sec1 = taskList[i].star;
               }
               break;
             case 7:
               {
-                taskList[i].sec1 = taskList[i].location1Text;
+                taskList[i].sec1 = taskList[i].categoryText;
               }
               break;
             case 8:
               {
+                taskList[i].sec1 = taskList[i].action1Text;
+              }
+              break;
+            case 9:
+              {
+                taskList[i].sec1 = taskList[i].context1Text;
+              }
+              break;
+            case 10:
+              {
+                taskList[i].sec1 = taskList[i].location1Text;
+              }
+              break;
+            case 11:
+              {
                 taskList[i].sec1 = taskList[i].tag1Text;
+              }
+              break;
+            case 12:
+              {
+                taskList[i].sec1 = taskList[i].goal1Text;
               }
               break;
             default:
@@ -429,117 +378,6 @@ class TaskHomeState extends State {
               break;
           }
 
-/////////////////
-          /// display sec2
-////////////////
-          switch (globals.showSec2) {
-            case 0:
-              {
-                taskList[i].sec2 = taskList[i].task;
-              }
-              break;
-            case 1:
-              {
-                taskList[i].sec2 = taskList[i].note;
-              }
-              break;
-            case 2:
-              {
-                taskList[i].sec2 = taskList[i].dateDue;
-              }
-              break;
-            case 3:
-              {
-                taskList[i].sec2 = taskList[i].timeDue;
-              }
-              break;
-            case 4:
-              {
-                taskList[i].sec2 = taskList[i].categoryText;
-              }
-              break;
-            case 5:
-              {
-                taskList[i].sec2 = taskList[i].action1Text;
-              }
-              break;
-            case 6:
-              {
-                taskList[i].sec2 = taskList[i].context1Text;
-              }
-              break;
-            case 7:
-              {
-                taskList[i].sec2 = taskList[i].location1Text;
-              }
-              break;
-            case 8:
-              {
-                taskList[i].sec2 = taskList[i].tag1Text;
-              }
-              break;
-            default:
-              {
-                taskList[i].sec2 = taskList[i].timeDue;
-              }
-              break;
-          }
-
-/////////////////
-          /// display sec3
-////////////////
-          switch (globals.showSec3) {
-            case 0:
-              {
-                taskList[i].sec3 = taskList[i].task;
-              }
-              break;
-            case 1:
-              {
-                taskList[i].sec3 = taskList[i].note;
-              }
-              break;
-            case 2:
-              {
-                taskList[i].sec3 = taskList[i].dateDue;
-              }
-              break;
-            case 3:
-              {
-                taskList[i].sec3 = taskList[i].timeDue;
-              }
-              break;
-            case 4:
-              {
-                taskList[i].sec3 = taskList[i].categoryText;
-              }
-              break;
-            case 5:
-              {
-                taskList[i].sec3 = taskList[i].action1Text;
-              }
-              break;
-            case 6:
-              {
-                taskList[i].sec3 = taskList[i].context1Text;
-              }
-              break;
-            case 7:
-              {
-                taskList[i].sec3 = taskList[i].location1Text;
-              }
-              break;
-            case 8:
-              {
-                taskList[i].sec3 = taskList[i].tag1Text;
-              }
-              break;
-            default:
-              {
-                taskList[i].sec3 = taskList[i].categoryText;
-              }
-              break;
-          }
         }
         setState(() {
           tasklist = taskList;
@@ -620,20 +458,33 @@ class TaskHomeState extends State {
         return "timeDue";
         break;
       case 4:
-        return "category";
+        return "status";
         break;
       case 5:
-        return "action1";
+        return "priority";
         break;
       case 6:
-        return "context1";
+        return "star";
         break;
       case 7:
-        return "location1";
+        return "category";
         break;
       case 8:
+        return "action1";
+        break;
+      case 9:
+        return "context1";
+        break;
+      case 10:
+        return "location1";
+        break;
+      case 11:
         return "tag1";
         break;
+      case 12:
+        return "goal1";
+        break;
+
 
       default:
         return "task";
@@ -642,7 +493,7 @@ class TaskHomeState extends State {
   }
 
   //Sort column names are defined here but if there is any changes in column name update here
-  String getDueDateColumn(int column) {
+  String getDateDueColumn(int column) {
     switch (column) {
       case 0:
         return "Today";
@@ -675,6 +526,40 @@ class TaskHomeState extends State {
     }
   }
 
+
+  //Sort column names are defined here but if there is any changes in column name update here
+  String getTimeDueColumn(int column) {
+    switch (column) {
+      case 0:
+        return "Today";
+        break;
+      case 1:
+        return "Tomorrow";
+        break;
+      case 2:
+        return "Next 7 days";
+        break;
+      case 3:
+        return "Next 30 days";
+        break;
+      case 4:
+        return "Any Due Date";
+        break;
+      case 5:
+        return "No Due Date";
+        break;
+      case 6:
+        return "Overdues Only";
+        break;
+      case 7:
+        return "All Tasks";
+        break;
+
+      default:
+        return "All Tasks";
+        break;
+    }
+  }
 
 //Sort column names are defined here but if there is any changes in column name update here
   String getOrderColumn(int column) {
