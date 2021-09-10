@@ -21,19 +21,19 @@ class DbHelper {
   String colId = 'id';
   String colTask = 'task';
   String colNote = 'note';
+  String colStatus = 'status';
+  String colPriority = 'priority';
+  String colStar = 'star';
+  String colDateDue = 'dateDue';
+  String colTimeDue = 'timeDue';
   String colCategory = 'category';
   String colAction1 = 'action1';
   String colContext1 = 'context1';
   String colLocation1 = 'location1';
   String colTag1 = 'tag1';
   String colGoal1 = 'goal1';
-  String colPriorityint = 'priorityvalue';
-  String colPrioritytxt = 'prioritytext';
-  String colDateDue = 'dateDue';
-  String colTimeDue = 'timeDue';
   String colIsDone = 'isDone';
   String colDateDone = 'dateDone';
-  String colStatus = 'status';
   String colLastModified = 'lastModified';
 
   String tblCustomSettings = "customSettings";
@@ -52,7 +52,7 @@ class DbHelper {
   String colfilterDateDue = 'filterDateDue';
   String colfilterStatus = 'filterStatus';
   String colfilterPriority = 'filterPriority';
-  String colfilterGoal = 'filterGaol';
+  String colfilterGoal = 'filterGoal';
   String colfilterStar = 'filterStar';
   String colfilterCategory = 'filterCategory';
   String colfilterAction = 'filterAction';
@@ -77,7 +77,7 @@ class DbHelper {
 
   Future<Database> initializeDb() async {
     Directory dir = await getApplicationDocumentsDirectory();
-    String path = dir.path + "todo_V19.a.db";
+    String path = dir.path + "todo_V19.e.db";
     var dbTodovn = await openDatabase(path, version: 1, onCreate: _createDb);
     return dbTodovn;
   }
@@ -85,22 +85,22 @@ class DbHelper {
   void _createDb(Database db, int newVersion) async {
     await db.execute(
         "CREATE TABLE $tblTodo($colId INTEGER PRIMARY KEY, $colTask TEXT, $colNote TEXT, " +
+        "$colDateDue TEXT, $colTimeDue TEXT, $colStatus TEXT, $colPriority TEXT, $colStar TEXT, " +
             " $colCategory TEXT, $colAction1 TEXT, " +
             "$colContext1 TEXT, $colLocation1 TEXT, $colTag1 TEXT, $colGoal1 TEXT, " +
-            " $colPriorityint INTEGER, $colPrioritytxt TEXT, $colDateDue TEXT, $colTimeDue TEXT, " +
-            " $colIsDone INTEGER, $colDateDone TEXT, $colStatus TEXT, $colLastModified TEXT)");
+            " $colIsDone INTEGER, $colDateDone TEXT, $colLastModified TEXT)");
 
 //this table need to include hash key to track users.... i would say all the tables
     await db.execute(
         "CREATE TABLE $tblCustomSettings($colId INTEGER PRIMARY KEY, $colsortField1 TEXT, $colsortOrder1 TEXT, $colsortField2 TEXT, " +
             "$colsortOrder2 TEXT, $colsortField3 TEXT, $colsortOrder3 TEXT, $colshowMain1 TEXT,$colshowMain2 TEXT, " +
-            "$colshowSec1 TEXT,$colshowSec2 TEXT,$colshowSec3 TEXT," +
-            " $colfilterIsDone INTEGER, $colfilterDateDue TEXT, $colfilterCategory TEXT, $colfilterAction TEXT, $colfilterContext TEXT, $colfilterLocation TEXT, $colfilterTag TEXT," +
-            " $colfilterStatus TEXT, $colfilterPriority TEXT, $colfilterGoal TEXT, $colfilterStar TEXT");
+            "$colshowSec1 TEXT,$colshowSec2 TEXT,$colshowSec3 TEXT, " +
+            "$colfilterIsDone INTEGER, $colfilterDateDue TEXT, $colfilterCategory TEXT, $colfilterAction TEXT, $colfilterContext TEXT, $colfilterLocation TEXT, $colfilterTag TEXT, " +
+            "$colfilterGoal TEXT, $colfilterStatus TEXT, $colfilterPriority TEXT, $colfilterStar TEXT)");
 
     // Create table categories
     await db.execute(
-        "CREATE TABLE categories(id INTEGER PRIMARY KEY, task TEXT, note TEXT)");
+        "CREATE TABLE categories(id INTEGER PRIMARY KEY, name TEXT, description TEXT)");
 
     // Create table actions
     await db.execute(
@@ -186,7 +186,7 @@ class DbHelper {
     Database db = await this.db;
 
     String queryStr = "";
-    queryStr = "SELECT $tblTodo.id,$tblTodo.task,$tblTodo.note,$tblTodo.category,action1,context1,location1,tag1,priorityvalue,prioritytext," +
+    queryStr = "SELECT $tblTodo.id,$tblTodo.task,$tblTodo.note,status, priority, star, $tblTodo.category,action1,context1,location1,tag1,goal1," +
         "dateDue,timeDue,isDone,dateDone,status,lastModified,categories.name as categoriesname, " +
         "action1s.name as action1name,context1s.name as context1name, location1s.name as location1name," +
         " tag1s.name as tag1name, goal1s.name as goal1name    FROM $tblTodo  " +
@@ -290,8 +290,6 @@ class DbHelper {
 //      return result;
   }
 
-//  Future<List> searchTasks(String searchText, String searchPriorityTxt, String searchCategory, String searchAction1,
-//   String searchContext1,String searchLocation1, String searchTag1, String  searchGoal1) async{
   Future<List> searchTasks(
       String searchText,
       String searchCategory,
