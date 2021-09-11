@@ -86,7 +86,7 @@ class DbHelper {
   void _createDb(Database db, int newVersion) async {
     await db.execute(
         "CREATE TABLE $tblTodo($colId INTEGER PRIMARY KEY, $colTask TEXT, $colNote TEXT, " +
-        "$colDateDue TEXT, $colTimeDue TEXT, $colStatus TEXT, $colPriority TEXT, $colStar TEXT, " +
+            "$colDateDue TEXT, $colTimeDue TEXT, $colStatus TEXT, $colPriority TEXT, $colStar TEXT, " +
             "$colCategory TEXT, $colAction1 TEXT, " +
             "$colContext1 TEXT, $colLocation1 TEXT, $colTag1 TEXT, $colGoal1 TEXT, " +
             "$colIsDone INTEGER, $colDateDone TEXT, $colLastModified TEXT)");
@@ -97,7 +97,7 @@ class DbHelper {
             "$colsortOrder2 TEXT, $colsortField3 TEXT, $colsortOrder3 TEXT, $colshowMain1 TEXT,$colshowMain2 TEXT, " +
             "$colshowSec1 TEXT,$colshowSec2 TEXT,$colshowSec3 TEXT, " +
             "$colfilterDateDue TEXT, $colfilterTimeDue TEXT, " +
-            "$colfilterStatus TEXT, $colfilterPriority TEXT, $colfilterStar TEXT, "+
+            "$colfilterStatus TEXT, $colfilterPriority TEXT, $colfilterStar TEXT, " +
             "$colfilterCategory TEXT, $colfilterAction TEXT, $colfilterContext TEXT, $colfilterLocation TEXT, $colfilterTag TEXT, " +
             "$colfilterGoal TEXT, $colfilterIsDone INTEGER)");
 
@@ -140,32 +140,28 @@ class DbHelper {
 
   Future<List> getTasksByID(String taskID) async {
     Database db = await this.db;
-    var result = await db
-        .rawQuery("SELECT * FROM todo where $colId = $taskID");
+    var result = await db.rawQuery("SELECT * FROM todo where $colId = $taskID");
     return result;
   }
 
   Future<List> getAllTasks() async {
     Database db = await this.db;
-    var result = await db
-        .rawQuery("SELECT * FROM todo where $colId < 6");
+    var result = await db.rawQuery("SELECT * FROM todo where $colId < 6");
     return result;
   }
 
   Future<List> getTasksFromLastFewDays(int days) async {
     Database db = await this.db;
-    var result = await db
-        .rawQuery(
-            "SELECT * FROM todo where (julianday(Date('now')) - julianday(date($colLastModified)) > 3)");
+    var result = await db.rawQuery(
+        "SELECT * FROM todo where (julianday(Date('now')) - julianday(date($colLastModified)) > 3)");
 
     return result;
   }
 
   Future<List> getTasks() async {
     Database db = await this.db;
-    var result = await db
-        .rawQuery(
-            "SELECT * FROM $tblTodo where ($colIsDone != 1) order by $colCategory $colsortOrder1, $colDateDue ASC, $colTimeDue $colsortOrder2, $colTask $colsortOrder3");
+    var result = await db.rawQuery(
+        "SELECT * FROM $tblTodo where ($colIsDone != 1) order by $colCategory $colsortOrder1, $colDateDue ASC, $colTimeDue $colsortOrder2, $colTask $colsortOrder3");
     return result;
   }
 
@@ -179,8 +175,12 @@ class DbHelper {
       String colfilterDateDue,
       String colfilterTimeDue,
       int colfilterIsDone,
-      String colfilterCategory) async {
-        
+      String colfilterCategory,
+      String colfilterAction,
+      String colfilterContext,
+      String colfilterLocation,
+      String colfilterTag,
+      String colfilterGoal) async {
 ////////////////
     /// build query 0
 ////////////////
@@ -218,45 +218,45 @@ class DbHelper {
     final String formattedN7D = formatter.format(_N7D);
     final String formattedN30D = formatter.format(_N30D);
 
+    ////////////////
+    /// build query - add filterIsDone
+////////////////
+    if (colfilterIsDone == 0) // hide
+      queryStr = queryStr + " where ($colIsDone ==0)";
+    else
+      queryStr = queryStr + " where ($colIsDone not Null)";
+
     if (colfilterDateDue == "Today") {
       _startDate = formattedToday;
       _endDate = formattedToday;
-      queryStr = queryStr + "and ($colDateDue == '$_startDate')";
+      queryStr = queryStr + " and ($colDateDue == '$_startDate')";
     } else if (colfilterDateDue == "Tomorrow") {
       _startDate = formattedTomo;
       _endDate = formattedTomo;
-      queryStr = queryStr + "and ($colDateDue == '$_startDate')";
+      queryStr = queryStr + " and ($colDateDue == '$_startDate')";
     } else if (colfilterDateDue == "Next 7 days") {
       _startDate = formattedToday;
       _endDate = formattedN7D;
       queryStr = queryStr +
-          "and ($colDateDue >= '$_startDate') and ($colDateDue<= '$_endDate')";
+          " and ($colDateDue >= '$_startDate') and ($colDateDue<= '$_endDate')";
     } else if (colfilterDateDue == "Next 30 days") {
       _startDate = formattedToday;
       _endDate = formattedN30D;
       queryStr = queryStr +
-          "and ($colDateDue >= '$_startDate') and ($colDateDue<= '$_endDate')";
+          " and ($colDateDue >= '$_startDate') and ($colDateDue<= '$_endDate')";
     } else if (colfilterDateDue == "Any Due Date") {
-      queryStr = queryStr + "and ($colDateDue != '')";
+      queryStr = queryStr + " and ($colDateDue != '')";
     } else if (colfilterDateDue == "No Due Date") {
-      queryStr = queryStr + "and ($colDateDue == '')";
+      queryStr = queryStr + " and ($colDateDue == '')";
     } else if (colfilterDateDue == "Overdues Only") {
       _endDate = formattedYesterday;
-      queryStr =
-          queryStr + "and ($colDateDue <= '$_endDate') and ($colDateDue != '')";
+      queryStr = queryStr +
+          " and ($colDateDue <= '$_endDate') and ($colDateDue != '')";
     } else if (colfilterDateDue == "All Tasks") {
     } else {
 // select all tasks regardless of due dates
     }
     ;
-
-////////////////
-    /// build query - add filterIsDone
-////////////////
-    if (colfilterIsDone == 0) // hide
-      queryStr = queryStr + "where ($colIsDone ==0)";
-    else
-      queryStr = queryStr + "where ($colIsDone not Null)";
 
 ////////////////
     /// build query - add category
@@ -265,9 +265,29 @@ class DbHelper {
     } // hide
 // include all
     else {
-      queryStr = queryStr + "and ($colCategory == $colfilterCategory)";
+      queryStr = queryStr + " and ($colCategory == $colfilterCategory)";
     }
-    ;
+
+    if (colfilterAction == "0") {
+    } else {
+      queryStr = queryStr + " and ($colAction1 == $colfilterAction)";
+    }
+    if (colfilterContext == "0") {
+    } else {
+      queryStr = queryStr + " and ($colContext1 == $colfilterContext)";
+    }
+    if (colfilterLocation == "0") {
+    } else {
+      queryStr = queryStr + " and ($colLocation1 == $colfilterLocation)";
+    }
+    if (colfilterTag == "0") {
+    } else {
+      queryStr = queryStr + " and ($colTag1 == $colfilterTag)";
+    }
+    if (colfilterGoal == "0") {
+    } else {
+      queryStr = queryStr + " and ($colGoal1 == $colfilterGoal)";
+    }
 
 ////////////////
     /// build query - add order by
@@ -325,7 +345,8 @@ class DbHelper {
       queryStr = queryStr + " AND $colTag1 = '$searchTag1' AND $colIsDone = 0";
     }
     if (searchGoal1 != null) {
-      queryStr = queryStr + " AND $colGoal1 = '$searchGoal1' AND $colIsDone = 0";
+      queryStr =
+          queryStr + " AND $colGoal1 = '$searchGoal1' AND $colIsDone = 0";
     }
 
     var result = await db.rawQuery(queryStr);
@@ -624,7 +645,7 @@ class DbHelper {
 
 //######################### ENd of Goal ##########################################/
 
-///########################## Custom Settings #########################
+  ///########################## Custom Settings #########################
   Future<int> insertCustomSettings(CustomSettings customSetting) async {
     Database db = await this.db;
 
