@@ -135,13 +135,11 @@ class TaskHomeState extends State {
                     title: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-
                         Flexible(
                             child: Padding(
                                 padding: const EdgeInsets.only(right: 2),
                                 child: Text(this.tasklist[position].main1,
                                     overflow: TextOverflow.ellipsis))),
-
                       ],
                     ),
                     subtitle: Row(
@@ -152,7 +150,6 @@ class TaskHomeState extends State {
                                 padding: const EdgeInsets.only(right: 2),
                                 child: Text(this.tasklist[position].sec1,
                                     overflow: TextOverflow.ellipsis))),
-
                       ],
                     ),
                     isThreeLine: false,
@@ -198,6 +195,7 @@ class TaskHomeState extends State {
     int _sortOrder1 = globals.sortOrder1 != null ? globals.sortOrder1 : 0;
     int _sortOrder2 = globals.sortOrder2 != null ? globals.sortOrder2 : 0;
     int _sortOrder3 = globals.sortOrder3 != null ? globals.sortOrder3 : 0;
+
     int _filterDateDue =
         globals.filterDateDue != null ? globals.filterDateDue : 7;
     int _filterIsDone = globals.filterIsDone != null ? globals.filterIsDone : 0;
@@ -216,7 +214,12 @@ class TaskHomeState extends State {
           getDateDueColumn(_filterDateDue),
           getTimeDueColumn(_filterDateDue),
           globals.filterIsDone,
-          "0");
+          globals.filterCategory.toString(),
+          globals.filterAction.toString(),
+          globals.filterContext.toString(),
+          globals.filterLocation.toString(),
+          globals.filterTag.toString(),
+          globals.filterGoal.toString());
       // final tasksFuture = helper.getTasksFromLastFewDays();
       tasksFuture.then((result) {
         List<Task> taskList = List<Task>();
@@ -377,7 +380,6 @@ class TaskHomeState extends State {
               }
               break;
           }
-
         }
         setState(() {
           tasklist = taskList;
@@ -434,6 +436,24 @@ class TaskHomeState extends State {
         if (customSetting.filterDateDue != "") {
           globals.filterDateDue = int.parse(customSetting.filterDateDue);
         }
+        globals.filterCategory = customSetting.filterCategory != ""
+            ? int.parse(customSetting.filterCategory)
+            : 0;
+        globals.filterLocation = customSetting.filterLocation != ""
+            ? int.parse(customSetting.filterLocation)
+            : 0;
+        globals.filterTag = customSetting.filterTag != ""
+            ? int.parse(customSetting.filterTag)
+            : 0;
+        globals.filterGoal = customSetting.filterGoal != ""
+            ? int.parse(customSetting.filterGoal)
+            : 0;
+        globals.filterContext = customSetting.filterContext != ""
+            ? int.parse(customSetting.filterContext)
+            : 0;
+        globals.filterAction = customSetting.filterAction != ""
+            ? int.parse(customSetting.filterAction)
+            : 0;
       }
     }
     getData();
@@ -485,7 +505,6 @@ class TaskHomeState extends State {
         return "goal1";
         break;
 
-
       default:
         return "task";
         break;
@@ -496,28 +515,28 @@ class TaskHomeState extends State {
   String getDateDueColumn(int column) {
     switch (column) {
       case 0:
-        return "Today";
+        return "All Tasks";
         break;
       case 1:
-        return "Tomorrow";
+        return "Today";
         break;
       case 2:
-        return "Next 7 days";
+        return "Tomorrow";
         break;
       case 3:
-        return "Next 30 days";
+        return "Next 7 days";
         break;
       case 4:
-        return "Any Due Date";
+        return "Next 30 days";
         break;
       case 5:
-        return "No Due Date";
+        return "Any Due Date";
         break;
       case 6:
-        return "Overdues Only";
+        return "No Due Date";
         break;
       case 7:
-        return "All Tasks";
+        return "Overdues Only";
         break;
 
       default:
@@ -525,7 +544,6 @@ class TaskHomeState extends State {
         break;
     }
   }
-
 
   //Sort column names are defined here but if there is any changes in column name update here
   String getTimeDueColumn(int column) {
