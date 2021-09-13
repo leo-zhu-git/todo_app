@@ -28,11 +28,6 @@ class _WipeScreenState extends State<WipeScreen> {
       ),
       body: Column(
         children: [
-//          SingleChildScrollView(
-//            scrollDirection: Axis.horizontal,
-//            child: rowChips(),
-//          ),
-//          Center(child: wrapWidget()),
           actionChips(),
         ],
       ),
@@ -80,14 +75,17 @@ class _WipeScreenState extends State<WipeScreen> {
     String _optionText;
     int _option;
     return Padding(
-      padding: EdgeInsets.only(top: 20.0, left: 16.0, right: 16.0),
+      padding: EdgeInsets.only(top: 50.0, left: 16.0, right: 16.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-
-
           ActionChip(
-              elevation: 6.0,
+              avatar: Icon(Icons.devices_rounded),
+              elevation: 8.0,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(0),
+                      bottomRight: Radius.circular(0))),
               padding: EdgeInsets.all(20.0),
               backgroundColor: Colors.pink[100],
               label: Center(child: Text('Force Device -> Cloud wipe')),
@@ -99,8 +97,13 @@ class _WipeScreenState extends State<WipeScreen> {
               }),
           SizedBox(height: 20.0),
           ActionChip(
-              elevation: 6.0,
+              avatar: Icon(Icons.cloud_circle),
+              elevation: 8.0,
               backgroundColor: Colors.pink[100],
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(0),
+                      bottomRight: Radius.circular(0))),
               padding: EdgeInsets.all(20.0),
               label: Center(child: Text('Force Cloud -> Device wipe')),
               onPressed: () {

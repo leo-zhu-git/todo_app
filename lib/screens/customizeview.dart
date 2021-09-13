@@ -57,7 +57,7 @@ class FilterDateDue {
   FilterDateDue(this.id, this.name);
   static List<FilterDateDue> getDateDue() {
     return <FilterDateDue>[
-      FilterDateDue(0, '-- All Tasks --'),
+      FilterDateDue(0, '-- All Due Dates --'),
       FilterDateDue(1, 'Today'),
       FilterDateDue(2, 'Tomorrow'),
       FilterDateDue(3, 'Next 7 days'),
@@ -158,11 +158,6 @@ class _CustomizeViewState extends State //State<CustomizeView>
   FilterStatus _selectedFilterStatus;
   FilterPriority _selectedFilterPriority;
   FilterStar _selectedFilterStar;
-//  FilterCategory _selectedFilterCategory;
-//  FilterAction _selectedFilterAction;
-//  FilterContext _selectedFilterContext;
-//  FilterLocation _selectedFilterLocation;
-//  FilterTag _selectedFilterTag;
   SortItem _selectedSortField1;
   SortOrder _selectedSortOrder1;
   SortItem _selectedSortField2;
@@ -986,24 +981,6 @@ class _CustomizeViewState extends State //State<CustomizeView>
                 ),
               ),
 ///////////////////////////
-//  Show Main 2
-///////////////////////////
-//              new Container(
-//                margin: const EdgeInsets.all(2.0),
-//                decoration: BoxDecoration(
-//                    shape: BoxShape.rectangle, color: Colors.green[100]),
-//                child: DropdownButtonFormField(
-//                  items: _dropdownMenuItemsSort,
-//                  hint: Text('Display Main2'),
-//                  value: _selectedMain2,
-//                  onChanged: (selectedShow) {
-//                    setState(() {
-//                      _selectedMain2 = selectedShow;
-//                    });
-//                  },
-//                ),
-//              ),
-///////////////////////////
 //  Show Secondary 1
 ///////////////////////////
 //              Text("Show - Second Line"),
@@ -1022,42 +999,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
                   },
                 ),
               ),
-///////////////////////////
-//  Show Secondary 2
-///////////////////////////
-//              new Container(
-//                margin: const EdgeInsets.all(2.0),
-//                decoration: BoxDecoration(
-//                    shape: BoxShape.rectangle, color: Colors.green[100]),
-//                child: DropdownButtonFormField(
-//                  items: _dropdownMenuItemsSort,
-//                  hint: Text('Display Secondary2'),
-//                  value: _selectedShowSec2,
-//                  onChanged: (selectedShow) {
-//                    setState(() {
-//                      _selectedShowSec2 = selectedShow;
-//                    });
-//                  },
-//                ),
-//              ),
-///////////////////////////
-//  Show Secondary 3
-///////////////////////////
-//              new Container(
-//                margin: const EdgeInsets.all(2.0),
-//                decoration: BoxDecoration(
-//                    shape: BoxShape.rectangle, color: Colors.green[100]),
-//                child: DropdownButtonFormField(
-//                  items: _dropdownMenuItemsSort,
-//                  hint: Text('Display Secondary3'),
-//                  value: _selectedShowSec3,
-//                  onChanged: (selectedShow) {
-//                    setState(() {
-//                      _selectedShowSec3 = selectedShow;
-//                    });
-//                  },
-//                ),
-//              ),
+
 
               SizedBox(
                 height: 20,

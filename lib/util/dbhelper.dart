@@ -272,18 +272,22 @@ class DbHelper {
     } else {
       queryStr = queryStr + " and ($colAction1 == $colfilterAction)";
     }
+
     if (colfilterContext == "0") {
     } else {
       queryStr = queryStr + " and ($colContext1 == $colfilterContext)";
     }
+
     if (colfilterLocation == "0") {
     } else {
       queryStr = queryStr + " and ($colLocation1 == $colfilterLocation)";
     }
+
     if (colfilterTag == "0") {
     } else {
       queryStr = queryStr + " and ($colTag1 == $colfilterTag)";
     }
+    
     if (colfilterGoal == "0") {
     } else {
       queryStr = queryStr + " and ($colGoal1 == $colfilterGoal)";
