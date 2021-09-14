@@ -1,5 +1,6 @@
 import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:todo_app/model/customSettings.dart';
 import 'package:todo_app/model/taskclass.dart';
 import 'package:todo_app/screens/customizeview.dart';
@@ -11,6 +12,7 @@ import 'package:intl/intl.dart';
 import 'package:todo_app/util/drawer_navigation.dart';
 import 'package:todo_app/model/globals.dart' as globals;
 import 'package:todo_app/util/mysql_dbhelper.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 DateTime currentDate = DateTime.now();
 DateFormat formatter = DateFormat('yyyy-mm-dd');
@@ -59,7 +61,9 @@ class TaskHomeState extends State {
               icon: const Icon(Icons.sync, color: Colors.white),
               tooltip: 'Sync',
               onPressed: () {
-                mysqlDBhelper.syncTasks();
+                Navigator.of(context).pushNamed('/syncview');
+// rt: comment out temporarily to test loader/ spinkit
+//                mysqlDBhelper.syncTasks();
               }),
         ],
       ),

@@ -4,11 +4,6 @@ import 'package:todo_app/screens/taskhome.dart';
 import 'package:todo_app/util/dbhelper.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-const spinkit = SpinKitRotatingCircle(
-  color: Colors.white,
-  size: 50.0,
-);
-
 class WipeScreen extends StatefulWidget {
   @override
   _WipeScreenState createState() => _WipeScreenState();
