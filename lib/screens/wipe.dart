@@ -2,6 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_app/screens/taskhome.dart';
 import 'package:todo_app/util/dbhelper.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+
+const spinkit = SpinKitRotatingCircle(
+  color: Colors.white,
+  size: 50.0,
+);
 
 class WipeScreen extends StatefulWidget {
   @override
@@ -141,6 +147,7 @@ class _WipeScreenState extends State<WipeScreen> {
   _showSuccessSnackBar(message) {
     var _snackBar = SnackBar(content: message);
     _key.currentState.showSnackBar(_snackBar);
+    
   }
 
   _ConfirmDialogue(int _option, String message) {

@@ -32,7 +32,7 @@ class _Goal1sScreenState extends State<Goal1sScreen> {
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
 
   getAllGoal1s() async {
-    _goal1List = List<Goal1>();
+    _goal1List = [];
     var goal1 = await _goal1Service.getGoals();
     goal1.forEach((goal1) {
       setState(() {
