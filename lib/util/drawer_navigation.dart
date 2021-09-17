@@ -136,7 +136,7 @@ class _DrawerNagivation extends State<DrawerNagivation> {
 
   _launchURL() async {
     const _url =
-        'https://sites.google.com/emerscape.com/2ndhalf-help-center/home';
+        'https://2ndhalf.app';
     if (await canLaunch(_url)) {
       await launch(_url);
     } else {
