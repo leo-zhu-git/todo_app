@@ -62,8 +62,7 @@ class TaskHomeState extends State {
               tooltip: 'Sync',
               onPressed: () {
                 Navigator.of(context).pushNamed('/syncview');
-// rt: comment out temporarily to test loader/ spinkit
-//                mysqlDBhelper.syncTasks();
+// rt: comment out temporarily to test loader/ spinkit --> code in syncview
               }),
         ],
       ),

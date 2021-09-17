@@ -15,16 +15,18 @@ class _SyncViewState extends State<SyncView> {
   @override
   void initState() {
     super.initState();
+    mysqlDBhelper.syncTasks();
+
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.blue[900],
+        backgroundColor: Colors.blue[100],
         body: Center(
-          child: SpinKitRotatingCircle(
-            color: Colors.white,
-            size: 50,
+          child: SpinKitPouringHourGlass(
+            color: Colors.yellow[100],
+            size: 100,
           ),
         ));
   }
