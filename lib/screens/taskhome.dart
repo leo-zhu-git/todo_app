@@ -1,18 +1,24 @@
 import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:todo_app/model/category.dart';
+import 'package:todo_app/model/action1.dart';
+import 'package:todo_app/model/context1.dart';
+import 'package:todo_app/model/location1.dart';
+import 'package:todo_app/model/tag1.dart';
+import 'package:todo_app/model/goal1.dart';
 import 'package:todo_app/model/customSettings.dart';
 import 'package:todo_app/model/taskclass.dart';
+import 'package:todo_app/model/globals.dart';
+import 'package:todo_app/util/dbhelper.dart';
+import 'package:todo_app/screens/taskdetail.dart';
 import 'package:todo_app/screens/customizeview.dart';
 import 'package:todo_app/screens/swipe.dart';
 import 'package:todo_app/screens/tasksearch.dart';
-import 'package:todo_app/util/dbhelper.dart';
-import 'package:todo_app/screens/taskdetail.dart';
-import 'package:intl/intl.dart';
 import 'package:todo_app/util/drawer_navigation.dart';
-import 'package:todo_app/model/globals.dart' as globals;
-import 'package:todo_app/util/mysql_dbhelper.dart';
+import 'package:intl/intl.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:todo_app/util/mysql_dbhelper.dart';
+
 
 DateTime currentDate = DateTime.now();
 DateFormat formatter = DateFormat('yyyy-mm-dd');
@@ -38,6 +44,7 @@ class TaskHomeState extends State {
     tasklist = List<Task>();
     displaytasklist = List<DisplayTask>();
     _getCustomSettings();
+    _getBootstrap();
   }
 
   @override
@@ -402,6 +409,65 @@ class TaskHomeState extends State {
 //    }
   }
 
+// create bootstrap records for picklists and mainbody
+  _getBootstrap() {
+    int _bootstrap = globals.bootstrap;
+
+    if (_bootstrap == null) {
+        // create category
+        var _category = Category();
+        var _categoryService = DbHelper();
+        _category.id = null; 
+        _category.name = "1.Personal";
+        _category.description =
+            "1Bootstrap - please delete or rename if necessary";
+        var result = async _categoryService.insertCategories(_category);
+
+        _category.id = null; 
+        _category.name = "2.Work";
+        _category.description =
+            "2Bootstrap - please delete or rename if necessary";
+        result = async _categoryService.insertCategories(_category);
+
+
+        _category.id = null; 
+        _category.name = "3.Play";
+        _category.description =
+            "3Bootstrap - please delete or rename if necessary";
+        result = async _categoryService.insertCategories(_category);
+
+        _category.id = null; 
+        _category.name = "4.Quiet Time";
+        _category.description =
+            "4Bootstrap - please delete or rename if necessary";
+        result = async _categoryService.insertCategories(_category);
+
+        // create action
+        var _action1 = Action1();
+        _action1Service = DbHelper();
+        _action1.name = 'Buy';
+        _action1.description =
+            "Bootstrap - please delete or rename if necessary";
+        _action1.id = null;
+        result = async _action1Service.insertAction(_action1);
+
+        _action1.name = 'Connect';
+        _action1.description =
+            "Bootstrap - please delete or rename if necessary";
+        _action1.id = null;
+        result = async _action1Service.insertAction(_action1);
+
+
+       // create location
+
+        // create tag
+
+        // create goal
+
+        globals.bootstrap = 1;
+    }
+  }
+
   //to get the custom user settings.  this in home now,  but depends on login screen logic we can move this method. KK
   _getCustomSettings() async {
     var _customSetting = await helper.getCustomSettings();
@@ -462,6 +528,7 @@ class TaskHomeState extends State {
     getData();
     setState(() {
       customSetting = customSetting;
+      globals.bootstrap = 1;
     });
   }
 
