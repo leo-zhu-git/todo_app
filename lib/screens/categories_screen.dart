@@ -44,7 +44,9 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
         });
       });
     } else {
-      _categoryList = null;
+      setState(() {
+        _categoryList.clear();
+      });
     }
   }
 
@@ -153,7 +155,8 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                   _category.description =
                       _editCategoryDescriptionController.text;
 
-                  var result = await _categoryService.updateCategories(_category);
+                  var result =
+                      await _categoryService.updateCategories(_category);
                   print(result);
                   if (result > 0) {
                     Navigator.pop(context);
@@ -290,11 +293,10 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                      Flexible(
-                        child: Text(
-                        _categoryList[index].name,
-                        overflow: TextOverflow.ellipsis),
-                      ),
+                    Flexible(
+                      child: Text(_categoryList[index].name,
+                          overflow: TextOverflow.ellipsis),
+                    ),
                     IconButton(
                         icon: Icon(Icons.delete, color: Colors.grey),
                         onPressed: () {
