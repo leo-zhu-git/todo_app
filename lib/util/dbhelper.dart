@@ -1,3 +1,4 @@
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:sqflite/sqflite.dart';
 import 'dart:async';
@@ -78,7 +79,7 @@ class DbHelper {
 
   Future<Database> initializeDb() async {
     Directory dir = await getApplicationDocumentsDirectory();
-    String path = dir.path + "todo_V20.o.db";
+    String path = dir.path + "todo_V20.ou.db";
     var dbTodovn = await openDatabase(path, version: 1, onCreate: _createDb);
     return dbTodovn;
   }
@@ -128,6 +129,77 @@ class DbHelper {
     // Create table USers
     await db.execute(
         "CREATE TABLE todouser(id INTEGER PRIMARY KEY, userid TEXT, email TEXT)");
+
+    //call tis to default the values
+    setDefaultDB(db);
+  }
+
+  void setDefaultDB(Database db) async {
+    //Create Default Values for Catergories
+    await db.execute(
+        "INSERT INTO categories ( 'name', 'description')  values (?, ?)",
+        ['1.Personal', '1Bootstrap - please delete or rename if necessary']);
+
+    await db.execute(
+        "INSERT INTO categories ( 'name', 'description')  values (?, ?)",
+        ['2.Work', '2Bootstrap - please delete or rename if necessary']);
+
+    await db.execute(
+        "INSERT INTO categories ( 'name', 'description')  values (?, ?)",
+        ['3.Play', '3Bootstrap - please delete or rename if necessary']);
+
+    await db.execute(
+        "INSERT INTO categories ( 'name', 'description')  values (?, ?)",
+        ['4.Quiet Time', '4Bootstrap - please delete or rename if necessary']);
+
+    //Create Default Values for Action
+    await db.execute(
+        "INSERT INTO action1s ( 'name', 'description')  values (?, ?)",
+        ['1.Buy', '1Bootstrap - please delete or rename if necessary']);
+
+    await db.execute(
+        "INSERT INTO action1s ( 'name', 'description')  values (?, ?)",
+        ['2.Connect', '2Bootstrap - please delete or rename if necessary']);
+
+    //Default value for Custom Setting
+    CustomSettings customSetting = new CustomSettings(
+        "2",
+        '0',
+        '3',
+        '0',
+        '0',
+        '0',
+        '0',
+        '2',
+        '1',
+        '3',
+        '4',
+        '0',
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        false);
+    var result = insertCustomSettings(customSetting);
+
+    DateTime _dateDue = DateTime.now();
+    final DateFormat formatter = DateFormat('yyyy-MM-dd');
+    final String formattedate = formatter.format(_dateDue);
+
+    Task task = Task("Default Task1", "Default Note", formattedate, '', "", '',
+        '', '', '', '', '', '', '', 0, '', '', '', '', '', '', '');
+
+    insertTask(task);
+
+    task = Task("Default Task2", "Default Note", formattedate, '', "", '', '',
+        '', '', '', '', '', '', 0, '', '', '', '', '', '', '');
+
+    insertTask(task);
   }
 
   Future<int> insertTask(Task task) async {
@@ -287,7 +359,7 @@ class DbHelper {
     } else {
       queryStr = queryStr + " and ($colTag1 == $colfilterTag)";
     }
-    
+
     if (colfilterGoal == "0") {
     } else {
       queryStr = queryStr + " and ($colGoal1 == $colfilterGoal)";
