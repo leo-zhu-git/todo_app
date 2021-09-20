@@ -43,6 +43,11 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
         _tag1List.add(tag1Model);
       });
     });
+    if (tag1.length == 0) {
+      setState(() {
+        _tag1List.clear();
+      });
+    }
   }
 
   _editTag1(BuildContext context, tag1Id) async {
@@ -75,7 +80,7 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
                   onPressed: () {
                     _tag1.name = _tag1NameController.text;
                     _tag1.description = _tag1DescriptionController.text;
-                    _tag1.id = null; 
+                    _tag1.id = null;
 
                     var result = _tag1Service.insertTags(_tag1);
                     Navigator.pop(context);
@@ -126,7 +131,7 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
         });
   }
 
- _editFormDialogue(BuildContext context) {
+  _editFormDialogue(BuildContext context) {
     return showDialog(
         context: context,
         barrierDismissible: true,
@@ -145,8 +150,7 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
                 onPressed: () async {
                   _tag1.id = tag1[0]['id'];
                   _tag1.name = _editTag1NameController.text;
-                  _tag1.description =
-                      _editTag1DescriptionController.text;
+                  _tag1.description = _editTag1DescriptionController.text;
 
                   var result = await _tag1Service.updateTags(_tag1);
                   print(result);
@@ -215,8 +219,7 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
                   child: Text('Cancel')),
               FlatButton(
                 onPressed: () async {
-                  var result =
-                      await _tag1Service.deleteTagbyID(tag1Id);
+                  var result = await _tag1Service.deleteTagbyID(tag1Id);
                   print(result);
                   if (result > 0) {
                     Navigator.pop(context);
@@ -243,9 +246,9 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
                   }
                 },
                 child: Text(
-                    'Delete?',
-                    style: TextStyle(color: Colors.brown[500]),
-                  ),
+                  'Delete?',
+                  style: TextStyle(color: Colors.brown[500]),
+                ),
               ),
             ],
             title: Text('Are you sure you want to delete this'),
@@ -257,6 +260,7 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
     var _snackBar = SnackBar(content: message);
     _globalKey.currentState.showSnackBar(_snackBar);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -276,27 +280,23 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
               color: Colors.blue[100],
               child: ListTile(
                 leading: IconButton(
-                  icon: Icon(Icons.edit),
+                    icon: Icon(Icons.edit),
                     onPressed: () {
                       _editTag1(context, _tag1List[index].id);
-                    }
-                ),
+                    }),
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Flexible(
-                      child: Text(
-                        _tag1List[index].name,
-                        overflow: TextOverflow.ellipsis),
+                      child: Text(_tag1List[index].name,
+                          overflow: TextOverflow.ellipsis),
                     ),
                     IconButton(
-                      icon: Icon(
-                        Icons.delete, color: Colors.grey),
+                        icon: Icon(Icons.delete, color: Colors.grey),
                         onPressed: () {
                           _deleteFormDialogue(context, _tag1List[index].id);
-                        }
-                  ),
-                  ],                  
+                        }),
+                  ],
                 ),
 //                subtitle: Text(_tag1List[index].description),
               ),
