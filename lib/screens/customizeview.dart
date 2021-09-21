@@ -853,7 +853,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
               new Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.pink[100]),
+                    shape: BoxShape.rectangle, color: Colors.green[100]),
                 child: DropdownButtonFormField(
                   value: _selectedSortField1,
                   items: _dropdownMenuItemsSort,
@@ -871,7 +871,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
               new Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.pink[100]),
+                    shape: BoxShape.rectangle, color: Colors.green[100]),
                 child: DropdownButtonFormField(
                   value: _selectedSortOrder1,
                   items: _dropdownMenuSortOrder,
@@ -890,7 +890,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
               new Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.pink[100]),
+                    shape: BoxShape.rectangle, color: Colors.green[100]),
                 child: DropdownButtonFormField(
                   items: _dropdownMenuItemsSort,
                   hint: Text('Sort 2'),
@@ -908,7 +908,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
               new Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.pink[100]),
+                    shape: BoxShape.rectangle, color: Colors.green[100]),
                 child: DropdownButtonFormField(
                   value: _selectedSortOrder2,
                   items: _dropdownMenuSortOrder,
@@ -927,7 +927,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
               new Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.pink[100]),
+                    shape: BoxShape.rectangle, color: Colors.green[100]),
                 child: DropdownButtonFormField(
                   items: _dropdownMenuItemsSort,
                   hint: Text('Sort 3'),
@@ -945,7 +945,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
               new Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.pink[100]),
+                    shape: BoxShape.rectangle, color: Colors.green[100]),
                 child: DropdownButtonFormField(
                   value: _selectedSortOrder3,
                   items: _dropdownMenuSortOrder,
@@ -968,7 +968,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
               new Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.green[100]),
+                    shape: BoxShape.rectangle, color: Colors.yellow[200]),
                 child: DropdownButtonFormField(
                   items: _dropdownMenuItemsSort,
                   hint: Text('Display Main1'),
@@ -987,7 +987,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
               new Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.green[100]),
+                    shape: BoxShape.rectangle, color: Colors.yellow[200]),
                 child: DropdownButtonFormField(
                   items: _dropdownMenuItemsSort,
                   hint: Text('Display Secondary1'),

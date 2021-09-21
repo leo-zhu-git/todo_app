@@ -356,7 +356,7 @@ class TaskDetailState extends State //<TaskDetail>
               margin:
                   EdgeInsets.only(left: 8.0, right: 8.0, top: 4.0, bottom: 2.0),
               decoration: new BoxDecoration(
-                color: Colors.green[100],
+                color: Colors.yellow[200],
               ),
               child: TextField(
                 style: _textStyleControls,
@@ -377,7 +377,7 @@ class TaskDetailState extends State //<TaskDetail>
               margin:
                   EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
               decoration: new BoxDecoration(
-                color: Colors.green[100],
+                color: Colors.yellow[200],
               ),
               child: TextField(
                 style: _textStyleControls,
@@ -385,7 +385,7 @@ class TaskDetailState extends State //<TaskDetail>
                 onChanged: (value) {
                   task.note = value;
                 },
-                minLines: 1,
+                minLines: 4,
                 maxLines: 25,
                 decoration: InputDecoration(
                   labelText: ' Note',
