@@ -79,7 +79,7 @@ class DbHelper {
 
   Future<Database> initializeDb() async {
     Directory dir = await getApplicationDocumentsDirectory();
-    String path = dir.path + "todo_V20.ow.db";
+    String path = dir.path + "todo_V20.oy.db";
     var dbTodovn = await openDatabase(path, version: 1, onCreate: _createDb);
     return dbTodovn;
   }
@@ -144,14 +144,6 @@ class DbHelper {
         "INSERT INTO categories ( 'name', 'description')  values (?, ?)",
         ['2.Work', '2Bootstrap - please delete or rename if necessary']);
 
-    await db.execute(
-        "INSERT INTO categories ( 'name', 'description')  values (?, ?)",
-        ['3.Play', '3Bootstrap - please delete or rename if necessary']);
-
-    await db.execute(
-        "INSERT INTO categories ( 'name', 'description')  values (?, ?)",
-        ['4.Quiet Time', '4Bootstrap - please delete or rename if necessary']);
-
     //Create Default Values for Action
     await db.execute(
         "INSERT INTO action1s ( 'name', 'description')  values (?, ?)",
@@ -160,6 +152,46 @@ class DbHelper {
     await db.execute(
         "INSERT INTO action1s ( 'name', 'description')  values (?, ?)",
         ['2.Connect', '2Bootstrap - please delete or rename if necessary']);
+
+    //Create Default Values for Context
+    await db.execute(
+        "INSERT INTO context1s ( 'name', 'description')  values (?, ?)",
+        ['1.Morning', '1Bootstrap - please delete or rename if necessary']);
+
+    await db.execute(
+        "INSERT INTO context1s ( 'name', 'description')  values (?, ?)",
+        ['2.Afternoon', '2Bootstrap - please delete or rename if necessary']);
+
+    await db.execute(
+        "INSERT INTO context1s ( 'name', 'description')  values (?, ?)",
+        ['3.Evening', '2Bootstrap - please delete or rename if necessary']);
+
+    //Create Default Values for Locations
+    await db.execute(
+        "INSERT INTO location1s ( 'name', 'description')  values (?, ?)",
+        ['1.Home', '1Bootstrap - please delete or rename if necessary']);
+
+    await db.execute(
+        "INSERT INTO location1s ( 'name', 'description')  values (?, ?)",
+        ['2.Grocery', '2Bootstrap - please delete or rename if necessary']);
+
+    //Create Default Values for Tags
+    await db.execute(
+        "INSERT INTO tag1s ( 'name', 'description')  values (?, ?)",
+        ['1.Family', '1Bootstrap - please delete or rename if necessary']);
+
+    await db.execute(
+        "INSERT INTO tag1s ( 'name', 'description')  values (?, ?)",
+        ['2.Friend1', '2Bootstrap - please delete or rename if necessary']);
+
+    //Create Default Values for Goals
+    await db.execute(
+        "INSERT INTO goal1s ( 'name', 'description')  values (?, ?)",
+        ['1.Health', '2Bootstrap - please delete or rename if necessary']);
+
+    await db.execute(
+        "INSERT INTO goal1s ( 'name', 'description')  values (?, ?)",
+        ['2.Wealth', '2Bootstrap - please delete or rename if necessary']);
 
     //Default value for Custom Setting
     CustomSettings customSetting = new CustomSettings(
@@ -191,15 +223,22 @@ class DbHelper {
     final DateFormat formatter = DateFormat('yyyy-MM-dd');
     final String formattedate = formatter.format(_dateDue);
 
-    Task task = Task("Default Task1", "Default Note", formattedate, '', "", '',
-        '', '', '', '', '', '', '', 0, '', '', '', '', '', '', '');
-
-    insertTask(task);
-
-    task = Task("Default Task2", "Default Note", formattedate, '', "", '', '',
+    Task task = Task("Connect", 
+    "How can we make this tool better for you?", formattedate, '', "", '', '',
         '', '', '', '', '', '', 0, '', '', '', '', '', '', '');
-
     insertTask(task);
+
+    task = Task("Navigation", 
+    "Bottom-Navigation", formattedate, '', "", '', '',
+        '', '', '', '', '', '', 0, '', '', '', '', '', '', '');
+    insertTask(task);
+
+    task = Task("Welcome to 2Half Todo!", 
+    "Please click on check to remove this", formattedate, '', "", '',
+        '', '', '', '', '', '', '', 0, '', '', '', '', '', '', '');
+    insertTask(task);
+
+
   }
 
   Future<int> insertTask(Task task) async {
