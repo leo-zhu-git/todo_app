@@ -79,7 +79,7 @@ class DbHelper {
 
   Future<Database> initializeDb() async {
     Directory dir = await getApplicationDocumentsDirectory();
-    String path = dir.path + "todo_V20.ou.db";
+    String path = dir.path + "todo_V20.ow.db";
     var dbTodovn = await openDatabase(path, version: 1, onCreate: _createDb);
     return dbTodovn;
   }
@@ -290,14 +290,17 @@ class DbHelper {
     final String formattedN7D = formatter.format(_N7D);
     final String formattedN30D = formatter.format(_N30D);
 
-    ////////////////
-    /// build query - add filterIsDone
 ////////////////
-    if (colfilterIsDone == 0) // hide
+/// build query - add filterIsDone
+////////////////
+    if (colfilterIsDone != 0) // show
       queryStr = queryStr + " where ($colIsDone ==0)";
     else
       queryStr = queryStr + " where ($colIsDone not Null)";
 
+////////////////
+/// build query - add DateDue
+////////////////
     if (colfilterDateDue == "Today") {
       _startDate = formattedToday;
       _endDate = formattedToday;

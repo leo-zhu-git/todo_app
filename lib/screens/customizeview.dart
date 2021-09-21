@@ -583,7 +583,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
       appBar: new AppBar(
         backgroundColor: Colors.brown[900],
         automaticallyImplyLeading: false,
-        title: Center(child: Text('View - Filter, Sort, Show')),
+        title: Center(child: Text('Personalize - Filter, Sort, View')),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -961,7 +961,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
               SizedBox(
                 height: 20,
               ),
-              Text("Show - Main and Second Line"),
+              Text("View - Main and Second Line"),
 ///////////////////////////
 //  Show Main 1
 ///////////////////////////
