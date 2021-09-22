@@ -79,7 +79,7 @@ class DbHelper {
 
   Future<Database> initializeDb() async {
     Directory dir = await getApplicationDocumentsDirectory();
-    String path = dir.path + "todo_V20.oz.db";
+    String path = dir.path + "todo_V21.d.db";
     var dbTodovn = await openDatabase(path, version: 1, onCreate: _createDb);
     return dbTodovn;
   }
@@ -223,20 +223,32 @@ class DbHelper {
     final DateFormat formatter = DateFormat('yyyy-MM-dd');
     final String formattedate = formatter.format(_dateDue);
 
-    Task task = Task("Connect", 
-    "How can we make this tool better for you?", formattedate, '', "", '', '',
+    Task task = Task("Welcome to 2Half Todo!", 
+    '''
+Hola/ Greetings/ Ayubowan/ NiHao,
+We welcome you to use this task maanagement app. 
+We'd love to hear from you for questions / comments/ feedback.
+Contact us at help@2half.online
+Cheers!
+    ''', formattedate, '', "", '',
+        '', '', '', '', '', '', '', 0, '', '', '', '', '', '', '');
+    insertTask(task);
+    
+    task = Task("Practice - complete a task", 
+    "Check on left box to complete task", formattedate, '', "", '', '',
         '', '', '', '', '', '', 0, '', '', '', '', '', '', '');
     insertTask(task);
 
     task = Task("Navigation", 
-    "Bottom-Navigation", formattedate, '', "", '', '',
+    "How can we make this tool better for you?", formattedate, '', "", '', '',
         '', '', '', '', '', '', 0, '', '', '', '', '', '', '');
     insertTask(task);
 
-    task = Task("Welcome to 2Half Todo!", 
-    "Please click on check to remove this", formattedate, '', "", '',
-        '', '', '', '', '', '', '', 0, '', '', '', '', '', '', '');
+    task = Task("Plans", 
+    "How can we make this tool better for you?", formattedate, '', "", '', '',
+        '', '', '', '', '', '', 0, '', '', '', '', '', '', '');
     insertTask(task);
+
 
 
   }

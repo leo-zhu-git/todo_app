@@ -46,6 +46,13 @@ class TaskHomeState extends State {
     _getCustomSettings();
   }
 
+  final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
+
+ _showSuccessSnackBar(message) {
+    var _snackBar = SnackBar(content: message);
+    _globalKey.currentState.showSnackBar(_snackBar);
+  }
+
   @override
   Widget build(BuildContext context) {
     if (tasklist == null) {
@@ -59,6 +66,8 @@ class TaskHomeState extends State {
       backgroundColor: Colors.grey[200],
       drawer: DrawerNagivation(),
       appBar: AppBar(
+              key: _globalKey,
+
         backgroundColor: Colors.brown[900],
         elevation: 8,
         title: Center(child: Text('View (' + count.toString() + ')')),
@@ -110,6 +119,7 @@ class TaskHomeState extends State {
       )),
     );
   }
+
 
   ListView taskListItems() {
     return ListView.builder(
@@ -180,6 +190,23 @@ class TaskHomeState extends State {
                           this.tasklist[position].status = "Completed";
                           this.tasklist[position].dateDone = formattedDate;
                           dbHelper.updateTask(tasklist[position]);
+                          _showSuccessSnackBar(Container(
+                            color: Colors.tealAccent[100],
+                            height: 40,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                (Icon(
+                                  Icons.thumb_up,
+                                  color: Colors.black,
+                                )),
+                                Text(
+                                  ' Task Completed - Satisfaction... ',
+                                  style: (TextStyle(color: Colors.black)),
+                                )
+                              ],
+                            ),
+                          ));
                         } else {
                           this.tasklist[position].isDone = 0;
                           this.tasklist[position].status = "Open";
