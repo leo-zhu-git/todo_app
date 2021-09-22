@@ -230,11 +230,11 @@ Greetings/ Nihao/ Hola/ Namaste/ Ayubowan,
 
 We welcome you to our community. 
 
-We'd love to hear from you.
+We'd love to hear from you - what is the #1 feature you wish to have.
 
 Contact us at help@2half.online
 
-Hope to hear from you soon
+Connect soon
     ''',
         formattedate,
         '',
