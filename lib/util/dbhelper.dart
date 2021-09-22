@@ -292,7 +292,7 @@ Bottom-Right (Find) | keyword search or more powerful advance dropdown search
     insertTask(task);
 
     task = Task(
-        "3.Practice - baby steps",
+        "3.Practice | Baby Steps",
         '''
 view | Check on left box to complete a task
 
@@ -329,13 +329,13 @@ contact us | share the good, bad, ugly
     insertTask(task);
 
     task = Task(
-        "4.Plans",
+        "4.Subcription Plans",
         '''
 First 30 days | free full features, is this tool for you?
 
 Plan A - USD 4 | 1 month plan before you commit
 
-Plan B - USD 18 | 6 month plan 
+Plan B - USD 15 | 6 month plan 
 
 Plan C - USD 24 | 12 month plan  
         ''',
