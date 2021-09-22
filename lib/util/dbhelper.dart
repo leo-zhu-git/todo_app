@@ -79,7 +79,7 @@ class DbHelper {
 
   Future<Database> initializeDb() async {
     Directory dir = await getApplicationDocumentsDirectory();
-    String path = dir.path + "todo_V21.d.db";
+    String path = dir.path + "todo_V21.h.db";
     var dbTodovn = await openDatabase(path, version: 1, onCreate: _createDb);
     return dbTodovn;
   }
@@ -223,34 +223,142 @@ class DbHelper {
     final DateFormat formatter = DateFormat('yyyy-MM-dd');
     final String formattedate = formatter.format(_dateDue);
 
-    Task task = Task("Welcome to 2Half Todo!", 
-    '''
-Hola/ Greetings/ Ayubowan/ NiHao,
-We welcome you to use this task maanagement app. 
-We'd love to hear from you for questions / comments/ feedback.
+    Task task = Task(
+        "1.Welcome to 2Half Todo!",
+        '''
+Greetings/ Nihao/ Hola/ Namaste/ Ayubowan,
+
+We welcome you to our community. 
+
+We'd love to hear from you.
+
 Contact us at help@2half.online
-Cheers!
-    ''', formattedate, '', "", '',
-        '', '', '', '', '', '', '', 0, '', '', '', '', '', '', '');
+
+Hope to hear from you soon
+    ''',
+        formattedate,
+        '',
+        "",
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        0,
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '');
     insertTask(task);
-    
-    task = Task("Practice - complete a task", 
-    "Check on left box to complete task", formattedate, '', "", '', '',
-        '', '', '', '', '', '', 0, '', '', '', '', '', '', '');
+
+    task = Task(
+        "2.Navigation | Moving about ",
+        '''
+Top-Left (Drawer) | personalize dropdown, wipe device/cloud, help
+
+Top-Right (Sync) | never lose data, sync your device to cloud 
+
+Bottom-Left (Customize) | filter, sort, view 
+
+Bottom middle (add task) | quick add or many hooks to remember  
+
+Bottom-Right (Find) | keyword search or more powerful advance dropdown search 
+''',
+        formattedate,
+        '',
+        "",
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        0,
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '');
     insertTask(task);
 
-    task = Task("Navigation", 
-    "How can we make this tool better for you?", formattedate, '', "", '', '',
-        '', '', '', '', '', '', 0, '', '', '', '', '', '', '');
+    task = Task(
+        "3.Practice - baby steps",
+        '''
+view | Check on left box to complete a task
+
+drawer | personalize bootstrap picklist/ dropdown
+
+customize | personalize filters, order, view  
+
+find | using normal search or advanced search
+
+sync | never lose your data with backup in cloud
+
+contact us | share the good, bad, ugly 
+
+    ''',
+        formattedate,
+        '',
+        "",
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        0,
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '');
     insertTask(task);
 
-    task = Task("Plans", 
-    "How can we make this tool better for you?", formattedate, '', "", '', '',
-        '', '', '', '', '', '', 0, '', '', '', '', '', '', '');
+    task = Task(
+        "4.Plans",
+        '''
+First 30 days | free full features, is this tool for you?
+
+Plan A - USD 4 | 1 month plan before you commit
+
+Plan B - USD 18 | 6 month plan 
+
+Plan C - USD 24 | 12 month plan  
+        ''',
+        formattedate,
+        '',
+        "",
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        0,
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '');
     insertTask(task);
-
-
-
   }
 
   Future<int> insertTask(Task task) async {
@@ -342,7 +450,7 @@ Cheers!
     final String formattedN30D = formatter.format(_N30D);
 
 ////////////////
-/// build query - add filterIsDone
+    /// build query - add filterIsDone
 ////////////////
     if (colfilterIsDone != 0) // show
       queryStr = queryStr + " where ($colIsDone ==0)";
@@ -350,7 +458,7 @@ Cheers!
       queryStr = queryStr + " where ($colIsDone not Null)";
 
 ////////////////
-/// build query - add DateDue
+    /// build query - add DateDue
 ////////////////
     if (colfilterDateDue == "Today") {
       _startDate = formattedToday;
