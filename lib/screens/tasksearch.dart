@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:todo_app/model/taskclass.dart';
@@ -201,8 +202,20 @@ class TaskSearchState extends State {
       appBar: AppBar(
         backgroundColor: Colors.brown[900],
         automaticallyImplyLeading: false,
-        title: Center(child: Text('Search')),
-      ),
+//        title: Center(child: Text('Search')),
+        title: Center(
+          child: Container(
+            child: Column(
+              children: <Widget>[
+                Badge(
+                  child: Text('Search  '),
+                  badgeContent: Text(count.toString(), style: TextStyle(color: Colors.white)),
+                  badgeColor: Colors.red,
+                ),
+              ],
+            ),
+          ),
+        ),      ),
       resizeToAvoidBottomInset: false,
       body: Column(
         children: [
@@ -455,12 +468,12 @@ class TaskSearchState extends State {
                   )
                 ],
               )),
-          Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Align(
-                  alignment: Alignment.topLeft,
-                  child: Text(count.toString() + " Results found..",
-                      style: _textStyleControls))),
+//          Padding(
+//              padding: EdgeInsets.all(8.0),
+//              child: Align(
+//                  alignment: Alignment.topLeft,
+//                  child: Text(count.toString() + " Results found..",
+//                      style: _textStyleControls))),
           Expanded(
             child: Container(child: taskListItems()),
           ),

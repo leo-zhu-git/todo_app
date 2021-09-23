@@ -48,7 +48,7 @@ class _DrawerNagivation extends State<DrawerNagivation> {
           children: <Widget>[
             UserAccountsDrawerHeader(
               currentAccountPicture: CircleAvatar(
-//                backgroundImage: NetworkImage(null),
+                  backgroundImage: AssetImage('images/todoMIT.png'),
                   ),
               accountName: Text('2half'),
               accountEmail: Text('2half@gmail.com'),

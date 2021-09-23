@@ -16,6 +16,7 @@ import 'package:todo_app/screens/swipe.dart';
 import 'package:todo_app/screens/tasksearch.dart';
 import 'package:todo_app/util/drawer_navigation.dart';
 import 'package:intl/intl.dart';
+import 'package:badges/badges.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:todo_app/util/mysql_dbhelper.dart';
 import 'package:todo_app/model/globals.dart' as globals;
@@ -48,7 +49,7 @@ class TaskHomeState extends State {
 
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
 
- _showSuccessSnackBar(message) {
+  _showSuccessSnackBar(message) {
     var _snackBar = SnackBar(content: message);
     _globalKey.currentState.showSnackBar(_snackBar);
   }
@@ -66,11 +67,24 @@ class TaskHomeState extends State {
       backgroundColor: Colors.grey[200],
       drawer: DrawerNagivation(),
       appBar: AppBar(
-              key: _globalKey,
+        key: _globalKey,
 
         backgroundColor: Colors.brown[900],
         elevation: 8,
-        title: Center(child: Text('View (' + count.toString() + ')')),
+//        title: Center(child: Text('View (' + count.toString() + ')')),
+        title: Center(
+          child: Container(
+            child: Column(
+              children: <Widget>[
+                Badge(
+                  child: Text('View  '),
+                  badgeContent: Text(count.toString(), style: TextStyle(color: Colors.white)),
+                  badgeColor: Colors.red,
+                ),
+              ],
+            ),
+          ),
+        ),
         actions: <Widget>[
           IconButton(
               icon: const Icon(Icons.sync, color: Colors.white),
@@ -119,7 +133,6 @@ class TaskHomeState extends State {
       )),
     );
   }
-
 
   ListView taskListItems() {
     return ListView.builder(

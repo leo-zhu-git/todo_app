@@ -24,8 +24,8 @@ class _SyncViewState extends State<SyncView> {
     return Scaffold(
         backgroundColor: Colors.blue[100],
         body: Center(
-          child: SpinKitPouringHourGlass(
-            color: Colors.yellow[100],
+          child: SpinKitFoldingCube(
+            color: Colors.yellow[200],
             size: 100,
           ),
         ));

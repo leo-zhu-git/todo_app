@@ -79,7 +79,7 @@ class DbHelper {
 
   Future<Database> initializeDb() async {
     Directory dir = await getApplicationDocumentsDirectory();
-    String path = dir.path + "todo_V21.h.db";
+    String path = dir.path + "todo_V21.j.db";
     var dbTodovn = await openDatabase(path, version: 1, onCreate: _createDb);
     return dbTodovn;
   }
@@ -224,15 +224,17 @@ class DbHelper {
     final String formattedate = formatter.format(_dateDue);
 
     Task task = Task(
-        "1.Welcome to 2Half Todo!",
+        "1.Welcome to TodoMIT",
         '''
 Greetings/ Nihao/ Hola/ Namaste/ Ayubowan,
 
 We welcome you to our community. 
 
-We'd love to hear from you - what is the #1 feature you wish to have.
+Our philosophy - do only what are the Top 5Most Important Tasks (MIT) - not everything
 
-Contact us at help@2half.online
+You keep your options open - be a traveller (unplanned), not a tourist (pre-planned)
+
+We'd love to hear from you - what is the #1 feature you wish to have. Contact us at help@2half.online
 
 Connect soon
     ''',
@@ -266,9 +268,9 @@ Top-Right (Sync) | never lose data, sync your device to cloud
 
 Bottom-Left (Customize) | filter, sort, view 
 
-Bottom middle (add task) | quick add or many hooks to remember  
+Bottom middle (Add Task) | quick add or many hooks to remember  
 
-Bottom-Right (Find) | keyword search or more powerful advance dropdown search 
+Bottom-Right (Search) | keyword search or more powerful advance dropdown search 
 ''',
         formattedate,
         '',
@@ -294,17 +296,17 @@ Bottom-Right (Find) | keyword search or more powerful advance dropdown search
     task = Task(
         "3.Practice | Baby Steps",
         '''
-view | Check on left box to complete a task
+View | Check on left box to complete a task
 
-drawer | personalize bootstrap picklist/ dropdown
+Drawer | personalize bootstrap picklist/ dropdown
 
-customize | personalize filters, order, view  
+Customize | personalize filters, order, view  
 
-find | using normal search or advanced search
+Search | using normal search or advanced search
 
-sync | never lose your data with backup in cloud
+Sync | never lose your data with backup in cloud
 
-contact us | share the good, bad, ugly 
+Contact us | share the good, bad, ugly 
 
     ''',
         formattedate,
