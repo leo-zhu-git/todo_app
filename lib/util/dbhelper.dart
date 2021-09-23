@@ -224,13 +224,13 @@ class DbHelper {
     final String formattedate = formatter.format(_dateDue);
 
     Task task = Task(
-        "1.Welcome to TodoMIT",
+        "1.Welcome to todoMIT",
         '''
 Greetings/ Nihao/ Hola/ Namaste/ Ayubowan,
 
 We welcome you to our community. 
 
-Our philosophy - do only what are the Top 5Most Important Tasks (MIT) - not everything
+Our philosophy - do only what are the Most Important Tasks (MIT) - not everything
 
 You keep your options open - be a traveller (unplanned), not a tourist (pre-planned)
 
