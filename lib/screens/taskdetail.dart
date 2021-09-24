@@ -14,8 +14,7 @@ DateTime currentDate = DateTime.now();
 String formattedDate = DateFormat('yyyymmdd').format(currentDate);
 String _searchText = "";
 TextStyle _textStyleControls =
-TextStyle(fontSize: 16.0, fontWeight: FontWeight.w800, color: Colors.black);
-
+    TextStyle(fontSize: 16.0, fontWeight: FontWeight.w800, color: Colors.black);
 
 final List<String> choices = const <String>[
   'Save Task & Back',
@@ -42,13 +41,15 @@ class TaskDetailState extends State //<TaskDetail>
   Task task;
 
   TaskDetailState(this.task);
-  final _priorities = ["Low", "Medium", "High", "Top"];
   List<String> _cat = List<String>();
 
-  var _todoTitleController = TextEditingController();
-  var _todoDescriptionController = TextEditingController();
+  var _todoTaskController = TextEditingController();
+  var _todoNoteController = TextEditingController();
   var _todoDateController = TextEditingController();
   var _todoTimeController = TextEditingController();
+  var _todoStatusController = TextEditingController();
+  var _todoPriorityController = TextEditingController();
+  var _todoStarController = TextEditingController();
 
   var _selectedCategory;
   var _selectedAction1;
@@ -56,15 +57,13 @@ class TaskDetailState extends State //<TaskDetail>
   var _selectedLocation1;
   var _selectedTag1;
   var _selectedGoal1;
-  var _selectedPriorityText;
-  int _selectedPriorityValue;
 
   List<CustomDropdownItem> _categories = [];
   List<CustomDropdownItem> _action1s = [];
   List<CustomDropdownItem> _context1s = [];
   List<CustomDropdownItem> _location1s = [];
   List<CustomDropdownItem> _tag1s = [];
-  TextEditingController prioritytextController = TextEditingController();
+  List<CustomDropdownItem> _goal1s = [];
 
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
 
@@ -79,6 +78,7 @@ class TaskDetailState extends State //<TaskDetail>
     _loadContext1s();
     _loadLocation1s();
     _loadTag1s();
+    _loadGoal1s(); 
   }
 
 //##################Drop Down Items Load from DB #################################################################
@@ -87,7 +87,7 @@ class TaskDetailState extends State //<TaskDetail>
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
-    cus.name = "--Select Category--";
+    cus.name = "-- Select Category --";
     _categories.add(cus);
     categories.forEach((category) {
       setState(() {
@@ -111,15 +111,15 @@ class TaskDetailState extends State //<TaskDetail>
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
-    cus.name = "--Select Action--";
+    cus.name = "-- Select Action --";
     _action1s.add(cus);
     action1s.forEach((action1) {
       setState(() {
         cus = new CustomDropdownItem();
         cus.id = action1['id'].toString();
         String tempAct;
-        if (action1['name'].toString().length > 30)
-          tempAct = action1['name'].toString().substring(0, 30) + "...";
+        if (action1['name'].toString().length > 20)
+          tempAct = action1['name'].toString().substring(0, 20) + "...";
         else
           tempAct = action1['name'];
 
@@ -134,7 +134,7 @@ class TaskDetailState extends State //<TaskDetail>
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
-    cus.name = "--Select Context--";
+    cus.name = "-- Select Context --";
     _context1s.add(cus);
     context1s.forEach((context1) {
       setState(() {
@@ -158,7 +158,7 @@ class TaskDetailState extends State //<TaskDetail>
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
-    cus.name = "--Select Location--";
+    cus.name = "-- Select Location --";
     _location1s.add(cus);
     location1s.forEach((location1) {
       setState(() {
@@ -182,7 +182,7 @@ class TaskDetailState extends State //<TaskDetail>
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
-    cus.name = "--Select Tag--";
+    cus.name = "-- Select Tag --";
     _tag1s.add(cus);
     tag1s.forEach((tag1) {
       setState(() {
@@ -196,6 +196,29 @@ class TaskDetailState extends State //<TaskDetail>
 
         cus.name = tempTag;
         _tag1s.add(cus);
+      });
+    });
+  }
+
+  _loadGoal1s() async {
+    var goal1s = await helper.getGoals();
+    CustomDropdownItem cus;
+    cus = new CustomDropdownItem();
+    cus.id = null;
+    cus.name = "-- Select Goal --";
+    _goal1s.add(cus);
+    goal1s.forEach((goal1) {
+      setState(() {
+        cus = new CustomDropdownItem();
+        cus.id = goal1['id'].toString();
+        String tempGoal;
+        if (goal1['name'].toString().length > 30)
+          tempGoal = goal1['name'].toString().substring(0, 30) + "...";
+        else
+          tempGoal = goal1['name'];
+
+        cus.name = tempGoal;
+        _goal1s.add(cus);
       });
     });
   }
@@ -265,7 +288,7 @@ class TaskDetailState extends State //<TaskDetail>
 
   @override
   Widget build(BuildContext context) {
-    _todoDescriptionController.text = task.description;
+    _todoNoteController.text = task.note;
     task.category != ""
         ? _selectedCategory = task.category
         : _selectedCategory = null;
@@ -278,13 +301,13 @@ class TaskDetailState extends State //<TaskDetail>
     task.location1 != ""
         ? _selectedLocation1 = task.location1
         : _selectedLocation1 = null;
-    task.tag1 != "" ? _selectedTag1 = task.tag1 : _selectedTag1 = null;
-    task.goal1 != "" ? _selectedGoal1 = task.goal1 : _selectedGoal1 = null;
-    _todoTitleController.text = task.title;
-    _selectedPriorityText = task.prioritytext;
-    task.prioritytext != ""
-        ? _selectedPriorityValue = task.priorityvalue
-        : _selectedPriorityValue = null;
+    task.tag1 != "" 
+        ? _selectedTag1 = task.tag1 
+        : _selectedTag1 = null;
+    task.goal1 != "" 
+        ? _selectedGoal1 = task.goal1 
+        : _selectedGoal1 = null;
+    _todoTaskController.text = task.task;
     task.dateDue != ""
         ? {
             if (_dateDue == null)
@@ -327,45 +350,46 @@ class TaskDetailState extends State //<TaskDetail>
         child: Column(
           children: <Widget>[
 ///////////////////////////
-//  WHAT - TITLE
+//  WHAT - Task
 ///////////////////////////
             Container(
-              margin: EdgeInsets.only(left: 8.0, right: 8.0, top: 4.0, bottom: 2.0),
-
+              margin:
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 4.0, bottom: 2.0),
               decoration: new BoxDecoration(
-                color: Colors.green[100],
+                color: Colors.yellow[200],
               ),
               child: TextField(
                 style: _textStyleControls,
-                controller: _todoTitleController,
+                controller: _todoTaskController,
                 onChanged: (value) {
-                  task.title = value;
+                  task.task = value;
                 },
                 decoration: InputDecoration(
-                  labelText: ' Title',
-                  hintText: ' Write Todo title',
+                  labelText: ' Task',
+                  hintText: ' Write Todo Task',
                 ),
               ),
             ),
 ///////////////////////////
-//  WHAT - DESCRIPTION
+//  WHAT - NOTE
 ///////////////////////////
             Container(
-              margin: EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+              margin:
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
               decoration: new BoxDecoration(
-                color: Colors.green[100],
+                color: Colors.yellow[200],
               ),
               child: TextField(
                 style: _textStyleControls,
-                controller: _todoDescriptionController,
+                controller: _todoNoteController,
                 onChanged: (value) {
-                  task.description = value;
+                  task.note = value;
                 },
-                minLines: 1,
-                maxLines: 25,
+                minLines: 4,
+                maxLines: 30,
                 decoration: InputDecoration(
-                  labelText: ' Description',
-                  hintText: ' Write Todo Description',
+                  labelText: ' Note',
+                  hintText: ' Write Todo Note',
                 ),
               ),
             ),
@@ -373,7 +397,8 @@ class TaskDetailState extends State //<TaskDetail>
 //  WHEN - DATE DUE
 ///////////////////////////
             Container(
-              margin: EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+              margin:
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
               decoration: BoxDecoration(
                 shape: BoxShape.rectangle,
                 color: Colors.blue[100],
@@ -398,8 +423,8 @@ class TaskDetailState extends State //<TaskDetail>
 //  WHEN - TIME DUE
 ///////////////////////////
             Container(
-              margin: EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
-
+              margin:
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
               decoration: BoxDecoration(
                 shape: BoxShape.rectangle,
                 color: Colors.blue[100],
@@ -424,14 +449,13 @@ class TaskDetailState extends State //<TaskDetail>
 ///////////////////////////
 
             Container(
-              margin: EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+              margin:
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
               decoration: BoxDecoration(
                   shape: BoxShape.rectangle, color: Colors.blue[100]),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(" Catogory: ", style: _textStyleControls),
-                  Spacer(),
                   DropdownButton<String>(
                       items: _categories.map((CustomDropdownItem value) {
                         return DropdownMenuItem<String>(
@@ -458,14 +482,13 @@ class TaskDetailState extends State //<TaskDetail>
 ///////////////////////////
 
             Container(
-              margin: EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+              margin:
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
               decoration: BoxDecoration(
                   shape: BoxShape.rectangle, color: Colors.blue[100]),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(" Action: ", style: _textStyleControls),
-                  Spacer(),
                   DropdownButton<String>(
                       items: _action1s.map((CustomDropdownItem value) {
                         return DropdownMenuItem<String>(
@@ -491,14 +514,13 @@ class TaskDetailState extends State //<TaskDetail>
 //  CONTEXT
 ///////////////////////////
             Container(
-              margin: EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+              margin:
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
               decoration: BoxDecoration(
                   shape: BoxShape.rectangle, color: Colors.blue[100]),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(" Context: ", style: _textStyleControls),
-                  Spacer(),
                   DropdownButton<String>(
                       items: _context1s.map((CustomDropdownItem value) {
                         return DropdownMenuItem<String>(
@@ -523,14 +545,13 @@ class TaskDetailState extends State //<TaskDetail>
 //  LOCATION
 ///////////////////////////
             Container(
-              margin: EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+              margin:
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
               decoration: BoxDecoration(
                   shape: BoxShape.rectangle, color: Colors.blue[100]),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(" Location: ", style: _textStyleControls),
-                  Spacer(),
                   DropdownButton<String>(
                       items: _location1s.map((CustomDropdownItem value) {
                         return DropdownMenuItem<String>(
@@ -555,14 +576,13 @@ class TaskDetailState extends State //<TaskDetail>
 //  TAG
 ///////////////////////////
             Container(
-              margin: EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+              margin:
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
               decoration: BoxDecoration(
                   shape: BoxShape.rectangle, color: Colors.blue[100]),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(" Tag: ", style: _textStyleControls),
-                  Spacer(),
                   DropdownButton<String>(
                       items: _tag1s.map((CustomDropdownItem value) {
                         return DropdownMenuItem<String>(
@@ -584,8 +604,37 @@ class TaskDetailState extends State //<TaskDetail>
               ),
             ),
 
-
-            //KK     // SizedBox(
+///////////////////////////
+//  GOAL
+///////////////////////////
+            Container(
+              margin:
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+              decoration: BoxDecoration(
+                  shape: BoxShape.rectangle, color: Colors.blue[100]),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  DropdownButton<String>(
+                      items: _goal1s.map((CustomDropdownItem value) {
+                        return DropdownMenuItem<String>(
+                            value: value.id,
+                            child: Text(
+                              value.name,
+                              overflow: TextOverflow.ellipsis,
+                            ));
+                      }).toList(),
+                      style: _textStyleControls,
+                      value: _selectedGoal1,
+                      onChanged: (String newValue) {
+                        setState(() {
+                          _selectedGoal1 = newValue;
+                          task.goal1 = newValue;
+                        });
+                      }),
+                ],
+              ),
+            ),            //KK     // SizedBox(
             //   height: 20,
             // ),
 
@@ -595,8 +644,8 @@ class TaskDetailState extends State //<TaskDetail>
               children: [
                 RaisedButton(
                     onPressed: () {
-                      //  Navigator.pop(context);
-                      Navigator.of(context).pushNamed('/dashboard');
+                      Navigator.pop(context);
+//                      Navigator.of(context).pushNamed('/dashboard');
                     },
                     child: Text(
                       'Cancel',
@@ -605,8 +654,8 @@ class TaskDetailState extends State //<TaskDetail>
                 //KK SizedBox(width: 10),
                 RaisedButton(
                     onPressed: () async {
-                      task.title = _todoTitleController.text;
-                      task.description = _todoDescriptionController.text;
+                      task.task = _todoTaskController.text;
+                      task.note = _todoNoteController.text;
                       task.category = _selectedCategory == null
                           ? ""
                           : _selectedCategory.toString();
@@ -618,6 +667,8 @@ class TaskDetailState extends State //<TaskDetail>
                           : _selectedContext1.toString();
                       task.tag1 =
                           _selectedTag1 == null ? "" : _selectedTag1.toString();
+                      task.goal1 =
+                          _selectedGoal1 == null ? "" : _selectedGoal1.toString();
                       task.dateDue = _todoDateController.text;
                       task.timeDue = _todoTimeController.text;
                       task.isDone = 0;
@@ -666,7 +717,8 @@ class TaskDetailState extends State //<TaskDetail>
                         ),
                       );
 
-                      Navigator.of(context).pushNamed('/dashboard');
+                      Navigator.pop(context);
+//                      Navigator.of(context).pushNamed('/dashboard');
                     },
                     color: Colors.brown[900],
                     child: Text(

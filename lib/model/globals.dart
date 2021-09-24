@@ -18,3 +18,8 @@ int filterAction;
 int filterContext;
 int filterLocation;
 int filterTag;
+int filterGoal;
+int filterStatus;
+int filterPriority;
+int filterStar;
+int bootstrap; 

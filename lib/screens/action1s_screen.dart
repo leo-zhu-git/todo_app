@@ -4,7 +4,6 @@ import 'package:todo_app/model/action1.dart';
 import 'package:todo_app/screens/taskhome.dart';
 import 'package:todo_app/util/dbhelper.dart';
 
-
 class Action1sScreen extends StatefulWidget {
   @override
   _Action1sScreenState createState() => _Action1sScreenState();
@@ -15,7 +14,7 @@ class _Action1sScreenState extends State<Action1sScreen> {
   var _action1DescriptionController = TextEditingController();
 
   var _action1 = Action1();
-  
+
   var _action1Service = DbHelper();
 
   var _editAction1NameController = TextEditingController();
@@ -45,6 +44,11 @@ class _Action1sScreenState extends State<Action1sScreen> {
         _actionList.add(actionModel);
       });
     });
+    if (action.length == 0) {
+      setState(() {
+        _actionList.clear();
+      });
+    }
   }
 
   _editAction(BuildContext context, actionId) async {
@@ -77,8 +81,7 @@ class _Action1sScreenState extends State<Action1sScreen> {
                   onPressed: () {
                     _action1.name = _action1NameController.text;
                     _action1.description = _action1DescriptionController.text;
-                    _action1.id = null; 
-
+                    _action1.id = null;
 
                     var result = _action1Service.insertAction(_action1);
                     Navigator.pop(context);
@@ -129,7 +132,7 @@ class _Action1sScreenState extends State<Action1sScreen> {
         });
   }
 
- _editFormDialogue(BuildContext context) {
+  _editFormDialogue(BuildContext context) {
     return showDialog(
         context: context,
         barrierDismissible: true,
@@ -148,8 +151,7 @@ class _Action1sScreenState extends State<Action1sScreen> {
                 onPressed: () async {
                   _action1.id = action1[0]['id'];
                   _action1.name = _editAction1NameController.text;
-                  _action1.description =
-                      _editAction1DescriptionController.text;
+                  _action1.description = _editAction1DescriptionController.text;
 
                   var result = await _action1Service.updateAction(_action1);
                   print(result);
@@ -218,8 +220,7 @@ class _Action1sScreenState extends State<Action1sScreen> {
                   child: Text('Cancel')),
               FlatButton(
                 onPressed: () async {
-                  var result =
-                      await _action1Service.deleteAction(actionId);
+                  var result = await _action1Service.deleteAction(actionId);
                   print(result);
                   if (result > 0) {
                     Navigator.pop(context);
@@ -246,9 +247,9 @@ class _Action1sScreenState extends State<Action1sScreen> {
                   }
                 },
                 child: Text(
-                    'Delete?',
-                    style: TextStyle(color: Colors.brown[500]),
-                  ),
+                  'Delete?',
+                  style: TextStyle(color: Colors.brown[500]),
+                ),
               ),
             ],
             title: Text('Are you sure you want to delete this'),
@@ -260,6 +261,7 @@ class _Action1sScreenState extends State<Action1sScreen> {
     var _snackBar = SnackBar(content: message);
     _globalKey.currentState.showSnackBar(_snackBar);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -279,27 +281,23 @@ class _Action1sScreenState extends State<Action1sScreen> {
               color: Colors.blue[100],
               child: ListTile(
                 leading: IconButton(
-                  icon: Icon(Icons.edit),
+                    icon: Icon(Icons.edit),
                     onPressed: () {
                       _editAction(context, _actionList[index].id);
-                    }
-                ),
+                    }),
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Flexible(
-                      child: Text(
-                        _actionList[index].name,
-                        overflow: TextOverflow.ellipsis),
+                      child: Text(_actionList[index].name,
+                          overflow: TextOverflow.ellipsis),
                     ),
                     IconButton(
-                      icon: Icon(
-                        Icons.delete, color: Colors.grey),
+                        icon: Icon(Icons.delete, color: Colors.grey),
                         onPressed: () {
                           _deleteFormDialogue(context, _actionList[index].id);
-                        }
-                  ),
-                  ],                  
+                        }),
+                  ],
                 ),
               ),
             ),

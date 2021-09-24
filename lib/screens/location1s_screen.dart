@@ -42,6 +42,11 @@ class _Location1sScreenState extends State<Location1sScreen> {
         _location1List.add(location1Model);
       });
     });
+    if (location1s.length == 0) {
+      setState(() {
+        _location1List.clear();
+      });
+    }
   }
 
   _editLocation1(BuildContext context, location1Id) async {
@@ -75,8 +80,9 @@ class _Location1sScreenState extends State<Location1sScreen> {
                   color: Colors.brown[500],
                   onPressed: () {
                     _location1.name = _location1NameController.text;
-                    _location1.description = _location1DescriptionController.text;
-                    _location1.id = null; 
+                    _location1.description =
+                        _location1DescriptionController.text;
+                    _location1.id = null;
 
                     var result = _location1Service.insertLocations(_location1);
                     print(result);
@@ -149,7 +155,8 @@ class _Location1sScreenState extends State<Location1sScreen> {
                   _location1.description =
                       _editLocation1DescriptionController.text;
 
-                  var result = await _location1Service.updateLocations(_location1);
+                  var result =
+                      await _location1Service.updateLocations(_location1);
                   print(result);
                   if (result > 0) {
                     Navigator.pop(context);
@@ -286,14 +293,14 @@ class _Location1sScreenState extends State<Location1sScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Flexible(
-                      child: Text(
-                        _location1List[index].name,
-                        overflow: TextOverflow.ellipsis),
+                      child: Text(_location1List[index].name,
+                          overflow: TextOverflow.ellipsis),
                     ),
                     IconButton(
                         icon: Icon(Icons.delete, color: Colors.grey),
                         onPressed: () {
-                          _deleteFormDialogue(context, _location1List[index].id);
+                          _deleteFormDialogue(
+                              context, _location1List[index].id);
                         }),
                   ],
                 ),

@@ -32,7 +32,7 @@ class _Goal1sScreenState extends State<Goal1sScreen> {
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
 
   getAllGoal1s() async {
-    _goal1List = List<Goal1>();
+    _goal1List = [];
     var goal1 = await _goal1Service.getGoals();
     goal1.forEach((goal1) {
       setState(() {
@@ -43,6 +43,11 @@ class _Goal1sScreenState extends State<Goal1sScreen> {
         _goal1List.add(goal1Model);
       });
     });
+    if (goal1.length == 0) {
+      setState(() {
+        _goal1List.clear();
+      });
+    }
   }
 
   _editGoal1(BuildContext context, goal1Id) async {
@@ -75,7 +80,7 @@ class _Goal1sScreenState extends State<Goal1sScreen> {
                   onPressed: () {
                     _goal1.name = _goal1NameController.text;
                     _goal1.description = _goal1DescriptionController.text;
-                    _goal1.id = null; 
+                    _goal1.id = null;
 
                     var result = _goal1Service.insertGoals(_goal1);
                     Navigator.pop(context);
@@ -100,7 +105,7 @@ class _Goal1sScreenState extends State<Goal1sScreen> {
                   },
                   child: Text('Save')),
             ],
-            backgroundColor: Colors.pink[100],
+            backgroundColor: Colors.blue[100],
             title: Text('Goals Form'),
             content: SingleChildScrollView(
               child: Column(
@@ -126,13 +131,13 @@ class _Goal1sScreenState extends State<Goal1sScreen> {
         });
   }
 
- _editFormDialogue(BuildContext context) {
+  _editFormDialogue(BuildContext context) {
     return showDialog(
         context: context,
         barrierDismissible: true,
         builder: (param) {
           return AlertDialog(
-            backgroundColor: Colors.pink[100],
+            backgroundColor: Colors.blue[100],
             actions: <Widget>[
               FlatButton(
                   onPressed: () => Navigator.pop(context),
@@ -145,10 +150,9 @@ class _Goal1sScreenState extends State<Goal1sScreen> {
                 onPressed: () async {
                   _goal1.id = goal1[0]['id'];
                   _goal1.name = _editGoal1NameController.text;
-                  _goal1.description =
-                      _editGoal1DescriptionController.text;
+                  _goal1.description = _editGoal1DescriptionController.text;
 
-                  var result = await _goal1Service.updateGoal(_goal1);
+                  var result = await _goal1Service.updateGoals(_goal1);
                   print(result);
                   if (result > 0) {
                     Navigator.pop(context);
@@ -207,7 +211,7 @@ class _Goal1sScreenState extends State<Goal1sScreen> {
         barrierDismissible: true,
         builder: (param) {
           return AlertDialog(
-            backgroundColor: Colors.pink[100],
+            backgroundColor: Colors.blue[100],
             actions: <Widget>[
               FlatButton(
                   color: Colors.brown[900],
@@ -215,8 +219,7 @@ class _Goal1sScreenState extends State<Goal1sScreen> {
                   child: Text('Cancel')),
               FlatButton(
                 onPressed: () async {
-                  var result =
-                      await _goal1Service.deleteGoalbyID(goal1Id);
+                  var result = await _goal1Service.deleteGoalbyID(goal1Id);
                   print(result);
                   if (result > 0) {
                     Navigator.pop(context);
@@ -243,9 +246,9 @@ class _Goal1sScreenState extends State<Goal1sScreen> {
                   }
                 },
                 child: Text(
-                    'Delete?',
-                    style: TextStyle(color: Colors.brown[900]),
-                  ),
+                  'Delete?',
+                  style: TextStyle(color: Colors.brown[900]),
+                ),
               ),
             ],
             title: Text('Are you sure you want to delete this'),
@@ -257,6 +260,7 @@ class _Goal1sScreenState extends State<Goal1sScreen> {
     var _snackBar = SnackBar(content: message);
     _globalKey.currentState.showSnackBar(_snackBar);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -273,26 +277,23 @@ class _Goal1sScreenState extends State<Goal1sScreen> {
             padding: EdgeInsets.only(top: 8.0, left: 16.0, right: 16.0),
             child: Card(
               elevation: 8.0,
-              color: Colors.pink[100],
+              color: Colors.blue[100],
               child: ListTile(
                 leading: IconButton(
-                  icon: Icon(Icons.edit),
+                    icon: Icon(Icons.edit),
                     onPressed: () {
                       _editGoal1(context, _goal1List[index].id);
-                    }
-                ),
+                    }),
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(_goal1List[index].name),
                     IconButton(
-                      icon: Icon(
-                        Icons.delete, color: Colors.grey),
+                        icon: Icon(Icons.delete, color: Colors.grey),
                         onPressed: () {
                           _deleteFormDialogue(context, _goal1List[index].id);
-                        }
-                  ),
-                  ],                  
+                        }),
+                  ],
                 ),
 //                subtitle: Text(_goal1List[index].description),
               ),

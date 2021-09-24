@@ -54,21 +54,21 @@ class MySql_DBHelper {
 
         Task task = Task.withId(
             int.parse(appTaskID),
-            swiperDataList[i]['TaskTitle'],
-            swiperDataList[i]['TaskDesc'],
+            swiperDataList[i]['TaskTask'],
+            swiperDataList[i]['TaskNote'],
+            swiperDataList[i]['TaskDateDue'],
+            swiperDataList[i]['TaskTimeDue'],
+            swiperDataList[i]['TaskStatus'],
+            swiperDataList[i]['TaskPriority'],
+            swiperDataList[i]['TaskStar'],
             swiperDataList[i]['TaskCategory'],
             swiperDataList[i]['TaskAction'],
             swiperDataList[i]['TaskContext'],
             swiperDataList[i]['TaskLocation'],
             swiperDataList[i]['TaskTag'],
-            swiperDataList[i]['TaskGole'],
-            int.parse(swiperDataList[i]['TaskPriorityint']),
-            swiperDataList[i]['TaskProiortyText'],
-            swiperDataList[i]['TaskDateDue'],
-            swiperDataList[i]['TaskTimeDue'],
+            swiperDataList[i]['TaskGoal'],
             int.parse(swiperDataList[i]['TaskIsDone']),
             swiperDataList[i]['TaskDateDone'],
-            swiperDataList[i]['TaskStatus'],
             swiperDataList[i]['LastModified'],
             "",
             "",
@@ -116,21 +116,21 @@ class MySql_DBHelper {
         // print("woaibeijingtiananmen");
         Task task = Task.withId(
             int.parse(appTaskID),
-            swiperDataList[i]['TaskTitle'],
-            swiperDataList[i]['TaskDesc'],
+            swiperDataList[i]['TaskTask'],
+            swiperDataList[i]['TaskNote'],
+            swiperDataList[i]['TaskDateDue'],
+            swiperDataList[i]['TaskTimeDue'],
+            swiperDataList[i]['TaskStatus'],
+            swiperDataList[i]['TaskPriority'],
+            swiperDataList[i]['TaskStar'],
             swiperDataList[i]['TaskCategory'],
             swiperDataList[i]['TaskAction'],
             swiperDataList[i]['TaskContext'],
             swiperDataList[i]['TaskLocation'],
             swiperDataList[i]['TaskTag'],
-            swiperDataList[i]['TaskGole'],
-            int.parse(swiperDataList[i]['TaskPriorityint']),
-            swiperDataList[i]['TaskProiortyText'],
-            swiperDataList[i]['TaskDateDue'],
-            swiperDataList[i]['TaskTimeDue'],
+            swiperDataList[i]['TaskGoal'],
             int.parse(swiperDataList[i]['TaskIsDone']),
             swiperDataList[i]['TaskDateDone'],
-            swiperDataList[i]['TaskStatus'],
             swiperDataList[i]['LastModified'],
             "",
             "",
@@ -192,6 +192,45 @@ class MySql_DBHelper {
     });
   }
 
+  void syncContextData() async {
+    helper.deleteAllContext();
+    final tasksRequest = request('contextContent', formData: null);
+
+    tasksRequest.then((value) {
+      final data = json.decode(value.toString());
+      print(data);
+      List<Map> swiperDataList = (data['Contexts'] as List).cast();
+
+      var count = swiperDataList.length;
+      print(count);
+
+      for (int i = 0; i < swiperDataList.length; i++) {
+        String dbId = swiperDataList[i]['id'].toString();
+        String dbUserID = swiperDataList[i]['userId'].toString();
+        String appId = dbId.substring(dbUserID.length, dbId.length);
+        Context1 context = new Context1();
+        context.id = int.parse(appId);
+        context.name = swiperDataList[i]['name'];
+        context.description = swiperDataList[i]['desc'];
+
+        print(swiperDataList[i]['name']);
+        //helper.deleteTask(swiperDataList[i]['TaskID']);
+        final actionFuture = helper.getContextbyID(int.parse(appId));
+        actionFuture.then((result) {
+          count = result.length;
+
+          if (count > 0) {
+            //helper.deleteContextbyID(swiperDataList[i]['ContextID']);
+            helper.updateContext(context);
+          } else {
+            helper.insertContexts(context);
+            //helper.deleteContextbyID(swiperDataList[i]['ContextID']);
+          }
+        });
+      }
+    });
+  }
+
   void syncTagsData() async {
     helper.deleteAllTags();
     final tasksRequest = request('tagContent', formData: null);
@@ -233,45 +272,6 @@ class MySql_DBHelper {
     });
   }
 
-  void syncContextData() async {
-    helper.deleteAllContext();
-    final tasksRequest = request('contextContent', formData: null);
-
-    tasksRequest.then((value) {
-      final data = json.decode(value.toString());
-      print(data);
-      List<Map> swiperDataList = (data['Contexts'] as List).cast();
-
-      var count = swiperDataList.length;
-      print(count);
-
-      for (int i = 0; i < swiperDataList.length; i++) {
-        String dbId = swiperDataList[i]['id'].toString();
-        String dbUserID = swiperDataList[i]['userId'].toString();
-        String appId = dbId.substring(dbUserID.length, dbId.length);
-        Context1 context = new Context1();
-        context.id = int.parse(appId);
-        context.name = swiperDataList[i]['name'];
-        context.description = swiperDataList[i]['desc'];
-
-        print(swiperDataList[i]['name']);
-        //helper.deleteTask(swiperDataList[i]['TaskID']);
-        final actionFuture = helper.getContextbyID(int.parse(appId));
-        actionFuture.then((result) {
-          count = result.length;
-
-          if (count > 0) {
-            //helper.deleteContextbyID(swiperDataList[i]['ContextID']);
-            helper.updateContext(context);
-          } else {
-            helper.insertContexts(context);
-            //helper.deleteContextbyID(swiperDataList[i]['ContextID']);
-          }
-        });
-      }
-    });
-  }
-
   void wipeTaskDataToMySql() {
     this.deleteAllTaskFromMySQL();
     final dbTaskFuture = helper.getAllTasks();
@@ -283,57 +283,67 @@ class MySql_DBHelper {
 
       for (int i = 0; i < result.length; i++) {
         print(result[i]);
-        var category = "";
-        var context = "";
-        var tag = "";
-        var isDone = "";
-        var priorityvalue = "";
-        var action = "";
-        var goal = "";
-        var description = "";
-        var location = "";
-        var prioritytext = "";
+        var task = "";
+        var note = "";
+        var dateDue = "";
         var timeDue = "";
         var status = "";
+        var priority = "";
+        var star = "";
+        var category = "";
+        var action = "";
+        var context = "";
+        var location = "";
+        var tag = "";
+        var goal = "";
+        var isDone = "";
         var lastModified = "";
         var dateDone = "";
-        var dateDue = "";
-        var title = "";
-        if (result[i]["category"] != null) {
-          category = result[i]["category"].toString();
-        }
-        if (result[i]["tag1"] != null) {
-          tag = result[i]["tag1"].toString();
-        }
-        if (result[i]["context1"] != null) {
-          context = result[i]["context1"].toString();
-        }
-        if (result[i]["isDone"] != null) {
-          isDone = result[i]["isDone"].toString();
-        }
-        if (result[i]["priorityvalue"] != null) {
-          priorityvalue = result[i]["priorityvalue"].toString();
-        }
-        if (result[i]["prioritytext"] != null) {
-          prioritytext = result[i]["prioritytext"];
+
+        if (result[i]["dateDue"] != null) {
+          dateDue = result[i]["dateDue"].toString();
         }
         if (result[i]["timeDue"] != null) {
           timeDue = result[i]["timeDue"];
         }
+
+        if (result[i]["status"] != null) {
+          status = result[i]["status"].toString();
+        }
+        if (result[i]["priority"] != null) {
+          priority = result[i]["priority"].toString();
+        }
+        if (result[i]["star"] != null) {
+          star = result[i]["star"].toString();
+        }
+
+        if (result[i]["category"] != null) {
+          category = result[i]["category"].toString();
+        }
         if (result[i]["action1"] != null) {
           action = result[i]["action1"];
         }
-        if (result[i]["dateDue"] != null) {
-          dateDue = result[i]["dateDue"].toString();
+        if (result[i]["context1"] != null) {
+          context = result[i]["context1"].toString();
+        }
+        if (result[i]["location1"] != null) {
+          timeDue = result[i]["location1"].toString();
+        }
+        if (result[i]["tag1"] != null) {
+          tag = result[i]["tag1"].toString();
+        }
+        if (result[i]["goal1"] != null) {
+          goal = result[i]["goal1"].toString();
+        }
+
+        if (result[i]["isDone"] != null) {
+          isDone = result[i]["isDone"].toString();
         }
         if (result[i]["title"] != null) {
-          title = stringReplace(result[i]["title"]);
+          task = stringReplace(result[i]["title"]);
         }
         if (result[i]["dateDone"] != null) {
           dateDone = result[i]["dateDone"].toString();
-        }
-        if (result[i]["status"] != null) {
-          status = result[i]["status"].toString();
         }
         if (result[i]["timeDue"] != null) {
           timeDue = result[i]["timeDue"].toString();
@@ -345,17 +355,32 @@ class MySql_DBHelper {
           timeDue = result[i]["location1"].toString();
         }
         if (result[i]["description"] != null) {
-          description = stringReplace(result[i]["description"]);
+          note = stringReplace(result[i]["description"]);
         }
 
-        String task = '{"taskId":"' +
+        String taskTask = '{"taskId":"' +
             result[i]["id"].toString() +
             '",' +
-            '"taskTitle":"' +
-            title +
+            '"taskTask":"' +
+            task +
             '",' +
-            '"taskDescription":"' +
-            description +
+            '"taskNote":"' +
+            note +
+            '",' +
+            '"taskDateDue":"' +
+            dateDue +
+            '",' +
+            '"taskTimeDue":"' +
+            timeDue +
+            '",' +
+            '"taskStatus":"' +
+            status +
+            '",' +
+            '"taskProiorty":"' +
+            priority +
+            '",' +
+            '"taskStar":"' +
+            status +
             '",' +
             '"taskCategory":"' +
             category +
@@ -375,32 +400,17 @@ class MySql_DBHelper {
             '"taskGoal":"' +
             goal +
             '",' +
-            '"taskDateDue":"' +
-            dateDue +
-            '",' +
-            '"taskTimeDue":"' +
-            timeDue +
-            '",' +
             '"taskIsDone":"' +
             isDone +
             '",' +
             '"taskDateDone":"' +
             dateDone +
             '",' +
-            '"taskProiortyValue":"' +
-            priorityvalue +
-            '",' +
-            '"taskProiortyText":"' +
-            prioritytext +
-            '",' +
-            '"taskStatus":"' +
-            status +
-            '",' +
             '"taskLastModified":"' +
             lastModified +
             '"}';
 
-        taskList.add(task);
+        taskList.add(taskTask);
       }
 
       tasks = {"tasks": taskList};

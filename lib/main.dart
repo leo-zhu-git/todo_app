@@ -3,6 +3,7 @@ import 'package:todo_app/model/taskclass.dart';
 import 'package:todo_app/screens/signUp.dart';
 import 'package:todo_app/screens/signin.dart';
 import 'package:todo_app/screens/customizeview.dart';
+import 'package:todo_app/screens/syncview.dart';
 import 'package:todo_app/screens/swipe.dart';
 import 'package:todo_app/screens/taskdetail.dart';
 import 'package:todo_app/screens/taskhome.dart';
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
       title: 'Todo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.deepOrange,
+        primarySwatch: Colors.red,
       ),
       onGenerateRoute: (settings) {
         if (settings.name == '/confirm') {
@@ -60,6 +61,13 @@ class MyApp extends StatelessWidget {
         if (settings.name == '/customizeview') {
           return PageRouteBuilder(
             pageBuilder: (_, __, ___) => CustomizeView(),
+            transitionsBuilder: (_, __, ___, child) => child,
+          );
+        }
+        
+        if (settings.name == '/syncview') {
+          return PageRouteBuilder(
+            pageBuilder: (_, __, ___) => SyncView(),
             transitionsBuilder: (_, __, ___, child) => child,
           );
         }

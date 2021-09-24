@@ -42,6 +42,12 @@ class _Context1sScreenState extends State<Context1sScreen> {
         _context1List.add(context1Model);
       });
     });
+
+    if (context1s.length == 0) {
+      setState(() {
+        _context1List.clear();
+      });
+    }
   }
 
   _editContext1(BuildContext context, context1Id) async {
@@ -76,7 +82,7 @@ class _Context1sScreenState extends State<Context1sScreen> {
                   onPressed: () {
                     _context1.name = _context1NameController.text;
                     _context1.description = _context1DescriptionController.text;
-                    _context1.id = null; 
+                    _context1.id = null;
 
                     var result = _context1Service.insertContexts(_context1);
                     print(result);
@@ -286,9 +292,8 @@ class _Context1sScreenState extends State<Context1sScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Flexible(
-                      child: Text(
-                        _context1List[index].name,
-                        overflow: TextOverflow.ellipsis),
+                      child: Text(_context1List[index].name,
+                          overflow: TextOverflow.ellipsis),
                     ),
                     IconButton(
                         icon: Icon(Icons.delete, color: Colors.grey),

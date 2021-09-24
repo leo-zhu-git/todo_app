@@ -1,3 +1,4 @@
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:sqflite/sqflite.dart';
 import 'dart:async';
@@ -19,21 +20,21 @@ class DbHelper {
   static final DbHelper _dbHelper = DbHelper._internal();
   String tblTodo = "todo";
   String colId = 'id';
-  String colTitle = 'title';
-  String colDescription = 'description';
+  String colTask = 'task';
+  String colNote = 'note';
+  String colStatus = 'status';
+  String colPriority = 'priority';
+  String colStar = 'star';
+  String colDateDue = 'dateDue';
+  String colTimeDue = 'timeDue';
   String colCategory = 'category';
   String colAction1 = 'action1';
   String colContext1 = 'context1';
   String colLocation1 = 'location1';
   String colTag1 = 'tag1';
   String colGoal1 = 'goal1';
-  String colPriorityint = 'priorityvalue';
-  String colPrioritytxt = 'prioritytext';
-  String colDateDue = 'dateDue';
-  String colTimeDue = 'timeDue';
   String colIsDone = 'isDone';
   String colDateDone = 'dateDone';
-  String colStatus = 'status';
   String colLastModified = 'lastModified';
 
   String tblCustomSettings = "customSettings";
@@ -48,13 +49,18 @@ class DbHelper {
   String colshowSec1 = 'showSec1';
   String colshowSec2 = 'showSec2';
   String colshowSec3 = 'showSec3';
-  String colfilterIsDone = 'filterIsDone';
   String colfilterDateDue = 'filterDateDue';
+  String colfilterTimeDue = 'filterTimeDue';
+  String colfilterStatus = 'filterStatus';
+  String colfilterPriority = 'filterPriority';
+  String colfilterStar = 'filterStar';
   String colfilterCategory = 'filterCategory';
   String colfilterAction = 'filterAction';
   String colfilterContext = 'filterContext';
   String colfilterLocation = 'filterLocation';
   String colfilterTag = 'filterTag';
+  String colfilterGoal = 'filterGoal';
+  String colfilterIsDone = 'filterIsDone';
 
   DbHelper._internal();
 
@@ -73,29 +79,30 @@ class DbHelper {
 
   Future<Database> initializeDb() async {
     Directory dir = await getApplicationDocumentsDirectory();
-    String path = dir.path + "todo_V18.e.db";
-// <<<<<<< HEAD
-//     print(path);
-// =======
-// >>>>>>> bd41ba8c11d876c998cc25b5140b747922b0dc9f
+
+    String path = dir.path + "todo_V21.j.db";
+
     var dbTodovn = await openDatabase(path, version: 1, onCreate: _createDb);
     return dbTodovn;
   }
 
   void _createDb(Database db, int newVersion) async {
     await db.execute(
-        "CREATE TABLE $tblTodo($colId INTEGER PRIMARY KEY, $colTitle TEXT, $colDescription TEXT, " +
-            " $colCategory TEXT, $colAction1 TEXT, " +
+        "CREATE TABLE $tblTodo($colId INTEGER PRIMARY KEY, $colTask TEXT, $colNote TEXT, " +
+            "$colDateDue TEXT, $colTimeDue TEXT, $colStatus TEXT, $colPriority TEXT, $colStar TEXT, " +
+            "$colCategory TEXT, $colAction1 TEXT, " +
             "$colContext1 TEXT, $colLocation1 TEXT, $colTag1 TEXT, $colGoal1 TEXT, " +
-            " $colPriorityint INTEGER, $colPrioritytxt TEXT, $colDateDue TEXT, $colTimeDue TEXT, " +
-            " $colIsDone INTEGER, $colDateDone TEXT, $colStatus TEXT, $colLastModified TEXT)");
+            "$colIsDone INTEGER, $colDateDone TEXT, $colLastModified TEXT)");
 
 //this table need to include hash key to track users.... i would say all the tables
     await db.execute(
         "CREATE TABLE $tblCustomSettings($colId INTEGER PRIMARY KEY, $colsortField1 TEXT, $colsortOrder1 TEXT, $colsortField2 TEXT, " +
             "$colsortOrder2 TEXT, $colsortField3 TEXT, $colsortOrder3 TEXT, $colshowMain1 TEXT,$colshowMain2 TEXT, " +
-            "$colshowSec1 TEXT,$colshowSec2 TEXT,$colshowSec3 TEXT," +
-            " $colfilterIsDone INTEGER, $colfilterDateDue TEXT, $colfilterCategory TEXT, $colfilterAction TEXT, $colfilterContext TEXT, $colfilterLocation TEXT, $colfilterTag TEXT)");
+            "$colshowSec1 TEXT,$colshowSec2 TEXT,$colshowSec3 TEXT, " +
+            "$colfilterDateDue TEXT, $colfilterTimeDue TEXT, " +
+            "$colfilterStatus TEXT, $colfilterPriority TEXT, $colfilterStar TEXT, " +
+            "$colfilterCategory TEXT, $colfilterAction TEXT, $colfilterContext TEXT, $colfilterLocation TEXT, $colfilterTag TEXT, " +
+            "$colfilterGoal TEXT, $colfilterIsDone INTEGER)");
 
     // Create table categories
     await db.execute(
@@ -124,6 +131,238 @@ class DbHelper {
     // Create table USers
     await db.execute(
         "CREATE TABLE todouser(id INTEGER PRIMARY KEY, userid TEXT, email TEXT)");
+
+    //call tis to default the values
+    setDefaultDB(db);
+  }
+
+  void setDefaultDB(Database db) async {
+    //Create Default Values for Catergories
+    await db.execute(
+        "INSERT INTO categories ( 'name', 'description')  values (?, ?)",
+        ['1.Personal', '1Bootstrap - please delete or rename if necessary']);
+
+    await db.execute(
+        "INSERT INTO categories ( 'name', 'description')  values (?, ?)",
+        ['2.Work', '2Bootstrap - please delete or rename if necessary']);
+
+    //Create Default Values for Action
+    await db.execute(
+        "INSERT INTO action1s ( 'name', 'description')  values (?, ?)",
+        ['1.Buy', '1Bootstrap - please delete or rename if necessary']);
+
+    await db.execute(
+        "INSERT INTO action1s ( 'name', 'description')  values (?, ?)",
+        ['2.Connect', '2Bootstrap - please delete or rename if necessary']);
+
+    //Create Default Values for Context
+    await db.execute(
+        "INSERT INTO context1s ( 'name', 'description')  values (?, ?)",
+        ['1.Morning', '1Bootstrap - please delete or rename if necessary']);
+
+    await db.execute(
+        "INSERT INTO context1s ( 'name', 'description')  values (?, ?)",
+        ['2.Afternoon', '2Bootstrap - please delete or rename if necessary']);
+
+    await db.execute(
+        "INSERT INTO context1s ( 'name', 'description')  values (?, ?)",
+        ['3.Evening', '2Bootstrap - please delete or rename if necessary']);
+
+    //Create Default Values for Locations
+    await db.execute(
+        "INSERT INTO location1s ( 'name', 'description')  values (?, ?)",
+        ['1.Home', '1Bootstrap - please delete or rename if necessary']);
+
+    await db.execute(
+        "INSERT INTO location1s ( 'name', 'description')  values (?, ?)",
+        ['2.Grocery', '2Bootstrap - please delete or rename if necessary']);
+
+    //Create Default Values for Tags
+    await db.execute(
+        "INSERT INTO tag1s ( 'name', 'description')  values (?, ?)",
+        ['1.Family', '1Bootstrap - please delete or rename if necessary']);
+
+    await db.execute(
+        "INSERT INTO tag1s ( 'name', 'description')  values (?, ?)",
+        ['2.Friend1', '2Bootstrap - please delete or rename if necessary']);
+
+    //Create Default Values for Goals
+    await db.execute(
+        "INSERT INTO goal1s ( 'name', 'description')  values (?, ?)",
+        ['1.Health', '2Bootstrap - please delete or rename if necessary']);
+
+    await db.execute(
+        "INSERT INTO goal1s ( 'name', 'description')  values (?, ?)",
+        ['2.Wealth', '2Bootstrap - please delete or rename if necessary']);
+
+    //Default value for Custom Setting
+    CustomSettings customSetting = new CustomSettings(
+        "2",
+        '0',
+        '3',
+        '0',
+        '0',
+        '0',
+        '0',
+        '2',
+        '1',
+        '3',
+        '4',
+        '0',
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        false);
+    var result = insertCustomSettings(customSetting);
+
+    DateTime _dateDue = DateTime.now();
+    final DateFormat formatter = DateFormat('yyyy-MM-dd');
+    final String formattedate = formatter.format(_dateDue);
+
+    Task task = Task(
+        "1.Welcome to todoMIT",
+        '''
+Greetings/ Nihao/ Hola/ Namaste/ Ayubowan,
+
+We welcome you to our community. 
+
+Our philosophy - do only what are the Most Important Tasks (MIT) - not everything
+
+You keep your options open - be a traveller (unplanned), not a tourist (pre-planned)
+
+We'd love to hear from you - what is the #1 feature you wish to have. Contact us at help@2half.online
+
+Connect soon
+    ''',
+        formattedate,
+        '',
+        "",
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        0,
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '');
+    insertTask(task);
+
+    task = Task(
+        "2.Navigation | Moving about ",
+        '''
+Top-Left (Drawer) | personalize dropdown, wipe device/cloud, help
+
+Top-Right (Sync) | never lose data, sync your device to cloud 
+
+Bottom-Left (Customize) | filter, sort, view 
+
+Bottom middle (Add Task) | quick add or many hooks to remember  
+
+Bottom-Right (Search) | keyword search or more powerful advance dropdown search 
+''',
+        formattedate,
+        '',
+        "",
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        0,
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '');
+    insertTask(task);
+
+    task = Task(
+        "3.Practice | Baby Steps",
+        '''
+View | Check on left box to complete a task
+
+Drawer | personalize bootstrap picklist/ dropdown
+
+Customize | personalize filters, order, view  
+
+Search | using normal search or advanced search
+
+Sync | never lose your data with backup in cloud
+
+Contact us | share the good, bad, ugly 
+
+    ''',
+        formattedate,
+        '',
+        "",
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        0,
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '');
+    insertTask(task);
+
+    task = Task(
+        "4.Subcription Plans",
+        '''
+First 30 days | free full features, is this tool for you?
+
+Plan A - USD 4 | 1 month plan before you commit
+
+Plan B - USD 15 | 6 month plan 
+
+Plan C - USD 24 | 12 month plan  
+        ''',
+        formattedate,
+        '',
+        "",
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        0,
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '');
+    insertTask(task);
   }
 
   Future<int> insertTask(Task task) async {
@@ -136,9 +375,7 @@ class DbHelper {
 
   Future<List> getTasksByID(String taskID) async {
     Database db = await this.db;
-    var result = await db
-//        .rawQuery("SELECT * FROM  where $colLastModified order by $colDateDue ASC");
-        .rawQuery("SELECT * FROM todo where $colId = $taskID");
+    var result = await db.rawQuery("SELECT * FROM todo where $colId = $taskID");
     return result;
   }
 
@@ -152,20 +389,16 @@ class DbHelper {
 
   Future<List> getTasksFromLastFewDays(int days) async {
     Database db = await this.db;
-    var result = await db
-//        .rawQuery("SELECT * FROM  where $colLastModified order by $colDateDue ASC");
-        .rawQuery(
-            "SELECT * FROM todo where (julianday(Date('now')) - julianday(date($colLastModified)) > 3)");
+    var result = await db.rawQuery(
+        "SELECT * FROM todo where (julianday(Date('now')) - julianday(date($colLastModified)) > 3)");
 
     return result;
   }
 
   Future<List> getTasks() async {
     Database db = await this.db;
-    var result = await db
-//        .rawQuery("SELECT * FROM $tblTodo order by $colDateDue ASC");
-        .rawQuery(
-            "SELECT * FROM $tblTodo where ($colIsDone != 1) order by $colCategory $colsortOrder1, $colDateDue ASC, $colTimeDue $colsortOrder2, $colTitle $colsortOrder3");
+    var result = await db.rawQuery(
+        "SELECT * FROM $tblTodo where ($colIsDone != 1) order by $colCategory $colsortOrder1, $colDateDue ASC, $colTimeDue $colsortOrder2, $colTask $colsortOrder3");
     return result;
   }
 
@@ -177,22 +410,30 @@ class DbHelper {
       String colsortField3,
       String colsortOrder3,
       String colfilterDateDue,
-      int colfilterIsDone) async {
+      String colfilterTimeDue,
+      int colfilterIsDone,
+      String colfilterCategory,
+      String colfilterAction,
+      String colfilterContext,
+      String colfilterLocation,
+      String colfilterTag,
+      String colfilterGoal) async {
 ////////////////
     /// build query 0
 ////////////////
     Database db = await this.db;
 
     String queryStr = "";
-    queryStr = "SELECT * FROM $tblTodo ";
-
-////////////////
-    /// build query - add filterIsDone
-////////////////
-    if (colfilterIsDone == 0) // hide
-      queryStr = queryStr + "where ($colIsDone ==0)";
-    else
-      queryStr = queryStr + "where ($colIsDone not Null)";
+    queryStr = "SELECT $tblTodo.id,$tblTodo.task,$tblTodo.note,status, priority, star, $tblTodo.category,action1,context1,location1,tag1,goal1," +
+        "dateDue,timeDue,isDone,dateDone,status,lastModified,categories.name as categoriesname, " +
+        "action1s.name as action1name,context1s.name as context1name, location1s.name as location1name," +
+        " tag1s.name as tag1name, goal1s.name as goal1name  FROM $tblTodo  " +
+        " LEFT JOIN categories ON  $tblTodo.category = categories.id" +
+        " LEFT JOIN action1s ON $tblTodo.action1 = action1s.id " +
+        " LEFT JOIN context1s ON  $tblTodo.context1 = context1s.id" +
+        " LEFT JOIN location1s ON  $tblTodo.location1 = location1s.id" +
+        " LEFT JOIN tag1s ON  $tblTodo.tag1 = tag1s.id" +
+        " LEFT JOIN goal1s ON  $tblTodo.goal1 = goal1s.id ";
 
 ////////////////
     /// build query - add filterDateDue
@@ -214,32 +455,43 @@ class DbHelper {
     final String formattedN7D = formatter.format(_N7D);
     final String formattedN30D = formatter.format(_N30D);
 
+////////////////
+    /// build query - add filterIsDone
+////////////////
+    if (colfilterIsDone != 0) // show
+      queryStr = queryStr + " where ($colIsDone ==0)";
+    else
+      queryStr = queryStr + " where ($colIsDone not Null)";
+
+////////////////
+    /// build query - add DateDue
+////////////////
     if (colfilterDateDue == "Today") {
       _startDate = formattedToday;
       _endDate = formattedToday;
-      queryStr = queryStr + "and ($colDateDue == '$_startDate')";
+      queryStr = queryStr + " and ($colDateDue == '$_startDate')";
     } else if (colfilterDateDue == "Tomorrow") {
       _startDate = formattedTomo;
       _endDate = formattedTomo;
-      queryStr = queryStr + "and ($colDateDue == '$_startDate')";
+      queryStr = queryStr + " and ($colDateDue == '$_startDate')";
     } else if (colfilterDateDue == "Next 7 days") {
       _startDate = formattedToday;
       _endDate = formattedN7D;
       queryStr = queryStr +
-          "and ($colDateDue >= '$_startDate') and ($colDateDue<= '$_endDate')";
+          " and ($colDateDue >= '$_startDate') and ($colDateDue<= '$_endDate')";
     } else if (colfilterDateDue == "Next 30 days") {
       _startDate = formattedToday;
       _endDate = formattedN30D;
       queryStr = queryStr +
-          "and ($colDateDue >= '$_startDate') and ($colDateDue<= '$_endDate')";
+          " and ($colDateDue >= '$_startDate') and ($colDateDue<= '$_endDate')";
     } else if (colfilterDateDue == "Any Due Date") {
-      queryStr = queryStr + "and ($colDateDue != '')";
+      queryStr = queryStr + " and ($colDateDue != '')";
     } else if (colfilterDateDue == "No Due Date") {
-      queryStr = queryStr + "and ($colDateDue == '')";
+      queryStr = queryStr + " and ($colDateDue == '')";
     } else if (colfilterDateDue == "Overdues Only") {
       _endDate = formattedYesterday;
-      queryStr =
-          queryStr + "and ($colDateDue <= '$_endDate') and ($colDateDue != '')";
+      queryStr = queryStr +
+          " and ($colDateDue <= '$_endDate') and ($colDateDue != '')";
     } else if (colfilterDateDue == "All Tasks") {
     } else {
 // select all tasks regardless of due dates
@@ -247,10 +499,45 @@ class DbHelper {
     ;
 
 ////////////////
-    /// build query - add order
+    /// build query - add category
 ////////////////
-    /// queryStr = queryStr +
-    " order by $colsortField1 $colsortOrder1, $colsortField2 $colsortOrder2, $colsortField3 $colsortOrder3";
+    if (colfilterCategory == "0") {
+    } // hide
+// include all
+    else {
+      queryStr = queryStr + " and ($colCategory == $colfilterCategory)";
+    }
+
+    if (colfilterAction == "0") {
+    } else {
+      queryStr = queryStr + " and ($colAction1 == $colfilterAction)";
+    }
+
+    if (colfilterContext == "0") {
+    } else {
+      queryStr = queryStr + " and ($colContext1 == $colfilterContext)";
+    }
+
+    if (colfilterLocation == "0") {
+    } else {
+      queryStr = queryStr + " and ($colLocation1 == $colfilterLocation)";
+    }
+
+    if (colfilterTag == "0") {
+    } else {
+      queryStr = queryStr + " and ($colTag1 == $colfilterTag)";
+    }
+
+    if (colfilterGoal == "0") {
+    } else {
+      queryStr = queryStr + " and ($colGoal1 == $colfilterGoal)";
+    }
+
+////////////////
+    /// build query - add order by
+////////////////
+    queryStr = queryStr +
+        " order by $colsortField1 $colsortOrder1, $colsortField2 $colsortOrder2, $colsortField3 $colsortOrder3";
 
     print(queryStr);
     var result = await db.rawQuery(queryStr);
@@ -268,25 +555,19 @@ class DbHelper {
 //      return result;
   }
 
-//  Future<List> searchTasks(String searchText, String searchPriorityTxt, String searchCategory, String searchAction1,
-//   String searchContext1,String searchLocation1, String searchTag1, String  searchGoal1) async{
   Future<List> searchTasks(
       String searchText,
       String searchCategory,
       String searchAction1,
       String searchContext1,
       String searchLocation1,
-      String searchTag1) async {
+      String searchTag1,
+      String searchGoal1) async {
     Database db = await this.db;
 
     String queryStr = "";
     queryStr =
-        "SELECT * FROM $tblTodo WHERE ($colTitle LIKE '%$searchText%' OR $colDescription LIKE '%$searchText%') ";
-
-    // queryStr = queryStr + " AND $colIsDone = 0";//  if (searchPriorityTxt.trim() != "")
-//  {
-//    queryStr = queryStr + " AND $colPrioritytxt = '$searchPriorityTxt'";
-//  }
+        "SELECT * FROM $tblTodo WHERE ($colTask LIKE '%$searchText%' OR $colNote LIKE '%$searchText%') ";
 
     if (searchCategory != null) {
       queryStr =
@@ -307,12 +588,11 @@ class DbHelper {
     if (searchTag1 != null) {
       queryStr = queryStr + " AND $colTag1 = '$searchTag1' AND $colIsDone = 0";
     }
-//  if (searchGoal1.trim() != "")
-//  {
-//    queryStr = queryStr + " AND $colGoal1 = '$searchGoal1'";
-//  }
+    if (searchGoal1 != null) {
+      queryStr =
+          queryStr + " AND $colGoal1 = '$searchGoal1' AND $colIsDone = 0";
+    }
 
-    print(queryStr);
     var result = await db.rawQuery(queryStr);
     return result;
   }
@@ -483,43 +763,6 @@ class DbHelper {
 
 //######################### ENd of Contexts ##########################################
 
-//#########################Goal ##########################################
-
-  Future<int> insertGoals(Goal1 goal1s) async {
-    Database db = await this.db;
-
-    var result = await db.insert('goal1s', goal1s.goal1Map());
-    return result;
-  }
-
-  Future<List> getGoals() async {
-    Database db = await this.db;
-    var result = await db.rawQuery("SELECT * FROM goal1s");
-    return result;
-  }
-
-  Future<List> getGoalsbyID(int goal1Id) async {
-    Database db = await this.db;
-    var result = await db.rawQuery("SELECT * FROM goal1s WHERE id=$goal1Id");
-    return result;
-  }
-
-  Future<int> updateGoal(Goal1 goal1s) async {
-    Database db = await this.db;
-    var result = await db.update("goal1s", goal1s.goal1Map(),
-        where: "$colId =?", whereArgs: [goal1s.id]);
-    return result;
-  }
-
-  Future<int> deleteGoalbyID(int id) async {
-    int result;
-    Database db = await this.db;
-    result = await db.rawDelete('DELETE FROM goal1s WHERE id = $id');
-    return result;
-  }
-
-//######################### ENd of Goal ##########################################
-
 //#########################Locations ##########################################
 
   Future<int> insertLocations(Location1 location1s) async {
@@ -602,7 +845,51 @@ class DbHelper {
 
 //######################### ENd of Tag ##########################################
 
-//########################## Custom Settings #########################
+//######################### Goal ##########################################
+
+  Future<int> insertGoals(Goal1 goal1s) async {
+    Database db = await this.db;
+
+    var result = await db.insert('goal1s', goal1s.goal1Map());
+    return result;
+  }
+
+  Future<List> getGoals() async {
+    Database db = await this.db;
+    var result = await db.rawQuery("SELECT * FROM goal1s");
+    return result;
+  }
+
+  Future<List> getGoalsbyID(int goal1s) async {
+    Database db = await this.db;
+    var result = await db.rawQuery("SELECT * FROM goal1s WHERE id=$goal1s");
+    return result;
+  }
+
+  Future<int> updateGoals(Goal1 goal1s) async {
+    Database db = await this.db;
+    var result = await db.update("goal1s", goal1s.goal1Map(),
+        where: "$colId =?", whereArgs: [goal1s.id]);
+    return result;
+  }
+
+  Future<int> deleteGoalbyID(int id) async {
+    int result;
+    Database db = await this.db;
+    result = await db.rawDelete('DELETE FROM goal1s WHERE id = $id');
+    return result;
+  }
+
+  Future<int> deleteAllGoals() async {
+    int result;
+    Database db = await this.db;
+    result = await db.rawDelete('DELETE FROM goal1s WHERE id <> 0');
+    return result;
+  }
+
+//######################### ENd of Goal ##########################################/
+
+  ///########################## Custom Settings #########################
   Future<int> insertCustomSettings(CustomSettings customSetting) async {
     Database db = await this.db;
 

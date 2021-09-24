@@ -48,7 +48,7 @@ class _DrawerNagivation extends State<DrawerNagivation> {
           children: <Widget>[
             UserAccountsDrawerHeader(
               currentAccountPicture: CircleAvatar(
-//                backgroundImage: NetworkImage(null),
+                  backgroundImage: AssetImage('images/todoMIT.png'),
                   ),
               accountName: Text('2half'),
               accountEmail: Text('2half@gmail.com'),
@@ -108,6 +108,13 @@ class _DrawerNagivation extends State<DrawerNagivation> {
             ),
             Divider(),
             ListTile(
+              leading: Icon(Icons.bookmark_border_rounded),
+              title: Text('Goals'),
+              onTap: () => Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => Goal1sScreen())),
+            ),
+            Divider(),
+            ListTile(
               leading: Icon(Icons.cloud_download_outlined),
               title: Text('Wipe'),
               onTap: () => Navigator.of(context)
@@ -129,7 +136,7 @@ class _DrawerNagivation extends State<DrawerNagivation> {
 
   _launchURL() async {
     const _url =
-        'https://sites.google.com/emerscape.com/2ndhalf-help-center/home';
+        'https://2ndhalf.app';
     if (await canLaunch(_url)) {
       await launch(_url);
     } else {
