@@ -220,7 +220,7 @@ class TaskSearchState extends State {
       body: Column(
         children: [
           Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: EdgeInsets.only(top: 6.0, left:8.0, right:8.0, bottom:6.0),
             child: TextField(
               controller: searchController,
               style: textStyle,
@@ -260,7 +260,7 @@ class TaskSearchState extends State {
 //#################################Category#####################################################
                       Container(
                         margin:
-                            EdgeInsets.only(left: 8.0, right: 8.0, bottom: 2.0),
+                            EdgeInsets.only(left: 8.0, right: 8.0),
                         decoration: BoxDecoration(
                             shape: BoxShape.rectangle, color: Colors.blue[100]),
                         child: Row(
@@ -298,7 +298,7 @@ class TaskSearchState extends State {
 //########################################### Action  ######### #################################3
                       Container(
                         margin: EdgeInsets.only(
-                            top: 2.0, left: 8.0, right: 8.0, bottom: 2.0),
+                            top: 4.0, left: 8.0, right: 8.0),
                         decoration: BoxDecoration(
                             shape: BoxShape.rectangle, color: Colors.blue[100]),
                         child: Flexible(
@@ -334,7 +334,7 @@ class TaskSearchState extends State {
 //######### Context  #########
                       Container(
                         margin: EdgeInsets.only(
-                            top: 2.0, left: 8.0, right: 8.0, bottom: 2.0),
+                            top: 4.0, left: 8.0, right: 8.0),
                         decoration: BoxDecoration(
                             shape: BoxShape.rectangle, color: Colors.blue[100]),
                         child: Row(
@@ -367,7 +367,7 @@ class TaskSearchState extends State {
 // //######### Location  #########
                       Container(
                         margin: EdgeInsets.only(
-                            top: 2.0, left: 8.0, right: 8.0, bottom: 2.0),
+                            top: 4.0, left: 8.0, right: 8.0),
                         decoration: BoxDecoration(
                             shape: BoxShape.rectangle, color: Colors.blue[100]),
                         child: Row(
@@ -401,7 +401,7 @@ class TaskSearchState extends State {
 // //######### Tag  #########
                       Container(
                         margin:
-                            EdgeInsets.only(top: 2.0, left: 8.0, right: 8.0),
+                            EdgeInsets.only(top:4.0, left: 8.0, right: 8.0),
                         decoration: BoxDecoration(
                             shape: BoxShape.rectangle, color: Colors.blue[100]),
                         child: Row(
@@ -434,7 +434,7 @@ class TaskSearchState extends State {
 // //######### Goal  #########
                       Container(
                         margin:
-                            EdgeInsets.only(top: 2.0, left: 8.0, right: 8.0),
+                            EdgeInsets.only(top: 4.0, left: 8.0, right: 8.0, bottom: 4.0),
                         decoration: BoxDecoration(
                             shape: BoxShape.rectangle, color: Colors.blue[100]),
                         child: Row(
@@ -529,7 +529,7 @@ class TaskSearchState extends State {
             ),
             child: Padding(
               padding:
-                  EdgeInsets.only(top: 1.0, left: 8.0, right: 8.0, bottom: 1.0),
+                  EdgeInsets.only(top: 1.0, left: 4.0, right: 4.0, bottom: 1.0),
               child: Card(
                   color: Colors.yellow[200],
 //                  elevation: 8.0,
@@ -987,7 +987,6 @@ class TaskSearchState extends State {
             setState(() {
               tasklist = taskList;
               _searchText = searchText;
-//          _selectedpriority = priority;
               count = count;
             });
           }

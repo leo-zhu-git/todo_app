@@ -158,7 +158,7 @@ class TaskHomeState extends State {
               color: Colors.red,
             ),
             child: Padding(
-              padding: EdgeInsets.only(top: 8.0, left: 16.0, right: 16.0),
+              padding: EdgeInsets.only(top: 4.0, left: 8.0, right: 8.0),
               child: Card(
                   color: Colors.yellow[200],
                   elevation: 8.0,
@@ -203,23 +203,23 @@ class TaskHomeState extends State {
                           this.tasklist[position].status = "Completed";
                           this.tasklist[position].dateDone = formattedDate;
                           dbHelper.updateTask(tasklist[position]);
-                          _showSuccessSnackBar(Container(
-                            color: Colors.tealAccent[100],
-                            height: 40,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                (Icon(
-                                  Icons.thumb_up,
-                                  color: Colors.black,
-                                )),
-                                Text(
-                                  ' Task Completed - Satisfaction... ',
-                                  style: (TextStyle(color: Colors.black)),
-                                )
-                              ],
-                            ),
-                          ));
+//                          _showSuccessSnackBar(Container(
+//                            color: Colors.tealAccent[100],
+//                            height: 40,
+//                            child: Row(
+//                              mainAxisAlignment: MainAxisAlignment.center,
+//                              children: [
+//                                (Icon(
+//                                  Icons.thumb_up,
+//                                  color: Colors.black,
+//                                )),
+//                                Text(
+//                                  ' Task Completed - Satisfaction... ',
+//                                  style: (TextStyle(color: Colors.black)),
+//                                )
+//                              ],
+//                            ),
+//                          ));
                         } else {
                           this.tasklist[position].isDone = 0;
                           this.tasklist[position].status = "Open";

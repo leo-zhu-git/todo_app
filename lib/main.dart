@@ -13,6 +13,7 @@ import 'package:flutter_login/flutter_login.dart';
 import 'screens/entry.dart';
 import 'screens/confirm.dart';
 import 'screens/confirm_reset.dart';
+import 'screens/notify_screen.dart';
 
 //import 'package:todo_app/screens/ExpandApp.dart';
 
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
+//      home: NotifyScreen(), 
       onGenerateRoute: (settings) {
         if (settings.name == '/confirm') {
           return PageRouteBuilder(
@@ -64,7 +66,7 @@ class MyApp extends StatelessWidget {
             transitionsBuilder: (_, __, ___, child) => child,
           );
         }
-        
+
         if (settings.name == '/syncview') {
           return PageRouteBuilder(
             pageBuilder: (_, __, ___) => SyncView(),
