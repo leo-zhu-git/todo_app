@@ -79,7 +79,7 @@ class DbHelper {
 
   Future<Database> initializeDb() async {
     Directory dir = await getApplicationDocumentsDirectory();
-    String path = dir.path + "todo_V21.o.db";
+    String path = dir.path + "todo_V21.p.db";
     var dbTodovn = await openDatabase(path, version: 1, onCreate: _createDb);
     return dbTodovn;
   }
@@ -626,51 +626,6 @@ Plan C - USD 24 | 12 month plan
     return result;
   }
 
-//#########################Action ##########################################
-
-  Future<int> insertAction(Action1 action1) async {
-    Database db = await this.db;
-
-    var result = await db.insert('action1s', action1.action1Map());
-    return result;
-  }
-
-  Future<List> getActions() async {
-    var result;
-    try {
-      Database db = await this.db;
-      result = await db.query("action1s");
-      // result =
-      //  await db.rawQuery("SELECT * FROM action1s");
-      return result;
-    } catch (e) {
-      print(e);
-    }
-    return result;
-  }
-
-  Future<List> getActionbyID(int action1Id) async {
-    Database db = await this.db;
-    var result =
-        await db.rawQuery("SELECT * FROM action1s WHERE id=$action1Id");
-    return result;
-  }
-
-  Future<int> updateAction(Action1 action1) async {
-    Database db = await this.db;
-    var result = await db.update("action1s", action1.action1Map(),
-        where: "$colId =?", whereArgs: [action1.id]);
-    return result;
-  }
-
-  Future<int> deleteAction(int id) async {
-    int result;
-    Database db = await this.db;
-    result = await db.rawDelete('DELETE FROM action1s WHERE id = $id');
-    return result;
-  }
-
-//######################### ENd of Action ##########################################
 
 //#########################Categories ##########################################
 
@@ -683,7 +638,7 @@ Plan C - USD 24 | 12 month plan
 
   Future<List> getCategories() async {
     Database db = await this.db;
-    var result = await db.rawQuery("SELECT * FROM categories");
+    var result = await db.rawQuery("SELECT * FROM categories order by name");
 
     return result;
   }
@@ -718,6 +673,52 @@ Plan C - USD 24 | 12 month plan
 
 //######################### ENd of Categories ##########################################
 
+//#########################Action ##########################################
+
+  Future<int> insertAction(Action1 action1) async {
+    Database db = await this.db;
+
+    var result = await db.insert('action1s', action1.action1Map());
+    return result;
+  }
+
+  Future<List> getActions() async {
+    var result;
+    try {
+      Database db = await this.db;
+      result = await db.query("action1s");
+       result =
+        await db.rawQuery("SELECT * FROM action1s order by name");
+      return result;
+    } catch (e) {
+      print(e);
+    }
+    return result;
+  }
+
+  Future<List> getActionbyID(int action1Id) async {
+    Database db = await this.db;
+    var result =
+        await db.rawQuery("SELECT * FROM action1s WHERE id=$action1Id");
+    return result;
+  }
+
+  Future<int> updateAction(Action1 action1) async {
+    Database db = await this.db;
+    var result = await db.update("action1s", action1.action1Map(),
+        where: "$colId =?", whereArgs: [action1.id]);
+    return result;
+  }
+
+  Future<int> deleteAction(int id) async {
+    int result;
+    Database db = await this.db;
+    result = await db.rawDelete('DELETE FROM action1s WHERE id = $id');
+    return result;
+  }
+
+//######################### ENd of Action ##########################################
+
 //#########################Context ##########################################
 
   Future<int> insertContexts(Context1 context1) async {
@@ -729,7 +730,7 @@ Plan C - USD 24 | 12 month plan
 
   Future<List> getContexts() async {
     Database db = await this.db;
-    var result = await db.rawQuery("SELECT * FROM context1s");
+    var result = await db.rawQuery("SELECT * FROM context1s order by name");
     return result;
   }
 
@@ -774,7 +775,7 @@ Plan C - USD 24 | 12 month plan
 
   Future<List> getLocations() async {
     Database db = await this.db;
-    var result = await db.rawQuery("SELECT * FROM location1s");
+    var result = await db.rawQuery("SELECT * FROM location1s order by name");
     return result;
   }
 
@@ -812,7 +813,7 @@ Plan C - USD 24 | 12 month plan
 
   Future<List> getTags() async {
     Database db = await this.db;
-    var result = await db.rawQuery("SELECT * FROM tag1s");
+    var result = await db.rawQuery("SELECT * FROM tag1s order by name");
     return result;
   }
 
@@ -856,7 +857,7 @@ Plan C - USD 24 | 12 month plan
 
   Future<List> getGoals() async {
     Database db = await this.db;
-    var result = await db.rawQuery("SELECT * FROM goal1s");
+    var result = await db.rawQuery("SELECT * FROM goal1s order by name");
     return result;
   }
 

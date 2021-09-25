@@ -268,6 +268,7 @@ class _Context1sScreenState extends State<Context1sScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[200],
       key: _globalKey,
       appBar: AppBar(
         automaticallyImplyLeading: false,

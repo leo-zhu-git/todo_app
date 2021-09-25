@@ -29,7 +29,7 @@ class LocalNotifyManager {
         requestBadgePermission: true,
         requestAlertPermission: true,
         onDidReceiveLocalNotification: (id, title, body, payload) async {});
-    var initSetting =
-        InitializationSettings(initSettingAndroid, initSettingIOS);
+//    var initSetting =
+//        InitializationSettings(initSettingAndroid, initSettingIOS);
   }
 }
