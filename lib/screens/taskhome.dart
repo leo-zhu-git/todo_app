@@ -71,15 +71,16 @@ class TaskHomeState extends State {
 
         backgroundColor: Colors.brown[900],
         elevation: 8,
-//        title: Center(child: Text('View (' + count.toString() + ')')),
         title: Center(
           child: Container(
             child: Column(
               children: <Widget>[
                 Badge(
-                  child: Text('View  '),
-                  badgeContent: Text(count.toString(), style: TextStyle(color: Colors.white)),
-                  badgeColor: Colors.red,
+                  child: Text('View     '),
+                  shape: BadgeShape.square,
+                  position: BadgePosition.topEnd(),
+                  badgeContent: Text(count.toString(), style: TextStyle(color: Colors.black)),
+                  badgeColor: Colors.blue[200],
                 ),
               ],
             ),

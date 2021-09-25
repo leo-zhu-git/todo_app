@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_app/model/category.dart';
 import 'package:todo_app/screens/taskhome.dart';
@@ -274,7 +275,23 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.brown[900],
-        title: Center(child: Text('Categories')),
+        elevation: 8,
+        title: Center(
+          child: Container(
+            child: Column(
+              children: <Widget>[
+                Badge(
+                  child: Text('Categories     '),
+                  shape: BadgeShape.square,
+                  position: BadgePosition.topEnd(),
+                  badgeContent: Text(_categoryList.length.toString(),
+                      style: TextStyle(color: Colors.black)),
+                  badgeColor: Colors.yellow[200],
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
       resizeToAvoidBottomInset: false,
       body: ListView.builder(

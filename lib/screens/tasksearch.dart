@@ -208,9 +208,11 @@ class TaskSearchState extends State {
             child: Column(
               children: <Widget>[
                 Badge(
-                  child: Text('Search  '),
-                  badgeContent: Text(count.toString(), style: TextStyle(color: Colors.white)),
-                  badgeColor: Colors.red,
+                  child: Text('Search     '),
+                  shape: BadgeShape.square,
+                  position: BadgePosition.topEnd(),
+                  badgeContent: Text(count.toString(), style: TextStyle(color: Colors.black)),
+                  badgeColor: Colors.yellow[200],
                 ),
               ],
             ),

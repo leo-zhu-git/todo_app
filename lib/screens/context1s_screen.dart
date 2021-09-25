@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_app/model/context1.dart';
 import 'package:todo_app/screens/taskhome.dart';
@@ -273,7 +274,23 @@ class _Context1sScreenState extends State<Context1sScreen> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.brown[900],
-        title: Center(child: Text('Contexts')),
+          title: Center(
+          child: Container(
+            child: Column(
+              children: <Widget>[
+                Badge(
+                  child: Text('Contexts     '),
+                  shape: BadgeShape.square,
+                  position: BadgePosition.topEnd(),
+                  badgeContent: Text(_context1List.length.toString(),
+                      style: TextStyle(color: Colors.black)),
+                  badgeColor: Colors.yellow[200],
+                ),
+              ],
+            ),
+          ),
+        ),
+
       ),
       body: ListView.builder(
         itemCount: _context1List.length,

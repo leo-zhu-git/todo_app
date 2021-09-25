@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_app/model/tag1.dart';
@@ -269,7 +270,23 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.brown[900],
-        title: Center(child: Text('Tags')),
+                title: Center(
+          child: Container(
+            child: Column(
+              children: <Widget>[
+                Badge(
+                  child: Text('Tags     '),
+                  shape: BadgeShape.square,
+                  position: BadgePosition.topEnd(),
+                  badgeContent: Text(_tag1List.length.toString(),
+                      style: TextStyle(color: Colors.black)),
+                  badgeColor: Colors.yellow[200],
+                ),
+              ],
+            ),
+          ),
+        ),
+
       ),
       body: ListView.builder(
         itemCount: _tag1List.length,

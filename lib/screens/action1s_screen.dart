@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_app/model/action1.dart';
@@ -270,7 +271,23 @@ class _Action1sScreenState extends State<Action1sScreen> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.brown[900],
-        title: Center(child: Text('Actions')),
+          title: Center(
+          child: Container(
+            child: Column(
+              children: <Widget>[
+                Badge(
+                  child: Text('Actions     '),
+                  shape: BadgeShape.square,
+                  position: BadgePosition.topEnd(),
+                  badgeContent: Text(_actionList.length.toString(),
+                      style: TextStyle(color: Colors.black)),
+                  badgeColor: Colors.yellow[200],
+                ),
+              ],
+            ),
+          ),
+        ),
+
       ),
       body: ListView.builder(
         itemCount: _actionList.length,

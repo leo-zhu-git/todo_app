@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_app/model/location1.dart';
 import 'package:todo_app/screens/taskhome.dart';
@@ -274,7 +275,23 @@ class _Location1sScreenState extends State<Location1sScreen> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.brown[900],
-        title: Center(child: Text('Locations')),
+                title: Center(
+          child: Container(
+            child: Column(
+              children: <Widget>[
+                Badge(
+                  child: Text('Locations     '),
+                  shape: BadgeShape.square,
+                  position: BadgePosition.topEnd(),
+                  badgeContent: Text(_location1List.length.toString(),
+                      style: TextStyle(color: Colors.black)),
+                  badgeColor: Colors.yellow[200],
+                ),
+              ],
+            ),
+          ),
+        ),
+
       ),
       body: ListView.builder(
         itemCount: _location1List.length,
