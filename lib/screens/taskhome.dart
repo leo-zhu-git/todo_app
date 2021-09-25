@@ -80,7 +80,7 @@ class TaskHomeState extends State {
                   shape: BadgeShape.square,
                   position: BadgePosition.topEnd(),
                   badgeContent: Text(count.toString(), style: TextStyle(color: Colors.black)),
-                  badgeColor: Colors.blue[200],
+                  badgeColor: Colors.green[100],
                 ),
               ],
             ),

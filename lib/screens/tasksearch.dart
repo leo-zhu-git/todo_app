@@ -212,7 +212,7 @@ class TaskSearchState extends State {
                   shape: BadgeShape.square,
                   position: BadgePosition.topEnd(),
                   badgeContent: Text(count.toString(), style: TextStyle(color: Colors.black)),
-                  badgeColor: Colors.yellow[200],
+                  badgeColor: Colors.blue[200],
                 ),
               ],
             ),
