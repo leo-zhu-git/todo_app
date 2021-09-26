@@ -72,14 +72,16 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           return AlertDialog(
             backgroundColor: Colors.blue[100],
             actions: <Widget>[
-              FlatButton(
+              ElevatedButton(
                   onPressed: () => Navigator.pop(context),
-                  child: Text(
-                    'Cancel',
-                    style: TextStyle(color: Colors.red[900]),
-                  )),
-              FlatButton(
-                  color: Colors.brown[900],
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.grey[300],
+                    ),
+                    child: Text(
+                      'Cancel',
+                      style: TextStyle(color: Colors.brown[900]),
+                    )),
+              ElevatedButton(
                   onPressed: () async {
                     _category.name = _categoryNameController.text;
                     _category.description = _categoryDescriptionController.text;
@@ -108,9 +110,16 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                       ),
                     ));
                   },
-                  child: Text('Add')),
+                                      style: ElevatedButton.styleFrom(
+                      primary: Colors.brown[900],
+                    ),
+                    child: Text(
+                      'Save',
+                      style: TextStyle(color: Colors.white),
+                    )),
+          
             ],
-            title: Text('Categories Form'),
+            title: Text('Add Category'),
             content: SingleChildScrollView(
                 child: Column(
               children: <Widget>[
@@ -142,51 +151,60 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           return AlertDialog(
             backgroundColor: Colors.blue[100],
             actions: <Widget>[
-              FlatButton(
+              ElevatedButton(
                   onPressed: () => Navigator.pop(context),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.grey[300],
+                  ),
                   child: Text(
                     'Cancel',
-                    style: TextStyle(color: Colors.red[500]),
+                    style: TextStyle(color: Colors.brown[900]),
                   )),
-              FlatButton(
-                color: Colors.brown[500],
-                onPressed: () async {
-                  _category.id = category[0]['id'];
-                  _category.name = _editCategoryNameController.text;
-                  _category.description =
-                      _editCategoryDescriptionController.text;
+              ElevatedButton(
+                  onPressed: () async {
+                    _category.id = category[0]['id'];
+                    _category.name = _editCategoryNameController.text;
+                    _category.description =
+                        _editCategoryDescriptionController.text;
 
-                  var result =
-                      await _categoryService.updateCategories(_category);
-                  print(result);
-                  if (result > 0) {
-                    Navigator.pop(context);
-                    getAllCategories();
-                    _showSuccessSnackBar(
-                      Container(
-                        color: Colors.tealAccent[100],
-                        height: 40,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            (Icon(
-                              Icons.thumb_up,
-                              color: Colors.white,
-                            )),
-                            Text(
-                              ' Updated ',
-                              style: (TextStyle(color: Colors.black)),
-                            )
-                          ],
+                    var result =
+                        await _categoryService.updateCategories(_category);
+                    print(result);
+                    if (result > 0) {
+                      Navigator.pop(context);
+                      getAllCategories();
+                      _showSuccessSnackBar(
+                        Container(
+                          color: Colors.tealAccent[100],
+                          height: 40,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              (Icon(
+                                Icons.thumb_up,
+                                color: Colors.white,
+                              )),
+                              Text(
+                                ' Updated ',
+                                style: (TextStyle(color: Colors.black)),
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                  }
-                },
-                child: Text('Update'),
-              ),
+                      );
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.brown[900],
+                  ),
+                  child: 
+                  Text(
+                    'Update',
+                    style: TextStyle(color: Colors.white),
+                  )
+                  ),
             ],
-            title: Text('Edit Categories Form'),
+            title: Text('Edit Category'),
             content: SingleChildScrollView(
                 child: Column(
               children: <Widget>[
@@ -218,11 +236,21 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           return AlertDialog(
             backgroundColor: Colors.blue[100],
             actions: <Widget>[
-              FlatButton(
-                  color: Colors.brown[500],
+              ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.brown[900],
+                    ),
+                    child: Text(
+                      'Cancel',
+                      style: TextStyle(color: Colors.white),
+                    ),
                   onPressed: () => Navigator.pop(context),
-                  child: Text('Cancel')),
-              FlatButton(
+                  ),
+              ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.white,
+                    ),
+
                 onPressed: () async {
                   var result =
                       await _categoryService.deleteCategoriesbyID(categoryId);
@@ -251,10 +279,11 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                     );
                   }
                 },
-                child: Text(
-                  'Delete?',
-                  style: TextStyle(color: Colors.brown[500]),
-                ),
+                child: 
+                  Text(
+                    'Delete',
+                    style: TextStyle(color: Colors.brown[900]),
+                  )
               ),
             ],
             title: Text('Are you sure you want to delete this'),

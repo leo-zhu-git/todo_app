@@ -642,17 +642,19 @@ class TaskDetailState extends State //<TaskDetail>
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                RaisedButton(
+                ElevatedButton(
                     onPressed: () {
                       Navigator.pop(context);
-//                      Navigator.of(context).pushNamed('/dashboard');
                     },
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.grey[300],
+                    ),
                     child: Text(
                       'Cancel',
                       style: TextStyle(color: Colors.brown[900]),
                     )),
-                //KK SizedBox(width: 10),
-                RaisedButton(
+                SizedBox(width: 5),
+                ElevatedButton(
                     onPressed: () async {
                       task.task = _todoTaskController.text;
                       task.note = _todoNoteController.text;
@@ -718,9 +720,10 @@ class TaskDetailState extends State //<TaskDetail>
                       );
 
                       Navigator.pop(context);
-//                      Navigator.of(context).pushNamed('/dashboard');
                     },
-                    color: Colors.brown[900],
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.brown[900],
+                    ),
                     child: Text(
                       'Save',
                       style: TextStyle(color: Colors.white),

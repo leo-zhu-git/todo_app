@@ -70,14 +70,19 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
         builder: (param) {
           return AlertDialog(
             actions: <Widget>[
-              FlatButton(
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.grey[300],
+                  ),
                   onPressed: () => Navigator.pop(context),
                   child: Text(
                     'Cancel',
-                    style: TextStyle(color: Colors.brown[500]),
+                    style: TextStyle(color: Colors.brown[900]),
                   )),
-              FlatButton(
-                  color: Colors.brown[500],
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.brown[900],
+                  ),
                   onPressed: () {
                     _tag1.name = _tag1NameController.text;
                     _tag1.description = _tag1DescriptionController.text;
@@ -104,10 +109,13 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
                       ),
                     ));
                   },
-                  child: Text('Save')),
+                  child: Text(
+                    'Save',
+                    style: TextStyle(color: Colors.white),
+                  )),
             ],
             backgroundColor: Colors.blue[100],
-            title: Text('Tags Form'),
+            title: Text('Add Tag'),
             content: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
@@ -140,49 +148,56 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
           return AlertDialog(
             backgroundColor: Colors.blue[100],
             actions: <Widget>[
-              FlatButton(
+              ElevatedButton(
                   onPressed: () => Navigator.pop(context),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.grey[300],
+                  ),
                   child: Text(
                     'Cancel',
-                    style: TextStyle(color: Colors.brown[500]),
+                    style: TextStyle(color: Colors.brown[900]),
                   )),
-              FlatButton(
-                color: Colors.brown[500],
-                onPressed: () async {
-                  _tag1.id = tag1[0]['id'];
-                  _tag1.name = _editTag1NameController.text;
-                  _tag1.description = _editTag1DescriptionController.text;
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.brown[900],
+                  ),
+                  onPressed: () async {
+                    _tag1.id = tag1[0]['id'];
+                    _tag1.name = _editTag1NameController.text;
+                    _tag1.description = _editTag1DescriptionController.text;
 
-                  var result = await _tag1Service.updateTags(_tag1);
-                  print(result);
-                  if (result > 0) {
-                    Navigator.pop(context);
-                    getAllTag1s();
-                    _showSuccessSnackBar(
-                      Container(
-                        color: Colors.tealAccent[100],
-                        height: 40,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            (Icon(
-                              Icons.thumb_up,
-                              color: Colors.black,
-                            )),
-                            Text(
-                              ' Updated ',
-                              style: (TextStyle(color: Colors.black)),
-                            )
-                          ],
+                    var result = await _tag1Service.updateTags(_tag1);
+                    print(result);
+                    if (result > 0) {
+                      Navigator.pop(context);
+                      getAllTag1s();
+                      _showSuccessSnackBar(
+                        Container(
+                          color: Colors.tealAccent[100],
+                          height: 40,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              (Icon(
+                                Icons.thumb_up,
+                                color: Colors.black,
+                              )),
+                              Text(
+                                ' Updated ',
+                                style: (TextStyle(color: Colors.black)),
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                  }
-                },
-                child: Text('Update'),
-              ),
+                      );
+                    }
+                  },
+                  child: Text(
+                    'Update',
+                    style: TextStyle(color: Colors.white),
+                  )),
             ],
-            title: Text('Edit Tag Form'),
+            title: Text('Edit Tag'),
             content: SingleChildScrollView(
                 child: Column(
               children: <Widget>[
@@ -214,43 +229,50 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
           return AlertDialog(
             backgroundColor: Colors.blue[100],
             actions: <Widget>[
-              FlatButton(
-                  color: Colors.brown[500],
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.brown[900],
+                  ),
                   onPressed: () => Navigator.pop(context),
-                  child: Text('Cancel')),
-              FlatButton(
-                onPressed: () async {
-                  var result = await _tag1Service.deleteTagbyID(tag1Id);
-                  print(result);
-                  if (result > 0) {
-                    Navigator.pop(context);
-                    getAllTag1s();
-                    _showSuccessSnackBar(
-                      Container(
-                        color: Colors.tealAccent[100],
-                        height: 40,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            (Icon(
-                              Icons.thumb_up,
-                              color: Colors.black,
-                            )),
-                            Text(
-                              ' Deleted ',
-                              style: (TextStyle(color: Colors.black)),
-                            )
-                          ],
+                  child: Text(
+                    'Cancel',
+                    style: TextStyle(color: Colors.white),
+                  )),
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.grey[300],
+                  ),
+                  onPressed: () async {
+                    var result = await _tag1Service.deleteTagbyID(tag1Id);
+                    print(result);
+                    if (result > 0) {
+                      Navigator.pop(context);
+                      getAllTag1s();
+                      _showSuccessSnackBar(
+                        Container(
+                          color: Colors.tealAccent[100],
+                          height: 40,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              (Icon(
+                                Icons.thumb_up,
+                                color: Colors.black,
+                              )),
+                              Text(
+                                ' Deleted ',
+                                style: (TextStyle(color: Colors.black)),
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                  }
-                },
-                child: Text(
-                  'Delete?',
-                  style: TextStyle(color: Colors.brown[500]),
-                ),
-              ),
+                      );
+                    }
+                  },
+                  child: Text(
+                    'Delete',
+                    style: TextStyle(color: Colors.brown[900]),
+                  )),
             ],
             title: Text('Are you sure you want to delete this'),
           );
@@ -270,7 +292,7 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.brown[900],
-                title: Center(
+        title: Center(
           child: Container(
             child: Column(
               children: <Widget>[
@@ -286,7 +308,6 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
             ),
           ),
         ),
-
       ),
       body: ListView.builder(
         itemCount: _tag1List.length,

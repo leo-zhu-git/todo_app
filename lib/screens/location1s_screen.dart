@@ -71,14 +71,19 @@ class _Location1sScreenState extends State<Location1sScreen> {
           return AlertDialog(
             backgroundColor: Colors.blue[100],
             actions: <Widget>[
-              FlatButton(
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.grey[300],
+                  ),
                   onPressed: () => Navigator.pop(context),
                   child: Text(
                     'Cancel',
-                    style: TextStyle(color: Colors.brown[500]),
+                    style: TextStyle(color: Colors.brown[900]),
                   )),
-              FlatButton(
-                  color: Colors.brown[500],
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.brown[900],
+                  ),
                   onPressed: () {
                     _location1.name = _location1NameController.text;
                     _location1.description =
@@ -107,9 +112,12 @@ class _Location1sScreenState extends State<Location1sScreen> {
                       ),
                     ));
                   },
-                  child: Text('Save')),
+                  child: Text(
+                    'Save',
+                    style: TextStyle(color: Colors.white),
+                  )),
             ],
-            title: Text('Location Form'),
+            title: Text('Add Location'),
             content: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
@@ -142,51 +150,58 @@ class _Location1sScreenState extends State<Location1sScreen> {
           return AlertDialog(
             backgroundColor: Colors.blue[100],
             actions: <Widget>[
-              FlatButton(
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.grey[300],
+                  ),
                   onPressed: () => Navigator.pop(context),
                   child: Text(
                     'Cancel',
-                    style: TextStyle(color: Colors.brown[500]),
+                    style: TextStyle(color: Colors.brown[900]),
                   )),
-              FlatButton(
-                color: Colors.brown[500],
-                onPressed: () async {
-                  _location1.id = location1[0]['id'];
-                  _location1.name = _editLocation1NameController.text;
-                  _location1.description =
-                      _editLocation1DescriptionController.text;
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.brown[900],
+                  ),
+                  onPressed: () async {
+                    _location1.id = location1[0]['id'];
+                    _location1.name = _editLocation1NameController.text;
+                    _location1.description =
+                        _editLocation1DescriptionController.text;
 
-                  var result =
-                      await _location1Service.updateLocations(_location1);
-                  print(result);
-                  if (result > 0) {
-                    Navigator.pop(context);
-                    getAllLocation1s();
-                    _showSuccessSnackBar(
-                      Container(
-                        color: Colors.tealAccent[100],
-                        height: 40,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            (Icon(
-                              Icons.thumb_up,
-                              color: Colors.black,
-                            )),
-                            Text(
-                              ' Updated ',
-                              style: (TextStyle(color: Colors.black)),
-                            )
-                          ],
+                    var result =
+                        await _location1Service.updateLocations(_location1);
+                    print(result);
+                    if (result > 0) {
+                      Navigator.pop(context);
+                      getAllLocation1s();
+                      _showSuccessSnackBar(
+                        Container(
+                          color: Colors.tealAccent[100],
+                          height: 40,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              (Icon(
+                                Icons.thumb_up,
+                                color: Colors.black,
+                              )),
+                              Text(
+                                ' Updated ',
+                                style: (TextStyle(color: Colors.black)),
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                  }
-                },
-                child: Text('Update'),
-              ),
+                      );
+                    }
+                  },
+                  child: Text(
+                    'Update',
+                    style: TextStyle(color: Colors.white),
+                  )),
             ],
-            title: Text('Edit Location Form'),
+            title: Text('Edit Location'),
             content: SingleChildScrollView(
                 child: Column(
               children: <Widget>[
@@ -218,44 +233,51 @@ class _Location1sScreenState extends State<Location1sScreen> {
           return AlertDialog(
             backgroundColor: Colors.blue[100],
             actions: <Widget>[
-              FlatButton(
-                  color: Colors.brown[500],
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.brown[900],
+                  ),
                   onPressed: () => Navigator.pop(context),
-                  child: Text('Cancel')),
-              FlatButton(
-                onPressed: () async {
-                  var result =
-                      await _location1Service.deleteLocationsbyID(location1Id);
-                  print(result);
-                  if (result > 0) {
-                    Navigator.pop(context);
-                    getAllLocation1s();
-                    _showSuccessSnackBar(
-                      Container(
-                        color: Colors.tealAccent[100],
-                        height: 40,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            (Icon(
-                              Icons.thumb_up,
-                              color: Colors.black,
-                            )),
-                            Text(
-                              ' Deleted ',
-                              style: (TextStyle(color: Colors.black)),
-                            )
-                          ],
+                  child: Text(
+                    'Cancel',
+                    style: TextStyle(color: Colors.white),
+                  )),
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.grey[300],
+                  ),
+                  onPressed: () async {
+                    var result = await _location1Service
+                        .deleteLocationsbyID(location1Id);
+                    print(result);
+                    if (result > 0) {
+                      Navigator.pop(context);
+                      getAllLocation1s();
+                      _showSuccessSnackBar(
+                        Container(
+                          color: Colors.tealAccent[100],
+                          height: 40,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              (Icon(
+                                Icons.thumb_up,
+                                color: Colors.black,
+                              )),
+                              Text(
+                                ' Deleted ',
+                                style: (TextStyle(color: Colors.black)),
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                  }
-                },
-                child: Text(
-                  'Delete?',
-                  style: TextStyle(color: Colors.brown[500]),
-                ),
-              ),
+                      );
+                    }
+                  },
+                  child: Text(
+                    'Delete',
+                    style: TextStyle(color: Colors.brown[900]),
+                  )),
             ],
             title: Text('Are you sure you want to delete this'),
           );
@@ -275,7 +297,7 @@ class _Location1sScreenState extends State<Location1sScreen> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.brown[900],
-                title: Center(
+        title: Center(
           child: Container(
             child: Column(
               children: <Widget>[
@@ -291,7 +313,6 @@ class _Location1sScreenState extends State<Location1sScreen> {
             ),
           ),
         ),
-
       ),
       body: ListView.builder(
         itemCount: _location1List.length,

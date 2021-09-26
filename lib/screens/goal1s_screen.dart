@@ -70,14 +70,19 @@ class _Goal1sScreenState extends State<Goal1sScreen> {
         builder: (param) {
           return AlertDialog(
             actions: <Widget>[
-              FlatButton(
+              ElevatedButton(
                   onPressed: () => Navigator.pop(context),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.grey[300],
+                  ),
                   child: Text(
                     'Cancel',
                     style: TextStyle(color: Colors.brown[900]),
                   )),
-              FlatButton(
-                  color: Colors.brown[900],
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.brown[900],
+                  ),
                   onPressed: () {
                     _goal1.name = _goal1NameController.text;
                     _goal1.description = _goal1DescriptionController.text;
@@ -104,10 +109,13 @@ class _Goal1sScreenState extends State<Goal1sScreen> {
                       ),
                     ));
                   },
-                  child: Text('Save')),
+                  child: Text(
+                    'Save',
+                    style: TextStyle(color: Colors.white),
+                  )),
             ],
             backgroundColor: Colors.blue[100],
-            title: Text('Goals Form'),
+            title: Text('Add Goal'),
             content: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
@@ -140,49 +148,56 @@ class _Goal1sScreenState extends State<Goal1sScreen> {
           return AlertDialog(
             backgroundColor: Colors.blue[100],
             actions: <Widget>[
-              FlatButton(
+              ElevatedButton(
                   onPressed: () => Navigator.pop(context),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.grey[300],
+                  ),
                   child: Text(
                     'Cancel',
                     style: TextStyle(color: Colors.brown[900]),
                   )),
-              FlatButton(
-                color: Colors.brown[900],
-                onPressed: () async {
-                  _goal1.id = goal1[0]['id'];
-                  _goal1.name = _editGoal1NameController.text;
-                  _goal1.description = _editGoal1DescriptionController.text;
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.brown[900],
+                  ),
+                  onPressed: () async {
+                    _goal1.id = goal1[0]['id'];
+                    _goal1.name = _editGoal1NameController.text;
+                    _goal1.description = _editGoal1DescriptionController.text;
 
-                  var result = await _goal1Service.updateGoals(_goal1);
-                  print(result);
-                  if (result > 0) {
-                    Navigator.pop(context);
-                    getAllGoal1s();
-                    _showSuccessSnackBar(
-                      Container(
-                        color: Colors.tealAccent[100],
-                        height: 40,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            (Icon(
-                              Icons.thumb_up,
-                              color: Colors.black,
-                            )),
-                            Text(
-                              ' Updated ',
-                              style: (TextStyle(color: Colors.black)),
-                            )
-                          ],
+                    var result = await _goal1Service.updateGoals(_goal1);
+                    print(result);
+                    if (result > 0) {
+                      Navigator.pop(context);
+                      getAllGoal1s();
+                      _showSuccessSnackBar(
+                        Container(
+                          color: Colors.tealAccent[100],
+                          height: 40,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              (Icon(
+                                Icons.thumb_up,
+                                color: Colors.black,
+                              )),
+                              Text(
+                                ' Updated ',
+                                style: (TextStyle(color: Colors.black)),
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                  }
-                },
-                child: Text('Update'),
-              ),
+                      );
+                    }
+                  },
+                  child: Text(
+                    'Update',
+                    style: TextStyle(color: Colors.white),
+                  )),
             ],
-            title: Text('Edit Goal Form'),
+            title: Text('Edit Goal'),
             content: SingleChildScrollView(
                 child: Column(
               children: <Widget>[
@@ -214,43 +229,50 @@ class _Goal1sScreenState extends State<Goal1sScreen> {
           return AlertDialog(
             backgroundColor: Colors.blue[100],
             actions: <Widget>[
-              FlatButton(
-                  color: Colors.brown[900],
+              ElevatedButton(
                   onPressed: () => Navigator.pop(context),
-                  child: Text('Cancel')),
-              FlatButton(
-                onPressed: () async {
-                  var result = await _goal1Service.deleteGoalbyID(goal1Id);
-                  print(result);
-                  if (result > 0) {
-                    Navigator.pop(context);
-                    getAllGoal1s();
-                    _showSuccessSnackBar(
-                      Container(
-                        color: Colors.tealAccent[100],
-                        height: 40,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            (Icon(
-                              Icons.thumb_up,
-                              color: Colors.black,
-                            )),
-                            Text(
-                              ' Deleted ',
-                              style: (TextStyle(color: Colors.black)),
-                            )
-                          ],
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.brown[900],
+                  ),
+                  child: Text(
+                    'Cancel',
+                    style: TextStyle(color: Colors.white),
+                  )),
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.grey[300],
+                  ),
+                  onPressed: () async {
+                    var result = await _goal1Service.deleteGoalbyID(goal1Id);
+                    print(result);
+                    if (result > 0) {
+                      Navigator.pop(context);
+                      getAllGoal1s();
+                      _showSuccessSnackBar(
+                        Container(
+                          color: Colors.tealAccent[100],
+                          height: 40,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              (Icon(
+                                Icons.thumb_up,
+                                color: Colors.black,
+                              )),
+                              Text(
+                                ' Deleted ',
+                                style: (TextStyle(color: Colors.black)),
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                  }
-                },
-                child: Text(
-                  'Delete?',
-                  style: TextStyle(color: Colors.brown[900]),
-                ),
-              ),
+                      );
+                    }
+                  },
+                  child: Text(
+                    'Delete',
+                    style: TextStyle(color: Colors.brown[900]),
+                  )),
             ],
             title: Text('Are you sure you want to delete this'),
           );
@@ -270,7 +292,7 @@ class _Goal1sScreenState extends State<Goal1sScreen> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.brown[900],
-          title: Center(
+        title: Center(
           child: Container(
             child: Column(
               children: <Widget>[
@@ -286,7 +308,6 @@ class _Goal1sScreenState extends State<Goal1sScreen> {
             ),
           ),
         ),
-
       ),
       body: ListView.builder(
         itemCount: _goal1List.length,

@@ -71,14 +71,19 @@ class _Action1sScreenState extends State<Action1sScreen> {
         builder: (param) {
           return AlertDialog(
             actions: <Widget>[
-              FlatButton(
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.grey[300],
+                  ),
                   onPressed: () => Navigator.pop(context),
                   child: Text(
                     'Cancel',
-                    style: TextStyle(color: Colors.brown[500]),
+                    style: TextStyle(color: Colors.brown[900]),
                   )),
-              FlatButton(
-                  color: Colors.brown[500],
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.brown[900],
+                  ),
                   onPressed: () {
                     _action1.name = _action1NameController.text;
                     _action1.description = _action1DescriptionController.text;
@@ -105,10 +110,13 @@ class _Action1sScreenState extends State<Action1sScreen> {
                       ),
                     ));
                   },
-                  child: Text('Save')),
+                  child: Text(
+                    'Save',
+                    style: TextStyle(color: Colors.white),
+                  )),
             ],
             backgroundColor: Colors.blue[100],
-            title: Text('Actions Form'),
+            title: Text('Add Action'),
             content: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
@@ -141,49 +149,57 @@ class _Action1sScreenState extends State<Action1sScreen> {
           return AlertDialog(
             backgroundColor: Colors.blue[100],
             actions: <Widget>[
-              FlatButton(
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.grey[300],
+                  ),
                   onPressed: () => Navigator.pop(context),
                   child: Text(
                     'Cancel',
-                    style: TextStyle(color: Colors.brown[500]),
+                    style: TextStyle(color: Colors.brown[900]),
                   )),
-              FlatButton(
-                color: Colors.brown[500],
-                onPressed: () async {
-                  _action1.id = action1[0]['id'];
-                  _action1.name = _editAction1NameController.text;
-                  _action1.description = _editAction1DescriptionController.text;
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.brown[900],
+                  ),
+                  onPressed: () async {
+                    _action1.id = action1[0]['id'];
+                    _action1.name = _editAction1NameController.text;
+                    _action1.description =
+                        _editAction1DescriptionController.text;
 
-                  var result = await _action1Service.updateAction(_action1);
-                  print(result);
-                  if (result > 0) {
-                    Navigator.pop(context);
-                    getAllActions();
-                    _showSuccessSnackBar(
-                      Container(
-                        color: Colors.tealAccent[100],
-                        height: 40,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            (Icon(
-                              Icons.thumb_up,
-                              color: Colors.black,
-                            )),
-                            Text(
-                              ' Updated ',
-                              style: (TextStyle(color: Colors.black)),
-                            )
-                          ],
+                    var result = await _action1Service.updateAction(_action1);
+                    print(result);
+                    if (result > 0) {
+                      Navigator.pop(context);
+                      getAllActions();
+                      _showSuccessSnackBar(
+                        Container(
+                          color: Colors.tealAccent[100],
+                          height: 40,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              (Icon(
+                                Icons.thumb_up,
+                                color: Colors.black,
+                              )),
+                              Text(
+                                ' Updated ',
+                                style: (TextStyle(color: Colors.black)),
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                  }
-                },
-                child: Text('Update'),
-              ),
+                      );
+                    }
+                  },
+                  child: Text(
+                    'Save',
+                    style: TextStyle(color: Colors.white),
+                  )),
             ],
-            title: Text('Edit Actions Form'),
+            title: Text('Edit Action'),
             content: SingleChildScrollView(
                 child: Column(
               children: <Widget>[
@@ -215,43 +231,50 @@ class _Action1sScreenState extends State<Action1sScreen> {
           return AlertDialog(
             backgroundColor: Colors.blue[100],
             actions: <Widget>[
-              FlatButton(
-                  color: Colors.brown[500],
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.brown[900],
+                  ),
                   onPressed: () => Navigator.pop(context),
-                  child: Text('Cancel')),
-              FlatButton(
-                onPressed: () async {
-                  var result = await _action1Service.deleteAction(actionId);
-                  print(result);
-                  if (result > 0) {
-                    Navigator.pop(context);
-                    getAllActions();
-                    _showSuccessSnackBar(
-                      Container(
-                        color: Colors.tealAccent[100],
-                        height: 40,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            (Icon(
-                              Icons.thumb_up,
-                              color: Colors.black,
-                            )),
-                            Text(
-                              ' Deleted ',
-                              style: (TextStyle(color: Colors.black)),
-                            )
-                          ],
+                  child: Text(
+                    'Cancel',
+                    style: TextStyle(color: Colors.white),
+                  )),
+              ElevatedButton(
+                  onPressed: () async {
+                    var result = await _action1Service.deleteAction(actionId);
+                    print(result);
+                    if (result > 0) {
+                      Navigator.pop(context);
+                      getAllActions();
+                      _showSuccessSnackBar(
+                        Container(
+                          color: Colors.tealAccent[100],
+                          height: 40,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              (Icon(
+                                Icons.thumb_up,
+                                color: Colors.black,
+                              )),
+                              Text(
+                                ' Deleted ',
+                                style: (TextStyle(color: Colors.black)),
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                  }
-                },
-                child: Text(
-                  'Delete?',
-                  style: TextStyle(color: Colors.brown[500]),
-                ),
-              ),
+                      );
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.grey[300],
+                  ),
+                  child: Text(
+                    'Delete',
+                    style: TextStyle(color: Colors.brown[900]),
+                  )),
             ],
             title: Text('Are you sure you want to delete this'),
           );
@@ -271,7 +294,7 @@ class _Action1sScreenState extends State<Action1sScreen> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.brown[900],
-          title: Center(
+        title: Center(
           child: Container(
             child: Column(
               children: <Widget>[
@@ -287,7 +310,6 @@ class _Action1sScreenState extends State<Action1sScreen> {
             ),
           ),
         ),
-
       ),
       body: ListView.builder(
         itemCount: _actionList.length,

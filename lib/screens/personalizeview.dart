@@ -1009,16 +1009,20 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  RaisedButton(
+                  ElevatedButton(
                       onPressed: () {
                         Navigator.pop(context);
                       },
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.grey[300],
+                    ),
+
                       child: Text(
                         'Cancel',
                         style: TextStyle(color: Colors.brown[900]),
                       )),
-                  SizedBox(width: 10),
-                  RaisedButton(
+                  SizedBox(width: 5),
+                  ElevatedButton(
                       onPressed: () {
                         setState(() {
                           if (_selectedSortField1 != null)
@@ -1197,7 +1201,9 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                         );
                         Navigator.of(context).pushNamed('/dashboard');
                       },
-                      color: Colors.brown[900],
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.brown[900],
+                    ),
                       child: Text(
                         'Save',
                         style: TextStyle(color: Colors.white),
