@@ -335,7 +335,7 @@ class TaskDetailState extends State //<TaskDetail>
     return Scaffold(
       key: _globalKey,
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Colors.teal[50],
       appBar: AppBar(
         backgroundColor: Colors.brown[900],
         automaticallyImplyLeading: false,
@@ -638,17 +638,19 @@ class TaskDetailState extends State //<TaskDetail>
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                RaisedButton(
+                ElevatedButton(
                     onPressed: () {
                       Navigator.pop(context);
-//                      Navigator.of(context).pushNamed('/dashboard');
                     },
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.grey[300],
+                    ),
                     child: Text(
                       'Cancel',
                       style: TextStyle(color: Colors.brown[900]),
                     )),
-                //KK SizedBox(width: 10),
-                RaisedButton(
+                SizedBox(width: 5),
+                ElevatedButton(
                     onPressed: () async {
                       task.task = _todoTaskController.text;
                       task.note = _todoNoteController.text;
@@ -717,9 +719,10 @@ class TaskDetailState extends State //<TaskDetail>
                       await Future.delayed(
                           const Duration(milliseconds: 500), () {});
                       Navigator.pop(context);
-//                      Navigator.of(context).pushNamed('/dashboard');
                     },
-                    color: Colors.brown[900],
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.brown[900],
+                    ),
                     child: Text(
                       'Save',
                       style: TextStyle(color: Colors.white),

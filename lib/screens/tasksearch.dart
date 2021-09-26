@@ -199,7 +199,7 @@ class TaskSearchState extends State {
   Widget build(BuildContext context) {
     TextStyle textStyle = Theme.of(context).textTheme.title;
     return Scaffold(
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Colors.teal[50],
       appBar: AppBar(
         backgroundColor: Colors.brown[900],
         automaticallyImplyLeading: true,
@@ -214,7 +214,7 @@ class TaskSearchState extends State {
                   position: BadgePosition.topEnd(),
                   badgeContent: Text(count.toString(),
                       style: TextStyle(color: Colors.black)),
-                  badgeColor: Colors.blue[200],
+                  badgeColor: Colors.green[100],
                 ),
               ],
             ),
