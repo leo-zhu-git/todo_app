@@ -348,14 +348,12 @@ class _Goal1sScreenState extends State<Goal1sScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               IconButton(
-                icon: Icon(Icons.home, color: Colors.white),
-                tooltip: 'Back to Home',
+                icon: Icon(Icons.arrow_back, color: Colors.white),
+                tooltip: 'Back',
                 onPressed: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => TaskHome()));
+                  Navigator.pop(context, true);
                 },
-              ),
-              IconButton(
+              ),              IconButton(
                 icon: Icon(Icons.add, color: Colors.white),
                 tooltip: 'Add Goal',
                 onPressed: () {

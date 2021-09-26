@@ -60,59 +60,59 @@ class _DrawerNagivation extends State<DrawerNagivation> {
               onTap: () => Navigator.of(context)
                   .push(MaterialPageRoute(builder: (context) => TaskHome())),
             ),
-            ListTile(
-              leading: Icon(Icons.category),
-              title: Text('Categories'),
-              onTap: () => Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => CategoriesScreen())),
-            ),
-            Divider(),
-            Column(
-              children: _categoryList,
-            ),
-            ListTile(
-              leading: Icon(Icons.pending_actions_outlined),
-              title: Text('Actions'),
-              onTap: () => Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => Action1sScreen())),
-            ),
-            Divider(),
-            Column(
-              children: _action1List,
-            ),
-            ListTile(
-              leading: Icon(Icons.filter_alt_outlined),
-              title: Text('Contexts'),
-              onTap: () => Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => Context1sScreen())),
-            ),
-            Divider(),
-            Column(
-              children: _context1List,
-            ),
-            ListTile(
-              leading: Icon(Icons.add_location_outlined),
-              title: Text('Locations'),
-              onTap: () => Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => Location1sScreen())),
-            ),
-            Divider(),
-            Column(
-              children: _location1List,
-            ),
-            ListTile(
-              leading: Icon(Icons.bookmark_border_rounded),
-              title: Text('Tags'),
-              onTap: () => Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => Tag1sScreen())),
-            ),
-            Divider(),
-            ListTile(
-              leading: Icon(Icons.bookmark_border_rounded),
-              title: Text('Goals'),
-              onTap: () => Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => Goal1sScreen())),
-            ),
+//            ListTile(
+//              leading: Icon(Icons.category),
+//              title: Text('Categories'),
+//              onTap: () => Navigator.of(context).push(
+//                  MaterialPageRoute(builder: (context) => CategoriesScreen())),
+//            ),
+//            Divider(),
+//            Column(
+//              children: _categoryList,
+//            ),
+//            ListTile(
+//              leading: Icon(Icons.pending_actions_outlined),
+//              title: Text('Actions'),
+//              onTap: () => Navigator.of(context).push(
+//                  MaterialPageRoute(builder: (context) => Action1sScreen())),
+//            ),
+//            Divider(),
+//            Column(
+//              children: _action1List,
+//            ),
+//            ListTile(
+//              leading: Icon(Icons.filter_alt_outlined),
+//              title: Text('Contexts'),
+//             onTap: () => Navigator.of(context).push(
+//                  MaterialPageRoute(builder: (context) => Context1sScreen())),
+//            ),
+//            Divider(),
+//            Column(
+//              children: _context1List,
+//            ),
+//            ListTile(
+//              leading: Icon(Icons.add_location_outlined),
+//              title: Text('Locations'),
+//              onTap: () => Navigator.of(context).push(
+//                  MaterialPageRoute(builder: (context) => Location1sScreen())),
+//            ),
+//           Divider(),
+//            Column(
+//              children: _location1List,
+//            ),
+//            ListTile(
+//              leading: Icon(Icons.bookmark_border_rounded),
+//              title: Text('Tags'),
+//              onTap: () => Navigator.of(context)
+//                  .push(MaterialPageRoute(builder: (context) => Tag1sScreen())),
+//            ),
+//            Divider(),
+//            ListTile(
+//              leading: Icon(Icons.bookmark_border_rounded),
+//              title: Text('Goals'),
+//              onTap: () => Navigator.of(context)
+//                  .push(MaterialPageRoute(builder: (context) => Goal1sScreen())),
+//            ),
             Divider(),
             ListTile(
               leading: Icon(Icons.cloud_download_outlined),

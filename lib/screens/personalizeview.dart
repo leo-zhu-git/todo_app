@@ -4,6 +4,12 @@ import 'package:flutter/rendering.dart';
 import 'package:todo_app/model/customDropdownItem.dart';
 import 'package:todo_app/model/customSettings.dart';
 import 'package:todo_app/model/taskclass.dart';
+import 'package:todo_app/screens/action1s_screen.dart';
+import 'package:todo_app/screens/categories_screen.dart';
+import 'package:todo_app/screens/context1s_screen.dart';
+import 'package:todo_app/screens/goal1s_screen.dart';
+import 'package:todo_app/screens/location1s_screen.dart';
+import 'package:todo_app/screens/tag1s_screen.dart';
 import 'package:todo_app/util/dbhelper.dart';
 import 'package:intl/intl.dart';
 import 'package:todo_app/model/globals.dart' as globals;
@@ -87,7 +93,6 @@ class FilterStatus {
   }
 }
 
-
 class FilterPriority {
   int id;
   String name;
@@ -117,7 +122,6 @@ class FilterStar {
     ];
   }
 }
-
 
 class SortOrder {
   int id;
@@ -223,8 +227,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
       _selectedFilterStatus = _dropdownFilterStatus[0].value;
       globals.filterStatus = 0;
     } else
-      _selectedFilterStatus =
-          _dropdownFilterStatus[globals.filterStatus].value;
+      _selectedFilterStatus = _dropdownFilterStatus[globals.filterStatus].value;
 
     ////////////////////////////
     /// filter - priority
@@ -243,8 +246,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
       _selectedFilterStar = _dropdownFilterStar[0].value;
       globals.filterStar = 0;
     } else
-      _selectedFilterStar =
-          _dropdownFilterStar[globals.filterStar].value;
+      _selectedFilterStar = _dropdownFilterStar[globals.filterStar].value;
 
     ////////////////////////////
     /// filter - is done
@@ -583,7 +585,8 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
       appBar: new AppBar(
         backgroundColor: Colors.brown[900],
         automaticallyImplyLeading: false,
-        title: Center(child: Text('Personalize - Filter, Sort, View')),
+        title:
+            Center(child: Text('Personalize - Filter, Sort, View, Picklist')),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -659,7 +662,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.blue[100]),
                 child: DropdownButtonFormField(
-                  items: _dropdownFilterStar ,
+                  items: _dropdownFilterStar,
                   hint: Text('Filter by Star'),
                   value: _selectedFilterStar,
                   onChanged: (selectedFilterStar) {
@@ -669,7 +672,6 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                   },
                 ),
               ),
-
 
 ///////////////////////////
 //  Filter Is Done
@@ -1000,6 +1002,75 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 ),
               ),
 
+              SizedBox(
+                height: 20,
+              ),
+              Text("Picklist | user-defined dropdowns"),
+
+///////////////////////////
+//  Picklist - Categories
+///////////////////////////
+              ListTile(
+                tileColor: Colors.blue[100],
+                title: Text('Categories'),
+                onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => CategoriesScreen())),
+              ),
+              SizedBox(height: 4,),
+
+///////////////////////////
+//  Picklist - Action
+///////////////////////////
+              ListTile(
+                tileColor: Colors.blue[100],
+                title: Text('Actions'),
+                onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => Action1sScreen())),
+              ),
+              SizedBox(height: 4,),
+
+///////////////////////////
+//  Picklist - Contexts
+///////////////////////////
+              ListTile(
+                tileColor: Colors.blue[100],
+                title: Text('Contexts'),
+                onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => Context1sScreen())),
+              ),
+              SizedBox(height: 4,),
+
+///////////////////////////
+//  Picklist - Locations
+///////////////////////////
+              ListTile(
+                tileColor: Colors.blue[100],
+                title: Text('Locations'),
+                onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => Location1sScreen())),
+              ),
+              SizedBox(height: 4,),
+
+///////////////////////////
+//  Picklist - Tags
+///////////////////////////
+              ListTile(
+                tileColor: Colors.blue[100],
+                title: Text('Tags'),
+                onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => Tag1sScreen())),
+              ),
+              SizedBox(height: 4,),
+
+///////////////////////////
+//  Picklist - Goals
+///////////////////////////
+              ListTile(
+                tileColor: Colors.blue[100],
+                title: Text('Goals'),
+                onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => Goal1sScreen())),
+              ),
 
               SizedBox(
                 height: 20,
@@ -1013,10 +1084,9 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.grey[300],
-                    ),
-
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.grey[300],
+                      ),
                       child: Text(
                         'Cancel',
                         style: TextStyle(color: Colors.brown[900]),
@@ -1076,28 +1146,29 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
 //Save
                           if (customSetting == null) {
                             customSetting = new CustomSettings(
-                                '',
-                                '',
-                                '',
-                                '',
-                                '',
-                                '',
-                                '',
-                                '',
-                                '',
-                                '',
-                                '',
-                                '',
-                                '',
-                                '',
-                                '',
-                                '',
-                                '', 
-                                "",
-                                "",
-                                "",
-                                "",
-                             false,);
+                              '',
+                              '',
+                              '',
+                              '',
+                              '',
+                              '',
+                              '',
+                              '',
+                              '',
+                              '',
+                              '',
+                              '',
+                              '',
+                              '',
+                              '',
+                              '',
+                              '',
+                              "",
+                              "",
+                              "",
+                              "",
+                              false,
+                            );
                           }
 
                           customSetting.sortField1 = _selectedSortField1 == null
@@ -1169,7 +1240,6 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                               ? ""
                               : _selectedGoal1.toString();
 
-
                           var result;
 
                           if (customSetting.id != null) {
@@ -1201,9 +1271,9 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                         );
                         Navigator.of(context).pushNamed('/dashboard');
                       },
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.brown[900],
-                    ),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.brown[900],
+                      ),
                       child: Text(
                         'Save',
                         style: TextStyle(color: Colors.white),
@@ -1292,8 +1362,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
 
       if (customSetting.filterStatus != "") {
         _selectedFilterStatus =
-            _dropdownFilterStatus[int.parse(customSetting.filterStatus)]
-                .value;
+            _dropdownFilterStatus[int.parse(customSetting.filterStatus)].value;
         globals.filterStatus = int.parse(customSetting.filterStatus);
       }
 
@@ -1306,8 +1375,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
 
       if (customSetting.filterStar != "") {
         _selectedFilterStar =
-            _dropdownFilterStar[int.parse(customSetting.filterStar)]
-                .value;
+            _dropdownFilterStar[int.parse(customSetting.filterStar)].value;
         globals.filterStar = int.parse(customSetting.filterStar);
       }
 
