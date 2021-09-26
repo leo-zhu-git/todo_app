@@ -339,7 +339,7 @@ class TaskDetailState extends State //<TaskDetail>
     return Scaffold(
       key: _globalKey,
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Colors.teal[50],
       appBar: AppBar(
         backgroundColor: Colors.brown[900],
         automaticallyImplyLeading: false,

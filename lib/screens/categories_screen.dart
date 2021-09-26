@@ -76,10 +76,10 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                   onPressed: () => Navigator.pop(context),
                   child: Text(
                     'Cancel',
-                    style: TextStyle(color: Colors.brown[500]),
+                    style: TextStyle(color: Colors.red[900]),
                   )),
               FlatButton(
-                  color: Colors.brown[500],
+                  color: Colors.brown[900],
                   onPressed: () async {
                     _category.name = _categoryNameController.text;
                     _category.description = _categoryDescriptionController.text;
@@ -102,7 +102,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                           )),
                           Text(
                             ' Added ',
-                            style: (TextStyle(color: Colors.black)),
+                            style: (TextStyle(color: Colors.white)),
                           )
                         ],
                       ),
@@ -146,7 +146,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                   onPressed: () => Navigator.pop(context),
                   child: Text(
                     'Cancel',
-                    style: TextStyle(color: Colors.brown[500]),
+                    style: TextStyle(color: Colors.red[500]),
                   )),
               FlatButton(
                 color: Colors.brown[500],
@@ -171,7 +171,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                           children: [
                             (Icon(
                               Icons.thumb_up,
-                              color: Colors.black,
+                              color: Colors.white,
                             )),
                             Text(
                               ' Updated ',
@@ -270,7 +270,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Colors.amber[50],
       key: _globalKey,
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -286,7 +286,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                   position: BadgePosition.topEnd(),
                   badgeContent: Text(_categoryList.length.toString(),
                       style: TextStyle(color: Colors.black)),
-                  badgeColor: Colors.yellow[200],
+                  badgeColor: Colors.blue[200],
                 ),
               ],
             ),

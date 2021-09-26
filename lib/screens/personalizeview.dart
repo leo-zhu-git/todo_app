@@ -8,9 +8,9 @@ import 'package:todo_app/util/dbhelper.dart';
 import 'package:intl/intl.dart';
 import 'package:todo_app/model/globals.dart' as globals;
 
-class CustomizeView extends StatefulWidget {
+class PersonalizeView extends StatefulWidget {
   @override
-  _CustomizeViewState createState() => _CustomizeViewState();
+  _PersonalizeViewState createState() => _PersonalizeViewState();
 }
 
 class SortItem {
@@ -132,7 +132,7 @@ class SortOrder {
   }
 }
 
-class _CustomizeViewState extends State //State<CustomizeView>
+class _PersonalizeViewState extends State //State<PersonalizeView>
 {
   List<SortItem> _sort = SortItem.getSort();
   List<SortOrder> _order = SortOrder.getOrder();
@@ -579,7 +579,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
     return Scaffold(
       key: _globalKey,
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Colors.teal[50],
       appBar: new AppBar(
         backgroundColor: Colors.brown[900],
         automaticallyImplyLeading: false,

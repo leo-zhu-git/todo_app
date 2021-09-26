@@ -11,7 +11,7 @@ import 'package:todo_app/model/taskclass.dart';
 
 import 'package:todo_app/util/dbhelper.dart';
 import 'package:todo_app/screens/taskdetail.dart';
-import 'package:todo_app/screens/customizeview.dart';
+// import 'package:todo_app/screens/personalizeview.dart';
 import 'package:todo_app/screens/swipe.dart';
 import 'package:todo_app/screens/tasksearch.dart';
 import 'package:todo_app/util/drawer_navigation.dart';
@@ -64,15 +64,35 @@ class TaskHomeState extends State {
     }
 
     return Scaffold(
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Colors.teal[50],
       drawer: DrawerNagivation(),
       appBar: AppBar(
         key: _globalKey,
-
         backgroundColor: Colors.brown[900],
         elevation: 8,
+
         title: Center(
-          child: Container(
+
+//          child: Container(
+//            child: Row(
+//              children: [
+//                Text('View '),
+//                Container(
+//                  decoration: BoxDecoration(
+//                  shape: BoxShape.rectangle, color: Colors.blue[100]),
+//                  child: Padding(
+//                  padding: const EdgeInsets.all(2.0),
+//                  child: Text(
+//                    count.toString(),
+//                    style: TextStyle(backgroundColor: Colors.green[100], color: Colors.black)),
+//                  ),
+//                ),
+//              ]
+//            )
+//          ),
+//        ),
+
+
             child: Column(
               children: <Widget>[
                 Badge(
@@ -80,12 +100,13 @@ class TaskHomeState extends State {
                   shape: BadgeShape.square,
                   position: BadgePosition.topEnd(),
                   badgeContent: Text(count.toString(), style: TextStyle(color: Colors.black)),
-                  badgeColor: Colors.green[100],
+                  badgeColor: Colors.yellow[200],
                 ),
               ],
             ),
-          ),
-        ),
+         ),
+        
+
         actions: <Widget>[
           IconButton(
               icon: const Icon(Icons.sync, color: Colors.white),
@@ -108,7 +129,7 @@ class TaskHomeState extends State {
               IconButton(
                 icon: Icon(Icons.dashboard_outlined, color: Colors.white),
                 onPressed: () {
-                  Navigator.of(context).pushNamed('/customizeview');
+                  Navigator.of(context).pushNamed('/personalizeview');
                 },
               ),
               IconButton(
@@ -156,10 +177,10 @@ class TaskHomeState extends State {
               });
             },
             background: Container(
-              color: Colors.red,
+              color: Colors.brown,
             ),
             child: Padding(
-              padding: EdgeInsets.only(top: 4.0, left: 8.0, right: 8.0),
+              padding: EdgeInsets.only(top: 4.0, left: 4.0, right: 4.0),
               child: Card(
                   color: Colors.yellow[200],
                   elevation: 8.0,

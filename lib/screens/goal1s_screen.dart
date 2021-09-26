@@ -265,7 +265,7 @@ class _Goal1sScreenState extends State<Goal1sScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Colors.amber[50],
       key: _globalKey,
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -275,12 +275,12 @@ class _Goal1sScreenState extends State<Goal1sScreen> {
             child: Column(
               children: <Widget>[
                 Badge(
-                  child: Text('Categories     '),
+                  child: Text('Goals     '),
                   shape: BadgeShape.square,
                   position: BadgePosition.topEnd(),
                   badgeContent: Text(_goal1List.length.toString(),
                       style: TextStyle(color: Colors.black)),
-                  badgeColor: Colors.yellow[200],
+                  badgeColor: Colors.blue[200],
                 ),
               ],
             ),

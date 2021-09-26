@@ -79,7 +79,7 @@ class DbHelper {
 
   Future<Database> initializeDb() async {
     Directory dir = await getApplicationDocumentsDirectory();
-    String path = dir.path + "todo_V21.p.db";
+    String path = dir.path + "todo_V21.s.db";
     var dbTodovn = await openDatabase(path, version: 1, onCreate: _createDb);
     return dbTodovn;
   }
@@ -270,7 +270,7 @@ Top-Left (Drawer) | personalize dropdown, wipe device/cloud, help
 
 Top-Right (Sync) | never lose data, sync your device to cloud 
 
-Bottom-Left (Customize) | filter, sort, view 
+Bottom-Left (Personalize) | filter, sort, view 
 
 Bottom middle (Add Task) | quick add or many hooks to remember  
 
@@ -304,7 +304,7 @@ View | Check on left box to complete a task
 
 Drawer | personalize bootstrap picklist/ dropdown
 
-Customize | personalize filters, order, view  
+Personalize | personalize filters, order, view  
 
 Search | using normal search or advanced search
 

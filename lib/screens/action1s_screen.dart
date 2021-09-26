@@ -266,7 +266,7 @@ class _Action1sScreenState extends State<Action1sScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Colors.amber[50],
       key: _globalKey,
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -281,7 +281,7 @@ class _Action1sScreenState extends State<Action1sScreen> {
                   position: BadgePosition.topEnd(),
                   badgeContent: Text(_actionList.length.toString(),
                       style: TextStyle(color: Colors.black)),
-                  badgeColor: Colors.yellow[200],
+                  badgeColor: Colors.blue[200],
                 ),
               ],
             ),
