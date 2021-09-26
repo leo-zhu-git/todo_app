@@ -5,7 +5,7 @@ import 'package:todo_app/model/customDropdownItem.dart';
 import 'package:todo_app/model/taskclass.dart';
 import 'package:todo_app/util/dbhelper.dart';
 import 'package:intl/intl.dart';
-
+import 'dart:io';
 import 'tasksearch.dart';
 
 DbHelper dbHelper = DbHelper();
@@ -78,7 +78,7 @@ class TaskDetailState extends State //<TaskDetail>
     _loadContext1s();
     _loadLocation1s();
     _loadTag1s();
-    _loadGoal1s(); 
+    _loadGoal1s();
   }
 
 //##################Drop Down Items Load from DB #################################################################
@@ -301,12 +301,8 @@ class TaskDetailState extends State //<TaskDetail>
     task.location1 != ""
         ? _selectedLocation1 = task.location1
         : _selectedLocation1 = null;
-    task.tag1 != "" 
-        ? _selectedTag1 = task.tag1 
-        : _selectedTag1 = null;
-    task.goal1 != "" 
-        ? _selectedGoal1 = task.goal1 
-        : _selectedGoal1 = null;
+    task.tag1 != "" ? _selectedTag1 = task.tag1 : _selectedTag1 = null;
+    task.goal1 != "" ? _selectedGoal1 = task.goal1 : _selectedGoal1 = null;
     _todoTaskController.text = task.task;
     task.dateDue != ""
         ? {
@@ -634,7 +630,7 @@ class TaskDetailState extends State //<TaskDetail>
                       }),
                 ],
               ),
-            ),            //KK     // SizedBox(
+            ), //KK     // SizedBox(
             //   height: 20,
             // ),
 
@@ -667,8 +663,9 @@ class TaskDetailState extends State //<TaskDetail>
                           : _selectedContext1.toString();
                       task.tag1 =
                           _selectedTag1 == null ? "" : _selectedTag1.toString();
-                      task.goal1 =
-                          _selectedGoal1 == null ? "" : _selectedGoal1.toString();
+                      task.goal1 = _selectedGoal1 == null
+                          ? ""
+                          : _selectedGoal1.toString();
                       task.dateDue = _todoDateController.text;
                       task.timeDue = _todoTimeController.text;
                       task.isDone = 0;
@@ -709,7 +706,7 @@ class TaskDetailState extends State //<TaskDetail>
                                 color: Colors.black,
                               )),
                               Text(
-                                ' Added ',
+                                ' Successfully Saved ',
                                 style: (TextStyle(color: Colors.black)),
                               )
                             ],
@@ -717,6 +714,8 @@ class TaskDetailState extends State //<TaskDetail>
                         ),
                       );
 
+                      await Future.delayed(
+                          const Duration(milliseconds: 500), () {});
                       Navigator.pop(context);
 //                      Navigator.of(context).pushNamed('/dashboard');
                     },
