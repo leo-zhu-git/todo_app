@@ -68,7 +68,6 @@ class TaskHomeState extends State {
       drawer: DrawerNagivation(),
       appBar: AppBar(
         key: _globalKey,
-
         backgroundColor: Colors.brown[900],
         elevation: 8,
         title: Center(
@@ -79,7 +78,8 @@ class TaskHomeState extends State {
                   child: Text('View     '),
                   shape: BadgeShape.square,
                   position: BadgePosition.topEnd(),
-                  badgeContent: Text(count.toString(), style: TextStyle(color: Colors.black)),
+                  badgeContent: Text(count.toString(),
+                      style: TextStyle(color: Colors.black)),
                   badgeColor: Colors.green[100],
                 ),
               ],
@@ -149,7 +149,8 @@ class TaskHomeState extends State {
                 this.tasklist[position].status = "Completed";
                 this.tasklist[position].dateDone = formattedDate;
                 dbHelper.updateTask(tasklist[position]);
-                this.tasklist.removeAt(position);
+                // this.tasklist.removeAt(position);
+                getData();
                 Scaffold.of(context).showSnackBar(new SnackBar(
                   content: new Text("Item Dismissed"),
                 ));
