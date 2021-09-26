@@ -15,8 +15,8 @@ class Task {
   String _note;
   String _dateDue;
   String _timeDue;
-  String _status;
   String _priority;
+  String _status;
   String _star;
   String _category;
   String _action1;
@@ -24,6 +24,8 @@ class Task {
   String _location1;
   String _tag1;
   String _goal1;
+  String _priorityText;
+  String _statusText;
   String _categoryText;
   String _action1Text;
   String _context1Text;
@@ -44,8 +46,8 @@ class Task {
       this._note,
       this._dateDue,
       this._timeDue,
-      this._status,
       this._priority,
+      this._status,
       this._star,
       this._category,
       this._action1,
@@ -67,8 +69,8 @@ class Task {
       this._note,
       this._dateDue,
       this._timeDue,
-      this._status,
       this._priority,
+      this._status,
       this._star,
       this._category,
       this._action1,
@@ -89,8 +91,8 @@ class Task {
   String get note => _note;
   String get dateDue => _dateDue;
   String get timeDue => _timeDue;
-  String get status => _status;
   String get priority => _priority;
+  String get status => _status;
   String get star => _star;
   String get category => _category;
   String get action1 => _action1;
@@ -98,6 +100,8 @@ class Task {
   String get location1 => _location1;
   String get tag1 => _tag1;
   String get goal1 => _goal1;
+  String get priorityText => _priorityText;
+  String get statusText => _statusText;
   String get categoryText => _categoryText;
   String get action1Text => _action1Text;
   String get context1Text => _context1Text;
@@ -165,6 +169,14 @@ class Task {
     this._goal1 = newGoal;
   }
 
+  set priorityText(String newpriorityText) {
+    this._priorityText = newpriorityText;
+  }
+
+  set statusText(String newstatusText) {
+    this._statusText = newstatusText;
+  }
+
   set categoryText(String newcategoryText) {
     this._categoryText = newcategoryText;
   }
@@ -226,8 +238,8 @@ class Task {
   String colNote = '';
   String colDateDue = '';
   String colTimeDue = '';
-  String colStatus = '';
   String colPriority = '';
+  String colStatus = '';
   String colStar = '';
   String colCategory = '';
   String colAction1 = '';
@@ -246,8 +258,8 @@ class Task {
     map['note'] = _note;
     map['dateDue'] = _dateDue;
     map['timeDue'] = _timeDue;
-    map['status'] = _status;
     map['priority'] = _priority;
+    map['status'] = _status;
     map['star'] = _star;
     map['category'] = _category;
     map['action1'] = _action1;
@@ -272,8 +284,8 @@ class Task {
     this._note = o['note'];
     this._dateDue = o['dateDue'];
     this._timeDue = o['timeDue'];
-    this._status = o['status'];
     this._priority = o['priority'];
+    this._status = o['status'];
     this._star = o['star'];
     this._category = o['category'];
     this._action1 = o['action1'];
@@ -281,6 +293,8 @@ class Task {
     this._location1 = o['location1'];
     this._tag1 = o['tag1'];
     this._goal1 = o['goal1'];
+    this._priorityText = o['prioritiesname'] == null ? "" : o['prioritiesname'];
+    this._statusText = o['statusesname'] == null ? "" : o['statusesname'];
     this._categoryText = o['categoriesname'] == null ? "" : o['categoriesname'];
     this._action1Text = o['action1name'] == null ? "" : o['action1name'];
     this._context1Text = o['context1name'] == null ? "" : o['context1name'];

@@ -21,6 +21,8 @@ class TaskSearch extends StatefulWidget {
 
 class TaskSearchState extends State {
   DbHelper helper = DbHelper();
+  List<CustomDropdownItem> _priorities = [];
+  List<CustomDropdownItem> _statuses = [];
   List<CustomDropdownItem> _categories = [];
   List<CustomDropdownItem> _action1s = [];
   List<CustomDropdownItem> _context1s = [];
@@ -30,6 +32,8 @@ class TaskSearchState extends State {
   List<Task> tasklist;
   int count = 0;
   TextEditingController searchController = TextEditingController();
+  var _selectedPriority = null;
+  var _selectedStatus = null;
   var _selectedCategory = null;
   var _selectedAction1 = null;
   var _selectedContext1 = null;
@@ -37,22 +41,68 @@ class TaskSearchState extends State {
   var _selectedTag1 = null;
   var _selectedGoal1 = null;
 
-//  var _selectedGoal1 = "";
-
   @override
   void initState() {
     super.initState();
+    _loadPriorities();
+    _loadStatuses();
     _loadCategories();
     _loadAction1s();
     _loadContext1s();
     _loadLocation1s();
     _loadTag1s();
     _loadGoal1s();
-//    _loadGoal1s();
   }
 
   //##################Drop Down Items Load from DB #################################################################
-  _loadCategories() async {
+  _loadPriorities() async {
+    var priorities = await helper.getPriorities();
+    CustomDropdownItem cus;
+    cus = new CustomDropdownItem();
+    cus.id = null;
+    cus.name = "-- Select Priority --";
+    _priorities.add(cus);
+    priorities.forEach((priority) {
+      setState(() {
+        cus = new CustomDropdownItem();
+        cus.id = priority['id'].toString();
+        String tempPriority;
+        if (priority['name'].toString().length > 30)
+          tempPriority = priority['name'].toString().substring(0, 30) + "...";
+        else
+          tempPriority = priority['name'];
+
+        cus.name = tempPriority;
+
+        _priorities.add(cus);
+      });
+    });
+  }
+
+  _loadStatuses() async {
+    var statuses = await helper.getStatuses();
+    CustomDropdownItem cus;
+    cus = new CustomDropdownItem();
+    cus.id = null;
+    cus.name = "-- Select Status --";
+    _statuses.add(cus);
+    statuses.forEach((status) {
+      setState(() {
+        cus = new CustomDropdownItem();
+        cus.id = status['id'].toString();
+        String tempStatus;
+        if (status['name'].toString().length > 30)
+          tempStatus = status['name'].toString().substring(0, 30) + "...";
+        else
+          tempStatus = status['name'];
+
+        cus.name = tempStatus;
+
+        _statuses.add(cus);
+      });
+    });
+  }
+    _loadCategories() async {
     var categories = await helper.getCategories();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
@@ -75,8 +125,7 @@ class TaskSearchState extends State {
       });
     });
   }
-
-  _loadAction1s() async {
+    _loadAction1s() async {
     var action1s = await helper.getActions();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
@@ -202,7 +251,6 @@ class TaskSearchState extends State {
       appBar: AppBar(
         backgroundColor: Colors.brown[900],
         automaticallyImplyLeading: false,
-//        title: Center(child: Text('Search')),
         title: Center(
           child: Container(
             child: Column(
@@ -229,6 +277,8 @@ class TaskSearchState extends State {
               onChanged: (value) {
                 searchData(
                     value,
+                    _selectedPriority,
+                    _selectedStatus,
                     _selectedCategory,
                     _selectedAction1,
                     _selectedContext1,
@@ -259,6 +309,86 @@ class TaskSearchState extends State {
                 children: [
                   Column(
                     children: [
+//################################# Priority #####################################################
+                      Container(
+                        margin:
+                            EdgeInsets.only(left: 8.0, right: 8.0),
+                        decoration: BoxDecoration(
+                            shape: BoxShape.rectangle, color: Colors.blue[100]),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            DropdownButton<String>(
+                                items:
+                                    _categories.map((CustomDropdownItem value) {
+                                  return DropdownMenuItem<String>(
+                                      value: value.id,
+                                      child: Text(
+                                        value.name,
+                                        overflow: TextOverflow.ellipsis,
+                                      ));
+                                }).toList(),
+                                style: _textStyleControls,
+                                value: _selectedPriority,
+                                onChanged: (String newValue) {
+                                  setState(() {
+                                    _selectedPriority = newValue;
+                                    searchData(
+                                        _searchText,
+                                        _selectedPriority,
+                                        _selectedStatus,
+                                        _selectedCategory,
+                                        _selectedAction1,
+                                        _selectedContext1,
+                                        _selectedLocation1,
+                                        _selectedTag1,
+                                        _selectedGoal1);
+                                  });
+                                }),
+                          ],
+                        ),
+                      ),
+
+//################################# Status #####################################################
+                      Container(
+                        margin:
+                            EdgeInsets.only(left: 8.0, right: 8.0),
+                        decoration: BoxDecoration(
+                            shape: BoxShape.rectangle, color: Colors.blue[100]),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            DropdownButton<String>(
+                                items:
+                                    _statuses.map((CustomDropdownItem value) {
+                                  return DropdownMenuItem<String>(
+                                      value: value.id,
+                                      child: Text(
+                                        value.name,
+                                        overflow: TextOverflow.ellipsis,
+                                      ));
+                                }).toList(),
+                                style: _textStyleControls,
+                                value: _selectedStatus,
+                                onChanged: (String newValue) {
+                                  setState(() {
+                                    _selectedStatus = newValue;
+                                    searchData(
+                                        _searchText,
+                                        _selectedPriority,
+                                        _selectedStatus,
+                                        _selectedCategory,
+                                        _selectedAction1,
+                                        _selectedContext1,
+                                        _selectedLocation1,
+                                        _selectedTag1,
+                                        _selectedGoal1);
+                                  });
+                                }),
+                          ],
+                        ),
+                      ),
+
 //#################################Category#####################################################
                       Container(
                         margin:
@@ -285,6 +415,8 @@ class TaskSearchState extends State {
                                     _selectedCategory = newValue;
                                     searchData(
                                         _searchText,
+                                        _selectedPriority,
+                                        _selectedStatus,
                                         _selectedCategory,
                                         _selectedAction1,
                                         _selectedContext1,
@@ -320,6 +452,8 @@ class TaskSearchState extends State {
                                     _selectedAction1 = value;
                                     searchData(
                                         _searchText,
+                                        _selectedPriority,
+                                        _selectedStatus,
                                         _selectedCategory,
                                         _selectedAction1,
                                         _selectedContext1,
@@ -354,6 +488,8 @@ class TaskSearchState extends State {
                                   _selectedContext1 = value;
                                   searchData(
                                       _searchText,
+                                      _selectedPriority,
+                                      _selectedStatus,
                                       _selectedCategory,
                                       _selectedAction1,
                                       _selectedContext1,
@@ -388,6 +524,8 @@ class TaskSearchState extends State {
                                   _selectedLocation1 = value;
                                   searchData(
                                       _searchText,
+                                      _selectedPriority,
+                                      _selectedStatus,
                                       _selectedCategory,
                                       _selectedAction1,
                                       _selectedContext1,
@@ -421,6 +559,8 @@ class TaskSearchState extends State {
                                   _selectedTag1 = value;
                                   searchData(
                                       _searchText,
+                                      _selectedPriority,
+                                      _selectedStatus,
                                       _selectedCategory,
                                       _selectedAction1,
                                       _selectedContext1,
@@ -454,6 +594,8 @@ class TaskSearchState extends State {
                                   _selectedGoal1 = value;
                                   searchData(
                                       _searchText,
+                                      _selectedPriority,
+                                      _selectedStatus,
                                       _selectedCategory,
                                       _selectedAction1,
                                       _selectedContext1,
@@ -591,14 +733,13 @@ class TaskSearchState extends State {
     );
   }
 
-  void searchData(String searchText, String category, String action1,
+  void searchData(String searchText, String priority, String status, String category, String action1,
       String context1, String location1, String tag1, String goal1) {
     if (searchText.trim() != "" || searchText.trim() == "") {
       final dbFuture = helper.initializeDb();
       dbFuture.then((result) {
-//      final tasksFuture = helper.searchTasks(searchText, priority, category, action1, context1, location1, tag1, goal1);
         final tasksFuture = helper.searchTasks(
-            searchText, category, action1, context1, location1, tag1, goal1);
+            searchText, priority, status, category, action1, context1, location1, tag1, goal1);
         tasksFuture.then((result) {
           List<Task> taskList = List<Task>();
           count = result.length;
