@@ -266,7 +266,7 @@ Connect soon
     task = Task(
         "2.Navigation | Moving about ",
         '''
-Top-Left (Drawer) | personalize dropdown, wipe device/cloud, help
+Top-Left (Drawer) | support, community, plans, logout 
 
 Top-Right (Sync) | never lose data, sync your device to cloud 
 
@@ -301,8 +301,6 @@ Bottom-Right (Search) | keyword search or more powerful advance dropdown search
         "3.Practice | Baby Steps",
         '''
 View | Check on left box to complete a task
-
-Drawer | personalize bootstrap picklist/ dropdown
 
 Personalize | personalize filters, order, view  
 

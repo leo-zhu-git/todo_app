@@ -48,8 +48,8 @@ class _DrawerNagivation extends State<DrawerNagivation> {
           children: <Widget>[
             UserAccountsDrawerHeader(
               currentAccountPicture: CircleAvatar(
-                  backgroundImage: AssetImage('images/todoMIT.png'),
-                  ),
+                backgroundImage: AssetImage('images/todoMIT.png'),
+              ),
               accountName: Text('2half'),
               accountEmail: Text('2half@gmail.com'),
               decoration: BoxDecoration(color: Colors.brown[900]),
@@ -57,6 +57,27 @@ class _DrawerNagivation extends State<DrawerNagivation> {
             ListTile(
               leading: Icon(Icons.home),
               title: Text('Home'),
+              onTap: () => Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => TaskHome())),
+            ),
+            Divider(),
+            ListTile(
+              leading: Icon(Icons.cloud_download),
+              title: Text('Wipe'),
+              onTap: () => Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => WipeScreen())),
+            ),
+            Divider(),
+            ListTile(
+              leading: Icon(Icons.connect_without_contact),
+              title: Text('Support [placeholder]'),
+              onTap: () => Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => TaskHome())),
+            ),
+            Divider(),
+            ListTile(
+              leading: Icon(Icons.people),
+              title: Text('Community [placeholder]'),
               onTap: () => Navigator.of(context)
                   .push(MaterialPageRoute(builder: (context) => TaskHome())),
             ),
@@ -115,18 +136,33 @@ class _DrawerNagivation extends State<DrawerNagivation> {
 //            ),
             Divider(),
             ListTile(
-              leading: Icon(Icons.cloud_download_outlined),
-              title: Text('Wipe'),
-              onTap: () => Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => WipeScreen())),
-            ),
-            Divider(),
-            ListTile(
               leading: Icon(Icons.help_outlined),
               title: Text('Help'),
               onTap: () {
                 _launchURL();
               },
+            ),
+            Divider(),
+            ListTile(
+              leading: Icon(Icons.elevator_rounded),
+              title: Text('Subscription Plans [placeholder]'),
+              onTap: () {
+                _launchURL();
+              },
+            ),
+            Divider(),
+            ListTile(
+              leading: Icon(Icons.perm_device_info),
+              title: Text('About [placeholder]'),
+              onTap: () => Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => TaskHome())),
+            ),
+            Divider(),
+            ListTile(
+              leading: Icon(Icons.logout),
+              title: Text('Logout [placeholder]'),
+              onTap: () => Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => TaskHome())),
             ),
           ],
         ),
@@ -135,13 +171,11 @@ class _DrawerNagivation extends State<DrawerNagivation> {
   }
 
   _launchURL() async {
-    const _url =
-        'https://2ndhalf.app';
+    const _url = 'https://2ndhalf.app';
     if (await canLaunch(_url)) {
       await launch(_url);
     } else {
       throw 'Could not launch $_url';
     }
   }
-
 }

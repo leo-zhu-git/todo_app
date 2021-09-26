@@ -130,8 +130,8 @@ class SortOrder {
   SortOrder(this.id, this.name);
   static List<SortOrder> getOrder() {
     return <SortOrder>[
-      SortOrder(0, 'a -> Z'),
-      SortOrder(1, 'Z -> a'),
+      SortOrder(0, 'Ascending'),
+      SortOrder(1, 'Descending'),
     ];
   }
 }
