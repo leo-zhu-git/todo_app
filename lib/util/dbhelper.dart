@@ -562,35 +562,38 @@ Plan C - USD 24 | 12 month plan
       String searchContext1,
       String searchLocation1,
       String searchTag1,
-      String searchGoal1) async {
+      String searchGoal1,
+      bool includeCompleted) async {
     Database db = await this.db;
 
     String queryStr = "";
     queryStr =
         "SELECT * FROM $tblTodo WHERE ($colTask LIKE '%$searchText%' OR $colNote LIKE '%$searchText%') ";
 
+    if (includeCompleted) {
+      //queryStr = queryStr + " AND  $colIsDone = $includeCompleted";
+    } else {
+      queryStr = queryStr + " AND  $colIsDone = 0 ";
+    }
+
     if (searchCategory != null) {
-      queryStr =
-          queryStr + " AND $colCategory = '$searchCategory' AND $colIsDone = 0";
+      queryStr = queryStr +
+          " AND $colCategory = '$searchCategory' "; //AND $colIsDone = 0
     }
     if (searchAction1 != null) {
-      queryStr =
-          queryStr + " AND $colAction1 = '$searchAction1' AND $colIsDone = 0";
+      queryStr = queryStr + " AND $colAction1 = '$searchAction1' ";
     }
     if (searchContext1 != null) {
-      queryStr =
-          queryStr + " AND $colContext1 = '$searchContext1' AND $colIsDone = 0";
+      queryStr = queryStr + " AND $colContext1 = '$searchContext1' ";
     }
     if (searchLocation1 != null) {
-      queryStr = queryStr +
-          " AND $colLocation1 = '$searchLocation1' AND $colIsDone = 0";
+      queryStr = queryStr + " AND $colLocation1 = '$searchLocation1' ";
     }
     if (searchTag1 != null) {
-      queryStr = queryStr + " AND $colTag1 = '$searchTag1' AND $colIsDone = 0";
+      queryStr = queryStr + " AND $colTag1 = '$searchTag1' ";
     }
     if (searchGoal1 != null) {
-      queryStr =
-          queryStr + " AND $colGoal1 = '$searchGoal1' AND $colIsDone = 0";
+      queryStr = queryStr + " AND $colGoal1 = '$searchGoal1' ";
     }
 
     var result = await db.rawQuery(queryStr);
@@ -625,7 +628,6 @@ Plan C - USD 24 | 12 month plan
     result = await db.rawDelete('DELETE FROM $tblTodo WHERE $colId <> 0');
     return result;
   }
-
 
 //#########################Categories ##########################################
 
@@ -687,8 +689,7 @@ Plan C - USD 24 | 12 month plan
     try {
       Database db = await this.db;
       result = await db.query("action1s");
-       result =
-        await db.rawQuery("SELECT * FROM action1s order by name");
+      result = await db.rawQuery("SELECT * FROM action1s order by name");
       return result;
     } catch (e) {
       print(e);
