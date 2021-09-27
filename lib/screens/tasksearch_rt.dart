@@ -251,7 +251,12 @@ class TaskSearchState extends State {
       backgroundColor: Colors.teal[50],
       appBar: AppBar(
         backgroundColor: Colors.brown[900],
+<<<<<<< HEAD
         automaticallyImplyLeading: false,
+=======
+        automaticallyImplyLeading: true,
+//        title: Center(child: Text('Search')),
+>>>>>>> cb9fd8492c56c78eb0ea4b07489073ce6c23c18b
         title: Center(
           child: Container(
             child: Column(
@@ -314,15 +319,22 @@ class TaskSearchState extends State {
                 children: [
                   Column(
                     children: [
+<<<<<<< HEAD
 //################################# Priority #####################################################
                       Container(
                         margin:
                             EdgeInsets.only(left: 8.0, right: 8.0),
+=======
+//####################################Show Completed Task Check box
+                      Container(
+                        margin: EdgeInsets.only(left: 8.0, right: 8.0),
+>>>>>>> cb9fd8492c56c78eb0ea4b07489073ce6c23c18b
                         decoration: BoxDecoration(
                             shape: BoxShape.rectangle, color: Colors.blue[100]),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
+<<<<<<< HEAD
                             DropdownButton<String>(
                                 items:
                                     _categories.map((CustomDropdownItem value) {
@@ -347,8 +359,7 @@ class TaskSearchState extends State {
                                         _selectedContext1,
                                         _selectedLocation1,
                                         _selectedTag1,
-                                        _selectedGoal1,
-                                        _showCompleted);
+                                        _selectedGoal1);
                                   });
                                 }),
                           ],
@@ -388,13 +399,36 @@ class TaskSearchState extends State {
                                         _selectedContext1,
                                         _selectedLocation1,
                                         _selectedTag1,
-                                        _selectedGoal1,
-                                        _showCompleted);
+                                        _selectedGoal1);
                                   });
                                 }),
                           ],
                         ),
                       ),
+=======
+                            Text('Include Completed Tasks:'),
+                            Checkbox(
+                              value: _showCompleted,
+                              onChanged: (value) {
+                                setState(() {
+                                  _showCompleted = value;
+                                  searchData(
+                                      _searchText,
+                                      _selectedCategory,
+                                      _selectedAction1,
+                                      _selectedContext1,
+                                      _selectedLocation1,
+                                      _selectedTag1,
+                                      _selectedGoal1,
+                                      _showCompleted);
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+//####################################end of Show completed
+>>>>>>> cb9fd8492c56c78eb0ea4b07489073ce6c23c18b
 
 //#################################Category#####################################################
                       Container(
@@ -676,8 +710,6 @@ class TaskSearchState extends State {
                 dbHelper.updateTask(tasklist[position]);
                 searchData(
                     _searchText,
-                    _selectedpriority,
-                    _selectedStatus,
                     _selectedCategory,
                     _selectedAction1,
                     _selectedContext1,
@@ -757,12 +789,31 @@ class TaskSearchState extends State {
     );
   }
 
+<<<<<<< HEAD
   void searchData(String searchText, String priority, String status, String category, String action1,
-      String context1, String location1, String tag1, String goal1, bool _showCompleted) {
+      String context1, String location1, String tag1, String goal1) {
     if (searchText.trim() != "" || searchText.trim() == "") {
       final dbFuture = helper.initializeDb();
       dbFuture.then((result) {
-        final tasksFuture = helper.searchTasks(searchText, priority, status, category, action1, context1, location1, tag1, goal1, _showCompleted);
+        final tasksFuture = helper.searchTasks(
+            searchText, priority, status, category, action1, context1, location1, tag1, goal1);
+=======
+  void searchData(
+      String searchText,
+      String category,
+      String action1,
+      String context1,
+      String location1,
+      String tag1,
+      String goal1,
+      bool showCompleted) {
+    if (searchText.trim() != "" || searchText.trim() == "") {
+      final dbFuture = helper.initializeDb();
+      dbFuture.then((result) {
+//      final tasksFuture = helper.searchTasks(searchText, priority, category, action1, context1, location1, tag1, goal1);
+        final tasksFuture = helper.searchTasks(searchText, category, action1,
+            context1, location1, tag1, goal1, showCompleted);
+>>>>>>> cb9fd8492c56c78eb0ea4b07489073ce6c23c18b
         tasksFuture.then((result) {
           List<Task> taskList = List<Task>();
           count = result.length;

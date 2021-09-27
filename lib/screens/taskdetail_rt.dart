@@ -755,7 +755,13 @@ class TaskDetailState extends State //<TaskDetail>
                       }),
                 ],
               ),
+<<<<<<< HEAD
             ),       
+=======
+            ), //KK     // SizedBox(
+            //   height: 20,
+            // ),
+>>>>>>> cb9fd8492c56c78eb0ea4b07489073ce6c23c18b
 
             /// form - save or cancel
             Row(
@@ -777,12 +783,6 @@ class TaskDetailState extends State //<TaskDetail>
                     onPressed: () async {
                       task.task = _todoTaskController.text;
                       task.note = _todoNoteController.text;
-                      task.priority = _selectedPriority == null
-                          ? ""
-                          : _selectedPriority.toString();
-                      task.status = _selectedStatus == null
-                          ? ""
-                          : _selectedStatus.toString();
                       task.category = _selectedCategory == null
                           ? ""
                           : _selectedCategory.toString();
