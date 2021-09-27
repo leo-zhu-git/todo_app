@@ -81,7 +81,7 @@ class DbHelper {
 
   Future<Database> initializeDb() async {
     Directory dir = await getApplicationDocumentsDirectory();
-    String path = dir.path + "todo_V21.t.db";
+    String path = dir.path + "todo_V21.u.db";
     var dbTodovn = await openDatabase(path, version: 1, onCreate: _createDb);
     return dbTodovn;
   }
@@ -643,7 +643,6 @@ Plan C - USD 24 | 12 month plan
     queryStr =
         "SELECT * FROM $tblTodo WHERE ($colTask LIKE '%$searchText%' OR $colNote LIKE '%$searchText%') ";
 
-<<<<<<< HEAD
     if (searchPriority != null) {
       queryStr =
           queryStr + " AND $colPriority = '$searchPriority' AND $colIsDone = 0";
@@ -652,14 +651,6 @@ Plan C - USD 24 | 12 month plan
       queryStr =
           queryStr + " AND $colStatus = '$searchStatus' AND $colIsDone = 0";
     }
-=======
-    if (includeCompleted) {
-      //queryStr = queryStr + " AND  $colIsDone = $includeCompleted";
-    } else {
-      queryStr = queryStr + " AND  $colIsDone = 0 ";
-    }
-
->>>>>>> cb9fd8492c56c78eb0ea4b07489073ce6c23c18b
     if (searchCategory != null) {
       queryStr = queryStr +
           " AND $colCategory = '$searchCategory' "; //AND $colIsDone = 0
@@ -713,7 +704,6 @@ Plan C - USD 24 | 12 month plan
     return result;
   }
 
-<<<<<<< HEAD
 //######################### Priorities ##########################################
 
   Future<int> insertPriorities(Priority priorities) async {
@@ -804,8 +794,6 @@ Plan C - USD 24 | 12 month plan
   }
 
 //######################### ENd of Statuses ##########################################
-=======
->>>>>>> cb9fd8492c56c78eb0ea4b07489073ce6c23c18b
 //#########################Categories ##########################################
 
   Future<int> insertCategories(Category categories) async {
