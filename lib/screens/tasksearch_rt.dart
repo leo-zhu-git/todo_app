@@ -12,7 +12,7 @@ DbHelper helper = DbHelper();
 String _selectedpriority = "";
 String _searchText = "";
 TextStyle _textStyleControls =
-    TextStyle(fontSize: 16.0, fontWeight: FontWeight.w800, color: Colors.black);
+    TextStyle(fontSize: 14.0, fontWeight: FontWeight.w800, color: Colors.black);
 
 class TaskSearch extends StatefulWidget {
   @override
@@ -40,6 +40,7 @@ class TaskSearchState extends State {
   var _selectedLocation1 = null;
   var _selectedTag1 = null;
   var _selectedGoal1 = null;
+  bool _showCompleted = true;
 
   @override
   void initState() {
@@ -250,7 +251,12 @@ class TaskSearchState extends State {
       backgroundColor: Colors.teal[50],
       appBar: AppBar(
         backgroundColor: Colors.brown[900],
+<<<<<<< HEAD
         automaticallyImplyLeading: false,
+=======
+        automaticallyImplyLeading: true,
+//        title: Center(child: Text('Search')),
+>>>>>>> cb9fd8492c56c78eb0ea4b07489073ce6c23c18b
         title: Center(
           child: Container(
             child: Column(
@@ -259,18 +265,21 @@ class TaskSearchState extends State {
                   child: Text('Search     '),
                   shape: BadgeShape.square,
                   position: BadgePosition.topEnd(),
-                  badgeContent: Text(count.toString(), style: TextStyle(color: Colors.black)),
+                  badgeContent: Text(count.toString(),
+                      style: TextStyle(color: Colors.black)),
                   badgeColor: Colors.green[100],
                 ),
               ],
             ),
           ),
-        ),      ),
-      resizeToAvoidBottomInset: false,
+        ),
+      ),
+      resizeToAvoidBottomInset: true,
       body: Column(
         children: [
           Padding(
-            padding: EdgeInsets.only(top: 6.0, left:8.0, right:8.0, bottom:6.0),
+            padding:
+                EdgeInsets.only(top: 0.0, left: 0.0, right: 0.0, bottom: 0.0),
             child: TextField(
               controller: searchController,
               style: textStyle,
@@ -284,7 +293,8 @@ class TaskSearchState extends State {
                     _selectedContext1,
                     _selectedLocation1,
                     _selectedTag1,
-                    _selectedGoal1);
+                    _selectedGoal1,
+                    _showCompleted);
               },
               decoration: InputDecoration(
                 labelStyle: textStyle,
@@ -309,15 +319,22 @@ class TaskSearchState extends State {
                 children: [
                   Column(
                     children: [
+<<<<<<< HEAD
 //################################# Priority #####################################################
                       Container(
                         margin:
                             EdgeInsets.only(left: 8.0, right: 8.0),
+=======
+//####################################Show Completed Task Check box
+                      Container(
+                        margin: EdgeInsets.only(left: 8.0, right: 8.0),
+>>>>>>> cb9fd8492c56c78eb0ea4b07489073ce6c23c18b
                         decoration: BoxDecoration(
                             shape: BoxShape.rectangle, color: Colors.blue[100]),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
+<<<<<<< HEAD
                             DropdownButton<String>(
                                 items:
                                     _categories.map((CustomDropdownItem value) {
@@ -388,11 +405,34 @@ class TaskSearchState extends State {
                           ],
                         ),
                       ),
+=======
+                            Text('Include Completed Tasks:'),
+                            Checkbox(
+                              value: _showCompleted,
+                              onChanged: (value) {
+                                setState(() {
+                                  _showCompleted = value;
+                                  searchData(
+                                      _searchText,
+                                      _selectedCategory,
+                                      _selectedAction1,
+                                      _selectedContext1,
+                                      _selectedLocation1,
+                                      _selectedTag1,
+                                      _selectedGoal1,
+                                      _showCompleted);
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+//####################################end of Show completed
+>>>>>>> cb9fd8492c56c78eb0ea4b07489073ce6c23c18b
 
 //#################################Category#####################################################
                       Container(
-                        margin:
-                            EdgeInsets.only(left: 8.0, right: 8.0),
+                        margin: EdgeInsets.only(left: 8.0, right: 8.0),
                         decoration: BoxDecoration(
                             shape: BoxShape.rectangle, color: Colors.blue[100]),
                         child: Row(
@@ -422,7 +462,8 @@ class TaskSearchState extends State {
                                         _selectedContext1,
                                         _selectedLocation1,
                                         _selectedTag1,
-                                        _selectedGoal1);
+                                        _selectedGoal1,
+                                        _showCompleted);
                                   });
                                 }),
                           ],
@@ -431,8 +472,8 @@ class TaskSearchState extends State {
 
 //########################################### Action  ######### #################################3
                       Container(
-                        margin: EdgeInsets.only(
-                            top: 4.0, left: 8.0, right: 8.0),
+                        margin:
+                            EdgeInsets.only(top: 2.0, left: 8.0, right: 8.0),
                         decoration: BoxDecoration(
                             shape: BoxShape.rectangle, color: Colors.blue[100]),
                         child: Flexible(
@@ -459,7 +500,8 @@ class TaskSearchState extends State {
                                         _selectedContext1,
                                         _selectedLocation1,
                                         _selectedTag1,
-                                        _selectedGoal1);
+                                        _selectedGoal1,
+                                        _showCompleted);
                                   });
                                 },
                               )
@@ -469,8 +511,8 @@ class TaskSearchState extends State {
                       ),
 //######### Context  #########
                       Container(
-                        margin: EdgeInsets.only(
-                            top: 4.0, left: 8.0, right: 8.0),
+                        margin:
+                            EdgeInsets.only(top: 2.0, left: 8.0, right: 8.0),
                         decoration: BoxDecoration(
                             shape: BoxShape.rectangle, color: Colors.blue[100]),
                         child: Row(
@@ -495,7 +537,8 @@ class TaskSearchState extends State {
                                       _selectedContext1,
                                       _selectedLocation1,
                                       _selectedTag1,
-                                      _selectedGoal1);
+                                      _selectedGoal1,
+                                      _showCompleted);
                                 });
                               },
                             )
@@ -504,8 +547,8 @@ class TaskSearchState extends State {
                       ),
 // //######### Location  #########
                       Container(
-                        margin: EdgeInsets.only(
-                            top: 4.0, left: 8.0, right: 8.0),
+                        margin:
+                            EdgeInsets.only(top: 2.0, left: 8.0, right: 8.0),
                         decoration: BoxDecoration(
                             shape: BoxShape.rectangle, color: Colors.blue[100]),
                         child: Row(
@@ -531,7 +574,8 @@ class TaskSearchState extends State {
                                       _selectedContext1,
                                       _selectedLocation1,
                                       _selectedTag1,
-                                      _selectedGoal1);
+                                      _selectedGoal1,
+                                      _showCompleted);
                                 });
                               },
                             )
@@ -541,7 +585,7 @@ class TaskSearchState extends State {
 // //######### Tag  #########
                       Container(
                         margin:
-                            EdgeInsets.only(top:4.0, left: 8.0, right: 8.0),
+                            EdgeInsets.only(top: 2.0, left: 8.0, right: 8.0),
                         decoration: BoxDecoration(
                             shape: BoxShape.rectangle, color: Colors.blue[100]),
                         child: Row(
@@ -566,7 +610,8 @@ class TaskSearchState extends State {
                                       _selectedContext1,
                                       _selectedLocation1,
                                       _selectedTag1,
-                                      _selectedGoal1);
+                                      _selectedGoal1,
+                                      _showCompleted);
                                 });
                               },
                             )
@@ -575,8 +620,8 @@ class TaskSearchState extends State {
                       ),
 // //######### Goal  #########
                       Container(
-                        margin:
-                            EdgeInsets.only(top: 4.0, left: 8.0, right: 8.0, bottom: 4.0),
+                        margin: EdgeInsets.only(
+                            top: 2.0, left: 8.0, right: 8.0, bottom: 4.0),
                         decoration: BoxDecoration(
                             shape: BoxShape.rectangle, color: Colors.blue[100]),
                         child: Row(
@@ -601,7 +646,8 @@ class TaskSearchState extends State {
                                       _selectedContext1,
                                       _selectedLocation1,
                                       _selectedTag1,
-                                      _selectedGoal1);
+                                      _selectedGoal1,
+                                      _showCompleted);
                                 });
                               },
                             )
@@ -628,7 +674,7 @@ class TaskSearchState extends State {
       //bottomNavigationBar: footerBar,
 
       bottomNavigationBar: Container(
-        height: 55.0,
+        height: 34.0,
         child: BottomAppBar(
           // color: Color.fromRGBO(58, 66, 86, 1.0),
           color: Colors.brown[900],
@@ -662,7 +708,17 @@ class TaskSearchState extends State {
                 this.tasklist[position].isDone = 1;
                 this.tasklist[position].dateDone = formattedDate;
                 dbHelper.updateTask(tasklist[position]);
-                this.tasklist.removeAt(position);
+                searchData(
+                    _searchText,
+                    _selectedCategory,
+                    _selectedAction1,
+                    _selectedContext1,
+                    _selectedLocation1,
+                    _selectedTag1,
+                    _selectedGoal1,
+                    _showCompleted);
+                //KK this.tasklist.removeAt(position);
+
                 Scaffold.of(context).showSnackBar(new SnackBar(
                   content: new Text("Item Dismissed"),
                 ));
@@ -733,6 +789,7 @@ class TaskSearchState extends State {
     );
   }
 
+<<<<<<< HEAD
   void searchData(String searchText, String priority, String status, String category, String action1,
       String context1, String location1, String tag1, String goal1) {
     if (searchText.trim() != "" || searchText.trim() == "") {
@@ -740,6 +797,23 @@ class TaskSearchState extends State {
       dbFuture.then((result) {
         final tasksFuture = helper.searchTasks(
             searchText, priority, status, category, action1, context1, location1, tag1, goal1);
+=======
+  void searchData(
+      String searchText,
+      String category,
+      String action1,
+      String context1,
+      String location1,
+      String tag1,
+      String goal1,
+      bool showCompleted) {
+    if (searchText.trim() != "" || searchText.trim() == "") {
+      final dbFuture = helper.initializeDb();
+      dbFuture.then((result) {
+//      final tasksFuture = helper.searchTasks(searchText, priority, category, action1, context1, location1, tag1, goal1);
+        final tasksFuture = helper.searchTasks(searchText, category, action1,
+            context1, location1, tag1, goal1, showCompleted);
+>>>>>>> cb9fd8492c56c78eb0ea4b07489073ce6c23c18b
         tasksFuture.then((result) {
           List<Task> taskList = List<Task>();
           count = result.length;
