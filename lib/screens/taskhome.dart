@@ -70,9 +70,7 @@ class TaskHomeState extends State {
         key: _globalKey,
         backgroundColor: Colors.brown[900],
         elevation: 8,
-
         title: Center(
-
 //          child: Container(
 //            child: Row(
 //              children: [
@@ -92,21 +90,19 @@ class TaskHomeState extends State {
 //          ),
 //        ),
 
-
-            child: Column(
-              children: <Widget>[
-                Badge(
-                  child: Text('View     '),
-                  shape: BadgeShape.square,
-                  position: BadgePosition.topEnd(),
-                  badgeContent: Text(count.toString(), style: TextStyle(color: Colors.black)),
-                  badgeColor: Colors.yellow[200],
-                ),
-              ],
-            ),
-         ),
-        
-
+          child: Column(
+            children: <Widget>[
+              Badge(
+                child: Text('View     '),
+                shape: BadgeShape.square,
+                position: BadgePosition.topEnd(),
+                badgeContent: Text(count.toString(),
+                    style: TextStyle(color: Colors.black)),
+                badgeColor: Colors.yellow[200],
+              ),
+            ],
+          ),
+        ),
         actions: <Widget>[
           IconButton(
               icon: const Icon(Icons.sync, color: Colors.white),
@@ -170,7 +166,8 @@ class TaskHomeState extends State {
                 this.tasklist[position].status = "Completed";
                 this.tasklist[position].dateDone = formattedDate;
                 dbHelper.updateTask(tasklist[position]);
-                this.tasklist.removeAt(position);
+                //this.tasklist.removeAt(position);
+                getData();
                 Scaffold.of(context).showSnackBar(new SnackBar(
                   content: new Text("Item Dismissed"),
                 ));
