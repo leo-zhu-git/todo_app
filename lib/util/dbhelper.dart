@@ -7,8 +7,6 @@ import 'package:path_provider/path_provider.dart';
 import 'package:todo_app/model/customSettings.dart';
 import 'package:todo_app/model/goal1.dart';
 import 'package:todo_app/model/location1.dart';
-import 'package:todo_app/model/priority.dart';
-import 'package:todo_app/model/status.dart';
 import 'package:todo_app/model/tag1.dart';
 import 'package:todo_app/model/taskclass.dart';
 import 'package:todo_app/model/action1.dart';
@@ -24,8 +22,8 @@ class DbHelper {
   String colId = 'id';
   String colTask = 'task';
   String colNote = 'note';
-  String colPriority = 'priority';
   String colStatus = 'status';
+  String colPriority = 'priority';
   String colStar = 'star';
   String colDateDue = 'dateDue';
   String colTimeDue = 'timeDue';
@@ -53,8 +51,8 @@ class DbHelper {
   String colshowSec3 = 'showSec3';
   String colfilterDateDue = 'filterDateDue';
   String colfilterTimeDue = 'filterTimeDue';
-  String colfilterPriority = 'filterPriority';
   String colfilterStatus = 'filterStatus';
+  String colfilterPriority = 'filterPriority';
   String colfilterStar = 'filterStar';
   String colfilterCategory = 'filterCategory';
   String colfilterAction = 'filterAction';
@@ -81,7 +79,7 @@ class DbHelper {
 
   Future<Database> initializeDb() async {
     Directory dir = await getApplicationDocumentsDirectory();
-    String path = dir.path + "todo_V21.t.db";
+    String path = dir.path + "todo_V21.s.db";
     var dbTodovn = await openDatabase(path, version: 1, onCreate: _createDb);
     return dbTodovn;
   }
@@ -89,7 +87,7 @@ class DbHelper {
   void _createDb(Database db, int newVersion) async {
     await db.execute(
         "CREATE TABLE $tblTodo($colId INTEGER PRIMARY KEY, $colTask TEXT, $colNote TEXT, " +
-            "$colDateDue TEXT, $colTimeDue TEXT, $colPriority TEXT, $colStatus TEXT,  $colStar TEXT, " +
+            "$colDateDue TEXT, $colTimeDue TEXT, $colStatus TEXT, $colPriority TEXT, $colStar TEXT, " +
             "$colCategory TEXT, $colAction1 TEXT, " +
             "$colContext1 TEXT, $colLocation1 TEXT, $colTag1 TEXT, $colGoal1 TEXT, " +
             "$colIsDone INTEGER, $colDateDone TEXT, $colLastModified TEXT)");
@@ -103,14 +101,6 @@ class DbHelper {
             "$colfilterStatus TEXT, $colfilterPriority TEXT, $colfilterStar TEXT, " +
             "$colfilterCategory TEXT, $colfilterAction TEXT, $colfilterContext TEXT, $colfilterLocation TEXT, $colfilterTag TEXT, " +
             "$colfilterGoal TEXT, $colfilterIsDone INTEGER)");
-
-    // Create table priorities
-    await db.execute(
-        "CREATE TABLE priorities(id INTEGER PRIMARY KEY, name TEXT, description TEXT)");
-
-    // Create table statuses
-    await db.execute(
-        "CREATE TABLE statuses(id INTEGER PRIMARY KEY, name TEXT, description TEXT)");
 
     // Create table categories
     await db.execute(
@@ -145,44 +135,6 @@ class DbHelper {
   }
 
   void setDefaultDB(Database db) async {
-    //Create Default Values for Priorities
-    await db.execute(
-        "INSERT INTO priorities ( 'name', 'description')  values (?, ?)",
-        ['4.Top', '4Bootstrap - please delete or rename if necessary']);
-
-    await db.execute(
-        "INSERT INTO priorities ( 'name', 'description')  values (?, ?)",
-        ['3.High', '3Bootstrap - please delete or rename if necessary']);
-
-    await db.execute(
-        "INSERT INTO priorities ( 'name', 'description')  values (?, ?)",
-        ['2.Medium', '2Bootstrap - please delete or rename if necessary']);
-
-    await db.execute(
-        "INSERT INTO priorities ( 'name', 'description')  values (?, ?)",
-        ['1.Low', '1Bootstrap - please delete or rename if necessary']);
-
-    //Create Default Values for Statuses
-    await db.execute(
-        "INSERT INTO statuses ( 'name', 'description')  values (?, ?)",
-        ['1.Next Action', '1Bootstrap - please delete or rename if necessary']);
-
-    await db.execute(
-        "INSERT INTO statuses ( 'name', 'description')  values (?, ?)",
-        ['2.Delegated', '2Bootstrap - please delete or rename if necessary']);
-
-    await db.execute(
-        "INSERT INTO statuses ( 'name', 'description')  values (?, ?)",
-        ['3.Waiting', '3Bootstrap - please delete or rename if necessary']);
-
-    await db.execute(
-        "INSERT INTO statuses ( 'name', 'description')  values (?, ?)",
-        ['4.Hold', '4Bootstrap - please delete or rename if necessary']);
-
-    await db.execute(
-        "INSERT INTO statuses ( 'name', 'description')  values (?, ?)",
-        ['5.Reference', '5Bootstrap - please delete or rename if necessary']);
-
     //Create Default Values for Catergories
     await db.execute(
         "INSERT INTO categories ( 'name', 'description')  values (?, ?)",
@@ -458,8 +410,6 @@ Plan C - USD 24 | 12 month plan
       String colfilterDateDue,
       String colfilterTimeDue,
       int colfilterIsDone,
-      String colfilterPriority,
-      String colfilterStatus,
       String colfilterCategory,
       String colfilterAction,
       String colfilterContext,
@@ -472,12 +422,10 @@ Plan C - USD 24 | 12 month plan
     Database db = await this.db;
 
     String queryStr = "";
-    queryStr = "SELECT $tblTodo.id,$tblTodo.task,$tblTodo.note,priority, status, star, category,action1,context1,location1,tag1,goal1," +
+    queryStr = "SELECT $tblTodo.id,$tblTodo.task,$tblTodo.note,status, priority, star, $tblTodo.category,action1,context1,location1,tag1,goal1," +
         "dateDue,timeDue,isDone,dateDone,status,lastModified,categories.name as categoriesname, " +
         "action1s.name as action1name,context1s.name as context1name, location1s.name as location1name," +
         " tag1s.name as tag1name, goal1s.name as goal1name  FROM $tblTodo  " +
-        " LEFT JOIN priorities ON  $tblTodo.priority = priorities.id" +
-        " LEFT JOIN statuses ON  $tblTodo.status = statuses.id" +
         " LEFT JOIN categories ON  $tblTodo.category = categories.id" +
         " LEFT JOIN action1s ON $tblTodo.action1 = action1s.id " +
         " LEFT JOIN context1s ON  $tblTodo.context1 = context1s.id" +
@@ -549,67 +497,35 @@ Plan C - USD 24 | 12 month plan
     ;
 
 ////////////////
-/// build query - add priority
-////////////////
-    if (colfilterPriority == "0") {
-    }  
-    else {
-      queryStr = queryStr + " and ($colPriority == $colfilterPriority)";
-    }
-
-////////////////
-/// build query - add status
-////////////////
-    if (colfilterStatus == "0") {
-    }  
-    else {
-      queryStr = queryStr + " and ($colStatus == $colfilterStatus)";
-    }
-
-////////////////
-/// build query - add category
+    /// build query - add category
 ////////////////
     if (colfilterCategory == "0") {
-    }  
+    } // hide
+// include all
     else {
       queryStr = queryStr + " and ($colCategory == $colfilterCategory)";
     }
 
-////////////////
-/// build query - add action
-////////////////
     if (colfilterAction == "0") {
     } else {
       queryStr = queryStr + " and ($colAction1 == $colfilterAction)";
     }
 
-////////////////
-/// build query - add context
-////////////////
     if (colfilterContext == "0") {
     } else {
       queryStr = queryStr + " and ($colContext1 == $colfilterContext)";
     }
 
-////////////////
-/// build query - add location
-////////////////
     if (colfilterLocation == "0") {
     } else {
       queryStr = queryStr + " and ($colLocation1 == $colfilterLocation)";
     }
 
-////////////////
-/// build query - add tag
-////////////////
     if (colfilterTag == "0") {
     } else {
       queryStr = queryStr + " and ($colTag1 == $colfilterTag)";
     }
 
-////////////////
-/// build query - add goal
-////////////////
     if (colfilterGoal == "0") {
     } else {
       queryStr = queryStr + " and ($colGoal1 == $colfilterGoal)";
@@ -624,12 +540,21 @@ Plan C - USD 24 | 12 month plan
     print(queryStr);
     var result = await db.rawQuery(queryStr);
     return result;
+//    if (colfilterIsDone == 1) {
+//      var result = await db.rawQuery(// show IsDone
+//          "SELECT * FROM $tblTodo where ($colIsDone not NULL) order by $colsortField1 $colsortOrder1, $colsortField2 $colsortOrder2, $colsortField3 $colsortOrder3");
+//      return result;
+//    } else {
+//      // hide IsDone
+//      var result = await db.rawQuery(
+//          "SELECT * FROM $tblTodo where ($colIsDone == 0 and $colDateDue >= '$_startDate') order by $colsortField1 $colsortOrder1, $colsortField2 $colsortOrder2, $colsortField3 $colsortOrder3");
+//          "SELECT * FROM $tblTodo where ($colIsDone == 0 and $colDateDue >= '$_startDate' and $colDateDue <= '$_endDate') order by $colsortField1 $colsortOrder1, $colsortField2 $colsortOrder2, $colsortField3 $colsortOrder3");
+//          "SELECT * FROM $tblTodo where ($colIsDone == 0) order by $colsortField1 $colsortOrder1, $colsortField2 $colsortOrder2, $colsortField3 $colsortOrder3");
+//      return result;
   }
 
   Future<List> searchTasks(
       String searchText,
-      String searchPriority,
-      String searchStatus,
       String searchCategory,
       String searchAction1,
       String searchContext1,
@@ -642,14 +567,6 @@ Plan C - USD 24 | 12 month plan
     queryStr =
         "SELECT * FROM $tblTodo WHERE ($colTask LIKE '%$searchText%' OR $colNote LIKE '%$searchText%') ";
 
-    if (searchPriority != null) {
-      queryStr =
-          queryStr + " AND $colPriority = '$searchPriority' AND $colIsDone = 0";
-    }
-    if (searchStatus != null) {
-      queryStr =
-          queryStr + " AND $colStatus = '$searchStatus' AND $colIsDone = 0";
-    }
     if (searchCategory != null) {
       queryStr =
           queryStr + " AND $colCategory = '$searchCategory' AND $colIsDone = 0";
@@ -707,96 +624,7 @@ Plan C - USD 24 | 12 month plan
     return result;
   }
 
-//######################### Priorities ##########################################
 
-  Future<int> insertPriorities(Priority priorities) async {
-    Database db = await this.db;
-
-    var result = await db.insert('priorities', priorities.priorityMap());
-    return result;
-  }
-
-  Future<List> getPriorities() async {
-    Database db = await this.db;
-    var result = await db.rawQuery("SELECT * FROM priorities order by name");
-
-    return result;
-  }
-
-  Future<List> getPrioritiesbyID(int prioritiesId) async {
-    Database db = await this.db;
-    var result =
-        await db.rawQuery("SELECT * FROM priorities WHERE id=$prioritiesId");
-    return result;
-  }
-
-  Future<int> updatePriorities(Priority priorities) async {
-    Database db = await this.db;
-    var result = await db.update("priorities", priorities.priorityMap(),
-        where: "$colId =?", whereArgs: [priorities.id]);
-    return result;
-  }
-
-  Future<int> deletePrioritybyID(int id) async {
-    int result;
-    Database db = await this.db;
-    result = await db.rawDelete('DELETE FROM priorities WHERE id = $id');
-    return result;
-  }
-
-  Future<int> deleteAllPriorities() async {
-    int result;
-    Database db = await this.db;
-    result = await db.rawDelete('DELETE FROM priorities WHERE id <> 0');
-    return result;
-  }
-
-//######################### ENd of Priorities ##########################################
-//######################### Statuses ##########################################
-
-  Future<int> insertStatuses(Status statuses) async {
-    Database db = await this.db;
-
-    var result = await db.insert('statuses', statuses.statusMap());
-    return result;
-  }
-
-  Future<List> getStatuses() async {
-    Database db = await this.db;
-    var result = await db.rawQuery("SELECT * FROM statuses order by name");
-
-    return result;
-  }
-
-  Future<List> getStatusesbyID(int statusesId) async {
-    Database db = await this.db;
-    var result =
-        await db.rawQuery("SELECT * FROM statuses WHERE id=$statusesId");
-    return result;
-  }
-
-  Future<int> updateStatuses(Status statuses) async {
-    Database db = await this.db;
-    var result = await db.update("statuses", statuses.statusMap(),
-        where: "$colId =?", whereArgs: [statuses.id]);
-    return result;
-  }
-
-  Future<int> deleteStatusbyID(int id) async {
-    int result;
-    Database db = await this.db;
-    result = await db.rawDelete('DELETE FROM statuse WHERE id = $id');
-    return result;
-  }
-
-  Future<int> deleteAllStatuses() async {
-    int result;
-    Database db = await this.db;
-    result = await db.rawDelete('DELETE FROM statuses WHERE id <> 0');
-    return result;
-  }
-
-//######################### ENd of Statuses ##########################################
 //#########################Categories ##########################################
 
   Future<int> insertCategories(Category categories) async {

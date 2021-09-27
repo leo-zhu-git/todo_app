@@ -5,8 +5,6 @@ import 'package:sqflite/sqflite.dart';
 import 'package:todo_app/model/action1.dart';
 import 'package:todo_app/model/category.dart';
 import 'package:todo_app/model/context1.dart';
-import 'package:todo_app/model/priority.dart';
-import 'package:todo_app/model/status.dart';
 import 'package:todo_app/model/tag1.dart';
 
 import 'package:todo_app/util/dbhelper.dart';
@@ -154,75 +152,7 @@ class MySql_DBHelper {
     });
   }
 
-  void syncPrioritiesData() async {
-    helper.deleteAllPriorities();
-    final tasksRequest = request('actionContent', formData: null);
-
-    tasksRequest.then((value) {
-      final data = json.decode(value.toString());
-      print(data);
-      List<Map> swiperDataList = (data['Priorities'] as List).cast();
-
-      var count = swiperDataList.length;
-      print(count);
-
-      for (int i = 0; i < swiperDataList.length; i++) {
-        Priority action = new Priority();
-        String dbId = swiperDataList[i]['id'].toString();
-        String dbUserID = swiperDataList[i]['userId'].toString();
-        String appId = dbId.substring(dbUserID.length, dbId.length);
-        action.id = int.parse(appId);
-        action.name = swiperDataList[i]['name'];
-        action.description = swiperDataList[i]['desc'];
-
-        final actionFuture = helper.getPrioritiesbyID(int.parse(appId));
-        actionFuture.then((result) {
-          count = result.length;
-          if (count > 0) {
-            helper.updatePriorities(action);
-            //helper.deleteAction(swiperDataList[i]['TaskID']);
-          } else {
-            helper.insertPriorities(action);
-            // helper.deleteAction(swiperDataList[i]['TaskID']);
-          }
-        });
-      }
-    });
-  }
-    void syncStatusesData() async {
-    helper.deleteAllStatuses();
-    final tasksRequest = request('actionContent', formData: null);
-
-    tasksRequest.then((value) {
-      final data = json.decode(value.toString());
-      print(data);
-      List<Map> swiperDataList = (data['Statuses'] as List).cast();
-
-      var count = swiperDataList.length;
-      print(count);
-
-      for (int i = 0; i < swiperDataList.length; i++) {
-        Status action = new Status();
-        String dbId = swiperDataList[i]['id'].toString();
-        String dbUserID = swiperDataList[i]['userId'].toString();
-        String appId = dbId.substring(dbUserID.length, dbId.length);
-        action.id = int.parse(appId);
-        action.name = swiperDataList[i]['name'];
-        action.description = swiperDataList[i]['desc'];
-
-        final actionFuture = helper.getStatusesbyID(int.parse(appId));
-        actionFuture.then((result) {
-          count = result.length;
-          if (count > 0) {
-            helper.updateStatuses(action);
-          } else {
-            helper.insertStatuses(action);
-          }
-        });
-      }
-    });
-  }
-    void syncCategoriesData() async {
+  void syncCategoriesData() async {
     helper.deleteAllCategories();
     final tasksRequest = request('actionContent', formData: null);
 

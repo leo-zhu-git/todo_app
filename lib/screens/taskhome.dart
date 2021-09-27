@@ -285,8 +285,6 @@ class TaskHomeState extends State {
           getDateDueColumn(_filterDateDue),
           getTimeDueColumn(_filterDateDue),
           globals.filterIsDone,
-          globals.filterPriority.toString(),
-          globals.filterStatus.toString(),
           globals.filterCategory.toString(),
           globals.filterAction.toString(),
           globals.filterContext.toString(),

@@ -51,8 +51,6 @@ class TaskDetailState extends State //<TaskDetail>
   var _todoPriorityController = TextEditingController();
   var _todoStarController = TextEditingController();
 
-  var _selectedPriority;
-  var _selectedStatus;
   var _selectedCategory;
   var _selectedAction1;
   var _selectedContext1;
@@ -60,8 +58,6 @@ class TaskDetailState extends State //<TaskDetail>
   var _selectedTag1;
   var _selectedGoal1;
 
-  List<CustomDropdownItem> _priority = [];
-  List<CustomDropdownItem> _status = [];
   List<CustomDropdownItem> _categories = [];
   List<CustomDropdownItem> _action1s = [];
   List<CustomDropdownItem> _context1s = [];
@@ -77,8 +73,6 @@ class TaskDetailState extends State //<TaskDetail>
   void initState() {
     super.initState();
 
-    _loadPriorities();
-    _loadStatuses();
     _loadCategories();
     _loadAction1s();
     _loadContext1s();
@@ -88,54 +82,6 @@ class TaskDetailState extends State //<TaskDetail>
   }
 
 //##################Drop Down Items Load from DB #################################################################
-  _loadPriorities() async {
-    var categories = await helper.getCategories();
-    CustomDropdownItem cus;
-    cus = new CustomDropdownItem();
-    cus.id = null;
-    cus.name = "-- Select Category --";
-    _categories.add(cus);
-    categories.forEach((category) {
-      setState(() {
-        cus = new CustomDropdownItem();
-        cus.id = category['id'].toString();
-        String tempCat;
-        if (category['name'].toString().length > 30)
-          tempCat = category['name'].toString().substring(0, 30) + "...";
-        else
-          tempCat = category['name'];
-
-        cus.name = tempCat;
-
-        _categories.add(cus);
-      });
-    });
-  }
-
-  _loadStatuses() async {
-    var categories = await helper.getCategories();
-    CustomDropdownItem cus;
-    cus = new CustomDropdownItem();
-    cus.id = null;
-    cus.name = "-- Select Category --";
-    _categories.add(cus);
-    categories.forEach((category) {
-      setState(() {
-        cus = new CustomDropdownItem();
-        cus.id = category['id'].toString();
-        String tempCat;
-        if (category['name'].toString().length > 30)
-          tempCat = category['name'].toString().substring(0, 30) + "...";
-        else
-          tempCat = category['name'];
-
-        cus.name = tempCat;
-
-        _categories.add(cus);
-      });
-    });
-  }
-
   _loadCategories() async {
     var categories = await helper.getCategories();
     CustomDropdownItem cus;
@@ -343,12 +289,6 @@ class TaskDetailState extends State //<TaskDetail>
   @override
   Widget build(BuildContext context) {
     _todoNoteController.text = task.note;
-    task.priority != ""
-        ? _selectedPriority = task.priority
-        : _selectedPriority = null;
-    task.status != ""
-        ? _selectedStatus = task.status
-        : _selectedStatus = null;
     task.category != ""
         ? _selectedCategory = task.category
         : _selectedCategory = null;
@@ -504,71 +444,6 @@ class TaskDetailState extends State //<TaskDetail>
                 ),
               ),
             ),
-///////////////////////////
-//  Priority
-///////////////////////////
-            Container(
-              margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
-              decoration: BoxDecoration(
-                  shape: BoxShape.rectangle, color: Colors.blue[100]),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  DropdownButton<String>(
-                      items: _priority.map((CustomDropdownItem value) {
-                        return DropdownMenuItem<String>(
-                            value: value.id,
-                            child: Text(
-                              value.name,
-                              overflow: TextOverflow.ellipsis,
-                            ));
-                      }).toList(),
-                      style: _textStyleControls,
-                      value: _selectedPriority,
-                      onChanged: (String newValue) {
-                        setState(() {
-                          _selectedPriority = newValue;
-                          task.priority = newValue;
-                        });
-                      }),
-                ],
-              ),
-            ),
-
-///////////////////////////
-//  Status
-///////////////////////////
-
-            Container(
-              margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
-              decoration: BoxDecoration(
-                  shape: BoxShape.rectangle, color: Colors.blue[100]),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  DropdownButton<String>(
-                      items: _status.map((CustomDropdownItem value) {
-                        return DropdownMenuItem<String>(
-                            value: value.id,
-                            child: Text(
-                              value.name,
-                              overflow: TextOverflow.ellipsis,
-                            ));
-                      }).toList(),
-                      style: _textStyleControls,
-                      value: _selectedStatus,
-                      onChanged: (String newValue) {
-                        setState(() {
-                          _selectedStatus = newValue;
-                          task.status = newValue;
-                        });
-                      }),
-                ],
-              ),
-            ),
-
 ///////////////////////////
 //  CATEGORY
 ///////////////////////////
@@ -759,7 +634,9 @@ class TaskDetailState extends State //<TaskDetail>
                       }),
                 ],
               ),
-            ),       
+            ),            //KK     // SizedBox(
+            //   height: 20,
+            // ),
 
             /// form - save or cancel
             Row(
