@@ -635,15 +635,13 @@ Plan C - USD 24 | 12 month plan
       String searchContext1,
       String searchLocation1,
       String searchTag1,
-      String searchGoal1,
-      bool includeCompleted) async {
+      String searchGoal1) async {
     Database db = await this.db;
 
     String queryStr = "";
     queryStr =
         "SELECT * FROM $tblTodo WHERE ($colTask LIKE '%$searchText%' OR $colNote LIKE '%$searchText%') ";
 
-<<<<<<< HEAD
     if (searchPriority != null) {
       queryStr =
           queryStr + " AND $colPriority = '$searchPriority' AND $colIsDone = 0";
@@ -652,32 +650,28 @@ Plan C - USD 24 | 12 month plan
       queryStr =
           queryStr + " AND $colStatus = '$searchStatus' AND $colIsDone = 0";
     }
-=======
-    if (includeCompleted) {
-      //queryStr = queryStr + " AND  $colIsDone = $includeCompleted";
-    } else {
-      queryStr = queryStr + " AND  $colIsDone = 0 ";
-    }
-
->>>>>>> cb9fd8492c56c78eb0ea4b07489073ce6c23c18b
     if (searchCategory != null) {
-      queryStr = queryStr +
-          " AND $colCategory = '$searchCategory' "; //AND $colIsDone = 0
+      queryStr =
+          queryStr + " AND $colCategory = '$searchCategory' AND $colIsDone = 0";
     }
     if (searchAction1 != null) {
-      queryStr = queryStr + " AND $colAction1 = '$searchAction1' ";
+      queryStr =
+          queryStr + " AND $colAction1 = '$searchAction1' AND $colIsDone = 0";
     }
     if (searchContext1 != null) {
-      queryStr = queryStr + " AND $colContext1 = '$searchContext1' ";
+      queryStr =
+          queryStr + " AND $colContext1 = '$searchContext1' AND $colIsDone = 0";
     }
     if (searchLocation1 != null) {
-      queryStr = queryStr + " AND $colLocation1 = '$searchLocation1' ";
+      queryStr = queryStr +
+          " AND $colLocation1 = '$searchLocation1' AND $colIsDone = 0";
     }
     if (searchTag1 != null) {
-      queryStr = queryStr + " AND $colTag1 = '$searchTag1' ";
+      queryStr = queryStr + " AND $colTag1 = '$searchTag1' AND $colIsDone = 0";
     }
     if (searchGoal1 != null) {
-      queryStr = queryStr + " AND $colGoal1 = '$searchGoal1' ";
+      queryStr =
+          queryStr + " AND $colGoal1 = '$searchGoal1' AND $colIsDone = 0";
     }
 
     var result = await db.rawQuery(queryStr);
@@ -713,7 +707,6 @@ Plan C - USD 24 | 12 month plan
     return result;
   }
 
-<<<<<<< HEAD
 //######################### Priorities ##########################################
 
   Future<int> insertPriorities(Priority priorities) async {
@@ -804,8 +797,6 @@ Plan C - USD 24 | 12 month plan
   }
 
 //######################### ENd of Statuses ##########################################
-=======
->>>>>>> cb9fd8492c56c78eb0ea4b07489073ce6c23c18b
 //#########################Categories ##########################################
 
   Future<int> insertCategories(Category categories) async {
@@ -866,7 +857,8 @@ Plan C - USD 24 | 12 month plan
     try {
       Database db = await this.db;
       result = await db.query("action1s");
-      result = await db.rawQuery("SELECT * FROM action1s order by name");
+       result =
+        await db.rawQuery("SELECT * FROM action1s order by name");
       return result;
     } catch (e) {
       print(e);
