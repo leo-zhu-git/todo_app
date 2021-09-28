@@ -1005,7 +1005,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
               SizedBox(
                 height: 20,
               ),
-              Text("Picklist | user-defined dropdowns"),
+              Text("Picklist | User-defined Dropdowns"),
 
 ///////////////////////////
 //  Picklist - Categories
