@@ -225,7 +225,7 @@ class TaskSearchState extends State {
         children: [
           Padding(
             padding:
-                EdgeInsets.only(top: 0.0, left: 0.0, right: 0.0, bottom: 0.0),
+                EdgeInsets.only(top: 2.0, left: 4.0, right: 4.0, bottom: 1.0),
             child: TextField(
               controller: searchController,
               style: textStyle,
@@ -245,7 +245,7 @@ class TaskSearchState extends State {
                 fillColor: Colors.green[100],
                 border: InputBorder.none,
                 filled: true, // dont forget this line
-                labelText: "Enter a search term",
+                labelText: "Searching for ...",
               ),
             ),
           ),
@@ -265,7 +265,7 @@ class TaskSearchState extends State {
                     children: [
 //####################################Show Completed Task Check box
                       Container(
-                        margin: EdgeInsets.only(left: 8.0, right: 8.0),
+                        margin: EdgeInsets.only(left: 8.0, right: 8.0, bottom: 2.0),
                         decoration: BoxDecoration(
                             shape: BoxShape.rectangle, color: Colors.blue[100]),
                         child: Row(
