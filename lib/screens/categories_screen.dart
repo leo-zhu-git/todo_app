@@ -110,13 +110,14 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                       ),
                     ));
                   },
-                                      style: ElevatedButton.styleFrom(
+                    style: ElevatedButton.styleFrom(
                       primary: Colors.brown[900],
                     ),
                     child: Text(
                       'Save',
                       style: TextStyle(color: Colors.white),
-                    )),
+                    )
+                    ),
           
             ],
             title: Text('Add Category'),
