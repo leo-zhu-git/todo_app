@@ -79,7 +79,7 @@ class DbHelper {
 
   Future<Database> initializeDb() async {
     Directory dir = await getApplicationDocumentsDirectory();
-    String path = dir.path + "todo_V21.t.db";
+    String path = dir.path + "todo_V21.u.db";
     var dbTodovn = await openDatabase(path, version: 1, onCreate: _createDb);
     return dbTodovn;
   }
@@ -151,11 +151,35 @@ class DbHelper {
     //Create Default Values for Action
     await db.execute(
         "INSERT INTO action1s ( 'name', 'description')  values (?, ?)",
-        ['1.Buy', '1Bootstrap - please delete or rename if necessary']);
+        ['1.Call', '2Bootstrap - please delete or rename if necessary']);
 
     await db.execute(
         "INSERT INTO action1s ( 'name', 'description')  values (?, ?)",
-        ['2.Connect', '2Bootstrap - please delete or rename if necessary']);
+        ['2.Email', '2Bootstrap - please delete or rename if necessary']);
+
+    await db.execute(
+        "INSERT INTO action1s ( 'name', 'description')  values (?, ?)",
+        ['3.Meet', '2Bootstrap - please delete or rename if necessary']);
+
+    await db.execute(
+        "INSERT INTO action1s ( 'name', 'description')  values (?, ?)",
+        ['4.Buy', '1Bootstrap - please delete or rename if necessary']);
+
+    await db.execute(
+        "INSERT INTO action1s ( 'name', 'description')  values (?, ?)",
+        ['5.Pay', '1Bootstrap - please delete or rename if necessary']);
+
+    await db.execute(
+        "INSERT INTO action1s ( 'name', 'description')  values (?, ?)",
+        ['6.Read', '1Bootstrap - please delete or rename if necessary']);
+
+    await db.execute(
+        "INSERT INTO action1s ( 'name', 'description')  values (?, ?)",
+        ['7.Study', '1Bootstrap - please delete or rename if necessary']);
+
+    await db.execute(
+        "INSERT INTO action1s ( 'name', 'description')  values (?, ?)",
+        ['8.Print', '1Bootstrap - please delete or rename if necessary']);
 
     //Create Default Values for Context
     await db.execute(
