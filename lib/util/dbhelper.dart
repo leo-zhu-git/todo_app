@@ -79,7 +79,7 @@ class DbHelper {
 
   Future<Database> initializeDb() async {
     Directory dir = await getApplicationDocumentsDirectory();
-    String path = dir.path + "todo_V21.u.db";
+    String path = dir.path + "todo_V21.v.db";
     var dbTodovn = await openDatabase(path, version: 1, onCreate: _createDb);
     return dbTodovn;
   }
@@ -215,11 +215,27 @@ class DbHelper {
     //Create Default Values for Goals
     await db.execute(
         "INSERT INTO goal1s ( 'name', 'description')  values (?, ?)",
-        ['1.Health', '2Bootstrap - please delete or rename if necessary']);
+        ['1.Eat Healthy', '1Bootstrap - please delete or rename if necessary']);
 
     await db.execute(
         "INSERT INTO goal1s ( 'name', 'description')  values (?, ?)",
-        ['2.Wealth', '2Bootstrap - please delete or rename if necessary']);
+        ['2.Drink Water', '2Bootstrap - please delete or rename if necessary']);
+
+    await db.execute(
+        "INSERT INTO goal1s ( 'name', 'description')  values (?, ?)",
+        ['3.Exercise', '3Bootstrap - please delete or rename if necessary']);
+
+    await db.execute(
+        "INSERT INTO goal1s ( 'name', 'description')  values (?, ?)",
+        ['4.Meditate', '4Bootstrap - please delete or rename if necessary']);
+
+    await db.execute(
+        "INSERT INTO goal1s ( 'name', 'description')  values (?, ?)",
+        ['5.Read', '5Bootstrap - please delete or rename if necessary']);
+
+    await db.execute(
+        "INSERT INTO goal1s ( 'name', 'description')  values (?, ?)",
+        ['6.Better Sleep', '6Bootstrap - please delete or rename if necessary']);
 
     //Default value for Custom Setting
     CustomSettings customSetting = new CustomSettings(
