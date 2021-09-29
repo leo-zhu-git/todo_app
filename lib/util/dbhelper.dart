@@ -81,7 +81,7 @@ class DbHelper {
 
   Future<Database> initializeDb() async {
     Directory dir = await getApplicationDocumentsDirectory();
-    String path = dir.path + "todo_V21.y.db";
+    String path = dir.path + "todo_V22.a.db";
     var dbTodovn = await openDatabase(path, version: 1, onCreate: _createDb);
     return dbTodovn;
   }
@@ -391,7 +391,7 @@ Top-Left (Drawer) | support, community, plans, logout
 
 Top-Right (Sync) | never lose data, sync your device to cloud 
 
-Bottom-Left (Personalize) | filter, sort, view 
+Bottom-Left (Personalize) | filter, sort, view, picklists
 
 Bottom middle (Add Task) | quick add or many hooks to remember  
 
@@ -421,9 +421,9 @@ Bottom-Right (Search) | keyword search or more powerful advance dropdown search
     task = Task(
         "3.Practice | Baby Steps",
         '''
-View | Check on left box to complete a task
+View | Check on left box or swipe to complete a task
 
-Personalize | personalize filters, order, view  
+Personalize | filters, order, view, picklists 
 
 Search | using normal search or advanced search
 
@@ -458,11 +458,11 @@ Contact us | share the good, bad, ugly
         '''
 First 30 days | free full features, is this tool for you?
 
-Plan A - USD 4 | 1 month plan before you commit
+Plan A - USD 4 | 1 month before you commit
 
-Plan B - USD 15 | 6 month plan 
+Plan B - USD 15 | 6 month 
 
-Plan C - USD 24 | 12 month plan  
+Plan C - USD 24 | 12 month  
         ''',
         formattedate, // dateDue
         '', // timeDue
