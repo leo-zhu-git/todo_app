@@ -361,8 +361,12 @@ class TaskDetailState extends State //<TaskDetail>
     task.location1 != ""
         ? _selectedLocation1 = task.location1
         : _selectedLocation1 = null;
-    task.tag1 != "" ? _selectedTag1 = task.tag1 : _selectedTag1 = null;
-    task.goal1 != "" ? _selectedGoal1 = task.goal1 : _selectedGoal1 = null;
+    task.tag1 != "" 
+        ? _selectedTag1 = task.tag1 
+        : _selectedTag1 = null;
+    task.goal1 != "" 
+        ? _selectedGoal1 = task.goal1 
+        : _selectedGoal1 = null;
     _todoTaskController.text = task.task;
     task.dateDue != ""
         ? {
@@ -780,6 +784,12 @@ class TaskDetailState extends State //<TaskDetail>
                     onPressed: () async {
                       task.task = _todoTaskController.text;
                       task.note = _todoNoteController.text;
+                      task.status = _selectedStatus == null
+                          ? ""
+                          : _selectedStatus.toString();
+                      task.priority = _selectedPriority == null
+                          ? ""
+                          : _selectedPriority.toString();
                       task.category = _selectedCategory == null
                           ? ""
                           : _selectedCategory.toString();
@@ -797,11 +807,11 @@ class TaskDetailState extends State //<TaskDetail>
                       task.dateDue = _todoDateController.text;
                       task.timeDue = _todoTimeController.text;
                       task.isDone = 0;
-                      if (task.isDone == 0) {
-                        task.status = "Open";
-                      } else {
-                        task.status = "Completed";
-                      }
+//                      if (task.isDone == 0) {
+//                        task.status = "Open";
+//                      } else {
+//                        task.status = "Completed";
+//                      }
                       //task.lastModified = DateTime.parse(
                       //DateFormat("yyyy-MM-dd HH:mm:ss")
                       //.format(DateTime.now()));

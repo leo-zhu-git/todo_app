@@ -81,7 +81,7 @@ class DbHelper {
 
   Future<Database> initializeDb() async {
     Directory dir = await getApplicationDocumentsDirectory();
-    String path = dir.path + "todo_V21.x.db";
+    String path = dir.path + "todo_V21.y.db";
     var dbTodovn = await openDatabase(path, version: 1, onCreate: _createDb);
     return dbTodovn;
   }
@@ -502,7 +502,8 @@ Plan C - USD 24 | 12 month plan
 
   Future<List> getAllTasks() async {
     Database db = await this.db;
-    var result = await db.rawQuery("SELECT * FROM todo where $colId < 6");
+//    var result = await db.rawQuery("SELECT * FROM todo where $colId < 6");
+    var result = await db.rawQuery("SELECT * FROM todo");
     return result;
   }
 
