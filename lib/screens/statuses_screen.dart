@@ -1,96 +1,97 @@
 import 'package:badges/badges.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:todo_app/model/tag1.dart';
+import 'package:todo_app/model/status.dart';
 import 'package:todo_app/screens/taskhome.dart';
 import 'package:todo_app/util/dbhelper.dart';
 
-class Tag1sScreen extends StatefulWidget {
+class StatusesScreen extends StatefulWidget {
   @override
-  _Tag1sScreenState createState() => _Tag1sScreenState();
+  _StatusesScreenState createState() => _StatusesScreenState();
 }
 
-class _Tag1sScreenState extends State<Tag1sScreen> {
-  var _tag1NameController = TextEditingController();
-  var _tag1DescriptionController = TextEditingController();
+class _StatusesScreenState extends State<StatusesScreen> {
+  var _statusNameController = TextEditingController();
+  var _statusDescriptionController = TextEditingController();
 
-  var _tag1 = Tag1();
-  var _tag1Service = DbHelper();
+  var _status = Status();
+  var _statusService = DbHelper();
 
-  var _editTag1NameController = TextEditingController();
-  var _editTag1DescriptionController = TextEditingController();
+  var _editStatusNameController = TextEditingController();
+  var _editStatusDescriptionController = TextEditingController();
 
-  List<Tag1> _tag1List = List<Tag1>();
+  List<Status> _statusList = List<Status>();
 
-  var tag1;
+  var status;
 
   @override
   void initState() {
     super.initState();
-    getAllTag1s();
+    getAllStatuses();
   }
 
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
 
-  getAllTag1s() async {
-    _tag1List = List<Tag1>();
-    var tag1 = await _tag1Service.getTag1s();
-    tag1.forEach((tag1) {
-      setState(() {
-        var tag1Model = Tag1();
-        tag1Model.name = tag1['name'];
-        tag1Model.description = tag1['description'];
-        tag1Model.id = tag1['id'];
-        _tag1List.add(tag1Model);
+  getAllStatuses() async {
+    _statusList = List<Status>();
+    var statuses = await _statusService.getStatuses();
+    if (statuses.length != 0) {
+      statuses.forEach((status) {
+        setState(() {
+          var statusModel = Status();
+          statusModel.name = status['name'];
+          statusModel.description = status['description'];
+          statusModel.id = status['id'];
+          _statusList.add(statusModel);
+        });
       });
-    });
-    if (tag1.length == 0) {
+    } else {
       setState(() {
-        _tag1List.clear();
+        _statusList.clear();
       });
     }
   }
 
-  _editTag1(BuildContext context, tag1Id) async {
-    tag1 = await _tag1Service.getTag1sbyID(tag1Id);
+  _editStatus(BuildContext context, statusId) async {
+    status = await _statusService.getStatusesbyID(statusId);
     setState(() {
-      _editTag1NameController.text = tag1[0]['name'] ?? 'No Name';
-      _editTag1DescriptionController.text =
-          tag1[0]['description'] ?? 'No Description';
+      _editStatusNameController.text = status[0]['name'] ?? 'No Name';
+      _editStatusDescriptionController.text =
+          status[0]['description'] ?? 'No Description';
     });
     _editFormDialogue(context);
   }
 
-  _showFormDialog(BuildContext context) {
-    _tag1NameController.text = '';
-    _tag1DescriptionController.text = '';
+  _showFormDialogue(BuildContext context) {
+    _statusNameController.text = '';
+    _statusDescriptionController.text = '';
+
     return showDialog(
         context: context,
         barrierDismissible: true,
         builder: (param) {
           return AlertDialog(
+            backgroundColor: Colors.blue[100],
             actions: <Widget>[
               ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.grey[300],
-                  ),
                   onPressed: () => Navigator.pop(context),
-                  child: Text(
-                    'Cancel',
-                    style: TextStyle(color: Colors.brown[900]),
-                  )),
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.grey[300],
+                    ),
+                    child: Text(
+                      'Cancel',
+                      style: TextStyle(color: Colors.brown[900]),
+                    )),
               ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.brown[900],
-                  ),
-                  onPressed: () {
-                    _tag1.name = _tag1NameController.text;
-                    _tag1.description = _tag1DescriptionController.text;
-                    _tag1.id = null;
+                  onPressed: () async {
+                    _status.name = _statusNameController.text;
+                    _status.description = _statusDescriptionController.text;
+                    _status.id = null;
 
-                    var result = _tag1Service.insertTag1s(_tag1);
+                    var result = _statusService.insertStatuses(_status);
+                    print(result);
+                    print(_status.name);
                     Navigator.pop(context);
-                    getAllTag1s();
+                    getAllStatuses();
                     _showSuccessSnackBar(Container(
                       color: Colors.tealAccent[100],
                       height: 40,
@@ -103,39 +104,42 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
                           )),
                           Text(
                             ' Added ',
-                            style: (TextStyle(color: Colors.black)),
+                            style: (TextStyle(color: Colors.white)),
                           )
                         ],
                       ),
                     ));
                   },
-                  child: Text(
-                    'Save',
-                    style: TextStyle(color: Colors.white),
-                  )),
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.brown[900],
+                    ),
+                    child: Text(
+                      'Save',
+                      style: TextStyle(color: Colors.white),
+                    )
+                    ),
+          
             ],
-            backgroundColor: Colors.blue[100],
-            title: Text('Add Tag'),
+            title: Text('Add Status'),
             content: SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
-                  TextField(
-                    controller: _tag1NameController,
-                    decoration: InputDecoration(
-                      hintText: 'Write a tag',
-                      labelText: 'Tag',
-                    ),
+                child: Column(
+              children: <Widget>[
+                TextField(
+                  controller: _statusNameController,
+                  decoration: InputDecoration(
+                    hintText: 'Write a status',
+                    labelText: 'Statua',
                   ),
-                  TextField(
-                    controller: _tag1DescriptionController,
-                    decoration: InputDecoration(
-                      hintText: 'Write a description',
-                      labelText: 'Description',
-                    ),
-                  )
-                ],
-              ),
-            ),
+                ),
+                TextField(
+                  controller: _statusDescriptionController,
+                  decoration: InputDecoration(
+                    hintText: 'Write a description',
+                    labelText: 'Description',
+                  ),
+                )
+              ],
+            )),
           );
         });
   }
@@ -158,19 +162,18 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
                     style: TextStyle(color: Colors.brown[900]),
                   )),
               ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.brown[900],
-                  ),
                   onPressed: () async {
-                    _tag1.id = tag1[0]['id'];
-                    _tag1.name = _editTag1NameController.text;
-                    _tag1.description = _editTag1DescriptionController.text;
+                    _status.id = status[0]['id'];
+                    _status.name = _editStatusNameController.text;
+                    _status.description =
+                        _editStatusDescriptionController.text;
 
-                    var result = await _tag1Service.updateTag1s(_tag1);
+                    var result =
+                        await _statusService.updateStatuses(_status);
                     print(result);
                     if (result > 0) {
                       Navigator.pop(context);
-                      getAllTag1s();
+                      getAllStatuses();
                       _showSuccessSnackBar(
                         Container(
                           color: Colors.tealAccent[100],
@@ -180,7 +183,7 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
                             children: [
                               (Icon(
                                 Icons.thumb_up,
-                                color: Colors.black,
+                                color: Colors.white,
                               )),
                               Text(
                                 ' Updated ',
@@ -192,24 +195,29 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
                       );
                     }
                   },
-                  child: Text(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.brown[900],
+                  ),
+                  child: 
+                  Text(
                     'Update',
                     style: TextStyle(color: Colors.white),
-                  )),
+                  )
+                  ),
             ],
-            title: Text('Edit Tag'),
+            title: Text('Edit Status'),
             content: SingleChildScrollView(
                 child: Column(
               children: <Widget>[
                 TextField(
-                  controller: _editTag1NameController,
+                  controller: _editStatusNameController,
                   decoration: InputDecoration(
-                    hintText: 'Write a tag',
-                    labelText: 'Tag',
+                    hintText: 'Write a status',
+                    labelText: 'Status',
                   ),
                 ),
                 TextField(
-                  controller: _editTag1DescriptionController,
+                  controller: _editStatusDescriptionController,
                   decoration: InputDecoration(
                     hintText: 'Write a description',
                     labelText: 'Description',
@@ -221,7 +229,7 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
         });
   }
 
-  _deleteFormDialogue(BuildContext context, tag1Id) {
+  _deleteFormDialogue(BuildContext context, statusId) {
     return showDialog(
         context: context,
         barrierDismissible: true,
@@ -230,49 +238,54 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
             backgroundColor: Colors.blue[100],
             actions: <Widget>[
               ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.brown[900],
-                  ),
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.brown[900],
+                    ),
+                    child: Text(
+                      'Cancel',
+                      style: TextStyle(color: Colors.white),
+                    ),
                   onPressed: () => Navigator.pop(context),
-                  child: Text(
-                    'Cancel',
-                    style: TextStyle(color: Colors.white),
-                  )),
-              ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.grey[300],
                   ),
-                  onPressed: () async {
-                    var result = await _tag1Service.deleteTag1sbyID(tag1Id);
-                    print(result);
-                    if (result > 0) {
-                      Navigator.pop(context);
-                      getAllTag1s();
-                      _showSuccessSnackBar(
-                        Container(
-                          color: Colors.tealAccent[100],
-                          height: 40,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              (Icon(
-                                Icons.thumb_up,
-                                color: Colors.black,
-                              )),
-                              Text(
-                                ' Deleted ',
-                                style: (TextStyle(color: Colors.black)),
-                              )
-                            ],
-                          ),
+              ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.white,
+                    ),
+
+                onPressed: () async {
+                  var result =
+                      await _statusService.deleteStatusesbyID(statusId);
+                  print(result);
+                  if (result > 0) {
+                    Navigator.pop(context);
+                    getAllStatuses();
+                    _showSuccessSnackBar(
+                      Container(
+                        color: Colors.tealAccent[100],
+                        height: 40,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            (Icon(
+                              Icons.thumb_up,
+                              color: Colors.black,
+                            )),
+                            Text(
+                              ' Deleted ',
+                              style: (TextStyle(color: Colors.black)),
+                            )
+                          ],
                         ),
-                      );
-                    }
-                  },
-                  child: Text(
+                      ),
+                    );
+                  }
+                },
+                child: 
+                  Text(
                     'Delete',
                     style: TextStyle(color: Colors.brown[900]),
-                  )),
+                  )
+              ),
             ],
             title: Text('Are you sure you want to delete this'),
           );
@@ -292,15 +305,16 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.brown[900],
+        elevation: 8,
         title: Center(
           child: Container(
             child: Column(
               children: <Widget>[
                 Badge(
-                  child: Text('Tags     '),
+                  child: Text('Statuses     '),
                   shape: BadgeShape.square,
                   position: BadgePosition.topEnd(),
-                  badgeContent: Text(_tag1List.length.toString(),
+                  badgeContent: Text(_statusList.length.toString(),
                       style: TextStyle(color: Colors.black)),
                   badgeColor: Colors.blue[200],
                 ),
@@ -309,8 +323,9 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
           ),
         ),
       ),
+      resizeToAvoidBottomInset: false,
       body: ListView.builder(
-        itemCount: _tag1List.length,
+        itemCount: _statusList.length,
         itemBuilder: (context, index) {
           return Padding(
             padding: EdgeInsets.only(top: 4.0, left: 4.0, right: 4.0),
@@ -321,23 +336,23 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
                 leading: IconButton(
                     icon: Icon(Icons.edit),
                     onPressed: () {
-                      _editTag1(context, _tag1List[index].id);
+                      _editStatus(context, _statusList[index].id);
                     }),
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Flexible(
-                      child: Text(_tag1List[index].name,
+                      child: Text(_statusList[index].name,
                           overflow: TextOverflow.ellipsis),
                     ),
                     IconButton(
                         icon: Icon(Icons.delete, color: Colors.grey),
                         onPressed: () {
-                          _deleteFormDialogue(context, _tag1List[index].id);
-                        }),
+                          _deleteFormDialogue(context, _statusList[index].id);
+                        })
                   ],
                 ),
-//                subtitle: Text(_tag1List[index].description),
+//                subtitle: Text(_statusList[index].description),
               ),
             ),
           );
@@ -359,9 +374,9 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
               ),
               IconButton(
                 icon: Icon(Icons.add, color: Colors.white),
-                tooltip: 'Add Tag',
+                tooltip: 'Add Status',
                 onPressed: () {
-                  _showFormDialog(context);
+                  _showFormDialogue(context);
                 },
               ),
             ],

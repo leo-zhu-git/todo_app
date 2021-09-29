@@ -34,7 +34,7 @@ class _Goal1sScreenState extends State<Goal1sScreen> {
 
   getAllGoal1s() async {
     _goal1List = [];
-    var goal1 = await _goal1Service.getGoals();
+    var goal1 = await _goal1Service.getGoal1s();
     goal1.forEach((goal1) {
       setState(() {
         var goal1Model = Goal1();
@@ -52,7 +52,7 @@ class _Goal1sScreenState extends State<Goal1sScreen> {
   }
 
   _editGoal1(BuildContext context, goal1Id) async {
-    goal1 = await _goal1Service.getGoalsbyID(goal1Id);
+    goal1 = await _goal1Service.getGoal1sbyID(goal1Id);
     setState(() {
       _editGoal1NameController.text = goal1[0]['name'] ?? 'No Name';
       _editGoal1DescriptionController.text =
@@ -88,7 +88,7 @@ class _Goal1sScreenState extends State<Goal1sScreen> {
                     _goal1.description = _goal1DescriptionController.text;
                     _goal1.id = null;
 
-                    var result = _goal1Service.insertGoals(_goal1);
+                    var result = _goal1Service.insertGoal1s(_goal1);
                     Navigator.pop(context);
                     getAllGoal1s();
                     _showSuccessSnackBar(Container(
@@ -166,7 +166,7 @@ class _Goal1sScreenState extends State<Goal1sScreen> {
                     _goal1.name = _editGoal1NameController.text;
                     _goal1.description = _editGoal1DescriptionController.text;
 
-                    var result = await _goal1Service.updateGoals(_goal1);
+                    var result = await _goal1Service.updateGoal1s(_goal1);
                     print(result);
                     if (result > 0) {
                       Navigator.pop(context);
@@ -243,7 +243,7 @@ class _Goal1sScreenState extends State<Goal1sScreen> {
                     primary: Colors.grey[300],
                   ),
                   onPressed: () async {
-                    var result = await _goal1Service.deleteGoalbyID(goal1Id);
+                    var result = await _goal1Service.deleteGoal1sbyID(goal1Id);
                     print(result);
                     if (result > 0) {
                       Navigator.pop(context);

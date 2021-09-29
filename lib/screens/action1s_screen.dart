@@ -35,7 +35,7 @@ class _Action1sScreenState extends State<Action1sScreen> {
 
   getAllActions() async {
     _actionList = List<Action1>();
-    var action = await _action1Service.getActions();
+    var action = await _action1Service.getAction1s();
     action.forEach((action) {
       setState(() {
         var actionModel = Action1();
@@ -53,7 +53,7 @@ class _Action1sScreenState extends State<Action1sScreen> {
   }
 
   _editAction(BuildContext context, actionId) async {
-    action1 = await _action1Service.getActionbyID(actionId);
+    action1 = await _action1Service.getAction1sbyID(actionId);
     setState(() {
       _editAction1NameController.text = action1[0]['name'] ?? 'No Name';
       _editAction1DescriptionController.text =
@@ -89,7 +89,7 @@ class _Action1sScreenState extends State<Action1sScreen> {
                     _action1.description = _action1DescriptionController.text;
                     _action1.id = null;
 
-                    var result = _action1Service.insertAction(_action1);
+                    var result = _action1Service.insertAction1s(_action1);
                     Navigator.pop(context);
                     getAllActions();
                     _showSuccessSnackBar(Container(
@@ -168,7 +168,7 @@ class _Action1sScreenState extends State<Action1sScreen> {
                     _action1.description =
                         _editAction1DescriptionController.text;
 
-                    var result = await _action1Service.updateAction(_action1);
+                    var result = await _action1Service.updateAction1s(_action1);
                     print(result);
                     if (result > 0) {
                       Navigator.pop(context);
@@ -242,7 +242,7 @@ class _Action1sScreenState extends State<Action1sScreen> {
                   )),
               ElevatedButton(
                   onPressed: () async {
-                    var result = await _action1Service.deleteAction(actionId);
+                    var result = await _action1Service.deleteAction1s(actionId);
                     print(result);
                     if (result > 0) {
                       Navigator.pop(context);

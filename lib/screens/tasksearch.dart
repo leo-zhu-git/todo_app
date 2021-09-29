@@ -21,6 +21,8 @@ class TaskSearch extends StatefulWidget {
 
 class TaskSearchState extends State {
   DbHelper helper = DbHelper();
+  List<CustomDropdownItem> _statuses = [];
+  List<CustomDropdownItem> _priorities = [];
   List<CustomDropdownItem> _categories = [];
   List<CustomDropdownItem> _action1s = [];
   List<CustomDropdownItem> _context1s = [];
@@ -30,6 +32,8 @@ class TaskSearchState extends State {
   List<Task> tasklist;
   int count = 0;
   TextEditingController searchController = TextEditingController();
+  var _selectedStatus = null;
+  var _selectedPriority = null;
   var _selectedCategory = null;
   var _selectedAction1 = null;
   var _selectedContext1 = null;
@@ -42,6 +46,8 @@ class TaskSearchState extends State {
   @override
   void initState() {
     super.initState();
+    _loadStatuses();
+    _loadPriorities();
     _loadCategories();
     _loadAction1s();
     _loadContext1s();
@@ -52,7 +58,54 @@ class TaskSearchState extends State {
   }
 
   //##################Drop Down Items Load from DB #################################################################
-  _loadCategories() async {
+  _loadStatuses() async {
+    var statuses = await helper.getStatuses();
+    CustomDropdownItem cus;
+    cus = new CustomDropdownItem();
+    cus.id = null;
+    cus.name = "-- Select Status --";
+    _statuses.add(cus);
+    statuses.forEach((status) {
+      setState(() {
+        cus = new CustomDropdownItem();
+        cus.id = status['id'].toString();
+        String tempStatus;
+        if (status['name'].toString().length > 30)
+          tempStatus = status['name'].toString().substring(0, 30) + "...";
+        else
+          tempStatus = status['name'];
+
+        cus.name = tempStatus;
+
+        _statuses.add(cus);
+      });
+    });
+  }
+  
+    _loadPriorities() async {
+    var priorities = await helper.getPriorities();
+    CustomDropdownItem cus;
+    cus = new CustomDropdownItem();
+    cus.id = null;
+    cus.name = "-- Select Priority --";
+    _priorities.add(cus);
+    priorities.forEach((priority) {
+      setState(() {
+        cus = new CustomDropdownItem();
+        cus.id = priority['id'].toString();
+        String tempPriority;
+        if (priority['name'].toString().length > 30)
+          tempPriority = priority['name'].toString().substring(0, 30) + "...";
+        else
+          tempPriority = priority['name'];
+
+        cus.name = tempPriority;
+
+        _priorities.add(cus);
+      });
+    });
+  }
+    _loadCategories() async {
     var categories = await helper.getCategories();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
@@ -77,7 +130,7 @@ class TaskSearchState extends State {
   }
 
   _loadAction1s() async {
-    var action1s = await helper.getActions();
+    var action1s = await helper.getAction1s();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
@@ -101,7 +154,7 @@ class TaskSearchState extends State {
   }
 
   _loadContext1s() async {
-    var context1s = await helper.getContexts();
+    var context1s = await helper.getContext1s();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
@@ -123,7 +176,7 @@ class TaskSearchState extends State {
   }
 
   _loadLocation1s() async {
-    var location1s = await helper.getLocations();
+    var location1s = await helper.getLocation1s();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
@@ -147,7 +200,7 @@ class TaskSearchState extends State {
   }
 
   _loadTag1s() async {
-    var tag1s = await helper.getTags();
+    var tag1s = await helper.getTag1s();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
@@ -170,7 +223,7 @@ class TaskSearchState extends State {
   }
 
   _loadGoal1s() async {
-    var goal1s = await helper.getGoals();
+    var goal1s = await helper.getGoal1s();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
@@ -232,6 +285,8 @@ class TaskSearchState extends State {
               onChanged: (value) {
                 searchData(
                     value,
+                    _selectedStatus,
+                    _selectedPriority,
                     _selectedCategory,
                     _selectedAction1,
                     _selectedContext1,
@@ -277,8 +332,10 @@ class TaskSearchState extends State {
                               onChanged: (value) {
                                 setState(() {
                                   _showCompleted = value;
-                                  searchData(
+                                  searchData(                                    
                                       _searchText,
+                                      _selectedStatus,
+                                      _selectedPriority,
                                       _selectedCategory,
                                       _selectedAction1,
                                       _selectedContext1,
@@ -319,6 +376,8 @@ class TaskSearchState extends State {
                                     _selectedCategory = newValue;
                                     searchData(
                                         _searchText,
+                                        _selectedStatus,
+                                        _selectedPriority,
                                         _selectedCategory,
                                         _selectedAction1,
                                         _selectedContext1,
@@ -355,6 +414,8 @@ class TaskSearchState extends State {
                                     _selectedAction1 = value;
                                     searchData(
                                         _searchText,
+                                        _selectedStatus,
+                                        _selectedPriority,
                                         _selectedCategory,
                                         _selectedAction1,
                                         _selectedContext1,
@@ -390,6 +451,8 @@ class TaskSearchState extends State {
                                   _selectedContext1 = value;
                                   searchData(
                                       _searchText,
+                                      _selectedStatus,
+                                      _selectedPriority,
                                       _selectedCategory,
                                       _selectedAction1,
                                       _selectedContext1,
@@ -425,6 +488,8 @@ class TaskSearchState extends State {
                                   _selectedLocation1 = value;
                                   searchData(
                                       _searchText,
+                                      _selectedStatus,
+                                      _selectedPriority,
                                       _selectedCategory,
                                       _selectedAction1,
                                       _selectedContext1,
@@ -459,6 +524,8 @@ class TaskSearchState extends State {
                                   _selectedTag1 = value;
                                   searchData(
                                       _searchText,
+                                      _selectedStatus,
+                                      _selectedPriority,
                                       _selectedCategory,
                                       _selectedAction1,
                                       _selectedContext1,
@@ -493,6 +560,8 @@ class TaskSearchState extends State {
                                   _selectedGoal1 = value;
                                   searchData(
                                       _searchText,
+                                      _selectedStatus,
+                                      _selectedPriority,
                                       _selectedCategory,
                                       _selectedAction1,
                                       _selectedContext1,
@@ -633,6 +702,8 @@ class TaskSearchState extends State {
 
   void searchData(
       String searchText,
+      String status,
+      String priority, 
       String category,
       String action1,
       String context1,
@@ -644,7 +715,7 @@ class TaskSearchState extends State {
       final dbFuture = helper.initializeDb();
       dbFuture.then((result) {
 //      final tasksFuture = helper.searchTasks(searchText, priority, category, action1, context1, location1, tag1, goal1);
-        final tasksFuture = helper.searchTasks(searchText, category, action1,
+        final tasksFuture = helper.searchTasks(searchText, status, priority, category, action1,
             context1, location1, tag1, goal1, showCompleted);
         tasksFuture.then((result) {
           List<Task> taskList = List<Task>();

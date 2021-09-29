@@ -33,7 +33,7 @@ class _Context1sScreenState extends State<Context1sScreen> {
 
   getAllContext1s() async {
     _context1List = List<Context1>();
-    var context1s = await _context1Service.getContexts();
+    var context1s = await _context1Service.getContext1s();
     context1s.forEach((context1) {
       setState(() {
         var context1Model = Context1();
@@ -52,7 +52,7 @@ class _Context1sScreenState extends State<Context1sScreen> {
   }
 
   _editContext1(BuildContext context, context1Id) async {
-    context1 = await _context1Service.getContextbyID(context1Id);
+    context1 = await _context1Service.getContext1sbyID(context1Id);
     setState(() {
       _editContext1NameController.text = context1[0]['name'] ?? 'No Name';
       _editContext1DescriptionController.text =
@@ -90,7 +90,7 @@ class _Context1sScreenState extends State<Context1sScreen> {
                     _context1.description = _context1DescriptionController.text;
                     _context1.id = null;
 
-                    var result = _context1Service.insertContexts(_context1);
+                    var result = _context1Service.insertContext1s(_context1);
                     print(result);
                     Navigator.pop(context);
                     getAllContext1s();
@@ -170,7 +170,7 @@ class _Context1sScreenState extends State<Context1sScreen> {
                         _editContext1DescriptionController.text;
 
                     var result =
-                        await _context1Service.updateContext(_context1);
+                        await _context1Service.updateContext1s(_context1);
                     print(result);
                     if (result > 0) {
                       Navigator.pop(context);
@@ -248,7 +248,7 @@ class _Context1sScreenState extends State<Context1sScreen> {
                   ),
                   onPressed: () async {
                     var result =
-                        await _context1Service.deleteContextbyID(context1Id);
+                        await _context1Service.deleteContext1sbyID(context1Id);
                     print(result);
                     if (result > 0) {
                       Navigator.pop(context);

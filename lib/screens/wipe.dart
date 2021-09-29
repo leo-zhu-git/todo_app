@@ -187,9 +187,14 @@ class _WipeScreenState extends State<WipeScreen> {
                       ));
                     } else {
                       mysqlDBhelper.wipeTaskDataFromMySql();
-                      mysqlDBhelper.syncTagsData();
-                      mysqlDBhelper.syncContextData();
+                      mysqlDBhelper.syncStatusesData();
+                      mysqlDBhelper.syncPrioritiesData();
                       mysqlDBhelper.syncCategoriesData();
+                      mysqlDBhelper.syncAction1sData();
+                      mysqlDBhelper.syncContext1sData();
+                      mysqlDBhelper.syncLocation1sData();
+                      mysqlDBhelper.syncTag1sData();
+                      mysqlDBhelper.syncGoal1sData();
 
                       Navigator.pop(context);
                       _showSuccessSnackBar(Container(

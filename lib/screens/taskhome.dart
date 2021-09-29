@@ -280,14 +280,18 @@ class TaskHomeState extends State {
           getSortColumn(_sortField3),
           getOrderColumn(_sortOrder3),
           getDateDueColumn(_filterDateDue),
-          getTimeDueColumn(_filterDateDue),
-          globals.filterIsDone,
+//          getDateDueColumn(_filterTimeDue),
+          globals.filterStar.toString(),
+          globals.filterStatus.toString(),
+          globals.filterPriority.toString(),
           globals.filterCategory.toString(),
           globals.filterAction.toString(),
           globals.filterContext.toString(),
           globals.filterLocation.toString(),
           globals.filterTag.toString(),
-          globals.filterGoal.toString());
+          globals.filterGoal.toString(),
+          globals.filterIsDone,
+);
       // final tasksFuture = helper.getTasksFromLastFewDays();
       tasksFuture.then((result) {
         List<Task> taskList = List<Task>();

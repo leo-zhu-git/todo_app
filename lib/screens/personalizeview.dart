@@ -356,7 +356,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
   }
 
   _loadAction1s() async {
-    var action1s = await helper.getActions();
+    var action1s = await helper.getAction1s();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
@@ -380,7 +380,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
   }
 
   _loadContext1s() async {
-    var context1s = await helper.getContexts();
+    var context1s = await helper.getContext1s();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
@@ -402,7 +402,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
   }
 
   _loadLocation1s() async {
-    var location1s = await helper.getLocations();
+    var location1s = await helper.getLocation1s();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
@@ -426,7 +426,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
   }
 
   _loadTag1s() async {
-    var tag1s = await helper.getTags();
+    var tag1s = await helper.getTag1s();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
@@ -449,7 +449,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
   }
 
   _loadGoal1s() async {
-    var goal1s = await helper.getGoals();
+    var goal1s = await helper.getGoal1s();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
