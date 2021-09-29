@@ -351,9 +351,92 @@ class TaskSearchState extends State {
                       ),
 //####################################end of Show completed
 
+//#################################Status#####################################################
+                      Container(
+                        margin:
+                            EdgeInsets.only(top: 2.0, left: 8.0, right: 8.0),
+                        decoration: BoxDecoration(
+                            shape: BoxShape.rectangle, color: Colors.blue[100]),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            DropdownButton<String>(
+                                items:
+                                    _statuses.map((CustomDropdownItem value) {
+                                  return DropdownMenuItem<String>(
+                                      value: value.id,
+                                      child: Text(
+                                        value.name,
+                                        overflow: TextOverflow.ellipsis,
+                                      ));
+                                }).toList(),
+                                style: _textStyleControls,
+                                value: _selectedStatus,
+                                onChanged: (String newValue) {
+                                  setState(() {
+                                    _selectedStatus = newValue;
+                                    searchData(
+                                        _searchText,
+                                        _selectedStatus,
+                                        _selectedPriority,
+                                        _selectedCategory,
+                                        _selectedAction1,
+                                        _selectedContext1,
+                                        _selectedLocation1,
+                                        _selectedTag1,
+                                        _selectedGoal1,
+                                        _showCompleted);
+                                  });
+                                }),
+                          ],
+                        ),
+                      ),
+
+//#################################Priority#####################################################
+                      Container(
+                        margin:
+                            EdgeInsets.only(top: 2.0, left: 8.0, right: 8.0),
+                        decoration: BoxDecoration(
+                            shape: BoxShape.rectangle, color: Colors.blue[100]),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            DropdownButton<String>(
+                                items:
+                                    _priorities.map((CustomDropdownItem value) {
+                                  return DropdownMenuItem<String>(
+                                      value: value.id,
+                                      child: Text(
+                                        value.name,
+                                        overflow: TextOverflow.ellipsis,
+                                      ));
+                                }).toList(),
+                                style: _textStyleControls,
+                                value: _selectedPriority,
+                                onChanged: (String newValue) {
+                                  setState(() {
+                                    _selectedPriority = newValue;
+                                    searchData(
+                                        _searchText,
+                                        _selectedStatus,
+                                        _selectedPriority,
+                                        _selectedCategory,
+                                        _selectedAction1,
+                                        _selectedContext1,
+                                        _selectedLocation1,
+                                        _selectedTag1,
+                                        _selectedGoal1,
+                                        _showCompleted);
+                                  });
+                                }),
+                          ],
+                        ),
+                      ),
+
 //#################################Category#####################################################
                       Container(
-                        margin: EdgeInsets.only(left: 8.0, right: 8.0),
+                        margin:
+                            EdgeInsets.only(top: 2.0, left: 8.0, right: 8.0),
                         decoration: BoxDecoration(
                             shape: BoxShape.rectangle, color: Colors.blue[100]),
                         child: Row(
