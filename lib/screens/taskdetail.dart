@@ -47,10 +47,12 @@ class TaskDetailState extends State //<TaskDetail>
   var _todoNoteController = TextEditingController();
   var _todoDateController = TextEditingController();
   var _todoTimeController = TextEditingController();
-  var _todoStatusController = TextEditingController();
-  var _todoPriorityController = TextEditingController();
+//  var _todoStatusController = TextEditingController();
+//  var _todoPriorityController = TextEditingController();
   var _todoStarController = TextEditingController();
 
+  var _selectedStatus;
+  var _selectedPriority;
   var _selectedCategory;
   var _selectedAction1;
   var _selectedContext1;
@@ -58,6 +60,8 @@ class TaskDetailState extends State //<TaskDetail>
   var _selectedTag1;
   var _selectedGoal1;
 
+  List<CustomDropdownItem> _statuses = [];
+  List<CustomDropdownItem> _priorities = [];
   List<CustomDropdownItem> _categories = [];
   List<CustomDropdownItem> _action1s = [];
   List<CustomDropdownItem> _context1s = [];
@@ -73,6 +77,8 @@ class TaskDetailState extends State //<TaskDetail>
   void initState() {
     super.initState();
 
+    _loadStatuses();
+    _loadPriorities();
     _loadCategories();
     _loadAction1s();
     _loadContext1s();
@@ -82,6 +88,54 @@ class TaskDetailState extends State //<TaskDetail>
   }
 
 //##################Drop Down Items Load from DB #################################################################
+  _loadStatuses() async {
+    var statuses = await helper.getStatuses();
+    CustomDropdownItem cus;
+    cus = new CustomDropdownItem();
+    cus.id = null;
+    cus.name = "-- Select Status --";
+    _statuses.add(cus);
+    statuses.forEach((status) {
+      setState(() {
+        cus = new CustomDropdownItem();
+        cus.id = status['id'].toString();
+        String tempStatus;
+        if (status['name'].toString().length > 30)
+          tempStatus = status['name'].toString().substring(0, 30) + "...";
+        else
+          tempStatus = status['name'];
+
+        cus.name = tempStatus;
+
+        _statuses.add(cus);
+      });
+    });
+  }
+
+  _loadPriorities() async {
+    var priorities = await helper.getPriorities();
+    CustomDropdownItem cus;
+    cus = new CustomDropdownItem();
+    cus.id = null;
+    cus.name = "-- Select Priority --";
+    _priorities.add(cus);
+    priorities.forEach((priority) {
+      setState(() {
+        cus = new CustomDropdownItem();
+        cus.id = priority['id'].toString();
+        String tempPriority;
+        if (priority['name'].toString().length > 30)
+          tempPriority = priority['name'].toString().substring(0, 30) + "...";
+        else
+          tempPriority = priority['name'];
+
+        cus.name = tempPriority;
+
+        _priorities.add(cus);
+      });
+    });
+  }
+
   _loadCategories() async {
     var categories = await helper.getCategories();
     CustomDropdownItem cus;
@@ -289,6 +343,12 @@ class TaskDetailState extends State //<TaskDetail>
   @override
   Widget build(BuildContext context) {
     _todoNoteController.text = task.note;
+    task.status != ""
+        ? _selectedStatus = task.status
+        : _selectedStatus = null;
+    task.priority != ""
+        ? _selectedPriority = task.priority
+        : _selectedPriority = null;
     task.category != ""
         ? _selectedCategory = task.category
         : _selectedCategory = null;
@@ -440,6 +500,72 @@ class TaskDetailState extends State //<TaskDetail>
                 ),
               ),
             ),
+///////////////////////////
+//  STATUS
+///////////////////////////
+
+            Container(
+              margin:
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+              decoration: BoxDecoration(
+                  shape: BoxShape.rectangle, color: Colors.blue[100]),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  DropdownButton<String>(
+                      items: _statuses.map((CustomDropdownItem value) {
+                        return DropdownMenuItem<String>(
+                            value: value.id,
+                            child: Text(
+                              value.name,
+                              overflow: TextOverflow.ellipsis,
+                            ));
+                      }).toList(),
+                      style: _textStyleControls,
+                      value: _selectedStatus,
+                      onChanged: (String newValue) {
+                        setState(() {
+                          _selectedStatus = newValue;
+                          task.status = newValue;
+                        });
+                      }),
+                ],
+              ),
+            ),
+
+///////////////////////////
+//  PRIORITY
+///////////////////////////
+
+            Container(
+              margin:
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+              decoration: BoxDecoration(
+                  shape: BoxShape.rectangle, color: Colors.blue[100]),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  DropdownButton<String>(
+                      items: _priorities.map((CustomDropdownItem value) {
+                        return DropdownMenuItem<String>(
+                            value: value.id,
+                            child: Text(
+                              value.name,
+                              overflow: TextOverflow.ellipsis,
+                            ));
+                      }).toList(),
+                      style: _textStyleControls,
+                      value: _selectedPriority,
+                      onChanged: (String newValue) {
+                        setState(() {
+                          _selectedPriority = newValue;
+                          task.priority = newValue;
+                        });
+                      }),
+                ],
+              ),
+            ),
+            
 ///////////////////////////
 //  CATEGORY
 ///////////////////////////

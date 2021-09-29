@@ -547,7 +547,7 @@ Plan C - USD 24 | 12 month plan
 
     String queryStr = "";
     queryStr = "SELECT $tblTodo.id,$tblTodo.task, $tblTodo.note, dateDue,timeDue, star, "+
-        "status, priority, category,action1,context1,location1,tag1,goal1" +
+        "status, priority, category,action1,context1,location1,tag1,goal1, " +
         "isDone, dateDone, lastModified, "+
         "statuses.name as statusesname, " +
         "priorities.name as prioritiesname, " +        
