@@ -99,8 +99,8 @@ class DbHelper {
         "CREATE TABLE $tblCustomSettings($colId INTEGER PRIMARY KEY, $colsortField1 TEXT, $colsortOrder1 TEXT, $colsortField2 TEXT, " +
             "$colsortOrder2 TEXT, $colsortField3 TEXT, $colsortOrder3 TEXT, $colshowMain1 TEXT,$colshowMain2 TEXT, " +
             "$colshowSec1 TEXT,$colshowSec2 TEXT,$colshowSec3 TEXT, " +
-            "$colfilterDateDue TEXT, $colfilterTimeDue TEXT, $colfilterStar TEXT," +
-            " $colfilterStatus TEXT, $colfilterPriority TEXT,  " +
+            "$colfilterDateDue TEXT, $colfilterTimeDue TEXT, $colfilterStar TEXT, " +
+            "$colfilterStatus TEXT, $colfilterPriority TEXT,  " +
             "$colfilterCategory TEXT, $colfilterAction TEXT, $colfilterContext TEXT, $colfilterLocation TEXT, $colfilterTag TEXT, " +
             "$colfilterGoal TEXT, $colfilterIsDone INTEGER)");
 

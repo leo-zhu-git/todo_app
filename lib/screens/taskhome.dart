@@ -327,17 +327,17 @@ class TaskHomeState extends State {
               break;
             case 4:
               {
-                taskList[i].main1 = taskList[i].status;
+                taskList[i].main1 = taskList[i].star;
               }
               break;
             case 5:
               {
-                taskList[i].main1 = taskList[i].priority;
+                taskList[i].main1 = taskList[i].statusText;
               }
               break;
             case 6:
               {
-                taskList[i].main1 = taskList[i].star;
+                taskList[i].main1 = taskList[i].priorityText;
               }
               break;
             case 7:
@@ -403,17 +403,17 @@ class TaskHomeState extends State {
               break;
             case 4:
               {
-                taskList[i].sec1 = taskList[i].status;
+                taskList[i].sec1 = taskList[i].star;
               }
               break;
             case 5:
               {
-                taskList[i].sec1 = taskList[i].priority;
+                taskList[i].sec1 = taskList[i].statusText;
               }
               break;
             case 6:
               {
-                taskList[i].sec1 = taskList[i].star;
+                taskList[i].sec1 = taskList[i].priorityText;
               }
               break;
             case 7:
@@ -508,6 +508,12 @@ class TaskHomeState extends State {
         if (customSetting.filterDateDue != "") {
           globals.filterDateDue = int.parse(customSetting.filterDateDue);
         }
+        globals.filterStatus = customSetting.filterStatus != ""
+            ? int.parse(customSetting.filterStatus)
+            : 0;
+        globals.filterPriority = customSetting.filterPriority != ""
+            ? int.parse(customSetting.filterPriority)
+            : 0;
         globals.filterCategory = customSetting.filterCategory != ""
             ? int.parse(customSetting.filterCategory)
             : 0;
@@ -551,13 +557,13 @@ class TaskHomeState extends State {
         return "timeDue";
         break;
       case 4:
-        return "status";
+        return "star";
         break;
       case 5:
-        return "priority";
+        return "status";
         break;
       case 6:
-        return "star";
+        return "priority";
         break;
       case 7:
         return "category";
