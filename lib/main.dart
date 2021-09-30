@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
       ),
       
       // rt testing notification 9.23
-      home: LocalNotificationScreen(), 
+//      home: LocalNotificationScreen(), 
 
       onGenerateRoute: (settings) {
         if (settings.name == '/confirm') {

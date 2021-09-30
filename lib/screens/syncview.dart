@@ -4,6 +4,8 @@ import 'package:todo_app/screens/taskhome.dart';
 import 'package:todo_app/util/dbhelper.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
+import 'LocalNotification_screen.dart';
+
 class SyncView extends StatefulWidget {
   @override
   _SyncViewState createState() => _SyncViewState();
@@ -30,10 +32,12 @@ class _SyncViewState extends State<SyncView> {
       ),
 
         body: Center(
-          child: SpinKitFoldingCube(
-            color: Colors.green[200],
-            size: 100,
-          ),
+          child: (LocalNotificationScreen())
+
+//          child: SpinKitFoldingCube(
+//            color: Colors.green[200],
+//            size: 100,
+//          ),
         ));
   }
 }

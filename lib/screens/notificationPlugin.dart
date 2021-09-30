@@ -26,7 +26,7 @@ class NotificationPlugin {
 
   initializePlatformSpecifics() {
     var initializationSettingsAndroid =
-        AndroidInitializationSettings('app_notification_icon');
+        AndroidInitializationSettings('ic_launcher');
     var initializationSettingsIOS = IOSInitializationSettings(
         requestAlertPermission: true,
         requestBadgePermission: true,
@@ -73,7 +73,8 @@ class NotificationPlugin {
         android: androidChannelSpecifics, iOS: iosChannelSpecifics);
 
     await flutterLocalNotificationsPlugin.show(
-        0, 'Test Title', 'Test Body', platformChannelSpecifics, payload: 'Test Payload');
+        0, 'Test Title', 'Test Body', platformChannelSpecifics,
+        payload: 'Test Payload');
   }
 }
 
