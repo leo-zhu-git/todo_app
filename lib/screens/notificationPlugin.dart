@@ -26,7 +26,7 @@ class NotificationPlugin {
 
   initializePlatformSpecifics() {
     var initializationSettingsAndroid =
-        AndroidInitializationSettings('ic_launcher');
+        AndroidInitializationSettings('notifytodomit');
     var initializationSettingsIOS = IOSInitializationSettings(
         requestAlertPermission: true,
         requestBadgePermission: true,
