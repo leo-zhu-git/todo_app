@@ -14,7 +14,6 @@ import 'package:flutter_login/flutter_login.dart';
 import 'screens/entry.dart';
 import 'screens/confirm.dart';
 import 'screens/confirm_reset.dart';
-import 'screens/notify_screen.dart';
 
 //import 'package:todo_app/screens/ExpandApp.dart';
 

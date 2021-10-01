@@ -20,19 +20,49 @@ class _LocalNotificationScreenState extends State<LocalNotificationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Local Notification'),
+          title: Text('Notifications Testing...'),
         ),
-        body: Center(
-          child: ElevatedButton(
-            onPressed: () async {
-              await notificationPlugin.showNotification();
-            },
-            child: Text('Send Notification'),
-          ),
+        body: Column(
+          children: [
+            Center(
+              child: ElevatedButton(
+                onPressed: () async {
+                  await notificationPlugin.showNotification();
+                },
+                child: Text('Send Notification'),
+              ),
+            ),
+            Center(
+              child: ElevatedButton(
+                onPressed: () async {
+                  await notificationPlugin.scheduleNotification();
+                },
+                child: Text('Scheduled Notification - 5s [Placeholder]'),
+              ),
+            ),
+            Center(
+              child: ElevatedButton(
+                onPressed: () async {
+                  await notificationPlugin.scheduleNotification();
+                },
+                child: Text('Repeated Notification - Every minute'),
+              ),
+            ),
+            Center(
+              child: ElevatedButton(
+                onPressed: () async {
+                  await notificationPlugin.showDailyAtTime();
+                },
+                child: Text('Show Daily At Time [Placeholder]'),
+              ),
+            ),
+          ],
         ));
   }
 
   onNotificationInLowerVersions(ReceivedNotification receivedNotification) {}
 
-  onNotificationClick(String payload) {}
+  onNotificationClick(String payload) {
+    print('Payload $payload');
+  }
 }

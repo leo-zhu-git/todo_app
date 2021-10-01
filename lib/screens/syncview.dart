@@ -24,7 +24,7 @@ class _SyncViewState extends State<SyncView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.teal[50],
+        backgroundColor: Colors.amber[100],
         appBar: new AppBar(
         backgroundColor: Colors.brown[900],
         automaticallyImplyLeading: false,
@@ -32,12 +32,10 @@ class _SyncViewState extends State<SyncView> {
       ),
 
         body: Center(
-          child: (LocalNotificationScreen())
-
-//          child: SpinKitFoldingCube(
-//            color: Colors.green[200],
-//            size: 100,
-//          ),
+          child: SpinKitFoldingCube(
+            color: Colors.green[200],
+            size: 100,
+          ),
         ));
   }
 }
