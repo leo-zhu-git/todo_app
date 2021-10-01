@@ -4,13 +4,21 @@ import 'package:flutter/rendering.dart';
 import 'package:todo_app/model/customDropdownItem.dart';
 import 'package:todo_app/model/customSettings.dart';
 import 'package:todo_app/model/taskclass.dart';
+import 'package:todo_app/screens/action1s_screen.dart';
+import 'package:todo_app/screens/categories_screen.dart';
+import 'package:todo_app/screens/context1s_screen.dart';
+import 'package:todo_app/screens/goal1s_screen.dart';
+import 'package:todo_app/screens/location1s_screen.dart';
+import 'package:todo_app/screens/priorities_screen.dart';
+import 'package:todo_app/screens/statuses_screen.dart';
+import 'package:todo_app/screens/tag1s_screen.dart';
 import 'package:todo_app/util/dbhelper.dart';
 import 'package:intl/intl.dart';
 import 'package:todo_app/model/globals.dart' as globals;
 
-class CustomizeView extends StatefulWidget {
+class PersonalizeView extends StatefulWidget {
   @override
-  _CustomizeViewState createState() => _CustomizeViewState();
+  _PersonalizeViewState createState() => _PersonalizeViewState();
 }
 
 class SortItem {
@@ -69,40 +77,39 @@ class FilterDateDue {
   }
 }
 
-class FilterStatus {
-  int id;
-  String name;
+//class FilterStatus {
+//  int id;
+//  String name;
+//
+//  FilterStatus(this.id, this.name);
+//  static List<FilterStatus> getStatus() {
+//    return <FilterStatus>[
+//      FilterStatus(0, '-- All Statuses -- '),
+//      FilterStatus(1, 'Next Action'),
+//      FilterStatus(2, 'Action'),
+//      FilterStatus(3, 'Planning'),
+//      FilterStatus(4, 'Delegated'),
+//      FilterStatus(5, 'Waiting'),
+//      FilterStatus(6, 'Hold'),
+//    ];
+//  }
+//}
 
-  FilterStatus(this.id, this.name);
-  static List<FilterStatus> getStatus() {
-    return <FilterStatus>[
-      FilterStatus(0, '-- All Statuses -- '),
-      FilterStatus(1, 'Next Action'),
-      FilterStatus(2, 'Action'),
-      FilterStatus(3, 'Planning'),
-      FilterStatus(4, 'Delegated'),
-      FilterStatus(5, 'Waiting'),
-      FilterStatus(6, 'Hold'),
-    ];
-  }
-}
-
-
-class FilterPriority {
-  int id;
-  String name;
-
-  FilterPriority(this.id, this.name);
-  static List<FilterPriority> getPriority() {
-    return <FilterPriority>[
-      FilterPriority(0, '-- All Priorities --'),
-      FilterPriority(1, 'Low'),
-      FilterPriority(2, 'Medium'),
-      FilterPriority(3, 'High'),
-      FilterPriority(4, 'Top'),
-    ];
-  }
-}
+//class FilterPriority {
+//  int id;
+//  String name;
+//
+//  FilterPriority(this.id, this.name);
+//  static List<FilterPriority> getPriority() {
+//    return <FilterPriority>[
+//      FilterPriority(0, '-- All Priorities --'),
+//      FilterPriority(1, 'Low'),
+//      FilterPriority(2, 'Medium'),
+//      FilterPriority(3, 'High'),
+//      FilterPriority(4, 'Top'),
+//    ];
+//  }
+//}
 
 class FilterStar {
   int id;
@@ -118,7 +125,6 @@ class FilterStar {
   }
 }
 
-
 class SortOrder {
   int id;
   String name;
@@ -126,28 +132,27 @@ class SortOrder {
   SortOrder(this.id, this.name);
   static List<SortOrder> getOrder() {
     return <SortOrder>[
-      SortOrder(0, 'a -> Z'),
-      SortOrder(1, 'Z -> a'),
+      SortOrder(0, 'Ascending'),
+      SortOrder(1, 'Descending'),
     ];
   }
 }
 
-class _CustomizeViewState extends State //State<CustomizeView>
+class _PersonalizeViewState extends State //State<PersonalizeView>
 {
   List<SortItem> _sort = SortItem.getSort();
   List<SortOrder> _order = SortOrder.getOrder();
   List<FilterIsDone> _filterIsDone = FilterIsDone.getIsDone();
   List<FilterDateDue> _filterDateDue = FilterDateDue.getDateDue();
-  List<FilterStatus> _filterStatus = FilterStatus.getStatus();
-  List<FilterPriority> _filterPriority = FilterPriority.getPriority();
+//  List<FilterStatus> _filterStatus = FilterStatus.getStatus();
+//  List<FilterPriority> _filterPriority = FilterPriority.getPriority();
   List<FilterStar> _filterStar = FilterStar.getStar();
   List<DropdownMenuItem<SortItem>> _dropdownMenuItemsSort;
   List<DropdownMenuItem<SortOrder>> _dropdownMenuSortOrder;
   List<DropdownMenuItem<FilterIsDone>> _dropdownFilterIsDone;
   List<DropdownMenuItem<FilterDateDue>> _dropdownFilterDateDue;
-  List<DropdownMenuItem<FilterStatus>> _dropdownFilterStatus;
-  List<DropdownMenuItem<FilterPriority>> _dropdownFilterPriority;
-  List<DropdownMenuItem<FilterStar>> _dropdownFilterStar;
+//  List<DropdownMenuItem<FilterStatus>> _dropdownFilterStatus;
+//  List<DropdownMenuItem<FilterPriority>> _dropdownFilterPriority;
 //  List<DropdownMenuItem<FilterCategory>> _dropdownFilterCategory;
 //  List<DropdownMenuItem<FilterAction>> _dropdownFilterAction;
 //  List<DropdownMenuItem<FilterContext>> _dropdownFilterContext;
@@ -155,8 +160,8 @@ class _CustomizeViewState extends State //State<CustomizeView>
 //  List<DropdownMenuItem<FilterTag>> _dropdownFilterTag;
   FilterIsDone _selectedFilterIsDone;
   FilterDateDue _selectedFilterDateDue;
-  FilterStatus _selectedFilterStatus;
-  FilterPriority _selectedFilterPriority;
+//  FilterStatus _selectedFilterStatus;
+//  FilterPriority _selectedFilterPriority;
   FilterStar _selectedFilterStar;
   SortItem _selectedSortField1;
   SortOrder _selectedSortOrder1;
@@ -171,6 +176,8 @@ class _CustomizeViewState extends State //State<CustomizeView>
   SortItem _selectedShowSec3;
   DbHelper helper = DbHelper();
   CustomSettings customSetting;
+  List<CustomDropdownItem> _statuses = [];
+  List<CustomDropdownItem> _priorities = [];
   List<CustomDropdownItem> _categories = [];
   List<CustomDropdownItem> _action1s = [];
   List<CustomDropdownItem> _context1s = [];
@@ -180,6 +187,8 @@ class _CustomizeViewState extends State //State<CustomizeView>
   List<Task> tasklist;
   int count = 0;
   TextEditingController searchController = TextEditingController();
+  var _selectedStatus = null;
+  var _selectedPriority = null;
   var _selectedCategory = null;
   var _selectedAction1 = null;
   var _selectedContext1 = null;
@@ -195,9 +204,11 @@ class _CustomizeViewState extends State //State<CustomizeView>
     _dropdownMenuSortOrder = buildDropdownMenuOrder(_order);
     _dropdownFilterIsDone = buildDropdownFilterIsDone(_filterIsDone);
     _dropdownFilterDateDue = buildDropdownFilterDateDue(_filterDateDue);
-    _dropdownFilterStatus = buildDropdownFilterStatus(_filterStatus);
-    _dropdownFilterPriority = buildDropdownFilterPriority(_filterPriority);
-    _dropdownFilterStar = buildDropdownFilterStar(_filterStar);
+//    _dropdownFilterStatus = buildDropdownFilterStatus(_filterStatus);
+//    _dropdownFilterPriority = buildDropdownFilterPriority(_filterPriority);
+//    _dropdownFilterStar = buildDropdownFilterStar(_filterStar);
+    _loadStatuses();
+    _loadPriorities();
     _loadCategories();
     _loadAction1s();
     _loadContext1s();
@@ -219,32 +230,30 @@ class _CustomizeViewState extends State //State<CustomizeView>
     ////////////////////////////
     /// filter - status
     ////////////////////////////
-    if (globals.filterStatus == null) {
-      _selectedFilterStatus = _dropdownFilterStatus[0].value;
-      globals.filterStatus = 0;
-    } else
-      _selectedFilterStatus =
-          _dropdownFilterStatus[globals.filterStatus].value;
+  //  if (globals.filterStatus == null) {
+  //    _selectedFilterStatus = _dropdownFilterStatus[0].value;
+  //    globals.filterStatus = 0;
+  //  } else
+  //    _selectedFilterStatus = _dropdownFilterStatus[globals.filterStatus].value;
 
     ////////////////////////////
     /// filter - priority
     ////////////////////////////
-    if (globals.filterPriority == null) {
-      _selectedFilterPriority = _dropdownFilterPriority[0].value;
-      globals.filterPriority = 0;
-    } else
-      _selectedFilterPriority =
-          _dropdownFilterPriority[globals.filterPriority].value;
+//    if (globals.filterPriority == null) {
+//      _selectedFilterPriority = _dropdownFilterPriority[0].value;
+//      globals.filterPriority = 0;
+//    } else
+//      _selectedFilterPriority =
+//          _dropdownFilterPriority[globals.filterPriority].value;
 
     ////////////////////////////
     /// filter - star
     ////////////////////////////
-    if (globals.filterStar == null) {
-      _selectedFilterStar = _dropdownFilterStar[0].value;
-      globals.filterStar = 0;
-    } else
-      _selectedFilterStar =
-          _dropdownFilterStar[globals.filterStar].value;
+//    if (globals.filterStar == null) {
+//      _selectedFilterStar = _dropdownFilterStar[0].value;
+//      globals.filterStar = 0;
+//    } else
+//      _selectedFilterStar = _dropdownFilterStar[globals.filterStar].value;
 
     ////////////////////////////
     /// filter - is done
@@ -329,6 +338,55 @@ class _CustomizeViewState extends State //State<CustomizeView>
   }
 
   //##################Drop Down Items Load from DB #################################################################
+  _loadStatuses() async {
+    var statuses = await helper.getStatuses();
+    CustomDropdownItem cus;
+    cus = new CustomDropdownItem();
+    cus.id = null;
+    cus.name = "-- All Statuses --";
+    _statuses.add(cus);
+    statuses.forEach((status) {
+      setState(() {
+        cus = new CustomDropdownItem();
+        cus.id = status['id'].toString();
+        String tempStatus;
+        if (status['name'].toString().length > 30)
+          tempStatus = status['name'].toString().substring(0, 30) + "...";
+        else
+          tempStatus = status['name'];
+
+        cus.name = tempStatus;
+
+        _statuses.add(cus);
+      });
+    });
+  }
+
+
+  _loadPriorities() async {
+    var priorities = await helper.getPriorities();
+    CustomDropdownItem cus;
+    cus = new CustomDropdownItem();
+    cus.id = null;
+    cus.name = "-- All Priorities --";
+    _priorities.add(cus);
+    priorities.forEach((priority) {
+      setState(() {
+        cus = new CustomDropdownItem();
+        cus.id = priority['id'].toString();
+        String tempPriority;
+        if (priority['name'].toString().length > 30)
+          tempPriority = priority['name'].toString().substring(0, 30) + "...";
+        else
+          tempPriority = priority['name'];
+
+        cus.name = tempPriority;
+
+        _priorities.add(cus);
+      });
+    });
+  }
+
   _loadCategories() async {
     var categories = await helper.getCategories();
     CustomDropdownItem cus;
@@ -354,7 +412,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
   }
 
   _loadAction1s() async {
-    var action1s = await helper.getActions();
+    var action1s = await helper.getAction1s();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
@@ -378,7 +436,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
   }
 
   _loadContext1s() async {
-    var context1s = await helper.getContexts();
+    var context1s = await helper.getContext1s();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
@@ -400,7 +458,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
   }
 
   _loadLocation1s() async {
-    var location1s = await helper.getLocations();
+    var location1s = await helper.getLocation1s();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
@@ -424,7 +482,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
   }
 
   _loadTag1s() async {
-    var tag1s = await helper.getTags();
+    var tag1s = await helper.getTag1s();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
@@ -447,7 +505,7 @@ class _CustomizeViewState extends State //State<CustomizeView>
   }
 
   _loadGoal1s() async {
-    var goal1s = await helper.getGoals();
+    var goal1s = await helper.getGoal1s();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
@@ -525,33 +583,33 @@ class _CustomizeViewState extends State //State<CustomizeView>
     return items;
   }
 
-  List<DropdownMenuItem<FilterStatus>> buildDropdownFilterStatus(
-      List filterStatusItems) {
-    List<DropdownMenuItem<FilterStatus>> items = List();
-    for (FilterStatus filterStatus in filterStatusItems) {
-      items.add(
-        DropdownMenuItem(
-          value: filterStatus,
-          child: Text(filterStatus.name),
-        ),
-      );
-    }
-    return items;
-  }
+//  List<DropdownMenuItem<FilterStatus>> buildDropdownFilterStatus(
+//      List filterStatusItems) {
+//    List<DropdownMenuItem<FilterStatus>> items = List();
+//    for (FilterStatus filterStatus in filterStatusItems) {
+//      items.add(
+//        DropdownMenuItem(
+//          value: filterStatus,
+//          child: Text(filterStatus.name),
+//        ),
+//      );
+//    }
+//    return items;
+//  }
 
-  List<DropdownMenuItem<FilterPriority>> buildDropdownFilterPriority(
-      List filterPriorityItems) {
-    List<DropdownMenuItem<FilterPriority>> items = List();
-    for (FilterPriority filterPriority in filterPriorityItems) {
-      items.add(
-        DropdownMenuItem(
-          value: filterPriority,
-          child: Text(filterPriority.name),
-        ),
-      );
-    }
-    return items;
-  }
+//  List<DropdownMenuItem<FilterPriority>> buildDropdownFilterPriority(
+//      List filterPriorityItems) {
+//    List<DropdownMenuItem<FilterPriority>> items = List();
+//    for (FilterPriority filterPriority in filterPriorityItems) {
+//      items.add(
+//        DropdownMenuItem(
+//          value: filterPriority,
+//          child: Text(filterPriority.name),
+//        ),
+//      );
+//    }
+//    return items;
+//  }
 
   List<DropdownMenuItem<FilterStar>> buildDropdownFilterStar(
       List filterStarItems) {
@@ -579,11 +637,12 @@ class _CustomizeViewState extends State //State<CustomizeView>
     return Scaffold(
       key: _globalKey,
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Colors.teal[50],
       appBar: new AppBar(
         backgroundColor: Colors.brown[900],
         automaticallyImplyLeading: false,
-        title: Center(child: Text('Personalize - Filter, Sort, View')),
+        title:
+            Center(child: Text('Personalize - Filter, Sort, View, Picklist')),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -615,61 +674,60 @@ class _CustomizeViewState extends State //State<CustomizeView>
 //  Filter Status
 ///////////////////////////
 
-              new Container(
-                margin: const EdgeInsets.all(2.0),
-                decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.blue[100]),
-                child: DropdownButtonFormField(
-                  items: _dropdownFilterStatus,
-                  hint: Text('Filter by Status'),
-                  value: _selectedFilterStatus,
-                  onChanged: (selectedFilterStatus) {
-                    setState(() {
-                      _selectedFilterStatus = selectedFilterStatus;
-                    });
-                  },
-                ),
-              ),
+//              new Container(
+//                margin: const EdgeInsets.all(2.0),
+//                decoration: BoxDecoration(
+//                    shape: BoxShape.rectangle, color: Colors.blue[100]),
+//                child: DropdownButtonFormField(
+//                  items: _dropdownFilterStatus,
+//                  hint: Text('Filter by Status'),
+//                  value: _selectedFilterStatus,
+//                  onChanged: (selectedFilterStatus) {
+//                    setState(() {
+//                      _selectedFilterStatus = selectedFilterStatus;
+//                    });
+//                  },
+//                ),
+//              ),
 
 ///////////////////////////
 //  Filter Priority
 ///////////////////////////
 
-              new Container(
-                margin: const EdgeInsets.all(2.0),
-                decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.blue[100]),
-                child: DropdownButtonFormField(
-                  items: _dropdownFilterPriority,
-                  hint: Text('Filter by Priority'),
-                  value: _selectedFilterPriority,
-                  onChanged: (selectedFilterPriority) {
-                    setState(() {
-                      _selectedFilterPriority = selectedFilterPriority;
-                    });
-                  },
-                ),
-              ),
+//              new Container(
+//                margin: const EdgeInsets.all(2.0),
+//                decoration: BoxDecoration(
+//                    shape: BoxShape.rectangle, color: Colors.blue[100]),
+//                child: DropdownButtonFormField(
+//                  items: _dropdownFilterPriority,
+//                  hint: Text('Filter by Priority'),
+//                  value: _selectedFilterPriority,
+//                  onChanged: (selectedFilterPriority) {
+//                    setState(() {
+//                      _selectedFilterPriority = selectedFilterPriority;
+//                    });
+//                  },
+//                ),
+//              ),
 
 ///////////////////////////
 //  Filter Star
 ///////////////////////////
-              new Container(
-                margin: const EdgeInsets.all(2.0),
-                decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.blue[100]),
-                child: DropdownButtonFormField(
-                  items: _dropdownFilterStar ,
-                  hint: Text('Filter by Star'),
-                  value: _selectedFilterStar,
-                  onChanged: (selectedFilterStar) {
-                    setState(() {
-                      _selectedFilterStar = selectedFilterStar;
-                    });
-                  },
-                ),
-              ),
-
+//              new Container(
+//                margin: const EdgeInsets.all(2.0),
+//                decoration: BoxDecoration(
+//                    shape: BoxShape.rectangle, color: Colors.blue[100]),
+//                child: DropdownButtonFormField(
+//                  items: _dropdownFilterStar,
+//                  hint: Text('Filter by Star'),
+//                  value: _selectedFilterStar,
+//                  onChanged: (selectedFilterStar) {
+//                    setState(() {
+//                      _selectedFilterStar = selectedFilterStar;
+//                    });
+//                  },
+//               ),
+//              ),
 
 ///////////////////////////
 //  Filter Is Done
@@ -689,6 +747,60 @@ class _CustomizeViewState extends State //State<CustomizeView>
                       _selectedFilterIsDone = selectedFilterIsDone;
                     });
                   },
+                ),
+              ),
+
+//#################################Status#####################################################
+              Container(
+                margin: const EdgeInsets.all(2.0),
+                decoration: BoxDecoration(
+                    shape: BoxShape.rectangle, color: Colors.blue[100]),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    DropdownButton<String>(
+                        items: _statuses.map((CustomDropdownItem value) {
+                          return DropdownMenuItem<String>(
+                              value: value.id,
+                              child: Text(
+                                value.name,
+                                overflow: TextOverflow.ellipsis,
+                              ));
+                        }).toList(),
+                        value: _selectedStatus,
+                        onChanged: (String newValue) {
+                          setState(() {
+                            _selectedStatus = newValue;
+                          });
+                        }),
+                  ],
+                ),
+              ),
+
+//#################################Priority#####################################################
+              Container(
+                margin: const EdgeInsets.all(2.0),
+                decoration: BoxDecoration(
+                    shape: BoxShape.rectangle, color: Colors.blue[100]),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    DropdownButton<String>(
+                        items: _priorities.map((CustomDropdownItem value) {
+                          return DropdownMenuItem<String>(
+                              value: value.id,
+                              child: Text(
+                                value.name,
+                                overflow: TextOverflow.ellipsis,
+                              ));
+                        }).toList(),
+                        value: _selectedPriority,
+                        onChanged: (String newValue) {
+                          setState(() {
+                            _selectedPriority = newValue;
+                          });
+                        }),
+                  ],
                 ),
               ),
 
@@ -1000,6 +1112,121 @@ class _CustomizeViewState extends State //State<CustomizeView>
                 ),
               ),
 
+              SizedBox(
+                height: 20,
+              ),
+              Text("Picklist | User-defined Dropdowns"),
+
+///////////////////////////
+//  Picklist - Statuses
+///////////////////////////
+              Card(
+                elevation: 8.0,
+                child: ListTile(
+                  tileColor: Colors.blue[100],
+                  title: Text('Statuses'),
+                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => StatusesScreen())),
+                ),
+              ),
+              SizedBox(height: 2),
+
+///////////////////////////
+//  Picklist - Priorities
+///////////////////////////
+              Card(
+                elevation: 8.0,
+                child: ListTile(
+                  tileColor: Colors.blue[100],
+                  title: Text('Priorities'),
+                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => PrioritiesScreen())),
+                ),
+              ),
+              SizedBox(height: 2),
+
+///////////////////////////
+//  Picklist - Categories
+///////////////////////////
+              Card(
+                elevation: 8.0,
+                child: ListTile(
+                  tileColor: Colors.blue[100],
+                  title: Text('Categories'),
+                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => CategoriesScreen())),
+                ),
+              ),
+              SizedBox(height: 2),
+
+///////////////////////////
+//  Picklist - Action
+///////////////////////////
+              Card(
+                elevation: 8.0,
+                child: ListTile(
+                  tileColor: Colors.blue[100],
+                  title: Text('Actions'),
+                  onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => Action1sScreen())),
+                ),
+              ),
+              SizedBox(height: 2),
+
+///////////////////////////
+//  Picklist - Contexts
+///////////////////////////
+              Card(
+                elevation: 8.0,
+                child: ListTile(
+                  tileColor: Colors.blue[100],
+                  title: Text('Contexts'),
+                  onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => Context1sScreen())),
+                ),
+              ),
+              SizedBox(height: 2),
+
+///////////////////////////
+//  Picklist - Locations
+///////////////////////////
+              Card(
+                elevation: 8.0,
+                child: ListTile(
+                  tileColor: Colors.blue[100],
+                  title: Text('Locations'),
+                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => Location1sScreen())),
+                ),
+              ),
+              SizedBox(height: 2),
+
+///////////////////////////
+//  Picklist - Tags
+///////////////////////////
+              Card(
+                elevation: 8.0,
+                child: ListTile(
+                  tileColor: Colors.blue[100],
+                  title: Text('Tags'),
+                  onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => Tag1sScreen())),
+                ),
+              ),
+              SizedBox(height: 2),
+
+///////////////////////////
+//  Picklist - Goals
+///////////////////////////
+              Card(
+                elevation: 8.0,
+                child: ListTile(
+                  tileColor: Colors.blue[100],
+                  title: Text('Goals'),
+                  onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => Goal1sScreen())),
+                ),
+              ),
 
               SizedBox(
                 height: 20,
@@ -1009,16 +1236,19 @@ class _CustomizeViewState extends State //State<CustomizeView>
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  RaisedButton(
+                  ElevatedButton(
                       onPressed: () {
                         Navigator.pop(context);
                       },
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.grey[300],
+                      ),
                       child: Text(
                         'Cancel',
                         style: TextStyle(color: Colors.brown[900]),
                       )),
-                  SizedBox(width: 10),
-                  RaisedButton(
+                  SizedBox(width: 5),
+                  ElevatedButton(
                       onPressed: () {
                         setState(() {
                           if (_selectedSortField1 != null)
@@ -1052,10 +1282,10 @@ class _CustomizeViewState extends State //State<CustomizeView>
                             globals.filterIsDone = _selectedFilterIsDone.id;
                           if (_selectedFilterDateDue != null)
                             globals.filterDateDue = _selectedFilterDateDue.id;
-                          if (_selectedFilterStatus != null)
-                            globals.filterStatus = _selectedFilterStatus.id;
-                          if (_selectedFilterPriority != null)
-                            globals.filterPriority = _selectedFilterPriority.id;
+//                          if (_selectedFilterStatus != null)
+//                            globals.filterStatus = _selectedFilterStatus.id;
+//                          if (_selectedFilterPriority != null)
+//                            globals.filterPriority = _selectedFilterPriority.id;
                           if (_selectedFilterStar != null)
                             globals.filterStar = _selectedFilterStar.id;
 //                          if (_selectedFilterCategory != null)
@@ -1072,28 +1302,29 @@ class _CustomizeViewState extends State //State<CustomizeView>
 //Save
                           if (customSetting == null) {
                             customSetting = new CustomSettings(
-                                '',
-                                '',
-                                '',
-                                '',
-                                '',
-                                '',
-                                '',
-                                '',
-                                '',
-                                '',
-                                '',
-                                '',
-                                '',
-                                '',
-                                '',
-                                '',
-                                '', 
-                                "",
-                                "",
-                                "",
-                                "",
-                             false,);
+                              '',
+                              '',
+                              '',
+                              '',
+                              '',
+                              '',
+                              '',
+                              '',
+                              '',
+                              '',
+                              '',
+                              '',
+                              '',
+                              '',
+                              '',
+                              '',
+                              '',
+                              "",
+                              "",
+                              "",
+                              "",
+                              false,
+                            );
                           }
 
                           customSetting.sortField1 = _selectedSortField1 == null
@@ -1143,6 +1374,14 @@ class _CustomizeViewState extends State //State<CustomizeView>
                             }
                           }
 
+                          customSetting.filterStatus =
+                              _selectedStatus == null
+                                  ? ""
+                                  : _selectedStatus.toString();
+                          customSetting.filterPriority =
+                              _selectedPriority == null
+                                  ? ""
+                                  : _selectedPriority.toString();
                           customSetting.filterCategory =
                               _selectedCategory == null
                                   ? ""
@@ -1164,7 +1403,6 @@ class _CustomizeViewState extends State //State<CustomizeView>
                           customSetting.filterGoal = _selectedGoal1 == null
                               ? ""
                               : _selectedGoal1.toString();
-
 
                           var result;
 
@@ -1197,7 +1435,9 @@ class _CustomizeViewState extends State //State<CustomizeView>
                         );
                         Navigator.of(context).pushNamed('/dashboard');
                       },
-                      color: Colors.brown[900],
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.brown[900],
+                      ),
                       child: Text(
                         'Save',
                         style: TextStyle(color: Colors.white),
@@ -1284,30 +1524,44 @@ class _CustomizeViewState extends State //State<CustomizeView>
         globals.filterDateDue = int.parse(customSetting.filterDateDue);
       }
 
-      if (customSetting.filterStatus != "") {
-        _selectedFilterStatus =
-            _dropdownFilterStatus[int.parse(customSetting.filterStatus)]
-                .value;
+//      if (customSetting.filterStatus != "") {
+//        _selectedFilterStatus =
+//            _dropdownFilterStatus[int.parse(customSetting.filterStatus)].value;
+//        globals.filterStatus = int.parse(customSetting.filterStatus);
+//      }
+
+//      if (customSetting.filterPriority != "") {
+//        _selectedFilterPriority =
+//            _dropdownFilterPriority[int.parse(customSetting.filterPriority)]
+//                .value;
+//        globals.filterPriority = int.parse(customSetting.filterPriority);
+//      }
+
+//      if (customSetting.filterStar != "") {
+//        _selectedFilterStar =
+//            _dropdownFilterStar[int.parse(customSetting.filterStar)].value;
+//        globals.filterStar = int.parse(customSetting.filterStar);
+//      }
+
+      ////////////////////////////
+      /// filter - picklists
+      ////////////////////////////
+      if (customSetting.filterStatus == "") {
+        _selectedStatus = null;
+        customSetting.filterStatus = null;
+      } else {
+        _selectedStatus = customSetting.filterStatus.toString();
         globals.filterStatus = int.parse(customSetting.filterStatus);
       }
 
-      if (customSetting.filterPriority != "") {
-        _selectedFilterPriority =
-            _dropdownFilterPriority[int.parse(customSetting.filterPriority)]
-                .value;
-        globals.filterPriority = int.parse(customSetting.filterPriority);
+      if (customSetting.filterPriority == "") {
+        _selectedPriority = null;
+        customSetting.filterPriority = null;
+      } else {
+        _selectedCategory = customSetting.filterCategory.toString();
+        globals.filterCategory = int.parse(customSetting.filterCategory);
       }
 
-      if (customSetting.filterStar != "") {
-        _selectedFilterStar =
-            _dropdownFilterStar[int.parse(customSetting.filterStar)]
-                .value;
-        globals.filterStar = int.parse(customSetting.filterStar);
-      }
-
-      ////////////////////////////
-      /// filter - category
-      ////////////////////////////
       if (customSetting.filterCategory == "") {
         _selectedCategory = null;
         customSetting.filterCategory = null;

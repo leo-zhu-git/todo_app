@@ -12,15 +12,15 @@ class CustomSettings {
   String _showSec2;
   String _showSec3;
   String _filterDateDue;
+  String _filterStar;
+  String _filterStatus;
+  String _filterPriority;
   String _filterCategory;
   String _filterAction;
   String _filterContext;
   String _filterLocation;
   String _filterTag;
   String _filterGoal;
-  String _filterStatus;
-  String _filterPriority;
-  String _filterStar;
   bool _filterIsDone;
 
   CustomSettings(
@@ -36,9 +36,9 @@ class CustomSettings {
       this._showSec2,
       this._showSec3,
       this._filterDateDue,
+      this._filterStar,
       this._filterStatus,
       this._filterPriority,
-      this._filterStar,
       this._filterCategory,
       this._filterAction,
       this._filterContext,
@@ -61,9 +61,9 @@ class CustomSettings {
       this._showSec2,
       this._showSec3,
       this._filterDateDue,
+      this._filterStar,
       this._filterStatus,
       this._filterPriority,
-      this._filterStar,
       this._filterCategory,
       this._filterAction,
       this._filterContext,
@@ -85,9 +85,9 @@ class CustomSettings {
   String get showSec2 => _showSec2;
   String get showSec3 => _showSec3;
   String get filterDateDue => _filterDateDue;
+  String get filterStar => _filterStar; 
   String get filterStatus => _filterStatus;
   String get filterPriority => _filterPriority;
-  String get filterStar => _filterStar; 
   String get filterCategory => _filterCategory;
   String get filterAction => _filterAction;
   String get filterContext => _filterContext;
@@ -144,16 +144,16 @@ class CustomSettings {
     this._filterDateDue = newFilterDateDue;
   }
 
+  set filterStar(String newFilterStar) {
+    this._filterStar = newFilterStar;
+  }
+
   set filterStatus(String newFilterStatus) {
     this._filterStatus = newFilterStatus;
   }
 
   set filterPriority(String newFilterPriority) {
     this._filterPriority = newFilterPriority;
-  }
-
-  set filterStar(String newFilterStar) {
-    this._filterStar = newFilterStar;
   }
 
   set filterCategory(String newFilterCategory) {
@@ -200,9 +200,9 @@ class CustomSettings {
     map['showSec2'] = _showSec2;
     map['showSec3'] = _showSec3;
     map['filterDateDue'] = _filterDateDue;
+    map['filterStar'] = _filterStar;
     map['filterStatus'] = _filterStatus;
     map['filterPriority'] = _filterPriority;
-    map['filterStar'] = _filterStar;
     map['filterCategory'] = _filterCategory;
     map['filterAction'] = _filterAction;
     map['filterContext'] = _filterContext;
@@ -232,9 +232,9 @@ class CustomSettings {
     this._showSec2 = o['showSec2'];
     this._showSec3 = o['showSec3'];
     this._filterDateDue = o['filterDateDue'];
+    this._filterStar = o['filterStar'];
     this._filterStatus = o['filterStatus'];
     this._filterPriority = o['filterPriority'];
-    this._filterStar = o['filterStar'];
     this._filterCategory = o['filterCategory'];
     this._filterAction = o['filterAction'];
     this._filterContext = o['filterContext'];

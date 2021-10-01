@@ -15,15 +15,17 @@ class Task {
   String _note;
   String _dateDue;
   String _timeDue;
+  String _star;
   String _status;
   String _priority;
-  String _star;
   String _category;
   String _action1;
   String _context1;
   String _location1;
   String _tag1;
   String _goal1;
+  String _priorityText;
+  String _statusText;
   String _categoryText;
   String _action1Text;
   String _context1Text;
@@ -44,9 +46,9 @@ class Task {
       this._note,
       this._dateDue,
       this._timeDue,
+      this._star,
       this._status,
       this._priority,
-      this._star,
       this._category,
       this._action1,
       this._context1,
@@ -67,9 +69,9 @@ class Task {
       this._note,
       this._dateDue,
       this._timeDue,
+      this._star,
       this._status,
       this._priority,
-      this._star,
       this._category,
       this._action1,
       this._context1,
@@ -89,15 +91,17 @@ class Task {
   String get note => _note;
   String get dateDue => _dateDue;
   String get timeDue => _timeDue;
+  String get star => _star;
   String get status => _status;
   String get priority => _priority;
-  String get star => _star;
   String get category => _category;
   String get action1 => _action1;
   String get context1 => _context1;
   String get location1 => _location1;
   String get tag1 => _tag1;
   String get goal1 => _goal1;
+  String get statusText => _statusText;
+  String get priorityText => _priorityText;
   String get categoryText => _categoryText;
   String get action1Text => _action1Text;
   String get context1Text => _context1Text;
@@ -129,16 +133,16 @@ class Task {
     this._timeDue = newTimedue;
   }
 
+  set star(String newStar) {
+    this._star = newStar;
+  }
+
   set status(String newStatus) {
     this._status = newStatus;
   }
 
   set priority(String newPriority) {
     this._priority = newPriority;
-  }
-
-  set star(String newStar) {
-    this._star = newStar;
   }
 
   set category(String newcategory) {
@@ -163,6 +167,14 @@ class Task {
 
   set goal1(String newGoal) {
     this._goal1 = newGoal;
+  }
+
+  set statusText(String newstatusText) {
+    this._statusText = newstatusText;
+  }
+
+  set priorityText(String newpriorityText) {
+    this._priorityText = newpriorityText;
   }
 
   set categoryText(String newcategoryText) {
@@ -226,9 +238,9 @@ class Task {
   String colNote = '';
   String colDateDue = '';
   String colTimeDue = '';
+  String colStar = '';
   String colStatus = '';
   String colPriority = '';
-  String colStar = '';
   String colCategory = '';
   String colAction1 = '';
   String colContext1 = '';
@@ -237,8 +249,8 @@ class Task {
   String colGoal1 = '';
   String colIsDone = '';
   String colDateDone = '';
-  String colMain1 = '';
   String colLastModified = '';
+  String colMain1 = '';
 
   Map<String, dynamic> toMap() {
     var map = Map<String, dynamic>();
@@ -246,9 +258,9 @@ class Task {
     map['note'] = _note;
     map['dateDue'] = _dateDue;
     map['timeDue'] = _timeDue;
+    map['star'] = _star;
     map['status'] = _status;
     map['priority'] = _priority;
-    map['star'] = _star;
     map['category'] = _category;
     map['action1'] = _action1;
     map['context1'] = _context1;
@@ -272,16 +284,18 @@ class Task {
     this._note = o['note'];
     this._dateDue = o['dateDue'];
     this._timeDue = o['timeDue'];
+    this._star = o['star'];
     this._status = o['status'];
     this._priority = o['priority'];
-    this._star = o['star'];
     this._category = o['category'];
     this._action1 = o['action1'];
     this._context1 = o['context1'];
     this._location1 = o['location1'];
     this._tag1 = o['tag1'];
     this._goal1 = o['goal1'];
-    this._categoryText = o['categoriesname'] == null ? "" : o['categoriesname'];
+    this._statusText = o['statusname'] == null ? "" : o['statusesname'];
+    this._priorityText = o['priorityname'] == null ? "" : o['priorityname'];
+    this._categoryText = o['categoryname'] == null ? "" : o['categoryname'];
     this._action1Text = o['action1name'] == null ? "" : o['action1name'];
     this._context1Text = o['context1name'] == null ? "" : o['context1name'];
     this._location1Text = o['location1name'] == null ? "" : o['location1name'];

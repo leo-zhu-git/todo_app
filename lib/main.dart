@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/model/taskclass.dart';
+import 'package:todo_app/screens/LocalNotification_screen.dart';
 import 'package:todo_app/screens/signUp.dart';
 import 'package:todo_app/screens/signin.dart';
-import 'package:todo_app/screens/customizeview.dart';
+import 'package:todo_app/screens/personalizeview.dart';
 import 'package:todo_app/screens/syncview.dart';
 import 'package:todo_app/screens/swipe.dart';
 import 'package:todo_app/screens/taskdetail.dart';
@@ -33,8 +34,12 @@ class MyApp extends StatelessWidget {
       title: 'Todo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.red,
+        primarySwatch: Colors.brown,
       ),
+      
+      // rt testing notification 9.23
+//      home: LocalNotificationScreen(), 
+
       onGenerateRoute: (settings) {
         if (settings.name == '/confirm') {
           return PageRouteBuilder(
@@ -58,13 +63,13 @@ class MyApp extends StatelessWidget {
             transitionsBuilder: (_, __, ___, child) => child,
           );
         }
-        if (settings.name == '/customizeview') {
+        if (settings.name == '/personalizeview') {
           return PageRouteBuilder(
-            pageBuilder: (_, __, ___) => CustomizeView(),
+            pageBuilder: (_, __, ___) => PersonalizeView(),
             transitionsBuilder: (_, __, ___, child) => child,
           );
         }
-        
+
         if (settings.name == '/syncview') {
           return PageRouteBuilder(
             pageBuilder: (_, __, ___) => SyncView(),

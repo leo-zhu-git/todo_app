@@ -153,11 +153,17 @@ class _WipeScreenState extends State<WipeScreen> {
           return AlertDialog(
               backgroundColor: Colors.pink[100],
               actions: <Widget>[
-                FlatButton(
-                    color: Colors.brown[500],
+                ElevatedButton(
                     onPressed: () => Navigator.pop(context),
-                    child: Text('Cancel')),
-                FlatButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.grey[300],
+                    ),
+                    child: Text(
+                      'Cancel',
+                      style: TextStyle(color: Colors.brown[900]),
+                    )
+                    ),
+                ElevatedButton(
                   onPressed: () async {
                     if (_option == 0) {
                       mysqlDBhelper.wipeTaskDataToMySql();
@@ -181,9 +187,14 @@ class _WipeScreenState extends State<WipeScreen> {
                       ));
                     } else {
                       mysqlDBhelper.wipeTaskDataFromMySql();
-                      mysqlDBhelper.syncTagsData();
-                      mysqlDBhelper.syncContextData();
+                      mysqlDBhelper.syncStatusesData();
+                      mysqlDBhelper.syncPrioritiesData();
                       mysqlDBhelper.syncCategoriesData();
+                      mysqlDBhelper.syncAction1sData();
+                      mysqlDBhelper.syncContext1sData();
+                      mysqlDBhelper.syncLocation1sData();
+                      mysqlDBhelper.syncTag1sData();
+                      mysqlDBhelper.syncGoal1sData();
 
                       Navigator.pop(context);
                       _showSuccessSnackBar(Container(
@@ -205,10 +216,15 @@ class _WipeScreenState extends State<WipeScreen> {
                       ));
                     }
                   },
-                  child: Text(
-                    'Wipe',
-                    style: TextStyle(color: Colors.brown[900]),
-                  ),
+
+                  style: ElevatedButton.styleFrom(
+                      primary: Colors.brown[900],
+                    ),
+                    child: Text(
+                      'Wipe',
+                      style: TextStyle(color: Colors.white),
+                    )
+
                 ),
               ],
               title: Text(message));

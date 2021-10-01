@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_app/model/context1.dart';
 import 'package:todo_app/screens/taskhome.dart';
@@ -32,7 +33,7 @@ class _Context1sScreenState extends State<Context1sScreen> {
 
   getAllContext1s() async {
     _context1List = List<Context1>();
-    var context1s = await _context1Service.getContexts();
+    var context1s = await _context1Service.getContext1s();
     context1s.forEach((context1) {
       setState(() {
         var context1Model = Context1();
@@ -51,7 +52,7 @@ class _Context1sScreenState extends State<Context1sScreen> {
   }
 
   _editContext1(BuildContext context, context1Id) async {
-    context1 = await _context1Service.getContextbyID(context1Id);
+    context1 = await _context1Service.getContext1sbyID(context1Id);
     setState(() {
       _editContext1NameController.text = context1[0]['name'] ?? 'No Name';
       _editContext1DescriptionController.text =
@@ -71,20 +72,25 @@ class _Context1sScreenState extends State<Context1sScreen> {
           return AlertDialog(
             backgroundColor: Colors.blue[100],
             actions: <Widget>[
-              FlatButton(
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.grey[300],
+                  ),
                   onPressed: () => Navigator.pop(context),
                   child: Text(
                     'Cancel',
-                    style: TextStyle(color: Colors.brown[500]),
+                    style: TextStyle(color: Colors.brown[900]),
                   )),
-              FlatButton(
-                  color: Colors.brown[500],
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.brown[900],
+                  ),
                   onPressed: () {
                     _context1.name = _context1NameController.text;
                     _context1.description = _context1DescriptionController.text;
                     _context1.id = null;
 
-                    var result = _context1Service.insertContexts(_context1);
+                    var result = _context1Service.insertContext1s(_context1);
                     print(result);
                     Navigator.pop(context);
                     getAllContext1s();
@@ -106,9 +112,12 @@ class _Context1sScreenState extends State<Context1sScreen> {
                       ),
                     ));
                   },
-                  child: Text('Save')),
+                  child: Text(
+                    'Save',
+                    style: TextStyle(color: Colors.white),
+                  )),
             ],
-            title: Text('Context Form'),
+            title: Text('Add Context'),
             content: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
@@ -141,50 +150,58 @@ class _Context1sScreenState extends State<Context1sScreen> {
           return AlertDialog(
             backgroundColor: Colors.blue[100],
             actions: <Widget>[
-              FlatButton(
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.grey[300],
+                  ),
                   onPressed: () => Navigator.pop(context),
                   child: Text(
                     'Cancel',
-                    style: TextStyle(color: Colors.brown[500]),
+                    style: TextStyle(color: Colors.brown[900]),
                   )),
-              FlatButton(
-                color: Colors.brown[500],
-                onPressed: () async {
-                  _context1.id = context1[0]['id'];
-                  _context1.name = _editContext1NameController.text;
-                  _context1.description =
-                      _editContext1DescriptionController.text;
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.brown[900],
+                  ),
+                  onPressed: () async {
+                    _context1.id = context1[0]['id'];
+                    _context1.name = _editContext1NameController.text;
+                    _context1.description =
+                        _editContext1DescriptionController.text;
 
-                  var result = await _context1Service.updateContext(_context1);
-                  print(result);
-                  if (result > 0) {
-                    Navigator.pop(context);
-                    getAllContext1s();
-                    _showSuccessSnackBar(
-                      Container(
-                        color: Colors.tealAccent[100],
-                        height: 40,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            (Icon(
-                              Icons.thumb_up,
-                              color: Colors.black,
-                            )),
-                            Text(
-                              ' Updated ',
-                              style: (TextStyle(color: Colors.black)),
-                            )
-                          ],
+                    var result =
+                        await _context1Service.updateContext1s(_context1);
+                    print(result);
+                    if (result > 0) {
+                      Navigator.pop(context);
+                      getAllContext1s();
+                      _showSuccessSnackBar(
+                        Container(
+                          color: Colors.tealAccent[100],
+                          height: 40,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              (Icon(
+                                Icons.thumb_up,
+                                color: Colors.black,
+                              )),
+                              Text(
+                                ' Updated ',
+                                style: (TextStyle(color: Colors.black)),
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                  }
-                },
-                child: Text('Update'),
-              ),
+                      );
+                    }
+                  },
+                  child: Text(
+                    'Update',
+                    style: TextStyle(color: Colors.white),
+                  )),
             ],
-            title: Text('Edit Context Form'),
+            title: Text('Edit Context'),
             content: SingleChildScrollView(
                 child: Column(
               children: <Widget>[
@@ -216,44 +233,51 @@ class _Context1sScreenState extends State<Context1sScreen> {
           return AlertDialog(
             backgroundColor: Colors.blue[100],
             actions: <Widget>[
-              FlatButton(
-                  color: Colors.brown[500],
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.brown[900],
+                  ),
                   onPressed: () => Navigator.pop(context),
-                  child: Text('Cancel')),
-              FlatButton(
-                onPressed: () async {
-                  var result =
-                      await _context1Service.deleteContextbyID(context1Id);
-                  print(result);
-                  if (result > 0) {
-                    Navigator.pop(context);
-                    getAllContext1s();
-                    _showSuccessSnackBar(
-                      Container(
-                        color: Colors.tealAccent[100],
-                        height: 40,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            (Icon(
-                              Icons.thumb_up,
-                              color: Colors.black,
-                            )),
-                            Text(
-                              ' Deleted ',
-                              style: (TextStyle(color: Colors.black)),
-                            )
-                          ],
+                  child: Text(
+                    'Cancel',
+                    style: TextStyle(color: Colors.white),
+                  )),
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.white,
+                  ),
+                  onPressed: () async {
+                    var result =
+                        await _context1Service.deleteContext1sbyID(context1Id);
+                    print(result);
+                    if (result > 0) {
+                      Navigator.pop(context);
+                      getAllContext1s();
+                      _showSuccessSnackBar(
+                        Container(
+                          color: Colors.tealAccent[100],
+                          height: 40,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              (Icon(
+                                Icons.thumb_up,
+                                color: Colors.black,
+                              )),
+                              Text(
+                                ' Deleted ',
+                                style: (TextStyle(color: Colors.black)),
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                  }
-                },
-                child: Text(
-                  'Delete?',
-                  style: TextStyle(color: Colors.brown[500]),
-                ),
-              ),
+                      );
+                    }
+                  },
+                  child: Text(
+                    'Delete',
+                    style: TextStyle(color: Colors.brown[900]),
+                  )),
             ],
             title: Text('Are you sure you want to delete this'),
           );
@@ -268,11 +292,27 @@ class _Context1sScreenState extends State<Context1sScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.amber[50],
       key: _globalKey,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.brown[900],
-        title: Center(child: Text('Contexts')),
+        title: Center(
+          child: Container(
+            child: Column(
+              children: <Widget>[
+                Badge(
+                  child: Text('Contexts     '),
+                  shape: BadgeShape.square,
+                  position: BadgePosition.topEnd(),
+                  badgeContent: Text(_context1List.length.toString(),
+                      style: TextStyle(color: Colors.black)),
+                  badgeColor: Colors.blue[200],
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
       body: ListView.builder(
         itemCount: _context1List.length,
@@ -315,11 +355,10 @@ class _Context1sScreenState extends State<Context1sScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               IconButton(
-                icon: Icon(Icons.home, color: Colors.white),
-                tooltip: 'Back to Home',
+                icon: Icon(Icons.arrow_back, color: Colors.white),
+                tooltip: 'Back',
                 onPressed: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => TaskHome()));
+                  Navigator.pop(context, true);
                 },
               ),
               IconButton(

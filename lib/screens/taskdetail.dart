@@ -5,7 +5,7 @@ import 'package:todo_app/model/customDropdownItem.dart';
 import 'package:todo_app/model/taskclass.dart';
 import 'package:todo_app/util/dbhelper.dart';
 import 'package:intl/intl.dart';
-
+import 'dart:io';
 import 'tasksearch.dart';
 
 DbHelper dbHelper = DbHelper();
@@ -47,10 +47,12 @@ class TaskDetailState extends State //<TaskDetail>
   var _todoNoteController = TextEditingController();
   var _todoDateController = TextEditingController();
   var _todoTimeController = TextEditingController();
-  var _todoStatusController = TextEditingController();
-  var _todoPriorityController = TextEditingController();
+//  var _todoStatusController = TextEditingController();
+//  var _todoPriorityController = TextEditingController();
   var _todoStarController = TextEditingController();
 
+  var _selectedStatus;
+  var _selectedPriority;
   var _selectedCategory;
   var _selectedAction1;
   var _selectedContext1;
@@ -58,6 +60,8 @@ class TaskDetailState extends State //<TaskDetail>
   var _selectedTag1;
   var _selectedGoal1;
 
+  List<CustomDropdownItem> _statuses = [];
+  List<CustomDropdownItem> _priorities = [];
   List<CustomDropdownItem> _categories = [];
   List<CustomDropdownItem> _action1s = [];
   List<CustomDropdownItem> _context1s = [];
@@ -73,15 +77,65 @@ class TaskDetailState extends State //<TaskDetail>
   void initState() {
     super.initState();
 
+    _loadStatuses();
+    _loadPriorities();
     _loadCategories();
     _loadAction1s();
     _loadContext1s();
     _loadLocation1s();
     _loadTag1s();
-    _loadGoal1s(); 
+    _loadGoal1s();
   }
 
 //##################Drop Down Items Load from DB #################################################################
+  _loadStatuses() async {
+    var statuses = await helper.getStatuses();
+    CustomDropdownItem cus;
+    cus = new CustomDropdownItem();
+    cus.id = null;
+    cus.name = "-- Select Status --";
+    _statuses.add(cus);
+    statuses.forEach((status) {
+      setState(() {
+        cus = new CustomDropdownItem();
+        cus.id = status['id'].toString();
+        String tempStatus;
+        if (status['name'].toString().length > 30)
+          tempStatus = status['name'].toString().substring(0, 30) + "...";
+        else
+          tempStatus = status['name'];
+
+        cus.name = tempStatus;
+
+        _statuses.add(cus);
+      });
+    });
+  }
+
+  _loadPriorities() async {
+    var priorities = await helper.getPriorities();
+    CustomDropdownItem cus;
+    cus = new CustomDropdownItem();
+    cus.id = null;
+    cus.name = "-- Select Priority --";
+    _priorities.add(cus);
+    priorities.forEach((priority) {
+      setState(() {
+        cus = new CustomDropdownItem();
+        cus.id = priority['id'].toString();
+        String tempPriority;
+        if (priority['name'].toString().length > 30)
+          tempPriority = priority['name'].toString().substring(0, 30) + "...";
+        else
+          tempPriority = priority['name'];
+
+        cus.name = tempPriority;
+
+        _priorities.add(cus);
+      });
+    });
+  }
+
   _loadCategories() async {
     var categories = await helper.getCategories();
     CustomDropdownItem cus;
@@ -107,7 +161,7 @@ class TaskDetailState extends State //<TaskDetail>
   }
 
   _loadAction1s() async {
-    var action1s = await helper.getActions();
+    var action1s = await helper.getAction1s();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
@@ -130,7 +184,7 @@ class TaskDetailState extends State //<TaskDetail>
   }
 
   _loadContext1s() async {
-    var context1s = await helper.getContexts();
+    var context1s = await helper.getContext1s();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
@@ -154,7 +208,7 @@ class TaskDetailState extends State //<TaskDetail>
   }
 
   _loadLocation1s() async {
-    var location1s = await helper.getLocations();
+    var location1s = await helper.getLocation1s();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
@@ -178,7 +232,7 @@ class TaskDetailState extends State //<TaskDetail>
   }
 
   _loadTag1s() async {
-    var tag1s = await helper.getTags();
+    var tag1s = await helper.getTag1s();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
@@ -201,7 +255,7 @@ class TaskDetailState extends State //<TaskDetail>
   }
 
   _loadGoal1s() async {
-    var goal1s = await helper.getGoals();
+    var goal1s = await helper.getGoal1s();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
@@ -289,6 +343,12 @@ class TaskDetailState extends State //<TaskDetail>
   @override
   Widget build(BuildContext context) {
     _todoNoteController.text = task.note;
+    task.status != ""
+        ? _selectedStatus = task.status
+        : _selectedStatus = null;
+    task.priority != ""
+        ? _selectedPriority = task.priority
+        : _selectedPriority = null;
     task.category != ""
         ? _selectedCategory = task.category
         : _selectedCategory = null;
@@ -339,7 +399,7 @@ class TaskDetailState extends State //<TaskDetail>
     return Scaffold(
       key: _globalKey,
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Colors.teal[50],
       appBar: AppBar(
         backgroundColor: Colors.brown[900],
         automaticallyImplyLeading: false,
@@ -444,6 +504,72 @@ class TaskDetailState extends State //<TaskDetail>
                 ),
               ),
             ),
+///////////////////////////
+//  STATUS
+///////////////////////////
+
+            Container(
+              margin:
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+              decoration: BoxDecoration(
+                  shape: BoxShape.rectangle, color: Colors.blue[100]),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  DropdownButton<String>(
+                      items: _statuses.map((CustomDropdownItem value) {
+                        return DropdownMenuItem<String>(
+                            value: value.id,
+                            child: Text(
+                              value.name,
+                              overflow: TextOverflow.ellipsis,
+                            ));
+                      }).toList(),
+                      style: _textStyleControls,
+                      value: _selectedStatus,
+                      onChanged: (String newValue) {
+                        setState(() {
+                          _selectedStatus = newValue;
+                          task.status = newValue;
+                        });
+                      }),
+                ],
+              ),
+            ),
+
+///////////////////////////
+//  PRIORITY
+///////////////////////////
+
+            Container(
+              margin:
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+              decoration: BoxDecoration(
+                  shape: BoxShape.rectangle, color: Colors.blue[100]),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  DropdownButton<String>(
+                      items: _priorities.map((CustomDropdownItem value) {
+                        return DropdownMenuItem<String>(
+                            value: value.id,
+                            child: Text(
+                              value.name,
+                              overflow: TextOverflow.ellipsis,
+                            ));
+                      }).toList(),
+                      style: _textStyleControls,
+                      value: _selectedPriority,
+                      onChanged: (String newValue) {
+                        setState(() {
+                          _selectedPriority = newValue;
+                          task.priority = newValue;
+                        });
+                      }),
+                ],
+              ),
+            ),
+            
 ///////////////////////////
 //  CATEGORY
 ///////////////////////////
@@ -634,7 +760,7 @@ class TaskDetailState extends State //<TaskDetail>
                       }),
                 ],
               ),
-            ),            //KK     // SizedBox(
+            ), //KK     // SizedBox(
             //   height: 20,
             // ),
 
@@ -642,20 +768,28 @@ class TaskDetailState extends State //<TaskDetail>
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                RaisedButton(
+                ElevatedButton(
                     onPressed: () {
                       Navigator.pop(context);
-//                      Navigator.of(context).pushNamed('/dashboard');
                     },
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.grey[300],
+                    ),
                     child: Text(
                       'Cancel',
                       style: TextStyle(color: Colors.brown[900]),
                     )),
-                //KK SizedBox(width: 10),
-                RaisedButton(
+                SizedBox(width: 5),
+                ElevatedButton(
                     onPressed: () async {
                       task.task = _todoTaskController.text;
                       task.note = _todoNoteController.text;
+                      task.status = _selectedStatus == null
+                          ? ""
+                          : _selectedStatus.toString();
+                      task.priority = _selectedPriority == null
+                          ? ""
+                          : _selectedPriority.toString();
                       task.category = _selectedCategory == null
                           ? ""
                           : _selectedCategory.toString();
@@ -667,16 +801,17 @@ class TaskDetailState extends State //<TaskDetail>
                           : _selectedContext1.toString();
                       task.tag1 =
                           _selectedTag1 == null ? "" : _selectedTag1.toString();
-                      task.goal1 =
-                          _selectedGoal1 == null ? "" : _selectedGoal1.toString();
+                      task.goal1 = _selectedGoal1 == null
+                          ? ""
+                          : _selectedGoal1.toString();
                       task.dateDue = _todoDateController.text;
                       task.timeDue = _todoTimeController.text;
                       task.isDone = 0;
-                      if (task.isDone == 0) {
-                        task.status = "Open";
-                      } else {
-                        task.status = "Completed";
-                      }
+//                      if (task.isDone == 0) {
+//                        task.status = "Open";
+//                      } else {
+//                        task.status = "Completed";
+//                      }
                       //task.lastModified = DateTime.parse(
                       //DateFormat("yyyy-MM-dd HH:mm:ss")
                       //.format(DateTime.now()));
@@ -709,18 +844,20 @@ class TaskDetailState extends State //<TaskDetail>
                                 color: Colors.black,
                               )),
                               Text(
-                                ' Added ',
+                                ' Successfully Saved ',
                                 style: (TextStyle(color: Colors.black)),
                               )
                             ],
                           ),
                         ),
                       );
-
+                      await Future.delayed(
+                          const Duration(milliseconds: 500), () {});
                       Navigator.pop(context);
-//                      Navigator.of(context).pushNamed('/dashboard');
                     },
-                    color: Colors.brown[900],
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.brown[900],
+                    ),
                     child: Text(
                       'Save',
                       style: TextStyle(color: Colors.white),

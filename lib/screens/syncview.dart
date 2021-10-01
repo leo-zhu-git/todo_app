@@ -4,6 +4,8 @@ import 'package:todo_app/screens/taskhome.dart';
 import 'package:todo_app/util/dbhelper.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
+import 'LocalNotification_screen.dart';
+
 class SyncView extends StatefulWidget {
   @override
   _SyncViewState createState() => _SyncViewState();
@@ -22,10 +24,16 @@ class _SyncViewState extends State<SyncView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.blue[100],
+        backgroundColor: Colors.amber[100],
+        appBar: new AppBar(
+        backgroundColor: Colors.brown[900],
+        automaticallyImplyLeading: false,
+        title: Center(child: Text('Sync - never lose your data')),
+      ),
+
         body: Center(
           child: SpinKitFoldingCube(
-            color: Colors.yellow[200],
+            color: Colors.green[200],
             size: 100,
           ),
         ));

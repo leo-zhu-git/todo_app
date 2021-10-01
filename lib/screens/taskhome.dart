@@ -11,7 +11,7 @@ import 'package:todo_app/model/taskclass.dart';
 
 import 'package:todo_app/util/dbhelper.dart';
 import 'package:todo_app/screens/taskdetail.dart';
-import 'package:todo_app/screens/customizeview.dart';
+// import 'package:todo_app/screens/personalizeview.dart';
 import 'package:todo_app/screens/swipe.dart';
 import 'package:todo_app/screens/tasksearch.dart';
 import 'package:todo_app/util/drawer_navigation.dart';
@@ -64,25 +64,43 @@ class TaskHomeState extends State {
     }
 
     return Scaffold(
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Colors.teal[50],
       drawer: DrawerNagivation(),
       appBar: AppBar(
         key: _globalKey,
-
         backgroundColor: Colors.brown[900],
         elevation: 8,
-//        title: Center(child: Text('View (' + count.toString() + ')')),
         title: Center(
-          child: Container(
-            child: Column(
-              children: <Widget>[
-                Badge(
-                  child: Text('View  '),
-                  badgeContent: Text(count.toString(), style: TextStyle(color: Colors.white)),
-                  badgeColor: Colors.red,
-                ),
-              ],
-            ),
+//          child: Container(
+//            child: Row(
+//              children: [
+//                Text('View '),
+//                Container(
+//                  decoration: BoxDecoration(
+//                  shape: BoxShape.rectangle, color: Colors.blue[100]),
+//                  child: Padding(
+//                  padding: const EdgeInsets.all(2.0),
+//                  child: Text(
+//                    count.toString(),
+//                    style: TextStyle(backgroundColor: Colors.green[100], color: Colors.black)),
+//                  ),
+//                ),
+//              ]
+//            )
+//          ),
+//        ),
+
+          child: Column(
+            children: <Widget>[
+              Badge(
+                child: Text('View     '),
+                shape: BadgeShape.square,
+                position: BadgePosition.topEnd(),
+                badgeContent: Text(count.toString(),
+                    style: TextStyle(color: Colors.black)),
+                badgeColor: Colors.yellow[200],
+              ),
+            ],
           ),
         ),
         actions: <Widget>[
@@ -107,7 +125,7 @@ class TaskHomeState extends State {
               IconButton(
                 icon: Icon(Icons.dashboard_outlined, color: Colors.white),
                 onPressed: () {
-                  Navigator.of(context).pushNamed('/customizeview');
+                  Navigator.of(context).pushNamed('/personalizeview');
                 },
               ),
               IconButton(
@@ -148,17 +166,18 @@ class TaskHomeState extends State {
                 this.tasklist[position].status = "Completed";
                 this.tasklist[position].dateDone = formattedDate;
                 dbHelper.updateTask(tasklist[position]);
-                this.tasklist.removeAt(position);
+                //this.tasklist.removeAt(position);
+                getData();
                 Scaffold.of(context).showSnackBar(new SnackBar(
                   content: new Text("Item Dismissed"),
                 ));
               });
             },
             background: Container(
-              color: Colors.red,
+              color: Colors.brown,
             ),
             child: Padding(
-              padding: EdgeInsets.only(top: 8.0, left: 16.0, right: 16.0),
+              padding: EdgeInsets.only(top: 4.0, left: 4.0, right: 4.0),
               child: Card(
                   color: Colors.yellow[200],
                   elevation: 8.0,
@@ -203,23 +222,23 @@ class TaskHomeState extends State {
                           this.tasklist[position].status = "Completed";
                           this.tasklist[position].dateDone = formattedDate;
                           dbHelper.updateTask(tasklist[position]);
-                          _showSuccessSnackBar(Container(
-                            color: Colors.tealAccent[100],
-                            height: 40,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                (Icon(
-                                  Icons.thumb_up,
-                                  color: Colors.black,
-                                )),
-                                Text(
-                                  ' Task Completed - Satisfaction... ',
-                                  style: (TextStyle(color: Colors.black)),
-                                )
-                              ],
-                            ),
-                          ));
+//                          _showSuccessSnackBar(Container(
+//                            color: Colors.tealAccent[100],
+//                            height: 40,
+//                            child: Row(
+//                              mainAxisAlignment: MainAxisAlignment.center,
+//                              children: [
+//                                (Icon(
+//                                  Icons.thumb_up,
+//                                  color: Colors.black,
+//                                )),
+//                                Text(
+//                                  ' Task Completed - Satisfaction... ',
+//                                  style: (TextStyle(color: Colors.black)),
+//                                )
+//                              ],
+//                            ),
+//                          ));
                         } else {
                           this.tasklist[position].isDone = 0;
                           this.tasklist[position].status = "Open";
@@ -261,14 +280,18 @@ class TaskHomeState extends State {
           getSortColumn(_sortField3),
           getOrderColumn(_sortOrder3),
           getDateDueColumn(_filterDateDue),
-          getTimeDueColumn(_filterDateDue),
-          globals.filterIsDone,
+//          getDateDueColumn(_filterTimeDue),
+          globals.filterStar.toString(),
+          globals.filterStatus.toString(),
+          globals.filterPriority.toString(),
           globals.filterCategory.toString(),
           globals.filterAction.toString(),
           globals.filterContext.toString(),
           globals.filterLocation.toString(),
           globals.filterTag.toString(),
-          globals.filterGoal.toString());
+          globals.filterGoal.toString(),
+          globals.filterIsDone,
+);
       // final tasksFuture = helper.getTasksFromLastFewDays();
       tasksFuture.then((result) {
         List<Task> taskList = List<Task>();
@@ -304,17 +327,17 @@ class TaskHomeState extends State {
               break;
             case 4:
               {
-                taskList[i].main1 = taskList[i].status;
+                taskList[i].main1 = taskList[i].star;
               }
               break;
             case 5:
               {
-                taskList[i].main1 = taskList[i].priority;
+                taskList[i].main1 = taskList[i].statusText;
               }
               break;
             case 6:
               {
-                taskList[i].main1 = taskList[i].star;
+                taskList[i].main1 = taskList[i].priorityText;
               }
               break;
             case 7:
@@ -380,17 +403,17 @@ class TaskHomeState extends State {
               break;
             case 4:
               {
-                taskList[i].sec1 = taskList[i].status;
+                taskList[i].sec1 = taskList[i].star;
               }
               break;
             case 5:
               {
-                taskList[i].sec1 = taskList[i].priority;
+                taskList[i].sec1 = taskList[i].statusText;
               }
               break;
             case 6:
               {
-                taskList[i].sec1 = taskList[i].star;
+                taskList[i].sec1 = taskList[i].priorityText;
               }
               break;
             case 7:
@@ -485,6 +508,12 @@ class TaskHomeState extends State {
         if (customSetting.filterDateDue != "") {
           globals.filterDateDue = int.parse(customSetting.filterDateDue);
         }
+        globals.filterStatus = customSetting.filterStatus != ""
+            ? int.parse(customSetting.filterStatus)
+            : 0;
+        globals.filterPriority = customSetting.filterPriority != ""
+            ? int.parse(customSetting.filterPriority)
+            : 0;
         globals.filterCategory = customSetting.filterCategory != ""
             ? int.parse(customSetting.filterCategory)
             : 0;
@@ -528,13 +557,13 @@ class TaskHomeState extends State {
         return "timeDue";
         break;
       case 4:
-        return "status";
+        return "star";
         break;
       case 5:
-        return "priority";
+        return "status";
         break;
       case 6:
-        return "star";
+        return "priority";
         break;
       case 7:
         return "category";
