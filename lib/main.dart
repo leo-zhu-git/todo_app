@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/model/taskclass.dart';
+import 'package:todo_app/screens/LocalNotification_screen.dart';
 import 'package:todo_app/screens/signUp.dart';
 import 'package:todo_app/screens/signin.dart';
 import 'package:todo_app/screens/personalizeview.dart';
@@ -13,7 +14,6 @@ import 'package:flutter_login/flutter_login.dart';
 import 'screens/entry.dart';
 import 'screens/confirm.dart';
 import 'screens/confirm_reset.dart';
-import 'screens/notify_screen.dart';
 
 //import 'package:todo_app/screens/ExpandApp.dart';
 
@@ -36,7 +36,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.brown,
       ),
-//      home: NotifyScreen(), 
+      
+      // rt testing notification 9.23
+//      home: LocalNotificationScreen(), 
+
       onGenerateRoute: (settings) {
         if (settings.name == '/confirm') {
           return PageRouteBuilder(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/screens/LocalNotification_screen.dart';
 import 'package:todo_app/screens/wipe.dart';
 import 'package:todo_app/screens/taskhome.dart';
 import 'package:todo_app/screens/action1s_screen.dart';
@@ -57,25 +58,29 @@ class _DrawerNagivation extends State<DrawerNagivation> {
             ListTile(
               leading: Icon(Icons.home),
               title: Text('Home'),
+              tileColor: Colors.amber[100],
               onTap: () => Navigator.of(context)
                   .push(MaterialPageRoute(builder: (context) => TaskHome())),
             ),
             Divider(),
             ListTile(
               leading: Icon(Icons.cloud_download),
+              tileColor: Colors.amber[100],
               title: Text('Wipe'),
               onTap: () => Navigator.of(context)
                   .push(MaterialPageRoute(builder: (context) => WipeScreen())),
             ),
             Divider(),
             ListTile(
+              tileColor: Colors.amber[100],
               leading: Icon(Icons.connect_without_contact),
-              title: Text('Support [placeholder]'),
+              title: Text('Support [temp test notification]'),
               onTap: () => Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => TaskHome())),
+                  .push(MaterialPageRoute(builder: (context) => LocalNotificationScreen())),
             ),
             Divider(),
             ListTile(
+              tileColor: Colors.amber[100],
               leading: Icon(Icons.people),
               title: Text('Community [placeholder]'),
               onTap: () => Navigator.of(context)
@@ -136,6 +141,7 @@ class _DrawerNagivation extends State<DrawerNagivation> {
 //            ),
             Divider(),
             ListTile(
+              tileColor: Colors.amber[100],
               leading: Icon(Icons.help_outlined),
               title: Text('Help'),
               onTap: () {
@@ -144,6 +150,7 @@ class _DrawerNagivation extends State<DrawerNagivation> {
             ),
             Divider(),
             ListTile(
+              tileColor: Colors.amber[100],
               leading: Icon(Icons.elevator_rounded),
               title: Text('Subscription Plans [placeholder]'),
               onTap: () {
@@ -152,6 +159,7 @@ class _DrawerNagivation extends State<DrawerNagivation> {
             ),
             Divider(),
             ListTile(
+              tileColor: Colors.amber[100],
               leading: Icon(Icons.perm_device_info),
               title: Text('About [placeholder]'),
               onTap: () => Navigator.of(context)
@@ -159,6 +167,7 @@ class _DrawerNagivation extends State<DrawerNagivation> {
             ),
             Divider(),
             ListTile(
+              tileColor: Colors.amber[100],
               leading: Icon(Icons.logout),
               title: Text('Logout [placeholder]'),
               onTap: () => Navigator.of(context)
