@@ -573,7 +573,7 @@ class MySql_DBHelper {
           timeDue = result[i]["timeDue"].toString();
         }
         if (result[i]["goal1"] != null) {
-          goal = result[i]["goal1"].toString();
+          goal1 = result[i]["goal1"].toString();
         }
         if (result[i]["location1"] != null) {
           timeDue = result[i]["location1"].toString();
