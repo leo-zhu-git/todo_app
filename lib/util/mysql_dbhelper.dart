@@ -1,15 +1,16 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:todo_app/model/action1.dart';
-import 'package:todo_app/model/category.dart';
-import 'package:todo_app/model/context1.dart';
-import 'package:todo_app/model/goal1.dart';
-import 'package:todo_app/model/location1.dart';
-import 'package:todo_app/model/priority.dart';
 import 'package:todo_app/model/status.dart';
+import 'package:todo_app/model/priority.dart';
+import 'package:todo_app/model/category.dart';
+import 'package:todo_app/model/action1.dart';
+import 'package:todo_app/model/context1.dart';
+import 'package:todo_app/model/location1.dart';
 import 'package:todo_app/model/tag1.dart';
+import 'package:todo_app/model/goal1.dart';
 
 import 'package:todo_app/util/dbhelper.dart';
 import '../service/http_service.dart';
@@ -49,13 +50,12 @@ class MySql_DBHelper {
       helper.deleteAllTask();
       var taskCount = helper.getCount();
       var count = swiperDataList.length;
-      print(count);
+      print("TaskCount:::::: $count");
 
       for (int i = 0; i < swiperDataList.length; i++) {
         String dbTaskID = swiperDataList[i]['TaskID'].toString();
         String dbUserID = swiperDataList[i]['TaskUserId'].toString();
         String appTaskID = dbTaskID.substring(dbUserID.length, dbTaskID.length);
-        print(dbTaskID);
 
         Task task = Task.withId(
             int.parse(appTaskID),
@@ -80,8 +80,10 @@ class MySql_DBHelper {
             "",
             "",
             "");
-
-        print(task);
+        print("TaskID" + appTaskID);
+        print("CategoryID::::::::" + swiperDataList[i]['TaskCategory']);
+        print("ContextID::::::::" + swiperDataList[i]['TaskContext']);
+        print("TagID::::::::" + swiperDataList[i]['TaskTag']);
 
         helper.insertTask(task);
 
@@ -89,13 +91,13 @@ class MySql_DBHelper {
         // tasksFuture.then((result) {
         //   count = result.length;
 
-        if (count > 0) {
-          helper.updateTask(task);
-          //helper.deleteTask(swiperDataList[i]['TaskID']);
-        } else {
-          helper.insertTask(task);
-          //helper.deleteTask(swiperDataList[i]['TaskID']);
-        }
+        // if (count > 0) {
+        //   helper.updateTask(task);
+        //   //helper.deleteTask(swiperDataList[i]['TaskID']);
+        // } else {
+        //   helper.insertTask(task);
+        //   //helper.deleteTask(swiperDataList[i]['TaskID']);
+        // }
         // });
       }
     });
@@ -155,8 +157,9 @@ class MySql_DBHelper {
       }
     });
   }
+
 ///////////////////////////
-/// sync statuses
+  /// sync statuses
 ///////////////////////////
   void syncStatusesData() async {
     helper.deleteAllStatuses();
@@ -198,7 +201,7 @@ class MySql_DBHelper {
   }
 
 ///////////////////////////
-/// sync priorities
+  /// sync priorities
 ///////////////////////////
   void syncPrioritiesData() async {
     helper.deleteAllPriorities();
@@ -240,7 +243,7 @@ class MySql_DBHelper {
   }
 
 ///////////////////////////
-/// sync categories
+  /// sync categories
 ///////////////////////////
 
   void syncCategoriesData() async {
@@ -283,7 +286,7 @@ class MySql_DBHelper {
   }
 
 ///////////////////////////
-/// sync actions
+  /// sync actions
 ///////////////////////////
   void syncAction1sData() async {
     helper.deleteAllAction1s();
@@ -292,13 +295,13 @@ class MySql_DBHelper {
     tasksRequest.then((value) {
       final data = json.decode(value.toString());
       print(data);
-      List<Map> swiperDataList = (data['priorities'] as List).cast();
+      List<Map> swiperDataList = (data['Action1s'] as List).cast();
 
       var count = swiperDataList.length;
       print(count);
 
       for (int i = 0; i < swiperDataList.length; i++) {
-        Priority action = new Priority();
+        Action1 action = new Action1();
         String dbId = swiperDataList[i]['id'].toString();
         String dbUserID = swiperDataList[i]['userId'].toString();
         String appId = dbId.substring(dbUserID.length, dbId.length);
@@ -306,17 +309,17 @@ class MySql_DBHelper {
         action.name = swiperDataList[i]['name'];
         action.description = swiperDataList[i]['desc'];
 
-        final actionFuture = helper.getPrioritiesbyID(int.parse(appId));
+        final actionFuture = helper.getAction1sbyID(int.parse(appId));
         actionFuture.then((result) {
           count = result.length;
           //for (int i = 0; i < count; i++) {
           //helper.deleteAction(i);
           //}
           if (count > 0) {
-            helper.updatePriorities(action);
+            helper.updateAction1s(action);
             //helper.deleteAction(swiperDataList[i]['TaskID']);
           } else {
-            helper.insertPriorities(action);
+            helper.insertAction1s(action);
             // helper.deleteAction(swiperDataList[i]['TaskID']);
           }
         });
@@ -324,10 +327,8 @@ class MySql_DBHelper {
     });
   }
 
-
-
 ///////////////////////////
-/// sync contexts
+  /// sync contexts
 ///////////////////////////
 
   void syncContext1sData() async {
@@ -337,7 +338,7 @@ class MySql_DBHelper {
     tasksRequest.then((value) {
       final data = json.decode(value.toString());
       print(data);
-      List<Map> swiperDataList = (data['Contexts'] as List).cast();
+      List<Map> swiperDataList = (data['Context1s'] as List).cast();
 
       var count = swiperDataList.length;
       print(count);
@@ -368,8 +369,9 @@ class MySql_DBHelper {
       }
     });
   }
+
 ///////////////////////////
-/// sync locations
+  /// sync locations
 ///////////////////////////
   void syncLocation1sData() async {
     helper.deleteAllLocation1s();
@@ -378,7 +380,7 @@ class MySql_DBHelper {
     tasksRequest.then((value) {
       final data = json.decode(value.toString());
       print(data);
-      List<Map> swiperDataList = (data['Locations'] as List).cast();
+      List<Map> swiperDataList = (data['Location1s'] as List).cast();
 
       var count = swiperDataList.length;
       print(count);
@@ -411,7 +413,7 @@ class MySql_DBHelper {
   }
 
 ///////////////////////////
-/// sync tags
+  /// sync tags
 ///////////////////////////
   void syncTag1sData() async {
     helper.deleteAllTag1s();
@@ -420,7 +422,7 @@ class MySql_DBHelper {
     tasksRequest.then((value) {
       final data = json.decode(value.toString());
       print(data);
-      List<Map> swiperDataList = (data['Tags'] as List).cast();
+      List<Map> swiperDataList = (data['Tag1s'] as List).cast();
 
       var count = swiperDataList.length;
       print(count);
@@ -453,7 +455,7 @@ class MySql_DBHelper {
   }
 
 ///////////////////////////
-/// sync goals
+  /// sync goals
 ///////////////////////////
   void syncGoal1sData() async {
     helper.deleteAllTag1s();
@@ -462,7 +464,7 @@ class MySql_DBHelper {
     tasksRequest.then((value) {
       final data = json.decode(value.toString());
       print(data);
-      List<Map> swiperDataList = (data['Goals'] as List).cast();
+      List<Map> swiperDataList = (data['Goal1s'] as List).cast();
 
       var count = swiperDataList.length;
       print(count);
@@ -513,11 +515,11 @@ class MySql_DBHelper {
         var status = "";
         var priority = "";
         var category = "";
-        var action = "";
-        var context = "";
-        var location = "";
-        var tag = "";
-        var goal = "";
+        var action1 = "";
+        var context1 = "";
+        var location1 = "";
+        var tag1 = "";
+        var goal1 = "";
         var isDone = "";
         var lastModified = "";
         var dateDone = "";
@@ -543,23 +545,26 @@ class MySql_DBHelper {
           category = result[i]["category"].toString();
         }
         if (result[i]["action1"] != null) {
-          action = result[i]["action1"];
+          action1 = result[i]["action1"];
         }
         if (result[i]["context1"] != null) {
-          context = result[i]["context1"].toString();
+          context1 = result[i]["context1"].toString();
         }
         if (result[i]["location1"] != null) {
-          timeDue = result[i]["location1"].toString();
+          location1 = result[i]["location1"].toString();
         }
         if (result[i]["tag1"] != null) {
-          tag = result[i]["tag1"].toString();
+          tag1 = result[i]["tag1"].toString();
         }
         if (result[i]["goal1"] != null) {
-          goal = result[i]["goal1"].toString();
+          goal1 = result[i]["goal1"].toString();
         }
 
         if (result[i]["isDone"] != null) {
           isDone = result[i]["isDone"].toString();
+        }
+        if (result[i]["title"] != null) {
+          task = stringReplace(result[i]["title"]);
         }
         if (result[i]["dateDone"] != null) {
           dateDone = result[i]["dateDone"].toString();
@@ -567,7 +572,15 @@ class MySql_DBHelper {
         if (result[i]["timeDue"] != null) {
           timeDue = result[i]["timeDue"].toString();
         }
-
+        if (result[i]["goal1"] != null) {
+          goal1 = result[i]["goal1"].toString();
+        }
+        if (result[i]["location1"] != null) {
+          timeDue = result[i]["location1"].toString();
+        }
+        if (result[i]["description"] != null) {
+          note = stringReplace(result[i]["description"]);
+        }
 
         String taskTask = '{"taskId":"' +
             result[i]["id"].toString() +
@@ -597,19 +610,19 @@ class MySql_DBHelper {
             category +
             '",' +
             '"taskAction":"' +
-            action +
+            action1 +
             '",' +
             '"taskContext":"' +
-            context +
+            context1 +
             '",' +
             '"taskLocation":"' +
-            location +
+            location1 +
             '",' +
             '"taskTag":"' +
-            tag +
+            tag1 +
             '",' +
             '"taskGoal":"' +
-            goal +
+            goal1 +
             '",' +
             '"taskIsDone":"' +
             isDone +
@@ -646,6 +659,22 @@ class MySql_DBHelper {
   void syncTasks() async {
     this.pushTasksToMySql();
     this.wipeTaskDataFromMySql();
+  }
+
+  String stringReplace(String str) {
+    str = str.replaceAll("\\", "\\\\");
+    str = str.replaceAll("\n", "\\n");
+    str = str.replaceAll("\r", "\\r");
+    str = str.replaceAll("\t", "\\t");
+    str = str.replaceAll("(" ")", "\"\"");
+    str = str.replaceAll(" ", "&nbsp;");
+    str = str.replaceAll("<", "&lt;");
+    str = str.replaceAll(">", "&gt;");
+    str = str.replaceAll('"', '”');
+    str = str.replaceAll('@', 'a:t');
+    str = str.replaceAll("'", '’');
+
+    return str;
   }
 
   // void getTaskData() {

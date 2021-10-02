@@ -92,7 +92,7 @@ class _WipeScreenState extends State<WipeScreen> {
               label: Center(child: Text('Force Device -> Cloud wipe')),
               onPressed: () {
                 _optionText =
-                    'All tasks on this DEVICE will be slowly forced up to CLOUD, potentionally overwriting change you have made. Are you sure?';
+                    'All tasks on this DEVICE will be slowly forced up to CLOUD, potentionally wiping out changes you have made. Are you sure?';
                 _option = 0;
                 _ConfirmDialogue(_option, _optionText);
               }),
@@ -109,7 +109,7 @@ class _WipeScreenState extends State<WipeScreen> {
               label: Center(child: Text('Force Cloud -> Device wipe')),
               onPressed: () {
                 _optionText =
-                    'All tasks on CLOUD will be slowly forced down to this DEVICE, potentionally overwriting change you have made on this device. Are you sure?';
+                    'All tasks on CLOUD will be slowly forced down to this DEVICE, potentionally wiping out changes you have made on this device. Are you sure?';
                 _option = 1;
                 _ConfirmDialogue(_option, _optionText);
               }),

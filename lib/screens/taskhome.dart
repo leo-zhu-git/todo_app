@@ -93,7 +93,7 @@ class TaskHomeState extends State {
           child: Column(
             children: <Widget>[
               Badge(
-                child: Text('View     '),
+                child: Text('View          '),
                 shape: BadgeShape.square,
                 position: BadgePosition.topEnd(),
                 badgeContent: Text(count.toString(),

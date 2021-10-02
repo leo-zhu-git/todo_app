@@ -81,7 +81,7 @@ class DbHelper {
 
   Future<Database> initializeDb() async {
     Directory dir = await getApplicationDocumentsDirectory();
-    String path = dir.path + "todo_V22.b.db";
+    String path = dir.path + "todo_V22.d4.db";
     var dbTodovn = await openDatabase(path, version: 1, onCreate: _createDb);
     return dbTodovn;
   }
@@ -145,7 +145,6 @@ class DbHelper {
   }
 
   void setDefaultDB(Database db) async {
-
     //////
     //Create Default Values for statuses
     //////
@@ -259,15 +258,23 @@ class DbHelper {
     //////
     await db.execute(
         "INSERT INTO context1s ( 'name', 'description')  values (?, ?)",
-        ['1.Morning', '1Bootstrap - please delete or rename if necessary']);
+        ['1.Quiet Time', '1Bootstrap - please delete or rename if necessary']);
 
     await db.execute(
         "INSERT INTO context1s ( 'name', 'description')  values (?, ?)",
-        ['2.Afternoon', '2Bootstrap - please delete or rename if necessary']);
+        ['2.Internet Time', '2Bootstrap - please delete or rename if necessary']);
 
     await db.execute(
         "INSERT INTO context1s ( 'name', 'description')  values (?, ?)",
-        ['3.Evening', '2Bootstrap - please delete or rename if necessary']);
+        ['3.Morning', '3Bootstrap - please delete or rename if necessary']);
+
+    await db.execute(
+        "INSERT INTO context1s ( 'name', 'description')  values (?, ?)",
+        ['4.Afternoon', '4Bootstrap - please delete or rename if necessary']);
+
+    await db.execute(
+        "INSERT INTO context1s ( 'name', 'description')  values (?, ?)",
+        ['5.Evening', '5Bootstrap - please delete or rename if necessary']);
 
     //////
     //Create Default Values for Locations
@@ -279,6 +286,10 @@ class DbHelper {
     await db.execute(
         "INSERT INTO location1s ( 'name', 'description')  values (?, ?)",
         ['2.Grocery', '2Bootstrap - please delete or rename if necessary']);
+
+    await db.execute(
+        "INSERT INTO location1s ( 'name', 'description')  values (?, ?)",
+        ['3.Outdoor', '3Bootstrap - please delete or rename if necessary']);
 
     //////
     //Create Default Values for Tags
@@ -315,8 +326,10 @@ class DbHelper {
         ['5.Read', '5Bootstrap - please delete or rename if necessary']);
 
     await db.execute(
-        "INSERT INTO goal1s ( 'name', 'description')  values (?, ?)",
-        ['6.Better Sleep', '6Bootstrap - please delete or rename if necessary']);
+        "INSERT INTO goal1s ( 'name', 'description')  values (?, ?)", [
+      '6.Better Sleep',
+      '6Bootstrap - please delete or rename if necessary'
+    ]);
 
     //Default value for Custom Setting
     CustomSettings customSetting = new CustomSettings(
@@ -366,7 +379,7 @@ Connect soon
         formattedate, // dateDue
         '', // timeDue
         '', // star
-        '', // status 
+        '', // status
         '', // priority
         '', // category
         '', // action
@@ -400,7 +413,7 @@ Bottom-Right (Search) | keyword search or more powerful advance dropdown search
         formattedate, // dateDue
         '', // timeDue
         '', // star
-        '', // status 
+        '', // status
         '', // priority
         '', // category
         '', // action
@@ -421,7 +434,7 @@ Bottom-Right (Search) | keyword search or more powerful advance dropdown search
     task = Task(
         "3.Practice | Baby Steps",
         '''
-View | Check on left box or swipe to complete a task
+View | Check on left box (or swipe) to complete a task
 
 Personalize | filters, order, view, picklists 
 
@@ -435,7 +448,7 @@ Contact us | share the good, bad, ugly
         formattedate, // dateDue
         '', // timeDue
         '', // star
-        '', // status 
+        '', // status
         '', // priority
         '', // category
         '', // action
@@ -467,7 +480,7 @@ Plan C - USD 24 | 12 month
         formattedate, // dateDue
         '', // timeDue
         '', // star
-        '', // status 
+        '', // status
         '', // priority
         '', // category
         '', // action
@@ -547,25 +560,26 @@ Plan C - USD 24 | 12 month
     Database db = await this.db;
 
     String queryStr = "";
-    queryStr = "SELECT $tblTodo.id,$tblTodo.task, $tblTodo.note, dateDue,timeDue, star, "+
-        "status, priority, category,action1,context1,location1,tag1,goal1, " +
-        "isDone, dateDone, lastModified, "+
-        "statuses.name as statusesname, " +
-        "priorities.name as prioritiesname, " +        
-        "categories.name as categoriesname, " +
-        "action1s.name as action1name, "+
-        "context1s.name as context1name, "+
-        "location1s.name as location1name, " +
-        "tag1s.name as tag1name, "+
-        "goal1s.name as goal1name  FROM $tblTodo  " +
-        " LEFT JOIN statuses ON  $tblTodo.status = statuses.id" +
-        " LEFT JOIN priorities ON  $tblTodo.priority = priorities.id" +
-        " LEFT JOIN categories ON  $tblTodo.category = categories.id" +
-        " LEFT JOIN action1s ON $tblTodo.action1 = action1s.id " +
-        " LEFT JOIN context1s ON  $tblTodo.context1 = context1s.id" +
-        " LEFT JOIN location1s ON  $tblTodo.location1 = location1s.id" +
-        " LEFT JOIN tag1s ON  $tblTodo.tag1 = tag1s.id" +
-        " LEFT JOIN goal1s ON  $tblTodo.goal1 = goal1s.id ";
+    queryStr =
+        "SELECT $tblTodo.id,$tblTodo.task, $tblTodo.note, dateDue,timeDue, star, " +
+            "status, priority, category,action1,context1,location1,tag1,goal1, " +
+            "isDone, dateDone, lastModified, " +
+            "statuses.name as statusesname, " +
+            "priorities.name as prioritiesname, " +
+            "categories.name as categoriesname, " +
+            "action1s.name as action1name, " +
+            "context1s.name as context1name, " +
+            "location1s.name as location1name, " +
+            "tag1s.name as tag1name, " +
+            "goal1s.name as goal1name  FROM $tblTodo  " +
+            " LEFT JOIN statuses ON  $tblTodo.status = statuses.id" +
+            " LEFT JOIN priorities ON  $tblTodo.priority = priorities.id" +
+            " LEFT JOIN categories ON  $tblTodo.category = categories.id" +
+            " LEFT JOIN action1s ON $tblTodo.action1 = action1s.id " +
+            " LEFT JOIN context1s ON  $tblTodo.context1 = context1s.id" +
+            " LEFT JOIN location1s ON  $tblTodo.location1 = location1s.id" +
+            " LEFT JOIN tag1s ON  $tblTodo.tag1 = tag1s.id" +
+            " LEFT JOIN goal1s ON  $tblTodo.goal1 = goal1s.id ";
 
 ////////////////
     /// build query - add filterDateDue
@@ -990,7 +1004,6 @@ Plan C - USD 24 | 12 month
     return result;
   }
 
-
 //######################### ENd of Action ##########################################
 
 //#########################Context ##########################################
@@ -1080,7 +1093,6 @@ Plan C - USD 24 | 12 month
     result = await db.rawDelete('DELETE FROM location1s WHERE id <> 0');
     return result;
   }
-
 
 //######################### ENd of locations ##########################################
 
