@@ -81,7 +81,7 @@ class DbHelper {
 
   Future<Database> initializeDb() async {
     Directory dir = await getApplicationDocumentsDirectory();
-    String path = dir.path + "todo_V22.b.db";
+    String path = dir.path + "todo_V22.d1.db";
     var dbTodovn = await openDatabase(path, version: 1, onCreate: _createDb);
     return dbTodovn;
   }
@@ -259,15 +259,23 @@ class DbHelper {
     //////
     await db.execute(
         "INSERT INTO context1s ( 'name', 'description')  values (?, ?)",
-        ['1.Morning', '1Bootstrap - please delete or rename if necessary']);
+        ['1.Quiet Time', '1Bootstrap - please delete or rename if necessary']);
 
     await db.execute(
         "INSERT INTO context1s ( 'name', 'description')  values (?, ?)",
-        ['2.Afternoon', '2Bootstrap - please delete or rename if necessary']);
+        ['2.Internet Time', '2Bootstrap - please delete or rename if necessary']);
 
     await db.execute(
         "INSERT INTO context1s ( 'name', 'description')  values (?, ?)",
-        ['3.Evening', '2Bootstrap - please delete or rename if necessary']);
+        ['3.Morning', '3Bootstrap - please delete or rename if necessary']);
+
+    await db.execute(
+        "INSERT INTO context1s ( 'name', 'description')  values (?, ?)",
+        ['4.Afternoon', '4Bootstrap - please delete or rename if necessary']);
+
+    await db.execute(
+        "INSERT INTO context1s ( 'name', 'description')  values (?, ?)",
+        ['5.Evening', '5Bootstrap - please delete or rename if necessary']);
 
     //////
     //Create Default Values for Locations
@@ -279,6 +287,10 @@ class DbHelper {
     await db.execute(
         "INSERT INTO location1s ( 'name', 'description')  values (?, ?)",
         ['2.Grocery', '2Bootstrap - please delete or rename if necessary']);
+
+    await db.execute(
+        "INSERT INTO location1s ( 'name', 'description')  values (?, ?)",
+        ['3.Outdoor', '3Bootstrap - please delete or rename if necessary']);
 
     //////
     //Create Default Values for Tags
@@ -421,7 +433,7 @@ Bottom-Right (Search) | keyword search or more powerful advance dropdown search
     task = Task(
         "3.Practice | Baby Steps",
         '''
-View | Check on left box or swipe to complete a task
+View | Check on left box (or swipe) to complete a task
 
 Personalize | filters, order, view, picklists 
 

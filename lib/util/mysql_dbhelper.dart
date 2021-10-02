@@ -1,15 +1,16 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:todo_app/model/action1.dart';
-import 'package:todo_app/model/category.dart';
-import 'package:todo_app/model/context1.dart';
-import 'package:todo_app/model/goal1.dart';
-import 'package:todo_app/model/location1.dart';
-import 'package:todo_app/model/priority.dart';
 import 'package:todo_app/model/status.dart';
+import 'package:todo_app/model/priority.dart';
+import 'package:todo_app/model/category.dart';
+import 'package:todo_app/model/action1.dart';
+import 'package:todo_app/model/context1.dart';
+import 'package:todo_app/model/location1.dart';
 import 'package:todo_app/model/tag1.dart';
+import 'package:todo_app/model/goal1.dart';
 
 import 'package:todo_app/util/dbhelper.dart';
 import '../service/http_service.dart';
@@ -292,13 +293,13 @@ class MySql_DBHelper {
     tasksRequest.then((value) {
       final data = json.decode(value.toString());
       print(data);
-      List<Map> swiperDataList = (data['priorities'] as List).cast();
+      List<Map> swiperDataList = (data['Action1s'] as List).cast();
 
       var count = swiperDataList.length;
       print(count);
 
       for (int i = 0; i < swiperDataList.length; i++) {
-        Priority action = new Priority();
+        Action1 action = new Action1();
         String dbId = swiperDataList[i]['id'].toString();
         String dbUserID = swiperDataList[i]['userId'].toString();
         String appId = dbId.substring(dbUserID.length, dbId.length);
@@ -306,25 +307,23 @@ class MySql_DBHelper {
         action.name = swiperDataList[i]['name'];
         action.description = swiperDataList[i]['desc'];
 
-        final actionFuture = helper.getPrioritiesbyID(int.parse(appId));
+        final actionFuture = helper.getAction1sbyID(int.parse(appId));
         actionFuture.then((result) {
           count = result.length;
           //for (int i = 0; i < count; i++) {
           //helper.deleteAction(i);
           //}
           if (count > 0) {
-            helper.updatePriorities(action);
+            helper.updateAction1s(action);
             //helper.deleteAction(swiperDataList[i]['TaskID']);
           } else {
-            helper.insertPriorities(action);
+            helper.insertAction1s(action);
             // helper.deleteAction(swiperDataList[i]['TaskID']);
           }
         });
       }
     });
   }
-
-
 
 ///////////////////////////
 /// sync contexts
@@ -337,7 +336,7 @@ class MySql_DBHelper {
     tasksRequest.then((value) {
       final data = json.decode(value.toString());
       print(data);
-      List<Map> swiperDataList = (data['Contexts'] as List).cast();
+      List<Map> swiperDataList = (data['Context1s'] as List).cast();
 
       var count = swiperDataList.length;
       print(count);
@@ -378,7 +377,7 @@ class MySql_DBHelper {
     tasksRequest.then((value) {
       final data = json.decode(value.toString());
       print(data);
-      List<Map> swiperDataList = (data['Locations'] as List).cast();
+      List<Map> swiperDataList = (data['Location1s'] as List).cast();
 
       var count = swiperDataList.length;
       print(count);
@@ -420,7 +419,7 @@ class MySql_DBHelper {
     tasksRequest.then((value) {
       final data = json.decode(value.toString());
       print(data);
-      List<Map> swiperDataList = (data['Tags'] as List).cast();
+      List<Map> swiperDataList = (data['Tag1s'] as List).cast();
 
       var count = swiperDataList.length;
       print(count);
@@ -462,7 +461,7 @@ class MySql_DBHelper {
     tasksRequest.then((value) {
       final data = json.decode(value.toString());
       print(data);
-      List<Map> swiperDataList = (data['Goals'] as List).cast();
+      List<Map> swiperDataList = (data['Goal1s'] as List).cast();
 
       var count = swiperDataList.length;
       print(count);
@@ -513,11 +512,11 @@ class MySql_DBHelper {
         var status = "";
         var priority = "";
         var category = "";
-        var action = "";
-        var context = "";
-        var location = "";
-        var tag = "";
-        var goal = "";
+        var action1 = "";
+        var context1 = "";
+        var location1 = "";
+        var tag1 = "";
+        var goal1 = "";
         var isDone = "";
         var lastModified = "";
         var dateDone = "";
@@ -543,19 +542,19 @@ class MySql_DBHelper {
           category = result[i]["category"].toString();
         }
         if (result[i]["action1"] != null) {
-          action = result[i]["action1"];
+          action1 = result[i]["action1"];
         }
         if (result[i]["context1"] != null) {
-          context = result[i]["context1"].toString();
+          context1 = result[i]["context1"].toString();
         }
         if (result[i]["location1"] != null) {
-          timeDue = result[i]["location1"].toString();
+          location1 = result[i]["location1"].toString();
         }
         if (result[i]["tag1"] != null) {
-          tag = result[i]["tag1"].toString();
+          tag1 = result[i]["tag1"].toString();
         }
         if (result[i]["goal1"] != null) {
-          goal = result[i]["goal1"].toString();
+          goal1 = result[i]["goal1"].toString();
         }
 
         if (result[i]["isDone"] != null) {
@@ -597,19 +596,19 @@ class MySql_DBHelper {
             category +
             '",' +
             '"taskAction":"' +
-            action +
+            action1 +
             '",' +
             '"taskContext":"' +
-            context +
+            context1 +
             '",' +
             '"taskLocation":"' +
-            location +
+            location1 +
             '",' +
             '"taskTag":"' +
-            tag +
+            tag1 +
             '",' +
             '"taskGoal":"' +
-            goal +
+            goal1 +
             '",' +
             '"taskIsDone":"' +
             isDone +
