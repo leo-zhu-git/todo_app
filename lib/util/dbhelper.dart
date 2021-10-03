@@ -26,7 +26,6 @@ class DbHelper {
   String colNote = 'note';
   String colDateDue = 'dateDue';
   String colTimeDue = 'timeDue';
-  String colStar = 'star';
   String colStatus = 'status';
   String colPriority = 'priority';
   String colCategory = 'category';
@@ -35,6 +34,7 @@ class DbHelper {
   String colLocation1 = 'location1';
   String colTag1 = 'tag1';
   String colGoal1 = 'goal1';
+  String colIsStar = 'isStar';
   String colIsDone = 'isDone';
   String colDateDone = 'dateDone';
   String colLastModified = 'lastModified';
@@ -53,7 +53,6 @@ class DbHelper {
   String colshowSec3 = 'showSec3';
   String colfilterDateDue = 'filterDateDue';
   String colfilterTimeDue = 'filterTimeDue';
-  String colfilterStar = 'filterStar';
   String colfilterStatus = 'filterStatus';
   String colfilterPriority = 'filterPriority';
   String colfilterCategory = 'filterCategory';
@@ -62,6 +61,7 @@ class DbHelper {
   String colfilterLocation = 'filterLocation';
   String colfilterTag = 'filterTag';
   String colfilterGoal = 'filterGoal';
+  String colfilterIsStar = 'filterIsStar';
   String colfilterIsDone = 'filterIsDone';
 
   DbHelper._internal();
@@ -81,7 +81,7 @@ class DbHelper {
 
   Future<Database> initializeDb() async {
     Directory dir = await getApplicationDocumentsDirectory();
-    String path = dir.path + "todo_V22.d5.db";
+    String path = dir.path + "todo_V22.d6.db";
     var dbTodovn = await openDatabase(path, version: 1, onCreate: _createDb);
     return dbTodovn;
   }
@@ -89,20 +89,20 @@ class DbHelper {
   void _createDb(Database db, int newVersion) async {
     await db.execute(
         "CREATE TABLE $tblTodo($colId INTEGER PRIMARY KEY, $colTask TEXT, $colNote TEXT, " +
-            "$colDateDue TEXT, $colTimeDue TEXT, $colStar TEXT, $colStatus TEXT, $colPriority TEXT,  " +
+            "$colDateDue TEXT, $colTimeDue TEXT, $colStatus TEXT, $colPriority TEXT,  " +
             "$colCategory TEXT, $colAction1 TEXT, " +
             "$colContext1 TEXT, $colLocation1 TEXT, $colTag1 TEXT, $colGoal1 TEXT, " +
-            "$colIsDone INTEGER, $colDateDone TEXT, $colLastModified TEXT)");
+            "$colIsStar INTEGER, $colIsDone INTEGER, $colDateDone TEXT, $colLastModified TEXT)");
 
 //this table need to include hash key to track users.... i would say all the tables
     await db.execute(
         "CREATE TABLE $tblCustomSettings($colId INTEGER PRIMARY KEY, $colsortField1 TEXT, $colsortOrder1 TEXT, $colsortField2 TEXT, " +
             "$colsortOrder2 TEXT, $colsortField3 TEXT, $colsortOrder3 TEXT, $colshowMain1 TEXT,$colshowMain2 TEXT, " +
             "$colshowSec1 TEXT,$colshowSec2 TEXT,$colshowSec3 TEXT, " +
-            "$colfilterDateDue TEXT, $colfilterTimeDue TEXT, $colfilterStar TEXT, " +
+            "$colfilterDateDue TEXT, $colfilterTimeDue TEXT, " +
             "$colfilterStatus TEXT, $colfilterPriority TEXT,  " +
             "$colfilterCategory TEXT, $colfilterAction TEXT, $colfilterContext TEXT, $colfilterLocation TEXT, $colfilterTag TEXT, " +
-            "$colfilterGoal TEXT, $colfilterIsDone INTEGER)");
+            "$colfilterGoal TEXT, $colfilterIsStar INTEGER, $colfilterIsDone INTEGER)");
 
     // Create table statuses
     await db.execute(
@@ -345,7 +345,6 @@ class DbHelper {
         '3', // sec2
         '4', // sec3
         '0', // dateDue
-        "", // star
         "", // priority
         "", // status
         "", // category
@@ -354,7 +353,9 @@ class DbHelper {
         "", // location
         "", // tag
         "", // goal
-        false); // isDone
+        false, // isStar
+        false //isDone
+        ); // 
     var result = insertCustomSettings(customSetting);
 
     DateTime _dateDue = DateTime.now();
@@ -378,7 +379,6 @@ Connect soon
     ''',
         formattedate, // dateDue
         '', // timeDue
-        '', // star
         '', // status
         '', // priority
         '', // category
@@ -387,6 +387,7 @@ Connect soon
         '', // location
         '', // tag
         '', // goal
+        0, // isStar
         0, // isDone
         '', // dateDone
         '', // last modified
@@ -412,7 +413,6 @@ Bottom-Right (Search) | keyword search or more powerful advance dropdown search
 ''',
         formattedate, // dateDue
         '', // timeDue
-        '', // star
         '', // status
         '', // priority
         '', // category
@@ -421,6 +421,7 @@ Bottom-Right (Search) | keyword search or more powerful advance dropdown search
         '', // location
         '', // tag
         '', // goal
+        0, // isStar
         0, // isDone
         '', // dateDone
         '', // last modified
@@ -447,7 +448,6 @@ Contact us | share the good, bad, ugly
     ''',
         formattedate, // dateDue
         '', // timeDue
-        '', // star
         '', // status
         '', // priority
         '', // category
@@ -456,6 +456,7 @@ Contact us | share the good, bad, ugly
         '', // location
         '', // tag
         '', // goal
+        0, // isStar
         0, // isDone
         '', // dateDone
         '', // last modified
@@ -479,7 +480,6 @@ Plan C - USD 24 | 12 month
         ''',
         formattedate, // dateDue
         '', // timeDue
-        '', // star
         '', // status
         '', // priority
         '', // category
@@ -488,6 +488,7 @@ Plan C - USD 24 | 12 month
         '', // location
         '', // tag
         '', // goal
+        0, // isStar
         0, // isDone
         '', // dateDone
         '', // last modified
@@ -544,7 +545,6 @@ Plan C - USD 24 | 12 month
       String colsortOrder3,
       String colfilterDateDue,
 //      String colfilterTimeDue,
-      String colfilterStar,
       String colfilterStatus,
       String colfilterPriority,
       String colfilterCategory,
@@ -553,6 +553,7 @@ Plan C - USD 24 | 12 month
       String colfilterLocation,
       String colfilterTag,
       String colfilterGoal,
+      int colfilterIsStar,
       int colfilterIsDone) async {
 ////////////////
     /// build query 0
@@ -561,9 +562,9 @@ Plan C - USD 24 | 12 month
 
     String queryStr = "";
     queryStr =
-        "SELECT $tblTodo.id,$tblTodo.task, $tblTodo.note, dateDue,timeDue, star, " +
+        "SELECT $tblTodo.id,$tblTodo.task, $tblTodo.note, dateDue,timeDue,   " +
             "status, priority, category,action1,context1,location1,tag1,goal1, " +
-            "isDone, dateDone, lastModified, " +
+            "isStar, isDone, dateDone, lastModified, " +
             "statuses.name as statusesname, " +
             "priorities.name as prioritiesname, " +
             "categories.name as categoriesname, " +
@@ -608,6 +609,15 @@ Plan C - USD 24 | 12 month
       queryStr = queryStr + " where ($colIsDone ==0)";
     else
       queryStr = queryStr + " where ($colIsDone not Null)";
+
+////////////////
+    /// build query - add filterIsStar
+////////////////
+    if (colfilterIsStar != 0) // show
+      queryStr = queryStr + " and ($colIsStar ==0)";
+    else
+      queryStr = queryStr + " and ($colIsStar not Null)";
+
 
 ////////////////
     /// build query - add DateDue
@@ -746,15 +756,16 @@ Plan C - USD 24 | 12 month
       String searchLocation1,
       String searchTag1,
       String searchGoal1,
-      bool includeCompleted) async {
+      bool includeIsStar,
+      bool includeIsDone) async {
     Database db = await this.db;
 
     String queryStr = "";
     queryStr =
         "SELECT * FROM $tblTodo WHERE ($colTask LIKE '%$searchText%' OR $colNote LIKE '%$searchText%') ";
 
-    if (includeCompleted) {
-      //queryStr = queryStr + " AND  $colIsDone = $includeCompleted";
+    if (includeIsDone) {
+      //queryStr = queryStr + " AND  $colIsDone = $includeIsDone";
     } else {
       queryStr = queryStr + " AND  $colIsDone = 0 ";
     }

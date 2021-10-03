@@ -12,7 +12,6 @@ class CustomSettings {
   String _showSec2;
   String _showSec3;
   String _filterDateDue;
-  String _filterStar;
   String _filterStatus;
   String _filterPriority;
   String _filterCategory;
@@ -21,57 +20,58 @@ class CustomSettings {
   String _filterLocation;
   String _filterTag;
   String _filterGoal;
+  bool _filterIsStar;
   bool _filterIsDone;
 
   CustomSettings(
-      this._sortField1,
-      this._sortOrder1,
-      this._sortField2,
-      this._sortOrder2,
-      this._sortField3,
-      this._sortOrder3,
-      this._showMain1,
-      this._showMain2,
-      this._showSec1,
-      this._showSec2,
-      this._showSec3,
-      this._filterDateDue,
-      this._filterStar,
-      this._filterStatus,
-      this._filterPriority,
-      this._filterCategory,
-      this._filterAction,
-      this._filterContext,
-      this._filterLocation,
-      this._filterTag,
-      this._filterGoal,
-      this._filterIsDone,
-);
+    this._sortField1,
+    this._sortOrder1,
+    this._sortField2,
+    this._sortOrder2,
+    this._sortField3,
+    this._sortOrder3,
+    this._showMain1,
+    this._showMain2,
+    this._showSec1,
+    this._showSec2,
+    this._showSec3,
+    this._filterDateDue,
+    this._filterStatus,
+    this._filterPriority,
+    this._filterCategory,
+    this._filterAction,
+    this._filterContext,
+    this._filterLocation,
+    this._filterTag,
+    this._filterGoal,
+    this._filterIsStar,
+    this._filterIsDone,
+  );
   CustomSettings.withId(
-      this._id,
-      this._sortField1,
-      this._sortOrder1,
-      this._sortField2,
-      this._sortOrder2,
-      this._sortField3,
-      this._sortOrder3,
-      this._showMain1,
-      this._showMain2,
-      this._showSec1,
-      this._showSec2,
-      this._showSec3,
-      this._filterDateDue,
-      this._filterStar,
-      this._filterStatus,
-      this._filterPriority,
-      this._filterCategory,
-      this._filterAction,
-      this._filterContext,
-      this._filterLocation,
-      this._filterTag,
-      this._filterGoal,
-      this._filterIsDone,
-);
+    this._id,
+    this._sortField1,
+    this._sortOrder1,
+    this._sortField2,
+    this._sortOrder2,
+    this._sortField3,
+    this._sortOrder3,
+    this._showMain1,
+    this._showMain2,
+    this._showSec1,
+    this._showSec2,
+    this._showSec3,
+    this._filterDateDue,
+    this._filterStatus,
+    this._filterPriority,
+    this._filterCategory,
+    this._filterAction,
+    this._filterContext,
+    this._filterLocation,
+    this._filterTag,
+    this._filterGoal,
+    this._filterIsStar,
+    this._filterIsDone,
+  );
   int get id => _id;
   String get sortField1 => _sortField1;
   String get sortOrder1 => _sortOrder1;
@@ -85,7 +85,6 @@ class CustomSettings {
   String get showSec2 => _showSec2;
   String get showSec3 => _showSec3;
   String get filterDateDue => _filterDateDue;
-  String get filterStar => _filterStar; 
   String get filterStatus => _filterStatus;
   String get filterPriority => _filterPriority;
   String get filterCategory => _filterCategory;
@@ -94,6 +93,7 @@ class CustomSettings {
   String get filterLocation => _filterLocation;
   String get filterTag => _filterTag;
   String get filterGoal => _filterGoal;
+  bool get filterIsStar => _filterIsStar;
   bool get filterIsDone => _filterIsDone;
 
   set sortField1(String newSortField1) {
@@ -144,10 +144,6 @@ class CustomSettings {
     this._filterDateDue = newFilterDateDue;
   }
 
-  set filterStar(String newFilterStar) {
-    this._filterStar = newFilterStar;
-  }
-
   set filterStatus(String newFilterStatus) {
     this._filterStatus = newFilterStatus;
   }
@@ -180,10 +176,13 @@ class CustomSettings {
     this._filterGoal = newFilterGoal;
   }
 
+  set filterIsStar(bool newFilterIsStar) {
+    this._filterIsStar = newFilterIsStar;
+  }
+
   set filterIsDone(bool newFilterIsDone) {
     this._filterIsDone = newFilterIsDone;
   }
-
 
   Map<String, dynamic> toMap() {
     var map = Map<String, dynamic>();
@@ -200,7 +199,6 @@ class CustomSettings {
     map['showSec2'] = _showSec2;
     map['showSec3'] = _showSec3;
     map['filterDateDue'] = _filterDateDue;
-    map['filterStar'] = _filterStar;
     map['filterStatus'] = _filterStatus;
     map['filterPriority'] = _filterPriority;
     map['filterCategory'] = _filterCategory;
@@ -209,6 +207,7 @@ class CustomSettings {
     map['filterLocation'] = _filterLocation;
     map['filterTag'] = _filterTag;
     map['filterGoal'] = _filterGoal;
+    map['filterIsStar'] = _filterIsStar;
     map['filterIsDone'] = _filterIsDone;
 
     if (_id != null) {
@@ -232,7 +231,6 @@ class CustomSettings {
     this._showSec2 = o['showSec2'];
     this._showSec3 = o['showSec3'];
     this._filterDateDue = o['filterDateDue'];
-    this._filterStar = o['filterStar'];
     this._filterStatus = o['filterStatus'];
     this._filterPriority = o['filterPriority'];
     this._filterCategory = o['filterCategory'];
@@ -241,6 +239,7 @@ class CustomSettings {
     this._filterLocation = o['filterLocation'];
     this._filterTag = o['filterTag'];
     this._filterGoal = o['filterGoal'];
+    this._filterIsStar = o['filterIsStar'] == 0 ? false : true; 
     this._filterIsDone = o['filterIsDone'] == 0 ? false : true;
   }
 }

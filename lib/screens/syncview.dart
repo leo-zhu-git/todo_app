@@ -14,7 +14,7 @@ class _SyncViewState extends State<SyncView> {
   @override
   void initState() {
     super.initState();
-    await mysqlDBhelper.syncTasks();
+    mysqlDBhelper.syncTasks();
     Navigator.pop(context);
   }
 

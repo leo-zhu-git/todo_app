@@ -15,7 +15,6 @@ class Task {
   String _note;
   String _dateDue;
   String _timeDue;
-  String _star;
   String _status;
   String _priority;
   String _category;
@@ -32,6 +31,7 @@ class Task {
   String _location1Text;
   String _tag1Text;
   String _goal1Text;
+  int _isStar;
   int _isDone;
   String _dateDone;
   String _lastModified;
@@ -46,7 +46,6 @@ class Task {
       this._note,
       this._dateDue,
       this._timeDue,
-      this._star,
       this._status,
       this._priority,
       this._category,
@@ -55,6 +54,7 @@ class Task {
       this._location1,
       this._tag1,
       this._goal1,
+      this._isStar,
       this._isDone,
       this._dateDone,
       this._lastModified,
@@ -69,7 +69,6 @@ class Task {
       this._note,
       this._dateDue,
       this._timeDue,
-      this._star,
       this._status,
       this._priority,
       this._category,
@@ -78,6 +77,7 @@ class Task {
       this._location1,
       this._tag1,
       this._goal1,
+      this._isStar,
       this._isDone,
       this._dateDone,
       this._lastModified,
@@ -91,7 +91,6 @@ class Task {
   String get note => _note;
   String get dateDue => _dateDue;
   String get timeDue => _timeDue;
-  String get star => _star;
   String get status => _status;
   String get priority => _priority;
   String get category => _category;
@@ -108,6 +107,7 @@ class Task {
   String get location1Text => _location1Text;
   String get tag1Text => _tag1Text;
   String get goal1Text => _goal1Text;
+  int get isStar => _isStar;
   int get isDone => _isDone;
   String get dateDone => _dateDone;
   String get lastModified => _lastModified;
@@ -131,10 +131,6 @@ class Task {
 
   set timeDue(String newTimedue) {
     this._timeDue = newTimedue;
-  }
-
-  set star(String newStar) {
-    this._star = newStar;
   }
 
   set status(String newStatus) {
@@ -201,6 +197,10 @@ class Task {
     this._goal1Text = newGoalText;
   }
 
+  set isStar(int newisStar) {
+    this._isStar = newisStar;
+  }
+
   set isDone(int newisDone) {
     this._isDone = newisDone;
   }
@@ -238,7 +238,6 @@ class Task {
   String colNote = '';
   String colDateDue = '';
   String colTimeDue = '';
-  String colStar = '';
   String colStatus = '';
   String colPriority = '';
   String colCategory = '';
@@ -247,6 +246,7 @@ class Task {
   String colLocation1 = '';
   String colTag1 = '';
   String colGoal1 = '';
+  String colIsStar = '';
   String colIsDone = '';
   String colDateDone = '';
   String colLastModified = '';
@@ -258,7 +258,6 @@ class Task {
     map['note'] = _note;
     map['dateDue'] = _dateDue;
     map['timeDue'] = _timeDue;
-    map['star'] = _star;
     map['status'] = _status;
     map['priority'] = _priority;
     map['category'] = _category;
@@ -267,6 +266,7 @@ class Task {
     map['location1'] = _location1;
     map['tag1'] = _tag1;
     map['goal1'] = _goal1;
+    map['isStar'] = _isStar;
     map['isDone'] = _isDone;
     map['dateDone'] = _dateDone;
     map['lastModified'] = _lastModified;
@@ -284,7 +284,6 @@ class Task {
     this._note = o['note'];
     this._dateDue = o['dateDue'];
     this._timeDue = o['timeDue'];
-    this._star = o['star'];
     this._status = o['status'];
     this._priority = o['priority'];
     this._category = o['category'];
@@ -301,6 +300,7 @@ class Task {
     this._location1Text = o['location1name'] == null ? "" : o['location1name'];
     this._tag1Text = o['tag1name'] == null ? "" : o['tag1name'];
     this._goal1Text = o['goal1name'] == null ? "" : o['goal1name'];
+    this._isStar = o['isStar'];
     this._isDone = o['isDone'];
     this._dateDone = o['dateDone'];
     this._lastModified = o['lastModified'];
