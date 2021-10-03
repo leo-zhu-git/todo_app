@@ -115,7 +115,7 @@ class _Action1sScreenState extends State<Action1sScreen> {
                     style: TextStyle(color: Colors.white),
                   )),
             ],
-            backgroundColor: Colors.blue[100],
+            backgroundColor: Colors.orange[100],
             title: Text('Add Action'),
             content: SingleChildScrollView(
               child: Column(
@@ -147,7 +147,7 @@ class _Action1sScreenState extends State<Action1sScreen> {
         barrierDismissible: true,
         builder: (param) {
           return AlertDialog(
-            backgroundColor: Colors.blue[100],
+            backgroundColor: Colors.orange[100],
             actions: <Widget>[
               ElevatedButton(
                   style: ElevatedButton.styleFrom(
@@ -229,7 +229,7 @@ class _Action1sScreenState extends State<Action1sScreen> {
         barrierDismissible: true,
         builder: (param) {
           return AlertDialog(
-            backgroundColor: Colors.blue[100],
+            backgroundColor: Colors.orange[100],
             actions: <Widget>[
               ElevatedButton(
                   style: ElevatedButton.styleFrom(
@@ -304,7 +304,7 @@ class _Action1sScreenState extends State<Action1sScreen> {
                   position: BadgePosition.topEnd(),
                   badgeContent: Text(_actionList.length.toString(),
                       style: TextStyle(color: Colors.black)),
-                  badgeColor: Colors.blue[200],
+                  badgeColor: Colors.orange[100],
                 ),
               ],
             ),
@@ -318,7 +318,7 @@ class _Action1sScreenState extends State<Action1sScreen> {
             padding: EdgeInsets.only(top: 4.0, left: 4.0, right: 4.0),
             child: Card(
               elevation: 8.0,
-              color: Colors.blue[100],
+              color: Colors.orange[100],
               child: ListTile(
                 leading: IconButton(
                     icon: Icon(Icons.edit),

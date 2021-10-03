@@ -34,13 +34,27 @@ class SortItem {
       SortItem(3, 'Due Time'),
       SortItem(4, 'Status'),
       SortItem(5, 'Priority'),
-      SortItem(6, 'Star'),
-      SortItem(7, 'Category'),
-      SortItem(8, 'Action'),
-      SortItem(9, 'Context'),
-      SortItem(10, 'Location'),
-      SortItem(11, 'Tag'),
-      SortItem(12, 'Goal'),
+      SortItem(6, 'Category'),
+      SortItem(7, 'Action'),
+      SortItem(8, 'Context'),
+      SortItem(9, 'Location'),
+      SortItem(10, 'Tag'),
+      SortItem(11, 'Goal'),
+      SortItem(12, 'Star'),
+      SortItem(13, 'Done'),
+    ];
+  }
+}
+
+class FilterIsStar {
+  int id;
+  String name;
+
+  FilterIsStar(this.id, this.name);
+  static List<FilterIsStar> getIsStar() {
+    return <FilterIsStar>[
+      FilterIsStar(0, '-- Star - Show All --'),
+      FilterIsStar(1, 'Star - Show Only'),
     ];
   }
 }
@@ -111,20 +125,6 @@ class FilterDateDue {
 //  }
 //}
 
-class FilterStar {
-  int id;
-  String name;
-
-  FilterStar(this.id, this.name);
-  static List<FilterStar> getStar() {
-    return <FilterStar>[
-      FilterStar(0, '-- All Star/ No Star -- '),
-      FilterStar(1, 'No Star'),
-      FilterStar(2, 'Star Only'),
-    ];
-  }
-}
-
 class SortOrder {
   int id;
   String name;
@@ -142,27 +142,17 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
 {
   List<SortItem> _sort = SortItem.getSort();
   List<SortOrder> _order = SortOrder.getOrder();
+  List<FilterIsStar> _filterIsStar = FilterIsStar.getIsStar();
   List<FilterIsDone> _filterIsDone = FilterIsDone.getIsDone();
   List<FilterDateDue> _filterDateDue = FilterDateDue.getDateDue();
-//  List<FilterStatus> _filterStatus = FilterStatus.getStatus();
-//  List<FilterPriority> _filterPriority = FilterPriority.getPriority();
-  List<FilterStar> _filterStar = FilterStar.getStar();
   List<DropdownMenuItem<SortItem>> _dropdownMenuItemsSort;
   List<DropdownMenuItem<SortOrder>> _dropdownMenuSortOrder;
+  List<DropdownMenuItem<FilterIsStar>> _dropdownFilterIsStar;
   List<DropdownMenuItem<FilterIsDone>> _dropdownFilterIsDone;
   List<DropdownMenuItem<FilterDateDue>> _dropdownFilterDateDue;
-//  List<DropdownMenuItem<FilterStatus>> _dropdownFilterStatus;
-//  List<DropdownMenuItem<FilterPriority>> _dropdownFilterPriority;
-//  List<DropdownMenuItem<FilterCategory>> _dropdownFilterCategory;
-//  List<DropdownMenuItem<FilterAction>> _dropdownFilterAction;
-//  List<DropdownMenuItem<FilterContext>> _dropdownFilterContext;
-//  List<DropdownMenuItem<FilterLocation>> _dropdownFilterLocation;
-//  List<DropdownMenuItem<FilterTag>> _dropdownFilterTag;
+  FilterIsStar _selectedFilterIsStar;
   FilterIsDone _selectedFilterIsDone;
   FilterDateDue _selectedFilterDateDue;
-//  FilterStatus _selectedFilterStatus;
-//  FilterPriority _selectedFilterPriority;
-  FilterStar _selectedFilterStar;
   SortItem _selectedSortField1;
   SortOrder _selectedSortOrder1;
   SortItem _selectedSortField2;
@@ -202,11 +192,9 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     super.initState();
     _dropdownMenuItemsSort = buildDropdownMenuItems(_sort);
     _dropdownMenuSortOrder = buildDropdownMenuOrder(_order);
+    _dropdownFilterIsStar = buildDropdownFilterIsStar(_filterIsStar);
     _dropdownFilterIsDone = buildDropdownFilterIsDone(_filterIsDone);
     _dropdownFilterDateDue = buildDropdownFilterDateDue(_filterDateDue);
-//    _dropdownFilterStatus = buildDropdownFilterStatus(_filterStatus);
-//    _dropdownFilterPriority = buildDropdownFilterPriority(_filterPriority);
-//    _dropdownFilterStar = buildDropdownFilterStar(_filterStar);
     _loadStatuses();
     _loadPriorities();
     _loadCategories();
@@ -228,32 +216,13 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
           _dropdownFilterDateDue[globals.filterDateDue].value;
 
     ////////////////////////////
-    /// filter - status
+    /// filter - is star
     ////////////////////////////
-  //  if (globals.filterStatus == null) {
-  //    _selectedFilterStatus = _dropdownFilterStatus[0].value;
-  //    globals.filterStatus = 0;
-  //  } else
-  //    _selectedFilterStatus = _dropdownFilterStatus[globals.filterStatus].value;
-
-    ////////////////////////////
-    /// filter - priority
-    ////////////////////////////
-//    if (globals.filterPriority == null) {
-//      _selectedFilterPriority = _dropdownFilterPriority[0].value;
-//      globals.filterPriority = 0;
-//    } else
-//      _selectedFilterPriority =
-//          _dropdownFilterPriority[globals.filterPriority].value;
-
-    ////////////////////////////
-    /// filter - star
-    ////////////////////////////
-//    if (globals.filterStar == null) {
-//      _selectedFilterStar = _dropdownFilterStar[0].value;
-//      globals.filterStar = 0;
-//    } else
-//      _selectedFilterStar = _dropdownFilterStar[globals.filterStar].value;
+    if (globals.filterIsStar == null) {
+      _selectedFilterIsStar = _dropdownFilterIsStar[0].value;
+      globals.filterIsStar = 0;
+    } else
+      _selectedFilterIsStar = _dropdownFilterIsStar[globals.filterIsStar].value;
 
     ////////////////////////////
     /// filter - is done
@@ -361,7 +330,6 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
       });
     });
   }
-
 
   _loadPriorities() async {
     var priorities = await helper.getPriorities();
@@ -555,6 +523,20 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     return order;
   }
 
+  List<DropdownMenuItem<FilterIsStar>> buildDropdownFilterIsStar(
+      List filterIsStarItems) {
+    List<DropdownMenuItem<FilterIsStar>> items = List();
+    for (FilterIsStar filterIsStar in filterIsStarItems) {
+      items.add(
+        DropdownMenuItem(
+          value: filterIsStar,
+          child: Text(filterIsStar.name),
+        ),
+      );
+    }
+    return items;
+  }
+
   List<DropdownMenuItem<FilterIsDone>> buildDropdownFilterIsDone(
       List filterIsDoneItems) {
     List<DropdownMenuItem<FilterIsDone>> items = List();
@@ -611,19 +593,19 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
 //    return items;
 //  }
 
-  List<DropdownMenuItem<FilterStar>> buildDropdownFilterStar(
-      List filterStarItems) {
-    List<DropdownMenuItem<FilterStar>> items = List();
-    for (FilterStar filterStar in filterStarItems) {
-      items.add(
-        DropdownMenuItem(
-          value: filterStar,
-          child: Text(filterStar.name),
-        ),
-      );
-    }
-    return items;
-  }
+//  List<DropdownMenuItem<FilterStar>> buildDropdownFilterStar(
+//      List filterStarItems) {
+//    List<DropdownMenuItem<FilterStar>> items = List();
+//    for (FilterStar filterStar in filterStarItems) {
+//      items.add(
+//        DropdownMenuItem(
+//          value: filterStar,
+//          child: Text(filterStar.name),
+//        ),
+//      );
+//    }
+//    return items;
+//  }
 
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
   _showSuccessSnackBar(message) {
@@ -728,6 +710,27 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
 //                  },
 //               ),
 //              ),
+
+///////////////////////////
+//  Filter Is Star
+///////////////////////////
+//              Text("Filter - Is Star"),
+
+              new Container(
+                margin: const EdgeInsets.all(2.0),
+                decoration: BoxDecoration(
+                    shape: BoxShape.rectangle, color: Colors.blue[100]),
+                child: DropdownButtonFormField(
+                  items: _dropdownFilterIsStar,
+                  hint: Text('Filter by Is Star Tasks'),
+                  value: _selectedFilterIsStar,
+                  onChanged: (selectedFilterIsStar) {
+                    setState(() {
+                      _selectedFilterIsStar = selectedFilterIsStar;
+                    });
+                  },
+                ),
+              ),
 
 ///////////////////////////
 //  Filter Is Done
@@ -1123,7 +1126,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
               Card(
                 elevation: 8.0,
                 child: ListTile(
-                  tileColor: Colors.blue[100],
+                  tileColor: Colors.orange[100],
                   title: Text('Statuses'),
                   onTap: () => Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => StatusesScreen())),
@@ -1137,7 +1140,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
               Card(
                 elevation: 8.0,
                 child: ListTile(
-                  tileColor: Colors.blue[100],
+                  tileColor: Colors.orange[100],
                   title: Text('Priorities'),
                   onTap: () => Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => PrioritiesScreen())),
@@ -1151,7 +1154,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
               Card(
                 elevation: 8.0,
                 child: ListTile(
-                  tileColor: Colors.blue[100],
+                  tileColor: Colors.orange[100],
                   title: Text('Categories'),
                   onTap: () => Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => CategoriesScreen())),
@@ -1165,10 +1168,10 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
               Card(
                 elevation: 8.0,
                 child: ListTile(
-                  tileColor: Colors.blue[100],
+                  tileColor: Colors.orange[100],
                   title: Text('Actions'),
-                  onTap: () => Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => Action1sScreen())),
+                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => Action1sScreen())),
                 ),
               ),
               SizedBox(height: 2),
@@ -1179,10 +1182,10 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
               Card(
                 elevation: 8.0,
                 child: ListTile(
-                  tileColor: Colors.blue[100],
+                  tileColor: Colors.orange[100],
                   title: Text('Contexts'),
-                  onTap: () => Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => Context1sScreen())),
+                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => Context1sScreen())),
                 ),
               ),
               SizedBox(height: 2),
@@ -1193,7 +1196,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
               Card(
                 elevation: 8.0,
                 child: ListTile(
-                  tileColor: Colors.blue[100],
+                  tileColor: Colors.orange[100],
                   title: Text('Locations'),
                   onTap: () => Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => Location1sScreen())),
@@ -1207,7 +1210,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
               Card(
                 elevation: 8.0,
                 child: ListTile(
-                  tileColor: Colors.blue[100],
+                  tileColor: Colors.orange[100],
                   title: Text('Tags'),
                   onTap: () => Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => Tag1sScreen())),
@@ -1221,7 +1224,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
               Card(
                 elevation: 8.0,
                 child: ListTile(
-                  tileColor: Colors.blue[100],
+                  tileColor: Colors.orange[100],
                   title: Text('Goals'),
                   onTap: () => Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => Goal1sScreen())),
@@ -1278,6 +1281,8 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                           if (_selectedShowSec3 != null)
                             globals.showSec3 = _selectedShowSec3.id;
                           print(globals.showSec3);
+                          if (_selectedFilterIsStar != null)
+                            globals.filterIsStar = _selectedFilterIsStar.id;
                           if (_selectedFilterIsDone != null)
                             globals.filterIsDone = _selectedFilterIsDone.id;
                           if (_selectedFilterDateDue != null)
@@ -1286,8 +1291,6 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
 //                            globals.filterStatus = _selectedFilterStatus.id;
 //                          if (_selectedFilterPriority != null)
 //                            globals.filterPriority = _selectedFilterPriority.id;
-                          if (_selectedFilterStar != null)
-                            globals.filterStar = _selectedFilterStar.id;
 //                          if (_selectedFilterCategory != null)
 //                            globals.filterCategory = _selectedFilterCategory.id;
 //                          if (_selectedFilterAction != null)
@@ -1322,7 +1325,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                               "",
                               "",
                               "",
-                              "",
+                              false,
                               false,
                             );
                           }
@@ -1364,55 +1367,66 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                               _selectedFilterDateDue == null
                                   ? ""
                                   : _selectedFilterDateDue.id.toString();
-                          if (_selectedFilterIsDone == null) {
-                            customSetting.filterIsDone = false;
+                          if (_selectedFilterIsStar == null) {
+                            customSetting.filterIsStar = false;
                           } else {
-                            if (_selectedFilterIsDone.id == 0) {
+                            if (_selectedFilterIsStar.id == 0) {
+                              customSetting.filterIsStar = false;
+                            } else {
+                              customSetting.filterIsStar = true;
+                            }
+                            if (_selectedFilterIsDone == null) {
                               customSetting.filterIsDone = false;
                             } else {
-                              customSetting.filterIsDone = true;
+                              if (_selectedFilterIsDone.id == 0) {
+                                customSetting.filterIsDone = false;
+                              } else {
+                                customSetting.filterIsDone = true;
+                              }
                             }
-                          }
 
-                          customSetting.filterStatus =
-                              _selectedStatus == null
-                                  ? ""
-                                  : _selectedStatus.toString();
-                          customSetting.filterPriority =
-                              _selectedPriority == null
-                                  ? ""
-                                  : _selectedPriority.toString();
-                          customSetting.filterCategory =
-                              _selectedCategory == null
-                                  ? ""
-                                  : _selectedCategory.toString();
-                          customSetting.filterAction = _selectedAction1 == null
-                              ? ""
-                              : _selectedAction1.toString();
-                          customSetting.filterContext =
-                              _selectedContext1 == null
-                                  ? ""
-                                  : _selectedContext1.toString();
-                          customSetting.filterLocation =
-                              _selectedLocation1 == null
-                                  ? ""
-                                  : _selectedLocation1.toString();
-                          customSetting.filterTag = _selectedTag1 == null
-                              ? ""
-                              : _selectedTag1.toString();
-                          customSetting.filterGoal = _selectedGoal1 == null
-                              ? ""
-                              : _selectedGoal1.toString();
+                            customSetting.filterStatus = _selectedStatus == null
+                                ? ""
+                                : _selectedStatus.toString();
+                            customSetting.filterPriority =
+                                _selectedPriority == null
+                                    ? ""
+                                    : _selectedPriority.toString();
+                            customSetting.filterCategory =
+                                _selectedCategory == null
+                                    ? ""
+                                    : _selectedCategory.toString();
+                            customSetting.filterAction =
+                                _selectedAction1 == null
+                                    ? ""
+                                    : _selectedAction1.toString();
+                            customSetting.filterContext =
+                                _selectedContext1 == null
+                                    ? ""
+                                    : _selectedContext1.toString();
+                            customSetting.filterLocation =
+                                _selectedLocation1 == null
+                                    ? ""
+                                    : _selectedLocation1.toString();
+                            customSetting.filterTag = _selectedTag1 == null
+                                ? ""
+                                : _selectedTag1.toString();
+                            customSetting.filterGoal = _selectedGoal1 == null
+                                ? ""
+                                : _selectedGoal1.toString();
 
-                          var result;
+                            var result;
 
-                          if (customSetting.id != null) {
-                            result = helper.updateCustomSettings(customSetting);
-                          } else {
-                            result = helper.insertCustomSettings(customSetting);
-                          }
+                            if (customSetting.id != null) {
+                              result =
+                                  helper.updateCustomSettings(customSetting);
+                            } else {
+                              result =
+                                  helper.insertCustomSettings(customSetting);
+                            }
 
 //end of save
+                          }
                         });
                         _showSuccessSnackBar(
                           Container(
@@ -1510,105 +1524,90 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
               _dropdownMenuItemsSort[int.parse(customSetting.showSec3)].value;
           globals.showSec3 = int.parse(customSetting.showSec3);
         }
-        if (customSetting.filterIsDone == true) {
-          _selectedFilterIsDone = _dropdownFilterIsDone[1].value;
-          globals.filterIsDone = 1;
+        if (customSetting.filterIsStar == true) {
+          _selectedFilterIsStar = _dropdownFilterIsStar[1].value;
+          globals.filterIsStar = 1;
         } else
-          _selectedFilterIsDone = _dropdownFilterIsDone[0].value;
+          _selectedFilterIsStar = _dropdownFilterIsStar[0].value;
       }
-
-      if (customSetting.filterDateDue != "") {
-        _selectedFilterDateDue =
-            _dropdownFilterDateDue[int.parse(customSetting.filterDateDue)]
-                .value;
-        globals.filterDateDue = int.parse(customSetting.filterDateDue);
-      }
-
-//      if (customSetting.filterStatus != "") {
-//        _selectedFilterStatus =
-//            _dropdownFilterStatus[int.parse(customSetting.filterStatus)].value;
-//        globals.filterStatus = int.parse(customSetting.filterStatus);
-//      }
-
-//      if (customSetting.filterPriority != "") {
-//        _selectedFilterPriority =
-//            _dropdownFilterPriority[int.parse(customSetting.filterPriority)]
-//                .value;
-//        globals.filterPriority = int.parse(customSetting.filterPriority);
-//      }
-
-//      if (customSetting.filterStar != "") {
-//        _selectedFilterStar =
-//            _dropdownFilterStar[int.parse(customSetting.filterStar)].value;
-//        globals.filterStar = int.parse(customSetting.filterStar);
-//      }
-
-      ////////////////////////////
-      /// filter - picklists
-      ////////////////////////////
-      if (customSetting.filterStatus == "") {
-        _selectedStatus = null;
-        customSetting.filterStatus = null;
-      } else {
-        _selectedStatus = customSetting.filterStatus.toString();
-        globals.filterStatus = int.parse(customSetting.filterStatus);
-      }
-
-      if (customSetting.filterPriority == "") {
-        _selectedPriority = null;
-        customSetting.filterPriority = null;
-      } else {
-        _selectedCategory = customSetting.filterCategory.toString();
-        globals.filterCategory = int.parse(customSetting.filterCategory);
-      }
-
-      if (customSetting.filterCategory == "") {
-        _selectedCategory = null;
-        customSetting.filterCategory = null;
-      } else {
-        _selectedCategory = customSetting.filterCategory.toString();
-        globals.filterCategory = int.parse(customSetting.filterCategory);
-      }
-
-      if (customSetting.filterAction == "") {
-        _selectedAction1 = null;
-        customSetting.filterAction = null;
-      } else {
-        _selectedAction1 = customSetting.filterAction.toString();
-        globals.filterAction = int.parse(customSetting.filterAction);
-      }
-      if (customSetting.filterContext == "") {
-        _selectedContext1 = null;
-        customSetting.filterContext = null;
-      } else {
-        _selectedContext1 = customSetting.filterContext.toString();
-        globals.filterContext = int.parse(customSetting.filterContext);
-      }
-
-      if (customSetting.filterTag == "") {
-        _selectedTag1 = null;
-        customSetting.filterTag = null;
-      } else {
-        _selectedTag1 = customSetting.filterTag.toString();
-        globals.filterTag = int.parse(customSetting.filterTag);
-      }
-
-      if (customSetting.filterGoal == "") {
-        _selectedGoal1 = null;
-        customSetting.filterGoal = null;
-      } else {
-        _selectedGoal1 = customSetting.filterGoal.toString();
-        globals.filterGoal = int.parse(customSetting.filterGoal);
-      }
-
-      if (customSetting.filterLocation == "") {
-        _selectedLocation1 = null;
-        customSetting.filterLocation = null;
-      } else {
-        _selectedLocation1 = customSetting.filterLocation.toString();
-        globals.filterLocation = int.parse(customSetting.filterLocation);
-      }
+      if (customSetting.filterIsDone == true) {
+        _selectedFilterIsDone = _dropdownFilterIsDone[1].value;
+        globals.filterIsDone = 1;
+      } else
+        _selectedFilterIsDone = _dropdownFilterIsDone[0].value;
     }
+
+    if (customSetting.filterDateDue != "") {
+      _selectedFilterDateDue =
+          _dropdownFilterDateDue[int.parse(customSetting.filterDateDue)].value;
+      globals.filterDateDue = int.parse(customSetting.filterDateDue);
+    }
+    ////////////////////////////
+    /// filter - picklists
+    ////////////////////////////
+    if (customSetting.filterStatus == "") {
+      _selectedStatus = null;
+      customSetting.filterStatus = null;
+    } else {
+      _selectedStatus = customSetting.filterStatus.toString();
+      globals.filterStatus = int.parse(customSetting.filterStatus);
+    }
+
+    if (customSetting.filterPriority == "") {
+      _selectedPriority = null;
+      customSetting.filterPriority = null;
+    } else {
+      _selectedCategory = customSetting.filterCategory.toString();
+      globals.filterCategory = int.parse(customSetting.filterCategory);
+    }
+
+    if (customSetting.filterCategory == "") {
+      _selectedCategory = null;
+      customSetting.filterCategory = null;
+    } else {
+      _selectedCategory = customSetting.filterCategory.toString();
+      globals.filterCategory = int.parse(customSetting.filterCategory);
+    }
+
+    if (customSetting.filterAction == "") {
+      _selectedAction1 = null;
+      customSetting.filterAction = null;
+    } else {
+      _selectedAction1 = customSetting.filterAction.toString();
+      globals.filterAction = int.parse(customSetting.filterAction);
+    }
+    if (customSetting.filterContext == "") {
+      _selectedContext1 = null;
+      customSetting.filterContext = null;
+    } else {
+      _selectedContext1 = customSetting.filterContext.toString();
+      globals.filterContext = int.parse(customSetting.filterContext);
+    }
+
+    if (customSetting.filterTag == "") {
+      _selectedTag1 = null;
+      customSetting.filterTag = null;
+    } else {
+      _selectedTag1 = customSetting.filterTag.toString();
+      globals.filterTag = int.parse(customSetting.filterTag);
+    }
+
+    if (customSetting.filterGoal == "") {
+      _selectedGoal1 = null;
+      customSetting.filterGoal = null;
+    } else {
+      _selectedGoal1 = customSetting.filterGoal.toString();
+      globals.filterGoal = int.parse(customSetting.filterGoal);
+    }
+
+    if (customSetting.filterLocation == "") {
+      _selectedLocation1 = null;
+      customSetting.filterLocation = null;
+    } else {
+      _selectedLocation1 = customSetting.filterLocation.toString();
+      globals.filterLocation = int.parse(customSetting.filterLocation);
+    }
+
     setState(() {
       customSetting = customSetting;
     });

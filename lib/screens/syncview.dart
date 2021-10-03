@@ -1,10 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:todo_app/screens/loading.dart';
 import 'package:todo_app/screens/taskhome.dart';
-import 'package:todo_app/util/dbhelper.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-
-import 'LocalNotification_screen.dart';
 
 class SyncView extends StatefulWidget {
   @override
@@ -18,24 +15,21 @@ class _SyncViewState extends State<SyncView> {
   void initState() {
     super.initState();
     mysqlDBhelper.syncTasks();
-
+    Navigator.pop(context);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.amber[100],
-        appBar: new AppBar(
+      backgroundColor: Colors.amber[100],
+      appBar: new AppBar(
         backgroundColor: Colors.brown[900],
         automaticallyImplyLeading: false,
-        title: Center(child: Text('Sync - never lose your data')),
+        title: Center(
+          child: Text('Sync - never lose your data'),
+        ),
       ),
-
-        body: Center(
-          child: SpinKitFoldingCube(
-            color: Colors.green[200],
-            size: 100,
-          ),
-        ));
+      body: Loading(),
+    );
   }
 }

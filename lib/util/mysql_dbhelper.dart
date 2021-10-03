@@ -63,7 +63,6 @@ class MySql_DBHelper {
             swiperDataList[i]['TaskNote'],
             swiperDataList[i]['TaskDateDue'],
             swiperDataList[i]['TaskTimeDue'],
-            swiperDataList[i]['TaskStar'],
             swiperDataList[i]['TaskStatus'],
             swiperDataList[i]['TaskPriority'],
             swiperDataList[i]['TaskCategory'],
@@ -72,6 +71,7 @@ class MySql_DBHelper {
             swiperDataList[i]['TaskLocation'],
             swiperDataList[i]['TaskTag'],
             swiperDataList[i]['TaskGoal'],
+            int.parse(swiperDataList[i]['TaskIsStar']),
             int.parse(swiperDataList[i]['TaskIsDone']),
             swiperDataList[i]['TaskDateDone'],
             swiperDataList[i]['LastModified'],
@@ -125,7 +125,6 @@ class MySql_DBHelper {
             swiperDataList[i]['TaskNote'],
             swiperDataList[i]['TaskDateDue'],
             swiperDataList[i]['TaskTimeDue'],
-            swiperDataList[i]['TaskStar'],
             swiperDataList[i]['TaskStatus'],
             swiperDataList[i]['TaskPriority'],
             swiperDataList[i]['TaskCategory'],
@@ -134,6 +133,7 @@ class MySql_DBHelper {
             swiperDataList[i]['TaskLocation'],
             swiperDataList[i]['TaskTag'],
             swiperDataList[i]['TaskGoal'],
+            int.parse(swiperDataList[i]['TaskIsStar']),
             int.parse(swiperDataList[i]['TaskIsDone']),
             swiperDataList[i]['TaskDateDone'],
             swiperDataList[i]['LastModified'],
@@ -511,7 +511,6 @@ class MySql_DBHelper {
         var note = "";
         var dateDue = "";
         var timeDue = "";
-        var star = "";
         var status = "";
         var priority = "";
         var category = "";
@@ -520,21 +519,23 @@ class MySql_DBHelper {
         var location1 = "";
         var tag1 = "";
         var goal1 = "";
+        var isStar = "";
         var isDone = "";
         var lastModified = "";
         var dateDone = "";
 
+        if (result[i]["task"] != null) {
+          task = stringReplace(result[i]["task"]);
+        }
+        if (result[i]["note"] != null) {
+          note = stringReplace(result[i]["note"]);
+        }
         if (result[i]["dateDue"] != null) {
           dateDue = result[i]["dateDue"].toString();
         }
         if (result[i]["timeDue"] != null) {
           timeDue = result[i]["timeDue"];
         }
-
-        if (result[i]["star"] != null) {
-          star = result[i]["star"].toString();
-        }
-
         if (result[i]["status"] != null) {
           status = result[i]["status"].toString();
         }
@@ -559,12 +560,11 @@ class MySql_DBHelper {
         if (result[i]["goal1"] != null) {
           goal1 = result[i]["goal1"].toString();
         }
-
+        if (result[i]["isStar"] != null) {
+          isDone = result[i]["isStar"].toString();
+        }
         if (result[i]["isDone"] != null) {
           isDone = result[i]["isDone"].toString();
-        }
-        if (result[i]["title"] != null) {
-          task = stringReplace(result[i]["title"]);
         }
         if (result[i]["dateDone"] != null) {
           dateDone = result[i]["dateDone"].toString();
@@ -577,9 +577,6 @@ class MySql_DBHelper {
         }
         if (result[i]["location1"] != null) {
           timeDue = result[i]["location1"].toString();
-        }
-        if (result[i]["description"] != null) {
-          note = stringReplace(result[i]["description"]);
         }
 
         String taskTask = '{"taskId":"' +
@@ -597,7 +594,6 @@ class MySql_DBHelper {
             '"taskTimeDue":"' +
             timeDue +
             '",' +
-            '"taskStar":"' +
             status +
             '",' +
             '"taskStatus":"' +
@@ -624,6 +620,7 @@ class MySql_DBHelper {
             '"taskGoal":"' +
             goal1 +
             '",' +
+            '"taskIsStar":"' +
             '"taskIsDone":"' +
             isDone +
             '",' +

@@ -40,7 +40,8 @@ class TaskSearchState extends State {
   var _selectedLocation1 = null;
   var _selectedTag1 = null;
   var _selectedGoal1 = null;
-  bool _showCompleted = true;
+  bool _showIsStar = true;
+  bool _showIsDone = true;
 //  var _selectedGoal1 = "";
 
   @override
@@ -81,8 +82,8 @@ class TaskSearchState extends State {
       });
     });
   }
-  
-    _loadPriorities() async {
+
+  _loadPriorities() async {
     var priorities = await helper.getPriorities();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
@@ -105,7 +106,8 @@ class TaskSearchState extends State {
       });
     });
   }
-    _loadCategories() async {
+
+  _loadCategories() async {
     var categories = await helper.getCategories();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
@@ -293,7 +295,8 @@ class TaskSearchState extends State {
                     _selectedLocation1,
                     _selectedTag1,
                     _selectedGoal1,
-                    _showCompleted);
+                    _showIsStar,
+                    _showIsDone);
               },
               decoration: InputDecoration(
                 labelStyle: textStyle,
@@ -320,7 +323,8 @@ class TaskSearchState extends State {
                     children: [
 //####################################Show Completed Task Check box
                       Container(
-                        margin: EdgeInsets.only(left: 8.0, right: 8.0, bottom: 2.0),
+                        margin:
+                            EdgeInsets.only(left: 8.0, right: 8.0, bottom: 2.0),
                         decoration: BoxDecoration(
                             shape: BoxShape.rectangle, color: Colors.blue[100]),
                         child: Row(
@@ -328,11 +332,11 @@ class TaskSearchState extends State {
                           children: [
                             Text('Include Completed Tasks:'),
                             Checkbox(
-                              value: _showCompleted,
+                              value: _showIsDone,
                               onChanged: (value) {
                                 setState(() {
-                                  _showCompleted = value;
-                                  searchData(                                    
+                                  _showIsDone = value;
+                                  searchData(
                                       _searchText,
                                       _selectedStatus,
                                       _selectedPriority,
@@ -342,7 +346,8 @@ class TaskSearchState extends State {
                                       _selectedLocation1,
                                       _selectedTag1,
                                       _selectedGoal1,
-                                      _showCompleted);
+                                      _showIsStar,
+                                      _showIsDone);
                                 });
                               },
                             ),
@@ -385,7 +390,8 @@ class TaskSearchState extends State {
                                         _selectedLocation1,
                                         _selectedTag1,
                                         _selectedGoal1,
-                                        _showCompleted);
+                                        _showIsStar,
+                                        _showIsDone);
                                   });
                                 }),
                           ],
@@ -426,7 +432,8 @@ class TaskSearchState extends State {
                                         _selectedLocation1,
                                         _selectedTag1,
                                         _selectedGoal1,
-                                        _showCompleted);
+                                        _showIsStar,
+                                        _showIsDone);
                                   });
                                 }),
                           ],
@@ -467,7 +474,8 @@ class TaskSearchState extends State {
                                         _selectedLocation1,
                                         _selectedTag1,
                                         _selectedGoal1,
-                                        _showCompleted);
+                                        _showIsStar,
+                                        _showIsDone);
                                   });
                                 }),
                           ],
@@ -505,7 +513,8 @@ class TaskSearchState extends State {
                                         _selectedLocation1,
                                         _selectedTag1,
                                         _selectedGoal1,
-                                        _showCompleted);
+                                        _showIsStar,
+                                        _showIsDone);
                                   });
                                 },
                               )
@@ -542,7 +551,8 @@ class TaskSearchState extends State {
                                       _selectedLocation1,
                                       _selectedTag1,
                                       _selectedGoal1,
-                                      _showCompleted);
+                                      _showIsStar,
+                                      _showIsDone);
                                 });
                               },
                             )
@@ -579,7 +589,8 @@ class TaskSearchState extends State {
                                       _selectedLocation1,
                                       _selectedTag1,
                                       _selectedGoal1,
-                                      _showCompleted);
+                                      _showIsStar,
+                                      _showIsDone);
                                 });
                               },
                             )
@@ -615,7 +626,8 @@ class TaskSearchState extends State {
                                       _selectedLocation1,
                                       _selectedTag1,
                                       _selectedGoal1,
-                                      _showCompleted);
+                                      _showIsStar,
+                                      _showIsDone);
                                 });
                               },
                             )
@@ -651,7 +663,8 @@ class TaskSearchState extends State {
                                       _selectedLocation1,
                                       _selectedTag1,
                                       _selectedGoal1,
-                                      _showCompleted);
+                                      _showIsStar,
+                                      _showIsDone);
                                 });
                               },
                             )
@@ -786,20 +799,31 @@ class TaskSearchState extends State {
   void searchData(
       String searchText,
       String status,
-      String priority, 
+      String priority,
       String category,
       String action1,
       String context1,
       String location1,
       String tag1,
       String goal1,
-      bool showCompleted) {
+      bool showIsStar,
+      bool showIsDone) {
     if (searchText.trim() != "" || searchText.trim() == "") {
       final dbFuture = helper.initializeDb();
       dbFuture.then((result) {
 //      final tasksFuture = helper.searchTasks(searchText, priority, category, action1, context1, location1, tag1, goal1);
-        final tasksFuture = helper.searchTasks(searchText, status, priority, category, action1,
-            context1, location1, tag1, goal1, showCompleted);
+        final tasksFuture = helper.searchTasks(
+            searchText,
+            status,
+            priority,
+            category,
+            action1,
+            context1,
+            location1,
+            tag1,
+            goal1,
+            showIsStar,
+            showIsDone);
         tasksFuture.then((result) {
           List<Task> taskList = List<Task>();
           count = result.length;
@@ -843,37 +867,42 @@ class TaskSearchState extends State {
                 break;
               case 6:
                 {
-                  taskList[i].main1 = taskList[i].star;
+                  taskList[i].main1 = taskList[i].category;
                 }
                 break;
               case 7:
                 {
-                  taskList[i].main1 = taskList[i].category;
+                  taskList[i].main1 = taskList[i].action1;
                 }
                 break;
               case 8:
                 {
-                  taskList[i].main1 = taskList[i].action1;
+                  taskList[i].main1 = taskList[i].context1;
                 }
                 break;
               case 9:
                 {
-                  taskList[i].main1 = taskList[i].context1;
+                  taskList[i].main1 = taskList[i].location1;
                 }
                 break;
               case 10:
                 {
-                  taskList[i].main1 = taskList[i].location1;
+                  taskList[i].main1 = taskList[i].tag1;
                 }
                 break;
               case 11:
                 {
-                  taskList[i].main1 = taskList[i].tag1;
+                  taskList[i].main1 = taskList[i].goal1;
                 }
                 break;
               case 12:
                 {
-                  taskList[i].main1 = taskList[i].goal1;
+                  taskList[i].main1 = taskList[i].isStar.toString();
+                }
+                break;
+              case 13:
+                {
+                  taskList[i].main1 = taskList[i].isDone.toString();
                 }
                 break;
               default:
@@ -889,72 +918,77 @@ class TaskSearchState extends State {
             switch (globals.showMain2) {
               case 0:
                 {
-                  taskList[i].main2 = taskList[i].task;
+                  taskList[i].main1 = taskList[i].task;
                 }
                 break;
               case 1:
                 {
-                  taskList[i].main2 = taskList[i].note;
+                  taskList[i].main1 = taskList[i].note;
                 }
                 break;
               case 2:
                 {
-                  taskList[i].main2 = taskList[i].dateDue;
+                  taskList[i].main1 = taskList[i].dateDue;
                 }
                 break;
               case 3:
                 {
-                  taskList[i].main2 = taskList[i].timeDue;
+                  taskList[i].main1 = taskList[i].timeDue;
                 }
                 break;
               case 4:
                 {
-                  taskList[i].main2 = taskList[i].status;
+                  taskList[i].main1 = taskList[i].status;
                 }
                 break;
               case 5:
                 {
-                  taskList[i].main2 = taskList[i].priority;
+                  taskList[i].main1 = taskList[i].priority;
                 }
                 break;
               case 6:
                 {
-                  taskList[i].main2 = taskList[i].star;
+                  taskList[i].main1 = taskList[i].category;
                 }
                 break;
               case 7:
                 {
-                  taskList[i].main2 = taskList[i].category;
+                  taskList[i].main1 = taskList[i].action1;
                 }
                 break;
               case 8:
                 {
-                  taskList[i].main2 = taskList[i].action1;
+                  taskList[i].main1 = taskList[i].context1;
                 }
                 break;
               case 9:
                 {
-                  taskList[i].main2 = taskList[i].context1;
+                  taskList[i].main1 = taskList[i].location1;
                 }
                 break;
               case 10:
                 {
-                  taskList[i].main2 = taskList[i].location1;
+                  taskList[i].main1 = taskList[i].tag1;
                 }
                 break;
               case 11:
                 {
-                  taskList[i].main2 = taskList[i].tag1;
+                  taskList[i].main1 = taskList[i].goal1;
                 }
                 break;
               case 12:
                 {
-                  taskList[i].main2 = taskList[i].goal1;
+                  taskList[i].main1 = taskList[i].isStar.toString();
+                }
+                break;
+              case 13:
+                {
+                  taskList[i].main1 = taskList[i].isDone.toString();
                 }
                 break;
               default:
                 {
-                  taskList[i].main2 = taskList[i].task;
+                  taskList[i].main1 = taskList[i].task;
                 }
                 break;
             }
@@ -995,37 +1029,42 @@ class TaskSearchState extends State {
                 break;
               case 6:
                 {
-                  taskList[i].sec1 = taskList[i].star;
+                  taskList[i].sec1 = taskList[i].category;
                 }
                 break;
               case 7:
                 {
-                  taskList[i].sec1 = taskList[i].category;
+                  taskList[i].sec1 = taskList[i].action1;
                 }
                 break;
               case 8:
                 {
-                  taskList[i].sec1 = taskList[i].action1;
+                  taskList[i].sec1 = taskList[i].context1;
                 }
                 break;
               case 9:
                 {
-                  taskList[i].sec1 = taskList[i].context1;
+                  taskList[i].sec1 = taskList[i].location1;
                 }
                 break;
               case 10:
                 {
-                  taskList[i].sec1 = taskList[i].location1;
+                  taskList[i].sec1 = taskList[i].tag1;
                 }
                 break;
               case 11:
                 {
-                  taskList[i].sec1 = taskList[i].tag1;
+                  taskList[i].sec1 = taskList[i].goal1;
                 }
                 break;
               case 12:
                 {
-                  taskList[i].sec1 = taskList[i].goal1;
+                  taskList[i].sec1 = taskList[i].isStar.toString();
+                }
+                break;
+              case 13:
+                {
+                  taskList[i].sec1 = taskList[i].isDone.toString();
                 }
                 break;
               default:
@@ -1071,37 +1110,42 @@ class TaskSearchState extends State {
                 break;
               case 6:
                 {
-                  taskList[i].sec2 = taskList[i].star;
+                  taskList[i].sec2 = taskList[i].category;
                 }
                 break;
               case 7:
                 {
-                  taskList[i].sec2 = taskList[i].category;
+                  taskList[i].sec2 = taskList[i].action1;
                 }
                 break;
               case 8:
                 {
-                  taskList[i].sec2 = taskList[i].action1;
+                  taskList[i].sec2 = taskList[i].context1;
                 }
                 break;
               case 9:
                 {
-                  taskList[i].sec2 = taskList[i].context1;
+                  taskList[i].sec2 = taskList[i].location1;
                 }
                 break;
               case 10:
                 {
-                  taskList[i].sec2 = taskList[i].location1;
+                  taskList[i].sec2 = taskList[i].tag1;
                 }
                 break;
               case 11:
                 {
-                  taskList[i].sec2 = taskList[i].tag1;
+                  taskList[i].sec2 = taskList[i].goal1;
                 }
                 break;
               case 12:
                 {
-                  taskList[i].sec2 = taskList[i].goal1;
+                  taskList[i].sec2 = taskList[i].isStar.toString();
+                }
+                break;
+              case 13:
+                {
+                  taskList[i].sec2 = taskList[i].isDone.toString();
                 }
                 break;
               default:
@@ -1147,37 +1191,42 @@ class TaskSearchState extends State {
                 break;
               case 6:
                 {
-                  taskList[i].sec3 = taskList[i].star;
+                  taskList[i].sec3 = taskList[i].category;
                 }
                 break;
               case 7:
                 {
-                  taskList[i].sec3 = taskList[i].category;
+                  taskList[i].sec3 = taskList[i].action1;
                 }
                 break;
               case 8:
                 {
-                  taskList[i].sec3 = taskList[i].action1;
+                  taskList[i].sec3 = taskList[i].context1;
                 }
                 break;
               case 9:
                 {
-                  taskList[i].sec3 = taskList[i].context1;
+                  taskList[i].sec3 = taskList[i].location1;
                 }
                 break;
               case 10:
                 {
-                  taskList[i].sec3 = taskList[i].location1;
+                  taskList[i].sec3 = taskList[i].tag1;
                 }
                 break;
               case 11:
                 {
-                  taskList[i].sec3 = taskList[i].tag1;
+                  taskList[i].sec3 = taskList[i].goal1;
                 }
                 break;
               case 12:
                 {
-                  taskList[i].sec3 = taskList[i].goal1;
+                  taskList[i].sec3 = taskList[i].isStar.toString();
+                }
+                break;
+              case 13:
+                {
+                  taskList[i].sec3 = taskList[i].isDone.toString();
                 }
                 break;
               default:

@@ -25,7 +25,6 @@ DateTime currentDate = DateTime.now();
 DateFormat formatter = DateFormat('yyyy-mm-dd');
 String formattedDate = DateFormat('yyyy-mm-dd').format(currentDate);
 var isChecked = false;
-var isStar = false;
 CustomSettings customSetting;
 MySql_DBHelper mysqlDBhelper = MySql_DBHelper();
 
@@ -182,39 +181,8 @@ class TaskHomeState extends State {
               child: Card(
                   color: Colors.yellow[200],
                   elevation: 8.0,
-
-// rt: change checkboxlisttile to listtile
-                  child: ListTile(
-                    leading: Checkbox(
-                      checkColor: Colors.white,
-                      value: (this.tasklist[position].isDone == 1),
-                      onChanged: (value) {
-                        setState(() {
-                          isChecked = value;
-                          DateTime now = DateTime.now();
-                          String formattedDate =
-                              DateFormat('yyyy-MM-dd').format(now);
-                          if (value == true) {
-                            this.tasklist[position].isDone = 1;
-                            this.tasklist[position].status = "Completed";
-                            this.tasklist[position].dateDone = formattedDate;
-                            dbHelper.updateTask(tasklist[position]);
-                          } else {
-                            this.tasklist[position].isDone = 0;
-                            this.tasklist[position].status = "Open";
-                            this.tasklist[position].dateDone = '';
-                            dbHelper.updateTask(tasklist[position]);
-                          }
-                        });
-                      },
-                    ),
-                    trailing: IconButton(
-                      icon: Icon(Icons.lightbulb, color: Colors.amber[800]),
-                      onPressed: () {
-                        if (this.tasklist[position].isStar == 1) {}
-                      },
-//                      icon: Icon(Icons.lightbulb_outline),
-                    ),
+                  child: CheckboxListTile(
+                    controlAffinity: ListTileControlAffinity.leading,
                     title: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -236,36 +204,53 @@ class TaskHomeState extends State {
                       ],
                     ),
                     isThreeLine: false,
+                    secondary: IconButton(
+                      icon: Icon(Icons.more_vert),
+                      onPressed: () {
+                        navigateToDetail(this.tasklist[position]);
+                      },
+                    ),
                     dense: true,
-//                    value: (this.tasklist[position].isDone == 1),
-                    onTap: () {
-                      navigateToDetail(this.tasklist[position]);
+                    value: (this.tasklist[position].isDone == 1),
+                    onChanged: (value) {
+                      setState(() {
+                        DateTime now = DateTime.now();
+                        String formattedDate =
+                            DateFormat('yyyy-MM-dd').format(now);
+                        if (value == true) {
+                          this.tasklist[position].isDone = 1;
+                          this.tasklist[position].status = "Completed";
+                          this.tasklist[position].dateDone = formattedDate;
+                          dbHelper.updateTask(tasklist[position]);
+//                          _showSuccessSnackBar(Container(
+//                            color: Colors.tealAccent[100],
+//                            height: 40,
+//                            child: Row(
+//                              mainAxisAlignment: MainAxisAlignment.center,
+//                              children: [
+//                                (Icon(
+//                                  Icons.thumb_up,
+//                                  color: Colors.black,
+//                                )),
+//                                Text(
+//                                  ' Task Completed - Satisfaction... ',
+//                                  style: (TextStyle(color: Colors.black)),
+//                                )
+//                              ],
+//                            ),
+//                          ));
+                        } else {
+                          this.tasklist[position].isDone = 0;
+                          this.tasklist[position].status = "Open";
+                          this.tasklist[position].dateDone = '';
+                          dbHelper.updateTask(tasklist[position]);
+                        }
+                      });
                     },
-//                      setState(() {
-//                        DateTime now = DateTime.now();
-//                        String formattedDate =
-//                            DateFormat('yyyy-MM-dd').format(now);
-//                        if (value == true) {
-//                          this.tasklist[position].isDone = 1;
-//                          this.tasklist[position].status = "Completed";
-//                          this.tasklist[position].dateDone = formattedDate;
-//                          dbHelper.updateTask(tasklist[position]);
-//                        } else {
-//                          this.tasklist[position].isDone = 0;
-//                          this.tasklist[position].status = "Open";
-//                          this.tasklist[position].dateDone = '';
-//                          dbHelper.updateTask(tasklist[position]);
-//                        }
-//                      });
-//                    },
-//                    activeColor: Colors.brown[900],
-//                    checkColor: Colors.white,
-
+                    activeColor: Colors.brown[900],
+                    checkColor: Colors.white,
                     autofocus: true,
-                  )
-// rt: change checkboxlisttile to listtile
-
-                  ),
+                  )),
             ));
       },
     );
@@ -281,7 +266,6 @@ class TaskHomeState extends State {
 
     int _filterDateDue =
         globals.filterDateDue != null ? globals.filterDateDue : 7;
-    int _filterIsStar = globals.filterIsStar != null ? globals.filterIsStar : 0;
     int _filterIsDone = globals.filterIsDone != null ? globals.filterIsDone : 0;
 
     var countDone = 0;
@@ -289,25 +273,25 @@ class TaskHomeState extends State {
 
     dbFuture.then((result) {
       final tasksFuture = helper.getTasksSort(
-        getSortColumn(_sortField1),
-        getOrderColumn(_sortOrder1),
-        getSortColumn(_sortField2),
-        getOrderColumn(_sortOrder2),
-        getSortColumn(_sortField3),
-        getOrderColumn(_sortOrder3),
-        getDateDueColumn(_filterDateDue),
+          getSortColumn(_sortField1),
+          getOrderColumn(_sortOrder1),
+          getSortColumn(_sortField2),
+          getOrderColumn(_sortOrder2),
+          getSortColumn(_sortField3),
+          getOrderColumn(_sortOrder3),
+          getDateDueColumn(_filterDateDue),
 //          getDateDueColumn(_filterTimeDue),
-        globals.filterStatus.toString(),
-        globals.filterPriority.toString(),
-        globals.filterCategory.toString(),
-        globals.filterAction.toString(),
-        globals.filterContext.toString(),
-        globals.filterLocation.toString(),
-        globals.filterTag.toString(),
-        globals.filterGoal.toString(),
-        globals.filterIsStar,
-        globals.filterIsDone,
-      );
+          globals.filterStatus.toString(),
+          globals.filterPriority.toString(),
+          globals.filterCategory.toString(),
+          globals.filterAction.toString(),
+          globals.filterContext.toString(),
+          globals.filterLocation.toString(),
+          globals.filterTag.toString(),
+          globals.filterGoal.toString(),
+          globals.filterIsStar,
+          globals.filterIsDone,
+);
       // final tasksFuture = helper.getTasksFromLastFewDays();
       tasksFuture.then((result) {
         List<Task> taskList = List<Task>();
@@ -343,47 +327,47 @@ class TaskHomeState extends State {
               break;
             case 4:
               {
-                taskList[i].main1 = taskList[i].statusText;
+                taskList[i].main1 = taskList[i].isStar.toString();
               }
               break;
             case 5:
               {
-                taskList[i].main1 = taskList[i].priorityText;
+                taskList[i].main1 = taskList[i].statusText;
               }
               break;
             case 6:
               {
-                taskList[i].main1 = taskList[i].categoryText;
+                taskList[i].main1 = taskList[i].priorityText;
               }
               break;
             case 7:
               {
-                taskList[i].main1 = taskList[i].action1Text;
+                taskList[i].main1 = taskList[i].categoryText;
               }
               break;
             case 8:
               {
-                taskList[i].main1 = taskList[i].context1Text;
+                taskList[i].main1 = taskList[i].action1Text;
               }
               break;
             case 9:
               {
-                taskList[i].main1 = taskList[i].location1Text;
+                taskList[i].main1 = taskList[i].context1Text;
               }
               break;
             case 10:
               {
-                taskList[i].main1 = taskList[i].tag1Text;
+                taskList[i].main1 = taskList[i].location1Text;
               }
               break;
             case 11:
               {
-                taskList[i].main1 = taskList[i].goal1Text;
+                taskList[i].main1 = taskList[i].tag1Text;
               }
               break;
             case 12:
               {
-                taskList[i].main1 = taskList[i].isStar.toString();
+                taskList[i].main1 = taskList[i].goal1Text;
               }
               break;
             default:
@@ -419,52 +403,52 @@ class TaskHomeState extends State {
               break;
             case 4:
               {
-                taskList[i].sec1 = taskList[i].statusText;
+                taskList[i].sec1 = taskList[i].isStar.toString();
               }
               break;
             case 5:
               {
-                taskList[i].sec1 = taskList[i].priorityText;
+                taskList[i].sec1 = taskList[i].statusText;
               }
               break;
             case 6:
               {
-                taskList[i].sec1 = taskList[i].categoryText;
+                taskList[i].sec1 = taskList[i].priorityText;
               }
               break;
             case 7:
               {
-                taskList[i].sec1 = taskList[i].action1Text;
+                taskList[i].sec1 = taskList[i].categoryText;
               }
               break;
             case 8:
               {
-                taskList[i].sec1 = taskList[i].context1Text;
+                taskList[i].sec1 = taskList[i].action1Text;
               }
               break;
             case 9:
               {
-                taskList[i].sec1 = taskList[i].location1Text;
+                taskList[i].sec1 = taskList[i].context1Text;
               }
               break;
             case 10:
               {
-                taskList[i].sec1 = taskList[i].tag1Text;
+                taskList[i].sec1 = taskList[i].location1Text;
               }
               break;
             case 11:
               {
-                taskList[i].sec1 = taskList[i].goal1Text;
+                taskList[i].sec1 = taskList[i].tag1Text;
               }
               break;
             case 12:
               {
-                taskList[i].sec1 = taskList[i].isStar.toString();
+                taskList[i].sec1 = taskList[i].goal1Text;
               }
               break;
             default:
               {
-                taskList[i].sec1 = taskList[i].task;
+                taskList[i].sec1 = taskList[i].dateDue;
               }
               break;
           }
@@ -517,11 +501,6 @@ class TaskHomeState extends State {
         }
         if (customSetting.showSec3 != "") {
           globals.showSec3 = int.parse(customSetting.showSec3);
-        }
-        if (customSetting.filterIsStar == true) {
-          globals.filterIsStar = 1;
-        } else {
-          globals.filterIsStar = 0;
         }
         if (customSetting.filterIsDone == true) {
           globals.filterIsDone = 1;
@@ -577,37 +556,33 @@ class TaskHomeState extends State {
       case 3:
         return "timeDue";
         break;
+      case 4:
+        return "star";
+        break;
       case 5:
         return "status";
         break;
       case 6:
         return "priority";
         break;
-      case 6:
+      case 7:
         return "category";
         break;
-      case 7:
+      case 8:
         return "action1";
         break;
-      case 8:
+      case 9:
         return "context1";
         break;
-      case 9:
+      case 10:
         return "location1";
         break;
-      case 10:
+      case 11:
         return "tag1";
         break;
-      case 11:
+      case 12:
         return "goal1";
         break;
-      case 12:
-        return "isStar";
-        break;
-      case 13:
-        return "isDone";
-        break;
-
 
       default:
         return "task";

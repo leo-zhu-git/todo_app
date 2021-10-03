@@ -114,7 +114,7 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
                     style: TextStyle(color: Colors.white),
                   )),
             ],
-            backgroundColor: Colors.blue[100],
+            backgroundColor: Colors.orange[100],
             title: Text('Add Tag'),
             content: SingleChildScrollView(
               child: Column(
@@ -146,7 +146,7 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
         barrierDismissible: true,
         builder: (param) {
           return AlertDialog(
-            backgroundColor: Colors.blue[100],
+            backgroundColor: Colors.orange[100],
             actions: <Widget>[
               ElevatedButton(
                   onPressed: () => Navigator.pop(context),
@@ -227,7 +227,7 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
         barrierDismissible: true,
         builder: (param) {
           return AlertDialog(
-            backgroundColor: Colors.blue[100],
+            backgroundColor: Colors.orange[100],
             actions: <Widget>[
               ElevatedButton(
                   style: ElevatedButton.styleFrom(
@@ -302,7 +302,7 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
                   position: BadgePosition.topEnd(),
                   badgeContent: Text(_tag1List.length.toString(),
                       style: TextStyle(color: Colors.black)),
-                  badgeColor: Colors.blue[200],
+                  badgeColor: Colors.orange[100],
                 ),
               ],
             ),
@@ -316,7 +316,7 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
             padding: EdgeInsets.only(top: 4.0, left: 4.0, right: 4.0),
             child: Card(
               elevation: 8.0,
-              color: Colors.blue[100],
+              color: Colors.orange[100],
               child: ListTile(
                 leading: IconButton(
                     icon: Icon(Icons.edit),
