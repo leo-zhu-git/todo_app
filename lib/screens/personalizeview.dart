@@ -1126,7 +1126,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
               Card(
                 elevation: 8.0,
                 child: ListTile(
-                  tileColor: Colors.blue[100],
+                  tileColor: Colors.orange[100],
                   title: Text('Statuses'),
                   onTap: () => Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => StatusesScreen())),
@@ -1140,7 +1140,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
               Card(
                 elevation: 8.0,
                 child: ListTile(
-                  tileColor: Colors.blue[100],
+                  tileColor: Colors.orange[100],
                   title: Text('Priorities'),
                   onTap: () => Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => PrioritiesScreen())),
@@ -1154,7 +1154,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
               Card(
                 elevation: 8.0,
                 child: ListTile(
-                  tileColor: Colors.blue[100],
+                  tileColor: Colors.orange[100],
                   title: Text('Categories'),
                   onTap: () => Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => CategoriesScreen())),
@@ -1168,7 +1168,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
               Card(
                 elevation: 8.0,
                 child: ListTile(
-                  tileColor: Colors.blue[100],
+                  tileColor: Colors.orange[100],
                   title: Text('Actions'),
                   onTap: () => Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => Action1sScreen())),
@@ -1182,7 +1182,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
               Card(
                 elevation: 8.0,
                 child: ListTile(
-                  tileColor: Colors.blue[100],
+                  tileColor: Colors.orange[100],
                   title: Text('Contexts'),
                   onTap: () => Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => Context1sScreen())),
@@ -1196,7 +1196,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
               Card(
                 elevation: 8.0,
                 child: ListTile(
-                  tileColor: Colors.blue[100],
+                  tileColor: Colors.orange[100],
                   title: Text('Locations'),
                   onTap: () => Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => Location1sScreen())),
@@ -1210,7 +1210,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
               Card(
                 elevation: 8.0,
                 child: ListTile(
-                  tileColor: Colors.blue[100],
+                  tileColor: Colors.orange[100],
                   title: Text('Tags'),
                   onTap: () => Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => Tag1sScreen())),
@@ -1224,7 +1224,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
               Card(
                 elevation: 8.0,
                 child: ListTile(
-                  tileColor: Colors.blue[100],
+                  tileColor: Colors.orange[100],
                   title: Text('Goals'),
                   onTap: () => Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => Goal1sScreen())),
