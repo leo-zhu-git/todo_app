@@ -49,8 +49,7 @@ class TaskDetailState extends State //<TaskDetail>
   var _todoTimeController = TextEditingController();
 //  var _todoStatusController = TextEditingController();
 //  var _todoPriorityController = TextEditingController();
-  var _todoStarController = TextEditingController();
-
+  var _selectedIsStar; 
   var _selectedStatus;
   var _selectedPriority;
   var _selectedCategory;
@@ -343,9 +342,7 @@ class TaskDetailState extends State //<TaskDetail>
   @override
   Widget build(BuildContext context) {
     _todoNoteController.text = task.note;
-    task.status != ""
-        ? _selectedStatus = task.status
-        : _selectedStatus = null;
+    task.status != "" ? _selectedStatus = task.status : _selectedStatus = null;
     task.priority != ""
         ? _selectedPriority = task.priority
         : _selectedPriority = null;
@@ -361,12 +358,8 @@ class TaskDetailState extends State //<TaskDetail>
     task.location1 != ""
         ? _selectedLocation1 = task.location1
         : _selectedLocation1 = null;
-    task.tag1 != "" 
-        ? _selectedTag1 = task.tag1 
-        : _selectedTag1 = null;
-    task.goal1 != "" 
-        ? _selectedGoal1 = task.goal1 
-        : _selectedGoal1 = null;
+    task.tag1 != "" ? _selectedTag1 = task.tag1 : _selectedTag1 = null;
+    task.goal1 != "" ? _selectedGoal1 = task.goal1 : _selectedGoal1 = null;
     _todoTaskController.text = task.task;
     task.dateDue != ""
         ? {
@@ -569,7 +562,7 @@ class TaskDetailState extends State //<TaskDetail>
                 ],
               ),
             ),
-            
+
 ///////////////////////////
 //  CATEGORY
 ///////////////////////////
@@ -761,8 +754,33 @@ class TaskDetailState extends State //<TaskDetail>
                 ],
               ),
             ), //KK     // SizedBox(
-            //   height: 20,
-            // ),
+///////////////////////////
+//  Star
+///////////////////////////
+            Container(
+                margin: EdgeInsets.only(
+                    left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+                decoration: BoxDecoration(
+                    shape: BoxShape.rectangle, color: Colors.blue[100]),
+                child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      _selectedIsStar = (task.isStar == 0),
+                      IconButton(
+                          icon: Icon(Icons.lightbulb),
+                          color: (task.isStar == 1) ? Colors.green: Colors.red,
+                          onPressed: () {
+                            setState() {
+                              if (task.isStar == 1) {
+                                this.task.isStar = 0;
+                                Icon(Icons.lightbulb, color: Colors.grey[300]);
+                              } else {
+                                this.task.isStar = 1;
+                                Icon(Icons.lightbulb, color: Colors.amber[800]);
+                              }
+                            }
+                          })
+                    ])),
 
             /// form - save or cancel
             Row(

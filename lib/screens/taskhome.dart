@@ -110,7 +110,6 @@ class TaskHomeState extends State {
               tooltip: 'Sync',
               onPressed: () {
                 Navigator.of(context).pushNamed('/syncview');
-// rt: comment out temporarily to test loader/ spinkit --> code in syncview
               }),
         ],
       ),
@@ -209,11 +208,24 @@ class TaskHomeState extends State {
                       },
                     ),
                     trailing: IconButton(
-                      icon: Icon(Icons.lightbulb, color: Colors.amber[800]),
+                      icon: Icon(Icons.lightbulb, color: Colors.grey[300]),
+                      color: (this.tasklist[position].isStar == 0)
+                          ? Colors.green
+                          : Colors.red,
                       onPressed: () {
-                        if (this.tasklist[position].isStar == 1) {}
+                        setState(() {
+                          if (this.tasklist[position].isStar == 1) {
+                            this.tasklist[position].isStar = 0;
+                            Icon(Icons.lightbulb, color: Colors.grey[300]);
+                            dbHelper.updateTask(tasklist[position]);
+                          } else {
+                            this.tasklist[position].isStar = 1;
+                            Icon(Icons.lightbulb, color: Colors.amber[800]);
+                            dbHelper.updateTask(tasklist[position]);
+                          }
+                          getData();
+                        });
                       },
-//                      icon: Icon(Icons.lightbulb_outline),
                     ),
                     title: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -607,7 +619,6 @@ class TaskHomeState extends State {
       case 13:
         return "isDone";
         break;
-
 
       default:
         return "task";
