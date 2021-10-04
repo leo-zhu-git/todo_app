@@ -765,7 +765,7 @@ class TaskDetailState extends State //<TaskDetail>
                 child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      _selectedIsStar = (task.isStar == 0),
+//                      _selectedIsStar = (task.isStar == 0),
                       IconButton(
                           icon: Icon(Icons.lightbulb),
                           color: (task.isStar == 1) ? Colors.green: Colors.red,
