@@ -264,6 +264,7 @@ class TaskHomeState extends State {
                     ),
                     isThreeLine: false,
                     dense: true,
+                    contentPadding: EdgeInsets.symmetric(horizontal: 0.0),
 //                    value: (this.tasklist[position].isDone == 1),
                     onTap: () {
                       navigateToDetail(this.tasklist[position]);
