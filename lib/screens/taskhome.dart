@@ -208,10 +208,10 @@ class TaskHomeState extends State {
                       },
                     ),
                     trailing: IconButton(
-                      icon: Icon(Icons.lightbulb, color: Colors.black38),
-                      color: (this.tasklist[position].isStar == 0)
-                          ? Colors.green
-                          : Colors.red,
+                      icon: Icon(Icons.lightbulb,
+                     color: (this.tasklist[position].isStar == 0)
+                          ? Colors.black38
+                          : Colors.green),
                       onPressed: () {
                         setState(() {
                           if (this.tasklist[position].isStar == 1) {
@@ -265,7 +265,6 @@ class TaskHomeState extends State {
                     isThreeLine: false,
                     dense: true,
                     contentPadding: EdgeInsets.symmetric(horizontal: 0.0),
-//                    value: (this.tasklist[position].isDone == 1),
                     onTap: () {
                       navigateToDetail(this.tasklist[position]);
                     },

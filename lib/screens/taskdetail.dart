@@ -765,20 +765,17 @@ class TaskDetailState extends State //<TaskDetail>
                 child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-//                      _selectedIsStar = (task.isStar == 0),
                       IconButton(
-                          icon: Icon(Icons.lightbulb),
-                          color: (task.isStar == 1) ? Colors.green: Colors.red,
+                          icon: Icon(Icons.lightbulb,
+                          color: (task.isStar == 0)
+                          ? Colors.black38
+                          : Colors.green),
                           onPressed: () {
-                            setState() {
                               if (task.isStar == 1) {
                                 this.task.isStar = 0;
-                                Icon(Icons.lightbulb, color: Colors.grey[300]);
                               } else {
                                 this.task.isStar = 1;
-                                Icon(Icons.lightbulb, color: Colors.amber[800]);
                               }
-                            }
                           })
                     ])),
 
