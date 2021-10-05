@@ -378,70 +378,60 @@ class TaskHomeState extends State {
           }
 
 /////////////////
-          /// display sec1
+/// display sec1
 ////////////////
           switch (globals.showSec1) {
             case 0:
               {
-                taskList[i].sec1 = taskList[i].task;
+                taskList[i].sec1 = taskList[i].dateDue;
               }
               break;
             case 1:
               {
-                taskList[i].sec1 = taskList[i].note;
+                taskList[i].sec1 = taskList[i].timeDue;
               }
               break;
             case 2:
               {
-                taskList[i].sec1 = taskList[i].dateDue;
+                taskList[i].sec1 = taskList[i].isStar.toString();
               }
               break;
             case 3:
               {
-                taskList[i].sec1 = taskList[i].timeDue;
+                taskList[i].sec1 = taskList[i].statusText;
               }
               break;
             case 4:
               {
-                taskList[i].sec1 = taskList[i].isStar.toString();
+                taskList[i].sec1 = taskList[i].priorityText;
               }
               break;
             case 5:
               {
-                taskList[i].sec1 = taskList[i].statusText;
+                taskList[i].sec1 = taskList[i].categoryText;
               }
               break;
             case 6:
               {
-                taskList[i].sec1 = taskList[i].priorityText;
+                taskList[i].sec1 = taskList[i].action1Text;
               }
               break;
             case 7:
               {
-                taskList[i].sec1 = taskList[i].categoryText;
+                taskList[i].sec1 = taskList[i].context1Text;
               }
               break;
             case 8:
               {
-                taskList[i].sec1 = taskList[i].action1Text;
+                taskList[i].sec1 = taskList[i].location1Text;
               }
               break;
             case 9:
               {
-                taskList[i].sec1 = taskList[i].context1Text;
-              }
-              break;
-            case 10:
-              {
-                taskList[i].sec1 = taskList[i].location1Text;
-              }
-              break;
-            case 11:
-              {
                 taskList[i].sec1 = taskList[i].tag1Text;
               }
               break;
-            case 12:
+            case 10:
               {
                 taskList[i].sec1 = taskList[i].goal1Text;
               }
@@ -452,7 +442,136 @@ class TaskHomeState extends State {
               }
               break;
           }
-        }
+/////////////////
+/// display sec2
+////////////////
+          switch (globals.showSec2) {
+            case 0:
+              {
+                taskList[i].sec2 = taskList[i].dateDue;
+              }
+              break;
+            case 1:
+              {
+                taskList[i].sec2 = taskList[i].timeDue;
+              }
+              break;
+            case 2:
+              {
+                taskList[i].sec2 = taskList[i].isStar.toString();
+              }
+              break;
+            case 3:
+              {
+                taskList[i].sec2 = taskList[i].statusText;
+              }
+              break;
+            case 4:
+              {
+                taskList[i].sec2 = taskList[i].priorityText;
+              }
+              break;
+            case 5:
+              {
+                taskList[i].sec2 = taskList[i].categoryText;
+              }
+              break;
+            case 6:
+              {
+                taskList[i].sec2 = taskList[i].action1Text;
+              }
+              break;
+            case 7:
+              {
+                taskList[i].sec2 = taskList[i].context1Text;
+              }
+              break;
+            case 8:
+              {
+                taskList[i].sec2 = taskList[i].location1Text;
+              }
+              break;
+            case 9:
+              {
+                taskList[i].sec2 = taskList[i].tag1Text;
+              }
+              break;
+            case 10:
+              {
+                taskList[i].sec2 = taskList[i].goal1Text;
+              }
+              break;
+            default:
+              {
+                taskList[i].sec2 = taskList[i].priorityText;
+              }
+              break;
+          }
+/////////////////
+/// display sec3
+////////////////
+          switch (globals.showSec3) {
+            case 0:
+              {
+                taskList[i].sec3 = taskList[i].dateDue;
+              }
+              break;
+            case 1:
+              {
+                taskList[i].sec3 = taskList[i].timeDue;
+              }
+              break;
+            case 2:
+              {
+                taskList[i].sec3 = taskList[i].isStar.toString();
+              }
+              break;
+            case 3:
+              {
+                taskList[i].sec3 = taskList[i].statusText;
+              }
+              break;
+            case 4:
+              {
+                taskList[i].sec3 = taskList[i].priorityText;
+              }
+              break;
+            case 5:
+              {
+                taskList[i].sec3 = taskList[i].categoryText;
+              }
+              break;
+            case 6:
+              {
+                taskList[i].sec3 = taskList[i].action1Text;
+              }
+              break;
+            case 7:
+              {
+                taskList[i].sec3 = taskList[i].context1Text;
+              }
+              break;
+            case 8:
+              {
+                taskList[i].sec3 = taskList[i].location1Text;
+              }
+              break;
+            case 9:
+              {
+                taskList[i].sec3 = taskList[i].tag1Text;
+              }
+              break;
+            case 10:
+              {
+                taskList[i].sec3 = taskList[i].goal1Text;
+              }
+              break;
+            default:
+              {
+                taskList[i].sec3 = taskList[i].categoryText;
+              }
+              break;
+          }        }
         setState(() {
           tasklist = taskList;
           count = count;

@@ -251,6 +251,9 @@ class Task {
   String colDateDone = '';
   String colLastModified = '';
   String colMain1 = '';
+  String colSec1 = '';
+  String colSec2 = '';
+  String colSec3 = '';
 
   Map<String, dynamic> toMap() {
     var map = Map<String, dynamic>();
@@ -269,7 +272,7 @@ class Task {
     map['isStar'] = _isStar;
     map['isDone'] = _isDone;
     map['dateDone'] = _dateDone;
-    map['lastModified'] = _lastModified;
+    map['lastModified'] = _lastModified;  
 
     if (_id != null) {
       map['id'] = _id;

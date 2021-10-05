@@ -81,7 +81,7 @@ class DbHelper {
 
   Future<Database> initializeDb() async {
     Directory dir = await getApplicationDocumentsDirectory();
-    String path = dir.path + "todo_V22.d7.db";
+    String path = dir.path + "todo_V22.f2.db";
     var dbTodovn = await openDatabase(path, version: 1, onCreate: _createDb);
     return dbTodovn;
   }
@@ -339,11 +339,11 @@ class DbHelper {
         '0', // order2
         '0', // sort3
         '0', // order3
-        '0', // main1
-        '2', // main2
-        '1', // sec1
-        '3', // sec2
-        '4', // sec3
+        '0', // main1 - task
+        '', // main2
+        '0', // sec1 - dateDue
+        '4', // sec2 - priority
+        '3', // sec3 - Category
         '0', // dateDue
         "", // priority
         "", // status
@@ -363,7 +363,7 @@ class DbHelper {
     final String formattedate = formatter.format(_dateDue);
 
     Task task = Task(
-        "1.Welcome to todoMIT",
+        "1.Welcome to todoMIT123456789012345679012345678901234567890",
         '''
 Greetings/ Nihao/ Hola/ Namaste/ Ayubowan,
 
@@ -380,8 +380,8 @@ Connect soon
         formattedate, // dateDue
         '', // timeDue
         '', // status
-        '', // priority
-        '', // category
+        '1', // priority
+        '1', // category
         '', // action
         '', // context
         '', // location
@@ -393,9 +393,9 @@ Connect soon
         '', // last modified
         '', // main1
         '', // main2
-        '', // sec1
-        '', // sec2
-        ''); // sec3
+        '1', // sec1
+        '3', // sec2
+        '2'); // sec3
     insertTask(task);
 
     task = Task(
@@ -414,8 +414,8 @@ Bottom-Right (Search) | keyword search or more powerful advance dropdown search
         formattedate, // dateDue
         '', // timeDue
         '', // status
-        '', // priority
-        '', // category
+        '1', // priority
+        '1', // category
         '', // action
         '', // context
         '', // location
@@ -427,9 +427,9 @@ Bottom-Right (Search) | keyword search or more powerful advance dropdown search
         '', // last modified
         '', // main1
         '', // main2
-        '', // sec1
-        '', // sec2
-        ''); // sec3
+        '1', // sec1
+        '3', // sec2
+        '2'); // sec3
     insertTask(task);
 
     task = Task(
@@ -449,8 +449,8 @@ Contact us | share the good, bad, ugly
         formattedate, // dateDue
         '', // timeDue
         '', // status
-        '', // priority
-        '', // category
+        '1', // priority
+        '1', // category
         '', // action
         '', // context
         '', // location
@@ -462,9 +462,9 @@ Contact us | share the good, bad, ugly
         '', // last modified
         '', // main1
         '', // main2
-        '', // sec1
-        '', // sec2
-        ''); // sec3
+        '1', // sec1
+        '3', // sec2
+        '2'); // sec3
     insertTask(task);
 
     task = Task(
@@ -481,8 +481,8 @@ Plan C - USD 24 | 12 month
         formattedate, // dateDue
         '', // timeDue
         '', // status
-        '', // priority
-        '', // category
+        '1', // priority
+        '1', // category
         '', // action
         '', // context
         '', // location
@@ -494,9 +494,9 @@ Plan C - USD 24 | 12 month
         '', // last modified
         '', // main1
         '', // main2
-        '', // sec1
-        '', // sec2
-        ''); // sec3
+        '1', // sec1
+        '3', // sec2
+        '2'); // sec3
     insertTask(task);
   }
 
@@ -544,7 +544,6 @@ Plan C - USD 24 | 12 month
       String colsortField3,
       String colsortOrder3,
       String colfilterDateDue,
-//      String colfilterTimeDue,
       String colfilterStatus,
       String colfilterPriority,
       String colfilterCategory,

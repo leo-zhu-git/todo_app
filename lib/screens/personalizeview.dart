@@ -28,20 +28,18 @@ class SortItem {
   SortItem(this.id, this.name);
   static List<SortItem> getSort() {
     return <SortItem>[
-      SortItem(0, 'Task'),
-      SortItem(1, 'Note'),
-      SortItem(2, 'Due Date'),
-      SortItem(3, 'Due Time'),
-      SortItem(4, 'Status'),
-      SortItem(5, 'Priority'),
-      SortItem(6, 'Category'),
-      SortItem(7, 'Action'),
-      SortItem(8, 'Context'),
-      SortItem(9, 'Location'),
-      SortItem(10, 'Tag'),
-      SortItem(11, 'Goal'),
-      SortItem(12, 'Star'),
-      SortItem(13, 'Done'),
+      SortItem(0, 'Due Date'),
+      SortItem(1, 'Due Time'),
+      SortItem(2, 'Status'),
+      SortItem(3, 'Priority'),
+      SortItem(4, 'Category'),
+      SortItem(5, 'Action'),
+      SortItem(6, 'Context'),
+      SortItem(7, 'Location'),
+      SortItem(8, 'Tag'),
+      SortItem(9, 'Goal'),
+      SortItem(10, 'Star'),
+      SortItem(11, 'Done'),
     ];
   }
 }
@@ -286,20 +284,20 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
       _selectedShowMain2 = _dropdownMenuItemsSort[globals.showMain2].value;
 
     if (globals.showSec1 == null) {
-      _selectedShowSec1 = _dropdownMenuItemsSort[1].value;
-      globals.showSec1 = 1;
+      _selectedShowSec1 = _dropdownMenuItemsSort[0].value;
+      globals.showSec1 = 0;
     } else
       _selectedShowSec1 = _dropdownMenuItemsSort[globals.showSec1].value;
 
     if (globals.showSec2 == null) {
-      _selectedShowSec2 = _dropdownMenuItemsSort[3].value;
-      globals.showSec2 = 3;
+      _selectedShowSec2 = _dropdownMenuItemsSort[6].value;
+      globals.showSec2 = 6;
     } else
       _selectedShowSec2 = _dropdownMenuItemsSort[globals.showSec2].value;
 
     if (globals.showSec3 == null) {
-      _selectedShowSec3 = _dropdownMenuItemsSort[4].value;
-      globals.showSec3 = 4;
+      _selectedShowSec3 = _dropdownMenuItemsSort[2].value;
+      globals.showSec3 = 2;
     } else
       _selectedShowSec3 = _dropdownMenuItemsSort[globals.showSec3].value;
 
@@ -1076,33 +1074,32 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
               SizedBox(
                 height: 20,
               ),
-              Text("View - Main and Second Line"),
+              Text("View - second line up to 3 fields"),
 ///////////////////////////
 //  Show Main 1
 ///////////////////////////
-              new Container(
-                margin: const EdgeInsets.all(2.0),
-                decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.yellow[200]),
-                child: DropdownButtonFormField(
-                  items: _dropdownMenuItemsSort,
-                  hint: Text('Display Main1'),
-                  value: _selectedShowMain1,
-                  onChanged: (selectedShow) {
-                    setState(() {
-                      _selectedShowMain1 = selectedShow;
-                    });
-                  },
-                ),
-              ),
+//              new Container(
+//                margin: const EdgeInsets.all(2.0),
+//                decoration: BoxDecoration(
+//                    shape: BoxShape.rectangle, color: Colors.yellow[200]),
+//                child: DropdownButtonFormField(
+//                  items: _dropdownMenuItemsSort,
+//                  hint: Text('Display Main1'),
+//                  value: _selectedShowMain1,
+//                  onChanged: (selectedShow) {
+//                    setState(() {
+//                      _selectedShowMain1 = selectedShow;
+//                    });
+//                  },
+//                ),
+//              ),
 ///////////////////////////
 //  Show Secondary 1
 ///////////////////////////
-//              Text("Show - Second Line"),
               new Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.yellow[200]),
+                    shape: BoxShape.rectangle, color: Colors.pink[100]),
                 child: DropdownButtonFormField(
                   items: _dropdownMenuItemsSort,
                   hint: Text('Display Secondary1'),
@@ -1110,6 +1107,44 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                   onChanged: (selectedShow) {
                     setState(() {
                       _selectedShowSec1 = selectedShow;
+                    });
+                  },
+                ),
+              ),
+
+///////////////////////////
+//  Show Secondary 2
+///////////////////////////
+              new Container(
+                margin: const EdgeInsets.all(2.0),
+                decoration: BoxDecoration(
+                    shape: BoxShape.rectangle, color: Colors.pink[100]),
+                child: DropdownButtonFormField(
+                  items: _dropdownMenuItemsSort,
+                  hint: Text('Display Secondary2'),
+                  value: _selectedShowSec2,
+                  onChanged: (selectedShow) {
+                    setState(() {
+                      _selectedShowSec2 = selectedShow;
+                    });
+                  },
+                ),
+              ),
+
+///////////////////////////
+//  Show Secondary 3
+///////////////////////////
+              new Container(
+                margin: const EdgeInsets.all(2.0),
+                decoration: BoxDecoration(
+                    shape: BoxShape.rectangle, color: Colors.pink[100]),
+                child: DropdownButtonFormField(
+                  items: _dropdownMenuItemsSort,
+                  hint: Text('Display Secondary3'),
+                  value: _selectedShowSec3,
+                  onChanged: (selectedShow) {
+                    setState(() {
+                      _selectedShowSec3 = selectedShow;
                     });
                   },
                 ),
