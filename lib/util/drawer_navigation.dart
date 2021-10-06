@@ -44,6 +44,7 @@ class _DrawerNagivation extends State<DrawerNagivation> {
   @override
   Widget build(BuildContext context) {
     return Container(
+//      decoration: BoxDecoration(color: Colors.amber),
       child: Drawer(
         child: ListView(
           children: <Widget>[
@@ -62,7 +63,7 @@ class _DrawerNagivation extends State<DrawerNagivation> {
               onTap: () => Navigator.of(context)
                   .push(MaterialPageRoute(builder: (context) => TaskHome())),
             ),
-            Divider(),
+//            Divider(),
             ListTile(
               leading: Icon(Icons.cloud_download),
               tileColor: Colors.amber[100],
@@ -70,7 +71,7 @@ class _DrawerNagivation extends State<DrawerNagivation> {
               onTap: () => Navigator.of(context)
                   .push(MaterialPageRoute(builder: (context) => WipeScreen())),
             ),
-            Divider(),
+//            Divider(),
             ListTile(
               tileColor: Colors.amber[100],
               leading: Icon(Icons.connect_without_contact),
@@ -78,7 +79,7 @@ class _DrawerNagivation extends State<DrawerNagivation> {
               onTap: () => Navigator.of(context)
                   .push(MaterialPageRoute(builder: (context) => LocalNotificationScreen())),
             ),
-            Divider(),
+//            Divider(),
             ListTile(
               tileColor: Colors.amber[100],
               leading: Icon(Icons.people),
@@ -139,7 +140,7 @@ class _DrawerNagivation extends State<DrawerNagivation> {
 //              onTap: () => Navigator.of(context)
 //                  .push(MaterialPageRoute(builder: (context) => Goal1sScreen())),
 //            ),
-            Divider(),
+//            Divider(),
             ListTile(
               tileColor: Colors.amber[100],
               leading: Icon(Icons.help_outlined),
@@ -148,7 +149,7 @@ class _DrawerNagivation extends State<DrawerNagivation> {
                 _launchURL();
               },
             ),
-            Divider(),
+//            Divider(),
             ListTile(
               tileColor: Colors.amber[100],
               leading: Icon(Icons.elevator_rounded),
@@ -157,7 +158,7 @@ class _DrawerNagivation extends State<DrawerNagivation> {
                 _launchURL();
               },
             ),
-            Divider(),
+//            Divider(),
             ListTile(
               tileColor: Colors.amber[100],
               leading: Icon(Icons.perm_device_info),
@@ -165,7 +166,7 @@ class _DrawerNagivation extends State<DrawerNagivation> {
               onTap: () => Navigator.of(context)
                   .push(MaterialPageRoute(builder: (context) => TaskHome())),
             ),
-            Divider(),
+//            Divider(),
             ListTile(
               tileColor: Colors.amber[100],
               leading: Icon(Icons.logout),
