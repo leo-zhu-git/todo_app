@@ -757,27 +757,27 @@ class TaskDetailState extends State //<TaskDetail>
 ///////////////////////////
 //  Star
 ///////////////////////////
-            Container(
-                margin: EdgeInsets.only(
-                    left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
-                decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.blue[100]),
-                child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      IconButton(
-                          icon: Icon(Icons.lightbulb,
-                          color: (task.isStar == 0)
-                          ? Colors.black38
-                          : Colors.green),
-                          onPressed: () {
-                              if (task.isStar == 1) {
-                                this.task.isStar = 0;
-                              } else {
-                                this.task.isStar = 1;
-                              }
-                          })
-                    ])),
+//            Container(
+//                margin: EdgeInsets.only(
+//                    left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+//                decoration: BoxDecoration(
+//                    shape: BoxShape.rectangle, color: Colors.blue[100]),
+//                child: Row(
+//                    crossAxisAlignment: CrossAxisAlignment.center,
+//                    children: [
+//                      IconButton(
+//                          icon: Icon(Icons.lightbulb,
+//                          color: (task.isStar == 0)
+//                          ? Colors.black38
+//                          : Colors.green),
+//                          onPressed: () {
+//                              if (task.isStar == 1) {
+//                                this.task.isStar = 0;
+//                              } else {
+//                                this.task.isStar = 1;
+//                              }
+//                          })
+//                    ])),
 
             /// form - save or cancel
             Row(
