@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:todo_app/model/customDropdownItem.dart';
 import 'package:todo_app/model/taskclass.dart';
+import 'package:todo_app/screens/notificationPlugin.dart';
 import 'package:todo_app/util/dbhelper.dart';
 import 'package:intl/intl.dart';
 import 'dart:io';
@@ -49,7 +50,7 @@ class TaskDetailState extends State //<TaskDetail>
   var _todoTimeController = TextEditingController();
 //  var _todoStatusController = TextEditingController();
 //  var _todoPriorityController = TextEditingController();
-  var _selectedIsStar; 
+  var _selectedIsStar;
   var _selectedStatus;
   var _selectedPriority;
   var _selectedCategory;
@@ -58,6 +59,7 @@ class TaskDetailState extends State //<TaskDetail>
   var _selectedLocation1;
   var _selectedTag1;
   var _selectedGoal1;
+  var _nTitle; 
 
   List<CustomDropdownItem> _statuses = [];
   List<CustomDropdownItem> _priorities = [];
@@ -784,7 +786,7 @@ class TaskDetailState extends State //<TaskDetail>
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       Navigator.pop(context);
                     },
                     style: ElevatedButton.styleFrom(
@@ -821,7 +823,13 @@ class TaskDetailState extends State //<TaskDetail>
                           : _selectedGoal1.toString();
                       task.dateDue = _todoDateController.text;
                       task.timeDue = _todoTimeController.text;
-                      task.isDone = 0;
+                      task.timeDue != ""
+                          ? {
+                              _nTitle = 'todoMIT Concierge Reminder @' + task.timeDue.toString(),
+                              await notificationPlugin.scheduleNotification(
+                                  _nTitle, task.task, 'test')
+                            }
+                          : task.isDone = 0;
 //                      if (task.isDone == 0) {
 //                        task.status = "Open";
 //                      } else {

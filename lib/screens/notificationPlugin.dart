@@ -72,7 +72,11 @@ class NotificationPlugin {
     });
   }
 
-  Future<void> showNotification() async {
+
+////////////////////////
+/// 1. Show notification now
+////////////////////////
+  Future<void> showNotification(String _nTitle, String _nBody) async {
     var androidChannelSpecifics = AndroidNotificationDetails(
       'CHANNEL_ID',
       'CHANNEL_NAME',
@@ -80,29 +84,111 @@ class NotificationPlugin {
       importance: Importance.max,
       priority: Priority.high,
       playSound: true,
-      timeoutAfter: 5000,
-      styleInformation: DefaultStyleInformation(true, true),
+//      timeoutAfter: 5000,
+      styleInformation: DefaultStyleInformation(true, true),     
+      enableLights: true,
+      ledColor: const Color.fromARGB(255, 255, 0, 0),
+      ledOnMs: 1000,
+      ledOffMs: 500,
+
+
     );
     var iosChannelSpecifics = IOSNotificationDetails();
     var platformChannelSpecifics =
         NotificationDetails(android: androidChannelSpecifics, iOS: iosChannelSpecifics);
     await flutterLocalNotificationsPlugin.show(
       0,
-      'Test Title',
-      'Test Body', //null
+      _nTitle,
+      _nBody,
       platformChannelSpecifics,
       payload: 'New Payload',
     );
   }
 
+////////////////////////
+/// 2. scheduled notification 5s delay
+////////////////////////
+    Future<void> scheduleNotification(String _nTitle, String _nBody, String _nTime) async {
+    var scheduleNotificationDateTime = DateTime.now().add(Duration(seconds: 5));
+    var androidChannelSpecifics = AndroidNotificationDetails(
+      'CHANNEL_ID 1',
+      'CHANNEL_NAME 1',
+      "CHANNEL_DESCRIPTION 1",
+//      icon: 'secondary_icon',
+//      largeIcon: DrawableResourceAndroidBitmap('large_notf_icon'),
+//      sound: RawResourceAndroidNotificationSound('my_sound'),
+      enableLights: true,
+      color: const Color.fromARGB(255, 255, 0, 0),
+      ledColor: const Color.fromARGB(255, 255, 0, 0),
+      ledOnMs: 1000,
+      ledOffMs: 500,
+      importance: Importance.max,
+      priority: Priority.high,
+      playSound: true,
+      styleInformation: DefaultStyleInformation(true, true),
+    );
+    var iosChannelSpecifics = IOSNotificationDetails(
+//      sound: 'my_sound.aiff',
+    );
+    var platformChannelSpecifics = NotificationDetails(
+      android: androidChannelSpecifics,
+      iOS: iosChannelSpecifics,
+    );
+    await flutterLocalNotificationsPlugin.schedule(
+      0,
+      _nTitle,
+      _nBody,
+      scheduleNotificationDateTime,
+      platformChannelSpecifics,
+      payload: 'Test Payload',
+    );
+  }
+
+////////////////////////
+/// 3. repeat notification - every minute
+////////////////////////
+
+  Future<void> repeatNotification() async {
+    var androidChannelSpecifics = AndroidNotificationDetails(
+      'CHANNEL_ID 3',
+      'CHANNEL_NAME 3',
+      "CHANNEL_DESCRIPTION 3",
+      importance: Importance.max,
+      priority: Priority.high,
+      styleInformation: DefaultStyleInformation(true, true),
+    );
+    var iosChannelSpecifics = IOSNotificationDetails();
+    var platformChannelSpecifics =
+        NotificationDetails(android: androidChannelSpecifics, iOS: iosChannelSpecifics);
+    await flutterLocalNotificationsPlugin.periodicallyShow(
+      0,
+      'Repeating Test Title',
+      'Repeating Test Body',
+      RepeatInterval.everyMinute,
+      platformChannelSpecifics,
+      payload: 'Test Payload',
+    );
+  }
+
+////////////////////////
+/// 4. showDaily at time
+////////////////////////
+
   Future<void> showDailyAtTime() async {
-    var time = Time(21, 3, 0);
+    var time = Time(6, 57, 0);
     var androidChannelSpecifics = AndroidNotificationDetails(
       'CHANNEL_ID 4',
       'CHANNEL_NAME 4',
       "CHANNEL_DESCRIPTION 4",
       importance: Importance.max,
       priority: Priority.high,
+//            largeIcon: DrawableResourceAndroidBitmap('large_notf_icon'),
+      enableLights: true,
+      color: const Color.fromARGB(255, 255, 0, 0),
+      ledColor: const Color.fromARGB(255, 255, 0, 0),
+      ledOnMs: 1000,
+      ledOffMs: 500,
+
     );
     var iosChannelSpecifics = IOSNotificationDetails();
     var platformChannelSpecifics =
@@ -116,6 +202,10 @@ class NotificationPlugin {
       payload: 'Test Payload',
     );
   }
+
+////////////////////////
+/// 4a. showWeekly at time
+////////////////////////
 
   Future<void> showWeeklyAtDayTime() async {
     var time = Time(21, 5, 0);
@@ -140,64 +230,6 @@ class NotificationPlugin {
     );
   }
 
-  Future<void> repeatNotification() async {
-    var androidChannelSpecifics = AndroidNotificationDetails(
-      'CHANNEL_ID 3',
-      'CHANNEL_NAME 3',
-      "CHANNEL_DESCRIPTION 3",
-      importance: Importance.max,
-      priority: Priority.high,
-      styleInformation: DefaultStyleInformation(true, true),
-    );
-    var iosChannelSpecifics = IOSNotificationDetails();
-    var platformChannelSpecifics =
-        NotificationDetails(android: androidChannelSpecifics, iOS: iosChannelSpecifics);
-    await flutterLocalNotificationsPlugin.periodicallyShow(
-      0,
-      'Repeating Test Title',
-      'Repeating Test Body',
-      RepeatInterval.everyMinute,
-      platformChannelSpecifics,
-      payload: 'Test Payload',
-    );
-  }
-
-  Future<void> scheduleNotification() async {
-    var scheduleNotificationDateTime = DateTime.now().add(Duration(seconds: 5));
-    var androidChannelSpecifics = AndroidNotificationDetails(
-      'CHANNEL_ID 1',
-      'CHANNEL_NAME 1',
-      "CHANNEL_DESCRIPTION 1",
-      icon: 'secondary_icon',
-      sound: RawResourceAndroidNotificationSound('my_sound'),
-      largeIcon: DrawableResourceAndroidBitmap('large_notf_icon'),
-      enableLights: true,
-      color: const Color.fromARGB(255, 255, 0, 0),
-      ledColor: const Color.fromARGB(255, 255, 0, 0),
-      ledOnMs: 1000,
-      ledOffMs: 500,
-      importance: Importance.max,
-      priority: Priority.high,
-      playSound: true,
-      timeoutAfter: 5000,
-      styleInformation: DefaultStyleInformation(true, true),
-    );
-    var iosChannelSpecifics = IOSNotificationDetails(
-      sound: 'my_sound.aiff',
-    );
-    var platformChannelSpecifics = NotificationDetails(
-      android: androidChannelSpecifics,
-      iOS: iosChannelSpecifics,
-    );
-    await flutterLocalNotificationsPlugin.schedule(
-      0,
-      'Test Title',
-      'Test Body',
-      scheduleNotificationDateTime,
-      platformChannelSpecifics,
-      payload: 'Test Payload',
-    );
-  }
 
   Future<void> showNotificationWithAttachment() async {
     var attachmentPicturePath = await _downloadAndSaveFile(

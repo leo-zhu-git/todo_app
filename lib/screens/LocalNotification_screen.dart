@@ -9,6 +9,7 @@ class LocalNotificationScreen extends StatefulWidget {
 }
 
 class _LocalNotificationScreenState extends State<LocalNotificationScreen> {
+  int count = 0;
   @override
   void initState() {
     super.initState();
@@ -27,25 +28,25 @@ class _LocalNotificationScreenState extends State<LocalNotificationScreen> {
             Center(
               child: ElevatedButton(
                 onPressed: () async {
-                  await notificationPlugin.showNotification();
+                  await notificationPlugin.showNotification('todoMIT task title', 'todoMIT task body');
                 },
-                child: Text('Send Notification'),
+                child: Text('Send Notification Now [working]'),
               ),
             ),
             Center(
               child: ElevatedButton(
                 onPressed: () async {
-                  await notificationPlugin.scheduleNotification();
+                  await notificationPlugin.scheduleNotification('todoMIT task title', 'todoMIT task body', '18:45');
                 },
-                child: Text('Scheduled Notification - 5s [Placeholder]'),
+                child: Text('Scheduled - 5s delay [working]'),
               ),
             ),
             Center(
               child: ElevatedButton(
                 onPressed: () async {
-                  await notificationPlugin.scheduleNotification();
+                  await notificationPlugin.repeatNotification();
                 },
-                child: Text('Repeated Notification - Every minute'),
+                child: Text('Repeated Notification - Every minute [working]'),
               ),
             ),
             Center(
@@ -53,9 +54,25 @@ class _LocalNotificationScreenState extends State<LocalNotificationScreen> {
                 onPressed: () async {
                   await notificationPlugin.showDailyAtTime();
                 },
-                child: Text('Show Daily At Time [Placeholder]'),
+                child: Text('Show Daily At 6.57am - watch NHK news [working]'),
               ),
             ),
+            Center(
+              child: ElevatedButton(
+                onPressed: () async {
+                  count = await notificationPlugin.getPendingNotificationCount();
+                },
+                child: Text('Pending Notification Count: $count [working]'),
+              ),
+            ),
+            Center(
+              child: ElevatedButton(
+                onPressed: () async {
+                  await notificationPlugin.cancelAllNotification();
+                },
+                child: Text('Cancel All Notifications [placeholder]'),
+              ),
+            )
           ],
         ));
   }
