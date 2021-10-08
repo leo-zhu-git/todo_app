@@ -315,22 +315,23 @@ class TaskDetailState extends State //<TaskDetail>
     }
   }
 
-  TimeOfDay timeConvert(String normTime) {
+  TimeOfDay timeConvert(String s) {
     int hour;
     int minute;
-    String ampm = normTime.substring(normTime.length - 2);
-    String result = normTime.substring(0, normTime.indexOf(' '));
-    if (ampm == 'AM' && int.parse(result.split(":")[1]) != 12) {
-      hour = int.parse(result.split(':')[0]);
-      if (hour == 12) hour = 0;
-      minute = int.parse(result.split(":")[1]);
-    } else {
-      hour = int.parse(result.split(':')[0]) - 12;
-      if (hour <= 0) {
-        hour = 24 + hour;
-      }
-      minute = int.parse(result.split(":")[1]);
-    }
+    TimeOfDay _startTime = TimeOfDay(hour:int.parse(s.split(":")[0]),minute: int.parse(s.split(":")[1]));
+//    String ampm = normTime.substring(normTime.length - 2);
+//    String result = normTime.substring(0, normTime.indexOf(' '));
+//    if (ampm == 'AM' && int.parse(result.split(":")[1]) != 12) {
+//      hour = int.parse(result.split(':')[0]);
+//      if (hour == 12) hour = 0;
+//      minute = int.parse(result.split(":")[1]);
+//    } else {
+//      hour = int.parse(result.split(':')[0]) - 12;
+//      if (hour <= 0) {
+//        hour = 24 + hour;
+//      }
+//      minute = int.parse(result.split(":")[1]);
+//    }
     return TimeOfDay(hour: hour, minute: minute);
   }
 
@@ -825,9 +826,9 @@ class TaskDetailState extends State //<TaskDetail>
                       task.timeDue = _todoTimeController.text;
                       task.timeDue != ""
                           ? {
-                              _nTitle = 'todoMIT Concierge Reminder @' + task.timeDue.toString(),
+                              _nTitle = task.timeDue.toString() + ' reminder: ' + task.task,
                               await notificationPlugin.scheduleNotification(
-                                  _nTitle, task.task, 'test')
+                                  _nTitle, task.note, task.timeDue)
                             }
                           : task.isDone = 0;
 //                      if (task.isDone == 0) {

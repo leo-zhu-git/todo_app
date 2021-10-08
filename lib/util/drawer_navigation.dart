@@ -1,5 +1,8 @@
+import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
+import 'package:amplify_flutter/amplify.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_app/screens/LocalNotification_screen.dart';
+import 'package:todo_app/screens/entry.dart';
 import 'package:todo_app/screens/wipe.dart';
 import 'package:todo_app/screens/taskhome.dart';
 import 'package:todo_app/screens/action1s_screen.dart';
@@ -9,6 +12,7 @@ import 'package:todo_app/screens/goal1s_screen.dart';
 import 'package:todo_app/screens/location1s_screen.dart';
 import 'package:todo_app/screens/tag1s_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../amplifyconfiguration.dart';
 
 class DrawerNagivation extends StatefulWidget {
   @override
@@ -76,8 +80,8 @@ class _DrawerNagivation extends State<DrawerNagivation> {
               tileColor: Colors.amber[100],
               leading: Icon(Icons.connect_without_contact),
               title: Text('Support [temp test notification]'),
-              onTap: () => Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => LocalNotificationScreen())),
+              onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => LocalNotificationScreen())),
             ),
 //            Divider(),
             ListTile(
@@ -168,12 +172,16 @@ class _DrawerNagivation extends State<DrawerNagivation> {
             ),
 //            Divider(),
             ListTile(
-              tileColor: Colors.amber[100],
-              leading: Icon(Icons.logout),
-              title: Text('Logout [placeholder]'),
-              onTap: () => Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => TaskHome())),
-            ),
+                tileColor: Colors.amber[100],
+                leading: Icon(Icons.logout),
+                title: Text('Logout [placeholder]'),
+                onTap: () {
+                  try {
+                    Amplify.Auth.signOut();
+                  } on AuthException catch (e) {
+                    print(e.message);
+                  }
+                }),
           ],
         ),
       ),
