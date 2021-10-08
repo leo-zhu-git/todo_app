@@ -80,10 +80,10 @@ class MySql_DBHelper {
             "",
             "",
             "");
-        print("TaskID" + appTaskID);
-        print("CategoryID::::::::" + swiperDataList[i]['TaskCategory']);
-        print("ContextID::::::::" + swiperDataList[i]['TaskContext']);
-        print("TagID::::::::" + swiperDataList[i]['TaskTag']);
+        // print("TaskID" + appTaskID);
+        // print("CategoryID::::::::" + swiperDataList[i]['TaskCategory']);
+        // print("ContextID::::::::" + swiperDataList[i]['TaskContext']);
+        // print("TagID::::::::" + swiperDataList[i]['TaskTag']);
 
         helper.insertTask(task);
 
