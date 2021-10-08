@@ -791,7 +791,7 @@ class TaskDetailState extends State //<TaskDetail>
                       Navigator.pop(context);
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.grey[300],
+                      primary: Colors.grey[100],
                     ),
                     child: Text(
                       'Cancel',
@@ -826,9 +826,9 @@ class TaskDetailState extends State //<TaskDetail>
                       task.timeDue = _todoTimeController.text;
                       task.timeDue != ""
                           ? {
-                              _nTitle = task.timeDue.toString() + ' reminder: ' + task.task,
-                              await notificationPlugin.scheduleNotification(
-                                  _nTitle, task.note, task.timeDue)
+//                              _nTitle = task.timeDue.toString() + ' reminder: ' + task.task,
+//                              await notificationPlugin.scheduleNotification(
+//                                  _nTitle, task.note, task.timeDue)
                             }
                           : task.isDone = 0;
 //                      if (task.isDone == 0) {
