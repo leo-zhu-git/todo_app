@@ -163,36 +163,36 @@ class MySql_DBHelper {
 ///////////////////////////
   void syncStatusesData() async {
     helper.deleteAllStatuses();
-    final tasksRequest = request('actionContent', formData: null);
+    final tasksRequest = request('statusContent', formData: null);
 
     tasksRequest.then((value) {
       final data = json.decode(value.toString());
       print(data);
-      List<Map> swiperDataList = (data['statuses'] as List).cast();
+      List<Map> swiperDataList = (data['Status'] as List).cast();
 
       var count = swiperDataList.length;
       print(count);
 
       for (int i = 0; i < swiperDataList.length; i++) {
-        Status action = new Status();
+        Status status = new Status();
         String dbId = swiperDataList[i]['id'].toString();
         String dbUserID = swiperDataList[i]['userId'].toString();
         String appId = dbId.substring(dbUserID.length, dbId.length);
-        action.id = int.parse(appId);
-        action.name = swiperDataList[i]['name'];
-        action.description = swiperDataList[i]['desc'];
+        status.id = int.parse(appId);
+        status.name = swiperDataList[i]['name'];
+        status.description = swiperDataList[i]['desc'];
 
-        final actionFuture = helper.getStatusesbyID(int.parse(appId));
-        actionFuture.then((result) {
+        final statusFuture = helper.getStatusesbyID(int.parse(appId));
+        statusFuture.then((result) {
           count = result.length;
           //for (int i = 0; i < count; i++) {
           //helper.deleteAction(i);
           //}
           if (count > 0) {
-            helper.updateStatuses(action);
+            helper.updateStatuses(status);
             //helper.deleteAction(swiperDataList[i]['TaskID']);
           } else {
-            helper.insertStatuses(action);
+            helper.insertStatuses(status);
             // helper.deleteAction(swiperDataList[i]['TaskID']);
           }
         });
@@ -205,36 +205,36 @@ class MySql_DBHelper {
 ///////////////////////////
   void syncPrioritiesData() async {
     helper.deleteAllPriorities();
-    final tasksRequest = request('actionContent', formData: null);
+    final tasksRequest = request('priorityContent', formData: null);
 
     tasksRequest.then((value) {
       final data = json.decode(value.toString());
       print(data);
-      List<Map> swiperDataList = (data['priorities'] as List).cast();
+      List<Map> swiperDataList = (data['Priority'] as List).cast();
 
       var count = swiperDataList.length;
       print(count);
 
       for (int i = 0; i < swiperDataList.length; i++) {
-        Priority action = new Priority();
+        Priority priority = new Priority();
         String dbId = swiperDataList[i]['id'].toString();
         String dbUserID = swiperDataList[i]['userId'].toString();
         String appId = dbId.substring(dbUserID.length, dbId.length);
-        action.id = int.parse(appId);
-        action.name = swiperDataList[i]['name'];
-        action.description = swiperDataList[i]['desc'];
+        priority.id = int.parse(appId);
+        priority.name = swiperDataList[i]['name'];
+        priority.description = swiperDataList[i]['desc'];
 
-        final actionFuture = helper.getPrioritiesbyID(int.parse(appId));
-        actionFuture.then((result) {
+        final priorityFuture = helper.getPrioritiesbyID(int.parse(appId));
+        priorityFuture.then((result) {
           count = result.length;
           //for (int i = 0; i < count; i++) {
           //helper.deleteAction(i);
           //}
           if (count > 0) {
-            helper.updatePriorities(action);
+            helper.updatePriorities(priority);
             //helper.deleteAction(swiperDataList[i]['TaskID']);
           } else {
-            helper.insertPriorities(action);
+            helper.insertPriorities(priority);
             // helper.deleteAction(swiperDataList[i]['TaskID']);
           }
         });
@@ -248,7 +248,7 @@ class MySql_DBHelper {
 
   void syncCategoriesData() async {
     helper.deleteAllCategories();
-    final tasksRequest = request('actionContent', formData: null);
+    final tasksRequest = request('categoriesContent', formData: null);
 
     tasksRequest.then((value) {
       final data = json.decode(value.toString());
@@ -295,7 +295,7 @@ class MySql_DBHelper {
     tasksRequest.then((value) {
       final data = json.decode(value.toString());
       print(data);
-      List<Map> swiperDataList = (data['Action1s'] as List).cast();
+      List<Map> swiperDataList = (data['Actions'] as List).cast();
 
       var count = swiperDataList.length;
       print(count);
@@ -458,37 +458,37 @@ class MySql_DBHelper {
   /// sync goals
 ///////////////////////////
   void syncGoal1sData() async {
-    helper.deleteAllTag1s();
+    helper.deleteAllGoal1s();
     final tasksRequest = request('goalContent', formData: null);
 
     tasksRequest.then((value) {
       final data = json.decode(value.toString());
       print(data);
-      List<Map> swiperDataList = (data['Goal1s'] as List).cast();
+      List<Map> swiperDataList = (data['Goals'] as List).cast();
 
       var count = swiperDataList.length;
       print(count);
 
       for (int i = 0; i < swiperDataList.length; i++) {
-        Goal1 action = new Goal1();
+        Goal1 goal = new Goal1();
         String dbId = swiperDataList[i]['id'].toString();
         String dbUserID = swiperDataList[i]['userId'].toString();
         String appId = dbId.substring(dbUserID.length, dbId.length);
-        action.id = int.parse(appId);
-        action.name = swiperDataList[i]['name'];
-        action.description = swiperDataList[i]['desc'];
+        goal.id = int.parse(appId);
+        goal.name = swiperDataList[i]['name'];
+        goal.description = swiperDataList[i]['desc'];
 
         print(swiperDataList[i]['name']);
         //helper.deleteTask(swiperDataList[i]['TaskID']);
-        final actionFuture = helper.getGoal1sbyID(int.parse(appId));
-        actionFuture.then((result) {
+        final goalFuture = helper.getGoal1sbyID(int.parse(appId));
+        goalFuture.then((result) {
           count = result.length;
 
           if (count > 0) {
             //helper.deleteContextbyID(swiperDataList[i]['ContextID']);
-            helper.updateGoal1s(action);
+            helper.updateGoal1s(goal);
           } else {
-            helper.insertGoal1s(action);
+            helper.insertGoal1s(goal);
             //helper.deleteContextbyID(swiperDataList[i]['ContextID']);
           }
         });
