@@ -828,7 +828,7 @@ class TaskDetailState extends State //<TaskDetail>
                           ? {
                               _nTitle = task.timeDue.toString() + ' reminder: ' + task.task,
                               await notificationPlugin.scheduleNotification(
-                                  _nTitle, task.note, 'test')
+                                  _nTitle, task.note, task.timeDue)
                             }
                           : task.isDone = 0;
 //                      if (task.isDone == 0) {
