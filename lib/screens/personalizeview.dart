@@ -46,6 +46,28 @@ class SortItem {
   }
 }
 
+class ShowItem {
+  int id;
+  String name;
+
+  ShowItem(this.id, this.name);
+  static List<ShowItem> getShow() {
+    return <ShowItem>[
+      ShowItem(0, 'Due Date'),
+      ShowItem(1, 'Due Time'),
+      ShowItem(2, 'Status'),
+      ShowItem(3, 'Priority'),
+      ShowItem(4, 'Category'),
+      ShowItem(5, 'Action'),
+      ShowItem(6, 'Context'),
+      ShowItem(7, 'Location'),
+      ShowItem(8, 'Tag'),
+      ShowItem(9, 'Goal'),
+      ShowItem(10, 'Star'),
+    ];
+  }
+}
+
 class FilterIsStar {
   int id;
   String name;
@@ -140,11 +162,13 @@ class SortOrder {
 
 class _PersonalizeViewState extends State //State<PersonalizeView>
 {
+  List<ShowItem> _show = ShowItem.getShow();
   List<SortItem> _sort = SortItem.getSort();
   List<SortOrder> _order = SortOrder.getOrder();
   List<FilterIsStar> _filterIsStar = FilterIsStar.getIsStar();
   List<FilterIsDone> _filterIsDone = FilterIsDone.getIsDone();
   List<FilterDateDue> _filterDateDue = FilterDateDue.getDateDue();
+  List<DropdownMenuItem<ShowItem>> _dropdownMenuItemsShow;
   List<DropdownMenuItem<SortItem>> _dropdownMenuItemsSort;
   List<DropdownMenuItem<SortOrder>> _dropdownMenuSortOrder;
   List<DropdownMenuItem<FilterIsStar>> _dropdownFilterIsStar;
@@ -159,11 +183,11 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
   SortOrder _selectedSortOrder2;
   SortItem _selectedSortField3;
   SortOrder _selectedSortOrder3;
-  SortItem _selectedShowMain1;
-  SortItem _selectedShowMain2;
-  SortItem _selectedShowSec1;
-  SortItem _selectedShowSec2;
-  SortItem _selectedShowSec3;
+//  SortItem _selectedShowMain1;
+//  SortItem _selectedShowMain2;
+  ShowItem _selectedShowSec1;
+  ShowItem _selectedShowSec2;
+  ShowItem _selectedShowSec3;
   DbHelper helper = DbHelper();
   CustomSettings customSetting;
   List<CustomDropdownItem> _statuses = [];
@@ -190,6 +214,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
   @override
   void initState() {
     super.initState();
+    _dropdownMenuItemsShow = buildDropdownMenuShow(_show);
     _dropdownMenuItemsSort = buildDropdownMenuItems(_sort);
     _dropdownMenuSortOrder = buildDropdownMenuOrder(_order);
     _dropdownFilterIsStar = buildDropdownFilterIsStar(_filterIsStar);
@@ -271,37 +296,40 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
       _selectedSortOrder3 = _dropdownMenuSortOrder[globals.sortOrder3].value;
 
     ////////////////////////////
-    /// show
+    /// show - main1 is hard coded to tasks always RT
     ////////////////////////////
-    if (globals.showMain1 == null) {
-      _selectedShowMain1 = _dropdownMenuItemsSort[0].value;
-      globals.showMain1 = 0;
-    } else
-      _selectedShowMain1 = _dropdownMenuItemsSort[globals.showMain1].value;
+//    if (globals.showMain1 == null) {
+//      _selectedShowMain1 = _dropdownMenuItemsShow[0].value;
+//      globals.showMain1 = 0;
+//    } else
+//      _selectedShowMain1 = _dropdownMenuItemsShow[globals.showMain1].value;
 
-    if (globals.showMain2 == null) {
-      _selectedShowMain2 = _dropdownMenuItemsSort[2].value;
-      globals.showMain2 = 2;
-    } else
-      _selectedShowMain2 = _dropdownMenuItemsSort[globals.showMain2].value;
+//    if (globals.showMain2 == null) {
+//      _selectedShowMain2 = _dropdownMenuItemsShow[2].value;
+//      globals.showMain2 = 2;
+//    } else
+//      _selectedShowMain2 = _dropdownMenuItemsShow[globals.showMain2].value;
 
+    ////////////////////////////
+    /// show - sec defaults star, dateDue, timeDue RT
+    ////////////////////////////
     if (globals.showSec1 == null) {
-      _selectedShowSec1 = _dropdownMenuItemsSort[0].value;
-      globals.showSec1 = 0;
+      _selectedShowSec1 = _dropdownMenuItemsShow[0].value;
+      globals.showSec1 = 10;
     } else
-      _selectedShowSec1 = _dropdownMenuItemsSort[globals.showSec1].value;
+      _selectedShowSec1 = _dropdownMenuItemsShow[globals.showSec1].value;
 
     if (globals.showSec2 == null) {
-      _selectedShowSec2 = _dropdownMenuItemsSort[6].value;
-      globals.showSec2 = 6;
+      _selectedShowSec2 = _dropdownMenuItemsShow[6].value;
+      globals.showSec2 = 0;
     } else
-      _selectedShowSec2 = _dropdownMenuItemsSort[globals.showSec2].value;
+      _selectedShowSec2 = _dropdownMenuItemsShow[globals.showSec2].value;
 
     if (globals.showSec3 == null) {
-      _selectedShowSec3 = _dropdownMenuItemsSort[2].value;
-      globals.showSec3 = 2;
+      _selectedShowSec3 = _dropdownMenuItemsShow[2].value;
+      globals.showSec3 = 1;
     } else
-      _selectedShowSec3 = _dropdownMenuItemsSort[globals.showSec3].value;
+      _selectedShowSec3 = _dropdownMenuItemsShow[globals.showSec3].value;
 
     // super.initState();
   }
@@ -496,6 +524,19 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
   }
 
 //##########################################end of Dropdown #################################################################
+
+  List<DropdownMenuItem<ShowItem>> buildDropdownMenuShow(List showItems) {
+    List<DropdownMenuItem<ShowItem>> items = List();
+    for (ShowItem showItem in showItems) {
+      items.add(
+        DropdownMenuItem(
+          value: showItem,
+          child: Text(showItem.name),
+        ),
+      );
+    }
+    return items;
+  }
 
   List<DropdownMenuItem<SortItem>> buildDropdownMenuItems(List sortItems) {
     List<DropdownMenuItem<SortItem>> items = List();
@@ -1103,7 +1144,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.pink[100]),
                 child: DropdownButtonFormField(
-                  items: _dropdownMenuItemsSort,
+                  items: _dropdownMenuItemsShow,
                   hint: Text('Display Secondary1'),
                   value: _selectedShowSec1,
                   onChanged: (selectedShow) {
@@ -1122,7 +1163,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.pink[100]),
                 child: DropdownButtonFormField(
-                  items: _dropdownMenuItemsSort,
+                  items: _dropdownMenuItemsShow,
                   hint: Text('Display Secondary2'),
                   value: _selectedShowSec2,
                   onChanged: (selectedShow) {
@@ -1141,7 +1182,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.pink[100]),
                 child: DropdownButtonFormField(
-                  items: _dropdownMenuItemsSort,
+                  items: _dropdownMenuItemsShow,
                   hint: Text('Display Secondary3'),
                   value: _selectedShowSec3,
                   onChanged: (selectedShow) {
@@ -1303,11 +1344,11 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                             globals.sortField3 = _selectedSortField3.id;
                           if (_selectedSortOrder3 != null)
                             globals.sortOrder3 = _selectedSortOrder3.id;
-                          if (_selectedShowMain1 != null)
-                            globals.showMain1 = _selectedShowMain1.id;
-                          print(globals.showMain1);
-                          if (_selectedShowMain2 != null)
-                            globals.showMain2 = _selectedShowMain2.id;
+//                          if (_selectedShowMain1 != null)
+//                            globals.showMain1 = _selectedShowMain1.id;
+//                          print(globals.showMain1);
+//                          if (_selectedShowMain2 != null)
+//                            globals.showMain2 = _selectedShowMain2.id;
                           print(globals.showMain2);
                           if (_selectedShowSec1 != null)
                             globals.showSec1 = _selectedShowSec1.id;
@@ -1385,12 +1426,12 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                           customSetting.sortOrder3 = _selectedSortOrder3 == null
                               ? ""
                               : _selectedSortOrder3.id.toString();
-                          customSetting.showMain1 = _selectedShowMain1 == null
-                              ? ""
-                              : _selectedShowMain1.id.toString();
-                          customSetting.showMain2 = _selectedShowMain2 == null
-                              ? ""
-                              : _selectedShowMain2.id.toString();
+//                          customSetting.showMain1 = _selectedShowMain1 == null
+//                              ? ""
+//                              : _selectedShowMain1.id.toString();
+//                          customSetting.showMain2 = _selectedShowMain2 == null
+//                              ? ""
+//                              : _selectedShowMain2.id.toString();
                           customSetting.showSec1 = _selectedShowSec1 == null
                               ? ""
                               : _selectedShowSec1.id.toString();
@@ -1536,29 +1577,29 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
           globals.sortField3 = int.parse(
               customSetting.sortOrder3); //convert it to session variables
         }
-        if (customSetting.showMain1 != "") {
-          _selectedShowMain1 =
-              _dropdownMenuItemsSort[int.parse(customSetting.showMain1)].value;
-          globals.showMain1 = int.parse(customSetting.showMain1);
-        }
-        if (customSetting.showMain2 != "") {
-          _selectedShowMain2 =
-              _dropdownMenuItemsSort[int.parse(customSetting.showMain2)].value;
-          globals.showMain2 = int.parse(customSetting.showMain2);
-        }
+//        if (customSetting.showMain1 != "") {
+//          _selectedShowMain1 =
+//              _dropdownMenuItemsSort[int.parse(customSetting.showMain1)].value;
+//          globals.showMain1 = int.parse(customSetting.showMain1);
+//        }
+//        if (customSetting.showMain2 != "") {
+//          _selectedShowMain2 =
+//              _dropdownMenuItemsSort[int.parse(customSetting.showMain2)].value;
+//          globals.showMain2 = int.parse(customSetting.showMain2);
+//        }
         if (customSetting.showSec1 != "") {
           _selectedShowSec1 =
-              _dropdownMenuItemsSort[int.parse(customSetting.showSec1)].value;
+              _dropdownMenuItemsShow[int.parse(customSetting.showSec1)].value;
           globals.showSec1 = int.parse(customSetting.showSec1);
         }
         if (customSetting.showSec2 != "") {
           _selectedShowSec2 =
-              _dropdownMenuItemsSort[int.parse(customSetting.showSec2)].value;
+              _dropdownMenuItemsShow[int.parse(customSetting.showSec2)].value;
           globals.showSec2 = int.parse(customSetting.showSec2);
         }
         if (customSetting.showSec3 != "") {
           _selectedShowSec3 =
-              _dropdownMenuItemsSort[int.parse(customSetting.showSec3)].value;
+              _dropdownMenuItemsShow[int.parse(customSetting.showSec3)].value;
           globals.showSec3 = int.parse(customSetting.showSec3);
         }
         if (customSetting.filterIsStar == true) {
