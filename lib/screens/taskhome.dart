@@ -210,7 +210,7 @@ class TaskHomeState extends State {
                     trailing: IconButton(
                       icon: Icon(Icons.lightbulb,
                      color: (this.tasklist[position].isStar == 0)
-                          ? Colors.black38
+                          ? Colors.black12
                           : Colors.green),
                       onPressed: () {
                         setState(() {
