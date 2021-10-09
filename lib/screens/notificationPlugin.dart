@@ -103,7 +103,7 @@ class NotificationPlugin {
   }
 
 ////////////////////////
-  /// 2. scheduled notification 5s delay
+  /// 2. scheduled notification  
 ////////////////////////
   Future<void> scheduleNotification(
       String _nTitle, String _nBody, String _nTime) async {
@@ -136,9 +136,7 @@ class NotificationPlugin {
     int yyyy = _scheduledDate.year;
     int mm = _scheduledDate.month;
     int dd = _scheduledDate.day;
-//    TimeOfDay _scheduledTime = TimeOfDay.now();
     TimeOfDay _scheduledTime = TimeOfDay(hour:int.parse(_nTime.split(":")[0]),minute: int.parse(_nTime.split(":")[1]));
-//    TimeOfDay _scheduledTime = _nTime;
     int hh = _scheduledTime.hour;
     int min = _scheduledTime.minute; 
 
