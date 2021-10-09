@@ -28,18 +28,20 @@ class SortItem {
   SortItem(this.id, this.name);
   static List<SortItem> getSort() {
     return <SortItem>[
-      SortItem(0, 'Due Date'),
-      SortItem(1, 'Due Time'),
-      SortItem(2, 'Status'),
-      SortItem(3, 'Priority'),
-      SortItem(4, 'Category'),
-      SortItem(5, 'Action'),
-      SortItem(6, 'Context'),
-      SortItem(7, 'Location'),
-      SortItem(8, 'Tag'),
-      SortItem(9, 'Goal'),
-      SortItem(10, 'Star'),
-      SortItem(11, 'Done'),
+      SortItem(0, 'Task'),
+      SortItem(1, 'Note'),
+      SortItem(2, 'Due Date'),
+      SortItem(3, 'Due Time'),
+      SortItem(4, 'Status'),
+      SortItem(5, 'Priority'),
+      SortItem(6, 'Category'),
+      SortItem(7, 'Action'),
+      SortItem(8, 'Context'),
+      SortItem(9, 'Location'),
+      SortItem(10, 'Tag'),
+      SortItem(11, 'Goal'),
+      SortItem(12, 'Star'),
+      SortItem(13, 'Done'),
     ];
   }
 }
