@@ -81,7 +81,7 @@ class DbHelper {
 
   Future<Database> initializeDb() async {
     Directory dir = await getApplicationDocumentsDirectory();
-    String path = dir.path + "todo_V22.f3.db";
+    String path = dir.path + "todo_V22.f6.db";
     var dbTodovn = await openDatabase(path, version: 1, onCreate: _createDb);
     return dbTodovn;
   }
@@ -354,7 +354,7 @@ class DbHelper {
         "", // tag
         "", // goal
         false, // isStar
-        false //isDone
+        false, //isDone
         ); // 
     var result = insertCustomSettings(customSetting);
 
@@ -602,20 +602,20 @@ Plan C - USD 24 | 12 month
     final String formattedN30D = formatter.format(_N30D);
 
 ////////////////
-    /// build query - add filterIsDone
+/// build query - add filterIsDone
 ////////////////
-    if (colfilterIsDone != 0) // show
-      queryStr = queryStr + " where ($colIsDone ==0)";
+    if (colfilterIsDone == 0) // show
+      queryStr = queryStr + " where ($colIsDone == $colIsDone)";
     else
-      queryStr = queryStr + " where ($colIsDone not Null)";
+      queryStr = queryStr + " where ($colIsDone != 1)";
 
 ////////////////
-    /// build query - add filterIsStar
+/// build query - add filterIsStar
 ////////////////
-    if (colfilterIsStar != 0) // show
-      queryStr = queryStr + " and ($colIsStar ==0)";
+    if (colfilterIsStar == 0) // show
+      queryStr = queryStr + " and ($colIsStar == $colIsStar)";
     else
-      queryStr = queryStr + " and ($colIsStar not Null)";
+      queryStr = queryStr + " and ($colIsStar == '1')";
 
 
 ////////////////

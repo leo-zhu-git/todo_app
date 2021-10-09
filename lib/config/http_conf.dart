@@ -8,4 +8,7 @@ const servicePath = {
   'wipeTasksfromDevice': base_url + 'wipeTasksfromDevice',
   'deleteAllTasks': base_url + 'deleteAllTasks',
   'tagContent': base_url + 'getTagContent',
+  'categoriesContent': base_url + 'getCategoriesContent',
+  'statusContent': base_url + 'getStatusContent',
+  'priorityContent': base_url + 'getPriorityContent',
 };

@@ -171,17 +171,17 @@ class _DrawerNagivation extends State<DrawerNagivation> {
                   .push(MaterialPageRoute(builder: (context) => TaskHome())),
             ),
 //            Divider(),
-            ListTile(
-                tileColor: Colors.amber[100],
-                leading: Icon(Icons.logout),
-                title: Text('Logout [placeholder]'),
-                onTap: () {
-                  try {
-                    Amplify.Auth.signOut();
-                  } on AuthException catch (e) {
-                    print(e.message);
-                  }
-                }),
+//            ListTile(
+//                tileColor: Colors.amber[100],
+//                leading: Icon(Icons.logout),
+//                title: Text('Logout [placeholder]'),
+//                onTap: () {
+//                  try {
+//                    Amplify.Auth.signOut();
+//                  } on AuthException catch (e) {
+//                    print(e.message);
+//                  }
+//                }),
           ],
         ),
       ),
