@@ -59,7 +59,7 @@ class TaskDetailState extends State //<TaskDetail>
   var _selectedLocation1;
   var _selectedTag1;
   var _selectedGoal1;
-  var _nTitle; 
+  var _nTitle;
 
   List<CustomDropdownItem> _statuses = [];
   List<CustomDropdownItem> _priorities = [];
@@ -316,9 +316,7 @@ class TaskDetailState extends State //<TaskDetail>
   }
 
   TimeOfDay timeConvert(String s) {
-    int hour;
-    int minute;
-    TimeOfDay _startTime = TimeOfDay(hour:int.parse(s.split(":")[0]),minute: int.parse(s.split(":")[1]));
+    TimeOfDay _time = TimeOfDay(hour:int.parse(s.split(":")[0]),minute: int.parse(s.split(":")[1]));
 //    String ampm = normTime.substring(normTime.length - 2);
 //    String result = normTime.substring(0, normTime.indexOf(' '));
 //    if (ampm == 'AM' && int.parse(result.split(":")[1]) != 12) {
@@ -332,7 +330,7 @@ class TaskDetailState extends State //<TaskDetail>
 //      }
 //      minute = int.parse(result.split(":")[1]);
 //    }
-    return TimeOfDay(hour: hour, minute: minute);
+    return _time;
   }
 
 //##################End of Drop Down Items Load from DB #################################################################

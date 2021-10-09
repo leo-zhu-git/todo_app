@@ -675,12 +675,6 @@ class TaskSearchState extends State {
                   )
                 ],
               )),
-//          Padding(
-//              padding: EdgeInsets.all(8.0),
-//              child: Align(
-//                  alignment: Alignment.topLeft,
-//                  child: Text(count.toString() + " Results found..",
-//                      style: _textStyleControls))),
           Expanded(
             child: Container(child: taskListItems()),
           ),
@@ -749,9 +743,9 @@ class TaskSearchState extends State {
                             child: Padding(
                                 padding: const EdgeInsets.only(right: 1),
                                 child: Text(
-                                    this.tasklist[position].main1 == null
+                                    this.tasklist[position].task == null
                                         ? ""
-                                        : this.tasklist[position].main1,
+                                        : this.tasklist[position].task,
                                     overflow: TextOverflow.ellipsis))),
                       ],
                     ),
@@ -831,167 +825,6 @@ class TaskSearchState extends State {
             taskList.add(Task.fromObject(result[i]));
             debugPrint(taskList[i].note);
 
-            /////////////////
-            /// display main1
-            ////////////////
-            switch (globals.showMain1) {
-              case 0:
-                {
-                  taskList[i].main1 = taskList[i].task;
-                }
-                break;
-              case 1:
-                {
-                  taskList[i].main1 = taskList[i].note;
-                }
-                break;
-              case 2:
-                {
-                  taskList[i].main1 = taskList[i].dateDue;
-                }
-                break;
-              case 3:
-                {
-                  taskList[i].main1 = taskList[i].timeDue;
-                }
-                break;
-              case 4:
-                {
-                  taskList[i].main1 = taskList[i].status;
-                }
-                break;
-              case 5:
-                {
-                  taskList[i].main1 = taskList[i].priority;
-                }
-                break;
-              case 6:
-                {
-                  taskList[i].main1 = taskList[i].category;
-                }
-                break;
-              case 7:
-                {
-                  taskList[i].main1 = taskList[i].action1;
-                }
-                break;
-              case 8:
-                {
-                  taskList[i].main1 = taskList[i].context1;
-                }
-                break;
-              case 9:
-                {
-                  taskList[i].main1 = taskList[i].location1;
-                }
-                break;
-              case 10:
-                {
-                  taskList[i].main1 = taskList[i].tag1;
-                }
-                break;
-              case 11:
-                {
-                  taskList[i].main1 = taskList[i].goal1;
-                }
-                break;
-              case 12:
-                {
-                  taskList[i].main1 = taskList[i].isStar.toString();
-                }
-                break;
-              case 13:
-                {
-                  taskList[i].main1 = taskList[i].isDone.toString();
-                }
-                break;
-              default:
-                {
-                  taskList[i].main1 = taskList[i].task;
-                }
-                break;
-            }
-
-/////////////////
-            /// display main2
-////////////////
-            switch (globals.showMain2) {
-              case 0:
-                {
-                  taskList[i].main1 = taskList[i].task;
-                }
-                break;
-              case 1:
-                {
-                  taskList[i].main1 = taskList[i].note;
-                }
-                break;
-              case 2:
-                {
-                  taskList[i].main1 = taskList[i].dateDue;
-                }
-                break;
-              case 3:
-                {
-                  taskList[i].main1 = taskList[i].timeDue;
-                }
-                break;
-              case 4:
-                {
-                  taskList[i].main1 = taskList[i].status;
-                }
-                break;
-              case 5:
-                {
-                  taskList[i].main1 = taskList[i].priority;
-                }
-                break;
-              case 6:
-                {
-                  taskList[i].main1 = taskList[i].category;
-                }
-                break;
-              case 7:
-                {
-                  taskList[i].main1 = taskList[i].action1;
-                }
-                break;
-              case 8:
-                {
-                  taskList[i].main1 = taskList[i].context1;
-                }
-                break;
-              case 9:
-                {
-                  taskList[i].main1 = taskList[i].location1;
-                }
-                break;
-              case 10:
-                {
-                  taskList[i].main1 = taskList[i].tag1;
-                }
-                break;
-              case 11:
-                {
-                  taskList[i].main1 = taskList[i].goal1;
-                }
-                break;
-              case 12:
-                {
-                  taskList[i].main1 = taskList[i].isStar.toString();
-                }
-                break;
-              case 13:
-                {
-                  taskList[i].main1 = taskList[i].isDone.toString();
-                }
-                break;
-              default:
-                {
-                  taskList[i].main1 = taskList[i].task;
-                }
-                break;
-            }
 
 /////////////////
             /// display sec1
