@@ -11,8 +11,8 @@ import 'package:todo_app/model/globals.dart' as globals;
 DbHelper helper = DbHelper();
 String _selectedpriority = "";
 String _searchText = "";
-TextStyle _textStyleControls =
-    TextStyle(fontSize: 14.0, fontWeight: FontWeight.w800, color: Colors.black);
+TextStyle _textStyleControls = TextStyle(
+    fontSize: 12.0, fontWeight: FontWeight.normal, color: Colors.black);
 
 class TaskSearch extends StatefulWidget {
   @override
@@ -259,11 +259,13 @@ class TaskSearchState extends State {
         automaticallyImplyLeading: true,
         title: Center(
           child: Container(
+            height: 30,
             child: Column(
               children: <Widget>[
                 Badge(
                   child: Text('Search     '),
                   shape: BadgeShape.square,
+                  stackFit: StackFit.loose,
                   position: BadgePosition.topEnd(),
                   badgeContent: Text(count.toString(),
                       style: TextStyle(color: Colors.black)),
@@ -274,12 +276,12 @@ class TaskSearchState extends State {
           ),
         ),
       ),
-      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: false,
       body: Column(
         children: [
           Padding(
             padding:
-                EdgeInsets.only(top: 2.0, left: 4.0, right: 4.0, bottom: 1.0),
+                EdgeInsets.only(top: 1.0, left: 4.0, right: 4.0, bottom: 1.0),
             child: TextField(
               controller: searchController,
               style: textStyle,
@@ -323,13 +325,14 @@ class TaskSearchState extends State {
 //####################################Show Completed Task Check box
                       Container(
                         margin:
-                            EdgeInsets.only(left: 8.0, right: 8.0, bottom: 2.0),
+                            EdgeInsets.only(left: 8.0, right: 8.0, bottom: 1.0),
                         decoration: BoxDecoration(
                             shape: BoxShape.rectangle, color: Colors.blue[100]),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Text('Include Completed Tasks:'),
+                            Text('Include Completed Tasks:',
+                                style: _textStyleControls),
                             Checkbox(
                               value: _showIsDone,
                               onChanged: (value) {
@@ -358,7 +361,7 @@ class TaskSearchState extends State {
 //#################################Status#####################################################
                       Container(
                         margin:
-                            EdgeInsets.only(top: 2.0, left: 8.0, right: 8.0),
+                            EdgeInsets.only(top: 1.0, left: 8.0, right: 8.0),
                         decoration: BoxDecoration(
                             shape: BoxShape.rectangle, color: Colors.blue[100]),
                         child: Row(
@@ -400,7 +403,7 @@ class TaskSearchState extends State {
 //#################################Priority#####################################################
                       Container(
                         margin:
-                            EdgeInsets.only(top: 2.0, left: 8.0, right: 8.0),
+                            EdgeInsets.only(top: 1.0, left: 8.0, right: 8.0),
                         decoration: BoxDecoration(
                             shape: BoxShape.rectangle, color: Colors.blue[100]),
                         child: Row(
@@ -442,7 +445,7 @@ class TaskSearchState extends State {
 //#################################Category#####################################################
                       Container(
                         margin:
-                            EdgeInsets.only(top: 2.0, left: 8.0, right: 8.0),
+                            EdgeInsets.only(top: 1.0, left: 8.0, right: 8.0),
                         decoration: BoxDecoration(
                             shape: BoxShape.rectangle, color: Colors.blue[100]),
                         child: Row(
@@ -484,7 +487,7 @@ class TaskSearchState extends State {
 //########################################### Action  ######### #################################3
                       Container(
                         margin:
-                            EdgeInsets.only(top: 2.0, left: 8.0, right: 8.0),
+                            EdgeInsets.only(top: 1.0, left: 8.0, right: 8.0),
                         decoration: BoxDecoration(
                             shape: BoxShape.rectangle, color: Colors.blue[100]),
                         child: Flexible(
@@ -524,7 +527,7 @@ class TaskSearchState extends State {
 //######### Context  #########
                       Container(
                         margin:
-                            EdgeInsets.only(top: 2.0, left: 8.0, right: 8.0),
+                            EdgeInsets.only(top: 1.0, left: 8.0, right: 8.0),
                         decoration: BoxDecoration(
                             shape: BoxShape.rectangle, color: Colors.blue[100]),
                         child: Row(
@@ -561,7 +564,7 @@ class TaskSearchState extends State {
 // //######### Location  #########
                       Container(
                         margin:
-                            EdgeInsets.only(top: 2.0, left: 8.0, right: 8.0),
+                            EdgeInsets.only(top: 1.0, left: 8.0, right: 8.0),
                         decoration: BoxDecoration(
                             shape: BoxShape.rectangle, color: Colors.blue[100]),
                         child: Row(
@@ -599,7 +602,7 @@ class TaskSearchState extends State {
 // //######### Tag  #########
                       Container(
                         margin:
-                            EdgeInsets.only(top: 2.0, left: 8.0, right: 8.0),
+                            EdgeInsets.only(top: 1.0, left: 8.0, right: 8.0),
                         decoration: BoxDecoration(
                             shape: BoxShape.rectangle, color: Colors.blue[100]),
                         child: Row(
@@ -636,7 +639,7 @@ class TaskSearchState extends State {
 // //######### Goal  #########
                       Container(
                         margin: EdgeInsets.only(
-                            top: 2.0, left: 8.0, right: 8.0, bottom: 4.0),
+                            top: 1.0, left: 8.0, right: 8.0, bottom: 1.0),
                         decoration: BoxDecoration(
                             shape: BoxShape.rectangle, color: Colors.blue[100]),
                         child: Row(
@@ -684,7 +687,7 @@ class TaskSearchState extends State {
       //bottomNavigationBar: footerBar,
 
       bottomNavigationBar: Container(
-        height: 34.0,
+        height: 28.0,
         child: BottomAppBar(
           // color: Color.fromRGBO(58, 66, 86, 1.0),
           color: Colors.brown[900],
@@ -718,7 +721,19 @@ class TaskSearchState extends State {
                 this.tasklist[position].isDone = 1;
                 this.tasklist[position].dateDone = formattedDate;
                 dbHelper.updateTask(tasklist[position]);
-                this.tasklist.removeAt(position);
+                searchData(
+                    _searchText,
+                    _selectedStatus,
+                    _selectedPriority,
+                    _selectedCategory,
+                    _selectedAction1,
+                    _selectedContext1,
+                    _selectedLocation1,
+                    _selectedTag1,
+                    _selectedGoal1,
+                    _showIsStar,
+                    _showIsDone);
+                //this.tasklist.removeAt(position);
                 Scaffold.of(context).showSnackBar(new SnackBar(
                   content: new Text("Item Dismissed"),
                 ));
@@ -823,7 +838,6 @@ class TaskSearchState extends State {
           for (int i = 0; i < count; i++) {
             taskList.add(Task.fromObject(result[i]));
             debugPrint(taskList[i].note);
-
 
 /////////////////
             /// display sec1
