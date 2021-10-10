@@ -272,7 +272,7 @@ class Task {
     map['isStar'] = _isStar;
     map['isDone'] = _isDone;
     map['dateDone'] = _dateDone;
-    map['lastModified'] = _lastModified;  
+    map['lastModified'] = _lastModified;
 
     if (_id != null) {
       map['id'] = _id;
@@ -295,9 +295,9 @@ class Task {
     this._location1 = o['location1'];
     this._tag1 = o['tag1'];
     this._goal1 = o['goal1'];
-    this._statusText = o['statusname'] == null ? "" : o['statusesname'];
-    this._priorityText = o['priorityname'] == null ? "" : o['priorityname'];
-    this._categoryText = o['categoryname'] == null ? "" : o['categoryname'];
+    this._statusText = o['statusesname'] == null ? "" : o['statusesname'];
+    this._priorityText = o['prioritiesname'] == null ? "" : o['prioritiesname'];
+    this._categoryText = o['categoriesname'] == null ? "" : o['categoriesname'];
     this._action1Text = o['action1name'] == null ? "" : o['action1name'];
     this._context1Text = o['context1name'] == null ? "" : o['context1name'];
     this._location1Text = o['location1name'] == null ? "" : o['location1name'];
