@@ -1,6 +1,7 @@
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_flutter/amplify.dart';
 import 'package:flutter/material.dart';
+import 'package:todo_app/screens/Community.dart';
 import 'package:todo_app/screens/LocalNotification_screen.dart';
 import 'package:todo_app/screens/entry.dart';
 import 'package:todo_app/screens/wipe.dart';
@@ -76,18 +77,42 @@ class _DrawerNagivation extends State<DrawerNagivation> {
                   .push(MaterialPageRoute(builder: (context) => WipeScreen())),
             ),
 //            Divider(),
-            ListTile(
-              tileColor: Colors.amber[100],
-              leading: Icon(Icons.connect_without_contact),
-              title: Text('Support [temp test notification]'),
-              onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => LocalNotificationScreen())),
-            ),
+//            ListTile(
+//              tileColor: Colors.amber[100],
+//              leading: Icon(Icons.connect_without_contact),
+//              title: Text('Support [temp test notification]'),
+//              onTap: () => Navigator.of(context).push(MaterialPageRoute(
+//                  builder: (context) => LocalNotificationScreen())),
+//            ),
 //            Divider(),
             ListTile(
               tileColor: Colors.amber[100],
+              leading: Icon(Icons.help_outlined),
+              title: Text('Help - FAQ [placeholder]'),
+              onTap: () {
+                _launchURL();
+              },
+            ),
+            ListTile(
+              tileColor: Colors.amber[100],
+              leading: Icon(Icons.help_outlined),
+              title: Text('Report a bug [placeholder]'),
+              onTap: () {
+                _launchURL();
+              },
+            ),
+            ListTile(
+              tileColor: Colors.amber[100],
+              leading: Icon(Icons.help_outlined),
+              title: Text('Request a feature [placeholder]'),
+              onTap: () {
+                _launchURL();
+              },
+            ),
+            ListTile(
+              tileColor: Colors.amber[100],
               leading: Icon(Icons.people),
-              title: Text('Community [placeholder]'),
+              title: Text('Early Adoptors Program [placeholder]'),
               onTap: () => Navigator.of(context)
                   .push(MaterialPageRoute(builder: (context) => TaskHome())),
             ),
@@ -145,14 +170,6 @@ class _DrawerNagivation extends State<DrawerNagivation> {
 //                  .push(MaterialPageRoute(builder: (context) => Goal1sScreen())),
 //            ),
 //            Divider(),
-            ListTile(
-              tileColor: Colors.amber[100],
-              leading: Icon(Icons.help_outlined),
-              title: Text('Help'),
-              onTap: () {
-                _launchURL();
-              },
-            ),
 //            Divider(),
             ListTile(
               tileColor: Colors.amber[100],
