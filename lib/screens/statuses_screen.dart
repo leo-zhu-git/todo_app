@@ -128,7 +128,7 @@ class _StatusesScreenState extends State<StatusesScreen> {
                   controller: _statusNameController,
                   decoration: InputDecoration(
                     hintText: 'Write a status',
-                    labelText: 'Statua',
+                    labelText: 'Status',
                   ),
                 ),
                 TextField(

@@ -349,7 +349,7 @@ class TaskDetailState extends State //<TaskDetail>
         : _selectedPriority = null;
     task.category != ""
         ? _selectedCategory = task.category
-        : _selectedCategory = null;
+        : _selectedCategory = "1";
     task.action1 != ""
         ? _selectedAction1 = task.action1
         : _selectedAction1 = null;
@@ -371,8 +371,8 @@ class TaskDetailState extends State //<TaskDetail>
               },
           }
         : {
-            _todoDateController.text = null,
             _dateDue = DateTime.now(),
+            _todoDateController.text = DateFormat('yyyy-M-d').format(_dateDue),
           };
     task.timeDue != ""
         ? {
@@ -807,7 +807,7 @@ class TaskDetailState extends State //<TaskDetail>
                           ? ""
                           : _selectedPriority.toString();
                       task.category = _selectedCategory == null
-                          ? ""
+                          ? "1"
                           : _selectedCategory.toString();
                       task.action1 = _selectedAction1 == null
                           ? ""
@@ -820,13 +820,15 @@ class TaskDetailState extends State //<TaskDetail>
                       task.goal1 = _selectedGoal1 == null
                           ? ""
                           : _selectedGoal1.toString();
-                      task.dateDue = _todoDateController.text;
+                      task.dateDue == null
+                      ? DateFormat('yyyy-MM-dd – kk:mm').format(DateTime.now())
+                      : _todoDateController.text;
                       task.timeDue = _todoTimeController.text;
                       task.timeDue != ""
                           ? {
-                              _nTitle = task.timeDue.toString() + ' reminder: ' + task.task,
-                              await notificationPlugin.scheduleNotification(
-                                  _nTitle, task.note, task.timeDue)
+//                              _nTitle = task.timeDue.toString() + ' reminder: ' + task.task,
+//                              await notificationPlugin.scheduleNotification(
+//                                  _nTitle, task.note, task.timeDue)
                             }
                           : task.isDone = 0;
 //                      if (task.isDone == 0) {
