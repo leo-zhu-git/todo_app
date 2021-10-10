@@ -177,7 +177,7 @@ class TaskHomeState extends State {
               color: Colors.brown,
             ),
             child: Padding(
-              padding: EdgeInsets.only(top: 4.0, left: 4.0, right: 4.0),
+              padding: EdgeInsets.only(top: 2.0, left: 4.0, right: 4.0),
               child: Card(
                   color: Colors.yellow[200],
                   elevation: 8.0,

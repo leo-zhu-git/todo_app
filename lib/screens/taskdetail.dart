@@ -14,8 +14,7 @@ DbHelper dbHelper = DbHelper();
 DateTime currentDate = DateTime.now();
 String formattedDate = DateFormat('yyyymmdd').format(currentDate);
 String _searchText = "";
-TextStyle _textStyleControls =
-    TextStyle(fontSize: 16.0, fontWeight: FontWeight.w800, color: Colors.black);
+TextStyle _textStyleControls = TextStyle(fontSize: 12.0, color: Colors.black);
 
 final List<String> choices = const <String>[
   'Save Task & Back',
@@ -316,7 +315,8 @@ class TaskDetailState extends State //<TaskDetail>
   }
 
   TimeOfDay timeConvert(String s) {
-    TimeOfDay _time = TimeOfDay(hour:int.parse(s.split(":")[0]),minute: int.parse(s.split(":")[1]));
+    TimeOfDay _time = TimeOfDay(
+        hour: int.parse(s.split(":")[0]), minute: int.parse(s.split(":")[1]));
 //    String ampm = normTime.substring(normTime.length - 2);
 //    String result = normTime.substring(0, normTime.indexOf(' '));
 //    if (ampm == 'AM' && int.parse(result.split(":")[1]) != 12) {
@@ -349,7 +349,7 @@ class TaskDetailState extends State //<TaskDetail>
         : _selectedPriority = null;
     task.category != ""
         ? _selectedCategory = task.category
-        : _selectedCategory = null;
+        : _selectedCategory = "1";
     task.action1 != ""
         ? _selectedAction1 = task.action1
         : _selectedAction1 = null;
@@ -370,10 +370,7 @@ class TaskDetailState extends State //<TaskDetail>
                 _dateDue = DateFormat('yyyy-M-d').parse(task.dateDue),
               },
           }
-        : {
-            _todoDateController.text = null,
-            _dateDue = DateTime.now(),
-          };
+        : {};
     task.timeDue != ""
         ? {
             if (_timeDue == null)
@@ -408,7 +405,7 @@ class TaskDetailState extends State //<TaskDetail>
 ///////////////////////////
             Container(
               margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 4.0, bottom: 2.0),
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 6.0, bottom: 2.0),
               decoration: new BoxDecoration(
                 color: Colors.yellow[200],
               ),
@@ -429,7 +426,7 @@ class TaskDetailState extends State //<TaskDetail>
 ///////////////////////////
             Container(
               margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
               decoration: new BoxDecoration(
                 color: Colors.yellow[200],
               ),
@@ -440,7 +437,7 @@ class TaskDetailState extends State //<TaskDetail>
                   task.note = value;
                 },
                 minLines: 4,
-                maxLines: 30,
+                maxLines: 20,
                 decoration: InputDecoration(
                   labelText: ' Note',
                   hintText: ' Write Todo Note',
@@ -452,7 +449,7 @@ class TaskDetailState extends State //<TaskDetail>
 ///////////////////////////
             Container(
               margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
               decoration: BoxDecoration(
                 shape: BoxShape.rectangle,
                 color: Colors.blue[100],
@@ -478,7 +475,7 @@ class TaskDetailState extends State //<TaskDetail>
 ///////////////////////////
             Container(
               margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
               decoration: BoxDecoration(
                 shape: BoxShape.rectangle,
                 color: Colors.blue[100],
@@ -504,7 +501,7 @@ class TaskDetailState extends State //<TaskDetail>
 
             Container(
               margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
               decoration: BoxDecoration(
                   shape: BoxShape.rectangle, color: Colors.blue[100]),
               child: Row(
@@ -537,7 +534,7 @@ class TaskDetailState extends State //<TaskDetail>
 
             Container(
               margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
               decoration: BoxDecoration(
                   shape: BoxShape.rectangle, color: Colors.blue[100]),
               child: Row(
@@ -570,7 +567,7 @@ class TaskDetailState extends State //<TaskDetail>
 
             Container(
               margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
               decoration: BoxDecoration(
                   shape: BoxShape.rectangle, color: Colors.blue[100]),
               child: Row(
@@ -603,7 +600,7 @@ class TaskDetailState extends State //<TaskDetail>
 
             Container(
               margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
               decoration: BoxDecoration(
                   shape: BoxShape.rectangle, color: Colors.blue[100]),
               child: Row(
@@ -635,7 +632,7 @@ class TaskDetailState extends State //<TaskDetail>
 ///////////////////////////
             Container(
               margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
               decoration: BoxDecoration(
                   shape: BoxShape.rectangle, color: Colors.blue[100]),
               child: Row(
@@ -666,7 +663,7 @@ class TaskDetailState extends State //<TaskDetail>
 ///////////////////////////
             Container(
               margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
               decoration: BoxDecoration(
                   shape: BoxShape.rectangle, color: Colors.blue[100]),
               child: Row(
@@ -697,7 +694,7 @@ class TaskDetailState extends State //<TaskDetail>
 ///////////////////////////
             Container(
               margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
               decoration: BoxDecoration(
                   shape: BoxShape.rectangle, color: Colors.blue[100]),
               child: Row(
@@ -729,7 +726,7 @@ class TaskDetailState extends State //<TaskDetail>
 ///////////////////////////
             Container(
               margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
               decoration: BoxDecoration(
                   shape: BoxShape.rectangle, color: Colors.blue[100]),
               child: Row(
@@ -807,7 +804,7 @@ class TaskDetailState extends State //<TaskDetail>
                           ? ""
                           : _selectedPriority.toString();
                       task.category = _selectedCategory == null
-                          ? ""
+                          ? "1"
                           : _selectedCategory.toString();
                       task.action1 = _selectedAction1 == null
                           ? ""
@@ -821,6 +818,10 @@ class TaskDetailState extends State //<TaskDetail>
                           ? ""
                           : _selectedGoal1.toString();
                       task.dateDue = _todoDateController.text;
+                      task.dateDue == null
+                          ? DateFormat('yyyy-MM-dd – kk:mm')
+                              .format(DateTime.now())
+                          : _todoDateController.text;
                       task.timeDue = _todoTimeController.text;
                       task.timeDue != ""
                           ? {
