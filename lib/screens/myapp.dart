@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Tasks',
         theme: ThemeData(
+          scaffoldBackgroundColor: Colors.amber[100],
           primaryColor: Colors.brown[900],
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
