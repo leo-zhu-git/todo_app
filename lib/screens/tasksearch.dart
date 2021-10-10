@@ -257,7 +257,6 @@ class TaskSearchState extends State {
       appBar: AppBar(
         backgroundColor: Colors.brown[900],
         automaticallyImplyLeading: true,
-//        title: Center(child: Text('Search')),
         title: Center(
           child: Container(
             child: Column(
