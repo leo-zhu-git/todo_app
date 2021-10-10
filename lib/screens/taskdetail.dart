@@ -316,7 +316,8 @@ class TaskDetailState extends State //<TaskDetail>
   }
 
   TimeOfDay timeConvert(String s) {
-    TimeOfDay _time = TimeOfDay(hour:int.parse(s.split(":")[0]),minute: int.parse(s.split(":")[1]));
+    TimeOfDay _time = TimeOfDay(
+        hour: int.parse(s.split(":")[0]), minute: int.parse(s.split(":")[1]));
 //    String ampm = normTime.substring(normTime.length - 2);
 //    String result = normTime.substring(0, normTime.indexOf(' '));
 //    if (ampm == 'AM' && int.parse(result.split(":")[1]) != 12) {
@@ -370,10 +371,7 @@ class TaskDetailState extends State //<TaskDetail>
                 _dateDue = DateFormat('yyyy-M-d').parse(task.dateDue),
               },
           }
-        : {
-            _dateDue = DateTime.now(),
-            _todoDateController.text = DateFormat('yyyy-M-d').format(_dateDue),
-          };
+        : {};
     task.timeDue != ""
         ? {
             if (_timeDue == null)
@@ -820,9 +818,11 @@ class TaskDetailState extends State //<TaskDetail>
                       task.goal1 = _selectedGoal1 == null
                           ? ""
                           : _selectedGoal1.toString();
+                      task.dateDue = _todoDateController.text; 
                       task.dateDue == null
-                      ? DateFormat('yyyy-MM-dd – kk:mm').format(DateTime.now())
-                      : _todoDateController.text;
+                          ? DateFormat('yyyy-MM-dd – kk:mm')
+                              .format(DateTime.now())
+                          : _todoDateController.text;
                       task.timeDue = _todoTimeController.text;
                       task.timeDue != ""
                           ? {
