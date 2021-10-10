@@ -14,8 +14,7 @@ DbHelper dbHelper = DbHelper();
 DateTime currentDate = DateTime.now();
 String formattedDate = DateFormat('yyyymmdd').format(currentDate);
 String _searchText = "";
-//TextStyle _textStyleControls =
-//    TextStyle(fontSize: 12.0, fontWeight: FontWeight.w800, color: Colors.black);
+TextStyle _textStyleControls = TextStyle(fontSize: 12.0, color: Colors.black);
 
 final List<String> choices = const <String>[
   'Save Task & Back',
@@ -387,7 +386,7 @@ class TaskDetailState extends State //<TaskDetail>
             _timeDue = TimeOfDay.now(),
           };
     print(_todoTimeController.text);
-//    TextStyle textStyle = Theme.of(context).textTheme.title;
+    TextStyle textStyle = Theme.of(context).textTheme.title;
     return Scaffold(
       key: _globalKey,
       resizeToAvoidBottomInset: false,
@@ -411,7 +410,7 @@ class TaskDetailState extends State //<TaskDetail>
                 color: Colors.yellow[200],
               ),
               child: TextField(
-//                style: _textStyleControls,
+                style: _textStyleControls,
                 controller: _todoTaskController,
                 onChanged: (value) {
                   task.task = value;
@@ -432,7 +431,7 @@ class TaskDetailState extends State //<TaskDetail>
                 color: Colors.yellow[200],
               ),
               child: TextField(
-                style: TextStyle(fontSize: 14),
+                style: _textStyleControls,
                 controller: _todoNoteController,
                 onChanged: (value) {
                   task.note = value;
@@ -457,7 +456,7 @@ class TaskDetailState extends State //<TaskDetail>
               ),
               child: TextField(
                 controller: _todoDateController,
-                style: TextStyle(fontSize: 14),
+                style: _textStyleControls,
                 decoration: InputDecoration(
                   labelText: ' Due Date',
                   hintText: ' Pick a Date',
@@ -483,7 +482,7 @@ class TaskDetailState extends State //<TaskDetail>
               ),
               child: TextField(
                 controller: _todoTimeController,
-                style: TextStyle(fontSize: 14),
+                style: _textStyleControls,
                 decoration: InputDecoration(
                   labelText: ' Due Time',
                   hintText: ' Pick a Time',
@@ -517,7 +516,7 @@ class TaskDetailState extends State //<TaskDetail>
                               overflow: TextOverflow.ellipsis,
                             ));
                       }).toList(),
-                      style: TextStyle(fontSize: 14, color: Colors.black),
+                      style: _textStyleControls,
                       value: _selectedStatus,
                       onChanged: (String newValue) {
                         setState(() {
@@ -550,7 +549,7 @@ class TaskDetailState extends State //<TaskDetail>
                               overflow: TextOverflow.ellipsis,
                             ));
                       }).toList(),
-                      style: TextStyle(fontSize: 14, color: Colors.black),
+                      style: _textStyleControls,
                       value: _selectedPriority,
                       onChanged: (String newValue) {
                         setState(() {
@@ -583,7 +582,7 @@ class TaskDetailState extends State //<TaskDetail>
                               overflow: TextOverflow.ellipsis,
                             ));
                       }).toList(),
-                      style: TextStyle(fontSize: 14, color: Colors.black),
+                      style: _textStyleControls,
                       value: _selectedCategory,
                       onChanged: (String newValue) {
                         setState(() {
@@ -616,7 +615,7 @@ class TaskDetailState extends State //<TaskDetail>
                               overflow: TextOverflow.ellipsis,
                             ));
                       }).toList(),
-                      style: TextStyle(fontSize: 14, color: Colors.black),
+                      style: _textStyleControls,
                       value: _selectedAction1,
                       onChanged: (String newValue) {
                         setState(() {
@@ -648,7 +647,7 @@ class TaskDetailState extends State //<TaskDetail>
                               overflow: TextOverflow.ellipsis,
                             ));
                       }).toList(),
-                      style: TextStyle(fontSize: 14, color: Colors.black),
+                      style: _textStyleControls,
                       value: _selectedContext1,
                       onChanged: (String newValue) {
                         setState(() {
@@ -679,7 +678,7 @@ class TaskDetailState extends State //<TaskDetail>
                               overflow: TextOverflow.ellipsis,
                             ));
                       }).toList(),
-                      style: TextStyle(fontSize: 14, color: Colors.black),
+                      style: _textStyleControls,
                       value: _selectedLocation1,
                       onChanged: (String newValue) {
                         setState(() {
@@ -710,7 +709,7 @@ class TaskDetailState extends State //<TaskDetail>
                               overflow: TextOverflow.ellipsis,
                             ));
                       }).toList(),
-                      style: TextStyle(fontSize: 14, color: Colors.black),
+                      style: _textStyleControls,
                       value: _selectedTag1,
                       onChanged: (String newValue) {
                         setState(() {
@@ -742,7 +741,7 @@ class TaskDetailState extends State //<TaskDetail>
                               overflow: TextOverflow.ellipsis,
                             ));
                       }).toList(),
-                      style: TextStyle(fontSize: 14, color: Colors.black),
+                      style: _textStyleControls,
                       value: _selectedGoal1,
                       onChanged: (String newValue) {
                         setState(() {
@@ -818,7 +817,7 @@ class TaskDetailState extends State //<TaskDetail>
                       task.goal1 = _selectedGoal1 == null
                           ? ""
                           : _selectedGoal1.toString();
-                      task.dateDue = _todoDateController.text; 
+                      task.dateDue = _todoDateController.text;
                       task.dateDue == null
                           ? DateFormat('yyyy-MM-dd – kk:mm')
                               .format(DateTime.now())
