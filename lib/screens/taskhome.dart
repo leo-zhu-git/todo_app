@@ -181,7 +181,6 @@ class TaskHomeState extends State {
               child: Card(
                   color: Colors.yellow[200],
                   elevation: 8.0,
-
                   child: ListTile(
                     visualDensity: VisualDensity(horizontal: -4),
                     leading: Checkbox(
@@ -209,9 +208,9 @@ class TaskHomeState extends State {
                     ),
                     trailing: IconButton(
                       icon: Icon(Icons.lightbulb,
-                     color: (this.tasklist[position].isStar == 0)
-                          ? Colors.black12
-                          : Colors.green),
+                          color: (this.tasklist[position].isStar == 0)
+                              ? Colors.black12
+                              : Colors.green),
                       onPressed: () {
                         setState(() {
                           if (this.tasklist[position].isStar == 1) {
@@ -233,9 +232,10 @@ class TaskHomeState extends State {
                         Flexible(
                             child: Padding(
                                 padding: const EdgeInsets.only(right: 2),
-                                child: Text(this.tasklist[position].main1.toString(),
+                                child: Text(
+                                  this.tasklist[position].main1.toString(),
 //                                    overflow: TextOverflow.ellipsis)
-                        ))),
+                                ))),
                       ],
                     ),
                     subtitle: Row(
@@ -243,23 +243,26 @@ class TaskHomeState extends State {
                         Flexible(
                             child: Padding(
                                 padding: const EdgeInsets.only(right: 2),
-                                child: Text(this.tasklist[position].sec1,
+                                child: Text(
+                                  this.tasklist[position].sec1,
 //                                    overflow: TextOverflow.ellipsis
-                                    ))),
+                                ))),
                         SizedBox(width: 10),
                         Flexible(
                             child: Padding(
                                 padding: const EdgeInsets.only(right: 2),
-                                child: Text(this.tasklist[position].sec2,
+                                child: Text(
+                                  this.tasklist[position].sec2,
 //                                    overflow: TextOverflow.ellipsis
-                                    ))),
+                                ))),
                         SizedBox(width: 10),
                         Flexible(
                             child: Padding(
                                 padding: const EdgeInsets.only(right: 2),
-                                child: Text(this.tasklist[position].sec3,
+                                child: Text(
+                                  this.tasklist[position].sec3,
 //                                    overflow: TextOverflow.ellipsis
-                                    ))),
+                                ))),
                       ],
                     ),
                     isThreeLine: false,
@@ -289,10 +292,7 @@ class TaskHomeState extends State {
 //                    checkColor: Colors.white,
 
                     autofocus: true,
-                  )
-// rt: change checkboxlisttile to listtile
-
-                  ),
+                  )),
             ));
       },
     );
@@ -306,7 +306,8 @@ class TaskHomeState extends State {
     int _sortOrder2 = globals.sortOrder2 != null ? globals.sortOrder2 : 0;
     int _sortOrder3 = globals.sortOrder3 != null ? globals.sortOrder3 : 0;
 
-    int _filterDateDue = globals.filterDateDue != null ? globals.filterDateDue : 7;
+    int _filterDateDue =
+        globals.filterDateDue != null ? globals.filterDateDue : 7;
     int _filterIsStar = globals.filterIsStar != null ? globals.filterIsStar : 0;
     int _filterIsDone = globals.filterIsDone != null ? globals.filterIsDone : 0;
 
@@ -343,7 +344,7 @@ class TaskHomeState extends State {
           taskList.add(Task.fromObject(result[i]));
 
 /////////////////
-/// display main1
+          /// display main1
 ////////////////
           switch (globals.showMain1) {
             case 0:
@@ -419,7 +420,7 @@ class TaskHomeState extends State {
           }
 
 /////////////////
-/// display sec1
+          /// display sec1
 ////////////////
           switch (globals.showSec1) {
             case 0:
@@ -484,7 +485,7 @@ class TaskHomeState extends State {
               break;
           }
 /////////////////
-/// display sec2
+          /// display sec2
 ////////////////
           switch (globals.showSec2) {
             case 0:
@@ -549,7 +550,7 @@ class TaskHomeState extends State {
               break;
           }
 /////////////////
-/// display sec3
+          /// display sec3
 ////////////////
           switch (globals.showSec3) {
             case 0:
