@@ -183,7 +183,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                             children: [
                               (Icon(
                                 Icons.thumb_up,
-                                color: Colors.white,
+                                color: Colors.black,
                               )),
                               Text(
                                 ' Updated ',
