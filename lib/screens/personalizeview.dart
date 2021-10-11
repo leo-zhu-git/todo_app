@@ -32,9 +32,9 @@ class SortItem {
       SortItem(1, 'Note'),
       SortItem(2, 'Due Date'),
       SortItem(3, 'Due Time'),
-      SortItem(4, 'Status'),
-      SortItem(5, 'Priority'),
-      SortItem(6, 'Category'),
+      SortItem(4, 'Category'),
+      SortItem(5, 'Status'),
+      SortItem(6, 'Priority'),
       SortItem(7, 'Action'),
       SortItem(8, 'Context'),
       SortItem(9, 'Location'),
@@ -262,20 +262,20 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     // Sort and Order
     ////////////////////////////
     if (globals.sortField1 == null) {
-      _selectedSortField1 = _dropdownMenuItemsSort[2].value;
-      globals.sortField1 = 2;
+      _selectedSortField1 = _dropdownMenuItemsSort[12].value;
+      globals.sortField1 = 12;
     } else
       _selectedSortField1 = _dropdownMenuItemsSort[globals.sortField1].value;
 
     if (globals.sortOrder1 == null) {
       _selectedSortOrder1 = _dropdownMenuSortOrder[0].value;
-      globals.sortOrder1 = 0;
+      globals.sortOrder1 = 1;
     } else
       _selectedSortOrder1 = _dropdownMenuSortOrder[globals.sortOrder1].value;
 
     if (globals.sortField2 == null) {
-      _selectedSortField2 = _dropdownMenuItemsSort[3].value;
-      globals.sortField2 = 3;
+      _selectedSortField2 = _dropdownMenuItemsSort[2].value;
+      globals.sortField2 = 2;
     } else
       _selectedSortField2 = _dropdownMenuItemsSort[globals.sortField2].value;
     if (globals.sortOrder2 == null) {
@@ -285,8 +285,8 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
       _selectedSortOrder2 = _dropdownMenuSortOrder[globals.sortOrder2].value;
 
     if (globals.sortField3 == null) {
-      _selectedSortField3 = _dropdownMenuItemsSort[0].value;
-      globals.sortField3 = 0;
+      _selectedSortField3 = _dropdownMenuItemsSort[3].value;
+      globals.sortField3 = 3;
     } else
       _selectedSortField3 = _dropdownMenuItemsSort[globals.sortField3].value;
     if (globals.sortOrder3 == null) {
@@ -794,6 +794,35 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 ),
               ),
 
+
+
+//#################################Category#####################################################
+              Container(
+                margin: const EdgeInsets.all(2.0),
+                decoration: BoxDecoration(
+                    shape: BoxShape.rectangle, color: Colors.blue[100]),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    DropdownButton<String>(
+                        items: _categories.map((CustomDropdownItem value) {
+                          return DropdownMenuItem<String>(
+                              value: value.id,
+                              child: Text(
+                                value.name,
+                                overflow: TextOverflow.ellipsis,
+                              ));
+                        }).toList(),
+                        value: _selectedCategory,
+                        onChanged: (String newValue) {
+                          setState(() {
+                            _selectedCategory = newValue;
+                          });
+                        }),
+                  ],
+                ),
+              ),
+
 //#################################Status#####################################################
               Container(
                 margin: const EdgeInsets.all(2.0),
@@ -842,33 +871,6 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                         onChanged: (String newValue) {
                           setState(() {
                             _selectedPriority = newValue;
-                          });
-                        }),
-                  ],
-                ),
-              ),
-
-//#################################Category#####################################################
-              Container(
-                margin: const EdgeInsets.all(2.0),
-                decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.blue[100]),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    DropdownButton<String>(
-                        items: _categories.map((CustomDropdownItem value) {
-                          return DropdownMenuItem<String>(
-                              value: value.id,
-                              child: Text(
-                                value.name,
-                                overflow: TextOverflow.ellipsis,
-                              ));
-                        }).toList(),
-                        value: _selectedCategory,
-                        onChanged: (String newValue) {
-                          setState(() {
-                            _selectedCategory = newValue;
                           });
                         }),
                   ],
@@ -1198,33 +1200,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
               ),
               Text("Picklist | User-defined Dropdowns"),
 
-///////////////////////////
-//  Picklist - Statuses
-///////////////////////////
-              Card(
-                elevation: 8.0,
-                child: ListTile(
-                  tileColor: Colors.orange[100],
-                  title: Text('Statuses'),
-                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => StatusesScreen())),
-                ),
-              ),
-              SizedBox(height: 2),
 
-///////////////////////////
-//  Picklist - Priorities
-///////////////////////////
-              Card(
-                elevation: 8.0,
-                child: ListTile(
-                  tileColor: Colors.orange[100],
-                  title: Text('Priorities'),
-                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => PrioritiesScreen())),
-                ),
-              ),
-              SizedBox(height: 2),
 
 ///////////////////////////
 //  Picklist - Categories
@@ -1255,6 +1231,32 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
               SizedBox(height: 2),
 
 ///////////////////////////
+//  Picklist - Statuses
+///////////////////////////
+              Card(
+                elevation: 8.0,
+                child: ListTile(
+                  tileColor: Colors.orange[100],
+                  title: Text('Statuses'),
+                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => StatusesScreen())),
+                ),
+              ),
+              SizedBox(height: 2),
+
+///////////////////////////
+//  Picklist - Priorities
+///////////////////////////
+              Card(
+                elevation: 8.0,
+                child: ListTile(
+                  tileColor: Colors.orange[100],
+                  title: Text('Priorities'),
+                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => PrioritiesScreen())),
+                ),
+              ),
+              SizedBox(height: 2),///////////////////////////
 //  Picklist - Contexts
 ///////////////////////////
               Card(

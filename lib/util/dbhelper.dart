@@ -333,11 +333,11 @@ class DbHelper {
 
     //Default value for Custom Setting
     CustomSettings customSetting = new CustomSettings(
-        "2", // sort1
-        '0', // order1
-        '3', // sort2
+        "12", // sort1 - star
+        '1', // order1 - descending order
+        '2', // sort2 - due date
         '0', // order2
-        '0', // sort3
+        '0', // sort3 - due time
         '0', // order3
         '0', // main1 - task
         '', // main2
@@ -363,7 +363,7 @@ class DbHelper {
     final String formattedate = formatter.format(_dateDue);
 
     Task task = Task(
-        "1.Welcome to todoMIT123456789012345679012345678901234567890",
+        "1.Welcome to todoMIT",
         '''
 Greetings/ Nihao/ Hola/ Namaste/ Ayubowan,
 
