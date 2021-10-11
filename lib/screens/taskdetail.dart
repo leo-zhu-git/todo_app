@@ -14,7 +14,7 @@ DbHelper dbHelper = DbHelper();
 DateTime currentDate = DateTime.now();
 String formattedDate = DateFormat('yyyymmdd').format(currentDate);
 String _searchText = "";
-TextStyle _textStyleControls = TextStyle(fontSize: 12.0, color: Colors.black);
+TextStyle _textStyleControls = TextStyle(fontSize: 16.0, color: Colors.black, fontWeight: FontWeight.w500);
 
 final List<String> choices = const <String>[
   'Save Task & Back',
@@ -437,7 +437,7 @@ class TaskDetailState extends State //<TaskDetail>
                   task.note = value;
                 },
                 minLines: 4,
-                maxLines: 20,
+                maxLines: 18,
                 decoration: InputDecoration(
                   labelText: ' Note',
                   hintText: ' Write Todo Note',
@@ -495,6 +495,40 @@ class TaskDetailState extends State //<TaskDetail>
                 ),
               ),
             ),
+
+///////////////////////////
+//  CATEGORY
+///////////////////////////
+
+            Container(
+              margin:
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
+              decoration: BoxDecoration(
+                  shape: BoxShape.rectangle, color: Colors.blue[100]),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  DropdownButton<String>(
+                      items: _categories.map((CustomDropdownItem value) {
+                        return DropdownMenuItem<String>(
+                            value: value.id,
+                            child: Text(
+                              value.name,
+                              overflow: TextOverflow.ellipsis,
+                            ));
+                      }).toList(),
+                      style: _textStyleControls,
+                      value: _selectedCategory,
+                      onChanged: (String newValue) {
+                        setState(() {
+                          _selectedCategory = newValue;
+                          task.category = newValue;
+                        });
+                      }),
+                ],
+              ),
+            ),
+
 ///////////////////////////
 //  STATUS
 ///////////////////////////
@@ -555,39 +589,6 @@ class TaskDetailState extends State //<TaskDetail>
                         setState(() {
                           _selectedPriority = newValue;
                           task.priority = newValue;
-                        });
-                      }),
-                ],
-              ),
-            ),
-
-///////////////////////////
-//  CATEGORY
-///////////////////////////
-
-            Container(
-              margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
-              decoration: BoxDecoration(
-                  shape: BoxShape.rectangle, color: Colors.blue[100]),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  DropdownButton<String>(
-                      items: _categories.map((CustomDropdownItem value) {
-                        return DropdownMenuItem<String>(
-                            value: value.id,
-                            child: Text(
-                              value.name,
-                              overflow: TextOverflow.ellipsis,
-                            ));
-                      }).toList(),
-                      style: _textStyleControls,
-                      value: _selectedCategory,
-                      onChanged: (String newValue) {
-                        setState(() {
-                          _selectedCategory = newValue;
-                          task.category = newValue;
                         });
                       }),
                 ],
