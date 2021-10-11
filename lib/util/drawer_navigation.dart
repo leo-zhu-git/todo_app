@@ -50,33 +50,36 @@ class _DrawerNagivation extends State<DrawerNagivation> {
   Widget build(BuildContext context) {
     return Container(
 //      decoration: BoxDecoration(color: Colors.amber),
-      child: Drawer(
-        child: ListView(
-          children: <Widget>[
-            UserAccountsDrawerHeader(
-              currentAccountPicture: CircleAvatar(
-                backgroundImage: AssetImage('images/todoMIT.png'),
+      child: Container(
+        color: Colors.amber[100],
+        child: Drawer(
+          child: ListView(
+            children: <Widget>[
+              UserAccountsDrawerHeader(
+                currentAccountPicture: CircleAvatar(
+                  backgroundImage: AssetImage('images/todoMIToctopus.png'),
+                ),
+                margin: EdgeInsets.zero, 
+                accountName: Text('Welcome to'),
+                accountEmail: Text('todoMIT'),
+                decoration: BoxDecoration(color: Colors.brown[900]),
               ),
-              accountName: Text('2half'),
-              accountEmail: Text('2half@gmail.com'),
-              decoration: BoxDecoration(color: Colors.brown[900]),
-            ),
-            ListTile(
-              leading: Icon(Icons.home),
-              title: Text('Home'),
-              tileColor: Colors.amber[100],
-              onTap: () => Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => TaskHome())),
-            ),
-            Divider(),
-            ListTile(
-              leading: Icon(Icons.cloud_download),
-              tileColor: Colors.amber[100],
-              title: Text('Wipe'),
-              onTap: () => Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => WipeScreen())),
-            ),
-            Divider(),
+              ListTile(
+                leading: Icon(Icons.home),
+                title: Text('Home'),
+                tileColor: Colors.amber[100],
+                onTap: () => Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => TaskHome())),
+              ),
+              Divider(color: Colors.amber[800]),
+              ListTile(
+                leading: Icon(Icons.cloud_download),
+                tileColor: Colors.amber[100],
+                title: Text('Wipe'),
+                onTap: () => Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => WipeScreen())),
+              ),
+              Divider(color: Colors.amber[800]),
 //            ListTile(
 //              tileColor: Colors.amber[100],
 //              leading: Icon(Icons.connect_without_contact),
@@ -85,40 +88,40 @@ class _DrawerNagivation extends State<DrawerNagivation> {
 //                  builder: (context) => LocalNotificationScreen())),
 //            ),
 //            Divider(),
-            ListTile(
-              tileColor: Colors.amber[100],
-              leading: Icon(Icons.help_outlined),
-              title: Text('Help - FAQ [placeholder]'),
-              onTap: () {
-                _launchURL();
-              },
-            ),
-            Divider(),
-            ListTile(
-              tileColor: Colors.amber[100],
-              leading: Icon(Icons.help_outlined),
-              title: Text('Report a bug [placeholder]'),
-              onTap: () {
-                _launchURL();
-              },
-            ),
-            Divider(),
-            ListTile(
-              tileColor: Colors.amber[100],
-              leading: Icon(Icons.help_outlined),
-              title: Text('Request a feature [placeholder]'),
-              onTap: () {
-                _launchURL();
-              },
-            ),
-            Divider(),
-            ListTile(
-              tileColor: Colors.amber[100],
-              leading: Icon(Icons.people),
-              title: Text('Early Adoptors Program [placeholder]'),
-              onTap: () => Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => TaskHome())),
-            ),
+              ListTile(
+                tileColor: Colors.amber[100],
+                leading: Icon(Icons.help_outlined),
+                title: Text('Help - FAQ [placeholder]'),
+                onTap: () {
+                  _launchURL();
+                },
+              ),
+              Divider(color: Colors.amber[800]),
+              ListTile(
+                tileColor: Colors.amber[100],
+                leading: Icon(Icons.help_outlined),
+                title: Text('Report a bug [placeholder]'),
+                onTap: () {
+                  _launchURL();
+                },
+              ),
+              Divider(color: Colors.amber[800]),
+              ListTile(
+                tileColor: Colors.amber[100],
+                leading: Icon(Icons.help_outlined),
+                title: Text('Request a feature [placeholder]'),
+                onTap: () {
+                  _launchURL();
+                },
+              ),
+              Divider(color: Colors.amber[800]),
+              ListTile(
+                tileColor: Colors.amber[100],
+                leading: Icon(Icons.people),
+                title: Text('Early Adoptors Program [placeholder]'),
+                onTap: () => Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => TaskHome())),
+              ),
 //            ListTile(
 //              leading: Icon(Icons.category),
 //              title: Text('Categories'),
@@ -173,24 +176,24 @@ class _DrawerNagivation extends State<DrawerNagivation> {
 //                  .push(MaterialPageRoute(builder: (context) => Goal1sScreen())),
 //            ),
 //            Divider(),
-            Divider(),
-            ListTile(
-              tileColor: Colors.amber[100],
-              leading: Icon(Icons.elevator_rounded),
-              title: Text('Subscription Plans [placeholder]'),
-              onTap: () {
-                _launchURL();
-              },
-            ),
-            Divider(),
-            ListTile(
-              tileColor: Colors.amber[100],
-              leading: Icon(Icons.perm_device_info),
-              title: Text('About [placeholder]'),
-              onTap: () => Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => TaskHome())),
-            ),
-            Divider(),
+              Divider(color: Colors.amber[800]),
+              ListTile(
+                tileColor: Colors.amber[100],
+                leading: Icon(Icons.elevator_rounded),
+                title: Text('Subscription Plans [placeholder]'),
+                onTap: () {
+                  _launchURL();
+                },
+              ),
+              Divider(color: Colors.amber[800]),
+              ListTile(
+                tileColor: Colors.amber[100],
+                leading: Icon(Icons.perm_device_info),
+                title: Text('About [placeholder]'),
+                onTap: () => Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => TaskHome())),
+              ),
+              Divider(color: Colors.amber[800]),
 //            ListTile(
 //                tileColor: Colors.amber[100],
 //                leading: Icon(Icons.logout),
@@ -202,7 +205,8 @@ class _DrawerNagivation extends State<DrawerNagivation> {
 //                    print(e.message);
 //                  }
 //                }),
-          ],
+            ],
+          ),
         ),
       ),
     );

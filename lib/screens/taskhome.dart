@@ -299,10 +299,10 @@ class TaskHomeState extends State {
   }
 
   void getData() {
-    int _sortField1 = globals.sortField1 != null ? globals.sortField1 : 2;
-    int _sortField2 = globals.sortField2 != null ? globals.sortField2 : 4;
-    int _sortField3 = globals.sortField3 != null ? globals.sortField3 : 0;
-    int _sortOrder1 = globals.sortOrder1 != null ? globals.sortOrder1 : 0;
+    int _sortField1 = globals.sortField1 != null ? globals.sortField1 : 12;
+    int _sortField2 = globals.sortField2 != null ? globals.sortField2 : 2;
+    int _sortField3 = globals.sortField3 != null ? globals.sortField3 : 3;
+    int _sortOrder1 = globals.sortOrder1 != null ? globals.sortOrder1 : 1;
     int _sortOrder2 = globals.sortOrder2 != null ? globals.sortOrder2 : 0;
     int _sortOrder3 = globals.sortOrder3 != null ? globals.sortOrder3 : 0;
 
