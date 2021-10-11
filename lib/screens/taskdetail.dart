@@ -14,7 +14,7 @@ DbHelper dbHelper = DbHelper();
 DateTime currentDate = DateTime.now();
 String formattedDate = DateFormat('yyyymmdd').format(currentDate);
 String _searchText = "";
-TextStyle _textStyleControls = TextStyle(fontSize: 16.0, color: Colors.black, fontWeight: FontWeight.w500);
+TextStyle _textStyleControls = TextStyle(fontSize: 14.0, color: Colors.black, fontWeight: FontWeight.w600);
 
 final List<String> choices = const <String>[
   'Save Task & Back',
@@ -437,7 +437,7 @@ class TaskDetailState extends State //<TaskDetail>
                   task.note = value;
                 },
                 minLines: 4,
-                maxLines: 18,
+                maxLines: 16,
                 decoration: InputDecoration(
                   labelText: ' Note',
                   hintText: ' Write Todo Note',
