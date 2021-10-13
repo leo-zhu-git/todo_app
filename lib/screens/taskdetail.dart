@@ -14,7 +14,8 @@ DbHelper dbHelper = DbHelper();
 DateTime currentDate = DateTime.now();
 String formattedDate = DateFormat('yyyymmdd').format(currentDate);
 String _searchText = "";
-TextStyle _textStyleControls = TextStyle(fontSize: 14.0, color: Colors.black, fontWeight: FontWeight.w600);
+TextStyle _textStyleControls =
+    TextStyle(fontSize: 14.0, color: Colors.black, fontWeight: FontWeight.w600);
 
 final List<String> choices = const <String>[
   'Save Task & Back',
@@ -299,17 +300,25 @@ class TaskDetailState extends State //<TaskDetail>
   TimeOfDay _timeDue;
   DateTime _todoTimeDue;
   String _savedTime;
+
   Future<void> _openTimePicker(BuildContext context) async {
     final pickedTime = await showTimePicker(
       context: context,
       initialTime: _todoTimeController == null ? TimeOfDay.now() : _timeDue,
+//      initialEntryMode: TimePickerEntryMode.dial,
     );
 
-    if (pickedTime != null) {
+    if (pickedTime != null && pickedTime != _savedTime) {
       setState(() {
         _timeDue = pickedTime;
         _pickedTime = pickedTime.format(context);
         _todoTimeController.text = _pickedTime;
+//        var _hh = pickedTime.hour;
+//        var _col = ":";
+//        var _min = pickedTime.minute;
+//        String _timeDue = _hh.toString() + _col + _min.toString();
+//        _timeDue = _hh.toString() + _col + _min.toString();
+//        _todoTimeController.text = _timeDue;
       });
     }
   }
@@ -826,9 +835,14 @@ class TaskDetailState extends State //<TaskDetail>
                       task.timeDue = _todoTimeController.text;
                       task.timeDue != ""
                           ? {
-//                              _nTitle = task.timeDue.toString() + ' reminder: ' + task.task,
+                              _nTitle = task.timeDue.toString() +
+                                  ' reminder: ' +
+                                  task.task,
 //                              await notificationPlugin.scheduleNotification(
-//                                  _nTitle, task.note, task.timeDue)
+//                                  _nTitle,
+//                                  task.note,
+//                                  task.dateDue,
+//                                  task.timeDue)
                             }
                           : task.isDone = 0;
 //                      if (task.isDone == 0) {

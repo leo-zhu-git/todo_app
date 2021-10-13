@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io' show File, Platform;
+import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 //import 'package:http/http.dart' as http;
 
 import 'package:rxdart/subjects.dart';
@@ -18,6 +20,8 @@ class NotificationPlugin {
 
   NotificationPlugin._() {
     init();
+    tz.initializeTimeZones();
+    
   }
 
   get http => null;
@@ -103,10 +107,10 @@ class NotificationPlugin {
   }
 
 ////////////////////////
-  /// 2. scheduled notification  
+  /// 2. scheduled notification
 ////////////////////////
   Future<void> scheduleNotification(
-      String _nTitle, String _nBody, String _nTime) async {
+      String _nTitle, String _nBody, String _nDate, String _nTime) async {
     var scheduleNotificationDateTime = DateTime.now().add(Duration(seconds: 5));
     var androidChannelSpecifics = AndroidNotificationDetails(
       'CHANNEL_ID 1',
@@ -132,22 +136,50 @@ class NotificationPlugin {
       android: androidChannelSpecifics,
       iOS: iosChannelSpecifics,
     );
-    DateTime _scheduledDate = DateTime.now();
-    int yyyy = _scheduledDate.year;
-    int mm = _scheduledDate.month;
-    int dd = _scheduledDate.day;
-    TimeOfDay _scheduledTime = TimeOfDay(hour:int.parse(_nTime.split(":")[0]),minute: int.parse(_nTime.split(":")[1]));
-    int hh = _scheduledTime.hour;
-    int min = _scheduledTime.minute; 
 
-    await flutterLocalNotificationsPlugin.schedule(
-      0,
-      _nTitle,
-      _nBody,
-      DateTime(yyyy,mm,dd,hh,min),
-      platformChannelSpecifics,
-      payload: 'Test Payload',
-    );
+    DateTime _currentDate = DateTime.now();
+    DateTime _notifyDate = DateTime.parse(_nDate);
+    var _inFuture = _notifyDate.difference(_currentDate).inDays;
+    bool _notify = false;
+    if (_inFuture >= 0) {
+      _notify = true;
+    }
+    ;
+    if (_notify == true) {
+      TimeOfDay _scheduledTime = TimeOfDay(
+          hour: int.parse(_nTime.split(":")[0]),
+          minute: int.parse(_nTime.split(":")[1]));
+      int hh = _scheduledTime.hour;
+      int min = _scheduledTime.minute;
+
+      DateTime _notifyDateTime = new DateTime(
+          _notifyDate.year, _notifyDate.month, _notifyDate.day, hh, min);
+//      final scheduledDate = tz.TZDateTime.from(_notifyDate, location);
+
+//      await flutterLocalNotificationsPlugin.schedule(
+//        0,
+//        _nTitle,
+//        _nBody,
+//        _notifyDateTime,
+//        platformChannelSpecifics,
+//        payload: 'Test Payload',
+//        androidAllowWhileIdle: true,
+//      );
+
+await flutterLocalNotificationsPlugin.zonedSchedule(
+    0,
+    _nTitle,
+    _nBody,
+    tz.TZDateTime.now(tz.local).add(const Duration(seconds: 5)),
+    NotificationDetails(
+        android: AndroidNotificationDetails(
+            'CHANNEL_ID 1', 
+            'CHANNEL_NAME 1',
+            "CHANNEL_DESCRIPTION 1")),
+    androidAllowWhileIdle: true,
+    uiLocalNotificationDateInterpretation:
+        UILocalNotificationDateInterpretation.absoluteTime );
+    }
   }
 
 ////////////////////////
