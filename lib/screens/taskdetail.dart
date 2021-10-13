@@ -89,12 +89,38 @@ class TaskDetailState extends State //<TaskDetail>
   }
 
 //##################Drop Down Items Load from DB #################################################################
+  _loadCategories() async {
+    var categories = await helper.getCategories();
+    CustomDropdownItem cus;
+    cus = new CustomDropdownItem();
+    cus.id = null;
+    cus.name = "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
+    cus.name = "-- Select Category --                                         ";
+    _categories.add(cus);
+    categories.forEach((category) {
+      setState(() {
+        cus = new CustomDropdownItem();
+        cus.id = category['id'].toString();
+        String tempCat;
+        if (category['name'].toString().length > 30)
+          tempCat = category['name'].toString().substring(0, 30) + "...";
+        else
+          tempCat = category['name'];
+
+        cus.name = tempCat;
+
+        _categories.add(cus);
+      });
+    });
+  }
+
   _loadStatuses() async {
     var statuses = await helper.getStatuses();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
-    cus.name = "-- Select Status --";
+    cus.name = "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
+    cus.name = "-- Select Status --                                              ";
     _statuses.add(cus);
     statuses.forEach((status) {
       setState(() {
@@ -118,7 +144,8 @@ class TaskDetailState extends State //<TaskDetail>
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
-    cus.name = "-- Select Priority --";
+    cus.name = "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
+    cus.name = "-- Select Priority --                                            ";
     _priorities.add(cus);
     priorities.forEach((priority) {
       setState(() {
@@ -137,36 +164,14 @@ class TaskDetailState extends State //<TaskDetail>
     });
   }
 
-  _loadCategories() async {
-    var categories = await helper.getCategories();
-    CustomDropdownItem cus;
-    cus = new CustomDropdownItem();
-    cus.id = null;
-    cus.name = "-- Select Category --";
-    _categories.add(cus);
-    categories.forEach((category) {
-      setState(() {
-        cus = new CustomDropdownItem();
-        cus.id = category['id'].toString();
-        String tempCat;
-        if (category['name'].toString().length > 30)
-          tempCat = category['name'].toString().substring(0, 30) + "...";
-        else
-          tempCat = category['name'];
-
-        cus.name = tempCat;
-
-        _categories.add(cus);
-      });
-    });
-  }
 
   _loadAction1s() async {
     var action1s = await helper.getAction1s();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
-    cus.name = "-- Select Action --";
+    cus.name = "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
+    cus.name = "-- Select Action --                                              ";
     _action1s.add(cus);
     action1s.forEach((action1) {
       setState(() {
@@ -189,7 +194,8 @@ class TaskDetailState extends State //<TaskDetail>
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
-    cus.name = "-- Select Context --";
+    cus.name = "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
+    cus.name = "-- Select Context --                                             ";
     _context1s.add(cus);
     context1s.forEach((context1) {
       setState(() {
@@ -213,7 +219,8 @@ class TaskDetailState extends State //<TaskDetail>
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
-    cus.name = "-- Select Location --";
+    cus.name = "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
+    cus.name = "-- Select Location --                                           ";
     _location1s.add(cus);
     location1s.forEach((location1) {
       setState(() {
@@ -237,7 +244,8 @@ class TaskDetailState extends State //<TaskDetail>
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
-    cus.name = "-- Select Tag --";
+    cus.name = "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
+    cus.name = "-- Select Tag --                                                    ";
     _tag1s.add(cus);
     tag1s.forEach((tag1) {
       setState(() {
@@ -260,7 +268,8 @@ class TaskDetailState extends State //<TaskDetail>
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
-    cus.name = "-- Select Goal --";
+    cus.name = "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
+    cus.name = "-- Select Goal --                                                  ";
     _goal1s.add(cus);
     goal1s.forEach((goal1) {
       setState(() {
@@ -277,6 +286,8 @@ class TaskDetailState extends State //<TaskDetail>
       });
     });
   }
+
+//##########################################end of Dropdown #################################################################
 
   DateTime _dateDue;
   _selectedTodoDate(BuildContext context) async {

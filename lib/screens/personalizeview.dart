@@ -334,13 +334,39 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     // super.initState();
   }
 
-  //##################Drop Down Items Load from DB #################################################################
+//##################Drop Down Items Load from DB #################################################################
+  _loadCategories() async {
+    var categories = await helper.getCategories();
+    CustomDropdownItem cus;
+    cus = new CustomDropdownItem();
+    cus.id = null;
+    cus.name = "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
+    cus.name = "-- Select Category --                                         ";
+    _categories.add(cus);
+    categories.forEach((category) {
+      setState(() {
+        cus = new CustomDropdownItem();
+        cus.id = category['id'].toString();
+        String tempCat;
+        if (category['name'].toString().length > 30)
+          tempCat = category['name'].toString().substring(0, 30) + "...";
+        else
+          tempCat = category['name'];
+
+        cus.name = tempCat;
+
+        _categories.add(cus);
+      });
+    });
+  }
+
   _loadStatuses() async {
     var statuses = await helper.getStatuses();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
-    cus.name = "-- All Statuses --";
+    cus.name = "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
+    cus.name = "-- Select Status --                                              ";
     _statuses.add(cus);
     statuses.forEach((status) {
       setState(() {
@@ -364,7 +390,8 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
-    cus.name = "-- All Priorities --";
+    cus.name = "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
+    cus.name = "-- Select Priority --                                            ";
     _priorities.add(cus);
     priorities.forEach((priority) {
       setState(() {
@@ -383,49 +410,26 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     });
   }
 
-  _loadCategories() async {
-    var categories = await helper.getCategories();
-    CustomDropdownItem cus;
-    cus = new CustomDropdownItem();
-    cus.id = null;
-    cus.name = "-- All Categories --";
-    _categories.add(cus);
-    categories.forEach((category) {
-      setState(() {
-        cus = new CustomDropdownItem();
-        cus.id = category['id'].toString();
-        String tempCat;
-        if (category['name'].toString().length > 30)
-          tempCat = category['name'].toString().substring(0, 30) + "...";
-        else
-          tempCat = category['name'];
-
-        cus.name = tempCat;
-
-        _categories.add(cus);
-      });
-    });
-  }
 
   _loadAction1s() async {
     var action1s = await helper.getAction1s();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
-    cus.name = "-- All Actions --             ";
+    cus.name = "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
+    cus.name = "-- Select Action --                                              ";
     _action1s.add(cus);
     action1s.forEach((action1) {
       setState(() {
         cus = new CustomDropdownItem();
         cus.id = action1['id'].toString();
         String tempAct;
-        if (action1['name'].toString().length > 30)
-          tempAct = action1['name'].toString().substring(0, 30) + "...";
+        if (action1['name'].toString().length > 20)
+          tempAct = action1['name'].toString().substring(0, 20) + "...";
         else
           tempAct = action1['name'];
 
         cus.name = tempAct;
-
         _action1s.add(cus);
       });
     });
@@ -436,7 +440,8 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
-    cus.name = "-- All Contexts --            ";
+    cus.name = "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
+    cus.name = "-- Select Context --                                             ";
     _context1s.add(cus);
     context1s.forEach((context1) {
       setState(() {
@@ -447,7 +452,9 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
           tempCon = context1['name'].toString().substring(0, 30) + "...";
         else
           tempCon = context1['name'];
+
         cus.name = tempCon;
+
         _context1s.add(cus);
       });
     });
@@ -458,7 +465,8 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
-    cus.name = "-- All Locations --           ";
+    cus.name = "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
+    cus.name = "-- Select Location --                                           ";
     _location1s.add(cus);
     location1s.forEach((location1) {
       setState(() {
@@ -482,7 +490,8 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
-    cus.name = "-- All Tags --                ";
+    cus.name = "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
+    cus.name = "-- Select Tag --                                                    ";
     _tag1s.add(cus);
     tag1s.forEach((tag1) {
       setState(() {
@@ -505,17 +514,18 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
-    cus.name = "-- All Goals --                ";
+    cus.name = "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
+    cus.name = "-- Select Goal --                                                  ";
     _goal1s.add(cus);
-    goal1s.forEach((goal) {
+    goal1s.forEach((goal1) {
       setState(() {
         cus = new CustomDropdownItem();
-        cus.id = goal['id'].toString();
+        cus.id = goal1['id'].toString();
         String tempGoal;
-        if (goal['name'].toString().length > 30)
-          tempGoal = goal['name'].toString().substring(0, 30) + "...";
+        if (goal1['name'].toString().length > 30)
+          tempGoal = goal1['name'].toString().substring(0, 30) + "...";
         else
-          tempGoal = goal['name'];
+          tempGoal = goal1['name'];
 
         cus.name = tempGoal;
         _goal1s.add(cus);
