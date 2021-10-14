@@ -81,7 +81,7 @@ class DbHelper {
 
   Future<Database> initializeDb() async {
     Directory dir = await getApplicationDocumentsDirectory();
-    String path = dir.path + "todo_V22.f6.db";
+    String path = dir.path + "todo_V22.f8.db";
     var dbTodovn = await openDatabase(path, version: 1, onCreate: _createDb);
     return dbTodovn;
   }
@@ -337,7 +337,7 @@ class DbHelper {
         '1', // order1 - descending order
         '2', // sort2 - due date
         '0', // order2
-        '0', // sort3 - due time
+        '3', // sort3 - due time
         '0', // order3
         '0', // main1 - task
         '', // main2

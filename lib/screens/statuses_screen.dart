@@ -183,7 +183,7 @@ class _StatusesScreenState extends State<StatusesScreen> {
                             children: [
                               (Icon(
                                 Icons.thumb_up,
-                                color: Colors.white,
+                                color: Colors.black,
                               )),
                               Text(
                                 ' Updated ',

@@ -14,7 +14,8 @@ DbHelper dbHelper = DbHelper();
 DateTime currentDate = DateTime.now();
 String formattedDate = DateFormat('yyyymmdd').format(currentDate);
 String _searchText = "";
-TextStyle _textStyleControls = TextStyle(fontSize: 16.0, color: Colors.black, fontWeight: FontWeight.w500);
+TextStyle _textStyleControls =
+    TextStyle(fontSize: 14.0, color: Colors.black, fontWeight: FontWeight.w600);
 
 final List<String> choices = const <String>[
   'Save Task & Back',
@@ -88,12 +89,38 @@ class TaskDetailState extends State //<TaskDetail>
   }
 
 //##################Drop Down Items Load from DB #################################################################
+  _loadCategories() async {
+    var categories = await helper.getCategories();
+    CustomDropdownItem cus;
+    cus = new CustomDropdownItem();
+    cus.id = null;
+    cus.name = "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
+    cus.name = "-- Select Category --                                         ";
+    _categories.add(cus);
+    categories.forEach((category) {
+      setState(() {
+        cus = new CustomDropdownItem();
+        cus.id = category['id'].toString();
+        String tempCat;
+        if (category['name'].toString().length > 30)
+          tempCat = category['name'].toString().substring(0, 30) + "...";
+        else
+          tempCat = category['name'];
+
+        cus.name = tempCat;
+
+        _categories.add(cus);
+      });
+    });
+  }
+
   _loadStatuses() async {
     var statuses = await helper.getStatuses();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
-    cus.name = "-- Select Status --";
+    cus.name = "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
+    cus.name = "-- Select Status --                                              ";
     _statuses.add(cus);
     statuses.forEach((status) {
       setState(() {
@@ -117,7 +144,8 @@ class TaskDetailState extends State //<TaskDetail>
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
-    cus.name = "-- Select Priority --";
+    cus.name = "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
+    cus.name = "-- Select Priority --                                            ";
     _priorities.add(cus);
     priorities.forEach((priority) {
       setState(() {
@@ -136,36 +164,14 @@ class TaskDetailState extends State //<TaskDetail>
     });
   }
 
-  _loadCategories() async {
-    var categories = await helper.getCategories();
-    CustomDropdownItem cus;
-    cus = new CustomDropdownItem();
-    cus.id = null;
-    cus.name = "-- Select Category --";
-    _categories.add(cus);
-    categories.forEach((category) {
-      setState(() {
-        cus = new CustomDropdownItem();
-        cus.id = category['id'].toString();
-        String tempCat;
-        if (category['name'].toString().length > 30)
-          tempCat = category['name'].toString().substring(0, 30) + "...";
-        else
-          tempCat = category['name'];
-
-        cus.name = tempCat;
-
-        _categories.add(cus);
-      });
-    });
-  }
 
   _loadAction1s() async {
     var action1s = await helper.getAction1s();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
-    cus.name = "-- Select Action --";
+    cus.name = "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
+    cus.name = "-- Select Action --                                              ";
     _action1s.add(cus);
     action1s.forEach((action1) {
       setState(() {
@@ -188,7 +194,8 @@ class TaskDetailState extends State //<TaskDetail>
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
-    cus.name = "-- Select Context --";
+    cus.name = "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
+    cus.name = "-- Select Context --                                             ";
     _context1s.add(cus);
     context1s.forEach((context1) {
       setState(() {
@@ -212,7 +219,8 @@ class TaskDetailState extends State //<TaskDetail>
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
-    cus.name = "-- Select Location --";
+    cus.name = "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
+    cus.name = "-- Select Location --                                           ";
     _location1s.add(cus);
     location1s.forEach((location1) {
       setState(() {
@@ -236,7 +244,8 @@ class TaskDetailState extends State //<TaskDetail>
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
-    cus.name = "-- Select Tag --";
+    cus.name = "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
+    cus.name = "-- Select Tag --                                                    ";
     _tag1s.add(cus);
     tag1s.forEach((tag1) {
       setState(() {
@@ -259,7 +268,8 @@ class TaskDetailState extends State //<TaskDetail>
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
-    cus.name = "-- Select Goal --";
+    cus.name = "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
+    cus.name = "-- Select Goal --                                                  ";
     _goal1s.add(cus);
     goal1s.forEach((goal1) {
       setState(() {
@@ -276,6 +286,8 @@ class TaskDetailState extends State //<TaskDetail>
       });
     });
   }
+
+//##########################################end of Dropdown #################################################################
 
   DateTime _dateDue;
   _selectedTodoDate(BuildContext context) async {
@@ -299,17 +311,25 @@ class TaskDetailState extends State //<TaskDetail>
   TimeOfDay _timeDue;
   DateTime _todoTimeDue;
   String _savedTime;
+
   Future<void> _openTimePicker(BuildContext context) async {
     final pickedTime = await showTimePicker(
       context: context,
       initialTime: _todoTimeController == null ? TimeOfDay.now() : _timeDue,
+//      initialEntryMode: TimePickerEntryMode.dial,
     );
 
-    if (pickedTime != null) {
+    if (pickedTime != null && pickedTime != _savedTime) {
       setState(() {
         _timeDue = pickedTime;
         _pickedTime = pickedTime.format(context);
         _todoTimeController.text = _pickedTime;
+//        var _hh = pickedTime.hour;
+//        var _col = ":";
+//        var _min = pickedTime.minute;
+//        String _timeDue = _hh.toString() + _col + _min.toString();
+//        _timeDue = _hh.toString() + _col + _min.toString();
+//        _todoTimeController.text = _timeDue;
       });
     }
   }
@@ -437,7 +457,7 @@ class TaskDetailState extends State //<TaskDetail>
                   task.note = value;
                 },
                 minLines: 4,
-                maxLines: 18,
+                maxLines: 16,
                 decoration: InputDecoration(
                   labelText: ' Note',
                   hintText: ' Write Todo Note',
@@ -826,9 +846,14 @@ class TaskDetailState extends State //<TaskDetail>
                       task.timeDue = _todoTimeController.text;
                       task.timeDue != ""
                           ? {
-//                              _nTitle = task.timeDue.toString() + ' reminder: ' + task.task,
+                              _nTitle = task.timeDue.toString() +
+                                  ' reminder: ' +
+                                  task.task,
 //                              await notificationPlugin.scheduleNotification(
-//                                  _nTitle, task.note, task.timeDue)
+//                                  _nTitle,
+//                                  task.note,
+//                                  task.dateDue,
+//                                  task.timeDue)
                             }
                           : task.isDone = 0;
 //                      if (task.isDone == 0) {
