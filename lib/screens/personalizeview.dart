@@ -1498,6 +1498,11 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
       customSetting = CustomSettings.fromObject(_customSetting[0]);
 
       if (customSetting != null && customSetting.id != null) {
+        if (customSetting.sortField1 != "") {
+          _selectedSortField1 =
+              _dropdownMenuItemsSort[int.parse(customSetting.sortField1)].value;
+          globals.sortField1 = int.parse(customSetting.sortField1);
+        }
         if (customSetting.sortOrder1 != "") {
           _selectedSortOrder1 =
               _dropdownMenuSortOrder[int.parse(customSetting.sortOrder1)].value;
