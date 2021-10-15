@@ -79,17 +79,20 @@ class NotificationPlugin {
 ////////////////////////
   Future<void> showNotification(String _nTitle, String _nBody) async {
     var androidChannelSpecifics = AndroidNotificationDetails(
-      'CHANNEL_ID',
+      'CHANNEL_ID_12',
       'CHANNEL_NAME',
       "CHANNEL_DESCRIPTION",
+      color: const Color.fromARGB(255, 255, 0, 0),
+//      color: Colors.yellow,
       importance: Importance.max,
       priority: Priority.high,
       playSound: true,
-      styleInformation: DefaultStyleInformation(true, true),
-      enableLights: true,
-      ledColor: const Color.fromARGB(255, 255, 0, 0),
+      timeoutAfter: 5000,
+      ledColor: const Color.fromARGB(255, 0, 255, 0),
       ledOnMs: 1000,
       ledOffMs: 500,
+      styleInformation: DefaultStyleInformation(true, true),
+      enableLights: true,
     );
     var iosChannelSpecifics = IOSNotificationDetails();
     var platformChannelSpecifics = NotificationDetails(
