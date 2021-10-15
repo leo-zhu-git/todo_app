@@ -80,14 +80,14 @@ class _DrawerNagivation extends State<DrawerNagivation> {
                     .push(MaterialPageRoute(builder: (context) => WipeScreen())),
               ),
               Divider(color: Colors.amber[800]),
-//            ListTile(
-//              tileColor: Colors.amber[100],
-//              leading: Icon(Icons.connect_without_contact),
-//              title: Text('Support [temp test notification]'),
-//              onTap: () => Navigator.of(context).push(MaterialPageRoute(
-//                  builder: (context) => LocalNotificationScreen())),
-//            ),
-//            Divider(),
+            ListTile(
+              tileColor: Colors.amber[100],
+              leading: Icon(Icons.connect_without_contact),
+              title: Text('Support [temp test notification]'),
+              onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => LocalNotificationScreen())),
+            ),
+            Divider(),
               ListTile(
                 tileColor: Colors.amber[100],
                 leading: Icon(Icons.help_outlined),
