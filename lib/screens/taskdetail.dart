@@ -430,7 +430,7 @@ class TaskDetailState extends State //<TaskDetail>
             _timeDue = TimeOfDay.now(),
           };
     print(_todoTimeController.text);
-    TextStyle textStyle = Theme.of(context).textTheme.title;
+    TextStyle textStyle = Theme.of(context).textTheme.headline6;
     return Scaffold(
       key: _globalKey,
       resizeToAvoidBottomInset: false,
