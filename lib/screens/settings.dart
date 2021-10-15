@@ -12,7 +12,7 @@ class SettingsFormState extends State {
   
     @override
     Widget build(BuildContext context) {
-      TextStyle textStyle = Theme.of(context).textTheme.title;
+      TextStyle textStyle = Theme.of(context).textTheme.headline6;
       return Scaffold(
         backgroundColor: Colors.yellow[200],
         appBar: AppBar(

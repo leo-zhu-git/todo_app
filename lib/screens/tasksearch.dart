@@ -254,7 +254,7 @@ class TaskSearchState extends State {
 
   @override
   Widget build(BuildContext context) {
-    TextStyle textStyle = Theme.of(context).textTheme.title;
+    TextStyle textStyle = Theme.of(context).textTheme.headline6;
     return Scaffold(
       backgroundColor: Colors.teal[50],
       appBar: AppBar(
