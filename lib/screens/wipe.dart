@@ -167,6 +167,14 @@ class _WipeScreenState extends State<WipeScreen> {
                   onPressed: () async {
                     if (_option == 0) {
                       mysqlDBhelper.wipeTaskDataToMySql();
+                      mysqlDBhelper.wipeActionToMySql();
+                      mysqlDBhelper.wipeCatatoryToMySql();
+                      mysqlDBhelper.wipeGoalToMySql();
+                      mysqlDBhelper.wipeContextToMySql();
+                      mysqlDBhelper.wipeLocationToMySql();
+                      mysqlDBhelper.wipePriorityToMySql();
+                      mysqlDBhelper.wipeStatusToMySql();
+                      mysqlDBhelper.wipeTagToMySql();
                       Navigator.pop(context);
                       _showSuccessSnackBar(Container(
                         color: Colors.tealAccent[100],

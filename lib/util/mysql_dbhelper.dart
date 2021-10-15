@@ -674,19 +674,363 @@ class MySql_DBHelper {
     return str;
   }
 
-  // void getTaskData() {
-  //   final dbTaskFuture = helper.initializeDb();
-  //   dbTaskFuture.then((result) {
-  //     final tasksDataFuture = helper.getTasks();
-  //     tasksDataFuture.then((result) {
-  //       List<Task> taskList = List<Task>();
-  //       count = result.length;
-  //       print(count);
-  //       for (int i = 0; i < count; i++) {
-  //         taskList.add(Task.fromObject(result[i]));
-  //         request('contextSaveContent', formData: result[i]);
-  //       }
-  //     });
-  //   });
-  // }
+  void wipeCatatoryToMySql() {
+    // this.deleteAllTaskFromMySQL();
+    final dbDataFuture = helper.getCategories();
+
+    var dataList = [];
+    var data = {};
+    dbDataFuture.then((result) {
+      print(result.length);
+
+      for (int i = 0; i < result.length; i++) {
+        print(result[i]);
+        var id = "";
+        var name = "";
+        var description = "";
+        
+
+        if (result[i]["id"] != null) {
+          id = stringReplace(result[i]["id"]);
+        }
+        if (result[i]["name"] != null) {
+          name = stringReplace(result[i]["name"]);
+        }
+        if (result[i]["description"] != null) {
+          description = result[i]["description"].toString();
+        }
+
+        String datadata = '{"id":"' +
+            id +
+            '",' +
+            '"name":"' +
+            name +
+            '",' +
+            '"description":"' +
+            description +
+            '"}';
+
+        dataList.add(datadata);
+      }
+
+      data = {"data": dataList};
+      print(data);
+      request('wipeCatagoryfromDevice', formData: data);
+    });
+  }
+
+  void wipeActionToMySql() {
+    // this.deleteAllTaskFromMySQL();
+    final dbDataFuture = helper.getAction1s();
+
+    var dataList = [];
+    var data = {};
+    dbDataFuture.then((result) {
+      print(result.length);
+
+      for (int i = 0; i < result.length; i++) {
+        print(result[i]);
+        var id = "";
+        var name = "";
+        var description = "";
+        
+
+        if (result[i]["id"] != null) {
+          id = stringReplace(result[i]["id"]);
+        }
+        if (result[i]["name"] != null) {
+          name = stringReplace(result[i]["name"]);
+        }
+        if (result[i]["description"] != null) {
+          description = result[i]["description"].toString();
+        }
+
+        String datadata = '{"id":"' +
+            id +
+            '",' +
+            '"name":"' +
+            name +
+            '",' +
+            '"description":"' +
+            description +
+            '"}';
+
+        dataList.add(datadata);
+      }
+
+      data = {"data": dataList};
+      print(data);
+      request('wipeActionfromDevice', formData: data);
+    });
+  }
+
+  void wipeContextToMySql() {
+    // this.deleteAllTaskFromMySQL();
+    final dbDataFuture = helper.getAction1s();
+
+    var dataList = [];
+    var data = {};
+    dbDataFuture.then((result) {
+      print(result.length);
+
+      for (int i = 0; i < result.length; i++) {
+        print(result[i]);
+        var id = "";
+        var name = "";
+        var description = "";
+        
+
+        if (result[i]["id"] != null) {
+          id = stringReplace(result[i]["id"]);
+        }
+        if (result[i]["name"] != null) {
+          name = stringReplace(result[i]["name"]);
+        }
+        if (result[i]["description"] != null) {
+          description = result[i]["description"].toString();
+        }
+
+        String datadata = '{"id":"' +
+            id +
+            '",' +
+            '"name":"' +
+            name +
+            '",' +
+            '"description":"' +
+            description +
+            '"}';
+
+        dataList.add(datadata);
+      }
+
+      data = {"data": dataList};
+      print(data);
+      request('wipeContextfromDevice', formData: data);
+    });
+  }
+
+   void wipeGoalToMySql() {
+    // this.deleteAllTaskFromMySQL();
+    final dbDataFuture = helper.getAction1s();
+
+    var dataList = [];
+    var data = {};
+    dbDataFuture.then((result) {
+      print(result.length);
+
+      for (int i = 0; i < result.length; i++) {
+        print(result[i]);
+        var id = "";
+        var name = "";
+        var description = "";
+        
+
+        if (result[i]["id"] != null) {
+          id = stringReplace(result[i]["id"]);
+        }
+        if (result[i]["name"] != null) {
+          name = stringReplace(result[i]["name"]);
+        }
+        if (result[i]["description"] != null) {
+          description = result[i]["description"].toString();
+        }
+
+        String datadata = '{"id":"' +
+            id +
+            '",' +
+            '"name":"' +
+            name +
+            '",' +
+            '"description":"' +
+            description +
+            '"}';
+
+        dataList.add(datadata);
+      }
+
+      data = {"data": dataList};
+      print(data);
+      request('wipeGoalfromDevice', formData: data);
+    });
+  }
+
+   void wipeLocationToMySql() {
+    // this.deleteAllTaskFromMySQL();
+    final dbDataFuture = helper.getAction1s();
+
+    var dataList = [];
+    var data = {};
+    dbDataFuture.then((result) {
+      print(result.length);
+
+      for (int i = 0; i < result.length; i++) {
+        print(result[i]);
+        var id = "";
+        var name = "";
+        var description = "";
+        
+
+        if (result[i]["id"] != null) {
+          id = stringReplace(result[i]["id"]);
+        }
+        if (result[i]["name"] != null) {
+          name = stringReplace(result[i]["name"]);
+        }
+        if (result[i]["description"] != null) {
+          description = result[i]["description"].toString();
+        }
+
+        String datadata = '{"id":"' +
+            id +
+            '",' +
+            '"name":"' +
+            name +
+            '",' +
+            '"description":"' +
+            description +
+            '"}';
+
+        dataList.add(datadata);
+      }
+
+      data = {"data": dataList};
+      print(data);
+      request('wipeLocationfromDevice', formData: data);
+    });
+  }
+
+   void wipePriorityToMySql() {
+    // this.deleteAllTaskFromMySQL();
+    final dbDataFuture = helper.getAction1s();
+
+    var dataList = [];
+    var data = {};
+    dbDataFuture.then((result) {
+      print(result.length);
+
+      for (int i = 0; i < result.length; i++) {
+        print(result[i]);
+        var id = "";
+        var name = "";
+        var description = "";
+        
+
+        if (result[i]["id"] != null) {
+          id = stringReplace(result[i]["id"]);
+        }
+        if (result[i]["name"] != null) {
+          name = stringReplace(result[i]["name"]);
+        }
+        if (result[i]["description"] != null) {
+          description = result[i]["description"].toString();
+        }
+
+        String datadata = '{"id":"' +
+            id +
+            '",' +
+            '"name":"' +
+            name +
+            '",' +
+            '"description":"' +
+            description +
+            '"}';
+
+        dataList.add(datadata);
+      }
+
+      data = {"data": dataList};
+      print(data);
+      request('wipePriorityfromDevice', formData: data);
+    });
+  }
+
+   void wipeStatusToMySql() {
+    // this.deleteAllTaskFromMySQL();
+    final dbDataFuture = helper.getAction1s();
+
+    var dataList = [];
+    var data = {};
+    dbDataFuture.then((result) {
+      print(result.length);
+
+      for (int i = 0; i < result.length; i++) {
+        print(result[i]);
+        var id = "";
+        var name = "";
+        var description = "";
+        
+
+        if (result[i]["id"] != null) {
+          id = stringReplace(result[i]["id"]);
+        }
+        if (result[i]["name"] != null) {
+          name = stringReplace(result[i]["name"]);
+        }
+        if (result[i]["description"] != null) {
+          description = result[i]["description"].toString();
+        }
+
+        String datadata = '{"id":"' +
+            id +
+            '",' +
+            '"name":"' +
+            name +
+            '",' +
+            '"description":"' +
+            description +
+            '"}';
+
+        dataList.add(datadata);
+      }
+
+      data = {"data": dataList};
+      print(data);
+      request('wipeStatusfromDevice', formData: data);
+    });
+  }
+
+   void wipeTagToMySql() {
+    // this.deleteAllTaskFromMySQL();
+    final dbDataFuture = helper.getAction1s();
+
+    var dataList = [];
+    var data = {};
+    dbDataFuture.then((result) {
+      print(result.length);
+
+      for (int i = 0; i < result.length; i++) {
+        print(result[i]);
+        var id = "";
+        var name = "";
+        var description = "";
+        
+
+        if (result[i]["id"] != null) {
+          id = stringReplace(result[i]["id"]);
+        }
+        if (result[i]["name"] != null) {
+          name = stringReplace(result[i]["name"]);
+        }
+        if (result[i]["description"] != null) {
+          description = result[i]["description"].toString();
+        }
+
+        String datadata = '{"id":"' +
+            id +
+            '",' +
+            '"name":"' +
+            name +
+            '",' +
+            '"description":"' +
+            description +
+            '"}';
+
+        dataList.add(datadata);
+      }
+
+      data = {"data": dataList};
+      print(data);
+      request('wipeTagfromDevice', formData: data);
+    });
+  }
 }

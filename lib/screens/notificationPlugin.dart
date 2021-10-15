@@ -81,7 +81,7 @@ class NotificationPlugin {
     var androidChannelSpecifics = AndroidNotificationDetails(
       'CHANNEL_ID',
       'CHANNEL_NAME',
-      "CHANNEL_DESCRIPTION",
+      // "CHANNEL_DESCRIPTION",
       importance: Importance.max,
       priority: Priority.high,
       playSound: true,
@@ -133,7 +133,7 @@ TimeOfDay timeConvert(String normTime) {
     var androidChannelSpecifics = AndroidNotificationDetails(
       'CHANNEL_ID 1',
       'CHANNEL_NAME 1',
-      "CHANNEL_DESCRIPTION 1",
+      // "CHANNEL_DESCRIPTION 1",
 //      icon: 'secondary_icon',
 //      largeIcon: DrawableResourceAndroidBitmap('large_notf_icon'),
 //      sound: RawResourceAndroidNotificationSound('my_sound'),
@@ -198,7 +198,7 @@ TimeOfDay timeConvert(String normTime) {
     var androidChannelSpecifics = AndroidNotificationDetails(
       'CHANNEL_ID 3',
       'CHANNEL_NAME 3',
-      "CHANNEL_DESCRIPTION 3",
+      // "CHANNEL_DESCRIPTION 3",
       importance: Importance.max,
       priority: Priority.high,
       styleInformation: DefaultStyleInformation(true, true),
@@ -225,7 +225,7 @@ TimeOfDay timeConvert(String normTime) {
     var androidChannelSpecifics = AndroidNotificationDetails(
       'CHANNEL_ID 4',
       'CHANNEL_NAME 4',
-      "CHANNEL_DESCRIPTION 4",
+      // "CHANNEL_DESCRIPTION 4",
       importance: Importance.max,
       priority: Priority.high,
 //            largeIcon: DrawableResourceAndroidBitmap('large_notf_icon'),
@@ -257,7 +257,7 @@ TimeOfDay timeConvert(String normTime) {
     var androidChannelSpecifics = AndroidNotificationDetails(
       'CHANNEL_ID 5',
       'CHANNEL_NAME 5',
-      "CHANNEL_DESCRIPTION 5",
+      // "CHANNEL_DESCRIPTION 5",
       importance: Importance.max,
       priority: Priority.high,
     );
@@ -291,7 +291,7 @@ TimeOfDay timeConvert(String normTime) {
     var androidChannelSpecifics = AndroidNotificationDetails(
       'CHANNEL ID 2',
       'CHANNEL NAME 2',
-      'CHANNEL DESCRIPTION 2',
+      // 'CHANNEL DESCRIPTION 2',
       importance: Importance.high,
       priority: Priority.high,
       styleInformation: bigPictureStyleInformation,
