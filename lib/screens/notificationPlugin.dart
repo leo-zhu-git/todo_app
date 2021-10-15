@@ -79,17 +79,20 @@ class NotificationPlugin {
 ////////////////////////
   Future<void> showNotification(String _nTitle, String _nBody) async {
     var androidChannelSpecifics = AndroidNotificationDetails(
-      'CHANNEL_ID',
+      'CHANNEL_ID_12',
       'CHANNEL_NAME',
-      // "CHANNEL_DESCRIPTION",
+      "CHANNEL_DESCRIPTION",
+      color: const Color.fromARGB(255, 255, 0, 0),
+//      color: Colors.yellow,
       importance: Importance.max,
       priority: Priority.high,
       playSound: true,
-      styleInformation: DefaultStyleInformation(true, true),
-      enableLights: true,
-      ledColor: const Color.fromARGB(255, 255, 0, 0),
+      timeoutAfter: 5000,
+      ledColor: const Color.fromARGB(255, 0, 255, 0),
       ledOnMs: 1000,
       ledOffMs: 500,
+      styleInformation: DefaultStyleInformation(true, true),
+      enableLights: true,
     );
     var iosChannelSpecifics = IOSNotificationDetails();
     var platformChannelSpecifics = NotificationDetails(
@@ -133,6 +136,7 @@ TimeOfDay timeConvert(String normTime) {
     var androidChannelSpecifics = AndroidNotificationDetails(
       'CHANNEL_ID 1',
       'CHANNEL_NAME 1',
+      'CHANNEL_Description',
       // "CHANNEL_DESCRIPTION 1",
 //      icon: 'secondary_icon',
 //      largeIcon: DrawableResourceAndroidBitmap('large_notf_icon'),
@@ -198,7 +202,7 @@ TimeOfDay timeConvert(String normTime) {
     var androidChannelSpecifics = AndroidNotificationDetails(
       'CHANNEL_ID 3',
       'CHANNEL_NAME 3',
-      // "CHANNEL_DESCRIPTION 3",
+      "CHANNEL_DESCRIPTION 3",
       importance: Importance.max,
       priority: Priority.high,
       styleInformation: DefaultStyleInformation(true, true),
@@ -225,7 +229,7 @@ TimeOfDay timeConvert(String normTime) {
     var androidChannelSpecifics = AndroidNotificationDetails(
       'CHANNEL_ID 4',
       'CHANNEL_NAME 4',
-      // "CHANNEL_DESCRIPTION 4",
+      "CHANNEL_DESCRIPTION 4",
       importance: Importance.max,
       priority: Priority.high,
 //            largeIcon: DrawableResourceAndroidBitmap('large_notf_icon'),
@@ -257,7 +261,7 @@ TimeOfDay timeConvert(String normTime) {
     var androidChannelSpecifics = AndroidNotificationDetails(
       'CHANNEL_ID 5',
       'CHANNEL_NAME 5',
-      // "CHANNEL_DESCRIPTION 5",
+      "CHANNEL_DESCRIPTION 5",
       importance: Importance.max,
       priority: Priority.high,
     );
@@ -291,7 +295,7 @@ TimeOfDay timeConvert(String normTime) {
     var androidChannelSpecifics = AndroidNotificationDetails(
       'CHANNEL ID 2',
       'CHANNEL NAME 2',
-      // 'CHANNEL DESCRIPTION 2',
+      'CHANNEL DESCRIPTION 2',
       importance: Importance.high,
       priority: Priority.high,
       styleInformation: bigPictureStyleInformation,
