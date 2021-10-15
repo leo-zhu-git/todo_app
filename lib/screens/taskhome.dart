@@ -40,6 +40,9 @@ class TaskHomeState extends State {
   List<Task> tasklist;
   List<DisplayTask> displaytasklist;
   int count = 0;
+  final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
+
+
   @override
   void initState() {
     super.initState();
@@ -48,12 +51,12 @@ class TaskHomeState extends State {
     _getCustomSettings();
   }
 
-  final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
 
   _showSuccessSnackBar(message) {
     var _snackBar = SnackBar(content: message);
     _globalKey.currentState.showSnackBar(_snackBar);
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -159,19 +162,38 @@ class TaskHomeState extends State {
         return new Dismissible(
             key: new UniqueKey(),
             onDismissed: (direction) {
-              setState(() {
+              setState(() async {
                 DateTime now = DateTime.now();
                 String formattedDate = DateFormat('yyyy-mm-dd').format(now);
                 this.tasklist[position].isDone = 1;
                 this.tasklist[position].status = "Completed";
                 this.tasklist[position].dateDone = formattedDate;
-                dbHelper.updateTask(tasklist[position]);
-                //this.tasklist.removeAt(position);
-                getData();
                 Scaffold.of(context).showSnackBar(new SnackBar(
-                  content: new Text("Item Dismissed"),
+                  content: new Text("Task Completed"),
                 ));
-              });
+//                _showSuccessSnackBar(
+//                  Container(
+//                    color: Colors.tealAccent[100],
+                    //KK height: 40,
+//                    child: Row(
+//                      mainAxisAlignment: MainAxisAlignment.center,
+//                      children: [
+//                        (Icon(
+//                          Icons.thumb_up,
+//                          color: Colors.black,
+//                        )),
+//                        Text(
+//                          ' Task Completed ',
+//                          style: (TextStyle(color: Colors.black)),
+//                        )
+//                      ],
+//                    ),
+//                  ),
+//                );
+//                await Future.delayed(const Duration(milliseconds: 500), () {});
+                dbHelper.updateTask(tasklist[position]);
+                getData();
+             });
             },
             background: Container(
               color: Colors.brown,
@@ -271,26 +293,6 @@ class TaskHomeState extends State {
                     onTap: () {
                       navigateToDetail(this.tasklist[position]);
                     },
-//                      setState(() {
-//                        DateTime now = DateTime.now();
-//                        String formattedDate =
-//                            DateFormat('yyyy-MM-dd').format(now);
-//                        if (value == true) {
-//                          this.tasklist[position].isDone = 1;
-//                          this.tasklist[position].status = "Completed";
-//                          this.tasklist[position].dateDone = formattedDate;
-//                          dbHelper.updateTask(tasklist[position]);
-//                        } else {
-//                          this.tasklist[position].isDone = 0;
-//                          this.tasklist[position].status = "Open";
-//                          this.tasklist[position].dateDone = '';
-//                          dbHelper.updateTask(tasklist[position]);
-//                        }
-//                      });
-//                    },
-//                    activeColor: Colors.brown[900],
-//                    checkColor: Colors.white,
-
                     autofocus: true,
                   )),
             ));
