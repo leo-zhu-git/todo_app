@@ -6,7 +6,6 @@ import 'package:path_provider/path_provider.dart';
 import 'dart:io' show File, Platform;
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
-//import 'package:http/http.dart' as http;
 
 import 'package:rxdart/subjects.dart';
 
@@ -21,7 +20,6 @@ class NotificationPlugin {
   NotificationPlugin._() {
     init();
     tz.initializeTimeZones();
-    
   }
 
   get http => null;
@@ -87,7 +85,6 @@ class NotificationPlugin {
       importance: Importance.max,
       priority: Priority.high,
       playSound: true,
-//      timeoutAfter: 5000,
       styleInformation: DefaultStyleInformation(true, true),
       enableLights: true,
       ledColor: const Color.fromARGB(255, 255, 0, 0),
@@ -106,12 +103,33 @@ class NotificationPlugin {
     );
   }
 
+TimeOfDay timeConvert(String normTime) {
+    int hour;
+    int minute;
+    String ampm = normTime.substring(normTime.length - 2);
+    String result = normTime.substring(0, normTime.indexOf(' '));
+    if (ampm == 'AM' && int.parse(result.split(":")[1]) != 12) {
+      hour = int.parse(result.split(':')[0]);
+      if (hour == 12) hour = 0;
+      minute = int.parse(result.split(":")[1]);
+    } else {
+      hour = int.parse(result.split(':')[0]) - 12;
+      if (hour <= 0) {
+        hour = 24 + hour;
+      }
+      minute = int.parse(result.split(":")[1]);
+    }
+    return TimeOfDay(hour: hour, minute: minute);
+  }
+
 ////////////////////////
   /// 2. scheduled notification
 ////////////////////////
   Future<void> scheduleNotification(
       String _nTitle, String _nBody, String _nDate, String _nTime) async {
     var scheduleNotificationDateTime = DateTime.now().add(Duration(seconds: 5));
+    int hour;
+    int minute;
     var androidChannelSpecifics = AndroidNotificationDetails(
       'CHANNEL_ID 1',
       'CHANNEL_NAME 1',
@@ -137,49 +155,39 @@ class NotificationPlugin {
       iOS: iosChannelSpecifics,
     );
 
-    DateTime _currentDate = DateTime.now();
     DateTime _notifyDate = DateTime.parse(_nDate);
-    var _inFuture = _notifyDate.difference(_currentDate).inDays;
-    bool _notify = false;
-    if (_inFuture >= 0) {
-      _notify = true;
-    }
-    ;
-    if (_notify == true) {
-      TimeOfDay _scheduledTime = TimeOfDay(
+    TimeOfDay _scheduledTime;
+    
+/////////////////
+    /// check _timeDue is 24h or 12h format
+/////////////////
+    if (_nTime.contains('M')) {
+      _scheduledTime = timeConvert(_nTime);
+    } else {
+      _scheduledTime = TimeOfDay(
           hour: int.parse(_nTime.split(":")[0]),
           minute: int.parse(_nTime.split(":")[1]));
-      int hh = _scheduledTime.hour;
-      int min = _scheduledTime.minute;
-
-      DateTime _notifyDateTime = new DateTime(
-          _notifyDate.year, _notifyDate.month, _notifyDate.day, hh, min);
-//      final scheduledDate = tz.TZDateTime.from(_notifyDate, location);
-
-//      await flutterLocalNotificationsPlugin.schedule(
-//        0,
-//        _nTitle,
-//        _nBody,
-//        _notifyDateTime,
-//        platformChannelSpecifics,
-//        payload: 'Test Payload',
-//        androidAllowWhileIdle: true,
-//      );
-
-await flutterLocalNotificationsPlugin.zonedSchedule(
-    0,
-    _nTitle,
-    _nBody,
-    tz.TZDateTime.now(tz.local).add(const Duration(seconds: 5)),
-    NotificationDetails(
-        android: AndroidNotificationDetails(
-            'CHANNEL_ID 1', 
-            'CHANNEL_NAME 1',
-            "CHANNEL_DESCRIPTION 1")),
-    androidAllowWhileIdle: true,
-    uiLocalNotificationDateInterpretation:
-        UILocalNotificationDateInterpretation.absoluteTime );
     }
+    ;
+
+    DateTime _notifyDateTime = new DateTime(
+        _notifyDate.year, _notifyDate.month, _notifyDate.day, _scheduledTime.hour, _scheduledTime.minute);
+
+    var _tzNotifyDateTime = tz.TZDateTime.from(_notifyDateTime, tz.local);
+
+    await flutterLocalNotificationsPlugin.zonedSchedule(
+        0,
+        _nTitle,
+        _nBody,
+//        tz.TZDateTime.now(tz.local).add(const Duration(seconds: 5)),
+        _tzNotifyDateTime, 
+        NotificationDetails(
+            android: AndroidNotificationDetails(
+                'CHANNEL_ID 1', 'CHANNEL_NAME 1', "CHANNEL_DESCRIPTION 1")),
+        androidAllowWhileIdle: true,
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime);
+//    }
   }
 
 ////////////////////////

@@ -86,6 +86,16 @@ class TaskDetailState extends State //<TaskDetail>
     _loadLocation1s();
     _loadTag1s();
     _loadGoal1s();
+   notificationPlugin
+        .setListenerForLowerVersions(onNotificationInLowerVersions);
+    notificationPlugin.setOnNotificationClick(onNotificationClick);
+
+  }
+
+  onNotificationInLowerVersions(ReceivedNotification receivedNotification) {}
+
+  onNotificationClick(String payload) {
+    print('Payload $payload');
   }
 
 //##################Drop Down Items Load from DB #################################################################
@@ -94,7 +104,8 @@ class TaskDetailState extends State //<TaskDetail>
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
-    cus.name = "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
+    cus.name =
+        "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
     cus.name = "-- Select Category --                                         ";
     _categories.add(cus);
     categories.forEach((category) {
@@ -119,8 +130,10 @@ class TaskDetailState extends State //<TaskDetail>
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
-    cus.name = "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
-    cus.name = "-- Select Status --                                              ";
+    cus.name =
+        "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
+    cus.name =
+        "-- Select Status --                                              ";
     _statuses.add(cus);
     statuses.forEach((status) {
       setState(() {
@@ -144,8 +157,10 @@ class TaskDetailState extends State //<TaskDetail>
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
-    cus.name = "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
-    cus.name = "-- Select Priority --                                            ";
+    cus.name =
+        "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
+    cus.name =
+        "-- Select Priority --                                            ";
     _priorities.add(cus);
     priorities.forEach((priority) {
       setState(() {
@@ -164,14 +179,15 @@ class TaskDetailState extends State //<TaskDetail>
     });
   }
 
-
   _loadAction1s() async {
     var action1s = await helper.getAction1s();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
-    cus.name = "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
-    cus.name = "-- Select Action --                                              ";
+    cus.name =
+        "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
+    cus.name =
+        "-- Select Action --                                              ";
     _action1s.add(cus);
     action1s.forEach((action1) {
       setState(() {
@@ -194,8 +210,10 @@ class TaskDetailState extends State //<TaskDetail>
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
-    cus.name = "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
-    cus.name = "-- Select Context --                                             ";
+    cus.name =
+        "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
+    cus.name =
+        "-- Select Context --                                             ";
     _context1s.add(cus);
     context1s.forEach((context1) {
       setState(() {
@@ -219,8 +237,10 @@ class TaskDetailState extends State //<TaskDetail>
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
-    cus.name = "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
-    cus.name = "-- Select Location --                                           ";
+    cus.name =
+        "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
+    cus.name =
+        "-- Select Location --                                           ";
     _location1s.add(cus);
     location1s.forEach((location1) {
       setState(() {
@@ -244,8 +264,10 @@ class TaskDetailState extends State //<TaskDetail>
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
-    cus.name = "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
-    cus.name = "-- Select Tag --                                                    ";
+    cus.name =
+        "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
+    cus.name =
+        "-- Select Tag --                                                    ";
     _tag1s.add(cus);
     tag1s.forEach((tag1) {
       setState(() {
@@ -268,8 +290,10 @@ class TaskDetailState extends State //<TaskDetail>
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
-    cus.name = "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
-    cus.name = "-- Select Goal --                                                  ";
+    cus.name =
+        "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
+    cus.name =
+        "-- Select Goal --                                                  ";
     _goal1s.add(cus);
     goal1s.forEach((goal1) {
       setState(() {
@@ -849,11 +873,13 @@ class TaskDetailState extends State //<TaskDetail>
                               _nTitle = task.timeDue.toString() +
                                   ' reminder: ' +
                                   task.task,
-//                              await notificationPlugin.scheduleNotification(
-//                                  _nTitle,
-//                                  task.note,
-//                                  task.dateDue,
-//                                  task.timeDue)
+//                              await notificationPlugin.showNotification(
+//                                  _nTitle, task.note),
+                              await notificationPlugin.scheduleNotification(
+                                  _nTitle,
+                                  task.note,
+                                  task.dateDue,
+                                  task.timeDue)
                             }
                           : task.isDone = 0;
 //                      if (task.isDone == 0) {
