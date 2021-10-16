@@ -575,7 +575,7 @@ class TaskDetailState extends State //<TaskDetail>
                         primary: Colors.grey[100],
                       ),
                       child: Text(
-                        'Select',
+                        'More...',
                         style: TextStyle(color: Colors.brown[900]),
                       )),
                   SizedBox(width: 5),
