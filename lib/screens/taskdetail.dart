@@ -86,10 +86,9 @@ class TaskDetailState extends State //<TaskDetail>
     _loadLocation1s();
     _loadTag1s();
     _loadGoal1s();
-   notificationPlugin
+    notificationPlugin
         .setListenerForLowerVersions(onNotificationInLowerVersions);
     notificationPlugin.setOnNotificationClick(onNotificationClick);
-
   }
 
   onNotificationInLowerVersions(ReceivedNotification receivedNotification) {}
@@ -499,19 +498,70 @@ class TaskDetailState extends State //<TaskDetail>
                 shape: BoxShape.rectangle,
                 color: Colors.blue[100],
               ),
-              child: TextField(
-                controller: _todoDateController,
-                style: _textStyleControls,
-                decoration: InputDecoration(
-                  labelText: ' Due Date',
-                  hintText: ' Pick a Date',
-                  prefixIcon: InkWell(
-                    onTap: () {
-                      _selectedTodoDate(context);
-                    },
-                    child: Icon(Icons.calendar_today),
-                  ),
-                ),
+              child: Row(
+                children: [
+//                      Text("Due: " + task.dateDue),
+                  Text("Due: " + _todoDateController.text),
+//                  TextField(
+//                    controller: _todoDateController,
+//                    style: _textStyleControls,
+//                    decoration: InputDecoration(
+//                      labelText: ' Due Date',
+//                      hintText: ' Pick a Date',
+//                      prefixIcon: InkWell(
+//                        onTap: () {
+//                          _selectedTodoDate(context);
+//                        },
+//                        child: Icon(Icons.calendar_today),
+//                      ),
+//                    ),
+//                  ),
+                  SizedBox(width: 5),
+                  ElevatedButton(
+                      onPressed: ()  {
+                          _dateDue = null;
+                          final DateFormat formatter = DateFormat('yyyy-MM-dd');
+                          final String formatted = formatter.format(_dateDue);
+                          _todoDateController.text = formatter.format(_dateDue);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.grey[100],
+                      ),
+                      child: Text(
+                        'None',
+                        style: TextStyle(color: Colors.brown[900]),
+                      )),
+                  SizedBox(width: 5),
+                  ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          _dateDue = DateTime.now();
+                          final DateFormat formatter = DateFormat('yyyy-MM-dd');
+                          final String formatted = formatter.format(_dateDue);
+                          _todoDateController.text = formatter.format(_dateDue);
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.grey[100],
+                      ),
+                      child: Text(
+                        'Today',
+                        style: TextStyle(color: Colors.brown[900]),
+                      )),
+                  SizedBox(width: 5),
+                  ElevatedButton(
+                      onPressed: () async {
+                        _selectedTodoDate(context);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.grey[100],
+                      ),
+                      child: Text(
+                        'Select',
+                        style: TextStyle(color: Colors.brown[900]),
+                      )),
+                  SizedBox(width: 5),
+                ],
               ),
             ),
 
@@ -798,30 +848,6 @@ class TaskDetailState extends State //<TaskDetail>
                 ],
               ),
             ), //KK     // SizedBox(
-///////////////////////////
-//  Star
-///////////////////////////
-//            Container(
-//                margin: EdgeInsets.only(
-//                    left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
-//                decoration: BoxDecoration(
-//                    shape: BoxShape.rectangle, color: Colors.blue[100]),
-//                child: Row(
-//                    crossAxisAlignment: CrossAxisAlignment.center,
-//                    children: [
-//                      IconButton(
-//                          icon: Icon(Icons.lightbulb,
-//                          color: (task.isStar == 0)
-//                          ? Colors.black38
-//                          : Colors.green),
-//                          onPressed: () {
-//                              if (task.isStar == 1) {
-//                                this.task.isStar = 0;
-//                              } else {
-//                                this.task.isStar = 1;
-//                              }
-//                          })
-//                    ])),
 
             /// form - save or cancel
             Row(
@@ -865,8 +891,8 @@ class TaskDetailState extends State //<TaskDetail>
                           : _selectedGoal1.toString();
                       task.dateDue = _todoDateController.text;
                       task.dateDue == null
-                          ? DateFormat('yyyy-MM-dd – kk:mm')
-                              .format(DateTime.now())
+//                          ? DateFormat('yyyy-MM-dd – kk:mm')
+                          ? DateFormat('yyyy-MM-dd').format(DateTime.now())
                           : _todoDateController.text;
                       task.timeDue = _todoTimeController.text;
                       task.timeDue != ""

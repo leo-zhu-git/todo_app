@@ -73,7 +73,7 @@ class TaskHomeState extends State {
       appBar: AppBar(
         key: _globalKey,
 //        backgroundColor: Colors.brown[900],
-        backgroundColor: Colors.tealAccent[700],
+        backgroundColor: Colors.teal[800],
         elevation: 8,
         title: Center(
 //          child: Container(
@@ -122,7 +122,7 @@ class TaskHomeState extends State {
         height: 55.0,
         child: BottomAppBar(
           // color: Color.fromRGBO(58, 66, 86, 1.0),
-          color: Colors.tealAccent[700],
+          color: Colors.teal[800],
 //          color: Colors.brown[900],
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
