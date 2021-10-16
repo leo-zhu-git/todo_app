@@ -259,7 +259,7 @@ class TaskSearchState extends State {
       backgroundColor: Colors.teal[50],
       appBar: AppBar(
 //        backgroundColor: Colors.brown[900],
-        backgroundColor: Colors.lightBlueAccent[700],
+        backgroundColor: Colors.lightGreen[800],
         automaticallyImplyLeading: true,
         title: Center(
           child: Container(
@@ -285,7 +285,7 @@ class TaskSearchState extends State {
         children: [
           Padding(
             padding:
-                EdgeInsets.only(top: 1.0, left: 4.0, right: 4.0, bottom: 1.0),
+                EdgeInsets.only(top: 6.0, left: 4.0, right: 4.0, bottom: 1.0),
             child: TextField(
               controller: searchController,
               style: textStyle,
@@ -694,7 +694,8 @@ class TaskSearchState extends State {
         height: 28.0,
         child: BottomAppBar(
           // color: Color.fromRGBO(58, 66, 86, 1.0),
-          color: Colors.brown[900],
+        color: Colors.lightGreen[800],
+//          color: Colors.brown[900],
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
