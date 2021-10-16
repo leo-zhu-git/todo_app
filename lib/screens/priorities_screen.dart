@@ -104,7 +104,7 @@ class _PrioritiesScreenState extends State<PrioritiesScreen> {
                           )),
                           Text(
                             ' Added ',
-                            style: (TextStyle(color: Colors.white)),
+                            style: (TextStyle(color: Colors.black)),
                           )
                         ],
                       ),

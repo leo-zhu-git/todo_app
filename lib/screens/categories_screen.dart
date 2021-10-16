@@ -104,7 +104,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                           )),
                           Text(
                             ' Added ',
-                            style: (TextStyle(color: Colors.white)),
+                            style: (TextStyle(color: Colors.black)),
                           )
                         ],
                       ),
