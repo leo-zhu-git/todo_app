@@ -258,7 +258,8 @@ class TaskSearchState extends State {
     return Scaffold(
       backgroundColor: Colors.teal[50],
       appBar: AppBar(
-        backgroundColor: Colors.brown[900],
+//        backgroundColor: Colors.brown[900],
+        backgroundColor: Colors.lightBlueAccent[700],
         automaticallyImplyLeading: true,
         title: Center(
           child: Container(

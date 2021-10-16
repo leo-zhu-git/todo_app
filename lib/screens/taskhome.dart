@@ -72,7 +72,8 @@ class TaskHomeState extends State {
       drawer: DrawerNagivation(),
       appBar: AppBar(
         key: _globalKey,
-        backgroundColor: Colors.brown[900],
+//        backgroundColor: Colors.brown[900],
+        backgroundColor: Colors.cyan[700],
         elevation: 8,
         title: Center(
 //          child: Container(

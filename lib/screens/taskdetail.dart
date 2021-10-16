@@ -436,7 +436,8 @@ class TaskDetailState extends State //<TaskDetail>
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.teal[50],
       appBar: AppBar(
-        backgroundColor: Colors.brown[900],
+//        backgroundColor: Colors.brown[900],
+        backgroundColor: Colors.cyanAccent[700],
         automaticallyImplyLeading: false,
         title: Center(child: Text('Todo Detail')),
       ),
