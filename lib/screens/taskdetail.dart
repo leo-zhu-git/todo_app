@@ -517,21 +517,21 @@ class TaskDetailState extends State //<TaskDetail>
 //                    ),
 //                  ),
                   SizedBox(width: 5),
-                  ElevatedButton(
-                      onPressed: ()  {
-                          _dateDue = null;
-                          final DateFormat formatter = DateFormat('yyyy-MM-dd');
-                          final String formatted = formatter.format(_dateDue);
-                          _todoDateController.text = formatter.format(_dateDue);
-                      },
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.grey[100],
-                      ),
-                      child: Text(
-                        'None',
-                        style: TextStyle(color: Colors.brown[900]),
-                      )),
-                  SizedBox(width: 5),
+//                  ElevatedButton(
+//                      onPressed: () {
+//                        _dateDue = null;
+//                        final DateFormat formatter = DateFormat('yyyy-MM-dd');
+//                        final String formatted = formatter.format(_dateDue);
+//                        _todoDateController.text = formatter.format(_dateDue);
+//                      },
+//                      style: ElevatedButton.styleFrom(
+//                        primary: Colors.grey[100],
+//                      ),
+//                      child: Text(
+//                        'None',
+//                        style: TextStyle(color: Colors.brown[900]),
+//                      )),
+//                  SizedBox(width: 5),
                   ElevatedButton(
                       onPressed: () {
                         setState(() {
@@ -546,6 +546,24 @@ class TaskDetailState extends State //<TaskDetail>
                       ),
                       child: Text(
                         'Today',
+                        style: TextStyle(color: Colors.brown[900]),
+                      )),
+                  SizedBox(width: 5),
+                  ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          _dateDue = DateTime.now();
+                          _dateDue = _dateDue.add(const Duration(days: 1));
+                          final DateFormat formatter = DateFormat('yyyy-MM-dd');
+                          final String formatted = formatter.format(_dateDue);
+                          _todoDateController.text = formatter.format(_dateDue);
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.grey[100],
+                      ),
+                      child: Text(
+                        'Tomo',
                         style: TextStyle(color: Colors.brown[900]),
                       )),
                   SizedBox(width: 5),
