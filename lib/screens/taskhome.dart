@@ -126,7 +126,8 @@ class TaskHomeState extends State {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               IconButton(
-                icon: Icon(Icons.dashboard_outlined, color: Colors.white),
+//                icon: Icon(Icons.dashboard_outlined, color: Colors.white),
+                icon: Icon(Icons.settings, color: Colors.white),
                 onPressed: () {
                   Navigator.of(context).pushNamed('/personalizeview');
                 },
