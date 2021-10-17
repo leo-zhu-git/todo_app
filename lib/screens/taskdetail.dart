@@ -517,23 +517,30 @@ class TaskDetailState extends State //<TaskDetail>
 //                    ),
 //                  ),
                   SizedBox(width: 5),
-                  ElevatedButton(
-                      onPressed: () {
-                        _dateDue = null;
+                  IconButton(
+                      icon: const Icon(Icons.clear, color: Colors.black),
+                      tooltip: 'Clear',
+                      onPressed: () {}),
+
+//                  ElevatedButton(
+//                      onPressed: () {
+//                        _dateDue = null;
 //                        final DateFormat formatter = DateFormat('yyyy-MM-dd');
 //                        final String formatted = formatter.format(_dateDue);
 //                        _todoDateController.text = formatter.format(_dateDue);
-                        _todoDateController.text = '';
-                      },
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.grey[100],
-                      ),
-                     child: Text(
-                        'None',
-                        style: TextStyle(color: Colors.brown[900]),
-                     )),
-                  SizedBox(width: 5),
-                  ElevatedButton(
+//                        _todoDateController.text = '';
+//                      },
+//                      style: ElevatedButton.styleFrom(
+//                        primary: Colors.grey[100],
+//                      ),
+//                     child: Text(
+//                        'None',
+//                        style: TextStyle(color: Colors.brown[900]),
+//                     )),
+//                  SizedBox(width: 5),
+                  IconButton(
+                      icon: const Icon(Icons.today, color: Colors.black),
+                      tooltip: 'Today',
                       onPressed: () {
                         setState(() {
                           _dateDue = DateTime.now();
@@ -541,16 +548,28 @@ class TaskDetailState extends State //<TaskDetail>
                           final String formatted = formatter.format(_dateDue);
                           _todoDateController.text = formatter.format(_dateDue);
                         });
-                      },
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.grey[100],
-                      ),
-                      child: Text(
-                        'Today',
-                        style: TextStyle(color: Colors.brown[900]),
-                      )),
-                  SizedBox(width: 5),
-                  ElevatedButton(
+                      }),
+//                  ElevatedButton(
+//                      onPressed: () {
+//                        setState(() {
+//                          _dateDue = DateTime.now();
+//                          final DateFormat formatter = DateFormat('yyyy-MM-dd');
+//                          final String formatted = formatter.format(_dateDue);
+//                          _todoDateController.text = formatter.format(_dateDue);
+//                        });
+//                      },
+//                      style: ElevatedButton.styleFrom(
+//                        primary: Colors.grey[100],
+//                      ),
+//                      child: Text(
+//                        'Today',
+//                        style: TextStyle(color: Colors.brown[900]),
+//                      )),
+//                  SizedBox(width: 5),
+                  IconButton(
+                      icon: const Icon(Icons.exposure_plus_1,
+                          color: Colors.black),
+                      tooltip: 'Tomo',
                       onPressed: () {
                         setState(() {
                           _dateDue = DateTime.now();
@@ -559,26 +578,42 @@ class TaskDetailState extends State //<TaskDetail>
                           final String formatted = formatter.format(_dateDue);
                           _todoDateController.text = formatter.format(_dateDue);
                         });
-                      },
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.grey[100],
-                      ),
-                      child: Text(
-                        'Tomo',
-                        style: TextStyle(color: Colors.brown[900]),
-                      )),
-                  SizedBox(width: 5),
-                  ElevatedButton(
-                      onPressed: () async {
-                        _selectedTodoDate(context);
-                      },
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.grey[100],
-                      ),
-                      child: Text(
-                        'More...',
-                        style: TextStyle(color: Colors.brown[900]),
-                      )),
+                      }),
+//                  ElevatedButton(
+//                      onPressed: () {
+//                        setState(() {
+//                          _dateDue = DateTime.now();
+//                          _dateDue = _dateDue.add(const Duration(days: 1));
+//                          final DateFormat formatter = DateFormat('yyyy-MM-dd');
+//                          final String formatted = formatter.format(_dateDue);
+//                          _todoDateController.text = formatter.format(_dateDue);
+//                        });
+//                      },
+//                      style: ElevatedButton.styleFrom(
+//                        primary: Colors.grey[100],
+//                      ),
+//                      child: Text(
+//                        'Tomo',
+//                        style: TextStyle(color: Colors.brown[900]),
+//                      )),
+//                  SizedBox(width: 5),
+                  IconButton(
+                      icon: const Icon(Icons.more_horiz, color: Colors.black),
+                      tooltip: 'More',
+                      onPressed: () {
+                          _selectedTodoDate(context);
+                      }),
+//                  ElevatedButton(
+//                      onPressed: () async {
+//                        _selectedTodoDate(context);
+//                      },
+//                      style: ElevatedButton.styleFrom(
+//                        primary: Colors.grey[100],
+//                      ),
+//                      child: Text(
+//                        'More...',
+//                        style: TextStyle(color: Colors.brown[900]),
+//                      )),
                   SizedBox(width: 5),
                 ],
               ),
