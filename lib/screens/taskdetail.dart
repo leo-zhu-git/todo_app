@@ -78,6 +78,7 @@ class TaskDetailState extends State //<TaskDetail>
   void initState() {
     super.initState();
 
+    _initFields();
     _loadStatuses();
     _loadPriorities();
     _loadCategories();
@@ -89,12 +90,64 @@ class TaskDetailState extends State //<TaskDetail>
     notificationPlugin
         .setListenerForLowerVersions(onNotificationInLowerVersions);
     notificationPlugin.setOnNotificationClick(onNotificationClick);
+    _initFields();
   }
 
   onNotificationInLowerVersions(ReceivedNotification receivedNotification) {}
 
   onNotificationClick(String payload) {
     print('Payload $payload');
+  }
+
+  _initFields() {
+    _todoTaskController.text = task.task;
+    _todoNoteController.text = task.note;
+    if (task.dateDue != "") {
+      _todoDateController.text = task.dateDue;
+      _dateDue = DateFormat('yyyy-M-d').parse(task.dateDue);
+    } else {}
+    ;
+//        ? {
+//            if (_dateDue == null)
+//              {
+//                _todoDateController.text = task.dateDue,
+//                _dateDue = DateFormat('yyyy-M-d').parse(task.dateDue),
+//              },
+//          }
+//        : {};
+    task.timeDue != ""
+        ? {
+            if (_timeDue == null)
+              {
+                _todoTimeController.text = task.timeDue,
+                _savedTime = task.timeDue,
+                _timeDue = timeConvert(_savedTime),
+                print(_timeDue),
+              }
+          }
+        : {
+            _todoTimeController.text = null,
+            _timeDue = TimeOfDay.now(),
+          };
+    print(_todoTimeController.text);
+    task.category != ""
+        ? _selectedCategory = task.category
+        : _selectedCategory = "1";
+    task.status != "" ? _selectedStatus = task.status : _selectedStatus = null;
+    task.priority != ""
+        ? _selectedPriority = task.priority
+        : _selectedPriority = null;
+    task.action1 != ""
+        ? _selectedAction1 = task.action1
+        : _selectedAction1 = null;
+    task.context1 != ""
+        ? _selectedContext1 = task.context1
+        : _selectedContext1 = null;
+    task.location1 != ""
+        ? _selectedLocation1 = task.location1
+        : _selectedLocation1 = null;
+    task.tag1 != "" ? _selectedTag1 = task.tag1 : _selectedTag1 = null;
+    task.goal1 != "" ? _selectedGoal1 = task.goal1 : _selectedGoal1 = null;
   }
 
 //##################Drop Down Items Load from DB #################################################################
@@ -385,50 +438,6 @@ class TaskDetailState extends State //<TaskDetail>
 
   @override
   Widget build(BuildContext context) {
-    _todoNoteController.text = task.note;
-    task.status != "" ? _selectedStatus = task.status : _selectedStatus = null;
-    task.priority != ""
-        ? _selectedPriority = task.priority
-        : _selectedPriority = null;
-    task.category != ""
-        ? _selectedCategory = task.category
-        : _selectedCategory = "1";
-    task.action1 != ""
-        ? _selectedAction1 = task.action1
-        : _selectedAction1 = null;
-    task.context1 != ""
-        ? _selectedContext1 = task.context1
-        : _selectedContext1 = null;
-    task.location1 != ""
-        ? _selectedLocation1 = task.location1
-        : _selectedLocation1 = null;
-    task.tag1 != "" ? _selectedTag1 = task.tag1 : _selectedTag1 = null;
-    task.goal1 != "" ? _selectedGoal1 = task.goal1 : _selectedGoal1 = null;
-    _todoTaskController.text = task.task;
-    task.dateDue != ""
-        ? {
-            if (_dateDue == null)
-              {
-                _todoDateController.text = task.dateDue,
-                _dateDue = DateFormat('yyyy-M-d').parse(task.dateDue),
-              },
-          }
-        : {};
-    task.timeDue != ""
-        ? {
-            if (_timeDue == null)
-              {
-                _todoTimeController.text = task.timeDue,
-                _savedTime = task.timeDue,
-                _timeDue = timeConvert(_savedTime),
-                print(_timeDue),
-              }
-          }
-        : {
-            _todoTimeController.text = null,
-            _timeDue = TimeOfDay.now(),
-          };
-    print(_todoTimeController.text);
     TextStyle textStyle = Theme.of(context).textTheme.headline6;
     return Scaffold(
       key: _globalKey,
@@ -524,8 +533,10 @@ class TaskDetailState extends State //<TaskDetail>
                         icon: const Icon(Icons.clear, color: Colors.purple),
                         tooltip: 'Clear',
                         onPressed: () {
-                          _dateDue = null;
-                          task.dateDue = null; 
+                          setState(() {
+                            _dateDue = null;
+                            _todoDateController.text = '';                            
+                          });
                         }),
                   ),
 
@@ -624,6 +635,12 @@ class TaskDetailState extends State //<TaskDetail>
                             const Icon(Icons.more_horiz, color: Colors.purple),
                         tooltip: 'More',
                         onPressed: () {
+                          if (_dateDue == null) {
+                            _todoDateController.text = task.dateDue;
+                            _dateDue =
+                                DateFormat('yyyy-M-d').parse(task.dateDue);
+                          }
+                          ;
                           _selectedTodoDate(context);
                         }),
                   ),
