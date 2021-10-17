@@ -517,10 +517,17 @@ class TaskDetailState extends State //<TaskDetail>
 //                    ),
 //                  ),
                   SizedBox(width: 5),
-                  IconButton(
-                      icon: const Icon(Icons.clear, color: Colors.black),
-                      tooltip: 'Clear',
-                      onPressed: () {}),
+                  Ink(
+                    decoration: const ShapeDecoration(
+                        color: Colors.red, shape: CircleBorder()),
+                    child: IconButton(
+                        icon: const Icon(Icons.clear, color: Colors.purple),
+                        tooltip: 'Clear',
+                        onPressed: () {
+                          _dateDue = null;
+                          task.dateDue = null; 
+                        }),
+                  ),
 
 //                  ElevatedButton(
 //                      onPressed: () {
@@ -538,17 +545,23 @@ class TaskDetailState extends State //<TaskDetail>
 //                        style: TextStyle(color: Colors.brown[900]),
 //                     )),
 //                  SizedBox(width: 5),
-                  IconButton(
-                      icon: const Icon(Icons.today, color: Colors.black),
-                      tooltip: 'Today',
-                      onPressed: () {
-                        setState(() {
-                          _dateDue = DateTime.now();
-                          final DateFormat formatter = DateFormat('yyyy-MM-dd');
-                          final String formatted = formatter.format(_dateDue);
-                          _todoDateController.text = formatter.format(_dateDue);
-                        });
-                      }),
+                  Ink(
+                    decoration: const ShapeDecoration(
+                        color: Colors.red, shape: CircleBorder()),
+                    child: IconButton(
+                        icon: const Icon(Icons.today, color: Colors.purple),
+                        tooltip: 'Today',
+                        onPressed: () {
+                          setState(() {
+                            _dateDue = DateTime.now();
+                            final DateFormat formatter =
+                                DateFormat('yyyy-MM-dd');
+                            final String formatted = formatter.format(_dateDue);
+                            _todoDateController.text =
+                                formatter.format(_dateDue);
+                          });
+                        }),
+                  ),
 //                  ElevatedButton(
 //                      onPressed: () {
 //                        setState(() {
@@ -566,19 +579,25 @@ class TaskDetailState extends State //<TaskDetail>
 //                        style: TextStyle(color: Colors.brown[900]),
 //                      )),
 //                  SizedBox(width: 5),
-                  IconButton(
-                      icon: const Icon(Icons.exposure_plus_1,
-                          color: Colors.black),
-                      tooltip: 'Tomo',
-                      onPressed: () {
-                        setState(() {
-                          _dateDue = DateTime.now();
-                          _dateDue = _dateDue.add(const Duration(days: 1));
-                          final DateFormat formatter = DateFormat('yyyy-MM-dd');
-                          final String formatted = formatter.format(_dateDue);
-                          _todoDateController.text = formatter.format(_dateDue);
-                        });
-                      }),
+                  Ink(
+                    decoration: const ShapeDecoration(
+                        color: Colors.red, shape: CircleBorder()),
+                    child: IconButton(
+                        icon: const Icon(Icons.exposure_plus_1,
+                            color: Colors.purple),
+                        tooltip: 'Tomo',
+                        onPressed: () {
+                          setState(() {
+                            _dateDue = DateTime.now();
+                            _dateDue = _dateDue.add(const Duration(days: 1));
+                            final DateFormat formatter =
+                                DateFormat('yyyy-MM-dd');
+                            final String formatted = formatter.format(_dateDue);
+                            _todoDateController.text =
+                                formatter.format(_dateDue);
+                          });
+                        }),
+                  ),
 //                  ElevatedButton(
 //                      onPressed: () {
 //                        setState(() {
@@ -597,12 +616,17 @@ class TaskDetailState extends State //<TaskDetail>
 //                        style: TextStyle(color: Colors.brown[900]),
 //                      )),
 //                  SizedBox(width: 5),
-                  IconButton(
-                      icon: const Icon(Icons.more_horiz, color: Colors.black),
-                      tooltip: 'More',
-                      onPressed: () {
+                  Ink(
+                    decoration: const ShapeDecoration(
+                        color: Colors.red, shape: CircleBorder()),
+                    child: IconButton(
+                        icon:
+                            const Icon(Icons.more_horiz, color: Colors.purple),
+                        tooltip: 'More',
+                        onPressed: () {
                           _selectedTodoDate(context);
-                      }),
+                        }),
+                  ),
 //                  ElevatedButton(
 //                      onPressed: () async {
 //                        _selectedTodoDate(context);
