@@ -72,7 +72,8 @@ class TaskHomeState extends State {
       drawer: DrawerNagivation(),
       appBar: AppBar(
         key: _globalKey,
-        backgroundColor: Colors.brown[900],
+//        backgroundColor: Colors.brown[900],
+        backgroundColor: Colors.teal[800],
         elevation: 8,
         title: Center(
 //          child: Container(
@@ -121,12 +122,14 @@ class TaskHomeState extends State {
         height: 55.0,
         child: BottomAppBar(
           // color: Color.fromRGBO(58, 66, 86, 1.0),
-          color: Colors.brown[900],
+          color: Colors.teal[800],
+//          color: Colors.brown[900],
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               IconButton(
-                icon: Icon(Icons.dashboard_outlined, color: Colors.white),
+//                icon: Icon(Icons.dashboard_outlined, color: Colors.white),
+                icon: Icon(Icons.settings, color: Colors.white),
                 onPressed: () {
                   Navigator.of(context).pushNamed('/personalizeview');
                 },

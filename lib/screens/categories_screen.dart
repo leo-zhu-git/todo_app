@@ -104,7 +104,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                           )),
                           Text(
                             ' Added ',
-                            style: (TextStyle(color: Colors.white)),
+                            style: (TextStyle(color: Colors.black)),
                           )
                         ],
                       ),
@@ -304,7 +304,8 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
       key: _globalKey,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.brown[900],
+//        backgroundColor: Colors.brown[900],
+        backgroundColor: Colors.amber[900],
         elevation: 8,
         title: Center(
           child: Container(

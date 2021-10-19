@@ -672,10 +672,11 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.teal[50],
       appBar: new AppBar(
-        backgroundColor: Colors.brown[900],
+//        backgroundColor: Colors.brown[900],
+        backgroundColor: Colors.indigo[600],
         automaticallyImplyLeading: false,
         title:
-            Center(child: Text('Personalize - Filter, Sort, View, Picklist')),
+            Center(child: Text('Personalize - Make this app your own!')),
       ),
       body: SingleChildScrollView(
         child: Padding(

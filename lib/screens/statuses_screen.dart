@@ -104,7 +104,7 @@ class _StatusesScreenState extends State<StatusesScreen> {
                           )),
                           Text(
                             ' Added ',
-                            style: (TextStyle(color: Colors.white)),
+                            style: (TextStyle(color: Colors.black)),
                           )
                         ],
                       ),

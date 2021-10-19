@@ -78,6 +78,7 @@ class TaskDetailState extends State //<TaskDetail>
   void initState() {
     super.initState();
 
+    _initFields();
     _loadStatuses();
     _loadPriorities();
     _loadCategories();
@@ -86,16 +87,67 @@ class TaskDetailState extends State //<TaskDetail>
     _loadLocation1s();
     _loadTag1s();
     _loadGoal1s();
-   notificationPlugin
+    notificationPlugin
         .setListenerForLowerVersions(onNotificationInLowerVersions);
     notificationPlugin.setOnNotificationClick(onNotificationClick);
-
+    _initFields();
   }
 
   onNotificationInLowerVersions(ReceivedNotification receivedNotification) {}
 
   onNotificationClick(String payload) {
     print('Payload $payload');
+  }
+
+  _initFields() {
+    _todoTaskController.text = task.task;
+    _todoNoteController.text = task.note;
+    if (task.dateDue != "") {
+      _todoDateController.text = task.dateDue;
+      _dateDue = DateFormat('yyyy-M-d').parse(task.dateDue);
+    } else {}
+    ;
+//        ? {
+//            if (_dateDue == null)
+//              {
+//                _todoDateController.text = task.dateDue,
+//                _dateDue = DateFormat('yyyy-M-d').parse(task.dateDue),
+//              },
+//          }
+//        : {};
+    task.timeDue != ""
+        ? {
+            if (_timeDue == null)
+              {
+                _todoTimeController.text = task.timeDue,
+                _savedTime = task.timeDue,
+                _timeDue = timeConvert(_savedTime),
+                print(_timeDue),
+              }
+          }
+        : {
+            _todoTimeController.text = null,
+            _timeDue = TimeOfDay.now(),
+          };
+    print(_todoTimeController.text);
+    task.category != ""
+        ? _selectedCategory = task.category
+        : _selectedCategory = "1";
+    task.status != "" ? _selectedStatus = task.status : _selectedStatus = null;
+    task.priority != ""
+        ? _selectedPriority = task.priority
+        : _selectedPriority = null;
+    task.action1 != ""
+        ? _selectedAction1 = task.action1
+        : _selectedAction1 = null;
+    task.context1 != ""
+        ? _selectedContext1 = task.context1
+        : _selectedContext1 = null;
+    task.location1 != ""
+        ? _selectedLocation1 = task.location1
+        : _selectedLocation1 = null;
+    task.tag1 != "" ? _selectedTag1 = task.tag1 : _selectedTag1 = null;
+    task.goal1 != "" ? _selectedGoal1 = task.goal1 : _selectedGoal1 = null;
   }
 
 //##################Drop Down Items Load from DB #################################################################
@@ -386,57 +438,14 @@ class TaskDetailState extends State //<TaskDetail>
 
   @override
   Widget build(BuildContext context) {
-    _todoNoteController.text = task.note;
-    task.status != "" ? _selectedStatus = task.status : _selectedStatus = null;
-    task.priority != ""
-        ? _selectedPriority = task.priority
-        : _selectedPriority = null;
-    task.category != ""
-        ? _selectedCategory = task.category
-        : _selectedCategory = "1";
-    task.action1 != ""
-        ? _selectedAction1 = task.action1
-        : _selectedAction1 = null;
-    task.context1 != ""
-        ? _selectedContext1 = task.context1
-        : _selectedContext1 = null;
-    task.location1 != ""
-        ? _selectedLocation1 = task.location1
-        : _selectedLocation1 = null;
-    task.tag1 != "" ? _selectedTag1 = task.tag1 : _selectedTag1 = null;
-    task.goal1 != "" ? _selectedGoal1 = task.goal1 : _selectedGoal1 = null;
-    _todoTaskController.text = task.task;
-    task.dateDue != ""
-        ? {
-            if (_dateDue == null)
-              {
-                _todoDateController.text = task.dateDue,
-                _dateDue = DateFormat('yyyy-M-d').parse(task.dateDue),
-              },
-          }
-        : {};
-    task.timeDue != ""
-        ? {
-            if (_timeDue == null)
-              {
-                _todoTimeController.text = task.timeDue,
-                _savedTime = task.timeDue,
-                _timeDue = timeConvert(_savedTime),
-                print(_timeDue),
-              }
-          }
-        : {
-            _todoTimeController.text = null,
-            _timeDue = TimeOfDay.now(),
-          };
-    print(_todoTimeController.text);
     TextStyle textStyle = Theme.of(context).textTheme.headline6;
     return Scaffold(
       key: _globalKey,
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.teal[50],
       appBar: AppBar(
-        backgroundColor: Colors.brown[900],
+//        backgroundColor: Colors.brown[900],
+        backgroundColor: Colors.cyanAccent[700],
         automaticallyImplyLeading: false,
         title: Center(child: Text('Todo Detail')),
       ),
@@ -498,19 +507,156 @@ class TaskDetailState extends State //<TaskDetail>
                 shape: BoxShape.rectangle,
                 color: Colors.blue[100],
               ),
-              child: TextField(
-                controller: _todoDateController,
-                style: _textStyleControls,
-                decoration: InputDecoration(
-                  labelText: ' Due Date',
-                  hintText: ' Pick a Date',
-                  prefixIcon: InkWell(
-                    onTap: () {
-                      _selectedTodoDate(context);
-                    },
-                    child: Icon(Icons.calendar_today),
+              child: Row(
+                children: [
+//                      Text("Due: " + task.dateDue),
+                  Text("Due: " + _todoDateController.text),
+//                  TextField(
+//                    controller: _todoDateController,
+//                    style: _textStyleControls,
+//                    decoration: InputDecoration(
+//                      labelText: ' Due Date',
+//                      hintText: ' Pick a Date',
+//                      prefixIcon: InkWell(
+//                        onTap: () {
+//                          _selectedTodoDate(context);
+//                        },
+//                        child: Icon(Icons.calendar_today),
+//                      ),
+//                    ),
+//                  ),
+                  SizedBox(width: 5),
+                  Ink(
+                    decoration: const ShapeDecoration(
+                        color: Colors.red, shape: CircleBorder()),
+                    child: IconButton(
+                        icon: const Icon(Icons.clear, color: Colors.purple),
+                        tooltip: 'Clear',
+                        onPressed: () {
+                          setState(() {
+                            _dateDue = null;
+                            _todoDateController.text = '';                            
+                          });
+                        }),
                   ),
-                ),
+
+//                  ElevatedButton(
+//                      onPressed: () {
+//                        _dateDue = null;
+//                        final DateFormat formatter = DateFormat('yyyy-MM-dd');
+//                        final String formatted = formatter.format(_dateDue);
+//                        _todoDateController.text = formatter.format(_dateDue);
+//                        _todoDateController.text = '';
+//                      },
+//                      style: ElevatedButton.styleFrom(
+//                        primary: Colors.grey[100],
+//                      ),
+//                     child: Text(
+//                        'None',
+//                        style: TextStyle(color: Colors.brown[900]),
+//                     )),
+//                  SizedBox(width: 5),
+                  Ink(
+                    decoration: const ShapeDecoration(
+                        color: Colors.red, shape: CircleBorder()),
+                    child: IconButton(
+                        icon: const Icon(Icons.today, color: Colors.purple),
+                        tooltip: 'Today',
+                        onPressed: () {
+                          setState(() {
+                            _dateDue = DateTime.now();
+                            final DateFormat formatter =
+                                DateFormat('yyyy-MM-dd');
+                            final String formatted = formatter.format(_dateDue);
+                            _todoDateController.text =
+                                formatter.format(_dateDue);
+                          });
+                        }),
+                  ),
+//                  ElevatedButton(
+//                      onPressed: () {
+//                        setState(() {
+//                          _dateDue = DateTime.now();
+//                          final DateFormat formatter = DateFormat('yyyy-MM-dd');
+//                          final String formatted = formatter.format(_dateDue);
+//                          _todoDateController.text = formatter.format(_dateDue);
+//                        });
+//                      },
+//                      style: ElevatedButton.styleFrom(
+//                        primary: Colors.grey[100],
+//                      ),
+//                      child: Text(
+//                        'Today',
+//                        style: TextStyle(color: Colors.brown[900]),
+//                      )),
+//                  SizedBox(width: 5),
+                  Ink(
+                    decoration: const ShapeDecoration(
+                        color: Colors.red, shape: CircleBorder()),
+                    child: IconButton(
+                        icon: const Icon(Icons.exposure_plus_1,
+                            color: Colors.purple),
+                        tooltip: 'Tomo',
+                        onPressed: () {
+                          setState(() {
+                            _dateDue = DateTime.now();
+                            _dateDue = _dateDue.add(const Duration(days: 1));
+                            final DateFormat formatter =
+                                DateFormat('yyyy-MM-dd');
+                            final String formatted = formatter.format(_dateDue);
+                            _todoDateController.text =
+                                formatter.format(_dateDue);
+                          });
+                        }),
+                  ),
+//                  ElevatedButton(
+//                      onPressed: () {
+//                        setState(() {
+//                          _dateDue = DateTime.now();
+//                          _dateDue = _dateDue.add(const Duration(days: 1));
+//                          final DateFormat formatter = DateFormat('yyyy-MM-dd');
+//                          final String formatted = formatter.format(_dateDue);
+//                          _todoDateController.text = formatter.format(_dateDue);
+//                        });
+//                      },
+//                      style: ElevatedButton.styleFrom(
+//                        primary: Colors.grey[100],
+//                      ),
+//                      child: Text(
+//                        'Tomo',
+//                        style: TextStyle(color: Colors.brown[900]),
+//                      )),
+//                  SizedBox(width: 5),
+                  Ink(
+                    decoration: const ShapeDecoration(
+                        color: Colors.red, shape: CircleBorder()),
+                    child: IconButton(
+                        icon:
+                            const Icon(Icons.more_horiz, color: Colors.purple),
+                        tooltip: 'More',
+                        onPressed: () {
+                          if (_dateDue == null) {
+                            _todoDateController.text = task.dateDue;
+                            _dateDue =
+                                DateFormat('yyyy-M-d').parse(task.dateDue);
+                          }
+                          ;
+                          _selectedTodoDate(context);
+                        }),
+                  ),
+//                  ElevatedButton(
+//                      onPressed: () async {
+//                        _selectedTodoDate(context);
+//                      },
+//                      style: ElevatedButton.styleFrom(
+//                        primary: Colors.grey[100],
+//                      ),
+//                      child: Text(
+//                        'More...',
+//                        style: TextStyle(color: Colors.brown[900]),
+//                      )),
+                  SizedBox(width: 5),
+                ],
               ),
             ),
 
@@ -797,30 +943,6 @@ class TaskDetailState extends State //<TaskDetail>
                 ],
               ),
             ), //KK     // SizedBox(
-///////////////////////////
-//  Star
-///////////////////////////
-//            Container(
-//                margin: EdgeInsets.only(
-//                    left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
-//                decoration: BoxDecoration(
-//                    shape: BoxShape.rectangle, color: Colors.blue[100]),
-//                child: Row(
-//                    crossAxisAlignment: CrossAxisAlignment.center,
-//                    children: [
-//                      IconButton(
-//                          icon: Icon(Icons.lightbulb,
-//                          color: (task.isStar == 0)
-//                          ? Colors.black38
-//                          : Colors.green),
-//                          onPressed: () {
-//                              if (task.isStar == 1) {
-//                                this.task.isStar = 0;
-//                              } else {
-//                                this.task.isStar = 1;
-//                              }
-//                          })
-//                    ])),
 
             /// form - save or cancel
             Row(
@@ -864,8 +986,8 @@ class TaskDetailState extends State //<TaskDetail>
                           : _selectedGoal1.toString();
                       task.dateDue = _todoDateController.text;
                       task.dateDue == null
-                          ? DateFormat('yyyy-MM-dd – kk:mm')
-                              .format(DateTime.now())
+//                          ? DateFormat('yyyy-MM-dd – kk:mm')
+                          ? DateFormat('yyyy-MM-dd').format(DateTime.now())
                           : _todoDateController.text;
                       task.timeDue = _todoTimeController.text;
                       task.timeDue != ""
