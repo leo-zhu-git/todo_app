@@ -1,9 +1,9 @@
 
 
 class Location1{
-  int id;
-  String name;
-  String description;
+  int? id;
+  String? name;
+  String? description;
 
   location1Map() {
     var mapping = Map<String, dynamic>();

@@ -42,7 +42,7 @@ class TaskDetailState extends State //<TaskDetail>
   Task task;
 
   TaskDetailState(this.task);
-  List<String> _cat = List<String>();
+  List<String> _cat = [];
 
   var _todoTaskController = TextEditingController();
   var _todoNoteController = TextEditingController();
@@ -100,35 +100,19 @@ class TaskDetailState extends State //<TaskDetail>
   }
 
   _initFields() {
-    _todoTaskController.text = task.task;
-    _todoNoteController.text = task.note;
+    _todoTaskController.text = task.task!;
+    _todoNoteController.text = task.note!;
     if (task.dateDue != "") {
-      _todoDateController.text = task.dateDue;
-      _dateDue = DateFormat('yyyy-M-d').parse(task.dateDue);
+      _todoDateController.text = task.dateDue!;
+      _dateDue = DateFormat('yyyy-M-d').parse(task.dateDue!);
     } else {}
     ;
-//        ? {
-//            if (_dateDue == null)
-//              {
-//                _todoDateController.text = task.dateDue,
-//                _dateDue = DateFormat('yyyy-M-d').parse(task.dateDue),
-//              },
-//          }
-//        : {};
-    task.timeDue != ""
-        ? {
-            if (_timeDue == null)
-              {
-                _todoTimeController.text = task.timeDue,
-                _savedTime = task.timeDue,
-                _timeDue = timeConvert(_savedTime),
-                print(_timeDue),
-              }
-          }
-        : {
-            _todoTimeController.text = null,
-            _timeDue = TimeOfDay.now(),
-          };
+    if (task.timeDue != "") {
+      _todoTimeController.text = task.timeDue!;
+       _savedTime = task.timeDue!;
+      _timeDue = timeConvert(_savedTime!);
+    } else {}
+    ;
     print(_todoTimeController.text);
     task.category != ""
         ? _selectedCategory = task.category
@@ -155,7 +139,7 @@ class TaskDetailState extends State //<TaskDetail>
     var categories = await helper.getCategories();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
-    cus.id = null;
+//    cus.id = null;
     cus.name =
         "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
     cus.name = "-- Select Category --                                         ";
@@ -181,7 +165,7 @@ class TaskDetailState extends State //<TaskDetail>
     var statuses = await helper.getStatuses();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
-    cus.id = null;
+//    cus.id = null;
     cus.name =
         "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
     cus.name =
@@ -208,7 +192,7 @@ class TaskDetailState extends State //<TaskDetail>
     var priorities = await helper.getPriorities();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
-    cus.id = null;
+//    cus.id = null;
     cus.name =
         "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
     cus.name =
@@ -235,7 +219,7 @@ class TaskDetailState extends State //<TaskDetail>
     var action1s = await helper.getAction1s();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
-    cus.id = null;
+//    cus.id = null;
     cus.name =
         "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
     cus.name =
@@ -261,7 +245,7 @@ class TaskDetailState extends State //<TaskDetail>
     var context1s = await helper.getContext1s();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
-    cus.id = null;
+//    cus.id = null;
     cus.name =
         "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
     cus.name =
@@ -288,7 +272,7 @@ class TaskDetailState extends State //<TaskDetail>
     var location1s = await helper.getLocation1s();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
-    cus.id = null;
+//    cus.id = null;
     cus.name =
         "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
     cus.name =
@@ -315,7 +299,7 @@ class TaskDetailState extends State //<TaskDetail>
     var tag1s = await helper.getTag1s();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
-    cus.id = null;
+//    cus.id = null;
     cus.name =
         "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
     cus.name =
@@ -341,7 +325,7 @@ class TaskDetailState extends State //<TaskDetail>
     var goal1s = await helper.getGoal1s();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
-    cus.id = null;
+//    cus.id = null;
     cus.name =
         "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
     cus.name =
@@ -365,11 +349,11 @@ class TaskDetailState extends State //<TaskDetail>
 
 //##########################################end of Dropdown #################################################################
 
-  DateTime _dateDue;
+  DateTime? _dateDue;
   _selectedTodoDate(BuildContext context) async {
     var pickedDate = await showDatePicker(
         context: context,
-        initialDate: _dateDue == null ? DateTime.now() : _dateDue,
+        initialDate: _dateDue == null ? DateTime.now() : _dateDue!,
         firstDate: new DateTime(DateTime.now().year - 3),
         lastDate: new DateTime(DateTime.now().year + 3));
 
@@ -377,35 +361,28 @@ class TaskDetailState extends State //<TaskDetail>
       setState(() {
         _dateDue = pickedDate;
         final DateFormat formatter = DateFormat('yyyy-MM-dd');
-        final String formatted = formatter.format(_dateDue);
-        _todoDateController.text = formatter.format(_dateDue);
+        final String formatted = formatter.format(_dateDue!);
+        _todoDateController.text = formatter.format(_dateDue!);
       });
     }
   }
 
-  String _pickedTime = '';
-  TimeOfDay _timeDue;
-  DateTime _todoTimeDue;
-  String _savedTime;
+  String? _pickedTime = '';
+  TimeOfDay? _timeDue;
+  DateTime? _todoTimeDue;
+  String? _savedTime;
 
   Future<void> _openTimePicker(BuildContext context) async {
     final pickedTime = await showTimePicker(
       context: context,
-      initialTime: _todoTimeController == null ? TimeOfDay.now() : _timeDue,
-//      initialEntryMode: TimePickerEntryMode.dial,
+      initialTime: _todoTimeController == null ? TimeOfDay.now() : _timeDue!,
     );
 
     if (pickedTime != null && pickedTime != _savedTime) {
       setState(() {
         _timeDue = pickedTime;
         _pickedTime = pickedTime.format(context);
-        _todoTimeController.text = _pickedTime;
-//        var _hh = pickedTime.hour;
-//        var _col = ":";
-//        var _min = pickedTime.minute;
-//        String _timeDue = _hh.toString() + _col + _min.toString();
-//        _timeDue = _hh.toString() + _col + _min.toString();
-//        _todoTimeController.text = _timeDue;
+        _todoTimeController.text = _pickedTime!;
       });
     }
   }
@@ -431,21 +408,21 @@ class TaskDetailState extends State //<TaskDetail>
 
 //##################End of Drop Down Items Load from DB #################################################################
 
-  _showSuccessSnackBar(message) {
-    var _snackBar = SnackBar(content: message);
-    _globalKey.currentState.showSnackBar(_snackBar);
-  }
+//  _showSuccessSnackBar(message) {
+//    var _snackBar = SnackBar(content: message);
+//    _globalKey.currentState.showSnackBar(_snackBar);
+//  }
 
   @override
   Widget build(BuildContext context) {
-    TextStyle textStyle = Theme.of(context).textTheme.headline6;
+//    TextStyle textStyle = Theme.of(context).textTheme.headline6;
     return Scaffold(
       key: _globalKey,
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.teal[50],
       appBar: AppBar(
-//        backgroundColor: Colors.brown[900],
-        backgroundColor: Colors.cyanAccent[700],
+        backgroundColor: Colors.brown[900],
+//        backgroundColor: Colors.cyanAccent[700],
         automaticallyImplyLeading: false,
         title: Center(child: Text('Todo Detail')),
       ),
@@ -534,8 +511,8 @@ class TaskDetailState extends State //<TaskDetail>
                         tooltip: 'Clear',
                         onPressed: () {
                           setState(() {
-                            _dateDue = null;
-                            _todoDateController.text = '';                            
+                            _dateDue = null!;
+                            _todoDateController.text = '';
                           });
                         }),
                   ),
@@ -567,9 +544,9 @@ class TaskDetailState extends State //<TaskDetail>
                             _dateDue = DateTime.now();
                             final DateFormat formatter =
                                 DateFormat('yyyy-MM-dd');
-                            final String formatted = formatter.format(_dateDue);
+                            final String formatted = formatter.format(_dateDue!);
                             _todoDateController.text =
-                                formatter.format(_dateDue);
+                                formatter.format(_dateDue!);
                           });
                         }),
                   ),
@@ -600,12 +577,12 @@ class TaskDetailState extends State //<TaskDetail>
                         onPressed: () {
                           setState(() {
                             _dateDue = DateTime.now();
-                            _dateDue = _dateDue.add(const Duration(days: 1));
+                            _dateDue = _dateDue!.add(const Duration(days: 1));
                             final DateFormat formatter =
                                 DateFormat('yyyy-MM-dd');
-                            final String formatted = formatter.format(_dateDue);
+                            final String formatted = formatter.format(_dateDue!);
                             _todoDateController.text =
-                                formatter.format(_dateDue);
+                                formatter.format(_dateDue!);
                           });
                         }),
                   ),
@@ -636,9 +613,9 @@ class TaskDetailState extends State //<TaskDetail>
                         tooltip: 'More',
                         onPressed: () {
                           if (_dateDue == null) {
-                            _todoDateController.text = task.dateDue;
+                            _todoDateController.text = task.dateDue!;
                             _dateDue =
-                                DateFormat('yyyy-M-d').parse(task.dateDue);
+                                DateFormat('yyyy-M-d').parse(task.dateDue!);
                           }
                           ;
                           _selectedTodoDate(context);
@@ -670,21 +647,94 @@ class TaskDetailState extends State //<TaskDetail>
                 shape: BoxShape.rectangle,
                 color: Colors.blue[100],
               ),
-              child: TextField(
-                controller: _todoTimeController,
-                style: _textStyleControls,
-                decoration: InputDecoration(
-                  labelText: ' Due Time',
-                  hintText: ' Pick a Time',
-                  prefixIcon: InkWell(
-                    onTap: () {
-                      _openTimePicker(context);
-                    },
-                    child: Icon(Icons.access_time),
+              child: Row(
+                children: [
+                  Text("Due: " + _todoTimeController.text),
+                  SizedBox(width: 5),
+                  Ink(
+                    decoration: const ShapeDecoration(
+                        color: Colors.red, shape: CircleBorder()),
+                    child: IconButton(
+                        icon: const Icon(Icons.clear, color: Colors.purple),
+                        tooltip: 'Clear',
+                        onPressed: () {
+                          setState(() {
+                            _timeDue = null!;
+                            _todoTimeController.text = "";
+                          });
+                        }),
                   ),
-                ),
+                  Ink(
+                    decoration: const ShapeDecoration(
+                        color: Colors.red, shape: CircleBorder()),
+                    child: IconButton(
+                        icon: const Icon(Icons.exposure_plus_1,
+                            color: Colors.purple),
+                        tooltip: '+1h',
+                        onPressed: () {
+                          setState(() {
+                            _timeDue = TimeOfDay.fromDateTime(
+                                DateTime.now().add(Duration(hours: 1)));
+                            _todoTimeController.text = _timeDue.toString();
+                          });
+                        }),
+                  ),
+                  Ink(
+                    decoration: const ShapeDecoration(
+                        color: Colors.red, shape: CircleBorder()),
+                    child: IconButton(
+                        icon: const Icon(Icons.exposure_plus_2,
+                            color: Colors.purple),
+                        tooltip: '+2h',
+                        onPressed: () {
+                          setState(() {
+                            _timeDue = TimeOfDay.fromDateTime(
+                                DateTime.now().add(Duration(hours: 2)));
+                            _todoTimeController.text = _timeDue.toString();
+                          });
+                        }),
+                  ),
+                  Ink(
+                    decoration: const ShapeDecoration(
+                        color: Colors.red, shape: CircleBorder()),
+                    child: IconButton(
+                        icon:
+                            const Icon(Icons.more_horiz, color: Colors.purple),
+                        tooltip: 'More',
+                        onPressed: () {
+//                          if (_timeDue == null) {
+//                            _todoTimeController.text = _timeDue.toString();
+//                          }
+//                          ;
+                          _openTimePicker(context);
+                        }),
+                  ),
+                  SizedBox(width: 5),
+                ],
               ),
             ),
+//            Container(
+//              margin:
+//                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
+//              decoration: BoxDecoration(
+//                shape: BoxShape.rectangle,
+//                color: Colors.blue[100],
+//              ),
+//              child: TextField(
+//                controller: _todoTimeController,
+//                style: _textStyleControls,
+//                decoration: InputDecoration(
+//                  labelText: ' Due Time',
+//                  hintText: ' Pick a Time',
+//                  prefixIcon: InkWell(
+//                    onTap: () {
+//                      _openTimePicker(context);
+//                    },
+//                    child: Icon(Icons.access_time),
+//                  ),
+//                ),
+//              ),
+//            ),
 
 ///////////////////////////
 //  CATEGORY
@@ -703,16 +753,16 @@ class TaskDetailState extends State //<TaskDetail>
                         return DropdownMenuItem<String>(
                             value: value.id,
                             child: Text(
-                              value.name,
+                              value.name!,
                               overflow: TextOverflow.ellipsis,
                             ));
                       }).toList(),
                       style: _textStyleControls,
                       value: _selectedCategory,
-                      onChanged: (String newValue) {
+                      onChanged: (newValue) {
                         setState(() {
                           _selectedCategory = newValue;
-                          task.category = newValue;
+                          task.category = newValue!;
                         });
                       }),
                 ],
@@ -736,16 +786,16 @@ class TaskDetailState extends State //<TaskDetail>
                         return DropdownMenuItem<String>(
                             value: value.id,
                             child: Text(
-                              value.name,
+                              value.name!,
                               overflow: TextOverflow.ellipsis,
                             ));
                       }).toList(),
                       style: _textStyleControls,
                       value: _selectedStatus,
-                      onChanged: (String newValue) {
+                      onChanged: (newValue) {
                         setState(() {
                           _selectedStatus = newValue;
-                          task.status = newValue;
+                          task.status = newValue!;
                         });
                       }),
                 ],
@@ -769,16 +819,16 @@ class TaskDetailState extends State //<TaskDetail>
                         return DropdownMenuItem<String>(
                             value: value.id,
                             child: Text(
-                              value.name,
+                              value.name!,
                               overflow: TextOverflow.ellipsis,
                             ));
                       }).toList(),
                       style: _textStyleControls,
                       value: _selectedPriority,
-                      onChanged: (String newValue) {
+                      onChanged: (newValue) {
                         setState(() {
                           _selectedPriority = newValue;
-                          task.priority = newValue;
+                          task.priority = newValue!;
                         });
                       }),
                 ],
@@ -802,16 +852,16 @@ class TaskDetailState extends State //<TaskDetail>
                         return DropdownMenuItem<String>(
                             value: value.id,
                             child: Text(
-                              value.name,
+                              value.name!,
                               overflow: TextOverflow.ellipsis,
                             ));
                       }).toList(),
                       style: _textStyleControls,
                       value: _selectedAction1,
-                      onChanged: (String newValue) {
+                      onChanged: (newValue) {
                         setState(() {
                           _selectedAction1 = newValue;
-                          task.action1 = newValue;
+                          task.action1 = newValue!;
                         });
                       }),
                 ],
@@ -834,16 +884,16 @@ class TaskDetailState extends State //<TaskDetail>
                         return DropdownMenuItem<String>(
                             value: value.id,
                             child: Text(
-                              value.name,
+                              value.name!,
                               overflow: TextOverflow.ellipsis,
                             ));
                       }).toList(),
                       style: _textStyleControls,
                       value: _selectedContext1,
-                      onChanged: (String newValue) {
+                      onChanged: (newValue) {
                         setState(() {
                           _selectedContext1 = newValue;
-                          task.context1 = newValue;
+                          task.context1 = newValue!;
                         });
                       }),
                 ],
@@ -865,16 +915,16 @@ class TaskDetailState extends State //<TaskDetail>
                         return DropdownMenuItem<String>(
                             value: value.id,
                             child: Text(
-                              value.name,
+                              value.name!,
                               overflow: TextOverflow.ellipsis,
                             ));
                       }).toList(),
                       style: _textStyleControls,
                       value: _selectedLocation1,
-                      onChanged: (String newValue) {
+                      onChanged: (newValue) {
                         setState(() {
                           _selectedLocation1 = newValue;
-                          task.location1 = newValue;
+                          task.location1 = newValue!;
                         });
                       }),
                 ],
@@ -896,16 +946,16 @@ class TaskDetailState extends State //<TaskDetail>
                         return DropdownMenuItem<String>(
                             value: value.id,
                             child: Text(
-                              value.name,
+                              value.name!,
                               overflow: TextOverflow.ellipsis,
                             ));
                       }).toList(),
                       style: _textStyleControls,
                       value: _selectedTag1,
-                      onChanged: (String newValue) {
+                      onChanged: (newValue) {
                         setState(() {
                           _selectedTag1 = newValue;
-                          task.tag1 = newValue;
+                          task.tag1 = newValue!;
                         });
                       }),
                 ],
@@ -928,16 +978,16 @@ class TaskDetailState extends State //<TaskDetail>
                         return DropdownMenuItem<String>(
                             value: value.id,
                             child: Text(
-                              value.name,
+                              value.name!,
                               overflow: TextOverflow.ellipsis,
                             ));
                       }).toList(),
                       style: _textStyleControls,
                       value: _selectedGoal1,
-                      onChanged: (String newValue) {
+                      onChanged: (newValue) {
                         setState(() {
                           _selectedGoal1 = newValue;
-                          task.goal1 = newValue;
+                          task.goal1 = newValue!;
                         });
                       }),
                 ],
@@ -985,42 +1035,29 @@ class TaskDetailState extends State //<TaskDetail>
                           ? ""
                           : _selectedGoal1.toString();
                       task.dateDue = _todoDateController.text;
-                      task.dateDue == null
-//                          ? DateFormat('yyyy-MM-dd – kk:mm')
-                          ? DateFormat('yyyy-MM-dd').format(DateTime.now())
-                          : _todoDateController.text;
+//                      task.dateDue == null!
+//                          ? DateFormat('yyyy-MM-dd').format(DateTime.now())
+//                          : _todoDateController.text;
                       task.timeDue = _todoTimeController.text;
                       task.timeDue != ""
                           ? {
                               _nTitle = task.timeDue.toString() +
                                   ' reminder: ' +
-                                  task.task,
+                                  task.task!,
 //                              await notificationPlugin.showNotification(
 //                                  _nTitle, task.note),
                               await notificationPlugin.scheduleNotification(
                                   _nTitle,
-                                  task.note,
-                                  task.dateDue,
-                                  task.timeDue)
+                                  task.note!,
+                                  task.dateDue!,
+                                  task.timeDue!)
                             }
                           : task.isDone = 0;
-//                      if (task.isDone == 0) {
-//                        task.status = "Open";
-//                      } else {
-//                        task.status = "Completed";
-//                      }
-                      //task.lastModified = DateTime.parse(
-                      //DateFormat("yyyy-MM-dd HH:mm:ss")
-                      //.format(DateTime.now()));
 
                       task.lastModified = DateFormat("yyyy-MM-dd HH:mm:ss")
                           .format(DateTime.now());
 
                       var result;
-//<<<<<<< HEAD
-//                      mysqlDBhelper.syncTaskDataToMySql();
-//=======
-//  >>>>>>> bbd660f62817a657ab9f13b93c3fb21d3c8f28aa
 
                       print(task.id);
                       if (task.id != null) {
@@ -1029,25 +1066,25 @@ class TaskDetailState extends State //<TaskDetail>
                         result = dbHelper.insertTask(task);
                       }
 
-                      _showSuccessSnackBar(
-                        Container(
-                          color: Colors.tealAccent[100],
-                          //KK height: 40,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              (Icon(
-                                Icons.thumb_up,
-                                color: Colors.black,
-                              )),
-                              Text(
-                                ' Successfully Saved ',
-                                style: (TextStyle(color: Colors.black)),
-                              )
-                            ],
-                          ),
-                        ),
-                      );
+//                      _showSuccessSnackBar(
+//                        Container(
+//                          color: Colors.tealAccent[100],
+//                          //KK height: 40,
+//                          child: Row(
+//                            mainAxisAlignment: MainAxisAlignment.center,
+//                            children: [
+//                              (Icon(
+//                                Icons.thumb_up,
+//                                color: Colors.black,
+//                              )),
+//                              Text(
+//                                ' Successfully Saved ',
+//                                style: (TextStyle(color: Colors.black)),
+//                              )
+//                            ],
+//                          ),
+//                        ),
+//                      );
                       await Future.delayed(
                           const Duration(milliseconds: 500), () {});
                       Navigator.pop(context);

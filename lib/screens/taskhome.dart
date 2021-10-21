@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_app/model/category.dart';
@@ -26,7 +28,7 @@ DateFormat formatter = DateFormat('yyyy-mm-dd');
 String formattedDate = DateFormat('yyyy-mm-dd').format(currentDate);
 var isChecked = false;
 var isStar = false;
-CustomSettings customSetting;
+CustomSettings? customSetting;
 MySql_DBHelper mysqlDBhelper = MySql_DBHelper();
 
 class TaskHome extends StatefulWidget {
@@ -37,26 +39,24 @@ class TaskHome extends StatefulWidget {
 class TaskHomeState extends State {
   DbHelper helper = DbHelper();
 
-  List<Task> tasklist;
-  List<DisplayTask> displaytasklist;
+  List<Task>? tasklist;
+  List<DisplayTask>? displaytasklist;
   int count = 0;
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
-
 
   @override
   void initState() {
     super.initState();
-    tasklist = List<Task>();
-    displaytasklist = List<DisplayTask>();
+    tasklist = [];
+    displaytasklist = [];
     _getCustomSettings();
+    getData();
   }
 
-
-  _showSuccessSnackBar(message) {
-    var _snackBar = SnackBar(content: message);
-    _globalKey.currentState.showSnackBar(_snackBar);
-  }
-
+//  _showSuccessSnackBar(message) {
+//    var _snackBar = SnackBar(content: message);
+//    _globalKey.currentState.showSnackBar(_snackBar);
+//  }
 
   @override
   Widget build(BuildContext context) {
@@ -99,11 +99,12 @@ class TaskHomeState extends State {
             children: <Widget>[
               Badge(
                 child: Text('View          '),
+//                child: Icon(Icons.home),
                 shape: BadgeShape.square,
                 position: BadgePosition.topEnd(),
                 badgeContent: Text(count.toString(),
                     style: TextStyle(color: Colors.black)),
-                badgeColor: Colors.yellow[200],
+                badgeColor: Colors.yellow[200]!,
               ),
             ],
           ),
@@ -165,19 +166,20 @@ class TaskHomeState extends State {
         return new Dismissible(
             key: new UniqueKey(),
             onDismissed: (direction) {
-              setState(() async {
+//              setState(() async {
+              setState(() {
                 DateTime now = DateTime.now();
                 String formattedDate = DateFormat('yyyy-mm-dd').format(now);
-                this.tasklist[position].isDone = 1;
-                this.tasklist[position].status = "Completed";
-                this.tasklist[position].dateDone = formattedDate;
+                this.tasklist![position].isDone = 1;
+                this.tasklist![position].status = "Completed";
+                this.tasklist![position].dateDone = formattedDate;
                 Scaffold.of(context).showSnackBar(new SnackBar(
                   content: new Text("Task Completed"),
                 ));
 //                _showSuccessSnackBar(
 //                  Container(
 //                    color: Colors.tealAccent[100],
-                    //KK height: 40,
+                //KK height: 40,
 //                    child: Row(
 //                      mainAxisAlignment: MainAxisAlignment.center,
 //                      children: [
@@ -194,9 +196,9 @@ class TaskHomeState extends State {
 //                  ),
 //                );
 //                await Future.delayed(const Duration(milliseconds: 500), () {});
-                dbHelper.updateTask(tasklist[position]);
+                dbHelper.updateTask(tasklist![position]);
                 getData();
-             });
+              });
             },
             background: Container(
               color: Colors.brown,
@@ -210,42 +212,42 @@ class TaskHomeState extends State {
                     visualDensity: VisualDensity(horizontal: -4),
                     leading: Checkbox(
                       checkColor: Colors.white,
-                      value: (this.tasklist[position].isDone == 1),
+                      value: (this.tasklist![position].isDone == 1),
                       onChanged: (value) {
                         setState(() {
-                          isChecked = value;
+                          isChecked = value!;
                           DateTime now = DateTime.now();
                           String formattedDate =
                               DateFormat('yyyy-MM-dd').format(now);
                           if (value == true) {
-                            this.tasklist[position].isDone = 1;
-                            this.tasklist[position].status = "Completed";
-                            this.tasklist[position].dateDone = formattedDate;
-                            dbHelper.updateTask(tasklist[position]);
+                            this.tasklist![position].isDone = 1;
+                            this.tasklist![position].status = "Completed";
+                            this.tasklist![position].dateDone = formattedDate;
+                            dbHelper.updateTask(tasklist![position]);
                           } else {
-                            this.tasklist[position].isDone = 0;
-                            this.tasklist[position].status = "Open";
-                            this.tasklist[position].dateDone = '';
-                            dbHelper.updateTask(tasklist[position]);
+                            this.tasklist![position].isDone = 0;
+                            this.tasklist![position].status = "Open";
+                            this.tasklist![position].dateDone = '';
+                            dbHelper.updateTask(tasklist![position]);
                           }
                         });
                       },
                     ),
                     trailing: IconButton(
                       icon: Icon(Icons.lightbulb,
-                          color: (this.tasklist[position].isStar == 0)
+                          color: (this.tasklist![position].isStar == 0)
                               ? Colors.black12
                               : Colors.green),
                       onPressed: () {
                         setState(() {
-                          if (this.tasklist[position].isStar == 1) {
-                            this.tasklist[position].isStar = 0;
+                          if (this.tasklist![position].isStar == 1) {
+                            this.tasklist![position].isStar = 0;
                             Icon(Icons.lightbulb, color: Colors.black38);
-                            dbHelper.updateTask(tasklist[position]);
+                            dbHelper.updateTask(tasklist![position]);
                           } else {
-                            this.tasklist[position].isStar = 1;
+                            this.tasklist![position].isStar = 1;
                             Icon(Icons.lightbulb, color: Colors.amber[800]);
-                            dbHelper.updateTask(tasklist[position]);
+                            dbHelper.updateTask(tasklist![position]);
                           }
                           getData();
                         });
@@ -258,7 +260,7 @@ class TaskHomeState extends State {
                             child: Padding(
                                 padding: const EdgeInsets.only(right: 2),
                                 child: Text(
-                                  this.tasklist[position].main1.toString(),
+                                  this.tasklist![position].main1.toString(),
 //                                    overflow: TextOverflow.ellipsis)
                                 ))),
                       ],
@@ -269,7 +271,7 @@ class TaskHomeState extends State {
                             child: Padding(
                                 padding: const EdgeInsets.only(right: 2),
                                 child: Text(
-                                  this.tasklist[position].sec1,
+                                  this.tasklist![position].sec1!,
 //                                    overflow: TextOverflow.ellipsis
                                 ))),
                         SizedBox(width: 10),
@@ -277,7 +279,7 @@ class TaskHomeState extends State {
                             child: Padding(
                                 padding: const EdgeInsets.only(right: 2),
                                 child: Text(
-                                  this.tasklist[position].sec2,
+                                  this.tasklist![position].sec2!,
 //                                    overflow: TextOverflow.ellipsis
                                 ))),
                         SizedBox(width: 10),
@@ -285,7 +287,7 @@ class TaskHomeState extends State {
                             child: Padding(
                                 padding: const EdgeInsets.only(right: 2),
                                 child: Text(
-                                  this.tasklist[position].sec3,
+                                  this.tasklist![position].sec3!,
 //                                    overflow: TextOverflow.ellipsis
                                 ))),
                       ],
@@ -294,7 +296,7 @@ class TaskHomeState extends State {
                     dense: true,
                     contentPadding: EdgeInsets.symmetric(horizontal: 0.0),
                     onTap: () {
-                      navigateToDetail(this.tasklist[position]);
+                      navigateToDetail(this.tasklist![position]);
                     },
                     autofocus: true,
                   )),
@@ -304,30 +306,32 @@ class TaskHomeState extends State {
   }
 
   void getData() {
-    int _sortField1 = globals.sortField1 != null ? globals.sortField1 : 12;
-    int _sortField2 = globals.sortField2 != null ? globals.sortField2 : 2;
-    int _sortField3 = globals.sortField3 != null ? globals.sortField3 : 3;
-    int _sortOrder1 = globals.sortOrder1 != null ? globals.sortOrder1 : 1;
-    int _sortOrder2 = globals.sortOrder2 != null ? globals.sortOrder2 : 0;
-    int _sortOrder3 = globals.sortOrder3 != null ? globals.sortOrder3 : 0;
+    int? _sortField1 = globals.sortField1 != null ? globals.sortField1 : 12;
+    int? _sortField2 = globals.sortField2 != null ? globals.sortField2 : 2;
+    int? _sortField3 = globals.sortField3 != null ? globals.sortField3 : 3;
+    int? _sortOrder1 = globals.sortOrder1 != null ? globals.sortOrder1 : 1;
+    int? _sortOrder2 = globals.sortOrder2 != null ? globals.sortOrder2 : 0;
+    int? _sortOrder3 = globals.sortOrder3 != null ? globals.sortOrder3 : 0;
 
-    int _filterDateDue =
-        globals.filterDateDue != null ? globals.filterDateDue : 7;
-    int _filterIsStar = globals.filterIsStar != null ? globals.filterIsStar : 0;
-    int _filterIsDone = globals.filterIsDone != null ? globals.filterIsDone : 0;
+    int? _filterDateDue =
+        globals.filterDateDue != 0 ? globals.filterDateDue : 7;
+    int? _filterIsStar =
+        globals.filterIsStar != "null" ? globals.filterIsStar : 0;
+    int? _filterIsDone =
+        globals.filterIsDone != "null" ? globals.filterIsDone : 0;
 
     var countDone = 0;
     final dbFuture = helper.initializeDb();
 
     dbFuture.then((result) {
       final tasksFuture = helper.getTasksSort(
-        getSortColumn(_sortField1),
-        getOrderColumn(_sortOrder1),
-        getSortColumn(_sortField2),
-        getOrderColumn(_sortOrder2),
-        getSortColumn(_sortField3),
-        getOrderColumn(_sortOrder3),
-        getDateDueColumn(_filterDateDue),
+        getSortColumn(_sortField1!),
+        getOrderColumn(_sortOrder1!),
+        getSortColumn(_sortField2!),
+        getOrderColumn(_sortOrder2!),
+        getSortColumn(_sortField3!),
+        getOrderColumn(_sortOrder3!),
+        getDateDueColumn(_filterDateDue!),
         globals.filterStatus.toString(),
         globals.filterPriority.toString(),
         globals.filterCategory.toString(),
@@ -339,10 +343,9 @@ class TaskHomeState extends State {
         globals.filterIsStar,
         globals.filterIsDone,
       );
-      // final tasksFuture = helper.getTasksFromLastFewDays();
       tasksFuture.then((result) {
-        List<Task> taskList = List<Task>();
-        List<DisplayTask> displaytaskList = List<DisplayTask>();
+        List<Task> taskList = [];
+        List<DisplayTask> displayTaskList= [];
         count = result.length;
         for (int i = 0; i < count; i++) {
           countDone = countDone + 1;
@@ -629,7 +632,8 @@ class TaskHomeState extends State {
   }
 
   void navigateToDetail(Task task) async {
-    bool result = await Navigator.push(
+//    bool result =
+    await Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => TaskDetail(task)),
     );
@@ -643,66 +647,68 @@ class TaskHomeState extends State {
     var _customSetting = await helper.getCustomSettings();
     if (_customSetting.length > 0) {
       customSetting = CustomSettings.fromObject(_customSetting[0]);
-      if (customSetting != null && customSetting.id != null) {
-        if (customSetting.sortField1 != "") {
+      if (customSetting != null && customSetting!.id != null) {
+        if (customSetting!.sortField1 != "") {
           globals.sortField1 = int.parse(
-              customSetting.sortField1); //convert it to session variables
+              customSetting!.sortField1!); //convert it to session variables
         }
-        if (customSetting.sortField2 != "") {
-          globals.sortField2 = int.parse(customSetting.sortField2);
+        if (customSetting!.sortField2 != "") {
+          globals.sortField2 = int.parse(customSetting!.sortField2!);
         }
-        if (customSetting.sortField3 != "") {
-          globals.sortField3 = int.parse(customSetting.sortField3);
+        if (customSetting!.sortField3 != "") {
+          globals.sortField3 = int.parse(customSetting!.sortField3!);
         }
-        if (customSetting.showMain1 != "") {
-          globals.showMain1 = int.parse(customSetting.showMain1);
+        if (customSetting!.showMain1 != "") {
+          globals.showMain1 = int.parse(customSetting!.showMain1!);
         }
-        if (customSetting.showMain2 != "") {
-          globals.showMain2 = int.parse(customSetting.showMain2);
+        if (customSetting!.showMain2 != "") {
+          globals.showMain2 = int.parse(customSetting!.showMain2!);
         }
-        if (customSetting.showSec1 != "") {
-          globals.showSec1 = int.parse(customSetting.showSec1);
+        if (customSetting!.showSec1 != "") {
+          globals.showSec1 = int.parse(customSetting!.showSec1!);
         }
-        if (customSetting.showSec2 != "") {
-          globals.showSec2 = int.parse(customSetting.showSec2);
+        if (customSetting!.showSec2 != "") {
+          globals.showSec2 = int.parse(customSetting!.showSec2!);
         }
-        if (customSetting.showSec3 != "") {
-          globals.showSec3 = int.parse(customSetting.showSec3);
+        if (customSetting!.showSec3 != "") {
+          globals.showSec3 = int.parse(customSetting!.showSec3!);
         }
-        if (customSetting.filterIsStar == true) {
+        if (customSetting!.filterIsStar == 1) {
           globals.filterIsStar = 1;
         } else {
           globals.filterIsStar = 0;
         }
-        if (customSetting.filterIsDone == true) {
+        if (customSetting!.filterIsDone == 1) {
           globals.filterIsDone = 1;
+        } else {
+          globals.filterIsDone = 0;
         }
-        if (customSetting.filterDateDue != "") {
-          globals.filterDateDue = int.parse(customSetting.filterDateDue);
+        if (customSetting!.filterDateDue != "") {
+          globals.filterDateDue = int.parse(customSetting!.filterDateDue!);
         }
-        globals.filterStatus = customSetting.filterStatus != ""
-            ? int.parse(customSetting.filterStatus)
+        globals.filterStatus = customSetting!.filterStatus != ""
+            ? int.parse(customSetting!.filterStatus!)
             : 0;
-        globals.filterPriority = customSetting.filterPriority != ""
-            ? int.parse(customSetting.filterPriority)
+        globals.filterPriority = customSetting!.filterPriority != ""
+            ? int.parse(customSetting!.filterPriority!)
             : 0;
-        globals.filterCategory = customSetting.filterCategory != ""
-            ? int.parse(customSetting.filterCategory)
+        globals.filterCategory = customSetting!.filterCategory != ""
+            ? int.parse(customSetting!.filterCategory!)
             : 0;
-        globals.filterLocation = customSetting.filterLocation != ""
-            ? int.parse(customSetting.filterLocation)
+        globals.filterLocation = customSetting!.filterLocation != ""
+            ? int.parse(customSetting!.filterLocation!)
             : 0;
-        globals.filterTag = customSetting.filterTag != ""
-            ? int.parse(customSetting.filterTag)
+        globals.filterTag = customSetting!.filterTag != ""
+            ? int.parse(customSetting!.filterTag!)
             : 0;
-        globals.filterGoal = customSetting.filterGoal != ""
-            ? int.parse(customSetting.filterGoal)
+        globals.filterGoal = customSetting!.filterGoal != ""
+            ? int.parse(customSetting!.filterGoal!)
             : 0;
-        globals.filterContext = customSetting.filterContext != ""
-            ? int.parse(customSetting.filterContext)
+        globals.filterContext = customSetting!.filterContext != ""
+            ? int.parse(customSetting!.filterContext!)
             : 0;
-        globals.filterAction = customSetting.filterAction != ""
-            ? int.parse(customSetting.filterAction)
+        globals.filterAction = customSetting!.filterAction != ""
+            ? int.parse(customSetting!.filterAction!)
             : 0;
       }
     }
@@ -714,7 +720,7 @@ class TaskHomeState extends State {
   }
 
 //Sort column names are defined here but if there is any changes in column name update here
-  String getSortColumn(int column) {
+  String? getSortColumn(int column) {
     switch (column) {
       case 0:
         return "task";
@@ -766,31 +772,31 @@ class TaskHomeState extends State {
   }
 
   //Sort column names are defined here but if there is any changes in column name update here
-  String getDateDueColumn(int column) {
+  String? getDateDueColumn(int column) {
     switch (column) {
       case 0:
-        return "All Tasks";
-        break;
-      case 1:
         return "Today";
         break;
-      case 2:
+      case 1:
         return "Tomorrow";
         break;
-      case 3:
+      case 2:
         return "Next 7 days";
         break;
-      case 4:
+      case 3:
         return "Next 30 days";
         break;
-      case 5:
+      case 4:
         return "Any Due Date";
         break;
-      case 6:
+      case 5:
         return "No Due Date";
         break;
-      case 7:
+      case 6:
         return "Overdues Only";
+        break;
+      case 7:
+        return "All Tasks";
         break;
 
       default:
@@ -800,7 +806,7 @@ class TaskHomeState extends State {
   }
 
   //Sort column names are defined here but if there is any changes in column name update here
-  String getTimeDueColumn(int column) {
+  String? getTimeDueColumn(int column) {
     switch (column) {
       case 0:
         return "Today";
@@ -834,7 +840,7 @@ class TaskHomeState extends State {
   }
 
 //Sort column names are defined here but if there is any changes in column name update here
-  String getOrderColumn(int column) {
+  String? getOrderColumn(int column) {
     switch (column) {
       case 0:
         return "ASC";

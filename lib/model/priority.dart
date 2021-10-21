@@ -1,7 +1,7 @@
 class Priority {
-  int id;
-  String name;
-  String description;
+  int? id;
+  String? name;
+  String? description;
 
   priorityMap() {
     var mapping = Map<String, dynamic>();

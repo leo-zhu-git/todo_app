@@ -1,7 +1,7 @@
 class Goal1{
-  int id;
-  String name;
-  String description;
+  int? id;
+  String? name;
+  String? description;
 
   goal1Map() {
     var mapping = Map<String, dynamic>();

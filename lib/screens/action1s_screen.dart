@@ -21,7 +21,7 @@ class _Action1sScreenState extends State<Action1sScreen> {
   var _editAction1NameController = TextEditingController();
   var _editAction1DescriptionController = TextEditingController();
 
-  List<Action1> _actionList = List<Action1>();
+  List<Action1> _actionList = [];
 
   var action1;
 
@@ -34,7 +34,7 @@ class _Action1sScreenState extends State<Action1sScreen> {
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
 
   getAllActions() async {
-    _actionList = List<Action1>();
+    _actionList = [];
     var action = await _action1Service.getAction1s();
     action.forEach((action) {
       setState(() {
@@ -87,28 +87,28 @@ class _Action1sScreenState extends State<Action1sScreen> {
                   onPressed: () {
                     _action1.name = _action1NameController.text;
                     _action1.description = _action1DescriptionController.text;
-                    _action1.id = null;
+//                    _action1.id = null;
 
                     var result = _action1Service.insertAction1s(_action1);
                     Navigator.pop(context);
                     getAllActions();
-                    _showSuccessSnackBar(Container(
-                      color: Colors.tealAccent[100],
-                      height: 40,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          (Icon(
-                            Icons.thumb_up,
-                            color: Colors.black,
-                          )),
-                          Text(
-                            ' Added ',
-                            style: (TextStyle(color: Colors.black)),
-                          )
-                        ],
-                      ),
-                    ));
+//                    _showSuccessSnackBar(Container(
+//                      color: Colors.tealAccent[100],
+//                      height: 40,
+//                      child: Row(
+//                        mainAxisAlignment: MainAxisAlignment.center,
+//                        children: [
+//                          (Icon(
+//                            Icons.thumb_up,
+//                            color: Colors.black,
+//                          )),
+//                          Text(
+//                            ' Added ',
+//                            style: (TextStyle(color: Colors.black)),
+//                          )
+//                        ],
+//                      ),
+//                    ));
                   },
                   child: Text(
                     'Save',
@@ -173,25 +173,25 @@ class _Action1sScreenState extends State<Action1sScreen> {
                     if (result > 0) {
                       Navigator.pop(context);
                       getAllActions();
-                      _showSuccessSnackBar(
-                        Container(
-                          color: Colors.tealAccent[100],
-                          height: 40,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              (Icon(
-                                Icons.thumb_up,
-                                color: Colors.black,
-                              )),
-                              Text(
-                                ' Updated ',
-                                style: (TextStyle(color: Colors.black)),
-                              )
-                            ],
-                          ),
-                        ),
-                      );
+//                      _showSuccessSnackBar(
+//                        Container(
+//                          color: Colors.tealAccent[100],
+//                          height: 40,
+//                          child: Row(
+//                            mainAxisAlignment: MainAxisAlignment.center,
+//                           children: [
+//                              (Icon(
+//                                Icons.thumb_up,
+//                                color: Colors.black,
+//                              )),
+//                              Text(
+//                                ' Updated ',
+//                                style: (TextStyle(color: Colors.black)),
+//                              )
+//                            ],
+//                          ),
+//                        ),
+//                      );
                     }
                   },
                   child: Text(
@@ -247,25 +247,25 @@ class _Action1sScreenState extends State<Action1sScreen> {
                     if (result > 0) {
                       Navigator.pop(context);
                       getAllActions();
-                      _showSuccessSnackBar(
-                        Container(
-                          color: Colors.tealAccent[100],
-                          height: 40,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              (Icon(
-                                Icons.thumb_up,
-                                color: Colors.black,
-                              )),
-                              Text(
-                                ' Deleted ',
-                                style: (TextStyle(color: Colors.black)),
-                              )
-                            ],
-                          ),
-                        ),
-                      );
+//                      _showSuccessSnackBar(
+//                        Container(
+//                          color: Colors.tealAccent[100],
+//                          height: 40,
+//                          child: Row(
+//                            mainAxisAlignment: MainAxisAlignment.center,
+//                            children: [
+//                              (Icon(
+//                                Icons.thumb_up,
+//                                color: Colors.black,
+//                              )),
+//                              Text(
+//                                ' Deleted ',
+//                                style: (TextStyle(color: Colors.black)),
+//                              )
+//                            ],
+//                          ),
+//                        ),
+//                      );
                     }
                   },
                   style: ElevatedButton.styleFrom(
@@ -281,10 +281,10 @@ class _Action1sScreenState extends State<Action1sScreen> {
         });
   }
 
-  _showSuccessSnackBar(message) {
-    var _snackBar = SnackBar(content: message);
-    _globalKey.currentState.showSnackBar(_snackBar);
-  }
+//  _showSuccessSnackBar(message) {
+//    var _snackBar = SnackBar(content: message);
+//    _globalKey.currentState.showSnackBar(_snackBar);
+//  }
 
   @override
   Widget build(BuildContext context) {
@@ -304,7 +304,7 @@ class _Action1sScreenState extends State<Action1sScreen> {
                   position: BadgePosition.topEnd(),
                   badgeContent: Text(_actionList.length.toString(),
                       style: TextStyle(color: Colors.black)),
-                  badgeColor: Colors.orange[100],
+//                  badgeColor: Colors.orange[100],
                 ),
               ],
             ),
@@ -329,7 +329,7 @@ class _Action1sScreenState extends State<Action1sScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Flexible(
-                      child: Text(_actionList[index].name,
+                      child: Text(_actionList[index].name!,
                           overflow: TextOverflow.ellipsis),
                     ),
                     IconButton(

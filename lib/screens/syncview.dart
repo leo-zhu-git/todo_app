@@ -9,7 +9,7 @@ class SyncView extends StatefulWidget {
 }
 
 class _SyncViewState extends State<SyncView> {
-  GlobalKey<ScaffoldState> _key;
+  late GlobalKey<ScaffoldState> _key;
 
   @override
   void initState() {

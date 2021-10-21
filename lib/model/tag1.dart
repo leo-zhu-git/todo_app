@@ -1,7 +1,7 @@
 class Tag1{
-  int id;
-  String name;
-  String description;
+  int? id;
+  String? name;
+  String? description;
 
   tag1Map() {
     var mapping = Map<String, dynamic>();

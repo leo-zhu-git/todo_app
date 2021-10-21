@@ -12,7 +12,7 @@ import 'package:todo_app/model/globals.dart' as globals;
 
 DbHelper helper = DbHelper();
 String _selectedpriority = "";
-String _searchText = "";
+String? _searchText = "";
 TextStyle _textStyleControls = TextStyle(
     fontSize: 12.0, fontWeight: FontWeight.normal, color: Colors.black);
 
@@ -31,20 +31,20 @@ class TaskSearchState extends State {
   List<CustomDropdownItem> _location1s = [];
   List<CustomDropdownItem> _tag1s = [];
   List<CustomDropdownItem> _goal1s = [];
-  List<Task> tasklist;
+  List<Task> tasklist = [];
   int count = 0;
   TextEditingController searchController = TextEditingController();
-  var _selectedStatus = null;
-  var _selectedPriority = null;
-  var _selectedCategory = null;
-  var _selectedAction1 = null;
-  var _selectedContext1 = null;
-  var _selectedLocation1 = null;
-  var _selectedTag1 = null;
-  var _selectedGoal1 = null;
-  var isChecked = false;
-  bool _showIsStar = true;
-  bool _showIsDone = true;
+  String? _selectedStatus;
+  String? _selectedPriority;
+  String? _selectedCategory;
+  String? _selectedAction1;
+  String? _selectedContext1;
+  String? _selectedLocation1;
+  String? _selectedTag1;
+  String? _selectedGoal1;
+  int? isChecked = 0;
+  int? _showIsStar = 1;
+  int? _showIsDone = 1;
 //  var _selectedGoal1 = "";
 
   @override
@@ -66,7 +66,7 @@ class TaskSearchState extends State {
     var statuses = await helper.getStatuses();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
-    cus.id = null;
+//    cus.id = null;
     cus.name = "-- Select Status --";
     _statuses.add(cus);
     statuses.forEach((status) {
@@ -90,7 +90,7 @@ class TaskSearchState extends State {
     var priorities = await helper.getPriorities();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
-    cus.id = null;
+//    cus.id = null;
     cus.name = "-- Select Priority --";
     _priorities.add(cus);
     priorities.forEach((priority) {
@@ -114,7 +114,7 @@ class TaskSearchState extends State {
     var categories = await helper.getCategories();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
-    cus.id = null;
+//    cus.id = null;
     cus.name = "-- Select Category --";
     _categories.add(cus);
     categories.forEach((category) {
@@ -138,7 +138,7 @@ class TaskSearchState extends State {
     var action1s = await helper.getAction1s();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
-    cus.id = null;
+//    cus.id = null;
     cus.name = "--Select Action--             ";
     _action1s.add(cus);
     action1s.forEach((action1) {
@@ -162,7 +162,7 @@ class TaskSearchState extends State {
     var context1s = await helper.getContext1s();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
-    cus.id = null;
+//    cus.id = null;
     cus.name = "--Select Context--            ";
     _context1s.add(cus);
     context1s.forEach((context1) {
@@ -184,7 +184,7 @@ class TaskSearchState extends State {
     var location1s = await helper.getLocation1s();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
-    cus.id = null;
+//    cus.id = null;
     cus.name = "--Select Location--           ";
     _location1s.add(cus);
     location1s.forEach((location1) {
@@ -208,7 +208,7 @@ class TaskSearchState extends State {
     var tag1s = await helper.getTag1s();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
-    cus.id = null;
+//    cus.id = null;
     cus.name = "--Select Tag--                ";
     _tag1s.add(cus);
     tag1s.forEach((tag1) {
@@ -231,7 +231,7 @@ class TaskSearchState extends State {
     var goal1s = await helper.getGoal1s();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
-    cus.id = null;
+//    cus.id = null;
     cus.name = "--Select Goal --                ";
     _goal1s.add(cus);
     goal1s.forEach((goal1) {
@@ -254,12 +254,13 @@ class TaskSearchState extends State {
 
   @override
   Widget build(BuildContext context) {
-    TextStyle textStyle = Theme.of(context).textTheme.headline6;
+//    TextStyle textStyle = Theme.of(context).textTheme.headline6;
     return Scaffold(
       backgroundColor: Colors.teal[50],
       appBar: AppBar(
 //        backgroundColor: Colors.brown[900],
-        backgroundColor: Colors.lightGreen[800],
+//        backgroundColor: Colors.lightGreen[800],
+        backgroundColor: Colors.teal[800],
         automaticallyImplyLeading: true,
         title: Center(
           child: Container(
@@ -273,7 +274,7 @@ class TaskSearchState extends State {
                   position: BadgePosition.topEnd(),
                   badgeContent: Text(count.toString(),
                       style: TextStyle(color: Colors.black)),
-                  badgeColor: Colors.green[100],
+                  badgeColor: Colors.green[100]!,
                 ),
               ],
             ),
@@ -288,7 +289,7 @@ class TaskSearchState extends State {
                 EdgeInsets.only(top: 6.0, left: 4.0, right: 4.0, bottom: 1.0),
             child: TextField(
               controller: searchController,
-              style: textStyle,
+//              style: textStyle,
               onChanged: (value) {
                 searchData(
                     value,
@@ -301,10 +302,10 @@ class TaskSearchState extends State {
                     _selectedTag1,
                     _selectedGoal1,
                     _showIsStar,
-                    true);
+                    1);
               },
               decoration: InputDecoration(
-                labelStyle: textStyle,
+//                labelStyle: textStyle,
                 fillColor: Colors.green[100],
                 border: InputBorder.none,
                 filled: true, // dont forget this line
@@ -338,10 +339,10 @@ class TaskSearchState extends State {
                             Text('Include Completed Tasks:',
                                 style: _textStyleControls),
                             Checkbox(
-                              value: _showIsDone,
+                              value: (_showIsDone == 0) ? false : true,
                               onChanged: (value) {
                                 setState(() {
-                                  _showIsDone = value;
+                                  _showIsDone = (value! == false) ? 0 : 1;
                                   searchData(
                                       _searchText,
                                       _selectedStatus,
@@ -371,19 +372,19 @@ class TaskSearchState extends State {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            DropdownButton<String>(
+                            DropdownButton<String?>(
                                 items:
                                     _statuses.map((CustomDropdownItem value) {
                                   return DropdownMenuItem<String>(
                                       value: value.id,
                                       child: Text(
-                                        value.name,
+                                        value.name!,
                                         overflow: TextOverflow.ellipsis,
                                       ));
                                 }).toList(),
                                 style: _textStyleControls,
                                 value: _selectedStatus,
-                                onChanged: (String newValue) {
+                                onChanged: (newValue) {
                                   setState(() {
                                     _selectedStatus = newValue;
                                     searchData(
@@ -413,19 +414,19 @@ class TaskSearchState extends State {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            DropdownButton<String>(
+                            DropdownButton<String?>(
                                 items:
                                     _priorities.map((CustomDropdownItem value) {
                                   return DropdownMenuItem<String>(
                                       value: value.id,
                                       child: Text(
-                                        value.name,
+                                        value.name!,
                                         overflow: TextOverflow.ellipsis,
                                       ));
                                 }).toList(),
                                 style: _textStyleControls,
                                 value: _selectedPriority,
-                                onChanged: (String newValue) {
+                                onChanged: (newValue) {
                                   setState(() {
                                     _selectedPriority = newValue;
                                     searchData(
@@ -455,19 +456,19 @@ class TaskSearchState extends State {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            DropdownButton<String>(
+                            DropdownButton<String?>(
                                 items:
                                     _categories.map((CustomDropdownItem value) {
                                   return DropdownMenuItem<String>(
                                       value: value.id,
                                       child: Text(
-                                        value.name,
+                                        value.name!,
                                         overflow: TextOverflow.ellipsis,
                                       ));
                                 }).toList(),
                                 style: _textStyleControls,
                                 value: _selectedCategory,
-                                onChanged: (String newValue) {
+                                onChanged: (newValue) {
                                   setState(() {
                                     _selectedCategory = newValue;
                                     searchData(
@@ -498,11 +499,12 @@ class TaskSearchState extends State {
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              DropdownButton<String>(
+                              DropdownButton<String?>(
                                 items:
                                     _action1s.map((CustomDropdownItem value) {
                                   return DropdownMenuItem<String>(
-                                      value: value.id, child: Text(value.name));
+                                      value: value.id,
+                                      child: Text(value.name!));
                                 }).toList(),
                                 style: _textStyleControls,
                                 value: _selectedAction1,
@@ -537,10 +539,10 @@ class TaskSearchState extends State {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            DropdownButton<String>(
+                            DropdownButton<String?>(
                               items: _context1s.map((CustomDropdownItem value) {
                                 return DropdownMenuItem<String>(
-                                    value: value.id, child: Text(value.name));
+                                    value: value.id, child: Text(value.name!));
                               }).toList(),
                               style: _textStyleControls,
                               value: _selectedContext1,
@@ -574,11 +576,11 @@ class TaskSearchState extends State {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            DropdownButton<String>(
+                            DropdownButton<String?>(
                               items:
                                   _location1s.map((CustomDropdownItem value) {
                                 return DropdownMenuItem<String>(
-                                    value: value.id, child: Text(value.name));
+                                    value: value.id, child: Text(value.name!));
                               }).toList(),
                               style: _textStyleControls,
                               value: _selectedLocation1,
@@ -612,10 +614,10 @@ class TaskSearchState extends State {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            DropdownButton<String>(
+                            DropdownButton<String?>(
                               items: _tag1s.map((CustomDropdownItem value) {
                                 return DropdownMenuItem<String>(
-                                    value: value.id, child: Text(value.name));
+                                    value: value.id, child: Text(value.name!));
                               }).toList(),
                               style: _textStyleControls,
                               value: _selectedTag1,
@@ -649,10 +651,10 @@ class TaskSearchState extends State {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            DropdownButton<String>(
+                            DropdownButton<String?>(
                               items: _goal1s.map((CustomDropdownItem value) {
                                 return DropdownMenuItem<String>(
-                                    value: value.id, child: Text(value.name));
+                                    value: value.id, child: Text(value.name!));
                               }).toList(),
                               style: _textStyleControls,
                               value: _selectedGoal1,
@@ -694,7 +696,7 @@ class TaskSearchState extends State {
         height: 28.0,
         child: BottomAppBar(
           // color: Color.fromRGBO(58, 66, 86, 1.0),
-          color: Colors.lightGreen[800],
+          color: Colors.teal[800],
 //          color: Colors.brown[900],
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -761,7 +763,7 @@ class TaskSearchState extends State {
                       value: (this.tasklist[position].isDone == 1),
                       onChanged: (value) {
                         setState(() {
-                          isChecked = value;
+                          isChecked = (value! == false) ? 0 : 1;
                           DateTime now = DateTime.now();
                           String formattedDate =
                               DateFormat('yyyy-MM-dd').format(now);
@@ -808,7 +810,7 @@ class TaskSearchState extends State {
                                 child: Text(
                                     this.tasklist[position].task == null
                                         ? ""
-                                        : this.tasklist[position].task,
+                                        : this.tasklist[position].task!,
                                     overflow: TextOverflow.ellipsis))),
                       ],
                     ),
@@ -845,30 +847,32 @@ class TaskSearchState extends State {
   }
 
   void getData() {
-    int _sortField1 = globals.sortField1 != null ? globals.sortField1 : 12;
-    int _sortField2 = globals.sortField2 != null ? globals.sortField2 : 2;
-    int _sortField3 = globals.sortField3 != null ? globals.sortField3 : 3;
-    int _sortOrder1 = globals.sortOrder1 != null ? globals.sortOrder1 : 1;
-    int _sortOrder2 = globals.sortOrder2 != null ? globals.sortOrder2 : 0;
-    int _sortOrder3 = globals.sortOrder3 != null ? globals.sortOrder3 : 0;
+    int? _sortField1 = globals.sortField1 != null ? globals.sortField1 : 12;
+    int? _sortField2 = globals.sortField2 != null ? globals.sortField2 : 2;
+    int? _sortField3 = globals.sortField3 != null ? globals.sortField3 : 3;
+    int? _sortOrder1 = globals.sortOrder1 != null ? globals.sortOrder1 : 1;
+    int? _sortOrder2 = globals.sortOrder2 != null ? globals.sortOrder2 : 0;
+    int? _sortOrder3 = globals.sortOrder3 != null ? globals.sortOrder3 : 0;
 
-    int _filterDateDue =
+    int? _filterDateDue =
         globals.filterDateDue != null ? globals.filterDateDue : 7;
-    int _filterIsStar = globals.filterIsStar != null ? globals.filterIsStar : 0;
-    int _filterIsDone = globals.filterIsDone != null ? globals.filterIsDone : 0;
+    int? _filterIsStar =
+        globals.filterIsStar != null ? globals.filterIsStar : 0;
+    int? _filterIsDone =
+        globals.filterIsDone != null ? globals.filterIsDone : 0;
 
     var countDone = 0;
     final dbFuture = helper.initializeDb();
 
     dbFuture.then((result) {
       final tasksFuture = helper.getTasksSort(
-        getSortColumn(_sortField1),
-        getOrderColumn(_sortOrder1),
-        getSortColumn(_sortField2),
-        getOrderColumn(_sortOrder2),
-        getSortColumn(_sortField3),
-        getOrderColumn(_sortOrder3),
-        getDateDueColumn(_filterDateDue),
+        getSortColumn(_sortField1!),
+        getOrderColumn(_sortOrder1!),
+        getSortColumn(_sortField2!),
+        getOrderColumn(_sortOrder2!),
+        getSortColumn(_sortField3!),
+        getOrderColumn(_sortOrder3!),
+        getDateDueColumn(_filterDateDue!),
         globals.filterStatus.toString(),
         globals.filterPriority.toString(),
         globals.filterCategory.toString(),
@@ -877,13 +881,12 @@ class TaskSearchState extends State {
         globals.filterLocation.toString(),
         globals.filterTag.toString(),
         globals.filterGoal.toString(),
-        globals.filterIsStar,
-        globals.filterIsDone,
+        globals.filterIsStar!,
+        globals.filterIsDone!,
       );
-      // final tasksFuture = helper.getTasksFromLastFewDays();
       tasksFuture.then((result) {
-        List<Task> taskList = List<Task>();
-        List<DisplayTask> displaytaskList = List<DisplayTask>();
+        List<Task> taskList = [];
+        List<DisplayTask> displaytaskList = [];
         count = result.length;
         for (int i = 0; i < count; i++) {
           countDone = countDone + 1;
@@ -975,7 +978,7 @@ class TaskSearchState extends State {
   }
 
   void navigateToDetail(Task task) async {
-    bool result = await Navigator.push(
+  await Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => TaskDetail(task)),
     );
@@ -983,35 +986,34 @@ class TaskSearchState extends State {
   }
 
   void searchData(
-      String searchText,
-      String status,
-      String priority,
-      String category,
-      String action1,
-      String context1,
-      String location1,
-      String tag1,
-      String goal1,
-      bool showIsStar,
-      bool showIsDone) {
-    if (searchText.trim() != "" || searchText.trim() == "") {
+      String? searchText,
+      String? status,
+      String? priority,
+      String? category,
+      String? action1,
+      String? context1,
+      String? location1,
+      String? tag1,
+      String? goal1,
+      int? showIsStar,
+      int? showIsDone) {
+    if (searchText?.trim() != "" || searchText?.trim() == "") {
       final dbFuture = helper.initializeDb();
       dbFuture.then((result) {
-//      final tasksFuture = helper.searchTasks(searchText, priority, category, action1, context1, location1, tag1, goal1);
         final tasksFuture = helper.searchTasks(
-            searchText,
-            status,
-            priority,
-            category,
-            action1,
-            context1,
-            location1,
-            tag1,
-            goal1,
-            showIsStar,
-            showIsDone);
+            searchText!,
+            status.toString(),
+            priority.toString(),
+            category.toString(),
+            action1.toString(),
+            context1.toString(),
+            location1.toString(),
+            tag1.toString(),
+            goal1.toString(),
+            showIsStar!,
+            showIsDone!);
         tasksFuture.then((result) {
-          List<Task> taskList = List<Task>();
+          List<Task> taskList = [];
           count = result.length;
           for (int i = 0; i < count; i++) {
             taskList.add(Task.fromObject(result[i]));
@@ -1269,7 +1271,7 @@ class TaskSearchState extends State {
         });
       });
     } else {
-      List<Task> taskList = List<Task>();
+      List<Task> taskList = [];
       count = 0;
       setState(() {
         tasklist = taskList;
@@ -1283,66 +1285,66 @@ class TaskSearchState extends State {
     var _customSetting = await helper.getCustomSettings();
     if (_customSetting.length > 0) {
       customSetting = CustomSettings.fromObject(_customSetting[0]);
-      if (customSetting != null && customSetting.id != null) {
-        if (customSetting.sortField1 != "") {
+      if (customSetting != null && customSetting!.id != null) {
+        if (customSetting!.sortField1 != "") {
           globals.sortField1 = int.parse(
-              customSetting.sortField1); //convert it to session variables
+              customSetting!.sortField1!); //convert it to session variables
         }
-        if (customSetting.sortField2 != "") {
-          globals.sortField2 = int.parse(customSetting.sortField2);
+        if (customSetting!.sortField2 != "") {
+          globals.sortField2 = int.parse(customSetting!.sortField2!);
         }
-        if (customSetting.sortField3 != "") {
-          globals.sortField3 = int.parse(customSetting.sortField3);
+        if (customSetting!.sortField3 != "") {
+          globals.sortField3 = int.parse(customSetting!.sortField3!);
         }
-        if (customSetting.showMain1 != "") {
-          globals.showMain1 = int.parse(customSetting.showMain1);
+        if (customSetting!.showMain1 != "") {
+          globals.showMain1 = int.parse(customSetting!.showMain1!);
         }
-        if (customSetting.showMain2 != "") {
-          globals.showMain2 = int.parse(customSetting.showMain2);
+        if (customSetting!.showMain2 != "") {
+          globals.showMain2 = int.parse(customSetting!.showMain2!);
         }
-        if (customSetting.showSec1 != "") {
-          globals.showSec1 = int.parse(customSetting.showSec1);
+        if (customSetting!.showSec1 != "") {
+          globals.showSec1 = int.parse(customSetting!.showSec1!);
         }
-        if (customSetting.showSec2 != "") {
-          globals.showSec2 = int.parse(customSetting.showSec2);
+        if (customSetting!.showSec2 != "") {
+          globals.showSec2 = int.parse(customSetting!.showSec2!);
         }
-        if (customSetting.showSec3 != "") {
-          globals.showSec3 = int.parse(customSetting.showSec3);
+        if (customSetting!.showSec3 != "") {
+          globals.showSec3 = int.parse(customSetting!.showSec3!);
         }
-        if (customSetting.filterIsStar == true) {
+        if (customSetting!.filterIsStar == true) {
           globals.filterIsStar = 1;
         } else {
           globals.filterIsStar = 0;
         }
-        if (customSetting.filterIsDone == true) {
+        if (customSetting!.filterIsDone == true) {
           globals.filterIsDone = 1;
         }
-        if (customSetting.filterDateDue != "") {
-          globals.filterDateDue = int.parse(customSetting.filterDateDue);
+        if (customSetting!.filterDateDue != "") {
+          globals.filterDateDue = int.parse(customSetting!.filterDateDue!);
         }
-        globals.filterStatus = customSetting.filterStatus != ""
-            ? int.parse(customSetting.filterStatus)
+        globals.filterStatus = customSetting!.filterStatus != ""
+            ? int.parse(customSetting!.filterStatus!)
             : 0;
-        globals.filterPriority = customSetting.filterPriority != ""
-            ? int.parse(customSetting.filterPriority)
+        globals.filterPriority = customSetting!.filterPriority != ""
+            ? int.parse(customSetting!.filterPriority!)
             : 0;
-        globals.filterCategory = customSetting.filterCategory != ""
-            ? int.parse(customSetting.filterCategory)
+        globals.filterCategory = customSetting!.filterCategory != ""
+            ? int.parse(customSetting!.filterCategory!)
             : 0;
-        globals.filterLocation = customSetting.filterLocation != ""
-            ? int.parse(customSetting.filterLocation)
+        globals.filterLocation = customSetting!.filterLocation != ""
+            ? int.parse(customSetting!.filterLocation!)
             : 0;
-        globals.filterTag = customSetting.filterTag != ""
-            ? int.parse(customSetting.filterTag)
+        globals.filterTag = customSetting!.filterTag != ""
+            ? int.parse(customSetting!.filterTag!)
             : 0;
-        globals.filterGoal = customSetting.filterGoal != ""
-            ? int.parse(customSetting.filterGoal)
+        globals.filterGoal = customSetting!.filterGoal != ""
+            ? int.parse(customSetting!.filterGoal!)
             : 0;
-        globals.filterContext = customSetting.filterContext != ""
-            ? int.parse(customSetting.filterContext)
+        globals.filterContext = customSetting!.filterContext != ""
+            ? int.parse(customSetting!.filterContext!)
             : 0;
-        globals.filterAction = customSetting.filterAction != ""
-            ? int.parse(customSetting.filterAction)
+        globals.filterAction = customSetting!.filterAction != ""
+            ? int.parse(customSetting!.filterAction!)
             : 0;
       }
     }

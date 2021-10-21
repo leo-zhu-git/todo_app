@@ -10,7 +10,7 @@ class WipeScreen extends StatefulWidget {
 }
 
 class _WipeScreenState extends State<WipeScreen> {
-  GlobalKey<ScaffoldState> _key;
+  late GlobalKey<ScaffoldState> _key;
 
   @override
   void initState() {
@@ -139,11 +139,10 @@ class _WipeScreenState extends State<WipeScreen> {
     );
   }
 
-  _showSuccessSnackBar(message) {
-    var _snackBar = SnackBar(content: message);
-    _key.currentState.showSnackBar(_snackBar);
-    
-  }
+//  _showSuccessSnackBar(message) {
+//    var _snackBar = SnackBar(content: message);
+//    _key.currentState.showSnackBar(_snackBar);  
+//  }
 
   _ConfirmDialogue(int _option, String message) {
     return showDialog(
@@ -176,23 +175,23 @@ class _WipeScreenState extends State<WipeScreen> {
                       mysqlDBhelper.wipeStatusToMySql();
                       mysqlDBhelper.wipeTagToMySql();
                       Navigator.pop(context);
-                      _showSuccessSnackBar(Container(
-                        color: Colors.tealAccent[100],
-                        height: 40,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            (Icon(
-                              Icons.thumb_up,
-                              color: Colors.black,
-                            )),
-                            Text(
-                              ' DEVICE -> CLOUD wipe SUCCESSFUL ',
-                              style: (TextStyle(color: Colors.black)),
-                            ),
-                          ],
-                        ),
-                      ));
+//                      _showSuccessSnackBar(Container(
+//                        color: Colors.tealAccent[100],
+//                        height: 40,
+//                        child: Row(
+//                          mainAxisAlignment: MainAxisAlignment.center,
+//                          children: [
+//                            (Icon(
+//                              Icons.thumb_up,
+//                              color: Colors.black,
+//                            )),
+//                            Text(
+//                              ' DEVICE -> CLOUD wipe SUCCESSFUL ',
+//                              style: (TextStyle(color: Colors.black)),
+//                            ),
+//                          ],
+//                        ),
+//                      ));
                     } else {
                       mysqlDBhelper.wipeTaskDataFromMySql();
                       mysqlDBhelper.syncStatusesData();
@@ -205,23 +204,23 @@ class _WipeScreenState extends State<WipeScreen> {
                       mysqlDBhelper.syncGoal1sData();
 
                       Navigator.pop(context);
-                      _showSuccessSnackBar(Container(
-                        color: Colors.tealAccent[100],
-                        height: 40,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            (Icon(
-                              Icons.thumb_up,
-                              color: Colors.black,
-                            )),
-                            Text(
-                              ' CLOUD ->DEVICE wipe SUCCESSFUL ',
-                              style: (TextStyle(color: Colors.black)),
-                            ),
-                          ],
-                        ),
-                      ));
+//                      _showSuccessSnackBar(Container(
+//                        color: Colors.tealAccent[100],
+//                        height: 40,
+//                        child: Row(
+//                          mainAxisAlignment: MainAxisAlignment.center,
+//                          children: [
+//                            (Icon(
+//                              Icons.thumb_up,
+//                              color: Colors.black,
+//                            )),
+//                            Text(
+//                              ' CLOUD ->DEVICE wipe SUCCESSFUL ',
+//                              style: (TextStyle(color: Colors.black)),
+//                            ),
+//                          ],
+//                        ),
+//                      ));
                     }
                   },
 

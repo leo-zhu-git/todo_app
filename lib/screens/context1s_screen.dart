@@ -19,7 +19,7 @@ class _Context1sScreenState extends State<Context1sScreen> {
   var _editContext1NameController = TextEditingController();
   var _editContext1DescriptionController = TextEditingController();
 
-  List<Context1> _context1List = List<Context1>();
+  List<Context1> _context1List = [];
 
   var context1;
 
@@ -32,7 +32,7 @@ class _Context1sScreenState extends State<Context1sScreen> {
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
 
   getAllContext1s() async {
-    _context1List = List<Context1>();
+    _context1List = [];
     var context1s = await _context1Service.getContext1s();
     context1s.forEach((context1) {
       setState(() {
@@ -88,29 +88,29 @@ class _Context1sScreenState extends State<Context1sScreen> {
                   onPressed: () {
                     _context1.name = _context1NameController.text;
                     _context1.description = _context1DescriptionController.text;
-                    _context1.id = null;
+//                    _context1.id = null;
 
                     var result = _context1Service.insertContext1s(_context1);
                     print(result);
                     Navigator.pop(context);
                     getAllContext1s();
-                    _showSuccessSnackBar(Container(
-                      color: Colors.tealAccent[100],
-                      height: 40,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          (Icon(
-                            Icons.thumb_up,
-                            color: Colors.black,
-                          )),
-                          Text(
-                            ' Added ',
-                            style: (TextStyle(color: Colors.black)),
-                          )
-                        ],
-                      ),
-                    ));
+//                    _showSuccessSnackBar(Container(
+//                      color: Colors.tealAccent[100],
+//                      height: 40,
+//                      child: Row(
+//                        mainAxisAlignment: MainAxisAlignment.center,
+//                        children: [
+//                          (Icon(
+//                            Icons.thumb_up,
+//                            color: Colors.black,
+//                          )),
+//                         Text(
+//                            ' Added ',
+//                            style: (TextStyle(color: Colors.black)),
+//                          )
+//                        ],
+//                      ),
+//                    ));
                   },
                   child: Text(
                     'Save',
@@ -175,25 +175,25 @@ class _Context1sScreenState extends State<Context1sScreen> {
                     if (result > 0) {
                       Navigator.pop(context);
                       getAllContext1s();
-                      _showSuccessSnackBar(
-                        Container(
-                          color: Colors.tealAccent[100],
-                          height: 40,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              (Icon(
-                                Icons.thumb_up,
-                                color: Colors.black,
-                              )),
-                              Text(
-                                ' Updated ',
-                                style: (TextStyle(color: Colors.black)),
-                              )
-                            ],
-                          ),
-                        ),
-                      );
+//                      _showSuccessSnackBar(
+//                        Container(
+//                          color: Colors.tealAccent[100],
+//                          height: 40,
+//                          child: Row(
+//                            mainAxisAlignment: MainAxisAlignment.center,
+//                            children: [
+//                              (Icon(
+//                                Icons.thumb_up,
+//                                color: Colors.black,
+//                              )),
+//                              Text(
+//                                ' Updated ',
+//                                style: (TextStyle(color: Colors.black)),
+//                             )
+//                            ],
+//                          ),
+//                        ),
+//                      );
                     }
                   },
                   child: Text(
@@ -253,25 +253,25 @@ class _Context1sScreenState extends State<Context1sScreen> {
                     if (result > 0) {
                       Navigator.pop(context);
                       getAllContext1s();
-                      _showSuccessSnackBar(
-                        Container(
-                          color: Colors.tealAccent[100],
-                          height: 40,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              (Icon(
-                                Icons.thumb_up,
-                                color: Colors.black,
-                              )),
-                              Text(
-                                ' Deleted ',
-                                style: (TextStyle(color: Colors.black)),
-                              )
-                            ],
-                          ),
-                        ),
-                      );
+//                      _showSuccessSnackBar(
+//                        Container(
+//                          color: Colors.tealAccent[100],
+//                          height: 40,
+//                          child: Row(
+//                            mainAxisAlignment: MainAxisAlignment.center,
+//                            children: [
+//                              (Icon(
+//                                Icons.thumb_up,
+//                                color: Colors.black,
+//                              )),
+//                              Text(
+//                                ' Deleted ',
+//                                style: (TextStyle(color: Colors.black)),
+//                              )
+//                            ],
+//                          ),
+//                        ),
+//                      );
                     }
                   },
                   child: Text(
@@ -284,10 +284,10 @@ class _Context1sScreenState extends State<Context1sScreen> {
         });
   }
 
-  _showSuccessSnackBar(message) {
-    var _snackBar = SnackBar(content: message);
-    _globalKey.currentState.showSnackBar(_snackBar);
-  }
+//  _showSuccessSnackBar(message) {
+//    var _snackBar = SnackBar(content: message);
+//    _globalKey.currentState.showSnackBar(_snackBar);
+//  }
 
   @override
   Widget build(BuildContext context) {
@@ -307,7 +307,7 @@ class _Context1sScreenState extends State<Context1sScreen> {
                   position: BadgePosition.topEnd(),
                   badgeContent: Text(_context1List.length.toString(),
                       style: TextStyle(color: Colors.black)),
-                  badgeColor: Colors.orange[100],
+//                  badgeColor: Colors.orange[100],
                 ),
               ],
             ),
@@ -332,7 +332,7 @@ class _Context1sScreenState extends State<Context1sScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Flexible(
-                      child: Text(_context1List[index].name,
+                      child: Text(_context1List[index].name!,
                           overflow: TextOverflow.ellipsis),
                     ),
                     IconButton(

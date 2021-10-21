@@ -19,7 +19,7 @@ class _Location1sScreenState extends State<Location1sScreen> {
   var _editLocation1NameController = TextEditingController();
   var _editLocation1DescriptionController = TextEditingController();
 
-  List<Location1> _location1List = List<Location1>();
+  List<Location1> _location1List = [];
 
   var location1;
 
@@ -32,7 +32,7 @@ class _Location1sScreenState extends State<Location1sScreen> {
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
 
   getAllLocation1s() async {
-    _location1List = List<Location1>();
+    _location1List = [];
     var location1s = await _location1Service.getLocation1s();
     location1s.forEach((location1) {
       setState(() {
@@ -88,29 +88,29 @@ class _Location1sScreenState extends State<Location1sScreen> {
                     _location1.name = _location1NameController.text;
                     _location1.description =
                         _location1DescriptionController.text;
-                    _location1.id = null;
+//                    _location1.id = null;
 
                     var result = _location1Service.insertLocation1s(_location1);
                     print(result);
                     Navigator.pop(context);
                     getAllLocation1s();
-                    _showSuccessSnackBar(Container(
-                      color: Colors.tealAccent[100],
-                      height: 40,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          (Icon(
-                            Icons.thumb_up,
-                            color: Colors.black,
-                          )),
-                          Text(
-                            ' Added ',
-                            style: (TextStyle(color: Colors.black)),
-                          )
-                        ],
-                      ),
-                    ));
+//                    _showSuccessSnackBar(Container(
+//                      color: Colors.tealAccent[100],
+//                      height: 40,
+//                      child: Row(
+//                        mainAxisAlignment: MainAxisAlignment.center,
+//                        children: [
+//                          (Icon(
+//                            Icons.thumb_up,
+//                            color: Colors.black,
+//                          )),
+//                          Text(
+//                            ' Added ',
+//                            style: (TextStyle(color: Colors.black)),
+//                          )
+//                        ],
+//                      ),
+//                    ));
                   },
                   child: Text(
                     'Save',
@@ -175,25 +175,25 @@ class _Location1sScreenState extends State<Location1sScreen> {
                     if (result > 0) {
                       Navigator.pop(context);
                       getAllLocation1s();
-                      _showSuccessSnackBar(
-                        Container(
-                          color: Colors.tealAccent[100],
-                          height: 40,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              (Icon(
-                                Icons.thumb_up,
-                                color: Colors.black,
-                              )),
-                              Text(
-                                ' Updated ',
-                                style: (TextStyle(color: Colors.black)),
-                              )
-                            ],
-                          ),
-                        ),
-                      );
+//                      _showSuccessSnackBar(
+//                        Container(
+//                          color: Colors.tealAccent[100],
+//                          height: 40,
+//                          child: Row(
+//                            mainAxisAlignment: MainAxisAlignment.center,
+//                            children: [
+//                              (Icon(
+//                                Icons.thumb_up,
+//                                color: Colors.black,
+//                              )),
+//                              Text(
+//                                ' Updated ',
+//                                style: (TextStyle(color: Colors.black)),
+//                              )
+//                            ],
+//                          ),
+//                        ),
+//                      );
                     }
                   },
                   child: Text(
@@ -253,25 +253,25 @@ class _Location1sScreenState extends State<Location1sScreen> {
                     if (result > 0) {
                       Navigator.pop(context);
                       getAllLocation1s();
-                      _showSuccessSnackBar(
-                        Container(
-                          color: Colors.tealAccent[100],
-                          height: 40,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              (Icon(
-                                Icons.thumb_up,
-                                color: Colors.black,
-                              )),
-                              Text(
-                                ' Deleted ',
-                                style: (TextStyle(color: Colors.black)),
-                              )
-                            ],
-                          ),
-                        ),
-                      );
+//                      _showSuccessSnackBar(
+//                        Container(
+//                          color: Colors.tealAccent[100],
+//                          height: 40,
+//                          child: Row(
+//                            mainAxisAlignment: MainAxisAlignment.center,
+//                            children: [
+//                              (Icon(
+//                                Icons.thumb_up,
+//                                color: Colors.black,
+//                              )),
+//                              Text(
+//                                ' Deleted ',
+//                                style: (TextStyle(color: Colors.black)),
+//                              )
+//                            ],
+//                          ),
+//                        ),
+//                      );
                     }
                   },
                   child: Text(
@@ -284,10 +284,10 @@ class _Location1sScreenState extends State<Location1sScreen> {
         });
   }
 
-  _showSuccessSnackBar(message) {
-    var _snackBar = SnackBar(content: message);
-    _globalKey.currentState.showSnackBar(_snackBar);
-  }
+//  _showSuccessSnackBar(message) {
+//    var _snackBar = SnackBar(content: message);
+//    _globalKey.currentState.showSnackBar(_snackBar);
+//  }
 
   @override
   Widget build(BuildContext context) {
@@ -307,7 +307,7 @@ class _Location1sScreenState extends State<Location1sScreen> {
                   position: BadgePosition.topEnd(),
                   badgeContent: Text(_location1List.length.toString(),
                       style: TextStyle(color: Colors.black)),
-                  badgeColor: Colors.orange[100],
+//                  badgeColor: Colors.orange[100],
                 ),
               ],
             ),
@@ -332,7 +332,7 @@ class _Location1sScreenState extends State<Location1sScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Flexible(
-                      child: Text(_location1List[index].name,
+                      child: Text(_location1List[index].name!,
                           overflow: TextOverflow.ellipsis),
                     ),
                     IconButton(

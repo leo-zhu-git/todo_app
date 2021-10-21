@@ -2,6 +2,7 @@ import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_flutter/amplify.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_app/screens/Community.dart';
+import 'package:todo_app/screens/Cupertino_screen.dart';
 import 'package:todo_app/screens/LocalNotification_screen.dart';
 import 'package:todo_app/screens/entry.dart';
 import 'package:todo_app/screens/wipe.dart';
@@ -21,24 +22,24 @@ class DrawerNagivation extends StatefulWidget {
 }
 
 class _DrawerNagivation extends State<DrawerNagivation> {
-  List<Widget> _categoryList = List<Widget>();
+  List<Widget> _categoryList = [];
   //DbHelper dbHelper = new DbHelper();
 
   // CategoryService _categoryService = CategoryService();
 
-  List<Widget> _action1List = List<Widget>();
+  List<Widget> _action1List = [];
   //Action1Service _action1Service = Action1Service();
 
-  List<Widget> _context1List = List<Widget>();
+  List<Widget> _context1List = [];
   //Context1Service _context1Service = Context1Service();
 
-  List<Widget> _location1List = List<Widget>();
+  List<Widget> _location1List = [];
   //Location1Service _location1Service = Location1Service();
 
-  List<Widget> _tag1List = List<Widget>();
+  List<Widget> _tag1List = [];
   //Tag1Service _tag1Service = Tag1Service();
 
-  List<Widget> _goal1List = List<Widget>();
+  List<Widget> _goal1List = [];
   // Goal1Service _goal1Service = Goal1Service();
 
   @override
@@ -59,7 +60,7 @@ class _DrawerNagivation extends State<DrawerNagivation> {
                 currentAccountPicture: CircleAvatar(
                   backgroundImage: AssetImage('images/todoMIToctopus.png'),
                 ),
-                margin: EdgeInsets.zero, 
+                margin: EdgeInsets.zero,
                 accountName: Text('Welcome to'),
                 accountEmail: Text('todoMIT'),
                 decoration: BoxDecoration(color: Colors.brown[900]),
@@ -76,18 +77,26 @@ class _DrawerNagivation extends State<DrawerNagivation> {
                 leading: Icon(Icons.cloud_download),
                 tileColor: Colors.amber[100],
                 title: Text('Wipe'),
-                onTap: () => Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) => WipeScreen())),
+                onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => WipeScreen())),
               ),
               Divider(color: Colors.amber[800]),
-            ListTile(
-              tileColor: Colors.amber[100],
-              leading: Icon(Icons.connect_without_contact),
-              title: Text('Support [temp test notification]'),
-              onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => LocalNotificationScreen())),
-            ),
-            Divider(),
+              ListTile(
+                tileColor: Colors.amber[100],
+                leading: Icon(Icons.connect_without_contact),
+                title: Text('Support [temp for testing]'),
+                onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => LocalNotificationScreen())),
+              ),
+              Divider(),
+              ListTile(
+                tileColor: Colors.amber[100],
+                leading: Icon(Icons.connect_without_contact),
+                title: Text('Cupertino [temp for testing]'),
+                onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => CupertinoScreen())),
+              ),
+              Divider(),
               ListTile(
                 tileColor: Colors.amber[100],
                 leading: Icon(Icons.help_outlined),

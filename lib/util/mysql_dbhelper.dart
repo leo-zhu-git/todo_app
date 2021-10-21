@@ -23,7 +23,7 @@ String formattedDate = DateFormat('dd-MMM-yyyy').format(currentDate);
 
 class MySql_DBHelper {
   int count = 0;
-  static Database _db;
+  static late Database _db;
   DbHelper helper = DbHelper();
 
   static final MySql_DBHelper _mySql_DBHelper = MySql_DBHelper._internal();

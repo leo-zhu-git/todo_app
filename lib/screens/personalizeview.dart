@@ -168,28 +168,27 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
   List<FilterIsStar> _filterIsStar = FilterIsStar.getIsStar();
   List<FilterIsDone> _filterIsDone = FilterIsDone.getIsDone();
   List<FilterDateDue> _filterDateDue = FilterDateDue.getDateDue();
-  List<DropdownMenuItem<ShowItem>> _dropdownMenuItemsShow;
-  List<DropdownMenuItem<SortItem>> _dropdownMenuItemsSort;
-  List<DropdownMenuItem<SortOrder>> _dropdownMenuSortOrder;
-  List<DropdownMenuItem<FilterIsStar>> _dropdownFilterIsStar;
-  List<DropdownMenuItem<FilterIsDone>> _dropdownFilterIsDone;
-  List<DropdownMenuItem<FilterDateDue>> _dropdownFilterDateDue;
-  FilterIsStar _selectedFilterIsStar;
-  FilterIsDone _selectedFilterIsDone;
-  FilterDateDue _selectedFilterDateDue;
-  SortItem _selectedSortField1;
-  SortOrder _selectedSortOrder1;
-  SortItem _selectedSortField2;
-  SortOrder _selectedSortOrder2;
-  SortItem _selectedSortField3;
-  SortOrder _selectedSortOrder3;
-//  SortItem _selectedShowMain1;
-//  SortItem _selectedShowMain2;
-  ShowItem _selectedShowSec1;
-  ShowItem _selectedShowSec2;
-  ShowItem _selectedShowSec3;
+  late List<DropdownMenuItem<ShowItem>> _dropdownMenuItemsShow;
+  late List<DropdownMenuItem<SortItem>> _dropdownMenuItemsSort;
+  late List<DropdownMenuItem<SortOrder>> _dropdownMenuSortOrder;
+  late List<DropdownMenuItem<FilterIsStar>> _dropdownFilterIsStar;
+  late List<DropdownMenuItem<FilterIsDone>> _dropdownFilterIsDone;
+  late List<DropdownMenuItem<FilterDateDue>> _dropdownFilterDateDue;
+  FilterIsStar? _selectedFilterIsStar;
+  FilterIsDone? _selectedFilterIsDone;
+  FilterDateDue? _selectedFilterDateDue;
+  SortItem? _selectedSortField1;
+  SortOrder? _selectedSortOrder1;
+  SortItem? _selectedSortField2;
+  SortItem? selectedSort;
+  SortOrder? _selectedSortOrder2;
+  SortItem? _selectedSortField3;
+  SortOrder? _selectedSortOrder3;
+  ShowItem? _selectedShowSec1;
+  ShowItem? _selectedShowSec2;
+  ShowItem? _selectedShowSec3;
   DbHelper helper = DbHelper();
-  CustomSettings customSetting;
+  CustomSettings? customSetting;
   List<CustomDropdownItem> _statuses = [];
   List<CustomDropdownItem> _priorities = [];
   List<CustomDropdownItem> _categories = [];
@@ -198,7 +197,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
   List<CustomDropdownItem> _location1s = [];
   List<CustomDropdownItem> _tag1s = [];
   List<CustomDropdownItem> _goal1s = [];
-  List<Task> tasklist;
+  List<Task> tasklist = [];
   int count = 0;
   TextEditingController searchController = TextEditingController();
   var _selectedStatus = null;
@@ -209,7 +208,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
   var _selectedLocation1 = null;
   var _selectedTag1 = null;
   var _selectedGoal1 = null;
-
+  
   //
   @override
   void initState() {
@@ -234,66 +233,66 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     /// filter - date due
     ////////////////////////////
     if (globals.filterDateDue == null) {
-      _selectedFilterDateDue = _dropdownFilterDateDue[0].value;
+      _selectedFilterDateDue = _dropdownFilterDateDue[0].value!;
       globals.filterDateDue = 0;
     } else
       _selectedFilterDateDue =
-          _dropdownFilterDateDue[globals.filterDateDue].value;
+          _dropdownFilterDateDue[globals.filterDateDue!].value!;
 
     ////////////////////////////
     /// filter - is star
     ////////////////////////////
     if (globals.filterIsStar == null) {
-      _selectedFilterIsStar = _dropdownFilterIsStar[0].value;
+      _selectedFilterIsStar = _dropdownFilterIsStar[0].value!;
       globals.filterIsStar = 0;
     } else
-      _selectedFilterIsStar = _dropdownFilterIsStar[globals.filterIsStar].value;
+      _selectedFilterIsStar = _dropdownFilterIsStar[globals.filterIsStar!].value!;
 
     ////////////////////////////
     /// filter - is done
     ////////////////////////////
     if (globals.filterIsDone == null) {
-      _selectedFilterIsDone = _dropdownFilterIsDone[0].value;
+      _selectedFilterIsDone = _dropdownFilterIsDone[0].value!;
       globals.filterIsDone = 0;
     } else
-      _selectedFilterIsDone = _dropdownFilterIsDone[globals.filterIsDone].value;
+      _selectedFilterIsDone = _dropdownFilterIsDone[globals.filterIsDone!].value!;
 
     ////////////////////////////
     // Sort and Order
     ////////////////////////////
     if (globals.sortField1 == null) {
-      _selectedSortField1 = _dropdownMenuItemsSort[12].value;
+      _selectedSortField1 = _dropdownMenuItemsSort[12].value!;
       globals.sortField1 = 12;
     } else
-      _selectedSortField1 = _dropdownMenuItemsSort[globals.sortField1].value;
+      _selectedSortField1 = _dropdownMenuItemsSort[globals.sortField1!].value!;
 
     if (globals.sortOrder1 == null) {
-      _selectedSortOrder1 = _dropdownMenuSortOrder[0].value;
+      _selectedSortOrder1 = _dropdownMenuSortOrder[0].value!;
       globals.sortOrder1 = 1;
     } else
-      _selectedSortOrder1 = _dropdownMenuSortOrder[globals.sortOrder1].value;
+      _selectedSortOrder1 = _dropdownMenuSortOrder[globals.sortOrder1!].value!;
 
     if (globals.sortField2 == null) {
-      _selectedSortField2 = _dropdownMenuItemsSort[2].value;
+      _selectedSortField2 = _dropdownMenuItemsSort[2].value!;
       globals.sortField2 = 2;
     } else
-      _selectedSortField2 = _dropdownMenuItemsSort[globals.sortField2].value;
+      _selectedSortField2 = _dropdownMenuItemsSort[globals.sortField2!].value!;
     if (globals.sortOrder2 == null) {
-      _selectedSortOrder2 = _dropdownMenuSortOrder[0].value;
+      _selectedSortOrder2 = _dropdownMenuSortOrder[0].value!;
       globals.sortOrder2 = 0;
     } else
-      _selectedSortOrder2 = _dropdownMenuSortOrder[globals.sortOrder2].value;
+      _selectedSortOrder2 = _dropdownMenuSortOrder[globals.sortOrder2!].value!;
 
     if (globals.sortField3 == null) {
-      _selectedSortField3 = _dropdownMenuItemsSort[3].value;
+      _selectedSortField3 = _dropdownMenuItemsSort[3].value!;
       globals.sortField3 = 3;
     } else
-      _selectedSortField3 = _dropdownMenuItemsSort[globals.sortField3].value;
+      _selectedSortField3 = _dropdownMenuItemsSort[globals.sortField3!].value!;
     if (globals.sortOrder3 == null) {
-      _selectedSortOrder3 = _dropdownMenuSortOrder[0].value;
+      _selectedSortOrder3 = _dropdownMenuSortOrder[0].value!;
       globals.sortOrder3 = 0;
     } else
-      _selectedSortOrder3 = _dropdownMenuSortOrder[globals.sortOrder3].value;
+      _selectedSortOrder3 = _dropdownMenuSortOrder[globals.sortOrder3!].value!;
 
     ////////////////////////////
     /// show - main1 is hard coded to tasks always RT
@@ -314,22 +313,22 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     /// show - sec defaults star, dateDue, timeDue RT
     ////////////////////////////
     if (globals.showSec1 == null) {
-      _selectedShowSec1 = _dropdownMenuItemsShow[0].value;
+      _selectedShowSec1 = _dropdownMenuItemsShow[0].value!;
       globals.showSec1 = 10;
     } else
-      _selectedShowSec1 = _dropdownMenuItemsShow[globals.showSec1].value;
+      _selectedShowSec1 = _dropdownMenuItemsShow[globals.showSec1!].value!;
 
     if (globals.showSec2 == null) {
-      _selectedShowSec2 = _dropdownMenuItemsShow[6].value;
+      _selectedShowSec2 = _dropdownMenuItemsShow[6].value!;
       globals.showSec2 = 0;
     } else
-      _selectedShowSec2 = _dropdownMenuItemsShow[globals.showSec2].value;
+      _selectedShowSec2 = _dropdownMenuItemsShow[globals.showSec2!].value!;
 
     if (globals.showSec3 == null) {
-      _selectedShowSec3 = _dropdownMenuItemsShow[2].value;
+      _selectedShowSec3 = _dropdownMenuItemsShow[2].value!;
       globals.showSec3 = 1;
     } else
-      _selectedShowSec3 = _dropdownMenuItemsShow[globals.showSec3].value;
+      _selectedShowSec3 = _dropdownMenuItemsShow[globals.showSec3!].value!;
 
     // super.initState();
   }
@@ -339,7 +338,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     var categories = await helper.getCategories();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
-    cus.id = null;
+//    cus.id = null;
     cus.name = "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
     cus.name = "-- Select Category --                                         ";
     _categories.add(cus);
@@ -364,7 +363,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     var statuses = await helper.getStatuses();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
-    cus.id = null;
+//    cus.id = null;
     cus.name = "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
     cus.name = "-- Select Status --                                              ";
     _statuses.add(cus);
@@ -389,7 +388,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     var priorities = await helper.getPriorities();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
-    cus.id = null;
+//    cus.id = null;
     cus.name = "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
     cus.name = "-- Select Priority --                                            ";
     _priorities.add(cus);
@@ -415,7 +414,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     var action1s = await helper.getAction1s();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
-    cus.id = null;
+//    cus.id = null;
     cus.name = "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
     cus.name = "-- Select Action --                                              ";
     _action1s.add(cus);
@@ -439,7 +438,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     var context1s = await helper.getContext1s();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
-    cus.id = null;
+//    cus.id = null;
     cus.name = "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
     cus.name = "-- Select Context --                                             ";
     _context1s.add(cus);
@@ -464,7 +463,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     var location1s = await helper.getLocation1s();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
-    cus.id = null;
+//    cus.id = null;
     cus.name = "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
     cus.name = "-- Select Location --                                           ";
     _location1s.add(cus);
@@ -489,7 +488,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     var tag1s = await helper.getTag1s();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
-    cus.id = null;
+//    cus.id = null;
     cus.name = "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
     cus.name = "-- Select Tag --                                                    ";
     _tag1s.add(cus);
@@ -513,7 +512,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     var goal1s = await helper.getGoal1s();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
-    cus.id = null;
+//    cus.id = null;
     cus.name = "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
     cus.name = "-- Select Goal --                                                  ";
     _goal1s.add(cus);
@@ -536,7 +535,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
 //##########################################end of Dropdown #################################################################
 
   List<DropdownMenuItem<ShowItem>> buildDropdownMenuShow(List showItems) {
-    List<DropdownMenuItem<ShowItem>> items = List();
+    List<DropdownMenuItem<ShowItem>> items = [];
     for (ShowItem showItem in showItems) {
       items.add(
         DropdownMenuItem(
@@ -549,7 +548,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
   }
 
   List<DropdownMenuItem<SortItem>> buildDropdownMenuItems(List sortItems) {
-    List<DropdownMenuItem<SortItem>> items = List();
+    List<DropdownMenuItem<SortItem>> items = [];
     for (SortItem sortItem in sortItems) {
       items.add(
         DropdownMenuItem(
@@ -562,7 +561,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
   }
 
   List<DropdownMenuItem<SortOrder>> buildDropdownMenuOrder(List orderItems) {
-    List<DropdownMenuItem<SortOrder>> order = List();
+    List<DropdownMenuItem<SortOrder>> order = [];
     for (SortOrder sortOrder in orderItems) {
       order.add(
         DropdownMenuItem(
@@ -576,7 +575,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
 
   List<DropdownMenuItem<FilterIsStar>> buildDropdownFilterIsStar(
       List filterIsStarItems) {
-    List<DropdownMenuItem<FilterIsStar>> items = List();
+    List<DropdownMenuItem<FilterIsStar>> items = [];
     for (FilterIsStar filterIsStar in filterIsStarItems) {
       items.add(
         DropdownMenuItem(
@@ -590,7 +589,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
 
   List<DropdownMenuItem<FilterIsDone>> buildDropdownFilterIsDone(
       List filterIsDoneItems) {
-    List<DropdownMenuItem<FilterIsDone>> items = List();
+    List<DropdownMenuItem<FilterIsDone>> items = [];
     for (FilterIsDone filterIsDone in filterIsDoneItems) {
       items.add(
         DropdownMenuItem(
@@ -604,7 +603,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
 
   List<DropdownMenuItem<FilterDateDue>> buildDropdownFilterDateDue(
       List filterDateDueItems) {
-    List<DropdownMenuItem<FilterDateDue>> items = List();
+    List<DropdownMenuItem<FilterDateDue>> items = [];
     for (FilterDateDue filterDateDue in filterDateDueItems) {
       items.add(
         DropdownMenuItem(
@@ -659,21 +658,21 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
 //  }
 
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
-  _showSuccessSnackBar(message) {
-    var _snackBar = SnackBar(content: message);
-    _globalKey.currentState.showSnackBar(_snackBar);
-  }
+//  _showSuccessSnackBar(message) {
+//    var _snackBar = SnackBar(content: message);
+//    _globalKey.currentState.showSnackBar(_snackBar);
+//  }
 
   Widget build(BuildContext context) {
-    TextStyle textStyle = Theme.of(context).textTheme.headline6;
+//    TextStyle textStyle = Theme.of(context).textTheme.headline6;
 
     return Scaffold(
       key: _globalKey,
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.teal[50],
+//      backgroundColor: Colors.teal[50],
       appBar: new AppBar(
-//        backgroundColor: Colors.brown[900],
-        backgroundColor: Colors.indigo[600],
+        backgroundColor: Colors.brown[900],
+//        backgroundColor: Colors.indigo[600],
         automaticallyImplyLeading: false,
         title:
             Center(child: Text('Personalize - Make this app your own!')),
@@ -692,13 +691,13 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.blue[100]),
-                child: DropdownButtonFormField(
+                child: DropdownButtonFormField<FilterDateDue>(
                   items: _dropdownFilterDateDue,
                   hint: Text('Filter by Due Date'),
                   value: _selectedFilterDateDue,
                   onChanged: (selectedFilterDateDue) {
                     setState(() {
-                      _selectedFilterDateDue = selectedFilterDateDue;
+                      _selectedFilterDateDue = selectedFilterDateDue!;
                     });
                   },
                 ),
@@ -717,12 +716,12 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                           return DropdownMenuItem<String>(
                               value: value.id,
                               child: Text(
-                                value.name,
+                                value.name!,
                                 overflow: TextOverflow.ellipsis,
                               ));
                         }).toList(),
                         value: _selectedCategory,
-                        onChanged: (String newValue) {
+                        onChanged: (newValue) {
                           setState(() {
                             _selectedCategory = newValue;
                           });
@@ -744,12 +743,12 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                           return DropdownMenuItem<String>(
                               value: value.id,
                               child: Text(
-                                value.name,
+                                value.name!,
                                 overflow: TextOverflow.ellipsis,
                               ));
                         }).toList(),
                         value: _selectedStatus,
-                        onChanged: (String newValue) {
+                        onChanged: (newValue) {
                           setState(() {
                             _selectedStatus = newValue;
                           });
@@ -771,12 +770,12 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                           return DropdownMenuItem<String>(
                               value: value.id,
                               child: Text(
-                                value.name,
+                                value.name!,
                                 overflow: TextOverflow.ellipsis,
                               ));
                         }).toList(),
                         value: _selectedPriority,
-                        onChanged: (String newValue) {
+                        onChanged: (newValue) {
                           setState(() {
                             _selectedPriority = newValue;
                           });
@@ -797,7 +796,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                       DropdownButton<String>(
                         items: _action1s.map((CustomDropdownItem value) {
                           return DropdownMenuItem<String>(
-                              value: value.id, child: Text(value.name));
+                              value: value.id, child: Text(value.name!));
                         }).toList(),
                         value: _selectedAction1,
                         onChanged: (value) {
@@ -823,7 +822,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                     DropdownButton<String>(
                       items: _context1s.map((CustomDropdownItem value) {
                         return DropdownMenuItem<String>(
-                            value: value.id, child: Text(value.name));
+                            value: value.id, child: Text(value.name!));
                       }).toList(),
                       value: _selectedContext1,
                       onChanged: (value) {
@@ -847,7 +846,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                     DropdownButton<String>(
                       items: _location1s.map((CustomDropdownItem value) {
                         return DropdownMenuItem<String>(
-                            value: value.id, child: Text(value.name));
+                            value: value.id, child: Text(value.name!));
                       }).toList(),
                       value: _selectedLocation1,
                       onChanged: (value) {
@@ -871,7 +870,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                     DropdownButton<String>(
                       items: _tag1s.map((CustomDropdownItem value) {
                         return DropdownMenuItem<String>(
-                            value: value.id, child: Text(value.name));
+                            value: value.id, child: Text(value.name!));
                       }).toList(),
                       value: _selectedTag1,
                       onChanged: (value) {
@@ -895,7 +894,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                     DropdownButton<String>(
                       items: _goal1s.map((CustomDropdownItem value) {
                         return DropdownMenuItem<String>(
-                            value: value.id, child: Text(value.name));
+                            value: value.id, child: Text(value.name!));
                       }).toList(),
                       value: _selectedGoal1,
                       onChanged: (value) {
@@ -916,13 +915,13 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.blue[100]),
-                child: DropdownButtonFormField(
+                child: DropdownButtonFormField<FilterIsStar>(
                   items: _dropdownFilterIsStar,
                   hint: Text('Filter by Is Star Tasks'),
                   value: _selectedFilterIsStar,
                   onChanged: (selectedFilterIsStar) {
                     setState(() {
-                      _selectedFilterIsStar = selectedFilterIsStar;
+                      _selectedFilterIsStar = selectedFilterIsStar!;
                     });
                   },
                 ),
@@ -935,13 +934,13 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.blue[100]),
-                child: DropdownButtonFormField(
+                child: DropdownButtonFormField<FilterIsDone>(
                   items: _dropdownFilterIsDone,
                   hint: Text('Filter by Is Done Tasks'),
                   value: _selectedFilterIsDone,
                   onChanged: (selectedFilterIsDone) {
                     setState(() {
-                      _selectedFilterIsDone = selectedFilterIsDone;
+                      _selectedFilterIsDone = selectedFilterIsDone!;
                     });
                   },
                 ),
@@ -962,13 +961,13 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.green[100]),
-                child: DropdownButtonFormField(
+                child: DropdownButtonFormField<SortItem>(
                   value: _selectedSortField1,
                   items: _dropdownMenuItemsSort,
                   hint: Text('Sort Order 1'),
                   onChanged: (selectedSort) {
                     setState(() {
-                      _selectedSortField1 = selectedSort;
+                      _selectedSortField1 = selectedSort!;
                     });
                   },
                 ),
@@ -980,13 +979,13 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.green[100]),
-                child: DropdownButtonFormField(
+                child: DropdownButtonFormField<SortOrder>(
                   value: _selectedSortOrder1,
                   items: _dropdownMenuSortOrder,
                   hint: Text('Sort 1 Ascending/Descending'),
                   onChanged: (selectedOrder) {
                     setState(() {
-                      _selectedSortOrder1 = selectedOrder;
+                      _selectedSortOrder1 = selectedOrder!;
                     });
                   },
                 ),
@@ -999,13 +998,13 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.green[100]),
-                child: DropdownButtonFormField(
+                child: DropdownButtonFormField<SortItem>(
                   items: _dropdownMenuItemsSort,
                   hint: Text('Sort 2'),
                   value: _selectedSortField2,
                   onChanged: (selectedSort) {
                     setState(() {
-                      _selectedSortField2 = selectedSort;
+                      _selectedSortField2 = selectedSort!;
                     });
                   },
                 ),
@@ -1017,13 +1016,13 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.green[100]),
-                child: DropdownButtonFormField(
+                child: DropdownButtonFormField<SortOrder>(
                   value: _selectedSortOrder2,
                   items: _dropdownMenuSortOrder,
                   hint: Text('Sort 2 Ascending/Descending'),
                   onChanged: (selectedOrder) {
                     setState(() {
-                      _selectedSortOrder2 = selectedOrder;
+                      _selectedSortOrder2 = selectedOrder!;
                     });
                   },
                 ),
@@ -1036,13 +1035,13 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.green[100]),
-                child: DropdownButtonFormField(
+                child: DropdownButtonFormField<SortItem>(
                   items: _dropdownMenuItemsSort,
                   hint: Text('Sort 3'),
                   value: _selectedSortField3,
                   onChanged: (selectedSort) {
                     setState(() {
-                      _selectedSortField3 = selectedSort;
+                      _selectedSortField3 = selectedSort!;
                     });
                   },
                 ),
@@ -1054,13 +1053,13 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.green[100]),
-                child: DropdownButtonFormField(
+                child: DropdownButtonFormField<SortOrder>(
                   value: _selectedSortOrder3,
                   items: _dropdownMenuSortOrder,
                   hint: Text('Sort Order 3 Ascending/Descending'),
                   onChanged: (selectedOrder) {
                     setState(() {
-                      _selectedSortOrder3 = selectedOrder;
+                      _selectedSortOrder3 = selectedOrder!;
                     });
                   },
                 ),
@@ -1209,13 +1208,13 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.pink[100]),
-                child: DropdownButtonFormField(
+                child: DropdownButtonFormField<ShowItem>(
                   items: _dropdownMenuItemsShow,
                   hint: Text('Display Secondary1'),
                   value: _selectedShowSec1,
                   onChanged: (selectedShow) {
                     setState(() {
-                      _selectedShowSec1 = selectedShow;
+                      _selectedShowSec1 = selectedShow!;
                     });
                   },
                 ),
@@ -1228,13 +1227,13 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.pink[100]),
-                child: DropdownButtonFormField(
+                child: DropdownButtonFormField<ShowItem>(
                   items: _dropdownMenuItemsShow,
                   hint: Text('Display Secondary2'),
                   value: _selectedShowSec2,
                   onChanged: (selectedShow) {
                     setState(() {
-                      _selectedShowSec2 = selectedShow;
+                      _selectedShowSec2 = selectedShow!;
                     });
                   },
                 ),
@@ -1247,13 +1246,13 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.pink[100]),
-                child: DropdownButtonFormField(
+                child: DropdownButtonFormField<ShowItem>(
                   items: _dropdownMenuItemsShow,
                   hint: Text('Display Secondary3'),
                   value: _selectedShowSec3,
                   onChanged: (selectedShow) {
                     setState(() {
-                      _selectedShowSec3 = selectedShow;
+                      _selectedShowSec3 = selectedShow!;
                     });
                   },
                 ),
@@ -1283,17 +1282,17 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                       onPressed: () {
                         setState(() {
                           if (_selectedSortField1 != null)
-                            globals.sortField1 = _selectedSortField1.id;
+                            globals.sortField1 = _selectedSortField1!.id;
                           if (_selectedSortOrder1 != null)
-                            globals.sortOrder1 = _selectedSortOrder1.id;
+                            globals.sortOrder1 = _selectedSortOrder1!.id;
                           if (_selectedSortField2 != null)
-                            globals.sortField2 = _selectedSortField2.id;
+                            globals.sortField2 = _selectedSortField2!.id;
                           if (_selectedSortOrder2 != null)
-                            globals.sortOrder2 = _selectedSortOrder2.id;
+                            globals.sortOrder2 = _selectedSortOrder2!.id;
                           if (_selectedSortField3 != null)
-                            globals.sortField3 = _selectedSortField3.id;
+                            globals.sortField3 = _selectedSortField3!.id;
                           if (_selectedSortOrder3 != null)
-                            globals.sortOrder3 = _selectedSortOrder3.id;
+                            globals.sortOrder3 = _selectedSortOrder3!.id;
 //                          if (_selectedShowMain1 != null)
 //                            globals.showMain1 = _selectedShowMain1.id;
 //                          print(globals.showMain1);
@@ -1301,20 +1300,20 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
 //                            globals.showMain2 = _selectedShowMain2.id;
                           print(globals.showMain2);
                           if (_selectedShowSec1 != null)
-                            globals.showSec1 = _selectedShowSec1.id;
+                            globals.showSec1 = _selectedShowSec1!.id;
                           print(globals.showSec1);
                           if (_selectedShowSec2 != null)
-                            globals.showSec2 = _selectedShowSec2.id;
+                            globals.showSec2 = _selectedShowSec2!.id;
                           print(globals.showSec2);
                           if (_selectedShowSec3 != null)
-                            globals.showSec3 = _selectedShowSec3.id;
+                            globals.showSec3 = _selectedShowSec3!.id;
                           print(globals.showSec3);
                           if (_selectedFilterIsStar != null)
-                            globals.filterIsStar = _selectedFilterIsStar.id;
+                            globals.filterIsStar = _selectedFilterIsStar!.id;
                           if (_selectedFilterIsDone != null)
-                            globals.filterIsDone = _selectedFilterIsDone.id;
+                            globals.filterIsDone = _selectedFilterIsDone!.id;
                           if (_selectedFilterDateDue != null)
-                            globals.filterDateDue = _selectedFilterDateDue.id;
+                            globals.filterDateDue = _selectedFilterDateDue!.id;
 //                          if (_selectedFilterStatus != null)
 //                            globals.filterStatus = _selectedFilterStatus.id;
 //                          if (_selectedFilterPriority != null)
@@ -1353,128 +1352,128 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                               "",
                               "",
                               "",
-                              false,
-                              false,
+                              0,
+                              0,
                             );
                           }
 
-                          customSetting.sortField1 = _selectedSortField1 == null
+                          customSetting!.sortField1 = _selectedSortField1 == null
                               ? ""
-                              : _selectedSortField1.id.toString();
-                          customSetting.sortOrder1 = _selectedSortOrder1 == null
+                              : _selectedSortField1!.id.toString();
+                          customSetting!.sortOrder1 = _selectedSortOrder1 == null
                               ? ""
-                              : _selectedSortOrder1.id.toString();
-                          customSetting.sortField2 = _selectedSortField2 == null
+                              : _selectedSortOrder1!.id.toString();
+                          customSetting!.sortField2 = _selectedSortField2 == null
                               ? ""
-                              : _selectedSortField2.id.toString();
-                          customSetting.sortOrder2 = _selectedSortOrder2 == null
+                              : _selectedSortField2!.id.toString();
+                          customSetting!.sortOrder2 = _selectedSortOrder2 == null
                               ? ""
-                              : _selectedSortOrder2.id.toString();
-                          customSetting.sortField3 = _selectedSortField3 == null
+                              : _selectedSortOrder2!.id.toString();
+                          customSetting!.sortField3 = _selectedSortField3 == null
                               ? ""
-                              : _selectedSortField3.id.toString();
-                          customSetting.sortOrder3 = _selectedSortOrder3 == null
+                              : _selectedSortField3!.id.toString();
+                          customSetting!.sortOrder3 = _selectedSortOrder3 == null
                               ? ""
-                              : _selectedSortOrder3.id.toString();
+                              : _selectedSortOrder3!.id.toString();
 //                          customSetting.showMain1 = _selectedShowMain1 == null
 //                              ? ""
 //                              : _selectedShowMain1.id.toString();
 //                          customSetting.showMain2 = _selectedShowMain2 == null
 //                              ? ""
 //                              : _selectedShowMain2.id.toString();
-                          customSetting.showSec1 = _selectedShowSec1 == null
+                          customSetting!.showSec1 = _selectedShowSec1 == null
                               ? ""
-                              : _selectedShowSec1.id.toString();
-                          customSetting.showSec2 = _selectedShowSec2 == null
+                              : _selectedShowSec1!.id.toString();
+                          customSetting!.showSec2 = _selectedShowSec2 == null
                               ? ""
-                              : _selectedShowSec2.id.toString();
-                          customSetting.showSec3 = _selectedShowSec3 == null
+                              : _selectedShowSec2!.id.toString();
+                          customSetting!.showSec3 = _selectedShowSec3 == null
                               ? ""
-                              : _selectedShowSec3.id.toString();
-                          customSetting.filterDateDue =
+                              : _selectedShowSec3!.id.toString();
+                          customSetting!.filterDateDue =
                               _selectedFilterDateDue == null
                                   ? ""
-                                  : _selectedFilterDateDue.id.toString();
+                                  : _selectedFilterDateDue!.id.toString();
                           if (_selectedFilterIsStar == null) {
-                            customSetting.filterIsStar = false;
+                            customSetting!.filterIsStar = 0;
                           } else {
-                            if (_selectedFilterIsStar.id == 0) {
-                              customSetting.filterIsStar = false;
+                            if (_selectedFilterIsStar!.id == 0) {
+                              customSetting!.filterIsStar = 0;
                             } else {
-                              customSetting.filterIsStar = true;
+                              customSetting!.filterIsStar = 1;
                             }
                             if (_selectedFilterIsDone == null) {
-                              customSetting.filterIsDone = false;
+                              customSetting!.filterIsDone = 0;
                             } else {
-                              if (_selectedFilterIsDone.id == 0) {
-                                customSetting.filterIsDone = false;
+                              if (_selectedFilterIsDone!.id == 0) {
+                                customSetting!.filterIsDone = 0;
                               } else {
-                                customSetting.filterIsDone = true;
+                                customSetting!.filterIsDone = 1;
                               }
                             }
 
-                            customSetting.filterStatus = _selectedStatus == null
+                            customSetting!.filterStatus = _selectedStatus == null
                                 ? ""
                                 : _selectedStatus.toString();
-                            customSetting.filterPriority =
+                            customSetting!.filterPriority =
                                 _selectedPriority == null
                                     ? ""
                                     : _selectedPriority.toString();
-                            customSetting.filterCategory =
+                            customSetting!.filterCategory =
                                 _selectedCategory == null
                                     ? ""
                                     : _selectedCategory.toString();
-                            customSetting.filterAction =
+                            customSetting!.filterAction =
                                 _selectedAction1 == null
                                     ? ""
                                     : _selectedAction1.toString();
-                            customSetting.filterContext =
+                            customSetting!.filterContext =
                                 _selectedContext1 == null
                                     ? ""
                                     : _selectedContext1.toString();
-                            customSetting.filterLocation =
+                            customSetting!.filterLocation =
                                 _selectedLocation1 == null
                                     ? ""
                                     : _selectedLocation1.toString();
-                            customSetting.filterTag = _selectedTag1 == null
+                            customSetting!.filterTag = _selectedTag1 == null
                                 ? ""
                                 : _selectedTag1.toString();
-                            customSetting.filterGoal = _selectedGoal1 == null
+                            customSetting!.filterGoal = _selectedGoal1 == null
                                 ? ""
                                 : _selectedGoal1.toString();
 
                             var result;
 
-                            if (customSetting.id != null) {
+                            if (customSetting!.id != null) {
                               result =
-                                  helper.updateCustomSettings(customSetting);
+                                  helper.updateCustomSettings(customSetting!);
                             } else {
                               result =
-                                  helper.insertCustomSettings(customSetting);
+                                  helper.insertCustomSettings(customSetting!);
                             }
 
 //end of save
                           }
                         });
-                        _showSuccessSnackBar(
-                          Container(
-                            color: Colors.tealAccent[100],
-                            height: 40,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                (Icon(
-                                  Icons.thumb_up,
-                                  color: Colors.black,
-                                )),
-                                Text(
-                                  ' Added ',
-                                  style: (TextStyle(color: Colors.black)),
-                                )
-                              ],
-                            ),
-                          ),
-                        );
+//                        _showSuccessSnackBar(
+//                          Container(
+//                            color: Colors.tealAccent[100],
+//                            height: 40,
+//                            child: Row(
+//                              mainAxisAlignment: MainAxisAlignment.center,
+//                              children: [
+//                                (Icon(
+//                                  Icons.thumb_up,
+//                                  color: Colors.black,
+//                                )),
+//                                Text(
+//                                  ' Added ',
+//                                  style: (TextStyle(color: Colors.black)),
+//                                )
+//                              ],
+//                            ),
+//                          ),
+//                        );
                         Navigator.of(context).pushNamed('/dashboard');
                       },
                       style: ElevatedButton.styleFrom(
@@ -1498,39 +1497,39 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     if (_customSetting.length > 0) {
       customSetting = CustomSettings.fromObject(_customSetting[0]);
 
-      if (customSetting != null && customSetting.id != null) {
-        if (customSetting.sortField1 != "") {
+      if (customSetting != null && customSetting!.id != null) {
+        if (customSetting!.sortField1 != "") {
           _selectedSortField1 =
-              _dropdownMenuItemsSort[int.parse(customSetting.sortField1)].value;
-          globals.sortField1 = int.parse(customSetting.sortField1);
+              _dropdownMenuItemsSort[int.parse(customSetting!.sortField1!)].value!;
+          globals.sortField1 = int.parse(customSetting!.sortField1!);
         }
-        if (customSetting.sortOrder1 != "") {
+        if (customSetting!.sortOrder1 != "") {
           _selectedSortOrder1 =
-              _dropdownMenuSortOrder[int.parse(customSetting.sortOrder1)].value;
+              _dropdownMenuSortOrder[int.parse(customSetting!.sortOrder1!)].value!;
           globals.sortField1 = int.parse(
-              customSetting.sortOrder1); //convert it to session variables
+              customSetting!.sortOrder1!); //convert it to session variables
         }
-        if (customSetting.sortField2 != "") {
+        if (customSetting!.sortField2 != "") {
           _selectedSortField2 =
-              _dropdownMenuItemsSort[int.parse(customSetting.sortField2)].value;
-          globals.sortField2 = int.parse(customSetting.sortField2);
+              _dropdownMenuItemsSort[int.parse(customSetting!.sortField2!)].value!;
+          globals.sortField2 = int.parse(customSetting!.sortField2!);
         }
-        if (customSetting.sortOrder2 != "") {
+        if (customSetting!.sortOrder2 != "") {
           _selectedSortOrder2 =
-              _dropdownMenuSortOrder[int.parse(customSetting.sortOrder2)].value;
+              _dropdownMenuSortOrder[int.parse(customSetting!.sortOrder2!)].value!;
           globals.sortField2 = int.parse(
-              customSetting.sortOrder2); //convert it to session variables
+              customSetting!.sortOrder2!); //convert it to session variables
         }
-        if (customSetting.sortField3 != "") {
+        if (customSetting!.sortField3 != "") {
           _selectedSortField3 =
-              _dropdownMenuItemsSort[int.parse(customSetting.sortField3)].value;
-          globals.sortField3 = int.parse(customSetting.sortField3);
+              _dropdownMenuItemsSort[int.parse(customSetting!.sortField3!)].value!;
+          globals.sortField3 = int.parse(customSetting!.sortField3!);
         }
-        if (customSetting.sortOrder3 != "") {
+        if (customSetting!.sortOrder3 != "") {
           _selectedSortOrder3 =
-              _dropdownMenuSortOrder[int.parse(customSetting.sortOrder3)].value;
+              _dropdownMenuSortOrder[int.parse(customSetting!.sortOrder3!)].value!;
           globals.sortField3 = int.parse(
-              customSetting.sortOrder3); //convert it to session variables
+              customSetting!.sortOrder3!); //convert it to session variables
         }
 //        if (customSetting.showMain1 != "") {
 //          _selectedShowMain1 =
@@ -1542,103 +1541,103 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
 //              _dropdownMenuItemsSort[int.parse(customSetting.showMain2)].value;
 //          globals.showMain2 = int.parse(customSetting.showMain2);
 //        }
-        if (customSetting.showSec1 != "") {
+        if (customSetting!.showSec1 != "") {
           _selectedShowSec1 =
-              _dropdownMenuItemsShow[int.parse(customSetting.showSec1)].value;
-          globals.showSec1 = int.parse(customSetting.showSec1);
+              _dropdownMenuItemsShow[int.parse(customSetting!.showSec1!)].value!;
+          globals.showSec1 = int.parse(customSetting!.showSec1!);
         }
-        if (customSetting.showSec2 != "") {
+        if (customSetting!.showSec2 != "") {
           _selectedShowSec2 =
-              _dropdownMenuItemsShow[int.parse(customSetting.showSec2)].value;
-          globals.showSec2 = int.parse(customSetting.showSec2);
+              _dropdownMenuItemsShow[int.parse(customSetting!.showSec2!)].value!;
+          globals.showSec2 = int.parse(customSetting!.showSec2!);
         }
-        if (customSetting.showSec3 != "") {
+        if (customSetting!.showSec3 != "") {
           _selectedShowSec3 =
-              _dropdownMenuItemsShow[int.parse(customSetting.showSec3)].value;
-          globals.showSec3 = int.parse(customSetting.showSec3);
+              _dropdownMenuItemsShow[int.parse(customSetting!.showSec3!)].value!;
+          globals.showSec3 = int.parse(customSetting!.showSec3!);
         }
-        if (customSetting.filterIsStar == true) {
-          _selectedFilterIsStar = _dropdownFilterIsStar[1].value;
+        if (customSetting!.filterIsStar == true) {
+          _selectedFilterIsStar = _dropdownFilterIsStar[1].value!;
           globals.filterIsStar = 1;
         } else
-          _selectedFilterIsStar = _dropdownFilterIsStar[0].value;
+          _selectedFilterIsStar = _dropdownFilterIsStar[0].value!;
       }
-      if (customSetting.filterIsDone == true) {
-        _selectedFilterIsDone = _dropdownFilterIsDone[1].value;
+      if (customSetting!.filterIsDone == true) {
+        _selectedFilterIsDone = _dropdownFilterIsDone[1].value!;
         globals.filterIsDone = 1;
       } else
-        _selectedFilterIsDone = _dropdownFilterIsDone[0].value;
+        _selectedFilterIsDone = _dropdownFilterIsDone[0].value!;
     }
 
-    if (customSetting.filterDateDue != "") {
+    if (customSetting!.filterDateDue != "") {
       _selectedFilterDateDue =
-          _dropdownFilterDateDue[int.parse(customSetting.filterDateDue)].value;
-      globals.filterDateDue = int.parse(customSetting.filterDateDue);
+          _dropdownFilterDateDue[int.parse(customSetting!.filterDateDue!)].value!;
+      globals.filterDateDue = int.parse(customSetting!.filterDateDue!);
     }
     ////////////////////////////
     /// filter - picklists
     ////////////////////////////
-    if (customSetting.filterStatus == "") {
+    if (customSetting!.filterStatus == "") {
       _selectedStatus = null;
-      customSetting.filterStatus = null;
+      customSetting!.filterStatus = "";
     } else {
-      _selectedStatus = customSetting.filterStatus.toString();
-      globals.filterStatus = int.parse(customSetting.filterStatus);
+      _selectedStatus = customSetting!.filterStatus.toString();
+      globals.filterStatus = int.parse(customSetting!.filterStatus!);
     }
 
-    if (customSetting.filterPriority == "") {
+    if (customSetting!.filterPriority == "") {
       _selectedPriority = null;
-      customSetting.filterPriority = null;
+      customSetting!.filterPriority = "";
     } else {
-      _selectedCategory = customSetting.filterCategory.toString();
-      globals.filterCategory = int.parse(customSetting.filterCategory);
+      _selectedCategory = customSetting!.filterCategory.toString();
+      globals.filterCategory = int.parse(customSetting!.filterCategory!);
     }
 
-    if (customSetting.filterCategory == "") {
+    if (customSetting!.filterCategory == "") {
       _selectedCategory = null;
-      customSetting.filterCategory = null;
+      customSetting!.filterCategory = "";
     } else {
-      _selectedCategory = customSetting.filterCategory.toString();
-      globals.filterCategory = int.parse(customSetting.filterCategory);
+      _selectedCategory = customSetting!.filterCategory.toString();
+      globals.filterCategory = int.parse(customSetting!.filterCategory!);
     }
 
-    if (customSetting.filterAction == "") {
+    if (customSetting!.filterAction == "") {
       _selectedAction1 = null;
-      customSetting.filterAction = null;
+      customSetting!.filterAction = "";
     } else {
-      _selectedAction1 = customSetting.filterAction.toString();
-      globals.filterAction = int.parse(customSetting.filterAction);
+      _selectedAction1 = customSetting!.filterAction.toString();
+      globals.filterAction = int.parse(customSetting!.filterAction!);
     }
-    if (customSetting.filterContext == "") {
+    if (customSetting!.filterContext == "") {
       _selectedContext1 = null;
-      customSetting.filterContext = null;
+      customSetting!.filterContext = "";
     } else {
-      _selectedContext1 = customSetting.filterContext.toString();
-      globals.filterContext = int.parse(customSetting.filterContext);
+      _selectedContext1 = customSetting!.filterContext.toString();
+      globals.filterContext = int.parse(customSetting!.filterContext!);
     }
 
-    if (customSetting.filterTag == "") {
+    if (customSetting!.filterTag == "") {
       _selectedTag1 = null;
-      customSetting.filterTag = null;
+      customSetting!.filterTag = "";
     } else {
-      _selectedTag1 = customSetting.filterTag.toString();
-      globals.filterTag = int.parse(customSetting.filterTag);
+      _selectedTag1 = customSetting!.filterTag.toString();
+      globals.filterTag = int.parse(customSetting!.filterTag!);
     }
 
-    if (customSetting.filterGoal == "") {
+    if (customSetting!.filterGoal == "") {
       _selectedGoal1 = null;
-      customSetting.filterGoal = null;
+      customSetting!.filterGoal = "";
     } else {
-      _selectedGoal1 = customSetting.filterGoal.toString();
-      globals.filterGoal = int.parse(customSetting.filterGoal);
+      _selectedGoal1 = customSetting!.filterGoal.toString();
+      globals.filterGoal = int.parse(customSetting!.filterGoal!);
     }
 
-    if (customSetting.filterLocation == "") {
+    if (customSetting!.filterLocation == "") {
       _selectedLocation1 = null;
-      customSetting.filterLocation = null;
+      customSetting!.filterLocation = "";
     } else {
-      _selectedLocation1 = customSetting.filterLocation.toString();
-      globals.filterLocation = int.parse(customSetting.filterLocation);
+      _selectedLocation1 = customSetting!.filterLocation.toString();
+      globals.filterLocation = int.parse(customSetting!.filterLocation!);
     }
 
     setState(() {

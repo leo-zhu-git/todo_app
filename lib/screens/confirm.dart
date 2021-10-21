@@ -6,7 +6,7 @@ import 'package:flutter_login/flutter_login.dart';
 class ConfirmScreen extends StatefulWidget {
   final LoginData data;
 
-  ConfirmScreen({@required this.data});
+  ConfirmScreen({required this.data});
 
   @override
   _ConfirmScreenState createState() => _ConfirmScreenState();

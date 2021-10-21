@@ -19,7 +19,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   var _editCategoryNameController = TextEditingController();
   var _editCategoryDescriptionController = TextEditingController();
 
-  List<Category> _categoryList = List<Category>();
+  List<Category> _categoryList = [];
 
   var category;
 
@@ -32,7 +32,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
 
   getAllCategories() async {
-    _categoryList = List<Category>();
+    _categoryList = [];
     var categories = await _categoryService.getCategories();
     if (categories.length != 0) {
       categories.forEach((category) {
@@ -85,30 +85,30 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                   onPressed: () async {
                     _category.name = _categoryNameController.text;
                     _category.description = _categoryDescriptionController.text;
-                    _category.id = null;
+//                    _category.id = null;
 
                     var result = _categoryService.insertCategories(_category);
                     print(result);
                     print(_category.name);
                     Navigator.pop(context);
                     getAllCategories();
-                    _showSuccessSnackBar(Container(
-                      color: Colors.tealAccent[100],
-                      height: 40,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          (Icon(
-                            Icons.thumb_up,
-                            color: Colors.black,
-                          )),
-                          Text(
-                            ' Added ',
-                            style: (TextStyle(color: Colors.black)),
-                          )
-                        ],
-                      ),
-                    ));
+//                    _showSuccessSnackBar(Container(
+//                      color: Colors.tealAccent[100],
+//                      height: 40,
+//                      child: Row(
+//                        mainAxisAlignment: MainAxisAlignment.center,
+//                        children: [
+//                          (Icon(
+//                            Icons.thumb_up,
+//                            color: Colors.black,
+//                          )),
+//                          Text(
+//                            ' Added ',
+//                            style: (TextStyle(color: Colors.black)),
+//                          )
+//                        ],
+//                      ),
+//                    ));
                   },
                     style: ElevatedButton.styleFrom(
                       primary: Colors.brown[900],
@@ -174,25 +174,25 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                     if (result > 0) {
                       Navigator.pop(context);
                       getAllCategories();
-                      _showSuccessSnackBar(
-                        Container(
-                          color: Colors.tealAccent[100],
-                          height: 40,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              (Icon(
-                                Icons.thumb_up,
-                                color: Colors.black,
-                              )),
-                              Text(
-                                ' Updated ',
-                                style: (TextStyle(color: Colors.black)),
-                              )
-                            ],
-                          ),
-                        ),
-                      );
+//                      _showSuccessSnackBar(
+//                        Container(
+//                          color: Colors.tealAccent[100],
+//                          height: 40,
+//                          child: Row(
+//                            mainAxisAlignment: MainAxisAlignment.center,
+//                            children: [
+//                              (Icon(
+//                                Icons.thumb_up,
+//                                color: Colors.black,
+//                              )),
+//                              Text(
+//                                ' Updated ',
+//                                style: (TextStyle(color: Colors.black)),
+//                              )
+//                            ],
+//                          ),
+//                        ),
+//                      );
                     }
                   },
                   style: ElevatedButton.styleFrom(
@@ -259,25 +259,25 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                   if (result > 0) {
                     Navigator.pop(context);
                     getAllCategories();
-                    _showSuccessSnackBar(
-                      Container(
-                        color: Colors.tealAccent[100],
-                        height: 40,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            (Icon(
-                              Icons.thumb_up,
-                              color: Colors.black,
-                            )),
-                            Text(
-                              ' Deleted ',
-                              style: (TextStyle(color: Colors.black)),
-                            )
-                          ],
-                        ),
-                      ),
-                    );
+//                    _showSuccessSnackBar(
+//                      Container(
+//                        color: Colors.tealAccent[100],
+//                        height: 40,
+//                        child: Row(
+//                          mainAxisAlignment: MainAxisAlignment.center,
+//                          children: [
+//                            (Icon(
+//                              Icons.thumb_up,
+//                              color: Colors.black,
+//                            )),
+//                            Text(
+//                              ' Deleted ',
+//                              style: (TextStyle(color: Colors.black)),
+//                            )
+//                          ],
+//                        ),
+//                      ),
+//                    );
                   }
                 },
                 child: 
@@ -292,10 +292,10 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
         });
   }
 
-  _showSuccessSnackBar(message) {
-    var _snackBar = SnackBar(content: message);
-    _globalKey.currentState.showSnackBar(_snackBar);
-  }
+// _showSuccessSnackBar(message) {
+//    var _snackBar = SnackBar(content: message);
+//    _globalKey.currentState.showSnackBar(_snackBar);
+//  }
 
   @override
   Widget build(BuildContext context) {
@@ -304,8 +304,8 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
       key: _globalKey,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-//        backgroundColor: Colors.brown[900],
-        backgroundColor: Colors.amber[900],
+        backgroundColor: Colors.brown[900],
+//        backgroundColor: Colors.amber[900],
         elevation: 8,
         title: Center(
           child: Container(
@@ -317,7 +317,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                   position: BadgePosition.topEnd(),
                   badgeContent: Text(_categoryList.length.toString(),
                       style: TextStyle(color: Colors.black)),
-                  badgeColor: Colors.orange[100],
+                  badgeColor: Colors.orange[100]!,
                 ),
               ],
             ),
@@ -343,7 +343,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Flexible(
-                      child: Text(_categoryList[index].name,
+                      child: Text(_categoryList[index].name!,
                           overflow: TextOverflow.ellipsis),
                     ),
                     IconButton(

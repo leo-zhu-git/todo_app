@@ -11,7 +11,7 @@ import 'package:rxdart/subjects.dart';
 
 class NotificationPlugin {
   //
-  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
+  FlutterLocalNotificationsPlugin? flutterLocalNotificationsPlugin;
   final BehaviorSubject<ReceivedNotification>
       didReceivedLocalNotificationSubject =
       BehaviorSubject<ReceivedNotification>();
@@ -41,7 +41,10 @@ class NotificationPlugin {
       requestSoundPermission: false,
       onDidReceiveLocalNotification: (id, title, body, payload) async {
         ReceivedNotification receivedNotification = ReceivedNotification(
-            id: id, title: title, body: body, payload: payload);
+            id: id, 
+            title: title!, 
+            body: body!, 
+            payload: payload!);
         didReceivedLocalNotificationSubject.add(receivedNotification);
       },
     );
@@ -51,9 +54,9 @@ class NotificationPlugin {
   }
 
   _requestIOSPermission() {
-    flutterLocalNotificationsPlugin
+    flutterLocalNotificationsPlugin!
         .resolvePlatformSpecificImplementation<
-            IOSFlutterLocalNotificationsPlugin>()
+            IOSFlutterLocalNotificationsPlugin>()!
         .requestPermissions(
           alert: false,
           badge: true,
@@ -68,8 +71,8 @@ class NotificationPlugin {
   }
 
   setOnNotificationClick(Function onNotificationClick) async {
-    await flutterLocalNotificationsPlugin.initialize(initializationSettings,
-        onSelectNotification: (String payload) async {
+    await flutterLocalNotificationsPlugin!.initialize(initializationSettings,
+        onSelectNotification: (payload) async {
       onNotificationClick(payload);
     });
   }
@@ -97,7 +100,7 @@ class NotificationPlugin {
     var iosChannelSpecifics = IOSNotificationDetails();
     var platformChannelSpecifics = NotificationDetails(
         android: androidChannelSpecifics, iOS: iosChannelSpecifics);
-    await flutterLocalNotificationsPlugin.show(
+    await flutterLocalNotificationsPlugin!.show(
       0,
       _nTitle,
       _nBody,
@@ -188,7 +191,7 @@ class NotificationPlugin {
       } else {
         var _tzNowDateTime = tz.TZDateTime.from(DateTime.now(), tz.local);
         var _tzNotifyDateTime = tz.TZDateTime.from(_notifyDateTime, tz.local);
-        await flutterLocalNotificationsPlugin.zonedSchedule(
+        await flutterLocalNotificationsPlugin!.zonedSchedule(
             0,
             _nTitle,
             _nBody,
@@ -223,7 +226,7 @@ class NotificationPlugin {
     var iosChannelSpecifics = IOSNotificationDetails();
     var platformChannelSpecifics = NotificationDetails(
         android: androidChannelSpecifics, iOS: iosChannelSpecifics);
-    await flutterLocalNotificationsPlugin.periodicallyShow(
+    await flutterLocalNotificationsPlugin!.periodicallyShow(
       0,
       'Repeating Test Title',
       'Repeating Test Body',
@@ -255,7 +258,7 @@ class NotificationPlugin {
     var iosChannelSpecifics = IOSNotificationDetails();
     var platformChannelSpecifics = NotificationDetails(
         android: androidChannelSpecifics, iOS: iosChannelSpecifics);
-    await flutterLocalNotificationsPlugin.showDailyAtTime(
+    await flutterLocalNotificationsPlugin!.showDailyAtTime(
       0,
       'Test Title at ${time.hour}:${time.minute}.${time.second}',
       'Test Body', //null
@@ -281,7 +284,7 @@ class NotificationPlugin {
     var iosChannelSpecifics = IOSNotificationDetails();
     var platformChannelSpecifics = NotificationDetails(
         android: androidChannelSpecifics, iOS: iosChannelSpecifics);
-    await flutterLocalNotificationsPlugin.showWeeklyAtDayAndTime(
+    await flutterLocalNotificationsPlugin!.showWeeklyAtDayAndTime(
       0,
       'Test Title at ${time.hour}:${time.minute}.${time.second}',
       'Test Body', //null
@@ -315,7 +318,7 @@ class NotificationPlugin {
     );
     var notificationDetails = NotificationDetails(
         android: androidChannelSpecifics, iOS: iOSPlatformSpecifics);
-    await flutterLocalNotificationsPlugin.show(
+    await flutterLocalNotificationsPlugin!.show(
       0,
       'Title with attachment',
       'Body with Attachment',
@@ -334,16 +337,16 @@ class NotificationPlugin {
 
   Future<int> getPendingNotificationCount() async {
     List<PendingNotificationRequest> p =
-        await flutterLocalNotificationsPlugin.pendingNotificationRequests();
+        await flutterLocalNotificationsPlugin!.pendingNotificationRequests();
     return p.length;
   }
 
   Future<void> cancelNotification() async {
-    await flutterLocalNotificationsPlugin.cancel(0);
+    await flutterLocalNotificationsPlugin!.cancel(0);
   }
 
   Future<void> cancelAllNotification() async {
-    await flutterLocalNotificationsPlugin.cancelAll();
+    await flutterLocalNotificationsPlugin!.cancelAll();
   }
 }
 
@@ -356,9 +359,9 @@ class ReceivedNotification {
   final String payload;
 
   ReceivedNotification({
-    @required this.id,
-    @required this.title,
-    @required this.body,
-    @required this.payload,
+    required this.id,
+    required this.title,
+    required this.body,
+    required this.payload,
   });
 }

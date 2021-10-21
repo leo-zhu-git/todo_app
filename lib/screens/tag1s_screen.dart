@@ -20,7 +20,7 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
   var _editTag1NameController = TextEditingController();
   var _editTag1DescriptionController = TextEditingController();
 
-  List<Tag1> _tag1List = List<Tag1>();
+  List<Tag1> _tag1List = [];
 
   var tag1;
 
@@ -33,7 +33,7 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
 
   getAllTag1s() async {
-    _tag1List = List<Tag1>();
+    _tag1List = [];
     var tag1 = await _tag1Service.getTag1s();
     tag1.forEach((tag1) {
       setState(() {
@@ -86,28 +86,28 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
                   onPressed: () {
                     _tag1.name = _tag1NameController.text;
                     _tag1.description = _tag1DescriptionController.text;
-                    _tag1.id = null;
+//                    _tag1.id = null;
 
                     var result = _tag1Service.insertTag1s(_tag1);
                     Navigator.pop(context);
                     getAllTag1s();
-                    _showSuccessSnackBar(Container(
-                      color: Colors.tealAccent[100],
-                      height: 40,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          (Icon(
-                            Icons.thumb_up,
-                            color: Colors.black,
-                          )),
-                          Text(
-                            ' Added ',
-                            style: (TextStyle(color: Colors.black)),
-                          )
-                        ],
-                      ),
-                    ));
+//                    _showSuccessSnackBar(Container(
+//                      color: Colors.tealAccent[100],
+//                      height: 40,
+//                      child: Row(
+//                        mainAxisAlignment: MainAxisAlignment.center,
+//                        children: [
+//                          (Icon(
+//                            Icons.thumb_up,
+//                            color: Colors.black,
+//                          )),
+//                          Text(
+//                            ' Added ',
+//                            style: (TextStyle(color: Colors.black)),
+//                          )
+//                        ],
+//                      ),
+//                    ));
                   },
                   child: Text(
                     'Save',
@@ -171,25 +171,25 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
                     if (result > 0) {
                       Navigator.pop(context);
                       getAllTag1s();
-                      _showSuccessSnackBar(
-                        Container(
-                          color: Colors.tealAccent[100],
-                          height: 40,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              (Icon(
-                                Icons.thumb_up,
-                                color: Colors.black,
-                              )),
-                              Text(
-                                ' Updated ',
-                                style: (TextStyle(color: Colors.black)),
-                              )
-                            ],
-                          ),
-                        ),
-                      );
+//                      _showSuccessSnackBar(
+//                        Container(
+//                          color: Colors.tealAccent[100],
+//                          height: 40,
+//                          child: Row(
+//                            mainAxisAlignment: MainAxisAlignment.center,
+//                            children: [
+//                              (Icon(
+//                                Icons.thumb_up,
+//                                color: Colors.black,
+//                              )),
+//                              Text(
+//                                ' Updated ',
+//                                style: (TextStyle(color: Colors.black)),
+//                              )
+//                            ],
+//                         ),
+//                        ),
+//                      );
                     }
                   },
                   child: Text(
@@ -248,25 +248,25 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
                     if (result > 0) {
                       Navigator.pop(context);
                       getAllTag1s();
-                      _showSuccessSnackBar(
-                        Container(
-                          color: Colors.tealAccent[100],
-                          height: 40,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              (Icon(
-                                Icons.thumb_up,
-                                color: Colors.black,
-                              )),
-                              Text(
-                                ' Deleted ',
-                                style: (TextStyle(color: Colors.black)),
-                              )
-                            ],
-                          ),
-                        ),
-                      );
+//                      _showSuccessSnackBar(
+//                        Container(
+//                          color: Colors.tealAccent[100],
+//                          height: 40,
+//                          child: Row(
+//                            mainAxisAlignment: MainAxisAlignment.center,
+//                            children: [
+//                              (Icon(
+//                                Icons.thumb_up,
+//                                color: Colors.black,
+//                              )),
+//                              Text(
+//                                ' Deleted ',
+//                                style: (TextStyle(color: Colors.black)),
+//                              )
+//                            ],
+//                          ),
+//                        ),
+//                      );
                     }
                   },
                   child: Text(
@@ -279,10 +279,10 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
         });
   }
 
-  _showSuccessSnackBar(message) {
-    var _snackBar = SnackBar(content: message);
-    _globalKey.currentState.showSnackBar(_snackBar);
-  }
+//  _showSuccessSnackBar(message) {
+//    var _snackBar = SnackBar(content: message);
+//    _globalKey.currentState.showSnackBar(_snackBar);
+//  }
 
   @override
   Widget build(BuildContext context) {
@@ -302,7 +302,7 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
                   position: BadgePosition.topEnd(),
                   badgeContent: Text(_tag1List.length.toString(),
                       style: TextStyle(color: Colors.black)),
-                  badgeColor: Colors.orange[100],
+//                  badgeColor: Colors.orange[100],
                 ),
               ],
             ),
@@ -327,7 +327,7 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Flexible(
-                      child: Text(_tag1List[index].name,
+                      child: Text(_tag1List[index].name!,
                           overflow: TextOverflow.ellipsis),
                     ),
                     IconButton(

@@ -70,9 +70,9 @@ class DbHelper {
     return _dbHelper;
   }
 
-  static Database _db;
+  static Database? _db;
 
-  Future<Database> get db async {
+  Future<Database?> get db async {
     if (_db == null) {
       _db = await initializeDb();
     }
@@ -81,7 +81,7 @@ class DbHelper {
 
   Future<Database> initializeDb() async {
     Directory dir = await getApplicationDocumentsDirectory();
-    String path = dir.path + "todo_V22.f8.db";
+    String path = dir.path + "todo_V22.g6.db";
     var dbTodovn = await openDatabase(path, version: 1, onCreate: _createDb);
     return dbTodovn;
   }
@@ -261,8 +261,10 @@ class DbHelper {
         ['1.Quiet Time', '1Bootstrap - please delete or rename if necessary']);
 
     await db.execute(
-        "INSERT INTO context1s ( 'name', 'description')  values (?, ?)",
-        ['2.Internet Time', '2Bootstrap - please delete or rename if necessary']);
+        "INSERT INTO context1s ( 'name', 'description')  values (?, ?)", [
+      '2.Internet Time',
+      '2Bootstrap - please delete or rename if necessary'
+    ]);
 
     await db.execute(
         "INSERT INTO context1s ( 'name', 'description')  values (?, ?)",
@@ -333,29 +335,29 @@ class DbHelper {
 
     //Default value for Custom Setting
     CustomSettings customSetting = new CustomSettings(
-        "12", // sort1 - star
-        '1', // order1 - descending order
-        '2', // sort2 - due date
-        '0', // order2
-        '3', // sort3 - due time
-        '0', // order3
-        '0', // main1 - task
-        '', // main2
-        '0', // sec1 - dateDue
-        '4', // sec2 - priority
-        '3', // sec3 - Category
-        '0', // dateDue
-        "", // priority
-        "", // status
-        "", // category
-        "", // action
-        "", // context
-        "", // location
-        "", // tag
-        "", // goal
-        false, // isStar
-        false, //isDone
-        ); // 
+      "12", // sort1 - star
+      '1', // order1 - descending order
+      '2', // sort2 - due date
+      '0', // order2
+      '3', // sort3 - due time
+      '0', // order3
+      '0', // main1 - task
+      '', // main2
+      '0', // sec1 - dateDue
+      '4', // sec2 - priority
+      '3', // sec3 - Category
+      '0', // dateDue
+      "", // priority
+      "", // status
+      "1", // category
+      "", // action
+      "", // context
+      "", // location
+      "", // tag
+      "", // goal
+      0, // isStar
+      0, //isDone
+    ); //
     var result = insertCustomSettings(customSetting);
 
     DateTime _dateDue = DateTime.now();
@@ -481,7 +483,7 @@ Plan C - USD 24 | 12 month
         formattedate, // dateDue
         '', // timeDue
         '', // status
-        '1', // priority
+        '', // priority
         '1', // category
         '', // action
         '', // context
@@ -501,63 +503,64 @@ Plan C - USD 24 | 12 month
   }
 
   Future<int> insertTask(Task task) async {
-    Database db = await this.db;
+    Database? db = await this.db;
 
-    var result = await db.insert(tblTodo, task.toMap());
+    var result = await db!.insert(tblTodo, task.toMap());
     print(result);
     return result;
   }
 
   Future<List> getTasksByID(String taskID) async {
-    Database db = await this.db;
-    var result = await db.rawQuery("SELECT * FROM todo where $colId = $taskID");
+    Database? db = await this.db;
+    var result =
+        await db!.rawQuery("SELECT * FROM todo where $colId = $taskID");
     return result;
   }
 
   Future<List> getAllTasks() async {
-    Database db = await this.db;
+    Database? db = await this.db;
 //    var result = await db.rawQuery("SELECT * FROM todo where $colId < 6");
-    var result = await db.rawQuery("SELECT * FROM todo");
+    var result = await db!.rawQuery("SELECT * FROM todo");
     return result;
   }
 
   Future<List> getTasksFromLastFewDays(int days) async {
-    Database db = await this.db;
-    var result = await db.rawQuery(
+    Database? db = await this.db;
+    var result = await db!.rawQuery(
         "SELECT * FROM todo where (julianday(Date('now')) - julianday(date($colLastModified)) > 3)");
 
     return result;
   }
 
   Future<List> getTasks() async {
-    Database db = await this.db;
-    var result = await db.rawQuery(
+    Database? db = await this.db;
+    var result = await db!.rawQuery(
         "SELECT * FROM $tblTodo where ($colIsDone != 1) order by $colCategory $colsortOrder1, $colDateDue ASC, $colTimeDue $colsortOrder2, $colTask $colsortOrder3");
     return result;
   }
 
   Future<List> getTasksSort(
-      String colsortField1,
-      String colsortOrder1,
-      String colsortField2,
-      String colsortOrder2,
-      String colsortField3,
-      String colsortOrder3,
-      String colfilterDateDue,
-      String colfilterStatus,
-      String colfilterPriority,
-      String colfilterCategory,
-      String colfilterAction,
-      String colfilterContext,
-      String colfilterLocation,
-      String colfilterTag,
-      String colfilterGoal,
-      int colfilterIsStar,
-      int colfilterIsDone) async {
+      String? colsortField1,
+      String? colsortOrder1,
+      String? colsortField2,
+      String? colsortOrder2,
+      String? colsortField3,
+      String? colsortOrder3,
+      String? colfilterDateDue,
+      String? colfilterStatus,
+      String? colfilterPriority,
+      String? colfilterCategory,
+      String? colfilterAction,
+      String? colfilterContext,
+      String? colfilterLocation,
+      String? colfilterTag,
+      String? colfilterGoal,
+      int? colfilterIsStar,
+      int? colfilterIsDone) async {
 ////////////////
     /// build query 0
 ////////////////
-    Database db = await this.db;
+    Database? db = await this.db;
 
     String queryStr = "";
     queryStr =
@@ -602,21 +605,22 @@ Plan C - USD 24 | 12 month
     final String formattedN30D = formatter.format(_N30D);
 
 ////////////////
-/// build query - add filterIsDone
+    /// build query - add filterIsDone
 ////////////////
-    if (colfilterIsDone == 0) // show
-      queryStr = queryStr + " where ($colIsDone == $colIsDone)";
-    else
+    if (colfilterIsDone == 0 || colfilterIsDone == null) // show
+    {
+//      queryStr = queryStr + " where ($colIsDone == $colIsDone)";
+    } else
       queryStr = queryStr + " where ($colIsDone != 1)";
 
 ////////////////
-/// build query - add filterIsStar
+    /// build query - add filterIsStar
 ////////////////
-    if (colfilterIsStar == 0) // show
-      queryStr = queryStr + " and ($colIsStar == $colIsStar)";
-    else
+    if (colfilterIsStar == 0 || colfilterIsStar == null) // show
+    {
+//      queryStr = queryStr + " and ($colIsStar == $colIsStar)";
+    } else
       queryStr = queryStr + " and ($colIsStar == '1')";
-
 
 ////////////////
     /// build query - add DateDue
@@ -656,7 +660,7 @@ Plan C - USD 24 | 12 month
 ////////////////
     /// build query - add status
 ////////////////
-    if (colfilterStatus == "0") {
+    if (colfilterStatus == "0" || colfilterStatus == "null") {
     } // hide
 // include all
     else {
@@ -666,7 +670,7 @@ Plan C - USD 24 | 12 month
 ////////////////
     /// build query - add priority
 ////////////////
-    if (colfilterPriority == "0") {
+    if (colfilterPriority == "0" || colfilterPriority == "null") {
     } // hide
 // include all
     else {
@@ -676,7 +680,7 @@ Plan C - USD 24 | 12 month
 ////////////////
     /// build query - add category
 ////////////////
-    if (colfilterCategory == "0") {
+    if (colfilterCategory == "0" || colfilterCategory == "null") {
     } // hide
 // include all
     else {
@@ -686,7 +690,7 @@ Plan C - USD 24 | 12 month
 ////////////////
     /// build query - add action
 ////////////////
-    if (colfilterAction == "0") {
+    if (colfilterAction == "0" || colfilterAction == "null") {
     } else {
       queryStr = queryStr + " and ($colAction1 == $colfilterAction)";
     }
@@ -694,7 +698,7 @@ Plan C - USD 24 | 12 month
 ////////////////
     /// build query - add context
 ////////////////
-    if (colfilterContext == "0") {
+    if (colfilterContext == "0" || colfilterContext == "null") {
     } else {
       queryStr = queryStr + " and ($colContext1 == $colfilterContext)";
     }
@@ -702,7 +706,7 @@ Plan C - USD 24 | 12 month
 ////////////////
     /// build query - add location
 ////////////////
-    if (colfilterLocation == "0") {
+    if (colfilterLocation == "0" || colfilterLocation == "null") {
     } else {
       queryStr = queryStr + " and ($colLocation1 == $colfilterLocation)";
     }
@@ -710,7 +714,7 @@ Plan C - USD 24 | 12 month
 ////////////////
     /// build query - add tag
 ////////////////
-    if (colfilterTag == "0") {
+    if (colfilterTag == "0" || colfilterTag == "null") {
     } else {
       queryStr = queryStr + " and ($colTag1 == $colfilterTag)";
     }
@@ -718,7 +722,7 @@ Plan C - USD 24 | 12 month
 ////////////////
     /// build query - add goal
 ////////////////
-    if (colfilterGoal == "0") {
+    if (colfilterGoal == "0" || colfilterGoal == "null") {
     } else {
       queryStr = queryStr + " and ($colGoal1 == $colfilterGoal)";
     }
@@ -730,144 +734,133 @@ Plan C - USD 24 | 12 month
         " order by $colsortField1 $colsortOrder1, $colsortField2 $colsortOrder2, $colsortField3 $colsortOrder3";
 
     print(queryStr);
-    var result = await db.rawQuery(queryStr);
+    var result = await db!.rawQuery(queryStr);
     return result;
-//    if (colfilterIsDone == 1) {
-//      var result = await db.rawQuery(// show IsDone
-//          "SELECT * FROM $tblTodo where ($colIsDone not NULL) order by $colsortField1 $colsortOrder1, $colsortField2 $colsortOrder2, $colsortField3 $colsortOrder3");
-//      return result;
-//    } else {
-//      // hide IsDone
-//      var result = await db.rawQuery(
-//          "SELECT * FROM $tblTodo where ($colIsDone == 0 and $colDateDue >= '$_startDate') order by $colsortField1 $colsortOrder1, $colsortField2 $colsortOrder2, $colsortField3 $colsortOrder3");
-//          "SELECT * FROM $tblTodo where ($colIsDone == 0 and $colDateDue >= '$_startDate' and $colDateDue <= '$_endDate') order by $colsortField1 $colsortOrder1, $colsortField2 $colsortOrder2, $colsortField3 $colsortOrder3");
-//          "SELECT * FROM $tblTodo where ($colIsDone == 0) order by $colsortField1 $colsortOrder1, $colsortField2 $colsortOrder2, $colsortField3 $colsortOrder3");
-//      return result;
   }
 
   Future<List> searchTasks(
-      String searchText,
-      String searchStatus,
-      String searchPriority,
-      String searchCategory,
-      String searchAction1,
-      String searchContext1,
-      String searchLocation1,
-      String searchTag1,
-      String searchGoal1,
-      bool includeIsStar,
-      bool includeIsDone) async {
-    Database db = await this.db;
+      String? searchText,
+      String? searchStatus,
+      String? searchPriority,
+      String? searchCategory,
+      String? searchAction1,
+      String? searchContext1,
+      String? searchLocation1,
+      String? searchTag1,
+      String? searchGoal1,
+      int? includeIsStar,
+      int? includeIsDone) async {
+    Database? db = await this.db;
 
     String queryStr = "";
     queryStr =
         "SELECT * FROM $tblTodo WHERE ($colTask LIKE '%$searchText%' OR $colNote LIKE '%$searchText%') ";
 
-    if (includeIsDone) {
+    if (includeIsDone! == 1) {
       //queryStr = queryStr + " AND  $colIsDone = $includeIsDone";
     } else {
       queryStr = queryStr + " AND  $colIsDone = 0 ";
     }
 
-    if (searchStatus != null) {
+    if (searchStatus != "null") {
       queryStr = queryStr + " AND $colStatus = '$searchStatus' ";
     }
-    if (searchPriority != null) {
+    if (searchPriority != "null") {
       queryStr = queryStr + " AND $colPriority = '$searchPriority' ";
     }
-    if (searchCategory != null) {
+    if (searchCategory != "null") {
       queryStr = queryStr + " AND $colCategory = '$searchCategory' ";
     }
-    if (searchAction1 != null) {
+    if (searchAction1 != "null") {
       queryStr = queryStr + " AND $colAction1 = '$searchAction1' ";
     }
-    if (searchContext1 != null) {
+    if (searchContext1 != "null") {
       queryStr = queryStr + " AND $colContext1 = '$searchContext1' ";
     }
-    if (searchLocation1 != null) {
+    if (searchLocation1 != "null") {
       queryStr = queryStr + " AND $colLocation1 = '$searchLocation1' ";
     }
-    if (searchTag1 != null) {
+    if (searchTag1 != "null") {
       queryStr = queryStr + " AND $colTag1 = '$searchTag1' ";
     }
-    if (searchGoal1 != null) {
+    if (searchGoal1 != "null") {
       queryStr = queryStr + " AND $colGoal1 = '$searchGoal1' ";
     }
 
-    var result = await db.rawQuery(queryStr);
+    var result = await db!.rawQuery(queryStr);
     return result;
   }
 
-  Future<int> getCount() async {
-    Database db = await this.db;
+  Future<int?> getCount() async {
+    Database? db = await this.db;
     var result = Sqflite.firstIntValue(
-        await db.rawQuery('select count (*) from $tblTodo'));
+        await db!.rawQuery('select count (*) from $tblTodo'));
 
     return result;
   }
 
   Future<int> updateTask(Task task) async {
-    Database db = await this.db;
-    var result = await db.update(tblTodo, task.toMap(),
+    Database? db = await this.db;
+    var result = await db!.update(tblTodo, task.toMap(),
         where: "$colId =?", whereArgs: [task.id]);
     return result;
   }
 
   Future<int> deleteTask(int id) async {
     int result;
-    Database db = await this.db;
-    result = await db.rawDelete('DELETE FROM $tblTodo WHERE $colId = $id');
+    Database? db = await this.db;
+    result = await db!.rawDelete('DELETE FROM $tblTodo WHERE $colId = $id');
     return result;
   }
 
   Future<int> deleteAllTask() async {
     int result;
-    Database db = await this.db;
-    result = await db.rawDelete('DELETE FROM $tblTodo WHERE $colId <> 0');
+    Database? db = await this.db;
+    result = await db!.rawDelete('DELETE FROM $tblTodo WHERE $colId <> 0');
     return result;
   }
 
 //######################### Statuses ##########################################
 
   Future<int> insertStatuses(Status statuses) async {
-    Database db = await this.db;
+    Database? db = await this.db;
 
-    var result = await db.insert('statuses', statuses.statusMap());
+    var result = await db!.insert('statuses', statuses.statusMap());
     return result;
   }
 
   Future<List> getStatuses() async {
-    Database db = await this.db;
-    var result = await db.rawQuery("SELECT * FROM statuses order by name");
+    Database? db = await this.db;
+    var result = await db!.rawQuery("SELECT * FROM statuses order by name");
 
     return result;
   }
 
   Future<List> getStatusesbyID(int statusesId) async {
-    Database db = await this.db;
+    Database? db = await this.db;
     var result =
-        await db.rawQuery("SELECT * FROM statuses WHERE id=$statusesId");
+        await db!.rawQuery("SELECT * FROM statuses WHERE id=$statusesId");
     return result;
   }
 
   Future<int> updateStatuses(Status statuses) async {
-    Database db = await this.db;
-    var result = await db.update("statuses", statuses.statusMap(),
+    Database? db = await this.db;
+    var result = await db!.update("statuses", statuses.statusMap(),
         where: "$colId =?", whereArgs: [statuses.id]);
     return result;
   }
 
   Future<int> deleteStatusesbyID(int id) async {
     int result;
-    Database db = await this.db;
-    result = await db.rawDelete('DELETE FROM statuses WHERE id = $id');
+    Database? db = await this.db;
+    result = await db!.rawDelete('DELETE FROM statuses WHERE id = $id');
     return result;
   }
 
   Future<int> deleteAllStatuses() async {
     int result;
-    Database db = await this.db;
-    result = await db.rawDelete('DELETE FROM statuses WHERE id <> 0');
+    Database? db = await this.db;
+    result = await db!.rawDelete('DELETE FROM statuses WHERE id <> 0');
     return result;
   }
 
@@ -876,44 +869,44 @@ Plan C - USD 24 | 12 month
 //######################### Priorities ##########################################
 
   Future<int> insertPriorities(Priority priorities) async {
-    Database db = await this.db;
+    Database? db = await this.db;
 
-    var result = await db.insert('priorities', priorities.priorityMap());
+    var result = await db!.insert('priorities', priorities.priorityMap());
     return result;
   }
 
   Future<List> getPriorities() async {
-    Database db = await this.db;
-    var result = await db.rawQuery("SELECT * FROM priorities order by name");
+    Database? db = await this.db;
+    var result = await db!.rawQuery("SELECT * FROM priorities order by name");
 
     return result;
   }
 
   Future<List> getPrioritiesbyID(int prioritiesId) async {
-    Database db = await this.db;
+    Database? db = await this.db;
     var result =
-        await db.rawQuery("SELECT * FROM priorities WHERE id=$prioritiesId");
+        await db!.rawQuery("SELECT * FROM priorities WHERE id=$prioritiesId");
     return result;
   }
 
   Future<int> updatePriorities(Priority priorities) async {
-    Database db = await this.db;
-    var result = await db.update("priorities", priorities.priorityMap(),
+    Database? db = await this.db;
+    var result = await db!.update("priorities", priorities.priorityMap(),
         where: "$colId =?", whereArgs: [priorities.id]);
     return result;
   }
 
   Future<int> deletePrioritiesbyID(int id) async {
     int result;
-    Database db = await this.db;
-    result = await db.rawDelete('DELETE FROM priorities WHERE id = $id');
+    Database? db = await this.db;
+    result = await db!.rawDelete('DELETE FROM priorities WHERE id = $id');
     return result;
   }
 
   Future<int> deleteAllPriorities() async {
     int result;
-    Database db = await this.db;
-    result = await db.rawDelete('DELETE FROM priorities WHERE id <> 0');
+    Database? db = await this.db;
+    result = await db!.rawDelete('DELETE FROM priorities WHERE id <> 0');
     return result;
   }
 
@@ -921,44 +914,44 @@ Plan C - USD 24 | 12 month
 //////#########################Categories ##########################################
 
   Future<int> insertCategories(Category categories) async {
-    Database db = await this.db;
+    Database? db = await this.db;
 
-    var result = await db.insert('categories', categories.categoryMap());
+    var result = await db!.insert('categories', categories.categoryMap());
     return result;
   }
 
   Future<List> getCategories() async {
-    Database db = await this.db;
-    var result = await db.rawQuery("SELECT * FROM categories order by name");
+    Database? db = await this.db;
+    var result = await db!.rawQuery("SELECT * FROM categories order by name");
 
     return result;
   }
 
   Future<List> getCategoriesbyID(int categoriesId) async {
-    Database db = await this.db;
+    Database? db = await this.db;
     var result =
-        await db.rawQuery("SELECT * FROM categories WHERE id=$categoriesId");
+        await db!.rawQuery("SELECT * FROM categories WHERE id=$categoriesId");
     return result;
   }
 
   Future<int> updateCategories(Category categories) async {
-    Database db = await this.db;
-    var result = await db.update("categories", categories.categoryMap(),
+    Database? db = await this.db;
+    var result = await db!.update("categories", categories.categoryMap(),
         where: "$colId =?", whereArgs: [categories.id]);
     return result;
   }
 
   Future<int> deleteCategoriesbyID(int id) async {
     int result;
-    Database db = await this.db;
-    result = await db.rawDelete('DELETE FROM categories WHERE id = $id');
+    Database? db = await this.db;
+    result = await db!.rawDelete('DELETE FROM categories WHERE id = $id');
     return result;
   }
 
   Future<int> deleteAllCategories() async {
     int result;
-    Database db = await this.db;
-    result = await db.rawDelete('DELETE FROM categories WHERE id <> 0');
+    Database? db = await this.db;
+    result = await db!.rawDelete('DELETE FROM categories WHERE id <> 0');
     return result;
   }
 
@@ -967,17 +960,17 @@ Plan C - USD 24 | 12 month
 //#########################Action ##########################################
 
   Future<int> insertAction1s(Action1 action1) async {
-    Database db = await this.db;
+    Database? db = await this.db;
 
-    var result = await db.insert('action1s', action1.action1Map());
+    var result = await db!.insert('action1s', action1.action1Map());
     return result;
   }
 
   Future<List> getAction1s() async {
     var result;
     try {
-      Database db = await this.db;
-      result = await db.query("action1s");
+      Database? db = await this.db;
+      result = await db!.query("action1s");
       result = await db.rawQuery("SELECT * FROM action1s order by name");
       return result;
     } catch (e) {
@@ -987,30 +980,30 @@ Plan C - USD 24 | 12 month
   }
 
   Future<List> getAction1sbyID(int action1Id) async {
-    Database db = await this.db;
+    Database? db = await this.db;
     var result =
-        await db.rawQuery("SELECT * FROM action1s WHERE id=$action1Id");
+        await db!.rawQuery("SELECT * FROM action1s WHERE id=$action1Id");
     return result;
   }
 
   Future<int> updateAction1s(Action1 action1) async {
-    Database db = await this.db;
-    var result = await db.update("action1s", action1.action1Map(),
+    Database? db = await this.db;
+    var result = await db!.update("action1s", action1.action1Map(),
         where: "$colId =?", whereArgs: [action1.id]);
     return result;
   }
 
   Future<int> deleteAction1s(int id) async {
     int result;
-    Database db = await this.db;
-    result = await db.rawDelete('DELETE FROM action1s WHERE id = $id');
+    Database? db = await this.db;
+    result = await db!.rawDelete('DELETE FROM action1s WHERE id = $id');
     return result;
   }
 
   Future<int> deleteAllAction1s() async {
     int result;
-    Database db = await this.db;
-    result = await db.rawDelete('DELETE FROM action1s WHERE id <> 0');
+    Database? db = await this.db;
+    result = await db!.rawDelete('DELETE FROM action1s WHERE id <> 0');
     return result;
   }
 
@@ -1019,43 +1012,43 @@ Plan C - USD 24 | 12 month
 //#########################Context ##########################################
 
   Future<int> insertContext1s(Context1 context1) async {
-    Database db = await this.db;
+    Database? db = await this.db;
 
-    var result = await db.insert('context1s', context1.context1Map());
+    var result = await db!.insert('context1s', context1.context1Map());
     return result;
   }
 
   Future<List> getContext1s() async {
-    Database db = await this.db;
-    var result = await db.rawQuery("SELECT * FROM context1s order by name");
+    Database? db = await this.db;
+    var result = await db!.rawQuery("SELECT * FROM context1s order by name");
     return result;
   }
 
   Future<List> getContext1sbyID(int context1ID) async {
-    Database db = await this.db;
+    Database? db = await this.db;
     var result =
-        await db.rawQuery("SELECT * FROM context1s WHERE id=$context1ID");
+        await db!.rawQuery("SELECT * FROM context1s WHERE id=$context1ID");
     return result;
   }
 
   Future<int> updateContext1s(Context1 context1) async {
-    Database db = await this.db;
-    var result = await db.update("context1s", context1.context1Map(),
+    Database? db = await this.db;
+    var result = await db!.update("context1s", context1.context1Map(),
         where: "$colId =?", whereArgs: [context1.id]);
     return result;
   }
 
   Future<int> deleteContext1sbyID(int id) async {
     int result;
-    Database db = await this.db;
-    result = await db.rawDelete('DELETE FROM context1s WHERE id = $id');
+    Database? db = await this.db;
+    result = await db!.rawDelete('DELETE FROM context1s WHERE id = $id');
     return result;
   }
 
   Future<int> deleteAllContext1s() async {
     int result;
-    Database db = await this.db;
-    result = await db.rawDelete('DELETE FROM context1s WHERE id <> 0');
+    Database? db = await this.db;
+    result = await db!.rawDelete('DELETE FROM context1s WHERE id <> 0');
     return result;
   }
 
@@ -1064,43 +1057,43 @@ Plan C - USD 24 | 12 month
 //#########################Locations ##########################################
 
   Future<int> insertLocation1s(Location1 location1s) async {
-    Database db = await this.db;
+    Database? db = await this.db;
 
-    var result = await db.insert('location1s', location1s.location1Map());
+    var result = await db!.insert('location1s', location1s.location1Map());
     return result;
   }
 
   Future<List> getLocation1s() async {
-    Database db = await this.db;
-    var result = await db.rawQuery("SELECT * FROM location1s order by name");
+    Database? db = await this.db;
+    var result = await db!.rawQuery("SELECT * FROM location1s order by name");
     return result;
   }
 
   Future<List> getLocation1sbyID(int location1s) async {
-    Database db = await this.db;
+    Database? db = await this.db;
     var result =
-        await db.rawQuery("SELECT * FROM location1s WHERE id=$location1s");
+        await db!.rawQuery("SELECT * FROM location1s WHERE id=$location1s");
     return result;
   }
 
   Future<int> updateLocation1s(Location1 location1s) async {
-    Database db = await this.db;
-    var result = await db.update("location1s", location1s.location1Map(),
+    Database? db = await this.db;
+    var result = await db!.update("location1s", location1s.location1Map(),
         where: "$colId =?", whereArgs: [location1s.id]);
     return result;
   }
 
   Future<int> deleteLocation1sbyID(int id) async {
     int result;
-    Database db = await this.db;
-    result = await db.rawDelete('DELETE FROM location1s WHERE id = $id');
+    Database? db = await this.db;
+    result = await db!.rawDelete('DELETE FROM location1s WHERE id = $id');
     return result;
   }
 
   Future<int> deleteAllLocation1s() async {
     int result;
-    Database db = await this.db;
-    result = await db.rawDelete('DELETE FROM location1s WHERE id <> 0');
+    Database? db = await this.db;
+    result = await db!.rawDelete('DELETE FROM location1s WHERE id <> 0');
     return result;
   }
 
@@ -1109,42 +1102,42 @@ Plan C - USD 24 | 12 month
 //#########################Tag ##########################################
 
   Future<int> insertTag1s(Tag1 tag1s) async {
-    Database db = await this.db;
+    Database? db = await this.db;
 
-    var result = await db.insert('tag1s', tag1s.tag1Map());
+    var result = await db!.insert('tag1s', tag1s.tag1Map());
     return result;
   }
 
   Future<List> getTag1s() async {
-    Database db = await this.db;
-    var result = await db.rawQuery("SELECT * FROM tag1s order by name");
+    Database? db = await this.db;
+    var result = await db!.rawQuery("SELECT * FROM tag1s order by name");
     return result;
   }
 
   Future<List> getTag1sbyID(int tag1s) async {
-    Database db = await this.db;
-    var result = await db.rawQuery("SELECT * FROM tag1s WHERE id=$tag1s");
+    Database? db = await this.db;
+    var result = await db!.rawQuery("SELECT * FROM tag1s WHERE id=$tag1s");
     return result;
   }
 
   Future<int> updateTag1s(Tag1 tag1s) async {
-    Database db = await this.db;
-    var result = await db.update("tag1s", tag1s.tag1Map(),
+    Database? db = await this.db;
+    var result = await db!.update("tag1s", tag1s.tag1Map(),
         where: "$colId =?", whereArgs: [tag1s.id]);
     return result;
   }
 
   Future<int> deleteTag1sbyID(int id) async {
     int result;
-    Database db = await this.db;
-    result = await db.rawDelete('DELETE FROM tag1s WHERE id = $id');
+    Database? db = await this.db;
+    result = await db!.rawDelete('DELETE FROM tag1s WHERE id = $id');
     return result;
   }
 
   Future<int> deleteAllTag1s() async {
     int result;
-    Database db = await this.db;
-    result = await db.rawDelete('DELETE FROM tag1s WHERE id <> 0');
+    Database? db = await this.db;
+    result = await db!.rawDelete('DELETE FROM tag1s WHERE id <> 0');
     return result;
   }
 
@@ -1153,42 +1146,42 @@ Plan C - USD 24 | 12 month
 //######################### Goal ##########################################
 
   Future<int> insertGoal1s(Goal1 goal1s) async {
-    Database db = await this.db;
+    Database? db = await this.db;
 
-    var result = await db.insert('goal1s', goal1s.goal1Map());
+    var result = await db!.insert('goal1s', goal1s.goal1Map());
     return result;
   }
 
   Future<List> getGoal1s() async {
-    Database db = await this.db;
-    var result = await db.rawQuery("SELECT * FROM goal1s order by name");
+    Database? db = await this.db;
+    var result = await db!.rawQuery("SELECT * FROM goal1s order by name");
     return result;
   }
 
   Future<List> getGoal1sbyID(int goal1s) async {
-    Database db = await this.db;
-    var result = await db.rawQuery("SELECT * FROM goal1s WHERE id=$goal1s");
+    Database? db = await this.db;
+    var result = await db!.rawQuery("SELECT * FROM goal1s WHERE id=$goal1s");
     return result;
   }
 
   Future<int> updateGoal1s(Goal1 goal1s) async {
-    Database db = await this.db;
-    var result = await db.update("goal1s", goal1s.goal1Map(),
+    Database? db = await this.db;
+    var result = await db!.update("goal1s", goal1s.goal1Map(),
         where: "$colId =?", whereArgs: [goal1s.id]);
     return result;
   }
 
   Future<int> deleteGoal1sbyID(int id) async {
     int result;
-    Database db = await this.db;
-    result = await db.rawDelete('DELETE FROM goal1s WHERE id = $id');
+    Database? db = await this.db;
+    result = await db!.rawDelete('DELETE FROM goal1s WHERE id = $id');
     return result;
   }
 
   Future<int> deleteAllGoal1s() async {
     int result;
-    Database db = await this.db;
-    result = await db.rawDelete('DELETE FROM goal1s WHERE id <> 0');
+    Database? db = await this.db;
+    result = await db!.rawDelete('DELETE FROM goal1s WHERE id <> 0');
     return result;
   }
 
@@ -1196,29 +1189,29 @@ Plan C - USD 24 | 12 month
 
   ///########################## Custom Settings #########################
   Future<int> insertCustomSettings(CustomSettings customSetting) async {
-    Database db = await this.db;
+    Database? db = await this.db;
 
-    var result = await db.insert(tblCustomSettings, customSetting.toMap());
+    var result = await db!.insert(tblCustomSettings, customSetting.toMap());
     return result;
   }
 
   Future<List> getCustomSettings() async {
-    Database db = await this.db;
-    var result = await db.rawQuery("SELECT * FROM $tblCustomSettings");
+    Database? db = await this.db;
+    var result = await db!.rawQuery("SELECT * FROM $tblCustomSettings");
 
     return result;
   }
 
   Future<List> getCustomSettingsbyID(int customsettingsId) async {
-    Database db = await this.db;
-    var result = await db.rawQuery(
+    Database? db = await this.db;
+    var result = await db!.rawQuery(
         "SELECT * FROM $tblCustomSettings WHERE id=$customsettingsId");
     return result;
   }
 
   Future<int> updateCustomSettings(CustomSettings customSetting) async {
-    Database db = await this.db;
-    var result = await db.update(tblCustomSettings, customSetting.toMap(),
+    Database? db = await this.db;
+    var result = await db!.update(tblCustomSettings, customSetting.toMap(),
         where: "$colId =?", whereArgs: [customSetting.id]);
     return result;
   }
@@ -1228,21 +1221,21 @@ Plan C - USD 24 | 12 month
 //############################# User Table ##############################################
 
   Future<int> insertUser(todoUser todouser) async {
-    Database db = await this.db;
+    Database? db = await this.db;
 
-    var result = await db.insert('todouser', todouser.todouserMap());
+    var result = await db!.insert('todouser', todouser.todouserMap());
     return result;
   }
 
   Future<List> getUser() async {
-    Database db = await this.db;
-    var result = await db.rawQuery("SELECT * FROM todouser");
+    Database? db = await this.db;
+    var result = await db!.rawQuery("SELECT * FROM todouser");
     return result;
   }
 
-  Future<String> getUserID() async {
-    Database db = await this.db;
-    var result = await db.rawQuery("SELECT userid FROM todouser");
+  Future getUserID() async {
+    Database? db = await this.db;
+    var result = await db!.rawQuery("SELECT userid FROM todouser");
     var userid = result[0]['userid'];
     return userid;
   }

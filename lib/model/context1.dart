@@ -1,7 +1,7 @@
 class Context1{
-  int id;
-  String name;
-  String description;
+  int? id;
+  String? name;
+  String? description;
 
   context1Map() {
     var mapping = Map<String, dynamic>();

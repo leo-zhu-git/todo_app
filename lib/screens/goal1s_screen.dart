@@ -20,7 +20,7 @@ class _Goal1sScreenState extends State<Goal1sScreen> {
   var _editGoal1NameController = TextEditingController();
   var _editGoal1DescriptionController = TextEditingController();
 
-  List<Goal1> _goal1List = List<Goal1>();
+  List<Goal1> _goal1List = [];
 
   var goal1;
 
@@ -86,28 +86,28 @@ class _Goal1sScreenState extends State<Goal1sScreen> {
                   onPressed: () {
                     _goal1.name = _goal1NameController.text;
                     _goal1.description = _goal1DescriptionController.text;
-                    _goal1.id = null;
+//                    _goal1.id = null;
 
                     var result = _goal1Service.insertGoal1s(_goal1);
                     Navigator.pop(context);
                     getAllGoal1s();
-                    _showSuccessSnackBar(Container(
-                      color: Colors.tealAccent[100],
-                      height: 40,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          (Icon(
-                            Icons.thumb_up,
-                            color: Colors.black,
-                          )),
-                          Text(
-                            ' Added ',
-                            style: (TextStyle(color: Colors.black)),
-                          )
-                        ],
-                      ),
-                    ));
+//                    _showSuccessSnackBar(Container(
+//                      color: Colors.tealAccent[100],
+//                      height: 40,
+//                      child: Row(
+//                        mainAxisAlignment: MainAxisAlignment.center,
+//                        children: [
+//                          (Icon(
+//                            Icons.thumb_up,
+//                            color: Colors.black,
+//                          )),
+//                          Text(
+//                            ' Added ',
+//                            style: (TextStyle(color: Colors.black)),
+//                          )
+//                        ],
+//                      ),
+//                    ));
                   },
                   child: Text(
                     'Save',
@@ -171,25 +171,25 @@ class _Goal1sScreenState extends State<Goal1sScreen> {
                     if (result > 0) {
                       Navigator.pop(context);
                       getAllGoal1s();
-                      _showSuccessSnackBar(
-                        Container(
-                          color: Colors.tealAccent[100],
-                          height: 40,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              (Icon(
-                                Icons.thumb_up,
-                                color: Colors.black,
-                              )),
-                              Text(
-                                ' Updated ',
-                                style: (TextStyle(color: Colors.black)),
-                              )
-                            ],
-                          ),
-                        ),
-                      );
+//                      _showSuccessSnackBar(
+//                        Container(
+//                          color: Colors.tealAccent[100],
+//                          height: 40,
+//                          child: Row(
+//                            mainAxisAlignment: MainAxisAlignment.center,
+//                            children: [
+//                              (Icon(
+//                                Icons.thumb_up,
+//                                color: Colors.black,
+//                              )),
+//                              Text(
+//                                ' Updated ',
+//                                style: (TextStyle(color: Colors.black)),
+//                              )
+//                            ],
+//                          ),
+//                        ),
+//                      );
                     }
                   },
                   child: Text(
@@ -248,25 +248,25 @@ class _Goal1sScreenState extends State<Goal1sScreen> {
                     if (result > 0) {
                       Navigator.pop(context);
                       getAllGoal1s();
-                      _showSuccessSnackBar(
-                        Container(
-                          color: Colors.tealAccent[100],
-                          height: 40,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              (Icon(
-                                Icons.thumb_up,
-                                color: Colors.black,
-                              )),
-                              Text(
-                                ' Deleted ',
-                                style: (TextStyle(color: Colors.black)),
-                              )
-                            ],
-                          ),
-                        ),
-                      );
+//                      _showSuccessSnackBar(
+//                        Container(
+//                          color: Colors.tealAccent[100],
+//                          height: 40,
+//                          child: Row(
+//                            mainAxisAlignment: MainAxisAlignment.center,
+//                            children: [
+//                              (Icon(
+//                                Icons.thumb_up,
+//                                color: Colors.black,
+//                              )),
+//                              Text(
+//                                ' Deleted ',
+//                                style: (TextStyle(color: Colors.black)),
+//                              )
+//                            ],
+//                          ),
+//                        ),
+//                      );
                     }
                   },
                   child: Text(
@@ -279,10 +279,10 @@ class _Goal1sScreenState extends State<Goal1sScreen> {
         });
   }
 
-  _showSuccessSnackBar(message) {
-    var _snackBar = SnackBar(content: message);
-    _globalKey.currentState.showSnackBar(_snackBar);
-  }
+//  _showSuccessSnackBar(message) {
+//    var _snackBar = SnackBar(content: message);
+//    _globalKey.currentState.showSnackBar(_snackBar);
+//  }
 
   @override
   Widget build(BuildContext context) {
@@ -302,7 +302,7 @@ class _Goal1sScreenState extends State<Goal1sScreen> {
                   position: BadgePosition.topEnd(),
                   badgeContent: Text(_goal1List.length.toString(),
                       style: TextStyle(color: Colors.black)),
-                  badgeColor: Colors.orange[100],
+//                  badgeColor: Colors.orange[100],
                 ),
               ],
             ),
@@ -326,7 +326,7 @@ class _Goal1sScreenState extends State<Goal1sScreen> {
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(_goal1List[index].name),
+                    Text(_goal1List[index].name!),
                     IconButton(
                         icon: Icon(Icons.delete, color: Colors.grey),
                         onPressed: () {

@@ -1,27 +1,27 @@
 class CustomSettings {
-  int _id;
-  String _sortField1;
-  String _sortOrder1;
-  String _sortField2;
-  String _sortOrder2;
-  String _sortField3;
-  String _sortOrder3;
-  String _showMain1;
-  String _showMain2;
-  String _showSec1;
-  String _showSec2;
-  String _showSec3;
-  String _filterDateDue;
-  String _filterStatus;
-  String _filterPriority;
-  String _filterCategory;
-  String _filterAction;
-  String _filterContext;
-  String _filterLocation;
-  String _filterTag;
-  String _filterGoal;
-  bool _filterIsStar;
-  bool _filterIsDone;
+  int? _id;
+  String? _sortField1;
+  String? _sortOrder1;
+  String? _sortField2;
+  String? _sortOrder2;
+  String? _sortField3;
+  String? _sortOrder3;
+  String? _showMain1;
+  String? _showMain2;
+  String? _showSec1;
+  String? _showSec2;
+  String? _showSec3;
+  String? _filterDateDue;
+  String? _filterStatus;
+  String? _filterPriority;
+  String? _filterCategory;
+  String? _filterAction;
+  String? _filterContext;
+  String? _filterLocation;
+  String? _filterTag;
+  String? _filterGoal;
+  int? _filterIsStar;
+  int? _filterIsDone;
 
   CustomSettings(
     this._sortField1,
@@ -72,115 +72,115 @@ class CustomSettings {
     this._filterIsStar,
     this._filterIsDone,
   );
-  int get id => _id;
-  String get sortField1 => _sortField1;
-  String get sortOrder1 => _sortOrder1;
-  String get sortField2 => _sortField2;
-  String get sortOrder2 => _sortOrder2;
-  String get sortField3 => _sortField3;
-  String get sortOrder3 => _sortOrder3;
-  String get showMain1 => _showMain1;
-  String get showMain2 => _showMain2;
-  String get showSec1 => _showSec1;
-  String get showSec2 => _showSec2;
-  String get showSec3 => _showSec3;
-  String get filterDateDue => _filterDateDue;
-  String get filterStatus => _filterStatus;
-  String get filterPriority => _filterPriority;
-  String get filterCategory => _filterCategory;
-  String get filterAction => _filterAction;
-  String get filterContext => _filterContext;
-  String get filterLocation => _filterLocation;
-  String get filterTag => _filterTag;
-  String get filterGoal => _filterGoal;
-  bool get filterIsStar => _filterIsStar;
-  bool get filterIsDone => _filterIsDone;
+  int? get id => _id;
+  String? get sortField1 => _sortField1;
+  String? get sortOrder1 => _sortOrder1;
+  String? get sortField2 => _sortField2;
+  String? get sortOrder2 => _sortOrder2;
+  String? get sortField3 => _sortField3;
+  String? get sortOrder3 => _sortOrder3;
+  String? get showMain1 => _showMain1;
+  String? get showMain2 => _showMain2;
+  String? get showSec1 => _showSec1;
+  String? get showSec2 => _showSec2;
+  String? get showSec3 => _showSec3;
+  String? get filterDateDue => _filterDateDue;
+  String? get filterStatus => _filterStatus;
+  String? get filterPriority => _filterPriority;
+  String? get filterCategory => _filterCategory;
+  String? get filterAction => _filterAction;
+  String? get filterContext => _filterContext;
+  String? get filterLocation => _filterLocation;
+  String? get filterTag => _filterTag;
+  String? get filterGoal => _filterGoal;
+  int? get filterIsStar => _filterIsStar;
+  int? get filterIsDone => _filterIsDone;
 
-  set sortField1(String newSortField1) {
+  set sortField1(String? newSortField1) {
     this._sortField1 = newSortField1;
   }
 
-  set sortOrder1(String newSortOrder1) {
+  set sortOrder1(String? newSortOrder1) {
     this._sortOrder1 = newSortOrder1;
   }
 
-  set sortField2(String newSortField2) {
+  set sortField2(String? newSortField2) {
     this._sortField2 = newSortField2;
   }
 
-  set sortOrder2(String newSortOrder2) {
+  set sortOrder2(String? newSortOrder2) {
     this._sortOrder2 = newSortOrder2;
   }
 
-  set sortField3(String newSortField3) {
+  set sortField3(String? newSortField3) {
     this._sortField3 = newSortField3;
   }
 
-  set sortOrder3(String newSortOrder3) {
+  set sortOrder3(String? newSortOrder3) {
     this._sortOrder3 = newSortOrder3;
   }
 
-  set showMain1(String newShowMain1) {
+  set showMain1(String? newShowMain1) {
     this._showMain1 = newShowMain1;
   }
 
-  set showMain2(String newShowMain2) {
+  set showMain2(String? newShowMain2) {
     this._showMain2 = newShowMain2;
   }
 
-  set showSec1(String newShowSec1) {
+  set showSec1(String? newShowSec1) {
     this._showSec1 = newShowSec1;
   }
 
-  set showSec2(String newShowSec2) {
+  set showSec2(String? newShowSec2) {
     this._showSec2 = newShowSec2;
   }
 
-  set showSec3(String newShowSec3) {
+  set showSec3(String? newShowSec3) {
     this._showSec3 = newShowSec3;
   }
 
-  set filterDateDue(String newFilterDateDue) {
+  set filterDateDue(String? newFilterDateDue) {
     this._filterDateDue = newFilterDateDue;
   }
 
-  set filterStatus(String newFilterStatus) {
+  set filterStatus(String? newFilterStatus) {
     this._filterStatus = newFilterStatus;
   }
 
-  set filterPriority(String newFilterPriority) {
+  set filterPriority(String? newFilterPriority) {
     this._filterPriority = newFilterPriority;
   }
 
-  set filterCategory(String newFilterCategory) {
+  set filterCategory(String? newFilterCategory) {
     this._filterCategory = newFilterCategory;
   }
 
-  set filterAction(String newFilterAction) {
+  set filterAction(String? newFilterAction) {
     this._filterAction = newFilterAction;
   }
 
-  set filterContext(String newFilterContext) {
+  set filterContext(String? newFilterContext) {
     this._filterContext = newFilterContext;
   }
 
-  set filterLocation(String newFilterLocation) {
+  set filterLocation(String? newFilterLocation) {
     this._filterLocation = newFilterLocation;
   }
 
-  set filterTag(String newFilterTag) {
+  set filterTag(String? newFilterTag) {
     this._filterTag = newFilterTag;
   }
 
-  set filterGoal(String newFilterGoal) {
+  set filterGoal(String? newFilterGoal) {
     this._filterGoal = newFilterGoal;
   }
 
-  set filterIsStar(bool newFilterIsStar) {
+  set filterIsStar(int? newFilterIsStar) {
     this._filterIsStar = newFilterIsStar;
   }
 
-  set filterIsDone(bool newFilterIsDone) {
+  set filterIsDone(int? newFilterIsDone) {
     this._filterIsDone = newFilterIsDone;
   }
 
@@ -239,7 +239,7 @@ class CustomSettings {
     this._filterLocation = o['filterLocation'];
     this._filterTag = o['filterTag'];
     this._filterGoal = o['filterGoal'];
-    this._filterIsStar = o['filterIsStar'] == 0 ? false : true; 
-    this._filterIsDone = o['filterIsDone'] == 0 ? false : true;
+    this._filterIsStar = o['filterIsStar']; 
+    this._filterIsDone = o['filterIsDone'];
   }
 }

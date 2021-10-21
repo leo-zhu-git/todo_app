@@ -19,7 +19,7 @@ class _PrioritiesScreenState extends State<PrioritiesScreen> {
   var _editPriorityNameController = TextEditingController();
   var _editPriorityDescriptionController = TextEditingController();
 
-  List<Priority> _priorityList = List<Priority>();
+  List<Priority> _priorityList = [];
 
   var priority;
 
@@ -32,7 +32,7 @@ class _PrioritiesScreenState extends State<PrioritiesScreen> {
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
 
   getAllPriorities() async {
-    _priorityList = List<Priority>();
+    _priorityList = [];
     var priorities = await _priorityService.getPriorities();
     if (priorities.length != 0) {
       priorities.forEach((priority) {
@@ -85,30 +85,30 @@ class _PrioritiesScreenState extends State<PrioritiesScreen> {
                   onPressed: () async {
                     _priority.name = _priorityNameController.text;
                     _priority.description = _priorityDescriptionController.text;
-                    _priority.id = null;
+//                    _priority.id = null;
 
                     var result = _priorityService.insertPriorities(_priority);
                     print(result);
                     print(_priority.name);
                     Navigator.pop(context);
                     getAllPriorities();
-                    _showSuccessSnackBar(Container(
-                      color: Colors.tealAccent[100],
-                      height: 40,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          (Icon(
-                            Icons.thumb_up,
-                            color: Colors.black,
-                          )),
-                          Text(
-                            ' Added ',
-                            style: (TextStyle(color: Colors.black)),
-                          )
-                        ],
-                      ),
-                    ));
+//                    _showSuccessSnackBar(Container(
+//                      color: Colors.tealAccent[100],
+//                      height: 40,
+//                      child: Row(
+//                        mainAxisAlignment: MainAxisAlignment.center,
+//                        children: [
+//                          (Icon(
+//                            Icons.thumb_up,
+//                            color: Colors.black,
+//                          )),
+//                          Text(
+//                            ' Added ',
+//                            style: (TextStyle(color: Colors.black)),
+//                          )
+//                        ],
+//                      ),
+//                    ));
                   },
                     style: ElevatedButton.styleFrom(
                       primary: Colors.brown[900],
@@ -174,25 +174,25 @@ class _PrioritiesScreenState extends State<PrioritiesScreen> {
                     if (result > 0) {
                       Navigator.pop(context);
                       getAllPriorities();
-                      _showSuccessSnackBar(
-                        Container(
-                          color: Colors.tealAccent[100],
-                          height: 40,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              (Icon(
-                                Icons.thumb_up,
-                                color: Colors.black,
-                              )),
-                              Text(
-                                ' Updated ',
-                                style: (TextStyle(color: Colors.black)),
-                              )
-                            ],
-                          ),
-                        ),
-                      );
+//                      _showSuccessSnackBar(
+//                        Container(
+//                          color: Colors.tealAccent[100],
+//                          height: 40,
+//                          child: Row(
+//                            mainAxisAlignment: MainAxisAlignment.center,
+//                            children: [
+//                              (Icon(
+//                                Icons.thumb_up,
+//                                color: Colors.black,
+//                              )),
+//                              Text(
+//                                ' Updated ',
+//                                style: (TextStyle(color: Colors.black)),
+//                              )
+//                            ],
+//                          ),
+//                        ),
+//                      );
                     }
                   },
                   style: ElevatedButton.styleFrom(
@@ -259,25 +259,25 @@ class _PrioritiesScreenState extends State<PrioritiesScreen> {
                   if (result > 0) {
                     Navigator.pop(context);
                     getAllPriorities();
-                    _showSuccessSnackBar(
-                      Container(
-                        color: Colors.tealAccent[100],
-                        height: 40,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            (Icon(
-                              Icons.thumb_up,
-                              color: Colors.black,
-                            )),
-                            Text(
-                              ' Deleted ',
-                              style: (TextStyle(color: Colors.black)),
-                            )
-                          ],
-                        ),
-                      ),
-                    );
+//                    _showSuccessSnackBar(
+//                      Container(
+//                        color: Colors.tealAccent[100],
+//                        height: 40,
+//                        child: Row(
+//                          mainAxisAlignment: MainAxisAlignment.center,
+//                          children: [
+//                            (Icon(
+//                              Icons.thumb_up,
+//                              color: Colors.black,
+//                            )),
+//                            Text(
+//                              ' Deleted ',
+//                              style: (TextStyle(color: Colors.black)),
+//                            )
+//                          ],
+//                        ),
+//                      ),
+ //                   );
                   }
                 },
                 child: 
@@ -292,10 +292,10 @@ class _PrioritiesScreenState extends State<PrioritiesScreen> {
         });
   }
 
-  _showSuccessSnackBar(message) {
-    var _snackBar = SnackBar(content: message);
-    _globalKey.currentState.showSnackBar(_snackBar);
-  }
+//  _showSuccessSnackBar(message) {
+//    var _snackBar = SnackBar(content: message);
+//    _globalKey.currentState.showSnackBar(_snackBar);
+//  }
 
   @override
   Widget build(BuildContext context) {
@@ -316,7 +316,7 @@ class _PrioritiesScreenState extends State<PrioritiesScreen> {
                   position: BadgePosition.topEnd(),
                   badgeContent: Text(_priorityList.length.toString(),
                       style: TextStyle(color: Colors.black)),
-                  badgeColor: Colors.orange[100],
+//                  badgeColor: Colors.orange[100],
                 ),
               ],
             ),
@@ -342,7 +342,7 @@ class _PrioritiesScreenState extends State<PrioritiesScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Flexible(
-                      child: Text(_priorityList[index].name,
+                      child: Text(_priorityList[index].name!,
                           overflow: TextOverflow.ellipsis),
                     ),
                     IconButton(

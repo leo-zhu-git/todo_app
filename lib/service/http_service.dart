@@ -15,16 +15,16 @@ Future request(url, {formData}) async {
     //dio.options.contentType = ContentType.parse('application/x-www-form-urlencoded');
     if (formData == null) {
       // print(servicePath[url]);
-      String userID = await helper.getUserID();
-      httpUrl = servicePath[url] + "?id=" + userID;
+      String? userID = await helper.getUserID();
+      httpUrl = servicePath[url]! + "?id=" + userID!;
       // print('form data is null');
       print(httpUrl);
       // print(servicePath[url]);
       response = await dio.post(httpUrl);
     } else {
       print(servicePath[url]);
-      String userID = await helper.getUserID();
-      httpUrl = servicePath[url] + "?id=" + userID;
+      String? userID = await helper.getUserID();
+      httpUrl = servicePath[url]! + "?id=" + userID!;
       print('form data is not null');
       print(httpUrl);
       print(servicePath[url]);

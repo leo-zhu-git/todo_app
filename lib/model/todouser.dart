@@ -1,7 +1,7 @@
 class todoUser{
-  int id;
-  String userID;
-  String email;
+  int? id;
+  String? userID;
+  String? email;
 
   todouserMap() {
     var mapping = Map<String, dynamic>();

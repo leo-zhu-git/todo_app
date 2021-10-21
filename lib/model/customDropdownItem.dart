@@ -1,4 +1,4 @@
 class CustomDropdownItem {
-  String id;
-  String name;
+  String? id;
+  String? name;
 }

@@ -1,45 +1,45 @@
 class DisplayTask {
-  int _id;
-  String _main1;
-  String _main2;
-  String _sec1;
-  String _sec2;
-  String _sec3;
+  int? _id;
+  String? _main1;
+  String? _main2;
+  String? _sec1;
+  String? _sec2;
+  String? _sec3;
 
   DisplayTask(this._main1, this._main2, this._sec1, this._sec2, this._sec3);
 }
 
 class Task {
-  int _id;
-  String _task;
-  String _note;
-  String _dateDue;
-  String _timeDue;
-  String _status;
-  String _priority;
-  String _category;
-  String _action1;
-  String _context1;
-  String _location1;
-  String _tag1;
-  String _goal1;
-  String _priorityText;
-  String _statusText;
-  String _categoryText;
-  String _action1Text;
-  String _context1Text;
-  String _location1Text;
-  String _tag1Text;
-  String _goal1Text;
-  int _isStar;
-  int _isDone;
-  String _dateDone;
-  String _lastModified;
-  String _main1;
-  String _main2;
-  String _sec1;
-  String _sec2;
-  String _sec3;
+  int? _id;
+  String? _task;
+  String? _note;
+  String? _dateDue;
+  String? _timeDue;
+  String? _status;
+  String? _priority;
+  String? _category;
+  String? _action1;
+  String? _context1;
+  String? _location1;
+  String? _tag1;
+  String? _goal1;
+  String? _priorityText;
+  String? _statusText;
+  String? _categoryText;
+  String? _action1Text;
+  String? _context1Text;
+  String? _location1Text;
+  String? _tag1Text;
+  String? _goal1Text;
+  int? _isStar;
+  int? _isDone;
+  String? _dateDone;
+  String? _lastModified;
+  String? _main1;
+  String? _main2;
+  String? _sec1;
+  String? _sec2;
+  String? _sec3;
 
   Task(
       this._task,
@@ -86,150 +86,150 @@ class Task {
       this._sec1,
       this._sec2,
       this._sec3);
-  int get id => _id;
-  String get task => _task;
-  String get note => _note;
-  String get dateDue => _dateDue;
-  String get timeDue => _timeDue;
-  String get status => _status;
-  String get priority => _priority;
-  String get category => _category;
-  String get action1 => _action1;
-  String get context1 => _context1;
-  String get location1 => _location1;
-  String get tag1 => _tag1;
-  String get goal1 => _goal1;
-  String get statusText => _statusText;
-  String get priorityText => _priorityText;
-  String get categoryText => _categoryText;
-  String get action1Text => _action1Text;
-  String get context1Text => _context1Text;
-  String get location1Text => _location1Text;
-  String get tag1Text => _tag1Text;
-  String get goal1Text => _goal1Text;
-  int get isStar => _isStar;
-  int get isDone => _isDone;
-  String get dateDone => _dateDone;
-  String get lastModified => _lastModified;
-  String get main1 => _main1;
-  String get main2 => _main2;
-  String get sec1 => _sec1;
-  String get sec2 => _sec2;
-  String get sec3 => _sec3;
+  int? get id => _id;
+  String? get task => _task;
+  String? get note => _note;
+  String? get dateDue => _dateDue;
+  String? get timeDue => _timeDue;
+  String? get status => _status;
+  String? get priority => _priority;
+  String? get category => _category;
+  String? get action1 => _action1;
+  String? get context1 => _context1;
+  String? get location1 => _location1;
+  String? get tag1 => _tag1;
+  String? get goal1 => _goal1;
+  String? get statusText => _statusText;
+  String? get priorityText => _priorityText;
+  String? get categoryText => _categoryText;
+  String? get action1Text => _action1Text;
+  String? get context1Text => _context1Text;
+  String? get location1Text => _location1Text;
+  String? get tag1Text => _tag1Text;
+  String? get goal1Text => _goal1Text;
+  int? get isStar => _isStar;
+  int? get isDone => _isDone;
+  String? get dateDone => _dateDone;
+  String? get lastModified => _lastModified;
+  String? get main1 => _main1;
+  String? get main2 => _main2;
+  String? get sec1 => _sec1;
+  String? get sec2 => _sec2;
+  String? get sec3 => _sec3;
 
-  set task(String newTask) {
+  set task(String? newTask) {
     this._task = newTask;
   }
 
-  set note(String newNote) {
+  set note(String? newNote) {
     this._note = newNote;
   }
 
-  set dateDue(String newDatedue) {
+  set dateDue(String? newDatedue) {
     this._dateDue = newDatedue;
   }
 
-  set timeDue(String newTimedue) {
+  set timeDue(String? newTimedue) {
     this._timeDue = newTimedue;
   }
 
-  set status(String newStatus) {
+  set status(String? newStatus) {
     this._status = newStatus;
   }
 
-  set priority(String newPriority) {
+  set priority(String? newPriority) {
     this._priority = newPriority;
   }
 
-  set category(String newcategory) {
+  set category(String? newcategory) {
     this._category = newcategory;
   }
 
-  set action1(String newaction1) {
+  set action1(String? newaction1) {
     this._action1 = newaction1;
   }
 
-  set context1(String newcontext1) {
+  set context1(String? newcontext1) {
     this._context1 = newcontext1;
   }
 
-  set location1(String newlocation) {
+  set location1(String? newlocation) {
     this._location1 = newlocation;
   }
 
-  set tag1(String newTag) {
+  set tag1(String? newTag) {
     this._tag1 = newTag;
   }
 
-  set goal1(String newGoal) {
+  set goal1(String? newGoal) {
     this._goal1 = newGoal;
   }
 
-  set statusText(String newstatusText) {
+  set statusText(String? newstatusText) {
     this._statusText = newstatusText;
   }
 
-  set priorityText(String newpriorityText) {
+  set priorityText(String? newpriorityText) {
     this._priorityText = newpriorityText;
   }
 
-  set categoryText(String newcategoryText) {
+  set categoryText(String? newcategoryText) {
     this._categoryText = newcategoryText;
   }
 
-  set action1Text(String newaction1Text) {
+  set action1Text(String? newaction1Text) {
     this._action1Text = newaction1Text;
   }
 
-  set context1Text(String newcontext1Text) {
+  set context1Text(String? newcontext1Text) {
     this._context1Text = newcontext1Text;
   }
 
-  set location1Text(String newlocationText) {
+  set location1Text(String? newlocationText) {
     this._location1Text = newlocationText;
   }
 
-  set tag1Text(String newTagText) {
+  set tag1Text(String? newTagText) {
     this._tag1Text = newTagText;
   }
 
-  set goal1Text(String newGoalText) {
+  set goal1Text(String? newGoalText) {
     this._goal1Text = newGoalText;
   }
 
-  set isStar(int newisStar) {
+  set isStar(int? newisStar) {
     this._isStar = newisStar;
   }
 
-  set isDone(int newisDone) {
+  set isDone(int? newisDone) {
     this._isDone = newisDone;
   }
 
-  set dateDone(String newDateDone) {
+  set dateDone(String? newDateDone) {
     this._dateDone = newDateDone;
   }
 
-  set lastModified(String newLastModified) {
+  set lastModified(String? newLastModified) {
     this._lastModified = newLastModified;
   }
 
-  set main1(String newMain1) {
+  set main1(String? newMain1) {
     this._main1 = newMain1;
   }
 
-  set main2(String newMain2) {
+  set main2(String? newMain2) {
     this._main2 = newMain2;
   }
 
-  set sec1(String newSec1) {
+  set sec1(String? newSec1) {
     this._sec1 = newSec1;
   }
 
-  set sec2(String newSec2) {
+  set sec2(String? newSec2) {
     this._sec2 = newSec2;
   }
 
-  set sec3(String newSec3) {
+  set sec3(String? newSec3) {
     this._sec3 = newSec3;
   }
 

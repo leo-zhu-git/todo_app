@@ -1,7 +1,7 @@
 class Status {
-  int id;
-  String name;
-  String description;
+  int? id;
+  String? name;
+  String? description;
 
   statusMap() {
     var mapping = Map<String, dynamic>();
