@@ -676,7 +676,24 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
         automaticallyImplyLeading: false,
         title:
             Center(child: Text('Personalize - Make this app your own!')),
+
+
+            centerTitle: true,
+            flexibleSpace: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Colors.brown, Colors.black38],
+                  begin: Alignment.bottomRight,
+                  end: Alignment.topLeft,
+                ),
+              ),
+            ),
+
       ),
+
+
+
+      
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),

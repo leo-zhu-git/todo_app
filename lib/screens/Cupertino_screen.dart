@@ -1,14 +1,12 @@
 import 'package:todo_app/screens/date_picker_page.dart';
-// import 'package:cupertino_datepicker_example/page/date_picker_page.dart';
-//import 'package:cupertino_datepicker_example/page/datetime_picker_page.dart';
-//import 'package:cupertino_datepicker_example/page/time_picker_page.dart';
-//import 'package:cupertino_datepicker_example/page/custom_picker_page.dart';
-//import 'package:cupertino_datepicker_example/page/timer_picker_page.dart';
-//import 'package:cupertino_datepicker_example/widget/tabbar_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:todo_app/screens/datetime_picker_page.dart';
+import 'package:todo_app/screens/time_picker_page.dart';
+import 'package:todo_app/screens/timer_picker_page.dart';
 import 'package:todo_app/widgets/tabbar_widget.dart';
+
+import 'custom_picker_page.dart';
 
 class CupertinoScreen extends StatefulWidget {
   @override
@@ -28,14 +26,10 @@ class _CupertinoScreenState extends State<CupertinoScreen> {
         ],
         children: [
           DatePickerPage(),
-          DatePickerPage(),
-          DatePickerPage(),
-          DatePickerPage(),
-          DatePickerPage(),
-//          TimePickerPage(),
-//          TimerPickerPage(),
-//          DatetimePickerPage(),
-//          CustomPickerPage(),
+          TimePickerPage(),
+          TimerPickerPage(),
+          DatetimePickerPage(),
+          CustomPickerPage(),
         ],
       );
 }

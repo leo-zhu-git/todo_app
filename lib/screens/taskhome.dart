@@ -73,6 +73,19 @@ class TaskHomeState extends State {
       appBar: AppBar(
         key: _globalKey,
 //        backgroundColor: Colors.brown[900],
+
+            centerTitle: true,
+            flexibleSpace: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Colors.teal, Colors.black38],
+                  begin: Alignment.bottomRight,
+                  end: Alignment.topLeft,
+                ),
+              ),
+            ),
+
+
         backgroundColor: Colors.teal[800],
         elevation: 8,
         title: Center(
