@@ -52,7 +52,7 @@ class _DrawerNagivation extends State<DrawerNagivation> {
     return Container(
 //      decoration: BoxDecoration(color: Colors.amber),
       child: Container(
-        color: Colors.amber[100],
+        color: Colors.teal[50],
         child: Drawer(
           child: ListView(
             children: <Widget>[
@@ -68,141 +68,90 @@ class _DrawerNagivation extends State<DrawerNagivation> {
               ListTile(
                 leading: Icon(Icons.home),
                 title: Text('Home'),
-                tileColor: Colors.amber[100],
+                tileColor: Colors.teal[50],
                 onTap: () => Navigator.of(context)
                     .push(MaterialPageRoute(builder: (context) => TaskHome())),
               ),
-              Divider(color: Colors.amber[800]),
+              Divider(color: Colors.teal[50]),
               ListTile(
                 leading: Icon(Icons.cloud_download),
-                tileColor: Colors.amber[100],
+                tileColor: Colors.teal[50],
                 title: Text('Wipe'),
                 onTap: () => Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) => WipeScreen())),
               ),
-              Divider(color: Colors.amber[800]),
+              Divider(color: Colors.teal[50]),
+
               ListTile(
-                tileColor: Colors.amber[100],
-                leading: Icon(Icons.connect_without_contact),
-                title: Text('Support [temp for testing]'),
-                onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => LocalNotificationScreen())),
-              ),
-              Divider(),
-              ListTile(
-                tileColor: Colors.amber[100],
-                leading: Icon(Icons.connect_without_contact),
-                title: Text('Cupertino [temp for testing]'),
-                onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => CupertinoScreen())),
-              ),
-              Divider(),
-              ListTile(
-                tileColor: Colors.amber[100],
+                tileColor: Colors.teal[50],
                 leading: Icon(Icons.help_outlined),
-                title: Text('Help - FAQ [placeholder]'),
+                title: Text('Help - FAQ'),
                 onTap: () {
-                  _launchURL();
+                  _launchURL('https://2ndhalf.online/community/foro-faq/');
                 },
               ),
-              Divider(color: Colors.amber[800]),
+              Divider(color: Colors.teal[50]),
               ListTile(
-                tileColor: Colors.amber[100],
+                tileColor: Colors.teal[50],
                 leading: Icon(Icons.help_outlined),
-                title: Text('Report a bug [placeholder]'),
+                title: Text('Report a bug'),
                 onTap: () {
-                  _launchURL();
+                  _launchURL('https://2ndhalf.online/community/foro-reports/');
                 },
               ),
-              Divider(color: Colors.amber[800]),
+              Divider(color: Colors.teal[50]),
               ListTile(
-                tileColor: Colors.amber[100],
+                tileColor: Colors.teal[50],
                 leading: Icon(Icons.help_outlined),
-                title: Text('Request a feature [placeholder]'),
+                title: Text('Request a feature'),
                 onTap: () {
-                  _launchURL();
+                  _launchURL('https://2ndhalf.online/community/foro-feature/');
                 },
               ),
-              Divider(color: Colors.amber[800]),
+              Divider(color: Colors.teal[50]),
               ListTile(
-                tileColor: Colors.amber[100],
-                leading: Icon(Icons.people),
-                title: Text('Early Adoptors Program [placeholder]'),
-                onTap: () => Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) => TaskHome())),
-              ),
-//            ListTile(
-//              leading: Icon(Icons.category),
-//              title: Text('Categories'),
-//              onTap: () => Navigator.of(context).push(
-//                  MaterialPageRoute(builder: (context) => CategoriesScreen())),
-//            ),
-//            Divider(),
-//            Column(
-//              children: _categoryList,
-//            ),
-//            ListTile(
-//              leading: Icon(Icons.pending_actions_outlined),
-//              title: Text('Actions'),
-//              onTap: () => Navigator.of(context).push(
-//                  MaterialPageRoute(builder: (context) => Action1sScreen())),
-//            ),
-//            Divider(),
-//            Column(
-//              children: _action1List,
-//            ),
-//            ListTile(
-//              leading: Icon(Icons.filter_alt_outlined),
-//              title: Text('Contexts'),
-//             onTap: () => Navigator.of(context).push(
-//                  MaterialPageRoute(builder: (context) => Context1sScreen())),
-//            ),
-//            Divider(),
-//            Column(
-//              children: _context1List,
-//            ),
-//            ListTile(
-//              leading: Icon(Icons.add_location_outlined),
-//              title: Text('Locations'),
-//              onTap: () => Navigator.of(context).push(
-//                  MaterialPageRoute(builder: (context) => Location1sScreen())),
-//            ),
-//           Divider(),
-//            Column(
-//              children: _location1List,
-//            ),
-//            ListTile(
-//              leading: Icon(Icons.bookmark_border_rounded),
-//              title: Text('Tags'),
-//              onTap: () => Navigator.of(context)
-//                  .push(MaterialPageRoute(builder: (context) => Tag1sScreen())),
-//            ),
-//            Divider(),
-//            ListTile(
-//              leading: Icon(Icons.bookmark_border_rounded),
-//              title: Text('Goals'),
-//              onTap: () => Navigator.of(context)
-//                  .push(MaterialPageRoute(builder: (context) => Goal1sScreen())),
-//            ),
-//            Divider(),
-              Divider(color: Colors.amber[800]),
-              ListTile(
-                tileColor: Colors.amber[100],
-                leading: Icon(Icons.elevator_rounded),
-                title: Text('Subscription Plans [placeholder]'),
-                onTap: () {
-                  _launchURL();
-                },
-              ),
-              Divider(color: Colors.amber[800]),
-              ListTile(
-                tileColor: Colors.amber[100],
+                tileColor: Colors.teal[50],
                 leading: Icon(Icons.perm_device_info),
                 title: Text('About [placeholder]'),
                 onTap: () => Navigator.of(context)
                     .push(MaterialPageRoute(builder: (context) => TaskHome())),
               ),
-              Divider(color: Colors.amber[800]),
+                            Divider(color: Colors.teal[50]),
+              ListTile(
+                tileColor: Colors.teal[50],
+                leading: Icon(Icons.people),
+                title: Text('Early Adoptors Program [placeholder]'),
+                onTap: () => Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => TaskHome())),
+              ),
+
+              Divider(color: Colors.teal[50]),
+              ListTile(
+                tileColor: Colors.teal[50],
+                leading: Icon(Icons.elevator_rounded),
+                title: Text('Subscription Plans [placeholder]'),
+                onTap: () {
+//                  _launchURL();
+                },
+              ),
+              Divider(color: Colors.teal[50]),
+              ListTile(
+                tileColor: Colors.teal[50],
+                leading: Icon(Icons.connect_without_contact),
+                title: Text('Cupertino [temp for testing]'),
+                onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => CupertinoScreen())),
+              ),
+              Divider(color: Colors.teal[50]),
+              ListTile(
+                tileColor: Colors.teal[50],
+                leading: Icon(Icons.connect_without_contact),
+                title: Text('Support [temp for testing]'),
+                onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => LocalNotificationScreen())),
+              ),
+
+              Divider(),
 //            ListTile(
 //                tileColor: Colors.amber[100],
 //                leading: Icon(Icons.logout),
@@ -221,8 +170,7 @@ class _DrawerNagivation extends State<DrawerNagivation> {
     );
   }
 
-  _launchURL() async {
-    const _url = 'https://2ndhalf.app';
+  _launchURL(String _url) async {
     if (await canLaunch(_url)) {
       await launch(_url);
     } else {
