@@ -74,17 +74,16 @@ class TaskHomeState extends State {
         key: _globalKey,
 //        backgroundColor: Colors.brown[900],
 
-            centerTitle: true,
-            flexibleSpace: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Colors.teal, Colors.black38],
-                  begin: Alignment.bottomRight,
-                  end: Alignment.topLeft,
-                ),
-              ),
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.teal, Colors.black38],
+              begin: Alignment.bottomRight,
+              end: Alignment.topLeft,
             ),
-
+          ),
+        ),
 
         backgroundColor: Colors.teal[800],
         elevation: 8,
@@ -184,7 +183,6 @@ class TaskHomeState extends State {
                 DateTime now = DateTime.now();
                 String formattedDate = DateFormat('yyyy-mm-dd').format(now);
                 this.tasklist![position].isDone = 1;
-                this.tasklist![position].status = "Completed";
                 this.tasklist![position].dateDone = formattedDate;
                 Scaffold.of(context).showSnackBar(new SnackBar(
                   content: new Text("Task Completed"),
@@ -234,12 +232,12 @@ class TaskHomeState extends State {
                               DateFormat('yyyy-MM-dd').format(now);
                           if (value == true) {
                             this.tasklist![position].isDone = 1;
-                            this.tasklist![position].status = "Completed";
+
                             this.tasklist![position].dateDone = formattedDate;
                             dbHelper.updateTask(tasklist![position]);
                           } else {
                             this.tasklist![position].isDone = 0;
-                            this.tasklist![position].status = "Open";
+
                             this.tasklist![position].dateDone = '';
                             dbHelper.updateTask(tasklist![position]);
                           }
@@ -358,7 +356,7 @@ class TaskHomeState extends State {
       );
       tasksFuture.then((result) {
         List<Task> taskList = [];
-        List<DisplayTask> displayTaskList= [];
+        List<DisplayTask> displayTaskList = [];
         count = result.length;
         for (int i = 0; i < count; i++) {
           countDone = countDone + 1;
