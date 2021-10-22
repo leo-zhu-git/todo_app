@@ -525,10 +525,10 @@ class MySql_DBHelper {
         var dateDone = "";
 
         if (result[i]["task"] != null) {
-          task = stringReplace(result[i]["task"]);
+          task = result[i]["task"];
         }
         if (result[i]["note"] != null) {
-          note = stringReplace(result[i]["note"]);
+          note = result[i]["note"];
         }
         if (result[i]["dateDue"] != null) {
           dateDue = result[i]["dateDue"].toString();
@@ -658,21 +658,21 @@ class MySql_DBHelper {
     this.wipeTaskDataFromMySql();
   }
 
-  String stringReplace(String str) {
-    str = str.replaceAll("\\", "\\\\");
-    str = str.replaceAll("\n", "\\n");
-    str = str.replaceAll("\r", "\\r");
-    str = str.replaceAll("\t", "\\t");
-    str = str.replaceAll("(" ")", "\"\"");
-    str = str.replaceAll(" ", "&nbsp;");
-    str = str.replaceAll("<", "&lt;");
-    str = str.replaceAll(">", "&gt;");
-    str = str.replaceAll('"', '”');
-    str = str.replaceAll('@', 'a:t');
-    str = str.replaceAll("'", '’');
+  // String stringReplace(String str) {
+  //   str = str.replaceAll("\\", "\\\\");
+  //   str = str.replaceAll("\n", "\\n");
+  //   str = str.replaceAll("\r", "\\r");
+  //   str = str.replaceAll("\t", "\\t");
+  //   str = str.replaceAll("(" ")", "\"\"");
+  //   str = str.replaceAll(" ", "&nbsp;");
+  //   str = str.replaceAll("<", "&lt;");
+  //   str = str.replaceAll(">", "&gt;");
+  //   str = str.replaceAll('"', '”');
+  //   str = str.replaceAll('@', 'a:t');
+  //   str = str.replaceAll("'", '’');
 
-    return str;
-  }
+  //   return str;
+  // }
 
   void wipeCatatoryToMySql() {
     // this.deleteAllTaskFromMySQL();
@@ -691,10 +691,10 @@ class MySql_DBHelper {
         
 
         if (result[i]["id"] != null) {
-          id = stringReplace(result[i]["id"]);
+          id = result[i]["id"];
         }
         if (result[i]["name"] != null) {
-          name = stringReplace(result[i]["name"]);
+          name = result[i]["name"];
         }
         if (result[i]["description"] != null) {
           description = result[i]["description"].toString();
@@ -736,10 +736,10 @@ class MySql_DBHelper {
         
 
         if (result[i]["id"] != null) {
-          id = stringReplace(result[i]["id"]);
+          id = result[i]["id"];
         }
         if (result[i]["name"] != null) {
-          name = stringReplace(result[i]["name"]);
+          name = result[i]["name"];
         }
         if (result[i]["description"] != null) {
           description = result[i]["description"].toString();
@@ -781,10 +781,10 @@ class MySql_DBHelper {
         
 
         if (result[i]["id"] != null) {
-          id = stringReplace(result[i]["id"]);
+          id = result[i]["id"];
         }
         if (result[i]["name"] != null) {
-          name = stringReplace(result[i]["name"]);
+          name = result[i]["name"];
         }
         if (result[i]["description"] != null) {
           description = result[i]["description"].toString();
@@ -826,10 +826,10 @@ class MySql_DBHelper {
         
 
         if (result[i]["id"] != null) {
-          id = stringReplace(result[i]["id"]);
+          id = result[i]["id"];
         }
         if (result[i]["name"] != null) {
-          name = stringReplace(result[i]["name"]);
+          name = result[i]["name"];
         }
         if (result[i]["description"] != null) {
           description = result[i]["description"].toString();
@@ -871,10 +871,10 @@ class MySql_DBHelper {
         
 
         if (result[i]["id"] != null) {
-          id = stringReplace(result[i]["id"]);
+          id = result[i]["id"];
         }
         if (result[i]["name"] != null) {
-          name = stringReplace(result[i]["name"]);
+          name = result[i]["name"];
         }
         if (result[i]["description"] != null) {
           description = result[i]["description"].toString();
@@ -916,10 +916,10 @@ class MySql_DBHelper {
         
 
         if (result[i]["id"] != null) {
-          id = stringReplace(result[i]["id"]);
+          id = result[i]["id"];
         }
         if (result[i]["name"] != null) {
-          name = stringReplace(result[i]["name"]);
+          name = result[i]["name"];
         }
         if (result[i]["description"] != null) {
           description = result[i]["description"].toString();
@@ -961,10 +961,10 @@ class MySql_DBHelper {
         
 
         if (result[i]["id"] != null) {
-          id = stringReplace(result[i]["id"]);
+          id = result[i]["id"];
         }
         if (result[i]["name"] != null) {
-          name = stringReplace(result[i]["name"]);
+          name = result[i]["name"];
         }
         if (result[i]["description"] != null) {
           description = result[i]["description"].toString();
@@ -1006,10 +1006,10 @@ class MySql_DBHelper {
         
 
         if (result[i]["id"] != null) {
-          id = stringReplace(result[i]["id"]);
+          id = result[i]["id"];
         }
         if (result[i]["name"] != null) {
-          name = stringReplace(result[i]["name"]);
+          name = result[i]["name"];
         }
         if (result[i]["description"] != null) {
           description = result[i]["description"].toString();
