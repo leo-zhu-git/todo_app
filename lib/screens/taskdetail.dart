@@ -600,8 +600,8 @@ class TaskDetailState extends State //<TaskDetail>
                   hintText: ' Pick a Date',
                   prefixIcon: InkWell(
                     onTap: () {
-//                      _showCupertinoDatePicker(context);
-                      _selectedTodoDate(context);
+                      _showCupertinoDatePicker(context);
+//                      _selectedTodoDate(context);
                     },
                     child: Icon(Icons.calendar_today),
                   ),
