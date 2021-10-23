@@ -77,11 +77,11 @@ class _Goal1sScreenState extends State<Goal1sScreen> {
                   ),
                   child: Text(
                     'Cancel',
-                    style: TextStyle(color: Colors.brown[900]),
+                    style: TextStyle(color: Colors.teal[800]),
                   )),
               ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.brown[900],
+                    primary: Colors.teal[800],
                   ),
                   onPressed: () {
                     _goal1.name = _goal1NameController.text;
@@ -155,11 +155,11 @@ class _Goal1sScreenState extends State<Goal1sScreen> {
                   ),
                   child: Text(
                     'Cancel',
-                    style: TextStyle(color: Colors.brown[900]),
+                    style: TextStyle(color: Colors.teal[800]),
                   )),
               ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.brown[900],
+                    primary: Colors.teal[800],
                   ),
                   onPressed: () async {
                     _goal1.id = goal1[0]['id'];
@@ -232,7 +232,7 @@ class _Goal1sScreenState extends State<Goal1sScreen> {
               ElevatedButton(
                   onPressed: () => Navigator.pop(context),
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.brown[900],
+                    primary: Colors.teal[800],
                   ),
                   child: Text(
                     'Cancel',
@@ -271,7 +271,7 @@ class _Goal1sScreenState extends State<Goal1sScreen> {
                   },
                   child: Text(
                     'Delete',
-                    style: TextStyle(color: Colors.brown[900]),
+                    style: TextStyle(color: Colors.teal[800]),
                   )),
             ],
             title: Text('Are you sure you want to delete this'),
@@ -290,8 +290,18 @@ class _Goal1sScreenState extends State<Goal1sScreen> {
       backgroundColor: Colors.amber[50],
       key: _globalKey,
       appBar: AppBar(
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.teal, Colors.black38],
+              begin: Alignment.bottomRight,
+              end: Alignment.topLeft,
+            ),
+          ),
+        ),
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.brown[900],
+        backgroundColor: Colors.teal[800],
         title: Center(
           child: Container(
             child: Column(
@@ -302,7 +312,7 @@ class _Goal1sScreenState extends State<Goal1sScreen> {
                   position: BadgePosition.topEnd(),
                   badgeContent: Text(_goal1List.length.toString(),
                       style: TextStyle(color: Colors.black)),
-//                  badgeColor: Colors.orange[100],
+                  badgeColor: Colors.orange[100]!,
                 ),
               ],
             ),
@@ -343,7 +353,7 @@ class _Goal1sScreenState extends State<Goal1sScreen> {
       bottomNavigationBar: Container(
         height: 55.0,
         child: BottomAppBar(
-          color: Colors.brown[900],
+          color: Colors.teal[800],
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[

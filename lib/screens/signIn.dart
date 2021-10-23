@@ -42,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             style: TextStyle(
                                 fontSize: 80.0,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.brown[700]),
+                                color: Colors.teal[800]),
                           ),
                         ),
                         Container(
@@ -52,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             style: TextStyle(
                                 fontSize: 80.0,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.brown[700]),
+                                color: Colors.teal[800]),
                           ),
                         ),
                         Container(
@@ -129,7 +129,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   child: Text(
                                     'LOGIN',
                                     style: TextStyle(
-                                      color: Colors.brown[700],
+                                      color: Colors.teal[800],
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),

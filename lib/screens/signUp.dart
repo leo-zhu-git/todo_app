@@ -26,7 +26,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             style: TextStyle(
                                 fontSize: 80.0,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.brown[700]),
+                                color: Colors.teal[800]),
                           ),
                         ),
                         Container(
@@ -36,7 +36,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             style: TextStyle(
                                 fontSize: 80.0,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.brown[700]),
+                                color: Colors.teal[800]),
                           ),
                         ),
                         Container(
@@ -112,7 +112,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                   child: Text(
                                     'LOGIN',
                                     style: TextStyle(
-                                      color: Colors.brown[700],
+                                      color: Colors.teal[800],
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -144,7 +144,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                   child: Text(
                                     'GO BACK',
                                     style: TextStyle(
-                                      color: Colors.brown[700],
+                                      color: Colors.teal[800],
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),

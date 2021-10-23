@@ -214,7 +214,7 @@ class TaskHomeState extends State {
               });
             },
             background: Container(
-              color: Colors.brown,
+              color: Colors.teal[800],
             ),
             child: Padding(
               padding: EdgeInsets.only(top: 2.0, left: 4.0, right: 4.0),

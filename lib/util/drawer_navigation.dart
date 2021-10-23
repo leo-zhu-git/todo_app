@@ -63,7 +63,7 @@ class _DrawerNagivation extends State<DrawerNagivation> {
                 margin: EdgeInsets.zero,
                 accountName: Text('Welcome to'),
                 accountEmail: Text('todoMIT'),
-                decoration: BoxDecoration(color: Colors.brown[900]),
+                decoration: BoxDecoration(color: Colors.teal[800]),
               ),
               ListTile(
                 leading: Icon(Icons.home),

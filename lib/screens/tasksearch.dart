@@ -258,8 +258,16 @@ class TaskSearchState extends State {
     return Scaffold(
       backgroundColor: Colors.teal[50],
       appBar: AppBar(
-//        backgroundColor: Colors.brown[900],
-//        backgroundColor: Colors.lightGreen[800],
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.teal, Colors.black38],
+              begin: Alignment.bottomRight,
+              end: Alignment.topLeft,
+            ),
+          ),
+        ),
         backgroundColor: Colors.teal[800],
         automaticallyImplyLeading: true,
         title: Center(
@@ -749,7 +757,7 @@ class TaskSearchState extends State {
               });
             },
             background: Container(
-              color: Colors.brown,
+              color: Colors.teal[800],
             ),
             child: Padding(
               padding:
@@ -978,7 +986,7 @@ class TaskSearchState extends State {
   }
 
   void navigateToDetail(Task task) async {
-  await Navigator.push(
+    await Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => TaskDetail(task)),
     );

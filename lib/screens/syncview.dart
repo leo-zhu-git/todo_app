@@ -21,9 +21,9 @@ class _SyncViewState extends State<SyncView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.amber[100],
+      backgroundColor: Colors.teal[50],
       appBar: new AppBar(
-        backgroundColor: Colors.brown[900],
+        backgroundColor: Colors.teal[800],
         automaticallyImplyLeading: false,
         title: Center(
           child: Text('Sync - never lose your data'),
