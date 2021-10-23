@@ -248,7 +248,7 @@ class TaskHomeState extends State {
                       icon: Icon(Icons.lightbulb,
                           color: (this.tasklist![position].isStar == 0)
                               ? Colors.black12
-                              : Colors.green),
+                              : Colors.teal[300]),
                       onPressed: () {
                         setState(() {
                           if (this.tasklist![position].isStar == 1) {
