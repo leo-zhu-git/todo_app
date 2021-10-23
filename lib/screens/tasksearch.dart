@@ -777,12 +777,10 @@ class TaskSearchState extends State {
                               DateFormat('yyyy-MM-dd').format(now);
                           if (value == true) {
                             this.tasklist[position].isDone = 1;
-                            this.tasklist[position].status = "Completed";
                             this.tasklist[position].dateDone = formattedDate;
                             dbHelper.updateTask(tasklist[position]);
                           } else {
                             this.tasklist[position].isDone = 0;
-                            this.tasklist[position].status = "Open";
                             this.tasklist[position].dateDone = '';
                             dbHelper.updateTask(tasklist[position]);
                           }
