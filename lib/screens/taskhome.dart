@@ -325,7 +325,7 @@ class TaskHomeState extends State {
     int? _sortOrder3 = globals.sortOrder3 != null ? globals.sortOrder3 : 0;
 
     int? _filterDateDue =
-        globals.filterDateDue != 0 ? globals.filterDateDue : 7;
+        globals.filterDateDue != 0 ? globals.filterDateDue : 0;
     int? _filterIsStar =
         globals.filterIsStar != "null" ? globals.filterIsStar : 0;
     int? _filterIsDone =
@@ -746,13 +746,13 @@ class TaskHomeState extends State {
         return "timeDue";
         break;
       case 4:
-        return "status";
+        return "category";
         break;
       case 5:
-        return "priority";
+        return "status";
         break;
       case 6:
-        return "category";
+        return "priority";
         break;
       case 7:
         return "action1";
@@ -785,7 +785,10 @@ class TaskHomeState extends State {
   //Sort column names are defined here but if there is any changes in column name update here
   String? getDateDueColumn(int column) {
     switch (column) {
-      case 1:
+      case 0:
+        return "All Tasks";
+        break;
+     case 1:
         return "Today";
         break;
       case 2:
@@ -806,10 +809,6 @@ class TaskHomeState extends State {
       case 7:
         return "Overdues Only";
         break;
-      case 0:
-        return "All Tasks";
-        break;
-
       default:
         return "All Tasks";
         break;
