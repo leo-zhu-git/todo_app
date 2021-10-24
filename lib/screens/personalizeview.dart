@@ -1598,13 +1598,13 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                   .value!;
           globals.showSec3 = int.parse(customSetting!.showSec3!);
         }
-        if (customSetting!.filterIsStar == true) {
+        if (customSetting!.filterIsStar == 1) {
           _selectedFilterIsStar = _dropdownFilterIsStar[1].value!;
           globals.filterIsStar = 1;
         } else
           _selectedFilterIsStar = _dropdownFilterIsStar[0].value!;
       }
-      if (customSetting!.filterIsDone == true) {
+      if (customSetting!.filterIsDone == 1) {
         _selectedFilterIsDone = _dropdownFilterIsDone[1].value!;
         globals.filterIsDone = 1;
       } else
