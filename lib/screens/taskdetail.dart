@@ -363,7 +363,8 @@ class TaskDetailState extends State //<TaskDetail>
                   Container(
                     height: 400,
                     child: CupertinoDatePicker(
-                        initialDateTime: DateTime.now(),
+                        initialDateTime:
+                            (_dateDue == null) ? DateTime.now() : _dateDue,
                         mode: CupertinoDatePickerMode.date,
                         onDateTimeChanged: (val) {
                           setState(() {
@@ -460,7 +461,8 @@ class TaskDetailState extends State //<TaskDetail>
                   Container(
                     height: 400,
                     child: CupertinoDatePicker(
-                        initialDateTime: DateTime.now(),
+                        initialDateTime:
+                            (_dateDue == null) ? DateTime.now() : _dateDue!.add(Duration(hours: _timeDue!.hour, minutes: _timeDue!.minute)),
                         mode: CupertinoDatePickerMode.dateAndTime,
                         onDateTimeChanged: (val) {
                           setState(() {
@@ -471,6 +473,13 @@ class TaskDetailState extends State //<TaskDetail>
                                 formatter.format(_dateDue!);
                             _todoDateController.text =
                                 formatter.format(_dateDue!);
+
+                            _timeDue = TimeOfDay.fromDateTime(val);
+//                            final DateFormat formatter =
+//                                DateFormat('hh:mm');
+//                            final String formatted =
+//                                formatter.format(_timeDue!);
+                            _todoTimeController.text = _timeDue!.format(context);
                           });
                         }),
                   ),
@@ -575,7 +584,7 @@ class TaskDetailState extends State //<TaskDetail>
                   task.note = value;
                 },
                 minLines: 4,
-                maxLines: 16,
+                maxLines: 8,
                 decoration: InputDecoration(
                   labelText: ' Note',
                   hintText: ' Write Todo Note',
@@ -787,8 +796,8 @@ class TaskDetailState extends State //<TaskDetail>
                   hintText: ' Pick a Time',
                   prefixIcon: InkWell(
                     onTap: () {
-//                      _showCupertinoDateTimePicker(context);
-                      _openTimePicker(context);
+                      _showCupertinoDateTimePicker(context);
+//                      _openTimePicker(context);
                     },
                     child: Icon(Icons.access_time),
                   ),

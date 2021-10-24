@@ -791,7 +791,7 @@ class TaskSearchState extends State {
                       icon: Icon(Icons.lightbulb,
                           color: (this.tasklist[position].isStar == 0)
                               ? Colors.black12
-                              : Colors.teal[300]),
+                              : Colors.teal),
                       onPressed: () {
                         setState(() {
                           if (this.tasklist[position].isStar == 1) {
