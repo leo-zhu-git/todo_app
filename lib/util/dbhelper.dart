@@ -609,7 +609,7 @@ Plan C - USD 24 | 12 month
 ////////////////
     if (colfilterIsDone == 0 || colfilterIsDone == null) // show
     {
-//      queryStr = queryStr + " where ($colIsDone == $colIsDone)";
+      queryStr = queryStr + " where ($colIsDone == $colIsDone)";
     } else
       queryStr = queryStr + " where ($colIsDone != 1)";
 
@@ -654,8 +654,7 @@ Plan C - USD 24 | 12 month
     } else if (colfilterDateDue == "All Tasks") {
     } else {
 // select all tasks regardless of due dates
-    }
-    ;
+    };
 
 ////////////////
     /// build query - add status

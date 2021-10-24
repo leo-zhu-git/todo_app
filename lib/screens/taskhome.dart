@@ -785,28 +785,28 @@ class TaskHomeState extends State {
   //Sort column names are defined here but if there is any changes in column name update here
   String? getDateDueColumn(int column) {
     switch (column) {
-      case 0:
+      case 1:
         return "Today";
         break;
-      case 1:
+      case 2:
         return "Tomorrow";
         break;
-      case 2:
+      case 3:
         return "Next 7 days";
         break;
-      case 3:
+      case 4:
         return "Next 30 days";
         break;
-      case 4:
+      case 5:
         return "Any Due Date";
         break;
-      case 5:
+      case 6:
         return "No Due Date";
         break;
-      case 6:
+      case 7:
         return "Overdues Only";
         break;
-      case 7:
+      case 0:
         return "All Tasks";
         break;
 
