@@ -1354,7 +1354,7 @@ class TaskSearchState extends State {
             : 0;
       }
     }
-    getData();
+//    getData();
     setState(() {
       customSetting = customSetting;
       globals.bootstrap = 1;
