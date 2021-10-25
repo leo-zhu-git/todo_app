@@ -811,79 +811,79 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
               ),
 
 //########################################### Action  ######### #################################3
-              Container(
-                margin: const EdgeInsets.all(2.0),
-                decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.blue[100]),
-                child: Flexible(
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      DropdownButton<String>(
-                        items: _action1s.map((CustomDropdownItem value) {
-                          return DropdownMenuItem<String>(
-                              value: value.id, child: Text(value.name!));
-                        }).toList(),
-                        value: _selectedAction1,
-                        onChanged: (value) {
-                          setState(() {
-                            _selectedAction1 = value;
-                            //                    searchData(_searchText, _selectedpriority, _selectedCategory, _selectedAction1, _selectedContext1, _selectedLocation1, _selectedTag1, _selectedGoal1);
-                          });
-                        },
-                      )
-                    ],
-                  ),
-                ),
-              ),
+//              Container(
+//                margin: const EdgeInsets.all(2.0),
+//                decoration: BoxDecoration(
+//                    shape: BoxShape.rectangle, color: Colors.blue[100]),
+//                child: Flexible(
+//                  child: Row(
+//                    crossAxisAlignment: CrossAxisAlignment.center,
+//                    children: [
+//                      DropdownButton<String>(
+//                        items: _action1s.map((CustomDropdownItem value) {
+//                          return DropdownMenuItem<String>(
+//                              value: value.id, child: Text(value.name!));
+//                        }).toList(),
+//                        value: _selectedAction1,
+//                        onChanged: (value) {
+//                          setState(() {
+//                            _selectedAction1 = value;
+//                            //                    searchData(_searchText, _selectedpriority, _selectedCategory, _selectedAction1, _selectedContext1, _selectedLocation1, _selectedTag1, _selectedGoal1);
+//                          });
+//                        },
+//                      )
+//                    ],
+//                  ),
+//                ),
+//              ),
 
 //######### Context  #########
-              Container(
-                margin: const EdgeInsets.all(2.0),
-                decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.blue[100]),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    DropdownButton<String>(
-                      items: _context1s.map((CustomDropdownItem value) {
-                        return DropdownMenuItem<String>(
-                            value: value.id, child: Text(value.name!));
-                      }).toList(),
-                      value: _selectedContext1,
-                      onChanged: (value) {
-                        setState(() {
-                          _selectedContext1 = value;
-                        });
-                      },
-                    )
-                  ],
-                ),
-              ),
+//              Container(
+//                margin: const EdgeInsets.all(2.0),
+//                decoration: BoxDecoration(
+//                    shape: BoxShape.rectangle, color: Colors.blue[100]),
+//                child: Row(
+//                  crossAxisAlignment: CrossAxisAlignment.center,
+//                  children: [
+//                    DropdownButton<String>(
+//                      items: _context1s.map((CustomDropdownItem value) {
+//                        return DropdownMenuItem<String>(
+//                            value: value.id, child: Text(value.name!));
+//                      }).toList(),
+//                      value: _selectedContext1,
+//                      onChanged: (value) {
+//                        setState(() {
+//                          _selectedContext1 = value;
+//                        });
+//                      },
+//                    )
+//                  ],
+//                ),
+//              ),
 
 // //######### Location  #########
-              Container(
-                margin: const EdgeInsets.all(2.0),
-                decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.blue[100]),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    DropdownButton<String>(
-                      items: _location1s.map((CustomDropdownItem value) {
-                        return DropdownMenuItem<String>(
-                            value: value.id, child: Text(value.name!));
-                      }).toList(),
-                      value: _selectedLocation1,
-                      onChanged: (value) {
-                        setState(() {
-                          _selectedLocation1 = value;
-                        });
-                      },
-                    )
-                  ],
-                ),
-              ),
+//              Container(
+//                margin: const EdgeInsets.all(2.0),
+//                decoration: BoxDecoration(
+//                    shape: BoxShape.rectangle, color: Colors.blue[100]),
+//                child: Row(
+//                  crossAxisAlignment: CrossAxisAlignment.center,
+//                  children: [
+//                    DropdownButton<String>(
+//                      items: _location1s.map((CustomDropdownItem value) {
+//                        return DropdownMenuItem<String>(
+//                            value: value.id, child: Text(value.name!));
+//                      }).toList(),
+//                      value: _selectedLocation1,
+//                      onChanged: (value) {
+//                        setState(() {
+//                          _selectedLocation1 = value;
+//                        });
+//                      },
+//                    )
+//                  ],
+//                ),
+//              ),
 
 // //######### Tag  #########
               Container(
@@ -910,28 +910,28 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
               ),
 
 // //######### Goal  #########
-              Container(
-                margin: const EdgeInsets.all(2.0),
-                decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.blue[100]),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    DropdownButton<String>(
-                      items: _goal1s.map((CustomDropdownItem value) {
-                        return DropdownMenuItem<String>(
-                            value: value.id, child: Text(value.name!));
-                      }).toList(),
-                      value: _selectedGoal1,
-                      onChanged: (value) {
-                        setState(() {
-                          _selectedGoal1 = value;
-                        });
-                      },
-                    )
-                  ],
-                ),
-              ),
+//              Container(
+//                margin: const EdgeInsets.all(2.0),
+//                decoration: BoxDecoration(
+//                    shape: BoxShape.rectangle, color: Colors.blue[100]),
+//                child: Row(
+//                  crossAxisAlignment: CrossAxisAlignment.center,
+//                  children: [
+//                    DropdownButton<String>(
+//                      items: _goal1s.map((CustomDropdownItem value) {
+//                        return DropdownMenuItem<String>(
+//                            value: value.id, child: Text(value.name!));
+//                      }).toList(),
+//                      value: _selectedGoal1,
+//                      onChanged: (value) {
+//                        setState(() {
+//                          _selectedGoal1 = value;
+//                        });
+//                      },
+//                    )
+//                  ],
+//                ),
+//              ),
 
 ///////////////////////////
 //  Filter Is Star
@@ -1114,16 +1114,16 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
 ///////////////////////////
 //  Picklist - Action
 ///////////////////////////
-              Card(
-                elevation: 8.0,
-                child: ListTile(
-                  tileColor: Colors.orange[100],
-                  title: Text('Actions'),
-                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => Action1sScreen())),
-                ),
-              ),
-              SizedBox(height: 2),
+//              Card(
+//                elevation: 8.0,
+//                child: ListTile(
+//                  tileColor: Colors.orange[100],
+//                  title: Text('Actions'),
+//                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
+//                      builder: (context) => Action1sScreen())),
+//                ),
+//              ),
+//              SizedBox(height: 2),
 
 ///////////////////////////
 //  Picklist - Statuses
@@ -1151,33 +1151,34 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                       builder: (context) => PrioritiesScreen())),
                 ),
               ),
-              SizedBox(height: 2), ///////////////////////////
+              SizedBox(height: 2), 
+///////////////////////////
 //  Picklist - Contexts
 ///////////////////////////
-              Card(
-                elevation: 8.0,
-                child: ListTile(
-                  tileColor: Colors.orange[100],
-                  title: Text('Contexts'),
-                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => Context1sScreen())),
-                ),
-              ),
-              SizedBox(height: 2),
+//              Card(
+//                elevation: 8.0,
+//                child: ListTile(
+//                  tileColor: Colors.orange[100],
+//                  title: Text('Contexts'),
+//                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
+//                     builder: (context) => Context1sScreen())),
+//                ),
+//              ),
+//              SizedBox(height: 2),
 
 ///////////////////////////
 //  Picklist - Locations
 ///////////////////////////
-              Card(
-                elevation: 8.0,
-                child: ListTile(
-                  tileColor: Colors.orange[100],
-                  title: Text('Locations'),
-                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => Location1sScreen())),
-                ),
-              ),
-              SizedBox(height: 2),
+//              Card(
+//                elevation: 8.0,
+//                child: ListTile(
+//                  tileColor: Colors.orange[100],
+//                  title: Text('Locations'),
+//                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
+//                      builder: (context) => Location1sScreen())),
+//                ),
+//              ),
+//              SizedBox(height: 2),
 
 ///////////////////////////
 //  Picklist - Tags
@@ -1196,19 +1197,19 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
 ///////////////////////////
 //  Picklist - Goals
 ///////////////////////////
-              Card(
-                elevation: 8.0,
-                child: ListTile(
-                  tileColor: Colors.orange[100],
-                  title: Text('Goals'),
-                  onTap: () => Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => Goal1sScreen())),
-                ),
-              ),
+//              Card(
+//                elevation: 8.0,
+//                child: ListTile(
+//                  tileColor: Colors.orange[100],
+//                  title: Text('Goals'),
+//                  onTap: () => Navigator.of(context).push(
+//                      MaterialPageRoute(builder: (context) => Goal1sScreen())),
+//                ),
+//              ),
               SizedBox(
                 height: 20,
               ),
-              Text("View - second line up to 3 fields"),
+             Text("View - second line up to 3 fields"),
 ///////////////////////////
 //  Show Main 1
 ///////////////////////////

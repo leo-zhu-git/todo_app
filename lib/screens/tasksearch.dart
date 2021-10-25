@@ -498,121 +498,121 @@ class TaskSearchState extends State {
                       ),
 
 //########################################### Action  ######### #################################3
-                      Container(
-                        margin:
-                            EdgeInsets.only(top: 1.0, left: 8.0, right: 8.0),
-                        decoration: BoxDecoration(
-                            shape: BoxShape.rectangle, color: Colors.blue[100]),
-                        child: Flexible(
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              DropdownButton<String?>(
-                                items:
-                                    _action1s.map((CustomDropdownItem value) {
-                                  return DropdownMenuItem<String>(
-                                      value: value.id,
-                                      child: Text(value.name!));
-                                }).toList(),
-                                style: _textStyleControls,
-                                value: _selectedAction1,
-                                onChanged: (value) {
-                                  setState(() {
-                                    _selectedAction1 = value;
-                                    searchData(
-                                        _searchText,
-                                        _selectedStatus,
-                                        _selectedPriority,
-                                        _selectedCategory,
-                                        _selectedAction1,
-                                        _selectedContext1,
-                                        _selectedLocation1,
-                                        _selectedTag1,
-                                        _selectedGoal1,
-                                        _showIsStar,
-                                        _showIsDone);
-                                  });
-                                },
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
+//                      Container(
+//                        margin:
+//                            EdgeInsets.only(top: 1.0, left: 8.0, right: 8.0),
+//                        decoration: BoxDecoration(
+//                            shape: BoxShape.rectangle, color: Colors.blue[100]),
+//                        child: Flexible(
+//                          child: Row(
+//                            crossAxisAlignment: CrossAxisAlignment.center,
+//                            children: [
+//                              DropdownButton<String?>(
+//                                items:
+//                                    _action1s.map((CustomDropdownItem value) {
+//                                  return DropdownMenuItem<String>(
+//                                      value: value.id,
+//                                      child: Text(value.name!));
+//                                }).toList(),
+//                                style: _textStyleControls,
+//                                value: _selectedAction1,
+//                                onChanged: (value) {
+//                                  setState(() {
+//                                    _selectedAction1 = value;
+//                                    searchData(
+//                                        _searchText,
+//                                        _selectedStatus,
+//                                        _selectedPriority,
+//                                        _selectedCategory,
+//                                        _selectedAction1,
+//                                        _selectedContext1,
+//                                        _selectedLocation1,
+//                                        _selectedTag1,
+//                                        _selectedGoal1,
+//                                        _showIsStar,
+//                                        _showIsDone);
+//                                  });
+//                                },
+//                              )
+//                            ],
+//                          ),
+//                        ),
+//                      ),
 //######### Context  #########
-                      Container(
-                        margin:
-                            EdgeInsets.only(top: 1.0, left: 8.0, right: 8.0),
-                        decoration: BoxDecoration(
-                            shape: BoxShape.rectangle, color: Colors.blue[100]),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            DropdownButton<String?>(
-                              items: _context1s.map((CustomDropdownItem value) {
-                                return DropdownMenuItem<String>(
-                                    value: value.id, child: Text(value.name!));
-                              }).toList(),
-                              style: _textStyleControls,
-                              value: _selectedContext1,
-                              onChanged: (value) {
-                                setState(() {
-                                  _selectedContext1 = value;
-                                  searchData(
-                                      _searchText,
-                                      _selectedStatus,
-                                      _selectedPriority,
-                                      _selectedCategory,
-                                      _selectedAction1,
-                                      _selectedContext1,
-                                      _selectedLocation1,
-                                      _selectedTag1,
-                                      _selectedGoal1,
-                                      _showIsStar,
-                                      _showIsDone);
-                                });
-                              },
-                            )
-                          ],
-                        ),
-                      ),
+//                      Container(
+//                        margin:
+//                            EdgeInsets.only(top: 1.0, left: 8.0, right: 8.0),
+//                        decoration: BoxDecoration(
+//                            shape: BoxShape.rectangle, color: Colors.blue[100]),
+//                        child: Row(
+//                          crossAxisAlignment: CrossAxisAlignment.center,
+//                          children: [
+//                            DropdownButton<String?>(
+//                              items: _context1s.map((CustomDropdownItem value) {
+//                                return DropdownMenuItem<String>(
+//                                    value: value.id, child: Text(value.name!));
+//                              }).toList(),
+//                              style: _textStyleControls,
+//                              value: _selectedContext1,
+//                              onChanged: (value) {
+//                                setState(() {
+//                                  _selectedContext1 = value;
+//                                  searchData(
+//                                      _searchText,
+//                                      _selectedStatus,
+//                                      _selectedPriority,
+//                                      _selectedCategory,
+//                                      _selectedAction1,
+//                                      _selectedContext1,
+//                                      _selectedLocation1,
+//                                      _selectedTag1,
+//                                      _selectedGoal1,
+//                                      _showIsStar,
+//                                      _showIsDone);
+//                                });
+//                              },
+//                            )
+//                          ],
+//                        ),
+//                      ),
 // //######### Location  #########
-                      Container(
-                        margin:
-                            EdgeInsets.only(top: 1.0, left: 8.0, right: 8.0),
-                        decoration: BoxDecoration(
-                            shape: BoxShape.rectangle, color: Colors.blue[100]),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            DropdownButton<String?>(
-                              items:
-                                  _location1s.map((CustomDropdownItem value) {
-                                return DropdownMenuItem<String>(
-                                    value: value.id, child: Text(value.name!));
-                              }).toList(),
-                              style: _textStyleControls,
-                              value: _selectedLocation1,
-                              onChanged: (value) {
-                                setState(() {
-                                  _selectedLocation1 = value;
-                                  searchData(
-                                      _searchText,
-                                      _selectedStatus,
-                                      _selectedPriority,
-                                      _selectedCategory,
-                                      _selectedAction1,
-                                      _selectedContext1,
-                                      _selectedLocation1,
-                                      _selectedTag1,
-                                      _selectedGoal1,
-                                      _showIsStar,
-                                      _showIsDone);
-                                });
-                              },
-                            )
-                          ],
-                        ),
-                      ),
+//                      Container(
+//                        margin:
+//                            EdgeInsets.only(top: 1.0, left: 8.0, right: 8.0),
+//                        decoration: BoxDecoration(
+//                            shape: BoxShape.rectangle, color: Colors.blue[100]),
+//                        child: Row(
+//                          crossAxisAlignment: CrossAxisAlignment.center,
+//                          children: [
+//                            DropdownButton<String?>(
+//                              items:
+//                                  _location1s.map((CustomDropdownItem value) {
+//                                return DropdownMenuItem<String>(
+//                                    value: value.id, child: Text(value.name!));
+//                              }).toList(),
+//                              style: _textStyleControls,
+//                              value: _selectedLocation1,
+//                              onChanged: (value) {
+//                                setState(() {
+//                                  _selectedLocation1 = value;
+//                                  searchData(
+//                                     _searchText,
+//                                      _selectedStatus,
+//                                      _selectedPriority,
+//                                      _selectedCategory,
+//                                      _selectedAction1,
+//                                      _selectedContext1,
+//                                      _selectedLocation1,
+//                                      _selectedTag1,
+//                                      _selectedGoal1,
+//                                      _showIsStar,
+//                                      _showIsDone);
+//                                });
+//                              },
+//                            )
+//                          ],
+//                        ),
+//                      ),
 // //######### Tag  #########
                       Container(
                         margin:
@@ -651,42 +651,42 @@ class TaskSearchState extends State {
                         ),
                       ),
 // //######### Goal  #########
-                      Container(
-                        margin: EdgeInsets.only(
-                            top: 1.0, left: 8.0, right: 8.0, bottom: 1.0),
-                        decoration: BoxDecoration(
-                            shape: BoxShape.rectangle, color: Colors.blue[100]),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            DropdownButton<String?>(
-                              items: _goal1s.map((CustomDropdownItem value) {
-                                return DropdownMenuItem<String>(
-                                    value: value.id, child: Text(value.name!));
-                              }).toList(),
-                              style: _textStyleControls,
-                              value: _selectedGoal1,
-                              onChanged: (value) {
-                                setState(() {
-                                  _selectedGoal1 = value;
-                                  searchData(
-                                      _searchText,
-                                      _selectedStatus,
-                                      _selectedPriority,
-                                      _selectedCategory,
-                                      _selectedAction1,
-                                      _selectedContext1,
-                                      _selectedLocation1,
-                                      _selectedTag1,
-                                      _selectedGoal1,
-                                      _showIsStar,
-                                      _showIsDone);
-                                });
-                              },
-                            )
-                          ],
-                        ),
-                      ),
+//                      Container(
+//                        margin: EdgeInsets.only(
+//                            top: 1.0, left: 8.0, right: 8.0, bottom: 1.0),
+//                        decoration: BoxDecoration(
+//                            shape: BoxShape.rectangle, color: Colors.blue[100]),
+//                        child: Row(
+//                          crossAxisAlignment: CrossAxisAlignment.center,
+//                          children: [
+//                            DropdownButton<String?>(
+//                              items: _goal1s.map((CustomDropdownItem value) {
+//                                return DropdownMenuItem<String>(
+//                                    value: value.id, child: Text(value.name!));
+//                              }).toList(),
+//                              style: _textStyleControls,
+//                              value: _selectedGoal1,
+//                              onChanged: (value) {
+//                                setState(() {
+//                                  _selectedGoal1 = value;
+//                                  searchData(
+//                                      _searchText,
+//                                      _selectedStatus,
+//                                      _selectedPriority,
+//                                      _selectedCategory,
+//                                      _selectedAction1,
+//                                      _selectedContext1,
+//                                      _selectedLocation1,
+//                                      _selectedTag1,
+//                                      _selectedGoal1,
+//                                      _showIsStar,
+//                                      _showIsDone);
+//                                });
+//                              },
+//                            )
+//                          ],
+//                        ),
+//                      ),
                     ],
                   )
                 ],

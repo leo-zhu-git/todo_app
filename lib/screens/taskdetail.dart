@@ -1003,97 +1003,97 @@ class TaskDetailState extends State //<TaskDetail>
 //  ACTION
 ///////////////////////////
 
-            Container(
-              margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
-              decoration: BoxDecoration(
-                  shape: BoxShape.rectangle, color: Colors.blue[100]),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  DropdownButton<String>(
-                      items: _action1s.map((CustomDropdownItem value) {
-                        return DropdownMenuItem<String>(
-                            value: value.id,
-                            child: Text(
-                              value.name!,
-                              overflow: TextOverflow.ellipsis,
-                            ));
-                      }).toList(),
-                      style: _textStyleControls,
-                      value: _selectedAction1,
-                      onChanged: (newValue) {
-                        setState(() {
-                          _selectedAction1 = newValue;
-                          task.action1 = newValue!;
-                        });
-                      }),
-                ],
-              ),
-            ),
+//            Container(
+//              margin:
+//                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
+//              decoration: BoxDecoration(
+//                  shape: BoxShape.rectangle, color: Colors.blue[100]),
+//              child: Row(
+//                crossAxisAlignment: CrossAxisAlignment.center,
+//                children: [
+//                  DropdownButton<String>(
+//                      items: _action1s.map((CustomDropdownItem value) {
+//                        return DropdownMenuItem<String>(
+//                            value: value.id,
+//                            child: Text(
+//                              value.name!,
+//                              overflow: TextOverflow.ellipsis,
+//                            ));
+//                      }).toList(),
+//                      style: _textStyleControls,
+//                      value: _selectedAction1,
+//                      onChanged: (newValue) {
+//                        setState(() {
+//                          _selectedAction1 = newValue;
+//                          task.action1 = newValue!;
+//                        });
+//                      }),
+//                ],
+//              ),
+//            ),
 
 ///////////////////////////
 //  CONTEXT
 ///////////////////////////
-            Container(
-              margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
-              decoration: BoxDecoration(
-                  shape: BoxShape.rectangle, color: Colors.blue[100]),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  DropdownButton<String>(
-                      items: _context1s.map((CustomDropdownItem value) {
-                        return DropdownMenuItem<String>(
-                            value: value.id,
-                            child: Text(
-                              value.name!,
-                              overflow: TextOverflow.ellipsis,
-                            ));
-                      }).toList(),
-                      style: _textStyleControls,
-                      value: _selectedContext1,
-                      onChanged: (newValue) {
-                        setState(() {
-                          _selectedContext1 = newValue;
-                          task.context1 = newValue!;
-                        });
-                      }),
-                ],
-              ),
-            ),
+//            Container(
+//              margin:
+//                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
+//              decoration: BoxDecoration(
+//                  shape: BoxShape.rectangle, color: Colors.blue[100]),
+//              child: Row(
+//                crossAxisAlignment: CrossAxisAlignment.center,
+//                children: [
+//                  DropdownButton<String>(
+//                      items: _context1s.map((CustomDropdownItem value) {
+//                        return DropdownMenuItem<String>(
+//                            value: value.id,
+//                            child: Text(
+//                              value.name!,
+//                              overflow: TextOverflow.ellipsis,
+//                            ));
+//                      }).toList(),
+//                      style: _textStyleControls,
+//                      value: _selectedContext1,
+//                      onChanged: (newValue) {
+//                        setState(() {
+//                          _selectedContext1 = newValue;
+//                          task.context1 = newValue!;
+//                        });
+//                      }),
+//                ],
+//              ),
+//            ),
 ///////////////////////////
 //  LOCATION
 ///////////////////////////
-            Container(
-              margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
-              decoration: BoxDecoration(
-                  shape: BoxShape.rectangle, color: Colors.blue[100]),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  DropdownButton<String>(
-                      items: _location1s.map((CustomDropdownItem value) {
-                        return DropdownMenuItem<String>(
-                            value: value.id,
-                            child: Text(
-                              value.name!,
-                              overflow: TextOverflow.ellipsis,
-                            ));
-                      }).toList(),
-                      style: _textStyleControls,
-                      value: _selectedLocation1,
-                      onChanged: (newValue) {
-                        setState(() {
-                          _selectedLocation1 = newValue;
-                          task.location1 = newValue!;
-                        });
-                      }),
-                ],
-              ),
-            ),
+//            Container(
+//              margin:
+//                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
+//              decoration: BoxDecoration(
+//                  shape: BoxShape.rectangle, color: Colors.blue[100]),
+//              child: Row(
+//                crossAxisAlignment: CrossAxisAlignment.center,
+//                children: [
+//                  DropdownButton<String>(
+//                      items: _location1s.map((CustomDropdownItem value) {
+//                        return DropdownMenuItem<String>(
+//                            value: value.id,
+//                            child: Text(
+//                              value.name!,
+//                              overflow: TextOverflow.ellipsis,
+//                            ));
+//                      }).toList(),
+//                      style: _textStyleControls,
+//                      value: _selectedLocation1,
+//                      onChanged: (newValue) {
+//                        setState(() {
+//                          _selectedLocation1 = newValue;
+//                          task.location1 = newValue!;
+//                        });
+//                      }),
+//                ],
+//              ),
+//            ),
 ///////////////////////////
 //  TAG
 ///////////////////////////
@@ -1129,34 +1129,34 @@ class TaskDetailState extends State //<TaskDetail>
 ///////////////////////////
 //  GOAL
 ///////////////////////////
-            Container(
-              margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
-              decoration: BoxDecoration(
-                  shape: BoxShape.rectangle, color: Colors.blue[100]),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  DropdownButton<String>(
-                      items: _goal1s.map((CustomDropdownItem value) {
-                        return DropdownMenuItem<String>(
-                            value: value.id,
-                            child: Text(
-                              value.name!,
-                              overflow: TextOverflow.ellipsis,
-                            ));
-                      }).toList(),
-                      style: _textStyleControls,
-                      value: _selectedGoal1,
-                      onChanged: (newValue) {
-                        setState(() {
-                          _selectedGoal1 = newValue;
-                          task.goal1 = newValue!;
-                        });
-                      }),
-                ],
-              ),
-            ), //KK     // SizedBox(
+//            Container(
+//              margin:
+//                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
+//              decoration: BoxDecoration(
+//                  shape: BoxShape.rectangle, color: Colors.blue[100]),
+//              child: Row(
+//                crossAxisAlignment: CrossAxisAlignment.center,
+//                children: [
+//                  DropdownButton<String>(
+//                      items: _goal1s.map((CustomDropdownItem value) {
+//                        return DropdownMenuItem<String>(
+//                            value: value.id,
+//                            child: Text(
+//                              value.name!,
+//                              overflow: TextOverflow.ellipsis,
+//                            ));
+//                      }).toList(),
+//                      style: _textStyleControls,
+//                      value: _selectedGoal1,
+//                      onChanged: (newValue) {
+//                        setState(() {
+//                          _selectedGoal1 = newValue;
+//                          task.goal1 = newValue!;
+//                        });
+//                      }),
+//                ],
+//              ),
+//            ), //KK     // SizedBox(
 ///////////////////////////
 //  GOAL
 ///////////////////////////
