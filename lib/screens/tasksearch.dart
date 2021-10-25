@@ -13,8 +13,7 @@ import 'package:todo_app/model/globals.dart' as globals;
 DbHelper helper = DbHelper();
 String _selectedpriority = "";
 String? _searchText = "";
-TextStyle _textStyleControls = TextStyle(
-    fontSize: 12.0, fontWeight: FontWeight.normal, color: Colors.black);
+TextStyle _textStyleControls = TextStyle(fontSize: 17.0, color: Colors.black);
 
 class TaskSearch extends StatefulWidget {
   @override
@@ -817,6 +816,7 @@ class TaskSearchState extends State {
                                     this.tasklist[position].task == null
                                         ? ""
                                         : this.tasklist[position].task!,
+                                    style: _textStyleControls,
                                     overflow: TextOverflow.ellipsis))),
                       ],
                     ),

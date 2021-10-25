@@ -30,6 +30,11 @@ var isChecked = false;
 var isStar = false;
 CustomSettings? customSetting;
 MySql_DBHelper mysqlDBhelper = MySql_DBHelper();
+TextStyle _textStyleControls =
+    TextStyle(fontSize: 17.0, color: Colors.black);
+TextStyle _textStyleControlsSub =
+    TextStyle(color: Colors.black);
+
 
 class TaskHome extends StatefulWidget {
   @override
@@ -115,7 +120,7 @@ class TaskHomeState extends State {
                 shape: BadgeShape.square,
                 position: BadgePosition.topEnd(),
                 badgeContent: Text(count.toString(),
-                    style: TextStyle(color: Colors.black)),
+                style: TextStyle(color: Colors.black)),
                 badgeColor: Colors.yellow[200]!,
               ),
             ],
@@ -136,12 +141,10 @@ class TaskHomeState extends State {
         child: BottomAppBar(
           // color: Color.fromRGBO(58, 66, 86, 1.0),
           color: Colors.teal[800],
-//          color: Colors.brown[900],
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               IconButton(
-//                icon: Icon(Icons.dashboard_outlined, color: Colors.white),
                 icon: Icon(Icons.settings, color: Colors.white),
                 onPressed: () {
                   Navigator.of(context).pushNamed('/personalizeview');
@@ -232,12 +235,10 @@ class TaskHomeState extends State {
                               DateFormat('yyyy-MM-dd').format(now);
                           if (value == true) {
                             this.tasklist![position].isDone = 1;
-
                             this.tasklist![position].dateDone = formattedDate;
                             dbHelper.updateTask(tasklist![position]);
                           } else {
                             this.tasklist![position].isDone = 0;
-
                             this.tasklist![position].dateDone = '';
                             dbHelper.updateTask(tasklist![position]);
                           }
@@ -272,6 +273,7 @@ class TaskHomeState extends State {
                                 padding: const EdgeInsets.only(right: 2),
                                 child: Text(
                                   this.tasklist![position].main1.toString(),
+                                  style: _textStyleControls,
 //                                    overflow: TextOverflow.ellipsis)
                                 ))),
                       ],
@@ -283,6 +285,8 @@ class TaskHomeState extends State {
                                 padding: const EdgeInsets.only(right: 2),
                                 child: Text(
                                   this.tasklist![position].sec1!,
+                                  style: _textStyleControlsSub,
+
 //                                    overflow: TextOverflow.ellipsis
                                 ))),
                         SizedBox(width: 10),
@@ -291,6 +295,7 @@ class TaskHomeState extends State {
                                 padding: const EdgeInsets.only(right: 2),
                                 child: Text(
                                   this.tasklist![position].sec2!,
+                                  style: _textStyleControlsSub,
 //                                    overflow: TextOverflow.ellipsis
                                 ))),
                         SizedBox(width: 10),
@@ -299,6 +304,7 @@ class TaskHomeState extends State {
                                 padding: const EdgeInsets.only(right: 2),
                                 child: Text(
                                   this.tasklist![position].sec3!,
+                                  style: _textStyleControlsSub,
 //                                    overflow: TextOverflow.ellipsis
                                 ))),
                       ],
