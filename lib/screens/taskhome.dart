@@ -371,66 +371,66 @@ class TaskHomeState extends State {
                 taskList[i].main1 = taskList[i].task;
               }
               break;
-            case 1:
-              {
-                taskList[i].main1 = taskList[i].note;
-              }
-              break;
-            case 2:
-              {
-                taskList[i].main1 = taskList[i].dateDue;
-              }
-              break;
-            case 3:
-              {
-                taskList[i].main1 = taskList[i].timeDue;
-              }
-              break;
-            case 4:
-              {
-                taskList[i].main1 = taskList[i].statusText;
-              }
-              break;
-            case 5:
-              {
-                taskList[i].main1 = taskList[i].priorityText;
-              }
-              break;
-            case 6:
-              {
-                taskList[i].main1 = taskList[i].categoryText;
-              }
-              break;
-            case 7:
-              {
-                taskList[i].main1 = taskList[i].action1Text;
-              }
-              break;
-            case 8:
-              {
-                taskList[i].main1 = taskList[i].context1Text;
-              }
-              break;
-            case 9:
-              {
-                taskList[i].main1 = taskList[i].location1Text;
-              }
-              break;
-            case 10:
-              {
-                taskList[i].main1 = taskList[i].tag1Text;
-              }
-              break;
-            case 11:
-              {
-                taskList[i].main1 = taskList[i].goal1Text;
-              }
-              break;
-            case 12:
-              {
-                taskList[i].main1 = taskList[i].isStar.toString();
-              }
-              break;
+//            case 1:
+//              {
+//                taskList[i].main1 = taskList[i].note;
+//              }
+//              break;
+//           case 2:
+//              {
+//                taskList[i].main1 = taskList[i].dateDue;
+//              }
+//              break;
+//            case 3:
+//              {
+//                taskList[i].main1 = taskList[i].timeDue;
+//              }
+//              break;
+//            case 4:
+//              {
+//                taskList[i].main1 = taskList[i].statusText;
+//              }
+//              break;
+//            case 5:
+//              {
+//                taskList[i].main1 = taskList[i].priorityText;
+//              }
+//              break;
+//            case 6:
+//              {
+//                taskList[i].main1 = taskList[i].categoryText;
+//              }
+//              break;
+//            case 7:
+//              {
+//                taskList[i].main1 = taskList[i].action1Text;
+//              }
+//              break;
+//            case 8:
+//              {
+//                taskList[i].main1 = taskList[i].context1Text;
+//              }
+//              break;
+//            case 9:
+//              {
+//                taskList[i].main1 = taskList[i].location1Text;
+//              }
+//              break;
+//            case 10:
+//              {
+//                taskList[i].main1 = taskList[i].tag1Text;
+//              }
+//              break;
+//            case 11:
+//              {
+//                taskList[i].main1 = taskList[i].goal1Text;
+//              }
+//              break;
+//            case 12:
+//              {
+//                taskList[i].main1 = taskList[i].isStar.toString();
+//              }
+//              break;
             default:
               {
                 taskList[i].main1 = taskList[i].task;
@@ -467,32 +467,32 @@ class TaskHomeState extends State {
                 taskList[i].sec1 = taskList[i].categoryText;
               }
               break;
+//            case 5:
+//              {
+//                taskList[i].sec1 = taskList[i].action1Text;
+//              }
+//              break;
+//            case 6:
+//              {
+//                taskList[i].sec1 = taskList[i].context1Text;
+//              }
+//              break;
+//            case 7:
+//              {
+//                taskList[i].sec1 = taskList[i].location1Text;
+//              }
+//              break;
             case 5:
-              {
-                taskList[i].sec1 = taskList[i].action1Text;
-              }
-              break;
-            case 6:
-              {
-                taskList[i].sec1 = taskList[i].context1Text;
-              }
-              break;
-            case 7:
-              {
-                taskList[i].sec1 = taskList[i].location1Text;
-              }
-              break;
-            case 8:
               {
                 taskList[i].sec1 = taskList[i].tag1Text;
               }
               break;
-            case 9:
-              {
-                taskList[i].sec1 = taskList[i].goal1Text;
-              }
-              break;
-            case 10:
+//            case 9:
+//              {
+//                taskList[i].sec1 = taskList[i].goal1Text;
+//              }
+//              break;
+            case 6:
               {
                 taskList[i].sec1 = taskList[i].isStar.toString();
               }
@@ -532,32 +532,32 @@ class TaskHomeState extends State {
                 taskList[i].sec2 = taskList[i].categoryText;
               }
               break;
+//            case 5:
+//              {
+//                taskList[i].sec2 = taskList[i].action1Text;
+//              }
+//              break;
+//            case 6:
+//              {
+//                taskList[i].sec2 = taskList[i].context1Text;
+//              }
+//              break;
+//            case 7:
+//              {
+//                taskList[i].sec2 = taskList[i].location1Text;
+//              }
+//              break;
             case 5:
-              {
-                taskList[i].sec2 = taskList[i].action1Text;
-              }
-              break;
-            case 6:
-              {
-                taskList[i].sec2 = taskList[i].context1Text;
-              }
-              break;
-            case 7:
-              {
-                taskList[i].sec2 = taskList[i].location1Text;
-              }
-              break;
-            case 8:
               {
                 taskList[i].sec2 = taskList[i].tag1Text;
               }
               break;
-            case 9:
-              {
-                taskList[i].sec2 = taskList[i].goal1Text;
-              }
-              break;
-            case 10:
+//            case 9:
+//              {
+//                taskList[i].sec2 = taskList[i].goal1Text;
+//              }
+//              break;
+            case 6:
               {
                 taskList[i].sec2 = taskList[i].isStar.toString();
               }
@@ -597,32 +597,32 @@ class TaskHomeState extends State {
                 taskList[i].sec3 = taskList[i].categoryText;
               }
               break;
+//            case 5:
+//              {
+//                taskList[i].sec3 = taskList[i].action1Text;
+//              }
+//              break;
+//            case 6:
+//              {
+//                taskList[i].sec3 = taskList[i].context1Text;
+//              }
+//              break;
+//            case 7:
+//              {
+//                taskList[i].sec3 = taskList[i].location1Text;
+//              }
+//              break;
             case 5:
-              {
-                taskList[i].sec3 = taskList[i].action1Text;
-              }
-              break;
-            case 6:
-              {
-                taskList[i].sec3 = taskList[i].context1Text;
-              }
-              break;
-            case 7:
-              {
-                taskList[i].sec3 = taskList[i].location1Text;
-              }
-              break;
-            case 8:
               {
                 taskList[i].sec3 = taskList[i].tag1Text;
               }
               break;
-            case 9:
-              {
-                taskList[i].sec3 = taskList[i].goal1Text;
-              }
-              break;
-            case 10:
+//            case 9:
+//              {
+//                taskList[i].sec3 = taskList[i].goal1Text;
+//              }
+//              break;
+            case 6:
               {
                 taskList[i].sec3 = taskList[i].isStar.toString();
               }
@@ -754,25 +754,25 @@ class TaskHomeState extends State {
       case 6:
         return "priority";
         break;
+//      case 7:
+//        return "action1";
+//        break;
+//      case 8:
+//        return "context1";
+//        break;
+//      case 9:
+//        return "location1";
+//        break;
       case 7:
-        return "action1";
-        break;
-      case 8:
-        return "context1";
-        break;
-      case 9:
-        return "location1";
-        break;
-      case 10:
         return "tag1";
         break;
-      case 11:
-        return "goal1";
-        break;
-      case 12:
+//      case 11:
+//        return "goal1";
+//        break;
+      case 8:
         return "isStar";
         break;
-      case 13:
+      case 9:
         return "isDone";
         break;
 

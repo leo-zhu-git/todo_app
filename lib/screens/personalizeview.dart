@@ -35,13 +35,13 @@ class SortItem {
       SortItem(4, 'Category'),
       SortItem(5, 'Status'),
       SortItem(6, 'Priority'),
-      SortItem(7, 'Action'),
-      SortItem(8, 'Context'),
-      SortItem(9, 'Location'),
-      SortItem(10, 'Tag'),
-      SortItem(11, 'Goal'),
-      SortItem(12, 'Star'),
-      SortItem(13, 'Done'),
+//      SortItem(7, 'Action'),
+//      SortItem(8, 'Context'),
+//      SortItem(9, 'Location'),
+      SortItem(7, 'Tag'),
+//      SortItem(11, 'Goal'),
+      SortItem(8, 'Star'),
+      SortItem(9, 'Done'),
     ];
   }
 }
@@ -58,12 +58,12 @@ class ShowItem {
       ShowItem(2, 'Status'),
       ShowItem(3, 'Priority'),
       ShowItem(4, 'Category'),
-      ShowItem(5, 'Action'),
-      ShowItem(6, 'Context'),
-      ShowItem(7, 'Location'),
-      ShowItem(8, 'Tag'),
-      ShowItem(9, 'Goal'),
-      ShowItem(10, 'Star'),
+//      ShowItem(5, 'Action'),
+//      ShowItem(6, 'Context'),
+//      ShowItem(7, 'Location'),
+      ShowItem(5, 'Tag'),
+//      ShowItem(9, 'Goal'),
+      ShowItem(6, 'Star'),
     ];
   }
 }
@@ -262,9 +262,9 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     ////////////////////////////
     // Sort and Order
     ////////////////////////////
-    if (globals.sortField1 == null) {
-      _selectedSortField1 = _dropdownMenuItemsSort[12].value!;
-      globals.sortField1 = 12;
+    if (globals.sortField1 == 8) {
+      _selectedSortField1 = _dropdownMenuItemsSort[8].value!;
+      globals.sortField1 = 8;
     } else
       _selectedSortField1 = _dropdownMenuItemsSort[globals.sortField1!].value!;
 
