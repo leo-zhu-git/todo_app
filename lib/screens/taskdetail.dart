@@ -16,7 +16,7 @@ DateTime currentDate = DateTime.now();
 String formattedDate = DateFormat('yyyymmdd').format(currentDate);
 String _searchText = "";
 TextStyle _textStyleControls =
-    TextStyle(fontSize: 14.0, color: Colors.black, fontWeight: FontWeight.w600);
+    TextStyle(fontSize: 18.0, color: Colors.black, fontWeight: FontWeight.w600);
 
 final List<String> choices = const <String>[
   'Save Task & Back',
