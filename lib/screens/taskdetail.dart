@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:todo_app/model/category.dart';
 import 'package:todo_app/model/customDropdownItem.dart';
 import 'package:todo_app/model/taskclass.dart';
 import 'package:todo_app/screens/notificationPlugin.dart';
@@ -49,8 +50,7 @@ class TaskDetailState extends State //<TaskDetail>
   var _todoNoteController = TextEditingController();
   var _todoDateController = TextEditingController();
   var _todoTimeController = TextEditingController();
-//  var _todoStatusController = TextEditingController();
-//  var _todoPriorityController = TextEditingController();
+  var _CategoryController = TextEditingController();
   var _selectedIsStar;
   var _selectedStatus;
   var _selectedPriority;
@@ -64,7 +64,9 @@ class TaskDetailState extends State //<TaskDetail>
 
   List<CustomDropdownItem> _statuses = [];
   List<CustomDropdownItem> _priorities = [];
-  List<CustomDropdownItem> _categories = [];
+//  List<CustomDropdownItem> _categories = [];
+  List _categories = [];
+
   List<CustomDropdownItem> _action1s = [];
   List<CustomDropdownItem> _context1s = [];
   List<CustomDropdownItem> _location1s = [];
@@ -461,8 +463,11 @@ class TaskDetailState extends State //<TaskDetail>
                   Container(
                     height: 400,
                     child: CupertinoDatePicker(
-                        initialDateTime:
-                            (_dateDue == null) ? DateTime.now() : _dateDue!.add(Duration(hours: _timeDue!.hour, minutes: _timeDue!.minute)),
+                        initialDateTime: (_dateDue == null)
+                            ? DateTime.now()
+                            : _dateDue!.add(Duration(
+                                hours: (_timeDue == null) ? DateTime.now().hour : _timeDue!.hour, 
+                                minutes: (_timeDue == null) ? DateTime.now().minute : _timeDue!.minute)),
                         mode: CupertinoDatePickerMode.dateAndTime,
                         onDateTimeChanged: (val) {
                           setState(() {
@@ -475,11 +480,8 @@ class TaskDetailState extends State //<TaskDetail>
                                 formatter.format(_dateDue!);
 
                             _timeDue = TimeOfDay.fromDateTime(val);
-//                            final DateFormat formatter =
-//                                DateFormat('hh:mm');
-//                            final String formatted =
-//                                formatter.format(_timeDue!);
-                            _todoTimeController.text = _timeDue!.format(context);
+                            _todoTimeController.text =
+                                _timeDue!.format(context);
                           });
                         }),
                   ),
@@ -511,6 +513,59 @@ class TaskDetailState extends State //<TaskDetail>
 //      minute = int.parse(result.split(":")[1]);
 //    }
     return _time;
+  }
+
+  final items = [
+    'Text1',
+    'Text2',
+    'Text3',
+    'Text4',
+    'Text5',
+    'Text6',
+  ];
+
+  int index = 0;
+
+  void _showCupertinoCustomPicker(ctx) {
+    // showCupertinoModalPopup is a built-in function of the cupertino library
+    String item;
+    showCupertinoModalPopup(
+        context: ctx,
+        builder: (_) => Container(
+              height: 500,
+              color: Color.fromARGB(255, 255, 255, 255),
+              child: Column(
+                children: [
+                  Container(
+                    height: 400,
+                    child: CupertinoPicker(
+//                      looping: true,
+                      itemExtent: 64,
+                      selectionOverlay: CupertinoPickerDefaultSelectionOverlay(
+                        background:
+                            CupertinoColors.activeGreen.withOpacity(0.2),
+                      ),
+                      children: items
+                          .map((item) => Center(
+                              child:
+                                  Text(item, style: TextStyle(fontSize: 32))))
+                          .toList(),
+                      onSelectedItemChanged: (index) => {
+                        setState(() => this.index = index),
+                        item = items[index],
+                        print('Selected item: $item'),
+                      },
+                    ),
+                  ),
+
+                  // Close the modal
+                  CupertinoButton(
+                    child: Text('OK'),
+                    onPressed: () => Navigator.of(ctx).pop(),
+                  )
+                ],
+              ),
+            ));
   }
 
 //##################End of Drop Down Items Load from DB #################################################################
@@ -610,173 +665,12 @@ class TaskDetailState extends State //<TaskDetail>
                   prefixIcon: InkWell(
                     onTap: () {
                       _showCupertinoDatePicker(context);
-//                      _selectedTodoDate(context);
                     },
                     child: Icon(Icons.calendar_today),
                   ),
                 ),
               ),
             ),
-//            Container(
-//              margin:
-//                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
-//              decoration: BoxDecoration(
-//                shape: BoxShape.rectangle,
-//                color: Colors.blue[100],
-//              ),
-//              child: Row(
-//                children: [
-//                   Text("Due: " + task.dateDue!),
-//                  Text("Due: " + _todoDateController.text),
-//                  TextField(
-//                    controller: _todoDateController,
-//                    style: _textStyleControls,
-//                    decoration: InputDecoration(
-//                      labelText: ' Due Date',
-//                      hintText: ' Pick a Date',
-//                      prefixIcon: InkWell(
-//                        onTap: () {
-//                          _selectedTodoDate(context);
-//                        },
-//                       child: Icon(Icons.calendar_today),
-//                      ),
-//                    ),
-//                  ),
-//                  SizedBox(width: 5),
-//                  Ink(
-//                    decoration: const ShapeDecoration(
-//                        color: Colors.red, shape: CircleBorder()),
-//                    child: IconButton(
-//                        icon: const Icon(Icons.clear, color: Colors.purple),
-//                        tooltip: 'Clear',
-//                        onPressed: () {
-//                          setState(() {
-//                            _dateDue = null!;
-//                            _todoDateController.text = '';
-//                          });
-//                        }),
-//                  ),
-//                  ElevatedButton(
-//                      onPressed: () {
-//                        _dateDue = null;
-//                        final DateFormat formatter = DateFormat('yyyy-MM-dd');
-//                        final String formatted = formatter.format(_dateDue);
-//                        _todoDateController.text = formatter.format(_dateDue);
-//                        _todoDateController.text = '';
-//                      },
-//                      style: ElevatedButton.styleFrom(
-//                        primary: Colors.grey[100],
-//                      ),
-//                     child: Text(
-//                        'None',
-//                        style: TextStyle(color: Colors.brown[900]),
-//                     )),
-//                  SizedBox(width: 5),
-//                  Ink(
-//                    decoration: const ShapeDecoration(
-//                        color: Colors.red, shape: CircleBorder()),
-//                    child: IconButton(
-//                        icon: const Icon(Icons.today, color: Colors.purple),
-//                        tooltip: 'Today',
-//                        onPressed: () {
-//                          setState(() {
-//                            _dateDue = DateTime.now();
-//                            final DateFormat formatter =
-//                                DateFormat('yyyy-MM-dd');
-//                            final String formatted =
-//                                formatter.format(_dateDue!);
-//                            _todoDateController.text =
-//                                formatter.format(_dateDue!);
-//                          });
-//                        }),
-//                  ),
-//                  ElevatedButton(
-//                      onPressed: () {
-//                        setState(() {
-//                          _dateDue = DateTime.now();
-//                          final DateFormat formatter = DateFormat('yyyy-MM-dd');
-//                          final String formatted = formatter.format(_dateDue);
-//                          _todoDateController.text = formatter.format(_dateDue);
-//                        });
-//                      },
-//                      style: ElevatedButton.styleFrom(
-//                        primary: Colors.grey[100],
-//                      ),
-//                      child: Text(
-//                        'Today',
-//                        style: TextStyle(color: Colors.brown[900]),
-//                      )),
-//                  SizedBox(width: 5),
-//                  Ink(
-//                    decoration: const ShapeDecoration(
-//                        color: Colors.red, shape: CircleBorder()),
-//                    child: IconButton(
-//                        icon: const Icon(Icons.exposure_plus_1,
-//                            color: Colors.purple),
-//                        tooltip: 'Tomo',
-//                        onPressed: () {
-//                          setState(() {
-//                            _dateDue = DateTime.now();
-//                            _dateDue = _dateDue!.add(const Duration(days: 1));
-//                            final DateFormat formatter =
-//                                DateFormat('yyyy-MM-dd');
-//                            final String formatted =
-//                                formatter.format(_dateDue!);
-//                            _todoDateController.text =
-//                                formatter.format(_dateDue!);
-//                          });
-//                        }),
-//                  ),
-//                  ElevatedButton(
-//                      onPressed: () {
-//                        setState(() {
-//                          _dateDue = DateTime.now();
-//                          _dateDue = _dateDue.add(const Duration(days: 1));
-//                          final DateFormat formatter = DateFormat('yyyy-MM-dd');
-//                          final String formatted = formatter.format(_dateDue);
-//                          _todoDateController.text = formatter.format(_dateDue);
-//                        });
-//                      },
-//                      style: ElevatedButton.styleFrom(
-//                        primary: Colors.grey[100],
-//                      ),
-//                      child: Text(
-//                        'Tomo',
-//                        style: TextStyle(color: Colors.brown[900]),
-//                      )),
-//                  SizedBox(width: 5),
-//                  Ink(
-//                    decoration: const ShapeDecoration(
-//                        color: Colors.red, shape: CircleBorder()),
-//                    child: IconButton(
-//                        icon:
-//                            const Icon(Icons.more_horiz, color: Colors.purple),
-//                        tooltip: 'More',
-//                        onPressed: () {
-//                          if (_dateDue == null) {
-//                            _todoDateController.text = task.dateDue!;
-//                            _dateDue =
-//                                DateFormat('yyyy-M-d').parse(task.dateDue!);
-//                          };
-//                          _showCupertinoDatePicker(context);
-//                          _selectedTodoDate(context);
-//                        }),
-//                  ),
-//                  ElevatedButton(
-//                      onPressed: () async {
-//                        _selectedTodoDate(context);
-//                      },
-//                      style: ElevatedButton.styleFrom(
-//                        primary: Colors.grey[100],
-//                      ),
-//                      child: Text(
-//                        'More...',
-//                        style: TextStyle(color: Colors.brown[900]),
-//                      )),
-//                  SizedBox(width: 5),
-//                ],
-//              ),
-//            ),
 
 ///////////////////////////
 //  WHEN - TIME DUE
@@ -797,108 +691,12 @@ class TaskDetailState extends State //<TaskDetail>
                   prefixIcon: InkWell(
                     onTap: () {
                       _showCupertinoDateTimePicker(context);
-//                      _openTimePicker(context);
                     },
                     child: Icon(Icons.access_time),
                   ),
                 ),
               ),
             ),
-//            Container(
-//              margin:
-//                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
-//              decoration: BoxDecoration(
-//                shape: BoxShape.rectangle,
-//                color: Colors.blue[100],
-//              ),
-//              child: Row(
-//                children: [
-//                  Text("Due: " + _todoTimeController.text),
-//                  SizedBox(width: 5),
-//                  Ink(
-//                   decoration: const ShapeDecoration(
-//                        color: Colors.red, shape: CircleBorder()),
-//                    child: IconButton(
-//                        icon: const Icon(Icons.clear, color: Colors.purple),
-//                        tooltip: 'Clear',
-//                        onPressed: () {
-//                          setState(() {
-//                            _timeDue = null!;
-//                            _todoTimeController.text = "";
-//                          });
-//                        }),
-//                  ),
-//                  Ink(
-//                    decoration: const ShapeDecoration(
-//                        color: Colors.red, shape: CircleBorder()),
-//                    child: IconButton(
-//                        icon: const Icon(Icons.exposure_plus_1,
-//                            color: Colors.purple),
-//                        tooltip: '+1h',
-//                        onPressed: () {
-//                          setState(() {
-//                            _timeDue = TimeOfDay.fromDateTime(
-//                                DateTime.now().add(Duration(hours: 1)));
-//                            _todoTimeController.text = _timeDue.toString();
-//                          });
-//                        }),
-//                  ),
-//                  Ink(
-//                    decoration: const ShapeDecoration(
-//                        color: Colors.red, shape: CircleBorder()),
-//                    child: IconButton(
-//                        icon: const Icon(Icons.exposure_plus_2,
-//                            color: Colors.purple),
-//                        tooltip: '+2h',
-//                        onPressed: () {
-//                          setState(() {
-//                            _timeDue = TimeOfDay.fromDateTime(
-//                                DateTime.now().add(Duration(hours: 2)));
-//                            _todoTimeController.text = _timeDue.toString();
-//                          });
-//                        }),
-//                  ),
-//                  Ink(
-//                    decoration: const ShapeDecoration(
-//                        color: Colors.red, shape: CircleBorder()),
-//                    child: IconButton(
-//                        icon:
-//                            const Icon(Icons.more_horiz, color: Colors.purple),
-//                        tooltip: 'More',
-//                        onPressed: () {
-//                          if (_timeDue == null) {
-//                            _todoTimeController.text = _timeDue.toString();
-//                          }
-//                          ;
-//                          _openTimePicker(context);
-//                        }),
-//                  ),
-//                  SizedBox(width: 5),
-//                ],
-//              ),
-//            ),
-//            Container(
-//              margin:
-//                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
-//              decoration: BoxDecoration(
-//                shape: BoxShape.rectangle,
-//                color: Colors.blue[100],
-//              ),
-//              child: TextField(
-//                controller: _todoTimeController,
-//                style: _textStyleControls,
-//                decoration: InputDecoration(
-//                  labelText: ' Due Time',
-//                  hintText: ' Pick a Time',
-//                  prefixIcon: InkWell(
-//                    onTap: () {
-//                      _openTimePicker(context);
-//                    },
-//                    child: Icon(Icons.access_time),
-//                  ),
-//                ),
-//              ),
-//            ),
 
 ///////////////////////////
 //  CATEGORY
@@ -909,29 +707,50 @@ class TaskDetailState extends State //<TaskDetail>
                   EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
               decoration: BoxDecoration(
                   shape: BoxShape.rectangle, color: Colors.blue[100]),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  DropdownButton<String>(
-                      items: _categories.map((CustomDropdownItem value) {
-                        return DropdownMenuItem<String>(
-                            value: value.id,
-                            child: Text(
-                              value.name!,
-                              overflow: TextOverflow.ellipsis,
-                            ));
-                      }).toList(),
-                      style: _textStyleControls,
-                      value: _selectedCategory,
-                      onChanged: (newValue) {
-                        setState(() {
-                          _selectedCategory = newValue;
-                          task.category = newValue!;
-                        });
-                      }),
-                ],
-              ),
+//              child: CupertinoTextField(
+//                controller: _CategoryController,
+//                style: _textStyleControls,
+//                decoration: InputDecoration(
+//                  labelText: ' Category',
+//                  hintText: ' Pick a Category',
+//                  prefixIcon: InkWell(
+//                    onTap: () {
+//                      _showCupertinoCustomPicker(context);
+//                    },
+//                    child: Icon(Icons.access_time),
+//                  ),
+//                ),
+//              ),
             ),
+
+//            Container(
+//              margin:
+//                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
+//              decoration: BoxDecoration(
+//                  shape: BoxShape.rectangle, color: Colors.blue[100]),
+//              child: Row(
+//                crossAxisAlignment: CrossAxisAlignment.center,
+//                children: [
+//                  DropdownButton<String>(
+//                      items: _categories.map((CustomDropdownItem value) {
+//                        return DropdownMenuItem<String>(
+//                            value: value.id,
+//                            child: Text(
+//                              value.name!,
+//                              overflow: TextOverflow.ellipsis,
+//                            ));
+//                      }).toList(),
+//                      style: _textStyleControls,
+//                      value: _selectedCategory,
+//                      onChanged: (newValue) {
+//                        setState(() {
+//                          _selectedCategory = newValue;
+//                          task.category = newValue!;
+//                        });
+//                      }),
+//                ],
+//              ),
+//            ),
 
 ///////////////////////////
 //  STATUS
