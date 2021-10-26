@@ -295,8 +295,8 @@ class TaskSearchState extends State {
             padding:
                 EdgeInsets.only(top: 6.0, left: 4.0, right: 4.0, bottom: 1.0),
             child: TextField(
+              style: _textStyleControls,
               controller: searchController,
-//              style: textStyle,
               onChanged: (value) {
                 searchData(
                     value,
