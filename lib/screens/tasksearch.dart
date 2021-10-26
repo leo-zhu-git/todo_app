@@ -13,7 +13,7 @@ import 'package:todo_app/model/globals.dart' as globals;
 DbHelper helper = DbHelper();
 String _selectedpriority = "";
 String? _searchText = "";
-TextStyle _textStyleControls = TextStyle(fontSize: 17.0, color: Colors.black);
+TextStyle _textStyleControls = TextStyle(fontSize: 17.0, color: Colors.black87);
 
 class TaskSearch extends StatefulWidget {
   @override
@@ -699,28 +699,28 @@ class TaskSearchState extends State {
 //footer
       //bottomNavigationBar: footerBar,
 
-      bottomNavigationBar: Container(
-        height: 28.0,
-        child: BottomAppBar(
-          // color: Color.fromRGBO(58, 66, 86, 1.0),
-          color: Colors.teal[800],
+//      bottomNavigationBar: Container(
+//        height: 28.0,
+//        child: BottomAppBar(
+//          // color: Color.fromRGBO(58, 66, 86, 1.0),
+//          color: Colors.teal[800],
 //          color: Colors.brown[900],
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              IconButton(
-                icon: Icon(Icons.home, color: Colors.white),
-                tooltip: 'Back to Home',
-                onPressed: () {
-                  // Navigator.pop(context, true);
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => TaskHome()));
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
+//          child: Row(
+//            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//            children: <Widget>[
+//              IconButton(
+//                icon: Icon(Icons.home, color: Colors.white),
+//                tooltip: 'Back to Home',
+//                onPressed: () {
+//                  // Navigator.pop(context, true);
+//                  Navigator.of(context).push(
+//                      MaterialPageRoute(builder: (context) => TaskHome()));
+//                },
+//              ),
+//            ],
+//          ),
+//        ),
+//      ),
     );
   }
 

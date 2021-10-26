@@ -31,7 +31,7 @@ var isStar = false;
 CustomSettings? customSetting;
 MySql_DBHelper mysqlDBhelper = MySql_DBHelper();
 TextStyle _textStyleControls =
-    TextStyle(fontSize: 17.0, color: Colors.black);
+    TextStyle(fontSize: 17.0, color: Colors.black87);
 TextStyle _textStyleControlsSub =
     TextStyle(color: Colors.black);
 

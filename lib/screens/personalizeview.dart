@@ -16,6 +16,8 @@ import 'package:todo_app/util/dbhelper.dart';
 import 'package:intl/intl.dart';
 import 'package:todo_app/model/globals.dart' as globals;
 
+TextStyle _textStyleControls = TextStyle(fontSize: 17.0, color: Colors.black87);
+
 class PersonalizeView extends StatefulWidget {
   @override
   _PersonalizeViewState createState() => _PersonalizeViewState();
@@ -711,13 +713,14 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
 ///////////////////////////
 //  Filter Date Due
 ///////////////////////////
-              Text("Filter - Reduce tasks to view"),
+              Text("Filter - Reduce tasks to view", style: _textStyleControls),
 
               new Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.blue[100]),
                 child: DropdownButtonFormField<FilterDateDue>(
+                  style: _textStyleControls,
                   items: _dropdownFilterDateDue,
                   hint: Text('Filter by Due Date'),
                   value: _selectedFilterDateDue,
@@ -738,6 +741,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     DropdownButton<String>(
+                  style: _textStyleControls,
                         items: _categories.map((CustomDropdownItem value) {
                           return DropdownMenuItem<String>(
                               value: value.id,
@@ -765,6 +769,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     DropdownButton<String>(
+                  style: _textStyleControls,
                         items: _statuses.map((CustomDropdownItem value) {
                           return DropdownMenuItem<String>(
                               value: value.id,
@@ -792,6 +797,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     DropdownButton<String>(
+                  style: _textStyleControls,
                         items: _priorities.map((CustomDropdownItem value) {
                           return DropdownMenuItem<String>(
                               value: value.id,
@@ -894,6 +900,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     DropdownButton<String>(
+                  style: _textStyleControls,
                       items: _tag1s.map((CustomDropdownItem value) {
                         return DropdownMenuItem<String>(
                             value: value.id, child: Text(value.name!));
@@ -942,6 +949,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.blue[100]),
                 child: DropdownButtonFormField<FilterIsStar>(
+                  style: _textStyleControls,
                   items: _dropdownFilterIsStar,
                   hint: Text('Filter by Is Star Tasks'),
                   value: _selectedFilterIsStar,
@@ -961,6 +969,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.blue[100]),
                 child: DropdownButtonFormField<FilterIsDone>(
+                  style: _textStyleControls,
                   items: _dropdownFilterIsDone,
                   hint: Text('Filter by Is Done Tasks'),
                   value: _selectedFilterIsDone,
@@ -979,7 +988,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
 ///////////////////////////
 //  SORT ORDER 1
 ///////////////////////////
-              Text("Sort - first, second, third"),
+              Text("Sort - first, second, third", style: _textStyleControls),
 ///////////////////////////
 //  SORT ORDER 1
 ///////////////////////////
@@ -988,6 +997,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.green[100]),
                 child: DropdownButtonFormField<SortItem>(
+                  style: _textStyleControls,
                   value: _selectedSortField1,
                   items: _dropdownMenuItemsSort,
                   hint: Text('Sort Order 1'),
@@ -1006,6 +1016,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.green[100]),
                 child: DropdownButtonFormField<SortOrder>(
+                  style: _textStyleControls,
                   value: _selectedSortOrder1,
                   items: _dropdownMenuSortOrder,
                   hint: Text('Sort 1 Ascending/Descending'),
@@ -1025,6 +1036,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.green[100]),
                 child: DropdownButtonFormField<SortItem>(
+                  style: _textStyleControls,
                   items: _dropdownMenuItemsSort,
                   hint: Text('Sort 2'),
                   value: _selectedSortField2,
@@ -1043,6 +1055,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.green[100]),
                 child: DropdownButtonFormField<SortOrder>(
+                  style: _textStyleControls,
                   value: _selectedSortOrder2,
                   items: _dropdownMenuSortOrder,
                   hint: Text('Sort 2 Ascending/Descending'),
@@ -1062,6 +1075,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.green[100]),
                 child: DropdownButtonFormField<SortItem>(
+                  style: _textStyleControls,
                   items: _dropdownMenuItemsSort,
                   hint: Text('Sort 3'),
                   value: _selectedSortField3,
@@ -1080,6 +1094,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.green[100]),
                 child: DropdownButtonFormField<SortOrder>(
+                  style: _textStyleControls,
                   value: _selectedSortOrder3,
                   items: _dropdownMenuSortOrder,
                   hint: Text('Sort Order 3 Ascending/Descending'),
@@ -1095,7 +1110,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 height: 20,
               ),
 
-              Text("Picklist | User-defined Dropdowns"),
+              Text("Picklist | User-defined Dropdowns", style: _textStyleControls),
 
 ///////////////////////////
 //  Picklist - Categories
@@ -1104,7 +1119,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 elevation: 8.0,
                 child: ListTile(
                   tileColor: Colors.orange[100],
-                  title: Text('Categories'),
+                  title: Text('Categories', style: _textStyleControls),
                   onTap: () => Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => CategoriesScreen())),
                 ),
@@ -1132,7 +1147,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 elevation: 8.0,
                 child: ListTile(
                   tileColor: Colors.orange[100],
-                  title: Text('Statuses'),
+                  title: Text('Statuses', style: _textStyleControls),
                   onTap: () => Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => StatusesScreen())),
                 ),
@@ -1146,7 +1161,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 elevation: 8.0,
                 child: ListTile(
                   tileColor: Colors.orange[100],
-                  title: Text('Priorities'),
+                  title: Text('Priorities', style: _textStyleControls),
                   onTap: () => Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => PrioritiesScreen())),
                 ),
@@ -1187,7 +1202,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 elevation: 8.0,
                 child: ListTile(
                   tileColor: Colors.orange[100],
-                  title: Text('Tags'),
+                  title: Text('Tags', style: _textStyleControls),
                   onTap: () => Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => Tag1sScreen())),
                 ),
@@ -1209,7 +1224,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
               SizedBox(
                 height: 20,
               ),
-             Text("View - second line up to 3 fields"),
+             Text("View - second line up to 3 fields", style: _textStyleControls),
 ///////////////////////////
 //  Show Main 1
 ///////////////////////////
@@ -1236,6 +1251,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.pink[100]),
                 child: DropdownButtonFormField<ShowItem>(
+                  style: _textStyleControls,                  
                   items: _dropdownMenuItemsShow,
                   hint: Text('Display Secondary1'),
                   value: _selectedShowSec1,
@@ -1255,6 +1271,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.pink[100]),
                 child: DropdownButtonFormField<ShowItem>(
+                  style: _textStyleControls,
                   items: _dropdownMenuItemsShow,
                   hint: Text('Display Secondary2'),
                   value: _selectedShowSec2,
@@ -1274,6 +1291,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.pink[100]),
                 child: DropdownButtonFormField<ShowItem>(
+                  style: _textStyleControls,
                   items: _dropdownMenuItemsShow,
                   hint: Text('Display Secondary3'),
                   value: _selectedShowSec3,
