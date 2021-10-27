@@ -141,7 +141,7 @@ class _WipeScreenState extends State<WipeScreen> {
 
 //  _showSuccessSnackBar(message) {
 //    var _snackBar = SnackBar(content: message);
-//    _key.currentState.showSnackBar(_snackBar);  
+//    _key.currentState.showSnackBar(_snackBar);
 //  }
 
   _ConfirmDialogue(int _option, String message) {
@@ -160,21 +160,20 @@ class _WipeScreenState extends State<WipeScreen> {
                     child: Text(
                       'Cancel',
                       style: TextStyle(color: Colors.brown[900]),
-                    )
-                    ),
+                    )),
                 ElevatedButton(
-                  onPressed: () async {
-                    if (_option == 0) {
-                      mysqlDBhelper.wipeTaskDataToMySql();
-                      mysqlDBhelper.wipeActionToMySql();
-                      mysqlDBhelper.wipeCatatoryToMySql();
-                      mysqlDBhelper.wipeGoalToMySql();
-                      mysqlDBhelper.wipeContextToMySql();
-                      mysqlDBhelper.wipeLocationToMySql();
-                      mysqlDBhelper.wipePriorityToMySql();
-                      mysqlDBhelper.wipeStatusToMySql();
-                      mysqlDBhelper.wipeTagToMySql();
-                      Navigator.pop(context);
+                    onPressed: () async {
+                      if (_option == 0) {
+                        mysqlDBhelper.wipeTaskDataToMySql();
+                        mysqlDBhelper.wipeActionToMySql();
+                        mysqlDBhelper.wipeCatatoryToMySql();
+                        mysqlDBhelper.wipeGoalToMySql();
+                        mysqlDBhelper.wipeContextToMySql();
+                        mysqlDBhelper.wipeLocationToMySql();
+                        mysqlDBhelper.wipePriorityToMySql();
+                        mysqlDBhelper.wipeStatusToMySql();
+                        mysqlDBhelper.wipeTagToMySql();
+                        Navigator.pop(context);
 //                      _showSuccessSnackBar(Container(
 //                        color: Colors.tealAccent[100],
 //                        height: 40,
@@ -192,18 +191,18 @@ class _WipeScreenState extends State<WipeScreen> {
 //                          ],
 //                        ),
 //                      ));
-                    } else {
-                      mysqlDBhelper.wipeTaskDataFromMySql();
-                      mysqlDBhelper.syncStatusesData();
-                      mysqlDBhelper.syncPrioritiesData();
-                      mysqlDBhelper.syncCategoriesData();
-                      mysqlDBhelper.syncAction1sData();
-                      mysqlDBhelper.syncContext1sData();
-                      mysqlDBhelper.syncLocation1sData();
-                      mysqlDBhelper.syncTag1sData();
-                      mysqlDBhelper.syncGoal1sData();
+                      } else {
+                        mysqlDBhelper.wipeTaskDataFromMySql();
+                        // mysqlDBhelper.syncStatusesData();
+                        // mysqlDBhelper.syncPrioritiesData();
+                        mysqlDBhelper.syncCategoriesData();
+                        mysqlDBhelper.syncAction1sData();
+                        mysqlDBhelper.syncContext1sData();
+                        mysqlDBhelper.syncLocation1sData();
+                        mysqlDBhelper.syncTag1sData();
+                        mysqlDBhelper.syncGoal1sData();
 
-                      Navigator.pop(context);
+                        Navigator.pop(context);
 //                      _showSuccessSnackBar(Container(
 //                        color: Colors.tealAccent[100],
 //                        height: 40,
@@ -221,18 +220,15 @@ class _WipeScreenState extends State<WipeScreen> {
 //                          ],
 //                        ),
 //                      ));
-                    }
-                  },
-
-                  style: ElevatedButton.styleFrom(
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
                       primary: Colors.brown[900],
                     ),
                     child: Text(
                       'Wipe',
                       style: TextStyle(color: Colors.white),
-                    )
-
-                ),
+                    )),
               ],
               title: Text(message));
         });

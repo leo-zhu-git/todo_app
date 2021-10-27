@@ -5,13 +5,13 @@ const servicePath = {
   'contextContent': base_url + 'getContextContent',
   'contextSaveContent': base_url + 'getContextSaveContent',
   'getAllTasks': base_url + 'getAllTasks',
-  
+  'goalContent': base_url + 'getGoalsContent',
+  'locationContent': base_url + 'getLocationContent',
   'deleteAllTasks': base_url + 'deleteAllTasks',
   'tagContent': base_url + 'getTagContent',
   'categoriesContent': base_url + 'getCategoriesContent',
   'statusContent': base_url + 'getStatusContent',
   'priorityContent': base_url + 'getPriorityContent',
-
   'wipeTasksfromDevice': base_url + 'wipeTasksfromDevice',
   'wipeActionfromDevice': base_url + 'wipeActionfromDevice',
   'wipeCatagoryfromDevice': base_url + 'wipeCatagoryfromDevice',
@@ -21,5 +21,4 @@ const servicePath = {
   'wipePriorityfromDevice': base_url + 'wipePriorityfromDevice',
   'wipeStatusfromDevice': base_url + 'wipeStatusfromDevice',
   'wipeTagfromDevice': base_url + 'wipeTagfromDevice',
-
 };
