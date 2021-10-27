@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:todo_app/model/category.dart';
 import 'package:todo_app/model/customDropdownItem.dart';
+import 'package:todo_app/model/priority.dart';
 import 'package:todo_app/model/taskclass.dart';
 import 'package:todo_app/screens/notificationPlugin.dart';
 import 'package:todo_app/util/dbhelper.dart';
@@ -16,8 +17,8 @@ DbHelper dbHelper = DbHelper();
 DateTime currentDate = DateTime.now();
 String formattedDate = DateFormat('yyyymmdd').format(currentDate);
 String _searchText = "";
-TextStyle _textStyleControls =
-    TextStyle(fontSize: 18.0, color: Colors.black87, fontWeight: FontWeight.w600);
+TextStyle _textStyleControls = TextStyle(
+    fontSize: 18.0, color: Colors.black87, fontWeight: FontWeight.w600);
 
 final List<String> choices = const <String>[
   'Save Task & Back',
@@ -50,7 +51,10 @@ class TaskDetailState extends State //<TaskDetail>
   var _todoNoteController = TextEditingController();
   var _todoDateController = TextEditingController();
   var _todoTimeController = TextEditingController();
-  var _CategoryController = TextEditingController();
+  var _categoryController = TextEditingController();
+  var _statusController = TextEditingController();
+  var _priorityController = TextEditingController();
+  var _tag1Controller = TextEditingController();
   var _selectedIsStar;
   var _selectedStatus;
   var _selectedPriority;
@@ -64,9 +68,7 @@ class TaskDetailState extends State //<TaskDetail>
 
   List<CustomDropdownItem> _statuses = [];
   List<CustomDropdownItem> _priorities = [];
-//  List<CustomDropdownItem> _categories = [];
-  List _categories = [];
-
+  List<CustomDropdownItem> _categories = [];
   List<CustomDropdownItem> _action1s = [];
   List<CustomDropdownItem> _context1s = [];
   List<CustomDropdownItem> _location1s = [];
@@ -76,6 +78,8 @@ class TaskDetailState extends State //<TaskDetail>
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
 
 //  String formattedDate = '';
+
+  int index = 0;
 
   @override
   void initState() {
@@ -94,7 +98,15 @@ class TaskDetailState extends State //<TaskDetail>
         .setListenerForLowerVersions(onNotificationInLowerVersions);
     notificationPlugin.setOnNotificationClick(onNotificationClick);
     _initFields();
+
+//    scrollController = FixedExtentScrollController(initialItem: index);
   }
+
+//  @override
+//  void dispose() {
+//    scrollController.dispose();
+//    super.dispose();
+//  }
 
   onNotificationInLowerVersions(ReceivedNotification receivedNotification) {}
 
@@ -118,12 +130,23 @@ class TaskDetailState extends State //<TaskDetail>
     ;
     print(_todoTimeController.text);
     task.category != ""
-        ? _selectedCategory = task.category
+        ? {
+            _categoryController.text = task.categoryText!,
+            _selectedCategory = task.category,
+          }
         : _selectedCategory = "1";
-    task.status != "" ? _selectedStatus = task.status : _selectedStatus = null;
+    task.status != ""
+        ? {
+            _statusController.text = task.statusText!,
+            _selectedStatus = task.status,
+          }
+        : _selectedCategory = "";
     task.priority != ""
-        ? _selectedPriority = task.priority
-        : _selectedPriority = null;
+        ? {
+            _priorityController.text = task.priorityText!,
+            _selectedPriority = task.priority,
+          }
+        : _selectedCategory = "";
     task.action1 != ""
         ? _selectedAction1 = task.action1
         : _selectedAction1 = null;
@@ -134,6 +157,12 @@ class TaskDetailState extends State //<TaskDetail>
         ? _selectedLocation1 = task.location1
         : _selectedLocation1 = null;
     task.tag1 != "" ? _selectedTag1 = task.tag1 : _selectedTag1 = null;
+    task.tag1 != ""
+        ? {
+            _tag1Controller.text = task.tag1Text!,
+            _selectedTag1 = task.tag1,
+          }
+        : _selectedCategory = "";
     task.goal1 != "" ? _selectedGoal1 = task.goal1 : _selectedGoal1 = null;
   }
 
@@ -142,10 +171,10 @@ class TaskDetailState extends State //<TaskDetail>
     var categories = await helper.getCategories();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
-//    cus.id = null;
+    cus.id = null;
     cus.name =
         "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
-    cus.name = "-- Select Category --                                         ";
+    cus.name = "-- All Categories --";
     _categories.add(cus);
     categories.forEach((category) {
       setState(() {
@@ -172,7 +201,7 @@ class TaskDetailState extends State //<TaskDetail>
     cus.name =
         "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
     cus.name =
-        "-- Select Status --                                              ";
+        "-- Select Status --";
     _statuses.add(cus);
     statuses.forEach((status) {
       setState(() {
@@ -199,7 +228,7 @@ class TaskDetailState extends State //<TaskDetail>
     cus.name =
         "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
     cus.name =
-        "-- Select Priority --                                            ";
+        "-- Select Priority --";
     _priorities.add(cus);
     priorities.forEach((priority) {
       setState(() {
@@ -252,7 +281,7 @@ class TaskDetailState extends State //<TaskDetail>
     cus.name =
         "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
     cus.name =
-        "-- Select Context --                                             ";
+        "-- Select Context --";
     _context1s.add(cus);
     context1s.forEach((context1) {
       setState(() {
@@ -279,7 +308,7 @@ class TaskDetailState extends State //<TaskDetail>
     cus.name =
         "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
     cus.name =
-        "-- Select Location --                                           ";
+        "-- Select Location --";
     _location1s.add(cus);
     location1s.forEach((location1) {
       setState(() {
@@ -306,7 +335,7 @@ class TaskDetailState extends State //<TaskDetail>
     cus.name =
         "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
     cus.name =
-        "-- Select Tag --                                                    ";
+        "-- Select Tag --";
     _tag1s.add(cus);
     tag1s.forEach((tag1) {
       setState(() {
@@ -466,8 +495,12 @@ class TaskDetailState extends State //<TaskDetail>
                         initialDateTime: (_dateDue == null)
                             ? DateTime.now()
                             : _dateDue!.add(Duration(
-                                hours: (_timeDue == null) ? DateTime.now().hour : _timeDue!.hour, 
-                                minutes: (_timeDue == null) ? DateTime.now().minute : _timeDue!.minute)),
+                                hours: (_timeDue == null)
+                                    ? DateTime.now().hour
+                                    : _timeDue!.hour,
+                                minutes: (_timeDue == null)
+                                    ? DateTime.now().minute
+                                    : _timeDue!.minute)),
                         mode: CupertinoDatePickerMode.dateAndTime,
                         onDateTimeChanged: (val) {
                           setState(() {
@@ -515,58 +548,137 @@ class TaskDetailState extends State //<TaskDetail>
     return _time;
   }
 
-  final items = [
-    'Text1',
-    'Text2',
-    'Text3',
-    'Text4',
-    'Text5',
-    'Text6',
-  ];
-
-  int index = 0;
-
-  void _showCupertinoCustomPicker(ctx) {
-    // showCupertinoModalPopup is a built-in function of the cupertino library
-    String item;
-    showCupertinoModalPopup(
-        context: ctx,
-        builder: (_) => Container(
-              height: 500,
-              color: Color.fromARGB(255, 255, 255, 255),
-              child: Column(
-                children: [
-                  Container(
-                    height: 400,
-                    child: CupertinoPicker(
-//                      looping: true,
-                      itemExtent: 64,
-                      selectionOverlay: CupertinoPickerDefaultSelectionOverlay(
-                        background:
-                            CupertinoColors.activeGreen.withOpacity(0.2),
-                      ),
-                      children: items
-                          .map((item) => Center(
-                              child:
-                                  Text(item, style: TextStyle(fontSize: 32))))
-                          .toList(),
-                      onSelectedItemChanged: (index) => {
-                        setState(() => this.index = index),
-                        item = items[index],
-                        print('Selected item: $item'),
-                      },
-                    ),
-                  ),
-
-                  // Close the modal
-                  CupertinoButton(
-                    child: Text('OK'),
-                    onPressed: () => Navigator.of(ctx).pop(),
-                  )
-                ],
+  Widget buildCategoryPicker() => SizedBox(
+        height: 400,
+        child: StatefulBuilder(
+          builder: (context, setState) => CupertinoPicker(
+              //            scrollController: scrollController,
+              backgroundColor: Colors.teal[50],
+              looping: true,
+              itemExtent: 64,
+              selectionOverlay: CupertinoPickerDefaultSelectionOverlay(
+                background: CupertinoColors.activeGreen.withOpacity(0.2),
               ),
-            ));
-  }
+              children: List.generate(_categories.length, (index) {
+                final isSelected = this.index == index;
+                final category = _categories[index];
+                final color = isSelected ? Colors.teal[800] : Colors.black87;
+                return Center(
+                  child: Text(
+                    category.name!,
+                    style: TextStyle(color: color, fontSize: 32),
+                  ),
+                );
+              }),
+              onSelectedItemChanged: (index) => {
+                    setState(() {
+                      _selectedCategory = index;
+                      _categoryController.text = _categories[index].name!;
+                      print(index);
+                      print(_categories[index].name);
+                    }),
+                  }),
+        ),
+      );
+
+  Widget buildStatusPicker() => SizedBox(
+        height: 400,
+        child: StatefulBuilder(
+          builder: (context, setState) => CupertinoPicker(
+              //            scrollController: scrollController,
+              backgroundColor: Colors.teal[50],
+              looping: true,
+              itemExtent: 64,
+              selectionOverlay: CupertinoPickerDefaultSelectionOverlay(
+                background: CupertinoColors.activeGreen.withOpacity(0.2),
+              ),
+              children: List.generate(_statuses.length, (index) {
+                final isSelected = this.index == index;
+                final status = _statuses[index];
+                final color = isSelected ? Colors.teal[800] : Colors.black87;
+                return Center(
+                  child: Text(
+                    status.name!,
+                    style: TextStyle(color: color, fontSize: 32),
+                  ),
+                );
+              }),
+              onSelectedItemChanged: (index) => {
+                    setState(() {
+                      _selectedStatus = index;
+                      _statusController.text = _statuses[index].name!;
+                      print(index);
+                      print(_statuses[index].name);
+                    }),
+                  }),
+        ),
+      );
+
+  Widget buildPriorityPicker() => SizedBox(
+        height: 400,
+        child: StatefulBuilder(
+          builder: (context, setState) => CupertinoPicker(
+              //            scrollController: scrollController,
+              backgroundColor: Colors.teal[50],
+              looping: true,
+              itemExtent: 64,
+              selectionOverlay: CupertinoPickerDefaultSelectionOverlay(
+                background: CupertinoColors.activeGreen.withOpacity(0.2),
+              ),
+              children: List.generate(_priorities.length, (index) {
+                final isSelected = this.index == index;
+                final priority = _priorities[index];
+                final color = isSelected ? Colors.teal[800] : Colors.black87;
+                return Center(
+                  child: Text(
+                    priority.name!,
+                    style: TextStyle(color: color, fontSize: 32),
+                  ),
+                );
+              }),
+              onSelectedItemChanged: (index) => {
+                    setState(() {
+                      _selectedPriority = index;
+                      _priorityController.text = _priorities[index].name!;
+                      print(index);
+                      print(_priorities[index].name);
+                    }),
+                  }),
+        ),
+      );
+
+Widget buildTag1Picker() => SizedBox(
+        height: 400,
+        child: StatefulBuilder(
+          builder: (context, setState) => CupertinoPicker(
+              //            scrollController: scrollController,
+              backgroundColor: Colors.teal[50],
+              looping: true,
+              itemExtent: 64,
+              selectionOverlay: CupertinoPickerDefaultSelectionOverlay(
+                background: CupertinoColors.activeGreen.withOpacity(0.2),
+              ),
+              children: List.generate(_tag1s.length, (index) {
+                final isSelected = this.index == index;
+                final tag1s = _tag1s[index];
+                final color = isSelected ? Colors.teal[800] : Colors.black87;
+                return Center(
+                  child: Text(
+                    tag1s.name!,
+                    style: TextStyle(color: color, fontSize: 32),
+                  ),
+                );
+              }),
+              onSelectedItemChanged: (index) => {
+                    setState(() {
+                      _selectedTag1 = index;
+                      _tag1Controller.text = _tag1s[index].name!;
+                      print(index);
+                      print(_tag1s[index].name);
+                    }),
+                  }),
+        ),
+      );
 
 //##################End of Drop Down Items Load from DB #################################################################
 
@@ -626,26 +738,27 @@ class TaskDetailState extends State //<TaskDetail>
 ///////////////////////////
 //  WHAT - NOTE
 ///////////////////////////
-            Container(
-              margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
-              decoration: new BoxDecoration(
-                color: Colors.yellow[200],
-              ),
-              child: TextField(
-                style: _textStyleControls,
-                controller: _todoNoteController,
-                onChanged: (value) {
-                  task.note = value;
-                },
-                minLines: 4,
-                maxLines: 8,
-                decoration: InputDecoration(
-                  labelText: ' Note',
-                  hintText: ' Write Todo Note',
-                ),
-              ),
-            ),
+//            Container(
+//              margin:
+//                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
+//              decoration: new BoxDecoration(
+//                color: Colors.yellow[200],
+//              ),
+//              child: TextField(
+//                style: _textStyleControls,
+//                controller: _todoNoteController,
+//                onChanged: (value) {
+//                  task.note = value;
+//                },
+//                minLines: 4,
+//                maxLines: 8,
+//                decoration: InputDecoration(
+//                  labelText: ' Note',
+//                  hintText: ' Write Todo Note',
+//                ),
+//              ),
+//            ),
+
 ///////////////////////////
 //  WHEN - DATE DUE
 ///////////////////////////
@@ -698,31 +811,6 @@ class TaskDetailState extends State //<TaskDetail>
               ),
             ),
 
-///////////////////////////
-//  CATEGORY
-///////////////////////////
-
-            Container(
-              margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
-              decoration: BoxDecoration(
-                  shape: BoxShape.rectangle, color: Colors.blue[100]),
-//              child: CupertinoTextField(
-//                controller: _CategoryController,
-//                style: _textStyleControls,
-//                decoration: InputDecoration(
-//                  labelText: ' Category',
-//                  hintText: ' Pick a Category',
-//                  prefixIcon: InkWell(
-//                    onTap: () {
-//                      _showCupertinoCustomPicker(context);
-//                    },
-//                    child: Icon(Icons.access_time),
-//                  ),
-//                ),
-//              ),
-            ),
-
 //            Container(
 //              margin:
 //                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
@@ -753,70 +841,178 @@ class TaskDetailState extends State //<TaskDetail>
 //            ),
 
 ///////////////////////////
-//  STATUS
+//  CATEGORY
 ///////////////////////////
-
             Container(
               margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
               decoration: BoxDecoration(
-                  shape: BoxShape.rectangle, color: Colors.blue[100]),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  DropdownButton<String>(
-                      items: _statuses.map((CustomDropdownItem value) {
-                        return DropdownMenuItem<String>(
-                            value: value.id,
-                            child: Text(
-                              value.name!,
-                              overflow: TextOverflow.ellipsis,
-                            ));
-                      }).toList(),
-                      style: _textStyleControls,
-                      value: _selectedStatus,
-                      onChanged: (newValue) {
-                        setState(() {
-                          _selectedStatus = newValue;
-                          task.status = newValue!;
-                        });
-                      }),
-                ],
+                shape: BoxShape.rectangle,
+                color: Colors.blue[100],
+              ),
+              child: TextField(
+                controller: _categoryController,
+                readOnly: true,
+                style: _textStyleControls,
+                decoration: InputDecoration(
+                  labelText: ' Category',
+                  hintText: ' Pick a Category',
+                  prefixIcon: InkWell(
+                      onTap: () {
+//                      scrollController.dispose();
+//                      scrollController = FixedExtentScrollController(
+//                          initialItem: (_selectedCategory != null)
+//                              ? _selectedCategory
+//                              : index);
+                        showCupertinoModalPopup(
+                            context: context,
+                            builder: (context) => CupertinoActionSheet(
+                                actions: [buildCategoryPicker()],
+                                cancelButton: CupertinoActionSheetAction(
+                                  child: Text('Cancel'),
+                                  onPressed: () => Navigator.pop(context),
+                                )));
+                      },
+                      child: Icon(Icons.category_outlined)),
+                ),
               ),
             ),
+
+///////////////////////////
+//  STATUS
+///////////////////////////
+            Container(
+              margin:
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+              decoration: BoxDecoration(
+                shape: BoxShape.rectangle,
+                color: Colors.blue[100],
+              ),
+              child: TextField(
+                controller: _statusController,
+                readOnly: true,
+                style: _textStyleControls,
+                decoration: InputDecoration(
+                  labelText: ' Status',
+                  hintText: ' Pick a Status',
+                  prefixIcon: InkWell(
+                    onTap: () {
+//                      scrollController.dispose();
+//                      scrollController = FixedExtentScrollController(
+//                          initialItem: (_selectedCategory != null)
+//                              ? _selectedCategory
+//                              : index);
+                      showCupertinoModalPopup(
+                          context: context,
+                          builder: (context) => CupertinoActionSheet(
+                              actions: [buildStatusPicker()],
+                              cancelButton: CupertinoActionSheetAction(
+                                child: Text('Cancel'),
+                                onPressed: () => Navigator.pop(context),
+                              )));
+                    },
+                    child: Icon(Icons.next_plan_outlined),
+                  ),
+                ),
+              ),
+            ),
+
+//            Container(
+//              margin:
+//                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
+//              decoration: BoxDecoration(
+//                  shape: BoxShape.rectangle, color: Colors.blue[100]),
+//              child: Row(
+//                crossAxisAlignment: CrossAxisAlignment.center,
+//                children: [
+//                  DropdownButton<String>(
+//                      items: _statuses.map((CustomDropdownItem value) {
+//                        return DropdownMenuItem<String>(
+//                            value: value.id,
+//                            child: Text(
+//                              value.name!,
+//                              overflow: TextOverflow.ellipsis,
+//                            ));
+//                      }).toList(),
+//                      style: _textStyleControls,
+//                      value: _selectedStatus,
+//                      onChanged: (newValue) {
+//                        setState(() {
+//                          _selectedStatus = newValue;
+//                          task.status = newValue!;
+//                        });
+//                      }),
+//                ],
+//              ),
+//            ),
 
 ///////////////////////////
 //  PRIORITY
 ///////////////////////////
-
             Container(
               margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
               decoration: BoxDecoration(
-                  shape: BoxShape.rectangle, color: Colors.blue[100]),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  DropdownButton<String>(
-                      items: _priorities.map((CustomDropdownItem value) {
-                        return DropdownMenuItem<String>(
-                            value: value.id,
-                            child: Text(
-                              value.name!,
-                              overflow: TextOverflow.ellipsis,
-                            ));
-                      }).toList(),
-                      style: _textStyleControls,
-                      value: _selectedPriority,
-                      onChanged: (newValue) {
-                        setState(() {
-                          _selectedPriority = newValue;
-                          task.priority = newValue!;
-                        });
-                      }),
-                ],
+                shape: BoxShape.rectangle,
+                color: Colors.blue[100],
+              ),
+              child: TextField(
+                controller: _priorityController,
+                readOnly: true,
+                style: _textStyleControls,
+                decoration: InputDecoration(
+                  labelText: ' Priority',
+                  hintText: ' Pick a Priority',
+                  prefixIcon: InkWell(
+                    onTap: () {
+//                      scrollController.dispose();
+//                      scrollController = FixedExtentScrollController(
+//                          initialItem: (_selectedCategory != null)
+//                              ? _selectedCategory
+//                              : index);
+                      showCupertinoModalPopup(
+                          context: context,
+                          builder: (context) => CupertinoActionSheet(
+                              actions: [buildPriorityPicker()],
+                              cancelButton: CupertinoActionSheetAction(
+                                child: Text('Cancel'),
+                                onPressed: () => Navigator.pop(context),
+                              )));
+                    },
+                    child: Icon(Icons.low_priority),
+                  ),
+                ),
               ),
             ),
+
+//            Container(
+//              margin:
+//                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
+//              decoration: BoxDecoration(
+//                  shape: BoxShape.rectangle, color: Colors.blue[100]),
+//              child: Row(
+//                crossAxisAlignment: CrossAxisAlignment.center,
+//                children: [
+//                  DropdownButton<String>(
+//                      items: _priorities.map((CustomDropdownItem value) {
+//                        return DropdownMenuItem<String>(
+//                            value: value.id,
+//                            child: Text(
+//                              value.name!,
+//                              overflow: TextOverflow.ellipsis,
+//                            ));
+//                      }).toList(),
+//                      style: _textStyleControls,
+//                      value: _selectedPriority,
+//                      onChanged: (newValue) {
+//                        setState(() {
+//                          _selectedPriority = newValue;
+//                          task.priority = newValue!;
+//                        });
+//                      }),
+//                ],
+//              ),
+//            ),
 
 ///////////////////////////
 //  ACTION
@@ -918,32 +1114,67 @@ class TaskDetailState extends State //<TaskDetail>
 ///////////////////////////
             Container(
               margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
               decoration: BoxDecoration(
-                  shape: BoxShape.rectangle, color: Colors.blue[100]),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  DropdownButton<String>(
-                      items: _tag1s.map((CustomDropdownItem value) {
-                        return DropdownMenuItem<String>(
-                            value: value.id,
-                            child: Text(
-                              value.name!,
-                              overflow: TextOverflow.ellipsis,
-                            ));
-                      }).toList(),
-                      style: _textStyleControls,
-                      value: _selectedTag1,
-                      onChanged: (newValue) {
-                        setState(() {
-                          _selectedTag1 = newValue;
-                          task.tag1 = newValue!;
-                        });
-                      }),
-                ],
+                shape: BoxShape.rectangle,
+                color: Colors.blue[100],
+              ),
+              child: TextField(
+                controller: _tag1Controller,
+                readOnly: true,
+                style: _textStyleControls,
+                decoration: InputDecoration(
+                  labelText: ' Tag',
+                  hintText: ' Pick a Tag',
+                  prefixIcon: InkWell(
+                    onTap: () {
+//                      scrollController.dispose();
+//                      scrollController = FixedExtentScrollController(
+//                          initialItem: (_selectedCategory != null)
+//                              ? _selectedCategory
+//                              : index);
+                      showCupertinoModalPopup(
+                          context: context,
+                          builder: (context) => CupertinoActionSheet(
+                              actions: [buildTag1Picker()],
+                              cancelButton: CupertinoActionSheetAction(
+                                child: Text('Cancel'),
+                                onPressed: () => Navigator.pop(context),
+                              )));
+                    },
+                    child: Icon(Icons.tag_outlined),
+                  ),
+                ),
               ),
             ),
+//            Container(
+//              margin:
+//                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
+//              decoration: BoxDecoration(
+//                  shape: BoxShape.rectangle, color: Colors.blue[100]),
+//              child: Row(
+//                crossAxisAlignment: CrossAxisAlignment.center,
+//                children: [
+//                 DropdownButton<String>(
+//                      items: _tag1s.map((CustomDropdownItem value) {
+//                        return DropdownMenuItem<String>(
+//                            value: value.id,
+//                            child: Text(
+//                              value.name!,
+//                              overflow: TextOverflow.ellipsis,
+//                            ));
+//                      }).toList(),
+//                      style: _textStyleControls,
+//                      value: _selectedTag1,
+//                      onChanged: (newValue) {
+//                        setState(() {
+//                          _selectedTag1 = newValue;
+//                          task.tag1 = newValue!;
+//                        });
+//                      }),
+//                ],
+//              ),
+//            ),
 
 ///////////////////////////
 //  GOAL
@@ -1012,15 +1243,36 @@ class TaskDetailState extends State //<TaskDetail>
                     onPressed: () async {
                       task.task = _todoTaskController.text;
                       task.note = _todoNoteController.text;
-                      task.status = _selectedStatus == null
-                          ? ""
-                          : _selectedStatus.toString();
-                      task.priority = _selectedPriority == null
-                          ? ""
-                          : _selectedPriority.toString();
-                      task.category = _selectedCategory == null
-                          ? "1"
-                          : _selectedCategory.toString();
+                      (_selectedStatus == null)
+                          ? {
+                              task.status = "1",
+                              task.statusText = "Inbox",
+                            }
+                          : {
+                              task.status = _selectedStatus.toString(),
+                              task.statusText =
+                                  _statusController.text,
+                            };
+                      (_selectedPriority == null)
+                          ? {
+                              task.priority = "",
+                              task.priorityText = "",
+                            }
+                          : {
+                              task.priority = _selectedPriority.toString(),
+                              task.priorityText =
+                                  _priorityController.text,
+                            };
+                      (_selectedCategory == null)
+                          ? {
+                              task.category = "1",
+                              task.categoryText = "Inbox",
+                            }
+                          : {
+                              task.category = _selectedCategory.toString(),
+                              task.categoryText =
+                                  _categoryController.text,
+                            };
                       task.action1 = _selectedAction1 == null
                           ? ""
                           : _selectedAction1.toString();
@@ -1029,6 +1281,16 @@ class TaskDetailState extends State //<TaskDetail>
                           : _selectedContext1.toString();
                       task.tag1 =
                           _selectedTag1 == null ? "" : _selectedTag1.toString();
+                      (_selectedTag1 == null)
+                          ? {
+                              task.tag1 = "",
+                              task.tag1Text = "",
+                            }
+                          : {
+                              task.tag1 = _selectedTag1.toString(),
+                              task.tag1Text =
+                                  _tag1Controller.text,
+                            };
                       task.goal1 = _selectedGoal1 == null
                           ? ""
                           : _selectedGoal1.toString();
@@ -1083,8 +1345,8 @@ class TaskDetailState extends State //<TaskDetail>
 //                          ),
 //                        ),
 //                      );
-                      await Future.delayed(
-                          const Duration(milliseconds: 500), () {});
+//                      await Future.delayed(
+//                          const Duration(milliseconds: 500), () {});
                       Navigator.pop(context);
                     },
                     style: ElevatedButton.styleFrom(

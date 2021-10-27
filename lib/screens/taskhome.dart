@@ -323,7 +323,7 @@ class TaskHomeState extends State {
   }
 
   void getData() {
-    int? _sortField1 = globals.sortField1 != null ? globals.sortField1 : 12;
+    int? _sortField1 = globals.sortField1 != null ? globals.sortField1 : 8;
     int? _sortField2 = globals.sortField2 != null ? globals.sortField2 : 2;
     int? _sortField3 = globals.sortField3 != null ? globals.sortField3 : 3;
     int? _sortOrder1 = globals.sortOrder1 != null ? globals.sortOrder1 : 1;
@@ -460,17 +460,17 @@ class TaskHomeState extends State {
               break;
             case 2:
               {
-                taskList[i].sec1 = taskList[i].statusText;
+                taskList[i].sec1 = taskList[i].categoryText;
               }
               break;
             case 3:
               {
-                taskList[i].sec1 = taskList[i].priorityText;
+                taskList[i].sec1 = taskList[i].statusText;
               }
               break;
             case 4:
               {
-                taskList[i].sec1 = taskList[i].categoryText;
+                taskList[i].sec1 = taskList[i].priorityText;
               }
               break;
 //            case 5:
@@ -525,17 +525,17 @@ class TaskHomeState extends State {
               break;
             case 2:
               {
-                taskList[i].sec2 = taskList[i].statusText;
+                taskList[i].sec2 = taskList[i].categoryText;
               }
               break;
             case 3:
               {
-                taskList[i].sec2 = taskList[i].priorityText;
+                taskList[i].sec2 = taskList[i].statusText;
               }
               break;
             case 4:
               {
-                taskList[i].sec2 = taskList[i].categoryText;
+                taskList[i].sec2 = taskList[i].priorityText;
               }
               break;
 //            case 5:
@@ -590,17 +590,17 @@ class TaskHomeState extends State {
               break;
             case 2:
               {
-                taskList[i].sec3 = taskList[i].statusText;
+                taskList[i].sec3 = taskList[i].categoryText;
               }
               break;
             case 3:
               {
-                taskList[i].sec3 = taskList[i].priorityText;
+                taskList[i].sec3 = taskList[i].statusText;
               }
               break;
             case 4:
               {
-                taskList[i].sec3 = taskList[i].categoryText;
+                taskList[i].sec3 = taskList[i].priorityText;
               }
               break;
 //            case 5:

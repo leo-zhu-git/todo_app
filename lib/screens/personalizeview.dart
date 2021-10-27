@@ -57,9 +57,9 @@ class ShowItem {
     return <ShowItem>[
       ShowItem(0, 'Due Date'),
       ShowItem(1, 'Due Time'),
-      ShowItem(2, 'Status'),
-      ShowItem(3, 'Priority'),
-      ShowItem(4, 'Category'),
+      ShowItem(2, 'Category'),
+      ShowItem(3, 'Status'),
+      ShowItem(4, 'Priority'),
 //      ShowItem(5, 'Action'),
 //      ShowItem(6, 'Context'),
 //      ShowItem(7, 'Location'),
