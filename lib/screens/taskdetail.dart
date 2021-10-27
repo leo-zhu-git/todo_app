@@ -868,10 +868,11 @@ Widget buildTag1Picker() => SizedBox(
                             context: context,
                             builder: (context) => CupertinoActionSheet(
                                 actions: [buildCategoryPicker()],
-                                cancelButton: CupertinoActionSheetAction(
-                                  child: Text('Cancel'),
-                                  onPressed: () => Navigator.pop(context),
-                                )));
+//                                cancelButton: CupertinoActionSheetAction(
+//                                  child: Text('Cancel'),
+//                                  onPressed: () => Navigator.pop(context),
+//                                )
+                                ));
                       },
                       child: Icon(Icons.category_outlined)),
                 ),
@@ -906,10 +907,11 @@ Widget buildTag1Picker() => SizedBox(
                           context: context,
                           builder: (context) => CupertinoActionSheet(
                               actions: [buildStatusPicker()],
-                              cancelButton: CupertinoActionSheetAction(
-                                child: Text('Cancel'),
-                                onPressed: () => Navigator.pop(context),
-                              )));
+//                              cancelButton: CupertinoActionSheetAction(
+//                                child: Text('Cancel'),
+//                                onPressed: () => Navigator.pop(context),
+//                              )
+                              ));
                     },
                     child: Icon(Icons.next_plan_outlined),
                   ),
@@ -974,10 +976,11 @@ Widget buildTag1Picker() => SizedBox(
                           context: context,
                           builder: (context) => CupertinoActionSheet(
                               actions: [buildPriorityPicker()],
-                              cancelButton: CupertinoActionSheetAction(
-                                child: Text('Cancel'),
-                                onPressed: () => Navigator.pop(context),
-                              )));
+//                              cancelButton: CupertinoActionSheetAction(
+//                                child: Text('Cancel'),
+//                                onPressed: () => Navigator.pop(context),
+//                              )
+                              ));
                     },
                     child: Icon(Icons.low_priority),
                   ),
@@ -1137,10 +1140,11 @@ Widget buildTag1Picker() => SizedBox(
                           context: context,
                           builder: (context) => CupertinoActionSheet(
                               actions: [buildTag1Picker()],
-                              cancelButton: CupertinoActionSheetAction(
-                                child: Text('Cancel'),
-                                onPressed: () => Navigator.pop(context),
-                              )));
+//                              cancelButton: CupertinoActionSheetAction(
+//                                child: Text('Cancel'),
+//                                onPressed: () => Navigator.pop(context),
+//                              )
+                              ));
                     },
                     child: Icon(Icons.tag_outlined),
                   ),
@@ -1245,8 +1249,8 @@ Widget buildTag1Picker() => SizedBox(
                       task.note = _todoNoteController.text;
                       (_selectedStatus == null)
                           ? {
-                              task.status = "1",
-                              task.statusText = "Inbox",
+                              task.status = "",
+                              task.statusText = "",
                             }
                           : {
                               task.status = _selectedStatus.toString(),
