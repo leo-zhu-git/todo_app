@@ -63,7 +63,14 @@ class _DrawerNagivation extends State<DrawerNagivation> {
                 margin: EdgeInsets.zero,
                 accountName: Text('Welcome to'),
                 accountEmail: Text('todoMIT'),
-                decoration: BoxDecoration(color: Colors.brown[900]),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Colors.teal, Colors.black38],
+                    begin: Alignment.bottomRight,
+                    end: Alignment.topLeft,
+                  ),
+                color: Colors.teal[800]
+                ),
               ),
               ListTile(
                 leading: Icon(Icons.home),
@@ -116,7 +123,7 @@ class _DrawerNagivation extends State<DrawerNagivation> {
                 onTap: () => Navigator.of(context)
                     .push(MaterialPageRoute(builder: (context) => TaskHome())),
               ),
-                            Divider(color: Colors.teal[50]),
+              Divider(color: Colors.teal[50]),
               ListTile(
                 tileColor: Colors.teal[50],
                 leading: Icon(Icons.people),

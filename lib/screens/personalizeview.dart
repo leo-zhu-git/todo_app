@@ -16,6 +16,8 @@ import 'package:todo_app/util/dbhelper.dart';
 import 'package:intl/intl.dart';
 import 'package:todo_app/model/globals.dart' as globals;
 
+TextStyle _textStyleControls = TextStyle(fontSize: 17.0, color: Colors.black87);
+
 class PersonalizeView extends StatefulWidget {
   @override
   _PersonalizeViewState createState() => _PersonalizeViewState();
@@ -35,13 +37,13 @@ class SortItem {
       SortItem(4, 'Category'),
       SortItem(5, 'Status'),
       SortItem(6, 'Priority'),
-      SortItem(7, 'Action'),
-      SortItem(8, 'Context'),
-      SortItem(9, 'Location'),
-      SortItem(10, 'Tag'),
-      SortItem(11, 'Goal'),
-      SortItem(12, 'Star'),
-      SortItem(13, 'Done'),
+//      SortItem(7, 'Action'),
+//      SortItem(8, 'Context'),
+//      SortItem(9, 'Location'),
+      SortItem(7, 'Tag'),
+//      SortItem(11, 'Goal'),
+      SortItem(8, 'Star'),
+      SortItem(9, 'Done'),
     ];
   }
 }
@@ -55,15 +57,15 @@ class ShowItem {
     return <ShowItem>[
       ShowItem(0, 'Due Date'),
       ShowItem(1, 'Due Time'),
-      ShowItem(2, 'Status'),
-      ShowItem(3, 'Priority'),
-      ShowItem(4, 'Category'),
-      ShowItem(5, 'Action'),
-      ShowItem(6, 'Context'),
-      ShowItem(7, 'Location'),
-      ShowItem(8, 'Tag'),
-      ShowItem(9, 'Goal'),
-      ShowItem(10, 'Star'),
+      ShowItem(2, 'Category'),
+      ShowItem(3, 'Status'),
+      ShowItem(4, 'Priority'),
+//      ShowItem(5, 'Action'),
+//      ShowItem(6, 'Context'),
+//      ShowItem(7, 'Location'),
+      ShowItem(5, 'Tag'),
+//      ShowItem(9, 'Goal'),
+      ShowItem(6, 'Star'),
     ];
   }
 }
@@ -208,7 +210,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
   var _selectedLocation1 = null;
   var _selectedTag1 = null;
   var _selectedGoal1 = null;
-  
+
   //
   @override
   void initState() {
@@ -246,7 +248,8 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
       _selectedFilterIsStar = _dropdownFilterIsStar[0].value!;
       globals.filterIsStar = 0;
     } else
-      _selectedFilterIsStar = _dropdownFilterIsStar[globals.filterIsStar!].value!;
+      _selectedFilterIsStar =
+          _dropdownFilterIsStar[globals.filterIsStar!].value!;
 
     ////////////////////////////
     /// filter - is done
@@ -255,14 +258,15 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
       _selectedFilterIsDone = _dropdownFilterIsDone[0].value!;
       globals.filterIsDone = 0;
     } else
-      _selectedFilterIsDone = _dropdownFilterIsDone[globals.filterIsDone!].value!;
+      _selectedFilterIsDone =
+          _dropdownFilterIsDone[globals.filterIsDone!].value!;
 
     ////////////////////////////
     // Sort and Order
     ////////////////////////////
-    if (globals.sortField1 == null) {
-      _selectedSortField1 = _dropdownMenuItemsSort[12].value!;
-      globals.sortField1 = 12;
+    if (globals.sortField1 == 8) {
+      _selectedSortField1 = _dropdownMenuItemsSort[8].value!;
+      globals.sortField1 = 8;
     } else
       _selectedSortField1 = _dropdownMenuItemsSort[globals.sortField1!].value!;
 
@@ -339,7 +343,8 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
 //    cus.id = null;
-    cus.name = "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
+    cus.name =
+        "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
     cus.name = "-- Select Category --                                         ";
     _categories.add(cus);
     categories.forEach((category) {
@@ -364,8 +369,10 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
 //    cus.id = null;
-    cus.name = "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
-    cus.name = "-- Select Status --                                              ";
+    cus.name =
+        "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
+    cus.name =
+        "-- Select Status --                                              ";
     _statuses.add(cus);
     statuses.forEach((status) {
       setState(() {
@@ -389,8 +396,10 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
 //    cus.id = null;
-    cus.name = "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
-    cus.name = "-- Select Priority --                                            ";
+    cus.name =
+        "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
+    cus.name =
+        "-- Select Priority --                                            ";
     _priorities.add(cus);
     priorities.forEach((priority) {
       setState(() {
@@ -409,14 +418,15 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     });
   }
 
-
   _loadAction1s() async {
     var action1s = await helper.getAction1s();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
 //    cus.id = null;
-    cus.name = "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
-    cus.name = "-- Select Action --                                              ";
+    cus.name =
+        "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
+    cus.name =
+        "-- Select Action --                                              ";
     _action1s.add(cus);
     action1s.forEach((action1) {
       setState(() {
@@ -439,8 +449,10 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
 //    cus.id = null;
-    cus.name = "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
-    cus.name = "-- Select Context --                                             ";
+    cus.name =
+        "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
+    cus.name =
+        "-- Select Context --                                             ";
     _context1s.add(cus);
     context1s.forEach((context1) {
       setState(() {
@@ -464,8 +476,10 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
 //    cus.id = null;
-    cus.name = "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
-    cus.name = "-- Select Location --                                           ";
+    cus.name =
+        "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
+    cus.name =
+        "-- Select Location --                                           ";
     _location1s.add(cus);
     location1s.forEach((location1) {
       setState(() {
@@ -489,8 +503,10 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
 //    cus.id = null;
-    cus.name = "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
-    cus.name = "-- Select Tag --                                                    ";
+    cus.name =
+        "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
+    cus.name =
+        "-- Select Tag --                                                    ";
     _tag1s.add(cus);
     tag1s.forEach((tag1) {
       setState(() {
@@ -513,8 +529,10 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
 //    cus.id = null;
-    cus.name = "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
-    cus.name = "-- Select Goal --                                                  ";
+    cus.name =
+        "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
+    cus.name =
+        "-- Select Goal --                                                  ";
     _goal1s.add(cus);
     goal1s.forEach((goal1) {
       setState(() {
@@ -671,29 +689,22 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
       resizeToAvoidBottomInset: false,
 //      backgroundColor: Colors.teal[50],
       appBar: new AppBar(
-        backgroundColor: Colors.brown[900],
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.teal, Colors.black38],
+              begin: Alignment.bottomRight,
+              end: Alignment.topLeft,
+            ),
+          ),
+        ),
+        backgroundColor: Colors.teal[800],
 //        backgroundColor: Colors.indigo[600],
         automaticallyImplyLeading: false,
-        title:
-            Center(child: Text('Personalize - Make this app your own!')),
-
-
-            centerTitle: true,
-            flexibleSpace: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Colors.brown, Colors.black38],
-                  begin: Alignment.bottomRight,
-                  end: Alignment.topLeft,
-                ),
-              ),
-            ),
-
+        title: Center(child: Text('Personalize - Make this app your own!')),
       ),
 
-
-
-      
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -702,13 +713,14 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
 ///////////////////////////
 //  Filter Date Due
 ///////////////////////////
-              Text("Filter - Reduce tasks to view"),
+              Text("Filter - Reduce tasks to view", style: _textStyleControls),
 
               new Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.blue[100]),
                 child: DropdownButtonFormField<FilterDateDue>(
+                  style: _textStyleControls,
                   items: _dropdownFilterDateDue,
                   hint: Text('Filter by Due Date'),
                   value: _selectedFilterDateDue,
@@ -729,6 +741,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     DropdownButton<String>(
+                  style: _textStyleControls,
                         items: _categories.map((CustomDropdownItem value) {
                           return DropdownMenuItem<String>(
                               value: value.id,
@@ -756,6 +769,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     DropdownButton<String>(
+                  style: _textStyleControls,
                         items: _statuses.map((CustomDropdownItem value) {
                           return DropdownMenuItem<String>(
                               value: value.id,
@@ -783,6 +797,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     DropdownButton<String>(
+                  style: _textStyleControls,
                         items: _priorities.map((CustomDropdownItem value) {
                           return DropdownMenuItem<String>(
                               value: value.id,
@@ -802,79 +817,79 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
               ),
 
 //########################################### Action  ######### #################################3
-              Container(
-                margin: const EdgeInsets.all(2.0),
-                decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.blue[100]),
-                child: Flexible(
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      DropdownButton<String>(
-                        items: _action1s.map((CustomDropdownItem value) {
-                          return DropdownMenuItem<String>(
-                              value: value.id, child: Text(value.name!));
-                        }).toList(),
-                        value: _selectedAction1,
-                        onChanged: (value) {
-                          setState(() {
-                            _selectedAction1 = value;
-                            //                    searchData(_searchText, _selectedpriority, _selectedCategory, _selectedAction1, _selectedContext1, _selectedLocation1, _selectedTag1, _selectedGoal1);
-                          });
-                        },
-                      )
-                    ],
-                  ),
-                ),
-              ),
+//              Container(
+//                margin: const EdgeInsets.all(2.0),
+//                decoration: BoxDecoration(
+//                    shape: BoxShape.rectangle, color: Colors.blue[100]),
+//                child: Flexible(
+//                  child: Row(
+//                    crossAxisAlignment: CrossAxisAlignment.center,
+//                    children: [
+//                      DropdownButton<String>(
+//                        items: _action1s.map((CustomDropdownItem value) {
+//                          return DropdownMenuItem<String>(
+//                              value: value.id, child: Text(value.name!));
+//                        }).toList(),
+//                        value: _selectedAction1,
+//                        onChanged: (value) {
+//                          setState(() {
+//                            _selectedAction1 = value;
+//                            //                    searchData(_searchText, _selectedpriority, _selectedCategory, _selectedAction1, _selectedContext1, _selectedLocation1, _selectedTag1, _selectedGoal1);
+//                          });
+//                        },
+//                      )
+//                    ],
+//                  ),
+//                ),
+//              ),
 
 //######### Context  #########
-              Container(
-                margin: const EdgeInsets.all(2.0),
-                decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.blue[100]),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    DropdownButton<String>(
-                      items: _context1s.map((CustomDropdownItem value) {
-                        return DropdownMenuItem<String>(
-                            value: value.id, child: Text(value.name!));
-                      }).toList(),
-                      value: _selectedContext1,
-                      onChanged: (value) {
-                        setState(() {
-                          _selectedContext1 = value;
-                        });
-                      },
-                    )
-                  ],
-                ),
-              ),
+//              Container(
+//                margin: const EdgeInsets.all(2.0),
+//                decoration: BoxDecoration(
+//                    shape: BoxShape.rectangle, color: Colors.blue[100]),
+//                child: Row(
+//                  crossAxisAlignment: CrossAxisAlignment.center,
+//                  children: [
+//                    DropdownButton<String>(
+//                      items: _context1s.map((CustomDropdownItem value) {
+//                        return DropdownMenuItem<String>(
+//                            value: value.id, child: Text(value.name!));
+//                      }).toList(),
+//                      value: _selectedContext1,
+//                      onChanged: (value) {
+//                        setState(() {
+//                          _selectedContext1 = value;
+//                        });
+//                      },
+//                    )
+//                  ],
+//                ),
+//              ),
 
 // //######### Location  #########
-              Container(
-                margin: const EdgeInsets.all(2.0),
-                decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.blue[100]),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    DropdownButton<String>(
-                      items: _location1s.map((CustomDropdownItem value) {
-                        return DropdownMenuItem<String>(
-                            value: value.id, child: Text(value.name!));
-                      }).toList(),
-                      value: _selectedLocation1,
-                      onChanged: (value) {
-                        setState(() {
-                          _selectedLocation1 = value;
-                        });
-                      },
-                    )
-                  ],
-                ),
-              ),
+//              Container(
+//                margin: const EdgeInsets.all(2.0),
+//                decoration: BoxDecoration(
+//                    shape: BoxShape.rectangle, color: Colors.blue[100]),
+//                child: Row(
+//                  crossAxisAlignment: CrossAxisAlignment.center,
+//                  children: [
+//                    DropdownButton<String>(
+//                      items: _location1s.map((CustomDropdownItem value) {
+//                        return DropdownMenuItem<String>(
+//                            value: value.id, child: Text(value.name!));
+//                      }).toList(),
+//                      value: _selectedLocation1,
+//                      onChanged: (value) {
+//                        setState(() {
+//                          _selectedLocation1 = value;
+//                        });
+//                      },
+//                    )
+//                  ],
+//                ),
+//              ),
 
 // //######### Tag  #########
               Container(
@@ -885,6 +900,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     DropdownButton<String>(
+                  style: _textStyleControls,
                       items: _tag1s.map((CustomDropdownItem value) {
                         return DropdownMenuItem<String>(
                             value: value.id, child: Text(value.name!));
@@ -901,28 +917,28 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
               ),
 
 // //######### Goal  #########
-              Container(
-                margin: const EdgeInsets.all(2.0),
-                decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.blue[100]),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    DropdownButton<String>(
-                      items: _goal1s.map((CustomDropdownItem value) {
-                        return DropdownMenuItem<String>(
-                            value: value.id, child: Text(value.name!));
-                      }).toList(),
-                      value: _selectedGoal1,
-                      onChanged: (value) {
-                        setState(() {
-                          _selectedGoal1 = value;
-                        });
-                      },
-                    )
-                  ],
-                ),
-              ),
+//              Container(
+//                margin: const EdgeInsets.all(2.0),
+//                decoration: BoxDecoration(
+//                    shape: BoxShape.rectangle, color: Colors.blue[100]),
+//                child: Row(
+//                  crossAxisAlignment: CrossAxisAlignment.center,
+//                  children: [
+//                    DropdownButton<String>(
+//                      items: _goal1s.map((CustomDropdownItem value) {
+//                        return DropdownMenuItem<String>(
+//                            value: value.id, child: Text(value.name!));
+//                      }).toList(),
+//                      value: _selectedGoal1,
+//                      onChanged: (value) {
+//                        setState(() {
+//                          _selectedGoal1 = value;
+//                        });
+//                      },
+//                    )
+//                  ],
+//                ),
+//              ),
 
 ///////////////////////////
 //  Filter Is Star
@@ -933,6 +949,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.blue[100]),
                 child: DropdownButtonFormField<FilterIsStar>(
+                  style: _textStyleControls,
                   items: _dropdownFilterIsStar,
                   hint: Text('Filter by Is Star Tasks'),
                   value: _selectedFilterIsStar,
@@ -952,6 +969,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.blue[100]),
                 child: DropdownButtonFormField<FilterIsDone>(
+                  style: _textStyleControls,
                   items: _dropdownFilterIsDone,
                   hint: Text('Filter by Is Done Tasks'),
                   value: _selectedFilterIsDone,
@@ -970,7 +988,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
 ///////////////////////////
 //  SORT ORDER 1
 ///////////////////////////
-              Text("Sort - first, second, third"),
+              Text("Sort - first, second, third", style: _textStyleControls),
 ///////////////////////////
 //  SORT ORDER 1
 ///////////////////////////
@@ -979,6 +997,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.green[100]),
                 child: DropdownButtonFormField<SortItem>(
+                  style: _textStyleControls,
                   value: _selectedSortField1,
                   items: _dropdownMenuItemsSort,
                   hint: Text('Sort Order 1'),
@@ -997,6 +1016,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.green[100]),
                 child: DropdownButtonFormField<SortOrder>(
+                  style: _textStyleControls,
                   value: _selectedSortOrder1,
                   items: _dropdownMenuSortOrder,
                   hint: Text('Sort 1 Ascending/Descending'),
@@ -1016,6 +1036,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.green[100]),
                 child: DropdownButtonFormField<SortItem>(
+                  style: _textStyleControls,
                   items: _dropdownMenuItemsSort,
                   hint: Text('Sort 2'),
                   value: _selectedSortField2,
@@ -1034,6 +1055,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.green[100]),
                 child: DropdownButtonFormField<SortOrder>(
+                  style: _textStyleControls,
                   value: _selectedSortOrder2,
                   items: _dropdownMenuSortOrder,
                   hint: Text('Sort 2 Ascending/Descending'),
@@ -1053,6 +1075,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.green[100]),
                 child: DropdownButtonFormField<SortItem>(
+                  style: _textStyleControls,
                   items: _dropdownMenuItemsSort,
                   hint: Text('Sort 3'),
                   value: _selectedSortField3,
@@ -1071,6 +1094,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.green[100]),
                 child: DropdownButtonFormField<SortOrder>(
+                  style: _textStyleControls,
                   value: _selectedSortOrder3,
                   items: _dropdownMenuSortOrder,
                   hint: Text('Sort Order 3 Ascending/Descending'),
@@ -1086,7 +1110,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 height: 20,
               ),
 
-              Text("Picklist | User-defined Dropdowns"),
+              Text("Picklist | User-defined Dropdowns", style: _textStyleControls),
 
 ///////////////////////////
 //  Picklist - Categories
@@ -1095,7 +1119,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 elevation: 8.0,
                 child: ListTile(
                   tileColor: Colors.orange[100],
-                  title: Text('Categories'),
+                  title: Text('Categories', style: _textStyleControls),
                   onTap: () => Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => CategoriesScreen())),
                 ),
@@ -1105,16 +1129,16 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
 ///////////////////////////
 //  Picklist - Action
 ///////////////////////////
-              Card(
-                elevation: 8.0,
-                child: ListTile(
-                  tileColor: Colors.orange[100],
-                  title: Text('Actions'),
-                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => Action1sScreen())),
-                ),
-              ),
-              SizedBox(height: 2),
+//              Card(
+//                elevation: 8.0,
+//                child: ListTile(
+//                  tileColor: Colors.orange[100],
+//                  title: Text('Actions'),
+//                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
+//                      builder: (context) => Action1sScreen())),
+//                ),
+//              ),
+//              SizedBox(height: 2),
 
 ///////////////////////////
 //  Picklist - Statuses
@@ -1123,7 +1147,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 elevation: 8.0,
                 child: ListTile(
                   tileColor: Colors.orange[100],
-                  title: Text('Statuses'),
+                  title: Text('Statuses', style: _textStyleControls),
                   onTap: () => Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => StatusesScreen())),
                 ),
@@ -1137,38 +1161,39 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 elevation: 8.0,
                 child: ListTile(
                   tileColor: Colors.orange[100],
-                  title: Text('Priorities'),
+                  title: Text('Priorities', style: _textStyleControls),
                   onTap: () => Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => PrioritiesScreen())),
                 ),
               ),
-              SizedBox(height: 2), ///////////////////////////
+              SizedBox(height: 2), 
+///////////////////////////
 //  Picklist - Contexts
 ///////////////////////////
-              Card(
-                elevation: 8.0,
-                child: ListTile(
-                  tileColor: Colors.orange[100],
-                  title: Text('Contexts'),
-                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => Context1sScreen())),
-                ),
-              ),
-              SizedBox(height: 2),
+//              Card(
+//                elevation: 8.0,
+//                child: ListTile(
+//                  tileColor: Colors.orange[100],
+//                  title: Text('Contexts'),
+//                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
+//                     builder: (context) => Context1sScreen())),
+//                ),
+//              ),
+//              SizedBox(height: 2),
 
 ///////////////////////////
 //  Picklist - Locations
 ///////////////////////////
-              Card(
-                elevation: 8.0,
-                child: ListTile(
-                  tileColor: Colors.orange[100],
-                  title: Text('Locations'),
-                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => Location1sScreen())),
-                ),
-              ),
-              SizedBox(height: 2),
+//              Card(
+//                elevation: 8.0,
+//                child: ListTile(
+//                  tileColor: Colors.orange[100],
+//                  title: Text('Locations'),
+//                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
+//                      builder: (context) => Location1sScreen())),
+//                ),
+//              ),
+//              SizedBox(height: 2),
 
 ///////////////////////////
 //  Picklist - Tags
@@ -1177,7 +1202,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 elevation: 8.0,
                 child: ListTile(
                   tileColor: Colors.orange[100],
-                  title: Text('Tags'),
+                  title: Text('Tags', style: _textStyleControls),
                   onTap: () => Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => Tag1sScreen())),
                 ),
@@ -1187,19 +1212,19 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
 ///////////////////////////
 //  Picklist - Goals
 ///////////////////////////
-              Card(
-                elevation: 8.0,
-                child: ListTile(
-                  tileColor: Colors.orange[100],
-                  title: Text('Goals'),
-                  onTap: () => Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => Goal1sScreen())),
-                ),
-              ),
+//              Card(
+//                elevation: 8.0,
+//                child: ListTile(
+//                  tileColor: Colors.orange[100],
+//                  title: Text('Goals'),
+//                  onTap: () => Navigator.of(context).push(
+//                      MaterialPageRoute(builder: (context) => Goal1sScreen())),
+//                ),
+//              ),
               SizedBox(
                 height: 20,
               ),
-                            Text("View - second line up to 3 fields"),
+             Text("View - second line up to 3 fields", style: _textStyleControls),
 ///////////////////////////
 //  Show Main 1
 ///////////////////////////
@@ -1226,6 +1251,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.pink[100]),
                 child: DropdownButtonFormField<ShowItem>(
+                  style: _textStyleControls,                  
                   items: _dropdownMenuItemsShow,
                   hint: Text('Display Secondary1'),
                   value: _selectedShowSec1,
@@ -1245,6 +1271,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.pink[100]),
                 child: DropdownButtonFormField<ShowItem>(
+                  style: _textStyleControls,
                   items: _dropdownMenuItemsShow,
                   hint: Text('Display Secondary2'),
                   value: _selectedShowSec2,
@@ -1264,6 +1291,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.pink[100]),
                 child: DropdownButtonFormField<ShowItem>(
+                  style: _textStyleControls,
                   items: _dropdownMenuItemsShow,
                   hint: Text('Display Secondary3'),
                   value: _selectedShowSec3,
@@ -1292,7 +1320,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                       ),
                       child: Text(
                         'Cancel',
-                        style: TextStyle(color: Colors.brown[900]),
+                        style: TextStyle(color: Colors.teal[800]),
                       )),
                   SizedBox(width: 5),
                   ElevatedButton(
@@ -1374,24 +1402,30 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                             );
                           }
 
-                          customSetting!.sortField1 = _selectedSortField1 == null
-                              ? ""
-                              : _selectedSortField1!.id.toString();
-                          customSetting!.sortOrder1 = _selectedSortOrder1 == null
-                              ? ""
-                              : _selectedSortOrder1!.id.toString();
-                          customSetting!.sortField2 = _selectedSortField2 == null
-                              ? ""
-                              : _selectedSortField2!.id.toString();
-                          customSetting!.sortOrder2 = _selectedSortOrder2 == null
-                              ? ""
-                              : _selectedSortOrder2!.id.toString();
-                          customSetting!.sortField3 = _selectedSortField3 == null
-                              ? ""
-                              : _selectedSortField3!.id.toString();
-                          customSetting!.sortOrder3 = _selectedSortOrder3 == null
-                              ? ""
-                              : _selectedSortOrder3!.id.toString();
+                          customSetting!.sortField1 =
+                              _selectedSortField1 == null
+                                  ? ""
+                                  : _selectedSortField1!.id.toString();
+                          customSetting!.sortOrder1 =
+                              _selectedSortOrder1 == null
+                                  ? ""
+                                  : _selectedSortOrder1!.id.toString();
+                          customSetting!.sortField2 =
+                              _selectedSortField2 == null
+                                  ? ""
+                                  : _selectedSortField2!.id.toString();
+                          customSetting!.sortOrder2 =
+                              _selectedSortOrder2 == null
+                                  ? ""
+                                  : _selectedSortOrder2!.id.toString();
+                          customSetting!.sortField3 =
+                              _selectedSortField3 == null
+                                  ? ""
+                                  : _selectedSortField3!.id.toString();
+                          customSetting!.sortOrder3 =
+                              _selectedSortOrder3 == null
+                                  ? ""
+                                  : _selectedSortOrder3!.id.toString();
 //                          customSetting.showMain1 = _selectedShowMain1 == null
 //                              ? ""
 //                              : _selectedShowMain1.id.toString();
@@ -1429,9 +1463,10 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                               }
                             }
 
-                            customSetting!.filterStatus = _selectedStatus == null
-                                ? ""
-                                : _selectedStatus.toString();
+                            customSetting!.filterStatus =
+                                _selectedStatus == null
+                                    ? ""
+                                    : _selectedStatus.toString();
                             customSetting!.filterPriority =
                                 _selectedPriority == null
                                     ? ""
@@ -1494,7 +1529,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                         Navigator.of(context).pushNamed('/dashboard');
                       },
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.brown[900],
+                        primary: Colors.teal[800],
                       ),
                       child: Text(
                         'Save',
@@ -1517,34 +1552,40 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
       if (customSetting != null && customSetting!.id != null) {
         if (customSetting!.sortField1 != "") {
           _selectedSortField1 =
-              _dropdownMenuItemsSort[int.parse(customSetting!.sortField1!)].value!;
+              _dropdownMenuItemsSort[int.parse(customSetting!.sortField1!)]
+                  .value!;
           globals.sortField1 = int.parse(customSetting!.sortField1!);
         }
         if (customSetting!.sortOrder1 != "") {
           _selectedSortOrder1 =
-              _dropdownMenuSortOrder[int.parse(customSetting!.sortOrder1!)].value!;
+              _dropdownMenuSortOrder[int.parse(customSetting!.sortOrder1!)]
+                  .value!;
           globals.sortField1 = int.parse(
               customSetting!.sortOrder1!); //convert it to session variables
         }
         if (customSetting!.sortField2 != "") {
           _selectedSortField2 =
-              _dropdownMenuItemsSort[int.parse(customSetting!.sortField2!)].value!;
+              _dropdownMenuItemsSort[int.parse(customSetting!.sortField2!)]
+                  .value!;
           globals.sortField2 = int.parse(customSetting!.sortField2!);
         }
         if (customSetting!.sortOrder2 != "") {
           _selectedSortOrder2 =
-              _dropdownMenuSortOrder[int.parse(customSetting!.sortOrder2!)].value!;
+              _dropdownMenuSortOrder[int.parse(customSetting!.sortOrder2!)]
+                  .value!;
           globals.sortField2 = int.parse(
               customSetting!.sortOrder2!); //convert it to session variables
         }
         if (customSetting!.sortField3 != "") {
           _selectedSortField3 =
-              _dropdownMenuItemsSort[int.parse(customSetting!.sortField3!)].value!;
+              _dropdownMenuItemsSort[int.parse(customSetting!.sortField3!)]
+                  .value!;
           globals.sortField3 = int.parse(customSetting!.sortField3!);
         }
         if (customSetting!.sortOrder3 != "") {
           _selectedSortOrder3 =
-              _dropdownMenuSortOrder[int.parse(customSetting!.sortOrder3!)].value!;
+              _dropdownMenuSortOrder[int.parse(customSetting!.sortOrder3!)]
+                  .value!;
           globals.sortField3 = int.parse(
               customSetting!.sortOrder3!); //convert it to session variables
         }
@@ -1560,26 +1601,29 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
 //        }
         if (customSetting!.showSec1 != "") {
           _selectedShowSec1 =
-              _dropdownMenuItemsShow[int.parse(customSetting!.showSec1!)].value!;
+              _dropdownMenuItemsShow[int.parse(customSetting!.showSec1!)]
+                  .value!;
           globals.showSec1 = int.parse(customSetting!.showSec1!);
         }
         if (customSetting!.showSec2 != "") {
           _selectedShowSec2 =
-              _dropdownMenuItemsShow[int.parse(customSetting!.showSec2!)].value!;
+              _dropdownMenuItemsShow[int.parse(customSetting!.showSec2!)]
+                  .value!;
           globals.showSec2 = int.parse(customSetting!.showSec2!);
         }
         if (customSetting!.showSec3 != "") {
           _selectedShowSec3 =
-              _dropdownMenuItemsShow[int.parse(customSetting!.showSec3!)].value!;
+              _dropdownMenuItemsShow[int.parse(customSetting!.showSec3!)]
+                  .value!;
           globals.showSec3 = int.parse(customSetting!.showSec3!);
         }
-        if (customSetting!.filterIsStar == true) {
+        if (customSetting!.filterIsStar == 1) {
           _selectedFilterIsStar = _dropdownFilterIsStar[1].value!;
           globals.filterIsStar = 1;
         } else
           _selectedFilterIsStar = _dropdownFilterIsStar[0].value!;
       }
-      if (customSetting!.filterIsDone == true) {
+      if (customSetting!.filterIsDone == 1) {
         _selectedFilterIsDone = _dropdownFilterIsDone[1].value!;
         globals.filterIsDone = 1;
       } else
@@ -1588,7 +1632,8 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
 
     if (customSetting!.filterDateDue != "") {
       _selectedFilterDateDue =
-          _dropdownFilterDateDue[int.parse(customSetting!.filterDateDue!)].value!;
+          _dropdownFilterDateDue[int.parse(customSetting!.filterDateDue!)]
+              .value!;
       globals.filterDateDue = int.parse(customSetting!.filterDateDue!);
     }
     ////////////////////////////

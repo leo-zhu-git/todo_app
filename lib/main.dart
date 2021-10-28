@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
       title: 'Todo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.brown,
+        primarySwatch: Colors.teal,
       ),
       
       // rt testing notification 9.23

@@ -1,7 +1,10 @@
 import 'dart:ui';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:todo_app/model/category.dart';
 import 'package:todo_app/model/customDropdownItem.dart';
+import 'package:todo_app/model/priority.dart';
 import 'package:todo_app/model/taskclass.dart';
 import 'package:todo_app/screens/notificationPlugin.dart';
 import 'package:todo_app/util/dbhelper.dart';
@@ -14,8 +17,8 @@ DbHelper dbHelper = DbHelper();
 DateTime currentDate = DateTime.now();
 String formattedDate = DateFormat('yyyymmdd').format(currentDate);
 String _searchText = "";
-TextStyle _textStyleControls =
-    TextStyle(fontSize: 14.0, color: Colors.black, fontWeight: FontWeight.w600);
+TextStyle _textStyleControls = TextStyle(
+    fontSize: 18.0, color: Colors.black87, fontWeight: FontWeight.w600);
 
 final List<String> choices = const <String>[
   'Save Task & Back',
@@ -48,8 +51,10 @@ class TaskDetailState extends State //<TaskDetail>
   var _todoNoteController = TextEditingController();
   var _todoDateController = TextEditingController();
   var _todoTimeController = TextEditingController();
-//  var _todoStatusController = TextEditingController();
-//  var _todoPriorityController = TextEditingController();
+  var _categoryController = TextEditingController();
+  var _statusController = TextEditingController();
+  var _priorityController = TextEditingController();
+  var _tag1Controller = TextEditingController();
   var _selectedIsStar;
   var _selectedStatus;
   var _selectedPriority;
@@ -74,6 +79,8 @@ class TaskDetailState extends State //<TaskDetail>
 
 //  String formattedDate = '';
 
+  int index = 0;
+
   @override
   void initState() {
     super.initState();
@@ -91,7 +98,15 @@ class TaskDetailState extends State //<TaskDetail>
         .setListenerForLowerVersions(onNotificationInLowerVersions);
     notificationPlugin.setOnNotificationClick(onNotificationClick);
     _initFields();
+
+//    scrollController = FixedExtentScrollController(initialItem: index);
   }
+
+//  @override
+//  void dispose() {
+//    scrollController.dispose();
+//    super.dispose();
+//  }
 
   onNotificationInLowerVersions(ReceivedNotification receivedNotification) {}
 
@@ -109,18 +124,29 @@ class TaskDetailState extends State //<TaskDetail>
     ;
     if (task.timeDue != "") {
       _todoTimeController.text = task.timeDue!;
-       _savedTime = task.timeDue!;
+      _savedTime = task.timeDue!;
       _timeDue = timeConvert(_savedTime!);
     } else {}
     ;
     print(_todoTimeController.text);
     task.category != ""
-        ? _selectedCategory = task.category
+        ? {
+            _categoryController.text = task.categoryText!,
+            _selectedCategory = task.category,
+          }
         : _selectedCategory = "1";
-    task.status != "" ? _selectedStatus = task.status : _selectedStatus = null;
+    task.status != ""
+        ? {
+            _statusController.text = task.statusText!,
+            _selectedStatus = task.status,
+          }
+        : _selectedCategory = "";
     task.priority != ""
-        ? _selectedPriority = task.priority
-        : _selectedPriority = null;
+        ? {
+            _priorityController.text = task.priorityText!,
+            _selectedPriority = task.priority,
+          }
+        : _selectedCategory = "";
     task.action1 != ""
         ? _selectedAction1 = task.action1
         : _selectedAction1 = null;
@@ -131,6 +157,12 @@ class TaskDetailState extends State //<TaskDetail>
         ? _selectedLocation1 = task.location1
         : _selectedLocation1 = null;
     task.tag1 != "" ? _selectedTag1 = task.tag1 : _selectedTag1 = null;
+    task.tag1 != ""
+        ? {
+            _tag1Controller.text = task.tag1Text!,
+            _selectedTag1 = task.tag1,
+          }
+        : _selectedCategory = "";
     task.goal1 != "" ? _selectedGoal1 = task.goal1 : _selectedGoal1 = null;
   }
 
@@ -139,10 +171,10 @@ class TaskDetailState extends State //<TaskDetail>
     var categories = await helper.getCategories();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
-//    cus.id = null;
+    cus.id = null;
     cus.name =
         "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
-    cus.name = "-- Select Category --                                         ";
+    cus.name = "-- All Categories --";
     _categories.add(cus);
     categories.forEach((category) {
       setState(() {
@@ -169,7 +201,7 @@ class TaskDetailState extends State //<TaskDetail>
     cus.name =
         "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
     cus.name =
-        "-- Select Status --                                              ";
+        "-- Select Status --";
     _statuses.add(cus);
     statuses.forEach((status) {
       setState(() {
@@ -196,7 +228,7 @@ class TaskDetailState extends State //<TaskDetail>
     cus.name =
         "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
     cus.name =
-        "-- Select Priority --                                            ";
+        "-- Select Priority --";
     _priorities.add(cus);
     priorities.forEach((priority) {
       setState(() {
@@ -249,7 +281,7 @@ class TaskDetailState extends State //<TaskDetail>
     cus.name =
         "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
     cus.name =
-        "-- Select Context --                                             ";
+        "-- Select Context --";
     _context1s.add(cus);
     context1s.forEach((context1) {
       setState(() {
@@ -276,7 +308,7 @@ class TaskDetailState extends State //<TaskDetail>
     cus.name =
         "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
     cus.name =
-        "-- Select Location --                                           ";
+        "-- Select Location --";
     _location1s.add(cus);
     location1s.forEach((location1) {
       setState(() {
@@ -303,7 +335,7 @@ class TaskDetailState extends State //<TaskDetail>
     cus.name =
         "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
     cus.name =
-        "-- Select Tag --                                                    ";
+        "-- Select Tag --";
     _tag1s.add(cus);
     tag1s.forEach((tag1) {
       setState(() {
@@ -350,6 +382,44 @@ class TaskDetailState extends State //<TaskDetail>
 //##########################################end of Dropdown #################################################################
 
   DateTime? _dateDue;
+  void _showCupertinoDatePicker(ctx) {
+    // showCupertinoModalPopup is a built-in function of the cupertino library
+    showCupertinoModalPopup(
+        context: ctx,
+        builder: (_) => Container(
+              height: 500,
+              color: Color.fromARGB(255, 255, 255, 255),
+              child: Column(
+                children: [
+                  Container(
+                    height: 400,
+                    child: CupertinoDatePicker(
+                        initialDateTime:
+                            (_dateDue == null) ? DateTime.now() : _dateDue,
+                        mode: CupertinoDatePickerMode.date,
+                        onDateTimeChanged: (val) {
+                          setState(() {
+                            _dateDue = val;
+                            final DateFormat formatter =
+                                DateFormat('yyyy-MM-dd');
+                            final String formatted =
+                                formatter.format(_dateDue!);
+                            _todoDateController.text =
+                                formatter.format(_dateDue!);
+                          });
+                        }),
+                  ),
+
+                  // Close the modal
+                  CupertinoButton(
+                    child: Text('OK'),
+                    onPressed: () => Navigator.of(ctx).pop(),
+                  )
+                ],
+              ),
+            ));
+  }
+
   _selectedTodoDate(BuildContext context) async {
     var pickedDate = await showDatePicker(
         context: context,
@@ -375,7 +445,7 @@ class TaskDetailState extends State //<TaskDetail>
   Future<void> _openTimePicker(BuildContext context) async {
     final pickedTime = await showTimePicker(
       context: context,
-      initialTime: _todoTimeController == null ? TimeOfDay.now() : _timeDue!,
+      initialTime: (_timeDue == null) ? TimeOfDay.now() : _timeDue!,
     );
 
     if (pickedTime != null && pickedTime != _savedTime) {
@@ -385,6 +455,78 @@ class TaskDetailState extends State //<TaskDetail>
         _todoTimeController.text = _pickedTime!;
       });
     }
+  }
+
+//    void _showCupertinoPicker(ctx) {
+//          itemExtent: 64,
+//          diameterRatio: 0.7,
+//         looping: true,
+//          onSelectedItemChanged: (index) => setState(() => this.index = index),
+//          // selectionOverlay: Container(),
+//          selectionOverlay: CupertinoPickerDefaultSelectionOverlay(
+//            background: Colors.pink.withOpacity(0.12),
+//          ),
+//          children: Utils.modelBuilder<String>(
+//            values,
+//            (index, value) {
+//              final isSelected = this.index == index;
+//              final color = isSelected ? Colors.pink : Colors.black;
+//
+//              return Center(
+//                child: Text(
+//                  value,
+//                  style: TextStyle(color: color, fontSize: 24),
+//                ),
+//              );
+//            }}
+
+  void _showCupertinoDateTimePicker(ctx) {
+    // showCupertinoModalPopup is a built-in function of the cupertino library
+    showCupertinoModalPopup(
+        context: ctx,
+        builder: (_) => Container(
+              height: 500,
+              color: Color.fromARGB(255, 255, 255, 255),
+              child: Column(
+                children: [
+                  Container(
+                    height: 400,
+                    child: CupertinoDatePicker(
+                        initialDateTime: (_dateDue == null)
+                            ? DateTime.now()
+                            : _dateDue!.add(Duration(
+                                hours: (_timeDue == null)
+                                    ? DateTime.now().hour
+                                    : _timeDue!.hour,
+                                minutes: (_timeDue == null)
+                                    ? DateTime.now().minute
+                                    : _timeDue!.minute)),
+                        mode: CupertinoDatePickerMode.dateAndTime,
+                        onDateTimeChanged: (val) {
+                          setState(() {
+                            _dateDue = val;
+                            final DateFormat formatter =
+                                DateFormat('yyyy-MM-dd');
+                            final String formatted =
+                                formatter.format(_dateDue!);
+                            _todoDateController.text =
+                                formatter.format(_dateDue!);
+
+                            _timeDue = TimeOfDay.fromDateTime(val);
+                            _todoTimeController.text =
+                                _timeDue!.format(context);
+                          });
+                        }),
+                  ),
+
+                  // Close the modal
+                  CupertinoButton(
+                    child: Text('OK'),
+                    onPressed: () => Navigator.of(ctx).pop(),
+                  )
+                ],
+              ),
+            ));
   }
 
   TimeOfDay timeConvert(String s) {
@@ -406,6 +548,138 @@ class TaskDetailState extends State //<TaskDetail>
     return _time;
   }
 
+  Widget buildCategoryPicker() => SizedBox(
+        height: 400,
+        child: StatefulBuilder(
+          builder: (context, setState) => CupertinoPicker(
+              //            scrollController: scrollController,
+              backgroundColor: Colors.teal[50],
+              looping: true,
+              itemExtent: 64,
+              selectionOverlay: CupertinoPickerDefaultSelectionOverlay(
+                background: CupertinoColors.activeGreen.withOpacity(0.2),
+              ),
+              children: List.generate(_categories.length, (index) {
+                final isSelected = this.index == index;
+                final category = _categories[index];
+                final color = isSelected ? Colors.teal[800] : Colors.black87;
+                return Center(
+                  child: Text(
+                    category.name!,
+                    style: TextStyle(color: color, fontSize: 32),
+                  ),
+                );
+              }),
+              onSelectedItemChanged: (index) => {
+                    setState(() {
+                      _selectedCategory = index;
+                      _categoryController.text = _categories[index].name!;
+                      print(index);
+                      print(_categories[index].name);
+                    }),
+                  }),
+        ),
+      );
+
+  Widget buildStatusPicker() => SizedBox(
+        height: 400,
+        child: StatefulBuilder(
+          builder: (context, setState) => CupertinoPicker(
+              //            scrollController: scrollController,
+              backgroundColor: Colors.teal[50],
+              looping: true,
+              itemExtent: 64,
+              selectionOverlay: CupertinoPickerDefaultSelectionOverlay(
+                background: CupertinoColors.activeGreen.withOpacity(0.2),
+              ),
+              children: List.generate(_statuses.length, (index) {
+                final isSelected = this.index == index;
+                final status = _statuses[index];
+                final color = isSelected ? Colors.teal[800] : Colors.black87;
+                return Center(
+                  child: Text(
+                    status.name!,
+                    style: TextStyle(color: color, fontSize: 32),
+                  ),
+                );
+              }),
+              onSelectedItemChanged: (index) => {
+                    setState(() {
+                      _selectedStatus = index;
+                      _statusController.text = _statuses[index].name!;
+                      print(index);
+                      print(_statuses[index].name);
+                    }),
+                  }),
+        ),
+      );
+
+  Widget buildPriorityPicker() => SizedBox(
+        height: 400,
+        child: StatefulBuilder(
+          builder: (context, setState) => CupertinoPicker(
+              //            scrollController: scrollController,
+              backgroundColor: Colors.teal[50],
+              looping: true,
+              itemExtent: 64,
+              selectionOverlay: CupertinoPickerDefaultSelectionOverlay(
+                background: CupertinoColors.activeGreen.withOpacity(0.2),
+              ),
+              children: List.generate(_priorities.length, (index) {
+                final isSelected = this.index == index;
+                final priority = _priorities[index];
+                final color = isSelected ? Colors.teal[800] : Colors.black87;
+                return Center(
+                  child: Text(
+                    priority.name!,
+                    style: TextStyle(color: color, fontSize: 32),
+                  ),
+                );
+              }),
+              onSelectedItemChanged: (index) => {
+                    setState(() {
+                      _selectedPriority = index;
+                      _priorityController.text = _priorities[index].name!;
+                      print(index);
+                      print(_priorities[index].name);
+                    }),
+                  }),
+        ),
+      );
+
+Widget buildTag1Picker() => SizedBox(
+        height: 400,
+        child: StatefulBuilder(
+          builder: (context, setState) => CupertinoPicker(
+              //            scrollController: scrollController,
+              backgroundColor: Colors.teal[50],
+              looping: true,
+              itemExtent: 64,
+              selectionOverlay: CupertinoPickerDefaultSelectionOverlay(
+                background: CupertinoColors.activeGreen.withOpacity(0.2),
+              ),
+              children: List.generate(_tag1s.length, (index) {
+                final isSelected = this.index == index;
+                final tag1s = _tag1s[index];
+                final color = isSelected ? Colors.teal[800] : Colors.black87;
+                return Center(
+                  child: Text(
+                    tag1s.name!,
+                    style: TextStyle(color: color, fontSize: 32),
+                  ),
+                );
+              }),
+              onSelectedItemChanged: (index) => {
+                    setState(() {
+                      _selectedTag1 = index;
+                      _tag1Controller.text = _tag1s[index].name!;
+                      print(index);
+                      print(_tag1s[index].name);
+                    }),
+                  }),
+        ),
+      );
+
 //##################End of Drop Down Items Load from DB #################################################################
 
 //  _showSuccessSnackBar(message) {
@@ -421,7 +695,17 @@ class TaskDetailState extends State //<TaskDetail>
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.teal[50],
       appBar: AppBar(
-        backgroundColor: Colors.brown[900],
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.teal, Colors.black38],
+              begin: Alignment.bottomRight,
+              end: Alignment.topLeft,
+            ),
+          ),
+        ),
+        backgroundColor: Colors.teal[800],
 //        backgroundColor: Colors.cyanAccent[700],
         automaticallyImplyLeading: false,
         title: Center(child: Text('Todo Detail')),
@@ -454,186 +738,50 @@ class TaskDetailState extends State //<TaskDetail>
 ///////////////////////////
 //  WHAT - NOTE
 ///////////////////////////
-            Container(
-              margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
-              decoration: new BoxDecoration(
-                color: Colors.yellow[200],
-              ),
-              child: TextField(
-                style: _textStyleControls,
-                controller: _todoNoteController,
-                onChanged: (value) {
-                  task.note = value;
-                },
-                minLines: 4,
-                maxLines: 16,
-                decoration: InputDecoration(
-                  labelText: ' Note',
-                  hintText: ' Write Todo Note',
-                ),
-              ),
-            ),
+//            Container(
+//              margin:
+//                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
+//              decoration: new BoxDecoration(
+//                color: Colors.yellow[200],
+//              ),
+//              child: TextField(
+//                style: _textStyleControls,
+//                controller: _todoNoteController,
+//                onChanged: (value) {
+//                  task.note = value;
+//                },
+//                minLines: 4,
+//                maxLines: 8,
+//                decoration: InputDecoration(
+//                  labelText: ' Note',
+//                  hintText: ' Write Todo Note',
+//                ),
+//              ),
+//            ),
+
 ///////////////////////////
 //  WHEN - DATE DUE
 ///////////////////////////
             Container(
               margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
               decoration: BoxDecoration(
                 shape: BoxShape.rectangle,
                 color: Colors.blue[100],
               ),
-              child: Row(
-                children: [
-//                      Text("Due: " + task.dateDue),
-                  Text("Due: " + _todoDateController.text),
-//                  TextField(
-//                    controller: _todoDateController,
-//                    style: _textStyleControls,
-//                    decoration: InputDecoration(
-//                      labelText: ' Due Date',
-//                      hintText: ' Pick a Date',
-//                      prefixIcon: InkWell(
-//                        onTap: () {
-//                          _selectedTodoDate(context);
-//                        },
-//                        child: Icon(Icons.calendar_today),
-//                      ),
-//                    ),
-//                  ),
-                  SizedBox(width: 5),
-                  Ink(
-                    decoration: const ShapeDecoration(
-                        color: Colors.red, shape: CircleBorder()),
-                    child: IconButton(
-                        icon: const Icon(Icons.clear, color: Colors.purple),
-                        tooltip: 'Clear',
-                        onPressed: () {
-                          setState(() {
-                            _dateDue = null!;
-                            _todoDateController.text = '';
-                          });
-                        }),
+              child: TextField(
+                controller: _todoDateController,
+                style: _textStyleControls,
+                decoration: InputDecoration(
+                  labelText: ' Due Date',
+                  hintText: ' Pick a Date',
+                  prefixIcon: InkWell(
+                    onTap: () {
+                      _showCupertinoDatePicker(context);
+                    },
+                    child: Icon(Icons.calendar_today),
                   ),
-
-//                  ElevatedButton(
-//                      onPressed: () {
-//                        _dateDue = null;
-//                        final DateFormat formatter = DateFormat('yyyy-MM-dd');
-//                        final String formatted = formatter.format(_dateDue);
-//                        _todoDateController.text = formatter.format(_dateDue);
-//                        _todoDateController.text = '';
-//                      },
-//                      style: ElevatedButton.styleFrom(
-//                        primary: Colors.grey[100],
-//                      ),
-//                     child: Text(
-//                        'None',
-//                        style: TextStyle(color: Colors.brown[900]),
-//                     )),
-//                  SizedBox(width: 5),
-                  Ink(
-                    decoration: const ShapeDecoration(
-                        color: Colors.red, shape: CircleBorder()),
-                    child: IconButton(
-                        icon: const Icon(Icons.today, color: Colors.purple),
-                        tooltip: 'Today',
-                        onPressed: () {
-                          setState(() {
-                            _dateDue = DateTime.now();
-                            final DateFormat formatter =
-                                DateFormat('yyyy-MM-dd');
-                            final String formatted = formatter.format(_dateDue!);
-                            _todoDateController.text =
-                                formatter.format(_dateDue!);
-                          });
-                        }),
-                  ),
-//                  ElevatedButton(
-//                      onPressed: () {
-//                        setState(() {
-//                          _dateDue = DateTime.now();
-//                          final DateFormat formatter = DateFormat('yyyy-MM-dd');
-//                          final String formatted = formatter.format(_dateDue);
-//                          _todoDateController.text = formatter.format(_dateDue);
-//                        });
-//                      },
-//                      style: ElevatedButton.styleFrom(
-//                        primary: Colors.grey[100],
-//                      ),
-//                      child: Text(
-//                        'Today',
-//                        style: TextStyle(color: Colors.brown[900]),
-//                      )),
-//                  SizedBox(width: 5),
-                  Ink(
-                    decoration: const ShapeDecoration(
-                        color: Colors.red, shape: CircleBorder()),
-                    child: IconButton(
-                        icon: const Icon(Icons.exposure_plus_1,
-                            color: Colors.purple),
-                        tooltip: 'Tomo',
-                        onPressed: () {
-                          setState(() {
-                            _dateDue = DateTime.now();
-                            _dateDue = _dateDue!.add(const Duration(days: 1));
-                            final DateFormat formatter =
-                                DateFormat('yyyy-MM-dd');
-                            final String formatted = formatter.format(_dateDue!);
-                            _todoDateController.text =
-                                formatter.format(_dateDue!);
-                          });
-                        }),
-                  ),
-//                  ElevatedButton(
-//                      onPressed: () {
-//                        setState(() {
-//                          _dateDue = DateTime.now();
-//                          _dateDue = _dateDue.add(const Duration(days: 1));
-//                          final DateFormat formatter = DateFormat('yyyy-MM-dd');
-//                          final String formatted = formatter.format(_dateDue);
-//                          _todoDateController.text = formatter.format(_dateDue);
-//                        });
-//                      },
-//                      style: ElevatedButton.styleFrom(
-//                        primary: Colors.grey[100],
-//                      ),
-//                      child: Text(
-//                        'Tomo',
-//                        style: TextStyle(color: Colors.brown[900]),
-//                      )),
-//                  SizedBox(width: 5),
-                  Ink(
-                    decoration: const ShapeDecoration(
-                        color: Colors.red, shape: CircleBorder()),
-                    child: IconButton(
-                        icon:
-                            const Icon(Icons.more_horiz, color: Colors.purple),
-                        tooltip: 'More',
-                        onPressed: () {
-                          if (_dateDue == null) {
-                            _todoDateController.text = task.dateDue!;
-                            _dateDue =
-                                DateFormat('yyyy-M-d').parse(task.dateDue!);
-                          }
-                          ;
-                          _selectedTodoDate(context);
-                        }),
-                  ),
-//                  ElevatedButton(
-//                      onPressed: () async {
-//                        _selectedTodoDate(context);
-//                      },
-//                      style: ElevatedButton.styleFrom(
-//                        primary: Colors.grey[100],
-//                      ),
-//                      child: Text(
-//                        'More...',
-//                        style: TextStyle(color: Colors.brown[900]),
-//                      )),
-                  SizedBox(width: 5),
-                ],
+                ),
               ),
             ),
 
@@ -642,358 +790,439 @@ class TaskDetailState extends State //<TaskDetail>
 ///////////////////////////
             Container(
               margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
               decoration: BoxDecoration(
                 shape: BoxShape.rectangle,
                 color: Colors.blue[100],
               ),
-              child: Row(
-                children: [
-                  Text("Due: " + _todoTimeController.text),
-                  SizedBox(width: 5),
-                  Ink(
-                    decoration: const ShapeDecoration(
-                        color: Colors.red, shape: CircleBorder()),
-                    child: IconButton(
-                        icon: const Icon(Icons.clear, color: Colors.purple),
-                        tooltip: 'Clear',
-                        onPressed: () {
-                          setState(() {
-                            _timeDue = null!;
-                            _todoTimeController.text = "";
-                          });
-                        }),
+              child: TextField(
+                controller: _todoTimeController,
+                style: _textStyleControls,
+                decoration: InputDecoration(
+                  labelText: ' Due Time',
+                  hintText: ' Pick a Time',
+                  prefixIcon: InkWell(
+                    onTap: () {
+                      _showCupertinoDateTimePicker(context);
+                    },
+                    child: Icon(Icons.access_time),
                   ),
-                  Ink(
-                    decoration: const ShapeDecoration(
-                        color: Colors.red, shape: CircleBorder()),
-                    child: IconButton(
-                        icon: const Icon(Icons.exposure_plus_1,
-                            color: Colors.purple),
-                        tooltip: '+1h',
-                        onPressed: () {
-                          setState(() {
-                            _timeDue = TimeOfDay.fromDateTime(
-                                DateTime.now().add(Duration(hours: 1)));
-                            _todoTimeController.text = _timeDue.toString();
-                          });
-                        }),
-                  ),
-                  Ink(
-                    decoration: const ShapeDecoration(
-                        color: Colors.red, shape: CircleBorder()),
-                    child: IconButton(
-                        icon: const Icon(Icons.exposure_plus_2,
-                            color: Colors.purple),
-                        tooltip: '+2h',
-                        onPressed: () {
-                          setState(() {
-                            _timeDue = TimeOfDay.fromDateTime(
-                                DateTime.now().add(Duration(hours: 2)));
-                            _todoTimeController.text = _timeDue.toString();
-                          });
-                        }),
-                  ),
-                  Ink(
-                    decoration: const ShapeDecoration(
-                        color: Colors.red, shape: CircleBorder()),
-                    child: IconButton(
-                        icon:
-                            const Icon(Icons.more_horiz, color: Colors.purple),
-                        tooltip: 'More',
-                        onPressed: () {
-//                          if (_timeDue == null) {
-//                            _todoTimeController.text = _timeDue.toString();
-//                          }
-//                          ;
-                          _openTimePicker(context);
-                        }),
-                  ),
-                  SizedBox(width: 5),
-                ],
+                ),
               ),
             ),
+
 //            Container(
 //              margin:
 //                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
 //              decoration: BoxDecoration(
-//                shape: BoxShape.rectangle,
-//                color: Colors.blue[100],
-//              ),
-//              child: TextField(
-//                controller: _todoTimeController,
-//                style: _textStyleControls,
-//                decoration: InputDecoration(
-//                  labelText: ' Due Time',
-//                  hintText: ' Pick a Time',
-//                  prefixIcon: InkWell(
-//                    onTap: () {
-//                      _openTimePicker(context);
-//                    },
-//                    child: Icon(Icons.access_time),
-//                  ),
-//                ),
+//                  shape: BoxShape.rectangle, color: Colors.blue[100]),
+//              child: Row(
+//                crossAxisAlignment: CrossAxisAlignment.center,
+//                children: [
+//                  DropdownButton<String>(
+//                      items: _categories.map((CustomDropdownItem value) {
+//                        return DropdownMenuItem<String>(
+//                            value: value.id,
+//                            child: Text(
+//                              value.name!,
+//                              overflow: TextOverflow.ellipsis,
+//                            ));
+//                      }).toList(),
+//                      style: _textStyleControls,
+//                      value: _selectedCategory,
+//                      onChanged: (newValue) {
+//                        setState(() {
+//                          _selectedCategory = newValue;
+//                          task.category = newValue!;
+//                        });
+//                      }),
+//                ],
 //              ),
 //            ),
 
 ///////////////////////////
 //  CATEGORY
 ///////////////////////////
-
             Container(
               margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
               decoration: BoxDecoration(
-                  shape: BoxShape.rectangle, color: Colors.blue[100]),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  DropdownButton<String>(
-                      items: _categories.map((CustomDropdownItem value) {
-                        return DropdownMenuItem<String>(
-                            value: value.id,
-                            child: Text(
-                              value.name!,
-                              overflow: TextOverflow.ellipsis,
-                            ));
-                      }).toList(),
-                      style: _textStyleControls,
-                      value: _selectedCategory,
-                      onChanged: (newValue) {
-                        setState(() {
-                          _selectedCategory = newValue;
-                          task.category = newValue!;
-                        });
-                      }),
-                ],
+                shape: BoxShape.rectangle,
+                color: Colors.blue[100],
+              ),
+              child: TextField(
+                controller: _categoryController,
+                readOnly: true,
+                style: _textStyleControls,
+                decoration: InputDecoration(
+                  labelText: ' Category',
+                  hintText: ' Pick a Category',
+                  prefixIcon: InkWell(
+                      onTap: () {
+//                      scrollController.dispose();
+//                      scrollController = FixedExtentScrollController(
+//                          initialItem: (_selectedCategory != null)
+//                              ? _selectedCategory
+//                              : index);
+                        showCupertinoModalPopup(
+                            context: context,
+                            builder: (context) => CupertinoActionSheet(
+                                actions: [buildCategoryPicker()],
+                                cancelButton: CupertinoActionSheetAction(
+                                  child: Text('Cancel'),
+                                  onPressed: () => Navigator.pop(context),
+                                )));
+                      },
+                      child: Icon(Icons.category_outlined)),
+                ),
               ),
             ),
 
 ///////////////////////////
 //  STATUS
 ///////////////////////////
-
             Container(
               margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
               decoration: BoxDecoration(
-                  shape: BoxShape.rectangle, color: Colors.blue[100]),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  DropdownButton<String>(
-                      items: _statuses.map((CustomDropdownItem value) {
-                        return DropdownMenuItem<String>(
-                            value: value.id,
-                            child: Text(
-                              value.name!,
-                              overflow: TextOverflow.ellipsis,
-                            ));
-                      }).toList(),
-                      style: _textStyleControls,
-                      value: _selectedStatus,
-                      onChanged: (newValue) {
-                        setState(() {
-                          _selectedStatus = newValue;
-                          task.status = newValue!;
-                        });
-                      }),
-                ],
+                shape: BoxShape.rectangle,
+                color: Colors.blue[100],
+              ),
+              child: TextField(
+                controller: _statusController,
+                readOnly: true,
+                style: _textStyleControls,
+                decoration: InputDecoration(
+                  labelText: ' Status',
+                  hintText: ' Pick a Status',
+                  prefixIcon: InkWell(
+                    onTap: () {
+//                      scrollController.dispose();
+//                      scrollController = FixedExtentScrollController(
+//                          initialItem: (_selectedCategory != null)
+//                              ? _selectedCategory
+//                              : index);
+                      showCupertinoModalPopup(
+                          context: context,
+                          builder: (context) => CupertinoActionSheet(
+                              actions: [buildStatusPicker()],
+                              cancelButton: CupertinoActionSheetAction(
+                                child: Text('Cancel'),
+                                onPressed: () => Navigator.pop(context),
+                              )));
+                    },
+                    child: Icon(Icons.next_plan_outlined),
+                  ),
+                ),
               ),
             ),
+
+//            Container(
+//              margin:
+//                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
+//              decoration: BoxDecoration(
+//                  shape: BoxShape.rectangle, color: Colors.blue[100]),
+//              child: Row(
+//                crossAxisAlignment: CrossAxisAlignment.center,
+//                children: [
+//                  DropdownButton<String>(
+//                      items: _statuses.map((CustomDropdownItem value) {
+//                        return DropdownMenuItem<String>(
+//                            value: value.id,
+//                            child: Text(
+//                              value.name!,
+//                              overflow: TextOverflow.ellipsis,
+//                            ));
+//                      }).toList(),
+//                      style: _textStyleControls,
+//                      value: _selectedStatus,
+//                      onChanged: (newValue) {
+//                        setState(() {
+//                          _selectedStatus = newValue;
+//                          task.status = newValue!;
+//                        });
+//                      }),
+//                ],
+//              ),
+//            ),
 
 ///////////////////////////
 //  PRIORITY
 ///////////////////////////
-
             Container(
               margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
               decoration: BoxDecoration(
-                  shape: BoxShape.rectangle, color: Colors.blue[100]),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  DropdownButton<String>(
-                      items: _priorities.map((CustomDropdownItem value) {
-                        return DropdownMenuItem<String>(
-                            value: value.id,
-                            child: Text(
-                              value.name!,
-                              overflow: TextOverflow.ellipsis,
-                            ));
-                      }).toList(),
-                      style: _textStyleControls,
-                      value: _selectedPriority,
-                      onChanged: (newValue) {
-                        setState(() {
-                          _selectedPriority = newValue;
-                          task.priority = newValue!;
-                        });
-                      }),
-                ],
+                shape: BoxShape.rectangle,
+                color: Colors.blue[100],
+              ),
+              child: TextField(
+                controller: _priorityController,
+                readOnly: true,
+                style: _textStyleControls,
+                decoration: InputDecoration(
+                  labelText: ' Priority',
+                  hintText: ' Pick a Priority',
+                  prefixIcon: InkWell(
+                    onTap: () {
+//                      scrollController.dispose();
+//                      scrollController = FixedExtentScrollController(
+//                          initialItem: (_selectedCategory != null)
+//                              ? _selectedCategory
+//                              : index);
+                      showCupertinoModalPopup(
+                          context: context,
+                          builder: (context) => CupertinoActionSheet(
+                              actions: [buildPriorityPicker()],
+                              cancelButton: CupertinoActionSheetAction(
+                                child: Text('Cancel'),
+                                onPressed: () => Navigator.pop(context),
+                              )));
+                    },
+                    child: Icon(Icons.low_priority),
+                  ),
+                ),
               ),
             ),
+
+//            Container(
+//              margin:
+//                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
+//              decoration: BoxDecoration(
+//                  shape: BoxShape.rectangle, color: Colors.blue[100]),
+//              child: Row(
+//                crossAxisAlignment: CrossAxisAlignment.center,
+//                children: [
+//                  DropdownButton<String>(
+//                      items: _priorities.map((CustomDropdownItem value) {
+//                        return DropdownMenuItem<String>(
+//                            value: value.id,
+//                            child: Text(
+//                              value.name!,
+//                              overflow: TextOverflow.ellipsis,
+//                            ));
+//                      }).toList(),
+//                      style: _textStyleControls,
+//                      value: _selectedPriority,
+//                      onChanged: (newValue) {
+//                        setState(() {
+//                          _selectedPriority = newValue;
+//                          task.priority = newValue!;
+//                        });
+//                      }),
+//                ],
+//              ),
+//            ),
 
 ///////////////////////////
 //  ACTION
 ///////////////////////////
 
-            Container(
-              margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
-              decoration: BoxDecoration(
-                  shape: BoxShape.rectangle, color: Colors.blue[100]),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  DropdownButton<String>(
-                      items: _action1s.map((CustomDropdownItem value) {
-                        return DropdownMenuItem<String>(
-                            value: value.id,
-                            child: Text(
-                              value.name!,
-                              overflow: TextOverflow.ellipsis,
-                            ));
-                      }).toList(),
-                      style: _textStyleControls,
-                      value: _selectedAction1,
-                      onChanged: (newValue) {
-                        setState(() {
-                          _selectedAction1 = newValue;
-                          task.action1 = newValue!;
-                        });
-                      }),
-                ],
-              ),
-            ),
+//            Container(
+//              margin:
+//                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
+//              decoration: BoxDecoration(
+//                  shape: BoxShape.rectangle, color: Colors.blue[100]),
+//              child: Row(
+//                crossAxisAlignment: CrossAxisAlignment.center,
+//                children: [
+//                  DropdownButton<String>(
+//                      items: _action1s.map((CustomDropdownItem value) {
+//                        return DropdownMenuItem<String>(
+//                            value: value.id,
+//                            child: Text(
+//                              value.name!,
+//                              overflow: TextOverflow.ellipsis,
+//                            ));
+//                      }).toList(),
+//                      style: _textStyleControls,
+//                      value: _selectedAction1,
+//                      onChanged: (newValue) {
+//                        setState(() {
+//                          _selectedAction1 = newValue;
+//                          task.action1 = newValue!;
+//                        });
+//                      }),
+//                ],
+//              ),
+//            ),
 
 ///////////////////////////
 //  CONTEXT
 ///////////////////////////
-            Container(
-              margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
-              decoration: BoxDecoration(
-                  shape: BoxShape.rectangle, color: Colors.blue[100]),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  DropdownButton<String>(
-                      items: _context1s.map((CustomDropdownItem value) {
-                        return DropdownMenuItem<String>(
-                            value: value.id,
-                            child: Text(
-                              value.name!,
-                              overflow: TextOverflow.ellipsis,
-                            ));
-                      }).toList(),
-                      style: _textStyleControls,
-                      value: _selectedContext1,
-                      onChanged: (newValue) {
-                        setState(() {
-                          _selectedContext1 = newValue;
-                          task.context1 = newValue!;
-                        });
-                      }),
-                ],
-              ),
-            ),
+//            Container(
+//              margin:
+//                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
+//              decoration: BoxDecoration(
+//                  shape: BoxShape.rectangle, color: Colors.blue[100]),
+//              child: Row(
+//                crossAxisAlignment: CrossAxisAlignment.center,
+//                children: [
+//                  DropdownButton<String>(
+//                      items: _context1s.map((CustomDropdownItem value) {
+//                        return DropdownMenuItem<String>(
+//                            value: value.id,
+//                            child: Text(
+//                              value.name!,
+//                              overflow: TextOverflow.ellipsis,
+//                            ));
+//                      }).toList(),
+//                      style: _textStyleControls,
+//                      value: _selectedContext1,
+//                      onChanged: (newValue) {
+//                        setState(() {
+//                          _selectedContext1 = newValue;
+//                          task.context1 = newValue!;
+//                        });
+//                      }),
+//                ],
+//              ),
+//            ),
 ///////////////////////////
 //  LOCATION
 ///////////////////////////
-            Container(
-              margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
-              decoration: BoxDecoration(
-                  shape: BoxShape.rectangle, color: Colors.blue[100]),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  DropdownButton<String>(
-                      items: _location1s.map((CustomDropdownItem value) {
-                        return DropdownMenuItem<String>(
-                            value: value.id,
-                            child: Text(
-                              value.name!,
-                              overflow: TextOverflow.ellipsis,
-                            ));
-                      }).toList(),
-                      style: _textStyleControls,
-                      value: _selectedLocation1,
-                      onChanged: (newValue) {
-                        setState(() {
-                          _selectedLocation1 = newValue;
-                          task.location1 = newValue!;
-                        });
-                      }),
-                ],
-              ),
-            ),
+//            Container(
+//              margin:
+//                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
+//              decoration: BoxDecoration(
+//                  shape: BoxShape.rectangle, color: Colors.blue[100]),
+//              child: Row(
+//                crossAxisAlignment: CrossAxisAlignment.center,
+//                children: [
+//                  DropdownButton<String>(
+//                      items: _location1s.map((CustomDropdownItem value) {
+//                        return DropdownMenuItem<String>(
+//                            value: value.id,
+//                            child: Text(
+//                              value.name!,
+//                              overflow: TextOverflow.ellipsis,
+//                            ));
+//                      }).toList(),
+//                      style: _textStyleControls,
+//                      value: _selectedLocation1,
+//                      onChanged: (newValue) {
+//                        setState(() {
+//                          _selectedLocation1 = newValue;
+//                          task.location1 = newValue!;
+//                        });
+//                      }),
+//                ],
+//              ),
+//            ),
 ///////////////////////////
 //  TAG
 ///////////////////////////
             Container(
               margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
               decoration: BoxDecoration(
-                  shape: BoxShape.rectangle, color: Colors.blue[100]),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  DropdownButton<String>(
-                      items: _tag1s.map((CustomDropdownItem value) {
-                        return DropdownMenuItem<String>(
-                            value: value.id,
-                            child: Text(
-                              value.name!,
-                              overflow: TextOverflow.ellipsis,
-                            ));
-                      }).toList(),
-                      style: _textStyleControls,
-                      value: _selectedTag1,
-                      onChanged: (newValue) {
-                        setState(() {
-                          _selectedTag1 = newValue;
-                          task.tag1 = newValue!;
-                        });
-                      }),
-                ],
+                shape: BoxShape.rectangle,
+                color: Colors.blue[100],
+              ),
+              child: TextField(
+                controller: _tag1Controller,
+                readOnly: true,
+                style: _textStyleControls,
+                decoration: InputDecoration(
+                  labelText: ' Tag',
+                  hintText: ' Pick a Tag',
+                  prefixIcon: InkWell(
+                    onTap: () {
+//                      scrollController.dispose();
+//                      scrollController = FixedExtentScrollController(
+//                          initialItem: (_selectedCategory != null)
+//                              ? _selectedCategory
+//                              : index);
+                      showCupertinoModalPopup(
+                          context: context,
+                          builder: (context) => CupertinoActionSheet(
+                              actions: [buildTag1Picker()],
+                              cancelButton: CupertinoActionSheetAction(
+                                child: Text('Cancel'),
+                                onPressed: () => Navigator.pop(context),
+                              )));
+                    },
+                    child: Icon(Icons.tag_outlined),
+                  ),
+                ),
               ),
             ),
+//            Container(
+//              margin:
+//                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
+//              decoration: BoxDecoration(
+//                  shape: BoxShape.rectangle, color: Colors.blue[100]),
+//              child: Row(
+//                crossAxisAlignment: CrossAxisAlignment.center,
+//                children: [
+//                 DropdownButton<String>(
+//                      items: _tag1s.map((CustomDropdownItem value) {
+//                        return DropdownMenuItem<String>(
+//                            value: value.id,
+//                            child: Text(
+//                              value.name!,
+//                              overflow: TextOverflow.ellipsis,
+//                            ));
+//                      }).toList(),
+//                      style: _textStyleControls,
+//                      value: _selectedTag1,
+//                      onChanged: (newValue) {
+//                        setState(() {
+//                          _selectedTag1 = newValue;
+//                          task.tag1 = newValue!;
+//                        });
+//                      }),
+//                ],
+//              ),
+//            ),
 
 ///////////////////////////
 //  GOAL
 ///////////////////////////
-            Container(
-              margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
-              decoration: BoxDecoration(
-                  shape: BoxShape.rectangle, color: Colors.blue[100]),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  DropdownButton<String>(
-                      items: _goal1s.map((CustomDropdownItem value) {
-                        return DropdownMenuItem<String>(
-                            value: value.id,
-                            child: Text(
-                              value.name!,
-                              overflow: TextOverflow.ellipsis,
-                            ));
-                      }).toList(),
-                      style: _textStyleControls,
-                      value: _selectedGoal1,
-                      onChanged: (newValue) {
-                        setState(() {
-                          _selectedGoal1 = newValue;
-                          task.goal1 = newValue!;
-                        });
-                      }),
-                ],
-              ),
-            ), //KK     // SizedBox(
-
+//            Container(
+//              margin:
+//                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
+//              decoration: BoxDecoration(
+//                  shape: BoxShape.rectangle, color: Colors.blue[100]),
+//              child: Row(
+//                crossAxisAlignment: CrossAxisAlignment.center,
+//                children: [
+//                  DropdownButton<String>(
+//                      items: _goal1s.map((CustomDropdownItem value) {
+//                        return DropdownMenuItem<String>(
+//                            value: value.id,
+//                            child: Text(
+//                              value.name!,
+//                              overflow: TextOverflow.ellipsis,
+//                            ));
+//                      }).toList(),
+//                      style: _textStyleControls,
+//                      value: _selectedGoal1,
+//                      onChanged: (newValue) {
+//                        setState(() {
+//                          _selectedGoal1 = newValue;
+//                          task.goal1 = newValue!;
+//                        });
+//                      }),
+//                ],
+//              ),
+//            ), //KK     // SizedBox(
+///////////////////////////
+//  GOAL
+///////////////////////////
+//            Container(
+//              child: CupertinoPicker(
+//                itemExtent: 50,
+//                onSelectedItemChanged: (int? i) {
+//                    print (i);
+//                },
+//                children: [
+//                  Text('option1'),
+//                  Text('option2'),
+//                  Text('option3'),
+//                ]
+//              )          ), //KK     // SizedBox
+//
             /// form - save or cancel
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -1007,22 +1236,43 @@ class TaskDetailState extends State //<TaskDetail>
                     ),
                     child: Text(
                       'Cancel',
-                      style: TextStyle(color: Colors.brown[900]),
+                      style: TextStyle(color: Colors.teal[800]),
                     )),
                 SizedBox(width: 5),
                 ElevatedButton(
                     onPressed: () async {
                       task.task = _todoTaskController.text;
                       task.note = _todoNoteController.text;
-                      task.status = _selectedStatus == null
-                          ? ""
-                          : _selectedStatus.toString();
-                      task.priority = _selectedPriority == null
-                          ? ""
-                          : _selectedPriority.toString();
-                      task.category = _selectedCategory == null
-                          ? "1"
-                          : _selectedCategory.toString();
+                      (_selectedStatus == null)
+                          ? {
+                              task.status = "1",
+                              task.statusText = "Inbox",
+                            }
+                          : {
+                              task.status = _selectedStatus.toString(),
+                              task.statusText =
+                                  _statusController.text,
+                            };
+                      (_selectedPriority == null)
+                          ? {
+                              task.priority = "",
+                              task.priorityText = "",
+                            }
+                          : {
+                              task.priority = _selectedPriority.toString(),
+                              task.priorityText =
+                                  _priorityController.text,
+                            };
+                      (_selectedCategory == null)
+                          ? {
+                              task.category = "1",
+                              task.categoryText = "Inbox",
+                            }
+                          : {
+                              task.category = _selectedCategory.toString(),
+                              task.categoryText =
+                                  _categoryController.text,
+                            };
                       task.action1 = _selectedAction1 == null
                           ? ""
                           : _selectedAction1.toString();
@@ -1031,6 +1281,16 @@ class TaskDetailState extends State //<TaskDetail>
                           : _selectedContext1.toString();
                       task.tag1 =
                           _selectedTag1 == null ? "" : _selectedTag1.toString();
+                      (_selectedTag1 == null)
+                          ? {
+                              task.tag1 = "",
+                              task.tag1Text = "",
+                            }
+                          : {
+                              task.tag1 = _selectedTag1.toString(),
+                              task.tag1Text =
+                                  _tag1Controller.text,
+                            };
                       task.goal1 = _selectedGoal1 == null
                           ? ""
                           : _selectedGoal1.toString();
@@ -1068,7 +1328,7 @@ class TaskDetailState extends State //<TaskDetail>
 
 //                      _showSuccessSnackBar(
 //                        Container(
-//                          color: Colors.tealAccent[100],
+//                          color: Colors.lAccent[100],
 //                          //KK height: 40,
 //                          child: Row(
 //                            mainAxisAlignment: MainAxisAlignment.center,
@@ -1085,12 +1345,12 @@ class TaskDetailState extends State //<TaskDetail>
 //                          ),
 //                        ),
 //                      );
-                      await Future.delayed(
-                          const Duration(milliseconds: 500), () {});
+//                      await Future.delayed(
+//                          const Duration(milliseconds: 500), () {});
                       Navigator.pop(context);
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.brown[900],
+                      primary: Colors.teal[800],
                     ),
                     child: Text(
                       'Save',

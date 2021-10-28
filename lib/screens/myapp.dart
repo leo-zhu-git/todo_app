@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         title: 'Tasks',
         theme: ThemeData(
           scaffoldBackgroundColor: Colors.amber[100],
-          primaryColor: Colors.brown[900],
+          primaryColor: Colors.teal[800],
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         home: MyHomePage(title: ''),

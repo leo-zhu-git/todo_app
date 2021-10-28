@@ -78,11 +78,11 @@ class _Action1sScreenState extends State<Action1sScreen> {
                   onPressed: () => Navigator.pop(context),
                   child: Text(
                     'Cancel',
-                    style: TextStyle(color: Colors.brown[900]),
+                    style: TextStyle(color: Colors.teal[800]),
                   )),
               ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.brown[900],
+                    primary: Colors.teal[800],
                   ),
                   onPressed: () {
                     _action1.name = _action1NameController.text;
@@ -156,11 +156,11 @@ class _Action1sScreenState extends State<Action1sScreen> {
                   onPressed: () => Navigator.pop(context),
                   child: Text(
                     'Cancel',
-                    style: TextStyle(color: Colors.brown[900]),
+                    style: TextStyle(color: Colors.teal[800]),
                   )),
               ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.brown[900],
+                    primary: Colors.teal[800],
                   ),
                   onPressed: () async {
                     _action1.id = action1[0]['id'];
@@ -233,7 +233,7 @@ class _Action1sScreenState extends State<Action1sScreen> {
             actions: <Widget>[
               ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.brown[900],
+                    primary: Colors.teal[800],
                   ),
                   onPressed: () => Navigator.pop(context),
                   child: Text(
@@ -273,7 +273,7 @@ class _Action1sScreenState extends State<Action1sScreen> {
                   ),
                   child: Text(
                     'Delete',
-                    style: TextStyle(color: Colors.brown[900]),
+                    style: TextStyle(color: Colors.teal[800]),
                   )),
             ],
             title: Text('Are you sure you want to delete this'),
@@ -293,7 +293,17 @@ class _Action1sScreenState extends State<Action1sScreen> {
       key: _globalKey,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.brown[900],
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.teal, Colors.black38],
+              begin: Alignment.bottomRight,
+              end: Alignment.topLeft,
+            ),
+          ),
+        ),
+        backgroundColor: Colors.teal[900],
         title: Center(
           child: Container(
             child: Column(
@@ -304,7 +314,7 @@ class _Action1sScreenState extends State<Action1sScreen> {
                   position: BadgePosition.topEnd(),
                   badgeContent: Text(_actionList.length.toString(),
                       style: TextStyle(color: Colors.black)),
-//                  badgeColor: Colors.orange[100],
+                  badgeColor: Colors.orange[100]!,
                 ),
               ],
             ),
@@ -347,7 +357,7 @@ class _Action1sScreenState extends State<Action1sScreen> {
       bottomNavigationBar: Container(
         height: 55.0,
         child: BottomAppBar(
-          color: Colors.brown[900],
+          color: Colors.teal[800],
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[

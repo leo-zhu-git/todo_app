@@ -24,7 +24,17 @@ class _WipeScreenState extends State<WipeScreen> {
       key: _key,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.brown[900],
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.teal, Colors.black38],
+              begin: Alignment.bottomRight,
+              end: Alignment.topLeft,
+            ),
+          ),
+        ),
+        backgroundColor: Colors.teal[800],
         title: Center(child: Text('Wipe')),
       ),
       body: Column(
@@ -35,7 +45,7 @@ class _WipeScreenState extends State<WipeScreen> {
       bottomNavigationBar: Container(
         height: 55.0,
         child: BottomAppBar(
-          color: Colors.brown[900],
+          color: Colors.teal[800],
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
@@ -159,7 +169,7 @@ class _WipeScreenState extends State<WipeScreen> {
                     ),
                     child: Text(
                       'Cancel',
-                      style: TextStyle(color: Colors.brown[900]),
+                      style: TextStyle(color: Colors.teal[800]),
                     )),
                 ElevatedButton(
                     onPressed: () async {
@@ -223,7 +233,7 @@ class _WipeScreenState extends State<WipeScreen> {
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.brown[900],
+                      primary: Colors.teal[800],
                     ),
                     child: Text(
                       'Wipe',

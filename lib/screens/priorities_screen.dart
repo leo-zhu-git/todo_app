@@ -79,7 +79,7 @@ class _PrioritiesScreenState extends State<PrioritiesScreen> {
                     ),
                     child: Text(
                       'Cancel',
-                      style: TextStyle(color: Colors.brown[900]),
+                      style: TextStyle(color: Colors.teal[800]),
                     )),
               ElevatedButton(
                   onPressed: () async {
@@ -111,7 +111,7 @@ class _PrioritiesScreenState extends State<PrioritiesScreen> {
 //                    ));
                   },
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.brown[900],
+                      primary: Colors.teal[800],
                     ),
                     child: Text(
                       'Save',
@@ -159,7 +159,7 @@ class _PrioritiesScreenState extends State<PrioritiesScreen> {
                   ),
                   child: Text(
                     'Cancel',
-                    style: TextStyle(color: Colors.brown[900]),
+                    style: TextStyle(color: Colors.teal[800]),
                   )),
               ElevatedButton(
                   onPressed: () async {
@@ -196,7 +196,7 @@ class _PrioritiesScreenState extends State<PrioritiesScreen> {
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.brown[900],
+                    primary: Colors.teal[800],
                   ),
                   child: 
                   Text(
@@ -239,7 +239,7 @@ class _PrioritiesScreenState extends State<PrioritiesScreen> {
             actions: <Widget>[
               ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.brown[900],
+                      primary: Colors.teal[800],
                     ),
                     child: Text(
                       'Cancel',
@@ -283,7 +283,7 @@ class _PrioritiesScreenState extends State<PrioritiesScreen> {
                 child: 
                   Text(
                     'Delete',
-                    style: TextStyle(color: Colors.brown[900]),
+                    style: TextStyle(color: Colors.teal[800]),
                   )
               ),
             ],
@@ -303,8 +303,18 @@ class _PrioritiesScreenState extends State<PrioritiesScreen> {
       backgroundColor: Colors.amber[50],
       key: _globalKey,
       appBar: AppBar(
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.teal, Colors.black38],
+              begin: Alignment.bottomRight,
+              end: Alignment.topLeft,
+            ),
+          ),
+        ),
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.brown[900],
+        backgroundColor: Colors.teal[800],
         elevation: 8,
         title: Center(
           child: Container(
@@ -316,7 +326,7 @@ class _PrioritiesScreenState extends State<PrioritiesScreen> {
                   position: BadgePosition.topEnd(),
                   badgeContent: Text(_priorityList.length.toString(),
                       style: TextStyle(color: Colors.black)),
-//                  badgeColor: Colors.orange[100],
+                  badgeColor: Colors.orange[100]!,
                 ),
               ],
             ),
@@ -361,7 +371,7 @@ class _PrioritiesScreenState extends State<PrioritiesScreen> {
       bottomNavigationBar: Container(
         height: 55.0,
         child: BottomAppBar(
-          color: Colors.brown[900],
+          color: Colors.teal[800],
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[

@@ -13,8 +13,7 @@ import 'package:todo_app/model/globals.dart' as globals;
 DbHelper helper = DbHelper();
 String _selectedpriority = "";
 String? _searchText = "";
-TextStyle _textStyleControls = TextStyle(
-    fontSize: 12.0, fontWeight: FontWeight.normal, color: Colors.black);
+TextStyle _textStyleControls = TextStyle(fontSize: 17.0, color: Colors.black87);
 
 class TaskSearch extends StatefulWidget {
   @override
@@ -258,8 +257,16 @@ class TaskSearchState extends State {
     return Scaffold(
       backgroundColor: Colors.teal[50],
       appBar: AppBar(
-//        backgroundColor: Colors.brown[900],
-//        backgroundColor: Colors.lightGreen[800],
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.teal, Colors.black38],
+              begin: Alignment.bottomRight,
+              end: Alignment.topLeft,
+            ),
+          ),
+        ),
         backgroundColor: Colors.teal[800],
         automaticallyImplyLeading: true,
         title: Center(
@@ -288,8 +295,8 @@ class TaskSearchState extends State {
             padding:
                 EdgeInsets.only(top: 6.0, left: 4.0, right: 4.0, bottom: 1.0),
             child: TextField(
+              style: _textStyleControls,
               controller: searchController,
-//              style: textStyle,
               onChanged: (value) {
                 searchData(
                     value,
@@ -490,121 +497,121 @@ class TaskSearchState extends State {
                       ),
 
 //########################################### Action  ######### #################################3
-                      Container(
-                        margin:
-                            EdgeInsets.only(top: 1.0, left: 8.0, right: 8.0),
-                        decoration: BoxDecoration(
-                            shape: BoxShape.rectangle, color: Colors.blue[100]),
-                        child: Flexible(
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              DropdownButton<String?>(
-                                items:
-                                    _action1s.map((CustomDropdownItem value) {
-                                  return DropdownMenuItem<String>(
-                                      value: value.id,
-                                      child: Text(value.name!));
-                                }).toList(),
-                                style: _textStyleControls,
-                                value: _selectedAction1,
-                                onChanged: (value) {
-                                  setState(() {
-                                    _selectedAction1 = value;
-                                    searchData(
-                                        _searchText,
-                                        _selectedStatus,
-                                        _selectedPriority,
-                                        _selectedCategory,
-                                        _selectedAction1,
-                                        _selectedContext1,
-                                        _selectedLocation1,
-                                        _selectedTag1,
-                                        _selectedGoal1,
-                                        _showIsStar,
-                                        _showIsDone);
-                                  });
-                                },
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
+//                      Container(
+//                        margin:
+//                            EdgeInsets.only(top: 1.0, left: 8.0, right: 8.0),
+//                        decoration: BoxDecoration(
+//                            shape: BoxShape.rectangle, color: Colors.blue[100]),
+//                        child: Flexible(
+//                          child: Row(
+//                            crossAxisAlignment: CrossAxisAlignment.center,
+//                            children: [
+//                              DropdownButton<String?>(
+//                                items:
+//                                    _action1s.map((CustomDropdownItem value) {
+//                                  return DropdownMenuItem<String>(
+//                                      value: value.id,
+//                                      child: Text(value.name!));
+//                                }).toList(),
+//                                style: _textStyleControls,
+//                                value: _selectedAction1,
+//                                onChanged: (value) {
+//                                  setState(() {
+//                                    _selectedAction1 = value;
+//                                    searchData(
+//                                        _searchText,
+//                                        _selectedStatus,
+//                                        _selectedPriority,
+//                                        _selectedCategory,
+//                                        _selectedAction1,
+//                                        _selectedContext1,
+//                                        _selectedLocation1,
+//                                        _selectedTag1,
+//                                        _selectedGoal1,
+//                                        _showIsStar,
+//                                        _showIsDone);
+//                                  });
+//                                },
+//                              )
+//                            ],
+//                          ),
+//                        ),
+//                      ),
 //######### Context  #########
-                      Container(
-                        margin:
-                            EdgeInsets.only(top: 1.0, left: 8.0, right: 8.0),
-                        decoration: BoxDecoration(
-                            shape: BoxShape.rectangle, color: Colors.blue[100]),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            DropdownButton<String?>(
-                              items: _context1s.map((CustomDropdownItem value) {
-                                return DropdownMenuItem<String>(
-                                    value: value.id, child: Text(value.name!));
-                              }).toList(),
-                              style: _textStyleControls,
-                              value: _selectedContext1,
-                              onChanged: (value) {
-                                setState(() {
-                                  _selectedContext1 = value;
-                                  searchData(
-                                      _searchText,
-                                      _selectedStatus,
-                                      _selectedPriority,
-                                      _selectedCategory,
-                                      _selectedAction1,
-                                      _selectedContext1,
-                                      _selectedLocation1,
-                                      _selectedTag1,
-                                      _selectedGoal1,
-                                      _showIsStar,
-                                      _showIsDone);
-                                });
-                              },
-                            )
-                          ],
-                        ),
-                      ),
+//                      Container(
+//                        margin:
+//                            EdgeInsets.only(top: 1.0, left: 8.0, right: 8.0),
+//                        decoration: BoxDecoration(
+//                            shape: BoxShape.rectangle, color: Colors.blue[100]),
+//                        child: Row(
+//                          crossAxisAlignment: CrossAxisAlignment.center,
+//                          children: [
+//                            DropdownButton<String?>(
+//                              items: _context1s.map((CustomDropdownItem value) {
+//                                return DropdownMenuItem<String>(
+//                                    value: value.id, child: Text(value.name!));
+//                              }).toList(),
+//                              style: _textStyleControls,
+//                              value: _selectedContext1,
+//                              onChanged: (value) {
+//                                setState(() {
+//                                  _selectedContext1 = value;
+//                                  searchData(
+//                                      _searchText,
+//                                      _selectedStatus,
+//                                      _selectedPriority,
+//                                      _selectedCategory,
+//                                      _selectedAction1,
+//                                      _selectedContext1,
+//                                      _selectedLocation1,
+//                                      _selectedTag1,
+//                                      _selectedGoal1,
+//                                      _showIsStar,
+//                                      _showIsDone);
+//                                });
+//                              },
+//                            )
+//                          ],
+//                        ),
+//                      ),
 // //######### Location  #########
-                      Container(
-                        margin:
-                            EdgeInsets.only(top: 1.0, left: 8.0, right: 8.0),
-                        decoration: BoxDecoration(
-                            shape: BoxShape.rectangle, color: Colors.blue[100]),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            DropdownButton<String?>(
-                              items:
-                                  _location1s.map((CustomDropdownItem value) {
-                                return DropdownMenuItem<String>(
-                                    value: value.id, child: Text(value.name!));
-                              }).toList(),
-                              style: _textStyleControls,
-                              value: _selectedLocation1,
-                              onChanged: (value) {
-                                setState(() {
-                                  _selectedLocation1 = value;
-                                  searchData(
-                                      _searchText,
-                                      _selectedStatus,
-                                      _selectedPriority,
-                                      _selectedCategory,
-                                      _selectedAction1,
-                                      _selectedContext1,
-                                      _selectedLocation1,
-                                      _selectedTag1,
-                                      _selectedGoal1,
-                                      _showIsStar,
-                                      _showIsDone);
-                                });
-                              },
-                            )
-                          ],
-                        ),
-                      ),
+//                      Container(
+//                        margin:
+//                            EdgeInsets.only(top: 1.0, left: 8.0, right: 8.0),
+//                        decoration: BoxDecoration(
+//                            shape: BoxShape.rectangle, color: Colors.blue[100]),
+//                        child: Row(
+//                          crossAxisAlignment: CrossAxisAlignment.center,
+//                          children: [
+//                            DropdownButton<String?>(
+//                              items:
+//                                  _location1s.map((CustomDropdownItem value) {
+//                                return DropdownMenuItem<String>(
+//                                    value: value.id, child: Text(value.name!));
+//                              }).toList(),
+//                              style: _textStyleControls,
+//                              value: _selectedLocation1,
+//                              onChanged: (value) {
+//                                setState(() {
+//                                  _selectedLocation1 = value;
+//                                  searchData(
+//                                     _searchText,
+//                                      _selectedStatus,
+//                                      _selectedPriority,
+//                                      _selectedCategory,
+//                                      _selectedAction1,
+//                                      _selectedContext1,
+//                                      _selectedLocation1,
+//                                      _selectedTag1,
+//                                      _selectedGoal1,
+//                                      _showIsStar,
+//                                      _showIsDone);
+//                                });
+//                              },
+//                            )
+//                          ],
+//                        ),
+//                      ),
 // //######### Tag  #########
                       Container(
                         margin:
@@ -643,42 +650,42 @@ class TaskSearchState extends State {
                         ),
                       ),
 // //######### Goal  #########
-                      Container(
-                        margin: EdgeInsets.only(
-                            top: 1.0, left: 8.0, right: 8.0, bottom: 1.0),
-                        decoration: BoxDecoration(
-                            shape: BoxShape.rectangle, color: Colors.blue[100]),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            DropdownButton<String?>(
-                              items: _goal1s.map((CustomDropdownItem value) {
-                                return DropdownMenuItem<String>(
-                                    value: value.id, child: Text(value.name!));
-                              }).toList(),
-                              style: _textStyleControls,
-                              value: _selectedGoal1,
-                              onChanged: (value) {
-                                setState(() {
-                                  _selectedGoal1 = value;
-                                  searchData(
-                                      _searchText,
-                                      _selectedStatus,
-                                      _selectedPriority,
-                                      _selectedCategory,
-                                      _selectedAction1,
-                                      _selectedContext1,
-                                      _selectedLocation1,
-                                      _selectedTag1,
-                                      _selectedGoal1,
-                                      _showIsStar,
-                                      _showIsDone);
-                                });
-                              },
-                            )
-                          ],
-                        ),
-                      ),
+//                      Container(
+//                        margin: EdgeInsets.only(
+//                            top: 1.0, left: 8.0, right: 8.0, bottom: 1.0),
+//                        decoration: BoxDecoration(
+//                            shape: BoxShape.rectangle, color: Colors.blue[100]),
+//                        child: Row(
+//                          crossAxisAlignment: CrossAxisAlignment.center,
+//                          children: [
+//                            DropdownButton<String?>(
+//                              items: _goal1s.map((CustomDropdownItem value) {
+//                                return DropdownMenuItem<String>(
+//                                    value: value.id, child: Text(value.name!));
+//                              }).toList(),
+//                              style: _textStyleControls,
+//                              value: _selectedGoal1,
+//                              onChanged: (value) {
+//                                setState(() {
+//                                  _selectedGoal1 = value;
+//                                  searchData(
+//                                      _searchText,
+//                                      _selectedStatus,
+//                                      _selectedPriority,
+//                                      _selectedCategory,
+//                                      _selectedAction1,
+//                                      _selectedContext1,
+//                                      _selectedLocation1,
+//                                      _selectedTag1,
+//                                      _selectedGoal1,
+//                                      _showIsStar,
+//                                      _showIsDone);
+//                                });
+//                              },
+//                            )
+//                          ],
+//                        ),
+//                      ),
                     ],
                   )
                 ],
@@ -692,28 +699,28 @@ class TaskSearchState extends State {
 //footer
       //bottomNavigationBar: footerBar,
 
-      bottomNavigationBar: Container(
-        height: 28.0,
-        child: BottomAppBar(
-          // color: Color.fromRGBO(58, 66, 86, 1.0),
-          color: Colors.teal[800],
+//      bottomNavigationBar: Container(
+//        height: 28.0,
+//        child: BottomAppBar(
+//          // color: Color.fromRGBO(58, 66, 86, 1.0),
+//          color: Colors.teal[800],
 //          color: Colors.brown[900],
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              IconButton(
-                icon: Icon(Icons.home, color: Colors.white),
-                tooltip: 'Back to Home',
-                onPressed: () {
-                  // Navigator.pop(context, true);
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => TaskHome()));
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
+//          child: Row(
+//            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//            children: <Widget>[
+//              IconButton(
+//                icon: Icon(Icons.home, color: Colors.white),
+//                tooltip: 'Back to Home',
+//                onPressed: () {
+//                  // Navigator.pop(context, true);
+//                  Navigator.of(context).push(
+//                      MaterialPageRoute(builder: (context) => TaskHome()));
+//                },
+//              ),
+//            ],
+//          ),
+//        ),
+//      ),
     );
   }
 
@@ -749,7 +756,7 @@ class TaskSearchState extends State {
               });
             },
             background: Container(
-              color: Colors.brown,
+              color: Colors.teal[800],
             ),
             child: Padding(
               padding:
@@ -769,12 +776,10 @@ class TaskSearchState extends State {
                               DateFormat('yyyy-MM-dd').format(now);
                           if (value == true) {
                             this.tasklist[position].isDone = 1;
-                            this.tasklist[position].status = "Completed";
                             this.tasklist[position].dateDone = formattedDate;
                             dbHelper.updateTask(tasklist[position]);
                           } else {
                             this.tasklist[position].isDone = 0;
-                            this.tasklist[position].status = "Open";
                             this.tasklist[position].dateDone = '';
                             dbHelper.updateTask(tasklist[position]);
                           }
@@ -785,7 +790,7 @@ class TaskSearchState extends State {
                       icon: Icon(Icons.lightbulb,
                           color: (this.tasklist[position].isStar == 0)
                               ? Colors.black12
-                              : Colors.green),
+                              : Colors.teal),
                       onPressed: () {
                         setState(() {
                           if (this.tasklist[position].isStar == 1) {
@@ -811,6 +816,7 @@ class TaskSearchState extends State {
                                     this.tasklist[position].task == null
                                         ? ""
                                         : this.tasklist[position].task!,
+                                    style: _textStyleControls,
                                     overflow: TextOverflow.ellipsis))),
                       ],
                     ),
@@ -978,7 +984,7 @@ class TaskSearchState extends State {
   }
 
   void navigateToDetail(Task task) async {
-  await Navigator.push(
+    await Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => TaskDetail(task)),
     );
@@ -1348,7 +1354,7 @@ class TaskSearchState extends State {
             : 0;
       }
     }
-    getData();
+//    getData();
     setState(() {
       customSetting = customSetting;
       globals.bootstrap = 1;

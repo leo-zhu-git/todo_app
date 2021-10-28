@@ -16,7 +16,7 @@ class SettingsFormState extends State {
       return Scaffold(
         backgroundColor: Colors.yellow[200],
         appBar: AppBar(
-          backgroundColor: Colors.brown[900],
+          backgroundColor: Colors.teal[800],
           automaticallyImplyLeading: false,
           title: Center(
             child: Text('Capture It!'),

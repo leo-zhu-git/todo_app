@@ -81,7 +81,7 @@ class DbHelper {
 
   Future<Database> initializeDb() async {
     Directory dir = await getApplicationDocumentsDirectory();
-    String path = dir.path + "todo_V22.g8.db";
+    String path = dir.path + "todo_V22.h3.db";
     var dbTodovn = await openDatabase(path, version: 1, onCreate: _createDb);
     return dbTodovn;
   }
@@ -150,192 +150,192 @@ class DbHelper {
     //////
     await db.execute(
         "INSERT INTO statuses ( 'name', 'description')  values (?, ?)",
-        ['1.Next Action', '1Bootstrap - please delete or rename if necessary']);
+        ['Next Action', '1Bootstrap - please delete or rename if necessary']);
 
     await db.execute(
         "INSERT INTO statuses ( 'name', 'description')  values (?, ?)",
-        ['2.Someday', '2Bootstrap - please delete or rename if necessary']);
+        ['Someday', '2Bootstrap - please delete or rename if necessary']);
 
     await db.execute(
         "INSERT INTO statuses ( 'name', 'description')  values (?, ?)",
-        ['3.Hold', '3Bootstrap - please delete or rename if necessary']);
+        ['Hold', '3Bootstrap - please delete or rename if necessary']);
 
     await db.execute(
         "INSERT INTO statuses ( 'name', 'description')  values (?, ?)",
-        ['4.Waiting', '4Bootstrap - please delete or rename if necessary']);
+        ['Waiting', '4Bootstrap - please delete or rename if necessary']);
 
     await db.execute(
         "INSERT INTO statuses ( 'name', 'description')  values (?, ?)",
-        ['5.Delegated', '5Bootstrap - please delete or rename if necessary']);
+        ['Delegated', '5Bootstrap - please delete or rename if necessary']);
 
     await db.execute(
         "INSERT INTO statuses ( 'name', 'description')  values (?, ?)",
-        ['6.Reference', '6Bootstrap - please delete or rename if necessary']);
+        ['Reference', '6Bootstrap - please delete or rename if necessary']);
 
     //////
     //Create Default Values for priorities
     //////
     await db.execute(
         "INSERT INTO priorities ( 'name', 'description')  values (?, ?)",
-        ['1.Low1', '1Bootstrap - please delete or rename if necessary']);
+        ['Low1', '1Bootstrap - please delete or rename if necessary']);
 
     await db.execute(
         "INSERT INTO priorities ( 'name', 'description')  values (?, ?)",
-        ['2.Low2', '2Bootstrap - please delete or rename if necessary']);
+        ['Low2', '2Bootstrap - please delete or rename if necessary']);
 
     await db.execute(
         "INSERT INTO priorities ( 'name', 'description')  values (?, ?)",
-        ['3.Medium1', '3Bootstrap - please delete or rename if necessary']);
+        ['Medium1', '3Bootstrap - please delete or rename if necessary']);
 
     await db.execute(
         "INSERT INTO priorities ( 'name', 'description')  values (?, ?)",
-        ['4.Medium2', '4Bootstrap - please delete or rename if necessary']);
+        ['Medium2', '4Bootstrap - please delete or rename if necessary']);
 
     await db.execute(
         "INSERT INTO priorities ( 'name', 'description')  values (?, ?)",
-        ['5.High1', '5Bootstrap - please delete or rename if necessary']);
+        ['High1', '5Bootstrap - please delete or rename if necessary']);
 
     await db.execute(
         "INSERT INTO priorities ( 'name', 'description')  values (?, ?)",
-        ['6.High2', '6Bootstrap - please delete or rename if necessary']);
+        ['High2', '6Bootstrap - please delete or rename if necessary']);
 
     await db.execute(
         "INSERT INTO priorities ( 'name', 'description')  values (?, ?)",
-        ['7.Top', '7Bootstrap - please delete or rename if necessary']);
+        ['Top', '7Bootstrap - please delete or rename if necessary']);
 
     //////
     //Create Default Values for Catergories
     //////
     await db.execute(
         "INSERT INTO categories ( 'name', 'description')  values (?, ?)",
-        ['1.Inbox', '1Bootstrap - please delete or rename if necessary']);
+        ['Inbox', '1Bootstrap - please delete or rename if necessary']);
 
     await db.execute(
         "INSERT INTO categories ( 'name', 'description')  values (?, ?)",
-        ['2.Personal', '1Bootstrap - please delete or rename if necessary']);
+        ['Personal', '1Bootstrap - please delete or rename if necessary']);
 
     await db.execute(
         "INSERT INTO categories ( 'name', 'description')  values (?, ?)",
-        ['3.Work', '2Bootstrap - please delete or rename if necessary']);
+        ['Work', '2Bootstrap - please delete or rename if necessary']);
 
     //////
     //Create Default Values for Action
     //////
     await db.execute(
         "INSERT INTO action1s ( 'name', 'description')  values (?, ?)",
-        ['1.Call', '2Bootstrap - please delete or rename if necessary']);
+        ['Call', '2Bootstrap - please delete or rename if necessary']);
 
     await db.execute(
         "INSERT INTO action1s ( 'name', 'description')  values (?, ?)",
-        ['2.Email', '2Bootstrap - please delete or rename if necessary']);
+        ['Email', '2Bootstrap - please delete or rename if necessary']);
 
     await db.execute(
         "INSERT INTO action1s ( 'name', 'description')  values (?, ?)",
-        ['3.Meet', '2Bootstrap - please delete or rename if necessary']);
+        ['Meet', '2Bootstrap - please delete or rename if necessary']);
 
     await db.execute(
         "INSERT INTO action1s ( 'name', 'description')  values (?, ?)",
-        ['4.Buy', '1Bootstrap - please delete or rename if necessary']);
+        ['Buy', '1Bootstrap - please delete or rename if necessary']);
 
     await db.execute(
         "INSERT INTO action1s ( 'name', 'description')  values (?, ?)",
-        ['5.Pay', '1Bootstrap - please delete or rename if necessary']);
+        ['Pay', '1Bootstrap - please delete or rename if necessary']);
 
     await db.execute(
         "INSERT INTO action1s ( 'name', 'description')  values (?, ?)",
-        ['6.Read', '1Bootstrap - please delete or rename if necessary']);
+        ['Read', '1Bootstrap - please delete or rename if necessary']);
 
     await db.execute(
         "INSERT INTO action1s ( 'name', 'description')  values (?, ?)",
-        ['7.Study', '1Bootstrap - please delete or rename if necessary']);
+        ['Study', '1Bootstrap - please delete or rename if necessary']);
 
     await db.execute(
         "INSERT INTO action1s ( 'name', 'description')  values (?, ?)",
-        ['8.Print', '1Bootstrap - please delete or rename if necessary']);
+        ['Print', '1Bootstrap - please delete or rename if necessary']);
 
     //////
     //Create Default Values for Context
     //////
     await db.execute(
         "INSERT INTO context1s ( 'name', 'description')  values (?, ?)",
-        ['1.Quiet Time', '1Bootstrap - please delete or rename if necessary']);
+        ['Quiet Time', '1Bootstrap - please delete or rename if necessary']);
 
     await db.execute(
         "INSERT INTO context1s ( 'name', 'description')  values (?, ?)", [
-      '2.Internet Time',
+      'Internet Time',
       '2Bootstrap - please delete or rename if necessary'
     ]);
 
     await db.execute(
         "INSERT INTO context1s ( 'name', 'description')  values (?, ?)",
-        ['3.Morning', '3Bootstrap - please delete or rename if necessary']);
+        ['Morning', '3Bootstrap - please delete or rename if necessary']);
 
     await db.execute(
         "INSERT INTO context1s ( 'name', 'description')  values (?, ?)",
-        ['4.Afternoon', '4Bootstrap - please delete or rename if necessary']);
+        ['Afternoon', '4Bootstrap - please delete or rename if necessary']);
 
     await db.execute(
         "INSERT INTO context1s ( 'name', 'description')  values (?, ?)",
-        ['5.Evening', '5Bootstrap - please delete or rename if necessary']);
+        ['Evening', '5Bootstrap - please delete or rename if necessary']);
 
     //////
     //Create Default Values for Locations
     //////
     await db.execute(
         "INSERT INTO location1s ( 'name', 'description')  values (?, ?)",
-        ['1.Home', '1Bootstrap - please delete or rename if necessary']);
+        ['Home', '1Bootstrap - please delete or rename if necessary']);
 
     await db.execute(
         "INSERT INTO location1s ( 'name', 'description')  values (?, ?)",
-        ['2.Grocery', '2Bootstrap - please delete or rename if necessary']);
+        ['Grocery', '2Bootstrap - please delete or rename if necessary']);
 
     await db.execute(
         "INSERT INTO location1s ( 'name', 'description')  values (?, ?)",
-        ['3.Outdoor', '3Bootstrap - please delete or rename if necessary']);
+        ['Outdoor', '3Bootstrap - please delete or rename if necessary']);
 
     //////
     //Create Default Values for Tags
     //////
     await db.execute(
         "INSERT INTO tag1s ( 'name', 'description')  values (?, ?)",
-        ['1.Family', '1Bootstrap - please delete or rename if necessary']);
+        ['Family', '1Bootstrap - please delete or rename if necessary']);
 
     await db.execute(
         "INSERT INTO tag1s ( 'name', 'description')  values (?, ?)",
-        ['2.Friend1', '2Bootstrap - please delete or rename if necessary']);
+        ['Friend1', '2Bootstrap - please delete or rename if necessary']);
 
     //////
     //Create Default Values for Goals
     //////
     await db.execute(
         "INSERT INTO goal1s ( 'name', 'description')  values (?, ?)",
-        ['1.Eat Healthy', '1Bootstrap - please delete or rename if necessary']);
+        ['Eat Healthy', '1Bootstrap - please delete or rename if necessary']);
 
     await db.execute(
         "INSERT INTO goal1s ( 'name', 'description')  values (?, ?)",
-        ['2.Drink Water', '2Bootstrap - please delete or rename if necessary']);
+        ['Drink Water', '2Bootstrap - please delete or rename if necessary']);
 
     await db.execute(
         "INSERT INTO goal1s ( 'name', 'description')  values (?, ?)",
-        ['3.Exercise', '3Bootstrap - please delete or rename if necessary']);
+        ['Exercise', '3Bootstrap - please delete or rename if necessary']);
 
     await db.execute(
         "INSERT INTO goal1s ( 'name', 'description')  values (?, ?)",
-        ['4.Meditate', '4Bootstrap - please delete or rename if necessary']);
+        ['Meditate', '4Bootstrap - please delete or rename if necessary']);
 
     await db.execute(
         "INSERT INTO goal1s ( 'name', 'description')  values (?, ?)",
-        ['5.Read', '5Bootstrap - please delete or rename if necessary']);
+        ['Read', '5Bootstrap - please delete or rename if necessary']);
 
     await db.execute(
         "INSERT INTO goal1s ( 'name', 'description')  values (?, ?)", [
-      '6.Better Sleep',
+      'Better Sleep',
       '6Bootstrap - please delete or rename if necessary'
     ]);
 
     //Default value for Custom Setting
     CustomSettings customSetting = new CustomSettings(
-      "12", // sort1 - star
+      "8", // sort1 - star
       '1', // order1 - descending order
       '2', // sort2 - due date
       '0', // order2
@@ -344,8 +344,8 @@ class DbHelper {
       '0', // main1 - task
       '', // main2
       '0', // sec1 - dateDue
-      '4', // sec2 - priority
-      '3', // sec3 - Category
+      '1', // sec2 - dueTime
+      '2', // sec3 - Category
       '0', // dateDue
       "", // priority
       "", // status
@@ -483,7 +483,7 @@ Plan C - USD 24 | 12 month
         formattedate, // dateDue
         '', // timeDue
         '', // status
-        '', // priority
+        '1', // priority
         '1', // category
         '', // action
         '', // context
@@ -609,7 +609,7 @@ Plan C - USD 24 | 12 month
 ////////////////
     if (colfilterIsDone == 0 || colfilterIsDone == null) // show
     {
-//      queryStr = queryStr + " where ($colIsDone == $colIsDone)";
+      queryStr = queryStr + " where ($colIsDone == $colIsDone)";
     } else
       queryStr = queryStr + " where ($colIsDone != 1)";
 
@@ -654,8 +654,7 @@ Plan C - USD 24 | 12 month
     } else if (colfilterDateDue == "All Tasks") {
     } else {
 // select all tasks regardless of due dates
-    }
-    ;
+    };
 
 ////////////////
     /// build query - add status
@@ -831,7 +830,7 @@ Plan C - USD 24 | 12 month
 
   Future<List> getStatuses() async {
     Database? db = await this.db;
-    var result = await db!.rawQuery("SELECT * FROM statuses order by name");
+    var result = await db!.rawQuery("SELECT * FROM statuses");
 
     return result;
   }
@@ -877,7 +876,7 @@ Plan C - USD 24 | 12 month
 
   Future<List> getPriorities() async {
     Database? db = await this.db;
-    var result = await db!.rawQuery("SELECT * FROM priorities order by name");
+    var result = await db!.rawQuery("SELECT * FROM priorities");
 
     return result;
   }
@@ -922,7 +921,7 @@ Plan C - USD 24 | 12 month
 
   Future<List> getCategories() async {
     Database? db = await this.db;
-    var result = await db!.rawQuery("SELECT * FROM categories order by name");
+    var result = await db!.rawQuery("SELECT * FROM categories");
 
     return result;
   }
@@ -971,7 +970,7 @@ Plan C - USD 24 | 12 month
     try {
       Database? db = await this.db;
       result = await db!.query("action1s");
-      result = await db.rawQuery("SELECT * FROM action1s order by name");
+      result = await db.rawQuery("SELECT * FROM action1s");
       return result;
     } catch (e) {
       print(e);
@@ -1020,7 +1019,7 @@ Plan C - USD 24 | 12 month
 
   Future<List> getContext1s() async {
     Database? db = await this.db;
-    var result = await db!.rawQuery("SELECT * FROM context1s order by name");
+    var result = await db!.rawQuery("SELECT * FROM context1s");
     return result;
   }
 
@@ -1065,7 +1064,7 @@ Plan C - USD 24 | 12 month
 
   Future<List> getLocation1s() async {
     Database? db = await this.db;
-    var result = await db!.rawQuery("SELECT * FROM location1s order by name");
+    var result = await db!.rawQuery("SELECT * FROM location1s");
     return result;
   }
 
@@ -1110,7 +1109,7 @@ Plan C - USD 24 | 12 month
 
   Future<List> getTag1s() async {
     Database? db = await this.db;
-    var result = await db!.rawQuery("SELECT * FROM tag1s order by name");
+    var result = await db!.rawQuery("SELECT * FROM tag1s");
     return result;
   }
 
@@ -1154,7 +1153,7 @@ Plan C - USD 24 | 12 month
 
   Future<List> getGoal1s() async {
     Database? db = await this.db;
-    var result = await db!.rawQuery("SELECT * FROM goal1s order by name");
+    var result = await db!.rawQuery("SELECT * FROM goal1s");
     return result;
   }
 

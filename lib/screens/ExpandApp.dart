@@ -133,7 +133,7 @@ class StuffInTiles extends StatelessWidget {
               value: false,
               onChanged: (value) {
               },
-              activeColor: Colors.brown[900],
+              activeColor: Colors.teal[800],
               checkColor: Colors.white,
               autofocus: true,
             );
