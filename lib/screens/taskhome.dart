@@ -10,7 +10,6 @@ import 'package:todo_app/model/tag1.dart';
 import 'package:todo_app/model/goal1.dart';
 import 'package:todo_app/model/customSettings.dart';
 import 'package:todo_app/model/taskclass.dart';
-
 import 'package:todo_app/util/dbhelper.dart';
 import 'package:todo_app/screens/taskdetail.dart';
 // import 'package:todo_app/screens/personalizeview.dart';
@@ -30,11 +29,8 @@ var isChecked = false;
 var isStar = false;
 CustomSettings? customSetting;
 MySql_DBHelper mysqlDBhelper = MySql_DBHelper();
-TextStyle _textStyleControls =
-    TextStyle(fontSize: 17.0, color: Colors.black87);
-TextStyle _textStyleControlsSub =
-    TextStyle(color: Colors.black);
-
+TextStyle _textStyleControls = TextStyle(fontSize: 17.0, color: Colors.black87);
+TextStyle _textStyleControlsSub = TextStyle(color: Colors.black);
 
 class TaskHome extends StatefulWidget {
   @override
@@ -116,11 +112,10 @@ class TaskHomeState extends State {
             children: <Widget>[
               Badge(
                 child: Text('View          '),
-//                child: Icon(Icons.home),
                 shape: BadgeShape.square,
                 position: BadgePosition.topEnd(),
                 badgeContent: Text(count.toString(),
-                style: TextStyle(color: Colors.black)),
+                    style: TextStyle(color: Colors.black)),
                 badgeColor: Colors.yellow[200]!,
               ),
             ],
@@ -165,6 +160,7 @@ class TaskHomeState extends State {
                     context,
                     MaterialPageRoute(builder: (context) => TaskSearch()),
                   );
+                  getData();
                 },
               ),
             ],
@@ -181,7 +177,6 @@ class TaskHomeState extends State {
         return new Dismissible(
             key: new UniqueKey(),
             onDismissed: (direction) {
-//              setState(() async {
               setState(() {
                 DateTime now = DateTime.now();
                 String formattedDate = DateFormat('yyyy-mm-dd').format(now);
@@ -190,26 +185,6 @@ class TaskHomeState extends State {
                 Scaffold.of(context).showSnackBar(new SnackBar(
                   content: new Text("Task Completed"),
                 ));
-//                _showSuccessSnackBar(
-//                  Container(
-//                    color: Colors.tealAccent[100],
-                //KK height: 40,
-//                    child: Row(
-//                      mainAxisAlignment: MainAxisAlignment.center,
-//                      children: [
-//                        (Icon(
-//                          Icons.thumb_up,
-//                          color: Colors.black,
-//                        )),
-//                        Text(
-//                          ' Task Completed ',
-//                          style: (TextStyle(color: Colors.black)),
-//                        )
-//                      ],
-//                    ),
-//                  ),
-//                );
-//                await Future.delayed(const Duration(milliseconds: 500), () {});
                 dbHelper.updateTask(tasklist![position]);
                 getData();
               });
@@ -649,14 +624,11 @@ class TaskHomeState extends State {
   }
 
   void navigateToDetail(Task task) async {
-//    bool result =
     await Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => TaskDetail(task)),
     );
-//    if (result == true) {
     getData();
-//    }
   }
 
   //to get the custom user settings.  this in home now,  but depends on login screen logic we can move this method. KK
@@ -794,7 +766,7 @@ class TaskHomeState extends State {
       case 0:
         return "All Tasks";
         break;
-     case 1:
+      case 1:
         return "Today";
         break;
       case 2:

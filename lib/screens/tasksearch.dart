@@ -736,6 +736,9 @@ class TaskSearchState extends State {
                 String formattedDate = DateFormat('yyyy-mm-dd').format(now);
                 this.tasklist[position].isDone = 1;
                 this.tasklist[position].dateDone = formattedDate;
+                Scaffold.of(context).showSnackBar(new SnackBar(
+                  content: new Text("Item Dismissed"),
+                ));
                 dbHelper.updateTask(tasklist[position]);
                 searchData(
                     _searchText,
@@ -749,10 +752,7 @@ class TaskSearchState extends State {
                     _selectedGoal1,
                     _showIsStar,
                     _showIsDone);
-                //this.tasklist.removeAt(position);
-                Scaffold.of(context).showSnackBar(new SnackBar(
-                  content: new Text("Item Dismissed"),
-                ));
+
               });
             },
             background: Container(
@@ -853,7 +853,7 @@ class TaskSearchState extends State {
   }
 
   void getData() {
-    int? _sortField1 = globals.sortField1 != null ? globals.sortField1 : 12;
+    int? _sortField1 = globals.sortField1 != null ? globals.sortField1 : 8;
     int? _sortField2 = globals.sortField2 != null ? globals.sortField2 : 2;
     int? _sortField3 = globals.sortField3 != null ? globals.sortField3 : 3;
     int? _sortOrder1 = globals.sortOrder1 != null ? globals.sortOrder1 : 1;
@@ -861,11 +861,12 @@ class TaskSearchState extends State {
     int? _sortOrder3 = globals.sortOrder3 != null ? globals.sortOrder3 : 0;
 
     int? _filterDateDue =
-        globals.filterDateDue != null ? globals.filterDateDue : 7;
+        globals.filterDateDue != 0 ? globals.filterDateDue : 0;
     int? _filterIsStar =
-        globals.filterIsStar != null ? globals.filterIsStar : 0;
+        globals.filterIsStar != "null" ? globals.filterIsStar : 0;
     int? _filterIsDone =
-        globals.filterIsDone != null ? globals.filterIsDone : 0;
+        globals.filterIsDone != "null" ? globals.filterIsDone : 0;
+
 
     var countDone = 0;
     final dbFuture = helper.initializeDb();
@@ -887,8 +888,8 @@ class TaskSearchState extends State {
         globals.filterLocation.toString(),
         globals.filterTag.toString(),
         globals.filterGoal.toString(),
-        globals.filterIsStar!,
-        globals.filterIsDone!,
+        globals.filterIsStar,
+        globals.filterIsDone,
       );
       tasksFuture.then((result) {
         List<Task> taskList = [];
@@ -907,74 +908,269 @@ class TaskSearchState extends State {
                 taskList[i].main1 = taskList[i].task;
               }
               break;
-            case 1:
-              {
-                taskList[i].main1 = taskList[i].note;
-              }
-              break;
-            case 2:
-              {
-                taskList[i].main1 = taskList[i].dateDue;
-              }
-              break;
-            case 3:
-              {
-                taskList[i].main1 = taskList[i].timeDue;
-              }
-              break;
-            case 4:
-              {
-                taskList[i].main1 = taskList[i].statusText;
-              }
-              break;
-            case 5:
-              {
-                taskList[i].main1 = taskList[i].priorityText;
-              }
-              break;
-            case 6:
-              {
-                taskList[i].main1 = taskList[i].categoryText;
-              }
-              break;
-            case 7:
-              {
-                taskList[i].main1 = taskList[i].action1Text;
-              }
-              break;
-            case 8:
-              {
-                taskList[i].main1 = taskList[i].context1Text;
-              }
-              break;
-            case 9:
-              {
-                taskList[i].main1 = taskList[i].location1Text;
-              }
-              break;
-            case 10:
-              {
-                taskList[i].main1 = taskList[i].tag1Text;
-              }
-              break;
-            case 11:
-              {
-                taskList[i].main1 = taskList[i].goal1Text;
-              }
-              break;
-            case 12:
-              {
-                taskList[i].main1 = taskList[i].isStar.toString();
-              }
-              break;
+//            case 1:
+//              {
+//                taskList[i].main1 = taskList[i].note;
+//              }
+//              break;
+//           case 2:
+//              {
+//                taskList[i].main1 = taskList[i].dateDue;
+//              }
+//              break;
+//            case 3:
+//              {
+//                taskList[i].main1 = taskList[i].timeDue;
+//              }
+//              break;
+//            case 4:
+//              {
+//                taskList[i].main1 = taskList[i].statusText;
+//              }
+//              break;
+//            case 5:
+//              {
+//                taskList[i].main1 = taskList[i].priorityText;
+//              }
+//              break;
+//            case 6:
+//              {
+//                taskList[i].main1 = taskList[i].categoryText;
+//              }
+//              break;
+//            case 7:
+//              {
+//                taskList[i].main1 = taskList[i].action1Text;
+//              }
+//              break;
+//            case 8:
+//              {
+//                taskList[i].main1 = taskList[i].context1Text;
+//              }
+//              break;
+//            case 9:
+//              {
+//                taskList[i].main1 = taskList[i].location1Text;
+//              }
+//              break;
+//            case 10:
+//              {
+//                taskList[i].main1 = taskList[i].tag1Text;
+//              }
+//              break;
+//            case 11:
+//              {
+//                taskList[i].main1 = taskList[i].goal1Text;
+//              }
+//              break;
+//            case 12:
+//              {
+//                taskList[i].main1 = taskList[i].isStar.toString();
+//              }
+//              break;
             default:
               {
                 taskList[i].main1 = taskList[i].task;
               }
               break;
           }
-        }
 
+/////////////////
+          /// display sec1
+////////////////
+          switch (globals.showSec1) {
+            case 0:
+              {
+                taskList[i].sec1 = taskList[i].dateDue;
+              }
+              break;
+            case 1:
+              {
+                taskList[i].sec1 = taskList[i].timeDue;
+              }
+              break;
+            case 2:
+              {
+                taskList[i].sec1 = taskList[i].categoryText;
+              }
+              break;
+            case 3:
+              {
+                taskList[i].sec1 = taskList[i].statusText;
+              }
+              break;
+            case 4:
+              {
+                taskList[i].sec1 = taskList[i].priorityText;
+              }
+              break;
+//            case 5:
+//              {
+//                taskList[i].sec1 = taskList[i].action1Text;
+//              }
+//              break;
+//            case 6:
+//              {
+//                taskList[i].sec1 = taskList[i].context1Text;
+//              }
+//              break;
+//            case 7:
+//              {
+//                taskList[i].sec1 = taskList[i].location1Text;
+//              }
+//              break;
+            case 5:
+              {
+                taskList[i].sec1 = taskList[i].tag1Text;
+              }
+              break;
+//            case 9:
+//              {
+//                taskList[i].sec1 = taskList[i].goal1Text;
+//              }
+//              break;
+            case 6:
+              {
+                taskList[i].sec1 = taskList[i].isStar.toString();
+              }
+              break;
+            default:
+              {
+                taskList[i].sec1 = taskList[i].dateDue;
+              }
+              break;
+          }
+/////////////////
+          /// display sec2
+////////////////
+          switch (globals.showSec2) {
+            case 0:
+              {
+                taskList[i].sec2 = taskList[i].dateDue;
+              }
+              break;
+            case 1:
+              {
+                taskList[i].sec2 = taskList[i].timeDue;
+              }
+              break;
+            case 2:
+              {
+                taskList[i].sec2 = taskList[i].categoryText;
+              }
+              break;
+            case 3:
+              {
+                taskList[i].sec2 = taskList[i].statusText;
+              }
+              break;
+            case 4:
+              {
+                taskList[i].sec2 = taskList[i].priorityText;
+              }
+              break;
+//            case 5:
+//              {
+//                taskList[i].sec2 = taskList[i].action1Text;
+//              }
+//              break;
+//            case 6:
+//              {
+//                taskList[i].sec2 = taskList[i].context1Text;
+//              }
+//              break;
+//            case 7:
+//              {
+//                taskList[i].sec2 = taskList[i].location1Text;
+//              }
+//              break;
+            case 5:
+              {
+                taskList[i].sec2 = taskList[i].tag1Text;
+              }
+              break;
+//            case 9:
+//              {
+//                taskList[i].sec2 = taskList[i].goal1Text;
+//              }
+//              break;
+            case 6:
+              {
+                taskList[i].sec2 = taskList[i].isStar.toString();
+              }
+              break;
+            default:
+              {
+                taskList[i].sec2 = taskList[i].priorityText;
+              }
+              break;
+          }
+/////////////////
+          /// display sec3
+////////////////
+          switch (globals.showSec3) {
+            case 0:
+              {
+                taskList[i].sec3 = taskList[i].dateDue;
+              }
+              break;
+            case 1:
+              {
+                taskList[i].sec3 = taskList[i].timeDue;
+              }
+              break;
+            case 2:
+              {
+                taskList[i].sec3 = taskList[i].categoryText;
+              }
+              break;
+            case 3:
+              {
+                taskList[i].sec3 = taskList[i].statusText;
+              }
+              break;
+            case 4:
+              {
+                taskList[i].sec3 = taskList[i].priorityText;
+              }
+              break;
+//            case 5:
+//              {
+//                taskList[i].sec3 = taskList[i].action1Text;
+//              }
+//              break;
+//            case 6:
+//              {
+//                taskList[i].sec3 = taskList[i].context1Text;
+//              }
+//              break;
+//            case 7:
+//              {
+//                taskList[i].sec3 = taskList[i].location1Text;
+//              }
+//              break;
+            case 5:
+              {
+                taskList[i].sec3 = taskList[i].tag1Text;
+              }
+              break;
+//            case 9:
+//              {
+//                taskList[i].sec3 = taskList[i].goal1Text;
+//              }
+//              break;
+            case 6:
+              {
+                taskList[i].sec3 = taskList[i].isStar.toString();
+              }
+              break;
+            default:
+              {
+                taskList[i].sec3 = taskList[i].categoryText;
+              }
+              break;
+          }
+        }
         setState(() {
           tasklist = taskList;
           count = count;
@@ -1317,13 +1513,15 @@ class TaskSearchState extends State {
         if (customSetting!.showSec3 != "") {
           globals.showSec3 = int.parse(customSetting!.showSec3!);
         }
-        if (customSetting!.filterIsStar == true) {
+        if (customSetting!.filterIsStar == 1) {
           globals.filterIsStar = 1;
         } else {
           globals.filterIsStar = 0;
         }
-        if (customSetting!.filterIsDone == true) {
+        if (customSetting!.filterIsDone == 1) {
           globals.filterIsDone = 1;
+        } else {
+          globals.filterIsDone = 0;
         }
         if (customSetting!.filterDateDue != "") {
           globals.filterDateDue = int.parse(customSetting!.filterDateDue!);
@@ -1354,7 +1552,7 @@ class TaskSearchState extends State {
             : 0;
       }
     }
-//    getData();
+    getData();
     setState(() {
       customSetting = customSetting;
       globals.bootstrap = 1;
@@ -1362,7 +1560,7 @@ class TaskSearchState extends State {
   }
 
 //Sort column names are defined here but if there is any changes in column name update here
-  String getSortColumn(int column) {
+  String? getSortColumn(int column) {
     switch (column) {
       case 0:
         return "task";
@@ -1377,33 +1575,33 @@ class TaskSearchState extends State {
         return "timeDue";
         break;
       case 4:
-        return "status";
-        break;
-      case 5:
-        return "priority";
-        break;
-      case 6:
         return "category";
         break;
+      case 5:
+        return "status";
+        break;
+      case 6:
+        return "priority";
+        break;
+//      case 7:
+//        return "action1";
+//        break;
+//      case 8:
+//        return "context1";
+//        break;
+//      case 9:
+//        return "location1";
+//        break;
       case 7:
-        return "action1";
-        break;
-      case 8:
-        return "context1";
-        break;
-      case 9:
-        return "location1";
-        break;
-      case 10:
         return "tag1";
         break;
-      case 11:
-        return "goal1";
-        break;
-      case 12:
+//      case 11:
+//        return "goal1";
+//        break;
+      case 8:
         return "isStar";
         break;
-      case 13:
+      case 9:
         return "isDone";
         break;
 
@@ -1414,12 +1612,12 @@ class TaskSearchState extends State {
   }
 
   //Sort column names are defined here but if there is any changes in column name update here
-  String getDateDueColumn(int column) {
+  String? getDateDueColumn(int column) {
     switch (column) {
       case 0:
         return "All Tasks";
         break;
-      case 1:
+     case 1:
         return "Today";
         break;
       case 2:
@@ -1440,7 +1638,6 @@ class TaskSearchState extends State {
       case 7:
         return "Overdues Only";
         break;
-
       default:
         return "All Tasks";
         break;
@@ -1448,7 +1645,7 @@ class TaskSearchState extends State {
   }
 
   //Sort column names are defined here but if there is any changes in column name update here
-  String getTimeDueColumn(int column) {
+  String? getTimeDueColumn(int column) {
     switch (column) {
       case 0:
         return "Today";
@@ -1482,7 +1679,7 @@ class TaskSearchState extends State {
   }
 
 //Sort column names are defined here but if there is any changes in column name update here
-  String getOrderColumn(int column) {
+  String? getOrderColumn(int column) {
     switch (column) {
       case 0:
         return "ASC";
@@ -1497,3 +1694,4 @@ class TaskSearchState extends State {
     }
   }
 }
+
