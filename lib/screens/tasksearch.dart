@@ -11,7 +11,6 @@ import 'package:intl/intl.dart';
 import 'package:todo_app/model/globals.dart' as globals;
 
 DbHelper helper = DbHelper();
-String _selectedpriority = "";
 String? _searchText = "";
 TextStyle _textStyleControls = TextStyle(fontSize: 17.0, color: Colors.black87);
 
@@ -44,7 +43,6 @@ class TaskSearchState extends State {
   int? isChecked = 0;
   int? _showIsStar = 1;
   int? _showIsDone = 1;
-//  var _selectedGoal1 = "";
 
   @override
   void initState() {
@@ -253,7 +251,6 @@ class TaskSearchState extends State {
 
   @override
   Widget build(BuildContext context) {
-//    TextStyle textStyle = Theme.of(context).textTheme.headline6;
     return Scaffold(
       backgroundColor: Colors.teal[50],
       appBar: AppBar(
@@ -266,6 +263,14 @@ class TaskSearchState extends State {
               end: Alignment.topLeft,
             ),
           ),
+        ),
+        leading: IconButton(
+          icon: const Icon(Icons.home),
+          onPressed: () {
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => TaskHome()));
+          },
+          tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
         ),
         backgroundColor: Colors.teal[800],
         automaticallyImplyLeading: true,
@@ -752,7 +757,6 @@ class TaskSearchState extends State {
                     _selectedGoal1,
                     _showIsStar,
                     _showIsDone);
-
               });
             },
             background: Container(
@@ -866,7 +870,6 @@ class TaskSearchState extends State {
         globals.filterIsStar != "null" ? globals.filterIsStar : 0;
     int? _filterIsDone =
         globals.filterIsDone != "null" ? globals.filterIsDone : 0;
-
 
     var countDone = 0;
     final dbFuture = helper.initializeDb();
@@ -1617,7 +1620,7 @@ class TaskSearchState extends State {
       case 0:
         return "All Tasks";
         break;
-     case 1:
+      case 1:
         return "Today";
         break;
       case 2:
@@ -1694,4 +1697,3 @@ class TaskSearchState extends State {
     }
   }
 }
-
