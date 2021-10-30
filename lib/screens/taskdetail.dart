@@ -200,8 +200,7 @@ class TaskDetailState extends State //<TaskDetail>
 //    cus.id = null;
     cus.name =
         "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
-    cus.name =
-        "-- Select Status --";
+    cus.name = "-- Select Status --";
     _statuses.add(cus);
     statuses.forEach((status) {
       setState(() {
@@ -227,8 +226,7 @@ class TaskDetailState extends State //<TaskDetail>
 //    cus.id = null;
     cus.name =
         "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
-    cus.name =
-        "-- Select Priority --";
+    cus.name = "-- Select Priority --";
     _priorities.add(cus);
     priorities.forEach((priority) {
       setState(() {
@@ -280,8 +278,7 @@ class TaskDetailState extends State //<TaskDetail>
 //    cus.id = null;
     cus.name =
         "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
-    cus.name =
-        "-- Select Context --";
+    cus.name = "-- Select Context --";
     _context1s.add(cus);
     context1s.forEach((context1) {
       setState(() {
@@ -307,8 +304,7 @@ class TaskDetailState extends State //<TaskDetail>
 //    cus.id = null;
     cus.name =
         "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
-    cus.name =
-        "-- Select Location --";
+    cus.name = "-- Select Location --";
     _location1s.add(cus);
     location1s.forEach((location1) {
       setState(() {
@@ -334,8 +330,7 @@ class TaskDetailState extends State //<TaskDetail>
 //    cus.id = null;
     cus.name =
         "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
-    cus.name =
-        "-- Select Tag --";
+    cus.name = "-- Select Tag --";
     _tag1s.add(cus);
     tag1s.forEach((tag1) {
       setState(() {
@@ -647,7 +642,7 @@ class TaskDetailState extends State //<TaskDetail>
         ),
       );
 
-Widget buildTag1Picker() => SizedBox(
+  Widget buildTag1Picker() => SizedBox(
         height: 400,
         child: StatefulBuilder(
           builder: (context, setState) => CupertinoPicker(
@@ -706,8 +701,123 @@ Widget buildTag1Picker() => SizedBox(
           ),
         ),
         backgroundColor: Colors.teal[800],
-//        backgroundColor: Colors.cyanAccent[700],
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: true,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white),
+          tooltip: 'Back',
+          onPressed: () {
+            Navigator.pop(context, true);
+          },
+        ),
+        actions: [
+          IconButton(
+              icon: Icon(Icons.save_alt, color: Colors.white),
+              tooltip: 'Add Tag',
+              onPressed: () {
+                setState(()  {
+//////////////
+
+                  task.task = _todoTaskController.text;
+                  task.note = _todoNoteController.text;
+                  (_selectedStatus == null)
+                      ? {
+                          task.status = "",
+                          task.statusText = "",
+                        }
+                      : {
+                          task.status = _selectedStatus.toString(),
+                          task.statusText = _statusController.text,
+                        };
+                  (_selectedPriority == null)
+                      ? {
+                          task.priority = "",
+                          task.priorityText = "",
+                        }
+                      : {
+                          task.priority = _selectedPriority.toString(),
+                          task.priorityText = _priorityController.text,
+                        };
+                  (_selectedCategory == null)
+                      ? {
+                          task.category = "1",
+                          task.categoryText = "Inbox",
+                        }
+                      : {
+                          task.category = _selectedCategory.toString(),
+                          task.categoryText = _categoryController.text,
+                        };
+                  task.action1 = _selectedAction1 == null
+                      ? ""
+                      : _selectedAction1.toString();
+                  task.context1 = _selectedContext1 == null
+                      ? ""
+                      : _selectedContext1.toString();
+                  task.tag1 =
+                      _selectedTag1 == null ? "" : _selectedTag1.toString();
+                  (_selectedTag1 == null)
+                      ? {
+                          task.tag1 = "",
+                          task.tag1Text = "",
+                        }
+                      : {
+                          task.tag1 = _selectedTag1.toString(),
+                          task.tag1Text = _tag1Controller.text,
+                        };
+                  task.goal1 =
+                      _selectedGoal1 == null ? "" : _selectedGoal1.toString();
+                  task.dateDue = _todoDateController.text;
+                  task.timeDue = _todoTimeController.text;
+
+////////// notificaiton to move outside setstate
+//                  task.timeDue != ""
+//                      ? {
+//                          _nTitle = task.timeDue.toString() +
+//                              ' reminder: ' +
+//                              task.task!,
+//                          await notificationPlugin.scheduleNotification(
+//                              _nTitle, task.note!, task.dateDue!, task.timeDue!)
+//                        }
+//                      : {};
+                  task.isDone = 0;
+                  task.lastModified =
+                      DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.now());
+
+                  var result;
+
+                  print(task.id);
+                  if (task.id != null) {
+                    result = dbHelper.updateTask(task);
+                  } else {
+                    result = dbHelper.insertTask(task);
+                  }
+
+//                      _showSuccessSnackBar(
+//                        Container(
+//                          color: Colors.lAccent[100],
+//                          //KK height: 40,
+//                          child: Row(
+//                            mainAxisAlignment: MainAxisAlignment.center,
+//                            children: [
+//                              (Icon(
+//                                Icons.thumb_up,
+//                                color: Colors.black,
+//                              )),
+//                              Text(
+//                                ' Successfully Saved ',
+//                                style: (TextStyle(color: Colors.black)),
+//                              )
+//                            ],
+//                          ),
+//                        ),
+//                      );
+//                      await Future.delayed(
+//                          const Duration(milliseconds: 500), () {});
+                  Navigator.pop(context);
+
+//////////////
+                });
+              }),
+        ],
         title: Center(child: Text('Todo Detail')),
       ),
       body: SingleChildScrollView(
@@ -867,7 +977,7 @@ Widget buildTag1Picker() => SizedBox(
                         showCupertinoModalPopup(
                             context: context,
                             builder: (context) => CupertinoActionSheet(
-                                actions: [buildCategoryPicker()],
+                                  actions: [buildCategoryPicker()],
 //                                cancelButton: CupertinoActionSheetAction(
 //                                  child: Text('Cancel'),
 //                                  onPressed: () => Navigator.pop(context),
@@ -906,7 +1016,7 @@ Widget buildTag1Picker() => SizedBox(
                       showCupertinoModalPopup(
                           context: context,
                           builder: (context) => CupertinoActionSheet(
-                              actions: [buildStatusPicker()],
+                                actions: [buildStatusPicker()],
 //                              cancelButton: CupertinoActionSheetAction(
 //                                child: Text('Cancel'),
 //                                onPressed: () => Navigator.pop(context),
@@ -975,7 +1085,7 @@ Widget buildTag1Picker() => SizedBox(
                       showCupertinoModalPopup(
                           context: context,
                           builder: (context) => CupertinoActionSheet(
-                              actions: [buildPriorityPicker()],
+                                actions: [buildPriorityPicker()],
 //                              cancelButton: CupertinoActionSheetAction(
 //                                child: Text('Cancel'),
 //                                onPressed: () => Navigator.pop(context),
@@ -1139,7 +1249,7 @@ Widget buildTag1Picker() => SizedBox(
                       showCupertinoModalPopup(
                           context: context,
                           builder: (context) => CupertinoActionSheet(
-                              actions: [buildTag1Picker()],
+                                actions: [buildTag1Picker()],
 //                              cancelButton: CupertinoActionSheetAction(
 //                                child: Text('Cancel'),
 //                                onPressed: () => Navigator.pop(context),
@@ -1228,140 +1338,109 @@ Widget buildTag1Picker() => SizedBox(
 //              )          ), //KK     // SizedBox
 //
             /// form - save or cancel
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                    onPressed: () async {
-                      Navigator.pop(context);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.grey[100],
-                    ),
-                    child: Text(
-                      'Cancel',
-                      style: TextStyle(color: Colors.teal[800]),
-                    )),
-                SizedBox(width: 5),
-                ElevatedButton(
-                    onPressed: () async {
-                      task.task = _todoTaskController.text;
-                      task.note = _todoNoteController.text;
-                      (_selectedStatus == null)
-                          ? {
-                              task.status = "",
-                              task.statusText = "",
-                            }
-                          : {
-                              task.status = _selectedStatus.toString(),
-                              task.statusText =
-                                  _statusController.text,
-                            };
-                      (_selectedPriority == null)
-                          ? {
-                              task.priority = "",
-                              task.priorityText = "",
-                            }
-                          : {
-                              task.priority = _selectedPriority.toString(),
-                              task.priorityText =
-                                  _priorityController.text,
-                            };
-                      (_selectedCategory == null)
-                          ? {
-                              task.category = "1",
-                              task.categoryText = "Inbox",
-                            }
-                          : {
-                              task.category = _selectedCategory.toString(),
-                              task.categoryText =
-                                  _categoryController.text,
-                            };
-                      task.action1 = _selectedAction1 == null
-                          ? ""
-                          : _selectedAction1.toString();
-                      task.context1 = _selectedContext1 == null
-                          ? ""
-                          : _selectedContext1.toString();
-                      task.tag1 =
-                          _selectedTag1 == null ? "" : _selectedTag1.toString();
-                      (_selectedTag1 == null)
-                          ? {
-                              task.tag1 = "",
-                              task.tag1Text = "",
-                            }
-                          : {
-                              task.tag1 = _selectedTag1.toString(),
-                              task.tag1Text =
-                                  _tag1Controller.text,
-                            };
-                      task.goal1 = _selectedGoal1 == null
-                          ? ""
-                          : _selectedGoal1.toString();
-                      task.dateDue = _todoDateController.text;
-//                      task.dateDue == null!
-//                          ? DateFormat('yyyy-MM-dd').format(DateTime.now())
-//                          : _todoDateController.text;
-                      task.timeDue = _todoTimeController.text;
-                      task.timeDue != ""
-                          ? {
-                              _nTitle = task.timeDue.toString() +
-                                  ' reminder: ' +
-                                  task.task!,
-//                              await notificationPlugin.showNotification(
-//                                  _nTitle, task.note),
-                              await notificationPlugin.scheduleNotification(
-                                  _nTitle,
-                                  task.note!,
-                                  task.dateDue!,
-                                  task.timeDue!)
-                            }
-                          : task.isDone = 0;
-
-                      task.lastModified = DateFormat("yyyy-MM-dd HH:mm:ss")
-                          .format(DateTime.now());
-
-                      var result;
-
-                      print(task.id);
-                      if (task.id != null) {
-                        result = dbHelper.updateTask(task);
-                      } else {
-                        result = dbHelper.insertTask(task);
-                      }
-
-//                      _showSuccessSnackBar(
-//                        Container(
-//                          color: Colors.lAccent[100],
-//                          //KK height: 40,
-//                          child: Row(
-//                            mainAxisAlignment: MainAxisAlignment.center,
-//                            children: [
-//                              (Icon(
-//                                Icons.thumb_up,
-//                                color: Colors.black,
-//                              )),
-//                              Text(
-//                                ' Successfully Saved ',
-//                                style: (TextStyle(color: Colors.black)),
-//                              )
-//                            ],
-//                          ),
-//                        ),
-//                      );
-//                      await Future.delayed(
-//                          const Duration(milliseconds: 500), () {});
-                      Navigator.pop(context);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.teal[800],
-                    ),
-                    child: Text(
-                      'Save',
-                      style: TextStyle(color: Colors.white),
-                    ))
-              ],
-            ),
+//            Row(
+//              mainAxisAlignment: MainAxisAlignment.center,
+//              children: [
+//                ElevatedButton(
+//                    onPressed: () async {
+//                      Navigator.pop(context);
+//                    },
+//                    style: ElevatedButton.styleFrom(
+//                      primary: Colors.grey[100],
+//                   ),
+//                    child: Text(
+//                      'Cancel',
+//                      style: TextStyle(color: Colors.teal[800]),
+//                    )),
+//                SizedBox(width: 5),
+//                ElevatedButton(
+//                    onPressed: () async {
+//                      task.task = _todoTaskController.text;
+//                      task.note = _todoNoteController.text;
+//                      (_selectedStatus == null)
+//                          ? {
+//                              task.status = "",
+//                              task.statusText = "",
+//                            }
+//                          : {
+//                              task.status = _selectedStatus.toString(),
+//                              task.statusText = _statusController.text,
+//                            };
+//                      (_selectedPriority == null)
+//                          ? {
+//                              task.priority = "",
+//                              task.priorityText = "",
+//                            }
+//                          : {
+//                              task.priority = _selectedPriority.toString(),
+//                              task.priorityText = _priorityController.text,
+//                            };
+//                      (_selectedCategory == null)
+//                          ? {
+//                              task.category = "1",
+//                              task.categoryText = "Inbox",
+//                            }
+//                          : {
+//                              task.category = _selectedCategory.toString(),
+//                              task.categoryText = _categoryController.text,
+//                            };
+//                      task.action1 = _selectedAction1 == null
+//                          ? ""
+//                          : _selectedAction1.toString();
+//                      task.context1 = _selectedContext1 == null
+//                          ? ""
+//                          : _selectedContext1.toString();
+//                      task.tag1 =
+//                          _selectedTag1 == null ? "" : _selectedTag1.toString();
+//                      (_selectedTag1 == null)
+//                          ? {
+//                              task.tag1 = "",
+//                             task.tag1Text = "",
+//                            }
+//                          : {
+//                              task.tag1 = _selectedTag1.toString(),
+//                              task.tag1Text = _tag1Controller.text,
+//                            };
+//                      task.goal1 = _selectedGoal1 == null
+//                          ? ""
+//                          : _selectedGoal1.toString();
+//                      task.dateDue = _todoDateController.text;
+//                      task.timeDue = _todoTimeController.text;
+//                      task.timeDue != ""
+//                          ? {
+//                              _nTitle = task.timeDue.toString() +
+//                                  ' reminder: ' +
+//                                  task.task!,
+//                              await notificationPlugin.scheduleNotification(
+//                                  _nTitle,
+//                                  task.note!,
+//                                  task.dateDue!,
+//                                  task.timeDue!)
+//                            }
+//                          : task.isDone = 0;
+//
+//                     task.lastModified = DateFormat("yyyy-MM-dd HH:mm:ss")
+//                          .format(DateTime.now());
+//
+//                      var result;
+//
+//                      print(task.id);
+//                      if (task.id != null) {
+//                        result = dbHelper.updateTask(task);
+//                      } else {
+//                        result = dbHelper.insertTask(task);
+//                      }
+//                      Navigator.pop(context);
+//                    },
+//                    style: ElevatedButton.styleFrom(
+//                      primary: Colors.teal[800],
+//                    ),
+//                    child: Text(
+//                      'Save',
+//                      style: TextStyle(color: Colors.white),
+//                    ))
+//              ],
+//            ),
           ],
         ),
       ),

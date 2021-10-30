@@ -74,13 +74,13 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
             actions: <Widget>[
               ElevatedButton(
                   onPressed: () => Navigator.pop(context),
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.grey[300],
-                    ),
-                    child: Text(
-                      'Cancel',
-                      style: TextStyle(color: Colors.teal[800]),
-                    )),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.grey[300],
+                  ),
+                  child: Text(
+                    'Cancel',
+                    style: TextStyle(color: Colors.teal[800]),
+                  )),
               ElevatedButton(
                   onPressed: () async {
                     _category.name = _categoryNameController.text;
@@ -110,15 +110,13 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
 //                      ),
 //                    ));
                   },
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.teal[800],
-                    ),
-                    child: Text(
-                      'Save',
-                      style: TextStyle(color: Colors.white),
-                    )
-                    ),
-          
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.teal[800],
+                  ),
+                  child: Text(
+                    'Save',
+                    style: TextStyle(color: Colors.white),
+                  )),
             ],
             title: Text('Add Category'),
             content: SingleChildScrollView(
@@ -198,12 +196,10 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                   style: ElevatedButton.styleFrom(
                     primary: Colors.teal[800],
                   ),
-                  child: 
-                  Text(
+                  child: Text(
                     'Update',
                     style: TextStyle(color: Colors.white),
-                  )
-                  ),
+                  )),
             ],
             title: Text('Edit Category'),
             content: SingleChildScrollView(
@@ -238,27 +234,26 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
             backgroundColor: Colors.orange[100],
             actions: <Widget>[
               ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.teal[800],
-                    ),
-                    child: Text(
-                      'Cancel',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  onPressed: () => Navigator.pop(context),
-                  ),
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.teal[800],
+                ),
+                child: Text(
+                  'Cancel',
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () => Navigator.pop(context),
+              ),
               ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.white,
-                    ),
-
-                onPressed: () async {
-                  var result =
-                      await _categoryService.deleteCategoriesbyID(categoryId);
-                  print(result);
-                  if (result > 0) {
-                    Navigator.pop(context);
-                    getAllCategories();
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.white,
+                  ),
+                  onPressed: () async {
+                    var result =
+                        await _categoryService.deleteCategoriesbyID(categoryId);
+                    print(result);
+                    if (result > 0) {
+                      Navigator.pop(context);
+                      getAllCategories();
 //                    _showSuccessSnackBar(
 //                      Container(
 //                        color: Colors.tealAccent[100],
@@ -278,14 +273,12 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
 //                        ),
 //                      ),
 //                    );
-                  }
-                },
-                child: 
-                  Text(
+                    }
+                  },
+                  child: Text(
                     'Delete',
                     style: TextStyle(color: Colors.teal[800]),
-                  )
-              ),
+                  )),
             ],
             title: Text('Are you sure you want to delete this'),
           );
@@ -313,9 +306,24 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
             ),
           ),
         ),
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: true,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white),
+          tooltip: 'Back',
+          onPressed: () {
+            Navigator.pop(context, true);
+          },
+        ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.add, color: Colors.white),
+            tooltip: 'Add Category',
+            onPressed: () {
+              _showFormDialogue(context);
+            },
+          ),
+        ],
         backgroundColor: Colors.teal[800],
-//        backgroundColor: Colors.amber[900],
         elevation: 8,
         title: Center(
           child: Container(
@@ -369,31 +377,31 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           );
         },
       ),
-      bottomNavigationBar: Container(
-        height: 55.0,
-        child: BottomAppBar(
-          color: Colors.teal[800],
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              IconButton(
-                icon: Icon(Icons.arrow_back, color: Colors.white),
-                tooltip: 'Back',
-                onPressed: () {
-                  Navigator.pop(context, true);
-                },
-              ),
-              IconButton(
-                icon: Icon(Icons.add, color: Colors.white),
-                tooltip: 'Add Category',
-                onPressed: () {
-                  _showFormDialogue(context);
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
+//      bottomNavigationBar: Container(
+//        height: 55.0,
+//        child: BottomAppBar(
+//          color: Colors.teal[800],
+//          child: Row(
+//            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//            children: <Widget>[
+//              IconButton(
+//                icon: Icon(Icons.arrow_back, color: Colors.white),
+//                tooltip: 'Back',
+//                onPressed: () {
+//                  Navigator.pop(context, true);
+//                },
+//              ),
+//              IconButton(
+//                icon: Icon(Icons.add, color: Colors.white),
+//                tooltip: 'Add Category',
+//                onPressed: () {
+//                  _showFormDialogue(context);
+//                },
+//              ),
+//            ],
+//          ),
+//        ),
+//      ),
     );
   }
 }

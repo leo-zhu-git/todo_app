@@ -313,7 +313,23 @@ class _PrioritiesScreenState extends State<PrioritiesScreen> {
             ),
           ),
         ),
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: true,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white),
+          tooltip: 'Back',
+          onPressed: () {
+            Navigator.pop(context, true);
+          },
+        ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.add, color: Colors.white),
+            tooltip: 'Add Priority',
+            onPressed: () {
+              _showFormDialogue(context);
+            },
+          ),
+        ],
         backgroundColor: Colors.teal[800],
         elevation: 8,
         title: Center(
@@ -368,31 +384,31 @@ class _PrioritiesScreenState extends State<PrioritiesScreen> {
           );
         },
       ),
-      bottomNavigationBar: Container(
-        height: 55.0,
-        child: BottomAppBar(
-          color: Colors.teal[800],
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              IconButton(
-                icon: Icon(Icons.arrow_back, color: Colors.white),
-                tooltip: 'Back',
-                onPressed: () {
-                  Navigator.pop(context, true);
-                },
-              ),
-              IconButton(
-                icon: Icon(Icons.add, color: Colors.white),
-                tooltip: 'Add Priority',
-                onPressed: () {
-                  _showFormDialogue(context);
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
+//      bottomNavigationBar: Container(
+//        height: 55.0,
+//        child: BottomAppBar(
+//          color: Colors.teal[800],
+//          child: Row(
+//            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//            children: <Widget>[
+//              IconButton(
+//                icon: Icon(Icons.arrow_back, color: Colors.white),
+//                tooltip: 'Back',
+//                onPressed: () {
+//                  Navigator.pop(context, true);
+//                },
+//              ),
+//              IconButton(
+//                icon: Icon(Icons.add, color: Colors.white),
+//                tooltip: 'Add Priority',
+//                onPressed: () {
+//                  _showFormDialogue(context);
+//                },
+//              ),
+//            ],
+//          ),
+//        ),
+//      ),
     );
   }
 }

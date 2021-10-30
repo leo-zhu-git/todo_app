@@ -303,7 +303,23 @@ class _StatusesScreenState extends State<StatusesScreen> {
       backgroundColor: Colors.amber[50],
       key: _globalKey,
       appBar: AppBar(
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: true,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white),
+          tooltip: 'Back',
+          onPressed: () {
+            Navigator.pop(context, true);
+          },
+        ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.add, color: Colors.white),
+            tooltip: 'Add Status',
+            onPressed: () {
+              _showFormDialogue(context);
+            },
+          ),
+        ],
         centerTitle: true,
         flexibleSpace: Container(
           decoration: BoxDecoration(
@@ -314,6 +330,7 @@ class _StatusesScreenState extends State<StatusesScreen> {
             ),
           ),
         ),
+        
         backgroundColor: Colors.teal[800],
         elevation: 8,
         title: Center(
@@ -368,31 +385,31 @@ class _StatusesScreenState extends State<StatusesScreen> {
           );
         },
       ),
-      bottomNavigationBar: Container(
-        height: 55.0,
-        child: BottomAppBar(
-          color: Colors.teal[800],
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              IconButton(
-                icon: Icon(Icons.arrow_back, color: Colors.white),
-                tooltip: 'Back',
-                onPressed: () {
-                  Navigator.pop(context, true);
-                },
-              ),
-              IconButton(
-                icon: Icon(Icons.add, color: Colors.white),
-                tooltip: 'Add Status',
-                onPressed: () {
-                  _showFormDialogue(context);
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
+//      bottomNavigationBar: Container(
+//        height: 55.0,
+//        child: BottomAppBar(
+//          color: Colors.teal[800],
+//          child: Row(
+//           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//            children: <Widget>[
+//              IconButton(
+//                icon: Icon(Icons.arrow_back, color: Colors.white),
+//                tooltip: 'Back',
+//                onPressed: () {
+//                  Navigator.pop(context, true);
+//                },
+//              ),
+//              IconButton(
+//                icon: Icon(Icons.add, color: Colors.white),
+//                tooltip: 'Add Status',
+//                onPressed: () {
+//                  _showFormDialogue(context);
+//                },
+//              ),
+//            ],
+//          ),
+//        ),
+//      ),
     );
   }
 }

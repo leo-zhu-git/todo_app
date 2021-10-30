@@ -701,8 +701,189 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
         ),
         backgroundColor: Colors.teal[800],
 //        backgroundColor: Colors.indigo[600],
-        automaticallyImplyLeading: false,
-        title: Center(child: Text('Personalize - Make this app your own!')),
+        automaticallyImplyLeading: true,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white),
+          tooltip: 'Back',
+          onPressed: () {
+            Navigator.pop(context, true);
+          },
+        ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.save_alt, color: Colors.white),
+            tooltip: 'Add Tag',
+            onPressed: () {
+              setState(() {
+                if (_selectedSortField1 != null)
+                  globals.sortField1 = _selectedSortField1!.id;
+                if (_selectedSortOrder1 != null)
+                  globals.sortOrder1 = _selectedSortOrder1!.id;
+                if (_selectedSortField2 != null)
+                  globals.sortField2 = _selectedSortField2!.id;
+                if (_selectedSortOrder2 != null)
+                  globals.sortOrder2 = _selectedSortOrder2!.id;
+                if (_selectedSortField3 != null)
+                  globals.sortField3 = _selectedSortField3!.id;
+                if (_selectedSortOrder3 != null)
+                  globals.sortOrder3 = _selectedSortOrder3!.id;
+                print(globals.showMain2);
+                if (_selectedShowSec1 != null)
+                  globals.showSec1 = _selectedShowSec1!.id;
+                print(globals.showSec1);
+                if (_selectedShowSec2 != null)
+                  globals.showSec2 = _selectedShowSec2!.id;
+                print(globals.showSec2);
+                if (_selectedShowSec3 != null)
+                  globals.showSec3 = _selectedShowSec3!.id;
+                print(globals.showSec3);
+                if (_selectedFilterIsStar != null)
+                  globals.filterIsStar = _selectedFilterIsStar!.id;
+                if (_selectedFilterIsDone != null)
+                  globals.filterIsDone = _selectedFilterIsDone!.id;
+                if (_selectedFilterDateDue != null)
+                  globals.filterDateDue = _selectedFilterDateDue!.id;
+
+//Save
+                if (customSetting == null) {
+                  customSetting = new CustomSettings(
+                    '',
+                    '',
+                    '',
+                    '',
+                    '',
+                    '',
+                    '',
+                    '',
+                    '',
+                    '',
+                    '',
+                    '',
+                    '',
+                    '',
+                    '',
+                    '',
+                    '',
+                    "",
+                    "",
+                    "",
+                    0,
+                    0,
+                  );
+                }
+
+                customSetting!.sortField1 = _selectedSortField1 == null
+                    ? ""
+                    : _selectedSortField1!.id.toString();
+                customSetting!.sortOrder1 = _selectedSortOrder1 == null
+                    ? ""
+                    : _selectedSortOrder1!.id.toString();
+                customSetting!.sortField2 = _selectedSortField2 == null
+                    ? ""
+                    : _selectedSortField2!.id.toString();
+                customSetting!.sortOrder2 = _selectedSortOrder2 == null
+                    ? ""
+                    : _selectedSortOrder2!.id.toString();
+                customSetting!.sortField3 = _selectedSortField3 == null
+                    ? ""
+                    : _selectedSortField3!.id.toString();
+                customSetting!.sortOrder3 = _selectedSortOrder3 == null
+                    ? ""
+                    : _selectedSortOrder3!.id.toString();
+//                          customSetting.showMain1 = _selectedShowMain1 == null
+//                              ? ""
+//                              : _selectedShowMain1.id.toString();
+//                          customSetting.showMain2 = _selectedShowMain2 == null
+//                              ? ""
+//                              : _selectedShowMain2.id.toString();
+                customSetting!.showSec1 = _selectedShowSec1 == null
+                    ? ""
+                    : _selectedShowSec1!.id.toString();
+                customSetting!.showSec2 = _selectedShowSec2 == null
+                    ? ""
+                    : _selectedShowSec2!.id.toString();
+                customSetting!.showSec3 = _selectedShowSec3 == null
+                    ? ""
+                    : _selectedShowSec3!.id.toString();
+                customSetting!.filterDateDue = _selectedFilterDateDue == null
+                    ? ""
+                    : _selectedFilterDateDue!.id.toString();
+                if (_selectedFilterIsStar == null) {
+                  customSetting!.filterIsStar = 0;
+                } else {
+                  if (_selectedFilterIsStar!.id == 0) {
+                    customSetting!.filterIsStar = 0;
+                  } else {
+                    customSetting!.filterIsStar = 1;
+                  }
+                  if (_selectedFilterIsDone == null) {
+                    customSetting!.filterIsDone = 0;
+                  } else {
+                    if (_selectedFilterIsDone!.id == 0) {
+                      customSetting!.filterIsDone = 0;
+                    } else {
+                      customSetting!.filterIsDone = 1;
+                    }
+                  }
+
+                  customSetting!.filterStatus =
+                      _selectedStatus == null ? "" : _selectedStatus.toString();
+                  customSetting!.filterPriority = _selectedPriority == null
+                      ? ""
+                      : _selectedPriority.toString();
+                  customSetting!.filterCategory = _selectedCategory == null
+                      ? ""
+                      : _selectedCategory.toString();
+                  customSetting!.filterAction = _selectedAction1 == null
+                      ? ""
+                      : _selectedAction1.toString();
+                  customSetting!.filterContext = _selectedContext1 == null
+                      ? ""
+                      : _selectedContext1.toString();
+                  customSetting!.filterLocation = _selectedLocation1 == null
+                      ? ""
+                      : _selectedLocation1.toString();
+                  customSetting!.filterTag =
+                      _selectedTag1 == null ? "" : _selectedTag1.toString();
+                  customSetting!.filterGoal =
+                      _selectedGoal1 == null ? "" : _selectedGoal1.toString();
+
+                  var result;
+
+                  if (customSetting!.id != null) {
+                    result = helper.updateCustomSettings(customSetting!);
+                  } else {
+                    result = helper.insertCustomSettings(customSetting!);
+                  }
+
+//end of save
+                }
+              });
+//                        _showSuccessSnackBar(
+//                          Container(
+//                            color: Colors.tealAccent[100],
+//                            height: 40,
+//                            child: Row(
+//                              mainAxisAlignment: MainAxisAlignment.center,
+//                              children: [
+//                                (Icon(
+//                                  Icons.thumb_up,
+//                                  color: Colors.black,
+//                                )),
+//                                Text(
+//                                  ' Added ',
+//                                  style: (TextStyle(color: Colors.black)),
+//                                )
+//                              ],
+//                            ),
+//                          ),
+//                        );
+              Navigator.of(context).pushNamed('/dashboard');
+            },
+          ),
+        ],
+
+        title: Center(child: Text('Personalize')),
       ),
 
       body: SingleChildScrollView(
@@ -741,7 +922,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     DropdownButton<String>(
-                  style: _textStyleControls,
+                        style: _textStyleControls,
                         items: _categories.map((CustomDropdownItem value) {
                           return DropdownMenuItem<String>(
                               value: value.id,
@@ -769,7 +950,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     DropdownButton<String>(
-                  style: _textStyleControls,
+                        style: _textStyleControls,
                         items: _statuses.map((CustomDropdownItem value) {
                           return DropdownMenuItem<String>(
                               value: value.id,
@@ -797,7 +978,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     DropdownButton<String>(
-                  style: _textStyleControls,
+                        style: _textStyleControls,
                         items: _priorities.map((CustomDropdownItem value) {
                           return DropdownMenuItem<String>(
                               value: value.id,
@@ -900,7 +1081,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     DropdownButton<String>(
-                  style: _textStyleControls,
+                      style: _textStyleControls,
                       items: _tag1s.map((CustomDropdownItem value) {
                         return DropdownMenuItem<String>(
                             value: value.id, child: Text(value.name!));
@@ -1110,7 +1291,8 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 height: 20,
               ),
 
-              Text("Picklist | User-defined Dropdowns", style: _textStyleControls),
+              Text("Picklist | User-defined Dropdowns",
+                  style: _textStyleControls),
 
 ///////////////////////////
 //  Picklist - Categories
@@ -1166,7 +1348,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                       builder: (context) => PrioritiesScreen())),
                 ),
               ),
-              SizedBox(height: 2), 
+              SizedBox(height: 2),
 ///////////////////////////
 //  Picklist - Contexts
 ///////////////////////////
@@ -1224,7 +1406,8 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
               SizedBox(
                 height: 20,
               ),
-             Text("View - second line up to 3 fields", style: _textStyleControls),
+              Text("View - second line up to 3 fields",
+                  style: _textStyleControls),
 ///////////////////////////
 //  Show Main 1
 ///////////////////////////
@@ -1251,7 +1434,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.pink[100]),
                 child: DropdownButtonFormField<ShowItem>(
-                  style: _textStyleControls,                  
+                  style: _textStyleControls,
                   items: _dropdownMenuItemsShow,
                   hint: Text('Display Secondary1'),
                   value: _selectedShowSec1,
@@ -1303,210 +1486,191 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 ),
               ),
 
-              SizedBox(
-                height: 20,
-              ),
+//              SizedBox(
+//                height: 20,
+//              ),
 
               /// form - save or cancel
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.grey[300],
-                      ),
-                      child: Text(
-                        'Cancel',
-                        style: TextStyle(color: Colors.teal[800]),
-                      )),
-                  SizedBox(width: 5),
-                  ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          if (_selectedSortField1 != null)
-                            globals.sortField1 = _selectedSortField1!.id;
-                          if (_selectedSortOrder1 != null)
-                            globals.sortOrder1 = _selectedSortOrder1!.id;
-                          if (_selectedSortField2 != null)
-                            globals.sortField2 = _selectedSortField2!.id;
-                          if (_selectedSortOrder2 != null)
-                            globals.sortOrder2 = _selectedSortOrder2!.id;
-                          if (_selectedSortField3 != null)
-                            globals.sortField3 = _selectedSortField3!.id;
-                          if (_selectedSortOrder3 != null)
-                            globals.sortOrder3 = _selectedSortOrder3!.id;
-//                          if (_selectedShowMain1 != null)
-//                            globals.showMain1 = _selectedShowMain1.id;
-//                          print(globals.showMain1);
-//                          if (_selectedShowMain2 != null)
-//                            globals.showMain2 = _selectedShowMain2.id;
-                          print(globals.showMain2);
-                          if (_selectedShowSec1 != null)
-                            globals.showSec1 = _selectedShowSec1!.id;
-                          print(globals.showSec1);
-                          if (_selectedShowSec2 != null)
-                            globals.showSec2 = _selectedShowSec2!.id;
-                          print(globals.showSec2);
-                          if (_selectedShowSec3 != null)
-                            globals.showSec3 = _selectedShowSec3!.id;
-                          print(globals.showSec3);
-                          if (_selectedFilterIsStar != null)
-                            globals.filterIsStar = _selectedFilterIsStar!.id;
-                          if (_selectedFilterIsDone != null)
-                            globals.filterIsDone = _selectedFilterIsDone!.id;
-                          if (_selectedFilterDateDue != null)
-                            globals.filterDateDue = _selectedFilterDateDue!.id;
-//                          if (_selectedFilterStatus != null)
-//                            globals.filterStatus = _selectedFilterStatus.id;
-//                          if (_selectedFilterPriority != null)
-//                            globals.filterPriority = _selectedFilterPriority.id;
-//                          if (_selectedFilterCategory != null)
-//                            globals.filterCategory = _selectedFilterCategory.id;
-//                          if (_selectedFilterAction != null)
-//                            globals.filterAction = _selectedFilterAction.id;
-//                          if (_selectedFilterContext != null)
-//                            globals.filterContext = _selectedFilterContext.id;
-//                          if (_selectedFilterLocation != null)
-//                            globals.filterLocation = _selectedFilterLocation.id;
-//                          if (_selectedFilterTag != null)
-//                            globals.filterTag = _selectedFilterTag.id;
+//              Row(
+//                mainAxisAlignment: MainAxisAlignment.center,
+//                children: [
+//                  ElevatedButton(
+//                      onPressed: () {
+//                        Navigator.pop(context);
+//                      },
+//                      style: ElevatedButton.styleFrom(
+//                        primary: Colors.grey[300],
+//                      ),
+//                      child: Text(
+//                        'Cancel',
+//                        style: TextStyle(color: Colors.teal[800]),
+//                      )),
+//                  SizedBox(width: 5),
+//                  ElevatedButton(
+//                      onPressed: () {
+//                        setState(() {
+//                          if (_selectedSortField1 != null)
+//                            globals.sortField1 = _selectedSortField1!.id;
+//                          if (_selectedSortOrder1 != null)
+//                            globals.sortOrder1 = _selectedSortOrder1!.id;
+//                          if (_selectedSortField2 != null)
+//                            globals.sortField2 = _selectedSortField2!.id;
+//                          if (_selectedSortOrder2 != null)
+//                            globals.sortOrder2 = _selectedSortOrder2!.id;
+//                          if (_selectedSortField3 != null)
+//                            globals.sortField3 = _selectedSortField3!.id;
+//                          if (_selectedSortOrder3 != null)
+//                            globals.sortOrder3 = _selectedSortOrder3!.id;
+//                          print(globals.showMain2);
+//                          if (_selectedShowSec1 != null)
+//                            globals.showSec1 = _selectedShowSec1!.id;
+//                          print(globals.showSec1);
+//                          if (_selectedShowSec2 != null)
+//                            globals.showSec2 = _selectedShowSec2!.id;
+//                          print(globals.showSec2);
+//                          if (_selectedShowSec3 != null)
+//                            globals.showSec3 = _selectedShowSec3!.id;
+//                         print(globals.showSec3);
+//                          if (_selectedFilterIsStar != null)
+//                            globals.filterIsStar = _selectedFilterIsStar!.id;
+//                          if (_selectedFilterIsDone != null)
+//                            globals.filterIsDone = _selectedFilterIsDone!.id;
+//                          if (_selectedFilterDateDue != null)
+//                            globals.filterDateDue = _selectedFilterDateDue!.id;
 
 //Save
-                          if (customSetting == null) {
-                            customSetting = new CustomSettings(
-                              '',
-                              '',
-                              '',
-                              '',
-                              '',
-                              '',
-                              '',
-                              '',
-                              '',
-                              '',
-                              '',
-                              '',
-                              '',
-                              '',
-                              '',
-                              '',
-                              '',
-                              "",
-                              "",
-                              "",
-                              0,
-                              0,
-                            );
-                          }
+//                          if (customSetting == null) {
+//                            customSetting = new CustomSettings(
+//                              '',
+//                              '',
+//                              '',
+//                              '',
+//                              '',
+//                              '',
+//                              '',
+//                              '',
+//                              '',
+//                              '',
+//                              '',
+//                              '',
+//                              '',
+//                              '',
+//                              '',
+//                              '',
+//                              '',
+//                              "",
+//                              "",
+//                              "",
+//                              0,
+//                              0,
+//                            );
+//                          }
 
-                          customSetting!.sortField1 =
-                              _selectedSortField1 == null
-                                  ? ""
-                                  : _selectedSortField1!.id.toString();
-                          customSetting!.sortOrder1 =
-                              _selectedSortOrder1 == null
-                                  ? ""
-                                  : _selectedSortOrder1!.id.toString();
-                          customSetting!.sortField2 =
-                              _selectedSortField2 == null
-                                  ? ""
-                                  : _selectedSortField2!.id.toString();
-                          customSetting!.sortOrder2 =
-                              _selectedSortOrder2 == null
-                                  ? ""
-                                  : _selectedSortOrder2!.id.toString();
-                          customSetting!.sortField3 =
-                              _selectedSortField3 == null
-                                  ? ""
-                                  : _selectedSortField3!.id.toString();
-                          customSetting!.sortOrder3 =
-                              _selectedSortOrder3 == null
-                                  ? ""
-                                  : _selectedSortOrder3!.id.toString();
+//                          customSetting!.sortField1 =
+//                              _selectedSortField1 == null
+//                                  ? ""
+//                                  : _selectedSortField1!.id.toString();
+//                          customSetting!.sortOrder1 =
+//                              _selectedSortOrder1 == null
+//                                  ? ""
+//                                  : _selectedSortOrder1!.id.toString();
+//                          customSetting!.sortField2 =
+//                              _selectedSortField2 == null
+//                                  ? ""
+//                                  : _selectedSortField2!.id.toString();
+//                          customSetting!.sortOrder2 =
+//                              _selectedSortOrder2 == null
+//                                  ? ""
+//                                  : _selectedSortOrder2!.id.toString();
+//                          customSetting!.sortField3 =
+//                              _selectedSortField3 == null
+//                                  ? ""
+//                                  : _selectedSortField3!.id.toString();
+//                          customSetting!.sortOrder3 =
+//                              _selectedSortOrder3 == null
+//                                  ? ""
+//                                  : _selectedSortOrder3!.id.toString();
 //                          customSetting.showMain1 = _selectedShowMain1 == null
 //                              ? ""
 //                              : _selectedShowMain1.id.toString();
 //                          customSetting.showMain2 = _selectedShowMain2 == null
 //                              ? ""
 //                              : _selectedShowMain2.id.toString();
-                          customSetting!.showSec1 = _selectedShowSec1 == null
-                              ? ""
-                              : _selectedShowSec1!.id.toString();
-                          customSetting!.showSec2 = _selectedShowSec2 == null
-                              ? ""
-                              : _selectedShowSec2!.id.toString();
-                          customSetting!.showSec3 = _selectedShowSec3 == null
-                              ? ""
-                              : _selectedShowSec3!.id.toString();
-                          customSetting!.filterDateDue =
-                              _selectedFilterDateDue == null
-                                  ? ""
-                                  : _selectedFilterDateDue!.id.toString();
-                          if (_selectedFilterIsStar == null) {
-                            customSetting!.filterIsStar = 0;
-                          } else {
-                            if (_selectedFilterIsStar!.id == 0) {
-                              customSetting!.filterIsStar = 0;
-                            } else {
-                              customSetting!.filterIsStar = 1;
-                            }
-                            if (_selectedFilterIsDone == null) {
-                              customSetting!.filterIsDone = 0;
-                            } else {
-                              if (_selectedFilterIsDone!.id == 0) {
-                                customSetting!.filterIsDone = 0;
-                              } else {
-                                customSetting!.filterIsDone = 1;
-                              }
-                            }
+//                          customSetting!.showSec1 = _selectedShowSec1 == null
+//                              ? ""
+//                            : _selectedShowSec1!.id.toString();
+//                          customSetting!.showSec2 = _selectedShowSec2 == null
+//                              ? ""
+//                              : _selectedShowSec2!.id.toString();
+//                          customSetting!.showSec3 = _selectedShowSec3 == null
+//                              ? ""
+//                              : _selectedShowSec3!.id.toString();
+//                          customSetting!.filterDateDue =
+//                             _selectedFilterDateDue == null
+//                                  ? ""
+//                                  : _selectedFilterDateDue!.id.toString();
+//                          if (_selectedFilterIsStar == null) {
+//                            customSetting!.filterIsStar = 0;
+//                          } else {
+//                            if (_selectedFilterIsStar!.id == 0) {
+//                              customSetting!.filterIsStar = 0;
+//                            } else {
+//                              customSetting!.filterIsStar = 1;
+//                            }
+//                            if (_selectedFilterIsDone == null) {
+//                              customSetting!.filterIsDone = 0;
+//                            } else {
+//                              if (_selectedFilterIsDone!.id == 0) {
+//                                customSetting!.filterIsDone = 0;
+//                              } else {
+//                                customSetting!.filterIsDone = 1;
+//                              }
+//                            }
 
-                            customSetting!.filterStatus =
-                                _selectedStatus == null
-                                    ? ""
-                                    : _selectedStatus.toString();
-                            customSetting!.filterPriority =
-                                _selectedPriority == null
-                                    ? ""
-                                    : _selectedPriority.toString();
-                            customSetting!.filterCategory =
-                                _selectedCategory == null
-                                    ? ""
-                                    : _selectedCategory.toString();
-                            customSetting!.filterAction =
-                                _selectedAction1 == null
-                                    ? ""
-                                    : _selectedAction1.toString();
-                            customSetting!.filterContext =
-                                _selectedContext1 == null
-                                    ? ""
-                                    : _selectedContext1.toString();
-                            customSetting!.filterLocation =
-                                _selectedLocation1 == null
-                                    ? ""
-                                    : _selectedLocation1.toString();
-                            customSetting!.filterTag = _selectedTag1 == null
-                                ? ""
-                                : _selectedTag1.toString();
-                            customSetting!.filterGoal = _selectedGoal1 == null
-                                ? ""
-                                : _selectedGoal1.toString();
+//                            customSetting!.filterStatus =
+//                                _selectedStatus == null
+//                                    ? ""
+//                                    : _selectedStatus.toString();
+//                            customSetting!.filterPriority =
+//                                _selectedPriority == null
+//                                    ? ""
+//                                    : _selectedPriority.toString();
+//                            customSetting!.filterCategory =
+//                                _selectedCategory == null
+//                                    ? ""
+//                                    : _selectedCategory.toString();
+//                            customSetting!.filterAction =
+//                                _selectedAction1 == null
+//                                    ? ""
+//                                    : _selectedAction1.toString();
+//                            customSetting!.filterContext =
+//                                _selectedContext1 == null
+//                                    ? ""
+//                                    : _selectedContext1.toString();
+//                            customSetting!.filterLocation =
+//                                _selectedLocation1 == null
+//                                    ? ""
+//                                    : _selectedLocation1.toString();
+//                            customSetting!.filterTag = _selectedTag1 == null
+//                                ? ""
+//                                : _selectedTag1.toString();
+//                            customSetting!.filterGoal = _selectedGoal1 == null
+//                                ? ""
+//                                : _selectedGoal1.toString();
 
-                            var result;
+//                            var result;
 
-                            if (customSetting!.id != null) {
-                              result =
-                                  helper.updateCustomSettings(customSetting!);
-                            } else {
-                              result =
-                                  helper.insertCustomSettings(customSetting!);
-                            }
+//                            if (customSetting!.id != null) {
+//                              result =
+//                                  helper.updateCustomSettings(customSetting!);
+//                            } else {
+//                              result =
+//                                  helper.insertCustomSettings(customSetting!);
+//                            }
 
 //end of save
-                          }
-                        });
+//                          }
+//                        });
 //                        _showSuccessSnackBar(
 //                          Container(
 //                            color: Colors.tealAccent[100],
@@ -1526,17 +1690,17 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
 //                            ),
 //                          ),
 //                        );
-                        Navigator.of(context).pushNamed('/dashboard');
-                      },
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.teal[800],
-                      ),
-                      child: Text(
-                        'Save',
-                        style: TextStyle(color: Colors.white),
-                      ))
-                ],
-              ),
+//                        Navigator.of(context).pushNamed('/dashboard');
+//                      },
+//                      style: ElevatedButton.styleFrom(
+//                        primary: Colors.teal[800],
+//                      ),
+//                      child: Text(
+//                        'Save',
+//                        style: TextStyle(color: Colors.white),
+//                      ))
+//                ],
+//              ),
             ],
           ),
         ),

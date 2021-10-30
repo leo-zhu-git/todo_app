@@ -61,7 +61,7 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
     _editFormDialogue(context);
   }
 
-  _showFormDialog(BuildContext context) {
+  _showFormDialogue(BuildContext context) {
     _tag1NameController.text = '';
     _tag1DescriptionController.text = '';
     return showDialog(
@@ -300,7 +300,24 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
             ),
           ),
         ),
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: true,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white),
+          tooltip: 'Back',
+          onPressed: () {
+            Navigator.pop(context, true);
+          },
+        ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.add, color: Colors.white),
+            tooltip: 'Add Tag',
+            onPressed: () {
+              _showFormDialogue(context);
+            },
+          ),
+        ],
+
         backgroundColor: Colors.teal[800],
         title: Center(
           child: Container(
@@ -353,31 +370,31 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
           );
         },
       ),
-      bottomNavigationBar: Container(
-        height: 55.0,
-        child: BottomAppBar(
-          color: Colors.teal[800],
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              IconButton(
-                icon: Icon(Icons.arrow_back, color: Colors.white),
-                tooltip: 'Back',
-                onPressed: () {
-                  Navigator.pop(context, true);
-                },
-              ),
-              IconButton(
-                icon: Icon(Icons.add, color: Colors.white),
-                tooltip: 'Add Tag',
-                onPressed: () {
-                  _showFormDialog(context);
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
+//      bottomNavigationBar: Container(
+//        height: 55.0,
+//        child: BottomAppBar(
+//          color: Colors.teal[800],
+//          child: Row(
+//            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//            children: <Widget>[
+//              IconButton(
+//                icon: Icon(Icons.arrow_back, color: Colors.white),
+//                tooltip: 'Back',
+//                onPressed: () {
+//                  Navigator.pop(context, true);
+//                },
+//              ),
+//             IconButton(
+//                icon: Icon(Icons.add, color: Colors.white),
+//                tooltip: 'Add Tag',
+//                onPressed: () {
+//                  _showFormDialog(context);
+//                },
+//              ),
+//            ],
+//          ),
+//        ),
+//      ),
     );
   }
 }
