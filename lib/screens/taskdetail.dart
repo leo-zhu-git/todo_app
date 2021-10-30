@@ -738,26 +738,26 @@ Widget buildTag1Picker() => SizedBox(
 ///////////////////////////
 //  WHAT - NOTE
 ///////////////////////////
-//            Container(
-//              margin:
-//                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
-//              decoration: new BoxDecoration(
-//                color: Colors.yellow[200],
-//              ),
-//              child: TextField(
-//                style: _textStyleControls,
-//                controller: _todoNoteController,
-//                onChanged: (value) {
-//                  task.note = value;
-//                },
-//                minLines: 4,
-//                maxLines: 8,
-//                decoration: InputDecoration(
-//                  labelText: ' Note',
-//                  hintText: ' Write Todo Note',
-//                ),
-//              ),
-//            ),
+            Container(
+              margin:
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
+              decoration: new BoxDecoration(
+                color: Colors.yellow[200],
+              ),
+              child: TextField(
+                style: _textStyleControls,
+                controller: _todoNoteController,
+                onChanged: (value) {
+                  task.note = value;
+                },
+                minLines: 4,
+                maxLines: 8,
+                decoration: InputDecoration(
+                  labelText: ' Note',
+                  hintText: ' Write Todo Note',
+                ),
+              ),
+            ),
 
 ///////////////////////////
 //  WHEN - DATE DUE
