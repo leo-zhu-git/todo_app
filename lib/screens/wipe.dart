@@ -23,7 +23,15 @@ class _WipeScreenState extends State<WipeScreen> {
     return Scaffold(
       key: _key,
       appBar: AppBar(
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: true,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white),
+          tooltip: 'Back',
+          onPressed: () {
+            Navigator.pop(context, true);
+          },
+        ),
+
         centerTitle: true,
         flexibleSpace: Container(
           decoration: BoxDecoration(
@@ -42,25 +50,25 @@ class _WipeScreenState extends State<WipeScreen> {
           actionChips(),
         ],
       ),
-      bottomNavigationBar: Container(
-        height: 55.0,
-        child: BottomAppBar(
-          color: Colors.teal[800],
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              IconButton(
-                icon: Icon(Icons.home, color: Colors.white),
-                tooltip: 'Back to Home',
-                onPressed: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => TaskHome()));
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
+//      bottomNavigationBar: Container(
+//        height: 55.0,
+//        child: BottomAppBar(
+//          color: Colors.teal[800],
+//          child: Row(
+//            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//            children: <Widget>[
+//              IconButton(
+//                icon: Icon(Icons.home, color: Colors.white),
+//                tooltip: 'Back to Home',
+//                onPressed: () {
+//                  Navigator.of(context).push(
+//                      MaterialPageRoute(builder: (context) => TaskHome()));
+//                },
+//              ),
+//            ],
+//          ),
+//        ),
+//      ),
     );
   }
 

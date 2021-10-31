@@ -82,15 +82,17 @@ class NotificationPlugin {
 ////////////////////////
   Future<void> showNotification(String _nTitle, String _nBody) async {
     var androidChannelSpecifics = AndroidNotificationDetails(
-      'CHANNEL_ID_12',
+      'CHANNEL_ID_31',
       'CHANNEL_NAME',
-      //"CHANNEL_DESCRIPTION",
-      color: const Color.fromARGB(255, 255, 0, 0),
-//      color: Colors.yellow,
+//      'CHANNEL_DESCRIPTION',
+//      color: const Color.fromARGB(255, 0, 255, 0),
+//      icon: 'notifytodomit',
+      icon: 'secondhalf_notify_icon',
+      color: Color.fromARGB(255, 255, 204, 0),
       importance: Importance.max,
       priority: Priority.high,
       playSound: true,
-      timeoutAfter: 5000,
+      timeoutAfter: 10000,
       ledColor: const Color.fromARGB(255, 0, 255, 0),
       ledOnMs: 1000,
       ledOffMs: 500,

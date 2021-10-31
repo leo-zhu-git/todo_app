@@ -21,14 +21,14 @@ class _LocalNotificationScreenState extends State<LocalNotificationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Notifications Testing...'),
+          title: Text('Notifications Testing - NOW...'),
         ),
         body: Column(
           children: [
             Center(
               child: ElevatedButton(
                 onPressed: () async {
-                  await notificationPlugin.showNotification('todoMIT task title', 'todoMIT task body');
+                  await notificationPlugin.showNotification('todoMIT showNow title', 'todoMIT showNow body');
                 },
                 child: Text('Send Notification Now [working]'),
               ),
