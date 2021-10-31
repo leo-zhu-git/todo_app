@@ -349,7 +349,7 @@ class DbHelper {
       '0', // dateDue
       "", // priority
       "", // status
-      "1", // category
+      "", // category - set to null
       "", // action
       "", // context
       "", // location

@@ -111,7 +111,7 @@ class TaskHomeState extends State {
           child: Column(
             children: <Widget>[
               Badge(
-                child: Text('View          '),
+                child: Text('Main          '),
                 shape: BadgeShape.square,
                 position: BadgePosition.topEnd(),
                 badgeContent: Text(count.toString(),

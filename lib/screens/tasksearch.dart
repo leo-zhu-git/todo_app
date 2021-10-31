@@ -317,7 +317,6 @@ class TaskSearchState extends State {
                     1);
               },
               decoration: InputDecoration(
-//                labelStyle: textStyle,
                 fillColor: Colors.green[100],
                 border: InputBorder.none,
                 filled: true, // dont forget this line
@@ -1555,7 +1554,7 @@ class TaskSearchState extends State {
             : 0;
       }
     }
-    getData();
+//    getData();
     setState(() {
       customSetting = customSetting;
       globals.bootstrap = 1;
