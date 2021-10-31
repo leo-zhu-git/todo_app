@@ -90,8 +90,8 @@ class FilterIsDone {
   FilterIsDone(this.id, this.name);
   static List<FilterIsDone> getIsDone() {
     return <FilterIsDone>[
-      FilterIsDone(0, '-- Completed Tasks - Show --'),
-      FilterIsDone(1, 'Completed Tasks - Hide'),
+      FilterIsDone(0, '-- Include Completed Tasks --'),
+      FilterIsDone(1, 'Hide Completed Tasks'),
     ];
   }
 }
@@ -345,7 +345,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
 //    cus.id = null;
     cus.name =
         "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
-    cus.name = "-- Select Category --                                         ";
+    cus.name = "-- All Categories -- ";
     _categories.add(cus);
     categories.forEach((category) {
       setState(() {
@@ -372,7 +372,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     cus.name =
         "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
     cus.name =
-        "-- Select Status --                                              ";
+        "-- All Statuses --";
     _statuses.add(cus);
     statuses.forEach((status) {
       setState(() {
@@ -399,7 +399,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     cus.name =
         "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
     cus.name =
-        "-- Select Priority --                                            ";
+        "-- All Priorities --";
     _priorities.add(cus);
     priorities.forEach((priority) {
       setState(() {
@@ -426,7 +426,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     cus.name =
         "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
     cus.name =
-        "-- Select Action --                                              ";
+        "-- All Actions --";
     _action1s.add(cus);
     action1s.forEach((action1) {
       setState(() {
@@ -452,7 +452,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     cus.name =
         "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
     cus.name =
-        "-- Select Context --                                             ";
+        "-- All Contexts --";
     _context1s.add(cus);
     context1s.forEach((context1) {
       setState(() {
@@ -479,7 +479,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     cus.name =
         "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
     cus.name =
-        "-- Select Location --                                           ";
+        "-- All Locations --";
     _location1s.add(cus);
     location1s.forEach((location1) {
       setState(() {
@@ -506,7 +506,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     cus.name =
         "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
     cus.name =
-        "-- Select Tag --                                                    ";
+        "-- All Tags --";
     _tag1s.add(cus);
     tag1s.forEach((tag1) {
       setState(() {
@@ -532,7 +532,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     cus.name =
         "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
     cus.name =
-        "-- Select Goal --                                                  ";
+        "-- All Goals --";
     _goal1s.add(cus);
     goal1s.forEach((goal1) {
       setState(() {

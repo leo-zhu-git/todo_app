@@ -64,7 +64,7 @@ class TaskSearchState extends State {
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
 //    cus.id = null;
-    cus.name = "-- Select Status --";
+    cus.name = "-- All Statuses --";
     _statuses.add(cus);
     statuses.forEach((status) {
       setState(() {
@@ -88,7 +88,7 @@ class TaskSearchState extends State {
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
 //    cus.id = null;
-    cus.name = "-- Select Priority --";
+    cus.name = "-- All Priorities --";
     _priorities.add(cus);
     priorities.forEach((priority) {
       setState(() {
@@ -112,7 +112,7 @@ class TaskSearchState extends State {
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
 //    cus.id = null;
-    cus.name = "-- Select Category --";
+    cus.name = "-- All Categories --";
     _categories.add(cus);
     categories.forEach((category) {
       setState(() {
@@ -136,7 +136,7 @@ class TaskSearchState extends State {
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
 //    cus.id = null;
-    cus.name = "--Select Action--             ";
+    cus.name = "-- All Actions --";
     _action1s.add(cus);
     action1s.forEach((action1) {
       setState(() {
@@ -160,7 +160,7 @@ class TaskSearchState extends State {
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
 //    cus.id = null;
-    cus.name = "--Select Context--            ";
+    cus.name = "-- All Contexts --";
     _context1s.add(cus);
     context1s.forEach((context1) {
       setState(() {
@@ -182,7 +182,7 @@ class TaskSearchState extends State {
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
 //    cus.id = null;
-    cus.name = "--Select Location--           ";
+    cus.name = "-- All Locations --";
     _location1s.add(cus);
     location1s.forEach((location1) {
       setState(() {
@@ -206,7 +206,7 @@ class TaskSearchState extends State {
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
 //    cus.id = null;
-    cus.name = "--Select Tag--                ";
+    cus.name = "-- All Tags --";
     _tag1s.add(cus);
     tag1s.forEach((tag1) {
       setState(() {
@@ -229,7 +229,7 @@ class TaskSearchState extends State {
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
 //    cus.id = null;
-    cus.name = "--Select Goal --                ";
+    cus.name = "-- All Goals --";
     _goal1s.add(cus);
     goal1s.forEach((goal1) {
       setState(() {
