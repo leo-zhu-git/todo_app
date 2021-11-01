@@ -752,8 +752,32 @@ Plan C - USD 24 | 12 month
     Database? db = await this.db;
 
     String queryStr = "";
+
     queryStr =
-        "SELECT * FROM $tblTodo WHERE ($colTask LIKE '%$searchText%' OR $colNote LIKE '%$searchText%') ";
+        "SELECT $tblTodo.id,$tblTodo.task, $tblTodo.note, dateDue,timeDue,   " +
+            "status, priority, category,action1,context1,location1,tag1,goal1, " +
+            "isStar, isDone, dateDone, lastModified, " +
+            "statuses.name as statusesname, " +
+            "priorities.name as prioritiesname, " +
+            "categories.name as categoriesname, " +
+            "action1s.name as action1name, " +
+            "context1s.name as context1name, " +
+            "location1s.name as location1name, " +
+            "tag1s.name as tag1name, " +
+            "goal1s.name as goal1name  FROM $tblTodo  " +
+            " LEFT JOIN statuses ON  $tblTodo.status = statuses.id" +
+            " LEFT JOIN priorities ON  $tblTodo.priority = priorities.id" +
+            " LEFT JOIN categories ON  $tblTodo.category = categories.id" +
+            " LEFT JOIN action1s ON $tblTodo.action1 = action1s.id " +
+            " LEFT JOIN context1s ON  $tblTodo.context1 = context1s.id" +
+            " LEFT JOIN location1s ON  $tblTodo.location1 = location1s.id" +
+            " LEFT JOIN tag1s ON  $tblTodo.tag1 = tag1s.id" +
+            " LEFT JOIN goal1s ON  $tblTodo.goal1 = goal1s.id " +
+            "WHERE ($colTask LIKE '%$searchText%' OR $colNote LIKE '%$searchText%')";
+
+
+//    queryStr =
+//        "SELECT * FROM $tblTodo WHERE ($colTask LIKE '%$searchText%' OR $colNote LIKE '%$searchText%') ";
 
     if (includeIsDone! == 1) {
       //queryStr = queryStr + " AND  $colIsDone = $includeIsDone";
