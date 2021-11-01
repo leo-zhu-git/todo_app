@@ -12,6 +12,7 @@ import 'package:todo_app/screens/location1s_screen.dart';
 import 'package:todo_app/screens/priorities_screen.dart';
 import 'package:todo_app/screens/statuses_screen.dart';
 import 'package:todo_app/screens/tag1s_screen.dart';
+import 'package:todo_app/screens/taskhome.dart';
 import 'package:todo_app/util/dbhelper.dart';
 import 'package:intl/intl.dart';
 import 'package:todo_app/model/globals.dart' as globals;
@@ -706,7 +707,9 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
           icon: Icon(Icons.arrow_back, color: Colors.white),
           tooltip: 'Back',
           onPressed: () {
-            Navigator.pop(context, true);
+//            Navigator.pop(context, true);
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => TaskHome()));
           },
         ),
         actions: [
