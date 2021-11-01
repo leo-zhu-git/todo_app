@@ -374,6 +374,42 @@ class TaskSearchState extends State {
                       ),
 //####################################end of Show completed
 
+//####################################Show Focus Tasks Task Check box
+                      Container(
+                        margin:
+                            EdgeInsets.only(left: 8.0, right: 8.0, bottom: 1.0),
+                        decoration: BoxDecoration(
+                            shape: BoxShape.rectangle, color: Colors.blue[100]),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text('Focus Tasks Only:',
+                                style: _textStyleControls),
+                            Checkbox(
+                              value: (_showIsStar == 0) ? false : true,
+                              onChanged: (value) {
+                                setState(() {
+                                  _showIsStar = (value! == false) ? 0 : 1;
+                                  searchData(
+                                      _searchText,
+                                      _selectedStatus,
+                                      _selectedPriority,
+                                      _selectedCategory,
+                                      _selectedAction1,
+                                      _selectedContext1,
+                                      _selectedLocation1,
+                                      _selectedTag1,
+                                      _selectedGoal1,
+                                      _showIsStar,
+                                      _showIsDone);
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+//####################################end of Show Focus Tasks
+
 //#################################Status#####################################################
                       Container(
                         margin:

@@ -42,7 +42,7 @@ class SortItem {
 //      SortItem(9, 'Location'),
       SortItem(7, 'Tag'),
 //      SortItem(11, 'Goal'),
-      SortItem(8, 'Star'),
+      SortItem(8, 'Focus'),
       SortItem(9, 'Done'),
     ];
   }
@@ -65,7 +65,7 @@ class ShowItem {
 //      ShowItem(7, 'Location'),
       ShowItem(5, 'Tag'),
 //      ShowItem(9, 'Goal'),
-      ShowItem(6, 'Star'),
+      ShowItem(6, 'Focus'),
     ];
   }
 }
@@ -77,8 +77,8 @@ class FilterIsStar {
   FilterIsStar(this.id, this.name);
   static List<FilterIsStar> getIsStar() {
     return <FilterIsStar>[
-      FilterIsStar(0, '-- Star - Show All --'),
-      FilterIsStar(1, 'Star - Show Only'),
+      FilterIsStar(0, '-- Focus & All Tasks --'),
+      FilterIsStar(1, 'Focus Tasks Only'),
     ];
   }
 }
@@ -1132,7 +1132,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 child: DropdownButtonFormField<FilterIsStar>(
                   style: _textStyleControls,
                   items: _dropdownFilterIsStar,
-                  hint: Text('Filter by Is Star Tasks'),
+                  hint: Text('Filter by Focus Tasks'),
                   value: _selectedFilterIsStar,
                   onChanged: (selectedFilterIsStar) {
                     setState(() {

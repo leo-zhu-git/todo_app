@@ -785,6 +785,12 @@ Plan C - USD 24 | 12 month
       queryStr = queryStr + " AND  $colIsDone = 0 ";
     }
 
+    if (includeIsStar! == 0) {
+      //queryStr = queryStr + " AND  $colIsDone = $includeIsDone";
+    } else {
+      queryStr = queryStr + " AND  $colIsStar = 1 ";
+    }
+
     if (searchStatus != "null") {
       queryStr = queryStr + " AND $colStatus = '$searchStatus' ";
     }
