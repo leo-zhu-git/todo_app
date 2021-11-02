@@ -114,7 +114,7 @@ class TaskHomeState extends State {
                 child: Container(
                   child: Row(
                     children: [
-                        Icon(Icons.home, color: Colors.pink[100]),
+                        Center(child: Icon(Icons.home, color: Colors.pink[100])),
                         ]
                       )),
                 shape: BadgeShape.square,
