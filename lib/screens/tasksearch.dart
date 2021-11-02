@@ -41,7 +41,7 @@ class TaskSearchState extends State {
   String? _selectedTag1;
   String? _selectedGoal1;
   int? isChecked = 0;
-  int? _showIsStar = 1;
+  int? _showIsStar = 0;
   int? _showIsDone = 1;
 
   @override
