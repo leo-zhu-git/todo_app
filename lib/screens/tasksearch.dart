@@ -410,6 +410,48 @@ class TaskSearchState extends State {
                       ),
 //####################################end of Show Focus Tasks
 
+//#################################Category#####################################################
+                      Container(
+                        margin:
+                            EdgeInsets.only(top: 1.0, left: 8.0, right: 8.0),
+                        decoration: BoxDecoration(
+                            shape: BoxShape.rectangle, color: Colors.blue[100]),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            DropdownButton<String?>(
+                                items:
+                                    _categories.map((CustomDropdownItem value) {
+                                  return DropdownMenuItem<String>(
+                                      value: value.id,
+                                      child: Text(
+                                        value.name!,
+                                        overflow: TextOverflow.ellipsis,
+                                      ));
+                                }).toList(),
+                                style: _textStyleControls,
+                                value: _selectedCategory,
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    _selectedCategory = newValue;
+                                    searchData(
+                                        _searchText,
+                                        _selectedStatus,
+                                        _selectedPriority,
+                                        _selectedCategory,
+                                        _selectedAction1,
+                                        _selectedContext1,
+                                        _selectedLocation1,
+                                        _selectedTag1,
+                                        _selectedGoal1,
+                                        _showIsStar,
+                                        _showIsDone);
+                                  });
+                                }),
+                          ],
+                        ),
+                      ),
+
 //#################################Status#####################################################
                       Container(
                         margin:
@@ -494,47 +536,7 @@ class TaskSearchState extends State {
                         ),
                       ),
 
-//#################################Category#####################################################
-                      Container(
-                        margin:
-                            EdgeInsets.only(top: 1.0, left: 8.0, right: 8.0),
-                        decoration: BoxDecoration(
-                            shape: BoxShape.rectangle, color: Colors.blue[100]),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            DropdownButton<String?>(
-                                items:
-                                    _categories.map((CustomDropdownItem value) {
-                                  return DropdownMenuItem<String>(
-                                      value: value.id,
-                                      child: Text(
-                                        value.name!,
-                                        overflow: TextOverflow.ellipsis,
-                                      ));
-                                }).toList(),
-                                style: _textStyleControls,
-                                value: _selectedCategory,
-                                onChanged: (newValue) {
-                                  setState(() {
-                                    _selectedCategory = newValue;
-                                    searchData(
-                                        _searchText,
-                                        _selectedStatus,
-                                        _selectedPriority,
-                                        _selectedCategory,
-                                        _selectedAction1,
-                                        _selectedContext1,
-                                        _selectedLocation1,
-                                        _selectedTag1,
-                                        _selectedGoal1,
-                                        _showIsStar,
-                                        _showIsDone);
-                                  });
-                                }),
-                          ],
-                        ),
-                      ),
+
 
 //########################################### Action  ######### #################################3
 //                      Container(
