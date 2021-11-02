@@ -265,7 +265,7 @@ class TaskSearchState extends State {
           ),
         ),
         leading: IconButton(
-          icon: const Icon(Icons.home),
+                    icon: Icon(Icons.home, color: Colors.pink[100]),
           onPressed: () {
             Navigator.of(context)
                 .push(MaterialPageRoute(builder: (context) => TaskHome()));

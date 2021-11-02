@@ -704,7 +704,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
 //        backgroundColor: Colors.indigo[600],
         automaticallyImplyLeading: true,
         leading: IconButton(
-          icon: Icon(Icons.home, color: Colors.white),
+          icon: Icon(Icons.home, color: Colors.pink[100]),
           tooltip: 'Home',
           onPressed: () {
 //            Navigator.pop(context, true);

@@ -111,7 +111,12 @@ class TaskHomeState extends State {
           child: Column(
             children: <Widget>[
               Badge(
-                child: Text('Main          '),
+                child: Container(
+                  child: Row(
+                    children: [
+                        Icon(Icons.home, color: Colors.pink[100]),
+                        ]
+                      )),
                 shape: BadgeShape.square,
                 position: BadgePosition.topEnd(),
                 badgeContent: Text(count.toString(),

@@ -73,7 +73,7 @@ class _DrawerNagivation extends State<DrawerNagivation> {
                 ),
               ),
               ListTile(
-                leading: Icon(Icons.home),
+                leading: Icon(Icons.home, color: Colors.pink[200]),
                 title: Text('Home'),
                 tileColor: Colors.teal[50],
                 onTap: () => Navigator.of(context)
