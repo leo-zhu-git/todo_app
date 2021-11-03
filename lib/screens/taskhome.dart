@@ -92,7 +92,7 @@ class TaskHomeState extends State {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(Icons.home, color: Colors.pink[100]),
-                Text(count.toString()),
+                Text(count.toString(), style: TextStyle(color: Colors.pink[100])),
               ],
             ),
 //          child: Row(
