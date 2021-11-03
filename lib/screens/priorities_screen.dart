@@ -85,7 +85,7 @@ class _PrioritiesScreenState extends State<PrioritiesScreen> {
                   onPressed: () async {
                     _priority.name = _priorityNameController.text;
                     _priority.description = _priorityDescriptionController.text;
-//                    _priority.id = null;
+                    _priority.id = null;
 
                     var result = _priorityService.insertPriorities(_priority);
                     print(result);

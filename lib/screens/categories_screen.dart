@@ -85,30 +85,12 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                   onPressed: () async {
                     _category.name = _categoryNameController.text;
                     _category.description = _categoryDescriptionController.text;
-//                    _category.id = null;
-
+                    _category.id = null; 
                     var result = _categoryService.insertCategories(_category);
                     print(result);
                     print(_category.name);
                     Navigator.pop(context);
                     getAllCategories();
-//                    _showSuccessSnackBar(Container(
-//                      color: Colors.tealAccent[100],
-//                      height: 40,
-//                      child: Row(
-//                        mainAxisAlignment: MainAxisAlignment.center,
-//                        children: [
-//                          (Icon(
-//                            Icons.thumb_up,
-//                            color: Colors.black,
-//                          )),
-//                          Text(
-//                            ' Added ',
-//                            style: (TextStyle(color: Colors.black)),
-//                          )
-//                        ],
-//                      ),
-//                    ));
                   },
                   style: ElevatedButton.styleFrom(
                     primary: Colors.teal[800],
@@ -172,25 +154,6 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                     if (result > 0) {
                       Navigator.pop(context);
                       getAllCategories();
-//                      _showSuccessSnackBar(
-//                        Container(
-//                          color: Colors.tealAccent[100],
-//                          height: 40,
-//                          child: Row(
-//                            mainAxisAlignment: MainAxisAlignment.center,
-//                            children: [
-//                              (Icon(
-//                                Icons.thumb_up,
-//                                color: Colors.black,
-//                              )),
-//                              Text(
-//                                ' Updated ',
-//                                style: (TextStyle(color: Colors.black)),
-//                              )
-//                            ],
-//                          ),
-//                        ),
-//                      );
                     }
                   },
                   style: ElevatedButton.styleFrom(
@@ -254,25 +217,6 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                     if (result > 0) {
                       Navigator.pop(context);
                       getAllCategories();
-//                    _showSuccessSnackBar(
-//                      Container(
-//                        color: Colors.tealAccent[100],
-//                        height: 40,
-//                        child: Row(
-//                          mainAxisAlignment: MainAxisAlignment.center,
-//                          children: [
-//                            (Icon(
-//                              Icons.thumb_up,
-//                              color: Colors.black,
-//                            )),
-//                            Text(
-//                              ' Deleted ',
-//                              style: (TextStyle(color: Colors.black)),
-//                            )
-//                          ],
-//                        ),
-//                      ),
-//                    );
                     }
                   },
                   child: Text(
@@ -284,11 +228,6 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           );
         });
   }
-
-// _showSuccessSnackBar(message) {
-//    var _snackBar = SnackBar(content: message);
-//    _globalKey.currentState.showSnackBar(_snackBar);
-//  }
 
   @override
   Widget build(BuildContext context) {

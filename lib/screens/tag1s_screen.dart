@@ -86,7 +86,7 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
                   onPressed: () {
                     _tag1.name = _tag1NameController.text;
                     _tag1.description = _tag1DescriptionController.text;
-//                    _tag1.id = null;
+                    _tag1.id = null;
 
                     var result = _tag1Service.insertTag1s(_tag1);
                     Navigator.pop(context);

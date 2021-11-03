@@ -85,7 +85,7 @@ class _StatusesScreenState extends State<StatusesScreen> {
                   onPressed: () async {
                     _status.name = _statusNameController.text;
                     _status.description = _statusDescriptionController.text;
-//                    _status.id = null;
+                    _status.id = null;
 
                     var result = _statusService.insertStatuses(_status);
                     print(result);
