@@ -356,7 +356,7 @@ class DbHelper {
       "", // tag
       "", // goal
       0, // isStar
-      0, //isDone
+      1, //isDone
     ); //
     var result = insertCustomSettings(customSetting);
 

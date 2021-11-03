@@ -315,7 +315,7 @@ class TaskHomeState extends State {
     int? _filterIsStar =
         globals.filterIsStar != "null" ? globals.filterIsStar : 0;
     int? _filterIsDone =
-        globals.filterIsDone != "null" ? globals.filterIsDone : 0;
+        globals.filterIsDone != "null" ? globals.filterIsDone : 1;
 
     var countDone = 0;
     final dbFuture = helper.initializeDb();
