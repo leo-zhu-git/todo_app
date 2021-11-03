@@ -73,8 +73,6 @@ class TaskHomeState extends State {
       drawer: DrawerNagivation(),
       appBar: AppBar(
         key: _globalKey,
-//        backgroundColor: Colors.brown[900],
-
         centerTitle: true,
         flexibleSpace: Container(
           decoration: BoxDecoration(
@@ -88,45 +86,32 @@ class TaskHomeState extends State {
 
         backgroundColor: Colors.teal[800],
         elevation: 8,
-        title: Center(
-//          child: Container(
-//            child: Row(
-//              children: [
-//                Text('View '),
-//                Container(
-//                  decoration: BoxDecoration(
-//                  shape: BoxShape.rectangle, color: Colors.blue[100]),
-//                  child: Padding(
-//                  padding: const EdgeInsets.all(2.0),
-//                  child: Text(
-//                    count.toString(),
-//                    style: TextStyle(backgroundColor: Colors.green[100], color: Colors.black)),
-//                  ),
+        title:
+//        Center(
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.home, color: Colors.pink[100]),
+                Text(count.toString()),
+              ],
+            ),
+//          child: Row(
+//            children: <Widget>[
+//              Center(
+//                child: Badge(
+//                  child: Icon(Icons.home, color: Colors.pink[100]),
+//                  shape: BadgeShape.square,
+//                  position: BadgePosition.topEnd(),
+//                  badgeContent: Text(count.toString(),
+//                      style: TextStyle(color: Colors.black)),
+//                  badgeColor: Colors.yellow[200]!,
 //                ),
-//              ]
-//            )
+//              ),
+//            ],
 //          ),
 //        ),
-
-          child: Column(
-            children: <Widget>[
-              Badge(
-                child: Container(
-                  child: Row(
-                    children: [
-                        Center(child: Icon(Icons.home, color: Colors.pink[100])),
-                        ]
-                      )),
-                shape: BadgeShape.square,
-                position: BadgePosition.topEnd(),
-                badgeContent: Text(count.toString(),
-                    style: TextStyle(color: Colors.black)),
-                badgeColor: Colors.yellow[200]!,
-              ),
-            ],
-          ),
-        ),
         actions: <Widget>[
+
           IconButton(
               icon: const Icon(Icons.sync, color: Colors.white),
               tooltip: 'Sync',
