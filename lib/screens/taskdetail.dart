@@ -134,19 +134,19 @@ class TaskDetailState extends State //<TaskDetail>
             _categoryController.text = task.categoryText!,
             _selectedCategory = task.category,
           }
-        : _selectedCategory = "1";
+        : _selectedCategory = "";
     task.status != ""
         ? {
             _statusController.text = task.statusText!,
             _selectedStatus = task.status,
           }
-        : _selectedCategory = "";
+        : _selectedStatus = "";
     task.priority != ""
         ? {
             _priorityController.text = task.priorityText!,
             _selectedPriority = task.priority,
           }
-        : _selectedCategory = "";
+        : _selectedPriority = "";
     task.action1 != ""
         ? _selectedAction1 = task.action1
         : _selectedAction1 = null;
@@ -162,7 +162,7 @@ class TaskDetailState extends State //<TaskDetail>
             _tag1Controller.text = task.tag1Text!,
             _selectedTag1 = task.tag1,
           }
-        : _selectedCategory = "";
+        : _selectedTag1 = "";
     task.goal1 != "" ? _selectedGoal1 = task.goal1 : _selectedGoal1 = null;
   }
 
@@ -737,10 +737,10 @@ class TaskDetailState extends State //<TaskDetail>
                           task.priority = _selectedPriority.toString(),
                           task.priorityText = _priorityController.text,
                         };
-                  (_selectedCategory == null)
+                  (_selectedCategory == "")
                       ? {
-                          task.category = "1",
-                          task.categoryText = "Inbox",
+                          task.category = "",
+                          task.categoryText = "",
                         }
                       : {
                           task.category = _selectedCategory.toString(),
