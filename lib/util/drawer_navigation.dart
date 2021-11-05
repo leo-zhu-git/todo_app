@@ -119,41 +119,41 @@ class _DrawerNagivation extends State<DrawerNagivation> {
               ListTile(
                 tileColor: Colors.teal[50],
                 leading: Icon(Icons.perm_device_info),
-                title: Text('About [placeholder]'),
+                title: Text('About [placeholder]', style: TextStyle(color: Colors.red)),
                 onTap: () => Navigator.of(context)
                     .push(MaterialPageRoute(builder: (context) => TaskHome())),
               ),
-              Divider(color: Colors.teal[50]),
-              ListTile(
-                tileColor: Colors.teal[50],
-                leading: Icon(Icons.people),
-                title: Text('Early Adoptors Program [placeholder]'),
-                onTap: () => Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) => TaskHome())),
-              ),
+//              Divider(color: Colors.teal[50]),
+//              ListTile(
+//                tileColor: Colors.teal[50],
+//                leading: Icon(Icons.people),
+//                title: Text('Early Adoptors Program [placeholder]'),
+//                onTap: () => Navigator.of(context)
+//                    .push(MaterialPageRoute(builder: (context) => TaskHome())),
+//              ),
 
-              Divider(color: Colors.teal[50]),
-              ListTile(
-                tileColor: Colors.teal[50],
-                leading: Icon(Icons.elevator_rounded),
-                title: Text('Subscription Plans [placeholder]'),
-                onTap: () {
+//              Divider(color: Colors.teal[50]),
+//              ListTile(
+//                tileColor: Colors.teal[50],
+//                leading: Icon(Icons.elevator_rounded),
+//                title: Text('Subscription Plans [placeholder]'),
+//                onTap: () {
 //                  _launchURL();
-                },
-              ),
+//                },
+//              ),
+//              Divider(color: Colors.teal[50]),
+//              ListTile(
+//                tileColor: Colors.teal[50],
+//                leading: Icon(Icons.connect_without_contact),
+//                title: Text('Cupertino [temp for testing]'),
+//                onTap: () => Navigator.of(context).push(
+//                    MaterialPageRoute(builder: (context) => CupertinoScreen())),
+//              ),
               Divider(color: Colors.teal[50]),
               ListTile(
                 tileColor: Colors.teal[50],
                 leading: Icon(Icons.connect_without_contact),
-                title: Text('Cupertino [temp for testing]'),
-                onTap: () => Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => CupertinoScreen())),
-              ),
-              Divider(color: Colors.teal[50]),
-              ListTile(
-                tileColor: Colors.teal[50],
-                leading: Icon(Icons.connect_without_contact),
-                title: Text('Support [temp for testing]'),
+                title: Text('Notification [testing]', style: TextStyle (color: Colors.red)),
                 onTap: () => Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => LocalNotificationScreen())),
               ),
