@@ -1098,130 +1098,6 @@ class TaskDetailState extends State //<TaskDetail>
               ),
             ),
 
-//            Container(
-//              margin:
-//                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
-//              decoration: BoxDecoration(
-//                  shape: BoxShape.rectangle, color: Colors.blue[100]),
-//              child: Row(
-//                crossAxisAlignment: CrossAxisAlignment.center,
-//                children: [
-//                  DropdownButton<String>(
-//                      items: _priorities.map((CustomDropdownItem value) {
-//                        return DropdownMenuItem<String>(
-//                            value: value.id,
-//                            child: Text(
-//                              value.name!,
-//                              overflow: TextOverflow.ellipsis,
-//                            ));
-//                      }).toList(),
-//                      style: _textStyleControls,
-//                      value: _selectedPriority,
-//                      onChanged: (newValue) {
-//                        setState(() {
-//                          _selectedPriority = newValue;
-//                          task.priority = newValue!;
-//                        });
-//                      }),
-//                ],
-//              ),
-//            ),
-
-///////////////////////////
-//  ACTION
-///////////////////////////
-
-//            Container(
-//              margin:
-//                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
-//              decoration: BoxDecoration(
-//                  shape: BoxShape.rectangle, color: Colors.blue[100]),
-//              child: Row(
-//                crossAxisAlignment: CrossAxisAlignment.center,
-//                children: [
-//                  DropdownButton<String>(
-//                      items: _action1s.map((CustomDropdownItem value) {
-//                        return DropdownMenuItem<String>(
-//                            value: value.id,
-//                            child: Text(
-//                              value.name!,
-//                              overflow: TextOverflow.ellipsis,
-//                            ));
-//                      }).toList(),
-//                      style: _textStyleControls,
-//                      value: _selectedAction1,
-//                      onChanged: (newValue) {
-//                        setState(() {
-//                          _selectedAction1 = newValue;
-//                          task.action1 = newValue!;
-//                        });
-//                      }),
-//                ],
-//              ),
-//            ),
-
-///////////////////////////
-//  CONTEXT
-///////////////////////////
-//            Container(
-//              margin:
-//                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
-//              decoration: BoxDecoration(
-//                  shape: BoxShape.rectangle, color: Colors.blue[100]),
-//              child: Row(
-//                crossAxisAlignment: CrossAxisAlignment.center,
-//                children: [
-//                  DropdownButton<String>(
-//                      items: _context1s.map((CustomDropdownItem value) {
-//                        return DropdownMenuItem<String>(
-//                            value: value.id,
-//                            child: Text(
-//                              value.name!,
-//                              overflow: TextOverflow.ellipsis,
-//                            ));
-//                      }).toList(),
-//                      style: _textStyleControls,
-//                      value: _selectedContext1,
-//                      onChanged: (newValue) {
-//                        setState(() {
-//                          _selectedContext1 = newValue;
-//                          task.context1 = newValue!;
-//                        });
-//                      }),
-//                ],
-//              ),
-//            ),
-///////////////////////////
-//  LOCATION
-///////////////////////////
-//            Container(
-//              margin:
-//                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
-//              decoration: BoxDecoration(
-//                  shape: BoxShape.rectangle, color: Colors.blue[100]),
-//              child: Row(
-//                crossAxisAlignment: CrossAxisAlignment.center,
-//                children: [
-//                  DropdownButton<String>(
-//                      items: _location1s.map((CustomDropdownItem value) {
-//                        return DropdownMenuItem<String>(
-//                            value: value.id,
-//                            child: Text(
-//                              value.name!,
-//                              overflow: TextOverflow.ellipsis,
-//                            ));
-//                      }).toList(),
-//                      style: _textStyleControls,
-//                      value: _selectedLocation1,
-//                      onChanged: (newValue) {
-//                        setState(() {
-//                          _selectedLocation1 = newValue;
-//                          task.location1 = newValue!;
-//                        });
-//                      }),
-//                ],
-//              ),
-//            ),
 ///////////////////////////
 //  TAG
 ///////////////////////////
@@ -1261,34 +1137,46 @@ class TaskDetailState extends State //<TaskDetail>
                 ),
               ),
             ),
-//            Container(
-//              margin:
-//                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
-//              decoration: BoxDecoration(
-//                  shape: BoxShape.rectangle, color: Colors.blue[100]),
-//              child: Row(
-//                crossAxisAlignment: CrossAxisAlignment.center,
-//                children: [
-//                 DropdownButton<String>(
-//                      items: _tag1s.map((CustomDropdownItem value) {
-//                        return DropdownMenuItem<String>(
-//                            value: value.id,
-//                            child: Text(
-//                              value.name!,
-//                              overflow: TextOverflow.ellipsis,
-//                            ));
-//                      }).toList(),
-//                      style: _textStyleControls,
-//                      value: _selectedTag1,
-//                      onChanged: (newValue) {
-//                        setState(() {
-//                          _selectedTag1 = newValue;
-//                          task.tag1 = newValue!;
-//                        });
-//                      }),
-//                ],
-//              ),
-//            ),
+///////////////////////////
+//  FOCUS
+///////////////////////////
+            Container(
+              margin:
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+              decoration: BoxDecoration(
+                shape: BoxShape.rectangle,
+                color: Colors.blue[100],
+              ),
+              child: TextField(
+                controller: _tag1Controller,
+                readOnly: true,
+                style: _textStyleControls,
+                decoration: InputDecoration(
+                  labelText: ' Focus',
+                  hintText: '',
+                  prefixIcon: InkWell(
+                    onTap: () {
+                        setState(() {
+                          if (task.isStar == 1) {
+                            task.isStar = 0;
+                            Icon(Icons.lightbulb, color: Colors.black38);
+                            dbHelper.updateTask(task);
+                          } else {
+                            task.isStar = 1;
+                            Icon(Icons.lightbulb, color: Colors.amber[800]);
+                            dbHelper.updateTask(task);
+                          }
+                        });
+                      },
+                    child: Icon(Icons.lightbulb,
+                          color: (task.isStar == 0)
+                              ? Colors.black12
+                              : Colors.teal),
+                  ),
+                ),
+              ),
+            ),
+
 
 ///////////////////////////
 //  GOAL
