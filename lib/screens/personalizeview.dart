@@ -37,14 +37,14 @@ class SortItem {
       SortItem(3, 'Due Time'),
       SortItem(4, 'Category'),
       SortItem(5, 'Status'),
-      SortItem(6, 'Priority'),
+//      SortItem(6, 'Priority'),
 //      SortItem(7, 'Action'),
 //      SortItem(8, 'Context'),
 //      SortItem(9, 'Location'),
-      SortItem(7, 'Tag'),
+//      SortItem(7, 'Tag'),
 //      SortItem(11, 'Goal'),
-      SortItem(8, 'Focus'),
-      SortItem(9, 'Done'),
+      SortItem(6, 'Focus'),
+      SortItem(7, 'Done'),
     ];
   }
 }
@@ -60,13 +60,13 @@ class ShowItem {
       ShowItem(1, 'Due Time'),
       ShowItem(2, 'Category'),
       ShowItem(3, 'Status'),
-      ShowItem(4, 'Priority'),
+//      ShowItem(4, 'Priority'),
 //      ShowItem(5, 'Action'),
 //      ShowItem(6, 'Context'),
 //      ShowItem(7, 'Location'),
-      ShowItem(5, 'Tag'),
+//      ShowItem(5, 'Tag'),
 //      ShowItem(9, 'Goal'),
-      ShowItem(6, 'Focus'),
+      ShowItem(4, 'Focus'),
     ];
   }
 }
@@ -192,25 +192,25 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
   ShowItem? _selectedShowSec3;
   DbHelper helper = DbHelper();
   CustomSettings? customSetting;
-  List<CustomDropdownItem> _statuses = [];
-  List<CustomDropdownItem> _priorities = [];
   List<CustomDropdownItem> _categories = [];
-  List<CustomDropdownItem> _action1s = [];
-  List<CustomDropdownItem> _context1s = [];
-  List<CustomDropdownItem> _location1s = [];
-  List<CustomDropdownItem> _tag1s = [];
-  List<CustomDropdownItem> _goal1s = [];
+  List<CustomDropdownItem> _statuses = [];
+//  List<CustomDropdownItem> _priorities = [];
+//  List<CustomDropdownItem> _action1s = [];
+//  List<CustomDropdownItem> _context1s = [];
+//  List<CustomDropdownItem> _location1s = [];
+//  List<CustomDropdownItem> _tag1s = [];
+//  List<CustomDropdownItem> _goal1s = [];
   List<Task> tasklist = [];
   int count = 0;
   TextEditingController searchController = TextEditingController();
-  var _selectedStatus = null;
-  var _selectedPriority = null;
   var _selectedCategory = null;
-  var _selectedAction1 = null;
-  var _selectedContext1 = null;
-  var _selectedLocation1 = null;
-  var _selectedTag1 = null;
-  var _selectedGoal1 = null;
+  var _selectedStatus = null;
+//  var _selectedPriority = null;
+//  var _selectedAction1 = null;
+//  var _selectedContext1 = null;
+//  var _selectedLocation1 = null;
+//  var _selectedTag1 = null;
+//  var _selectedGoal1 = null;
 
   //
   @override
@@ -222,14 +222,14 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     _dropdownFilterIsStar = buildDropdownFilterIsStar(_filterIsStar);
     _dropdownFilterIsDone = buildDropdownFilterIsDone(_filterIsDone);
     _dropdownFilterDateDue = buildDropdownFilterDateDue(_filterDateDue);
-    _loadStatuses();
-    _loadPriorities();
     _loadCategories();
-    _loadAction1s();
-    _loadContext1s();
-    _loadLocation1s();
-    _loadTag1s();
-    _loadGoal1s();
+    _loadStatuses();
+//    _loadPriorities();
+//    _loadAction1s();
+//    _loadContext1s();
+//    _loadLocation1s();
+//    _loadTag1s();
+//    _loadGoal1s();
 
     _getCustomSettings();
     ////////////////////////////
@@ -265,9 +265,9 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     ////////////////////////////
     // Sort and Order
     ////////////////////////////
-    if (globals.sortField1 == 8) {
-      _selectedSortField1 = _dropdownMenuItemsSort[8].value!;
-      globals.sortField1 = 8;
+    if (globals.sortField1 == 6) {
+      _selectedSortField1 = _dropdownMenuItemsSort[6].value!;
+      globals.sortField1 = 6;
     } else
       _selectedSortField1 = _dropdownMenuItemsSort[globals.sortField1!].value!;
 
@@ -351,7 +351,6 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     categories.forEach((category) {
       setState(() {
         cus = new CustomDropdownItem();
-
         cus.id = category['id'].toString();
         String tempCat;
         if (category['name'].toString().length > 30)
@@ -373,7 +372,8 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
 //    cus.id = null;
     cus.name =
         "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
-    cus.name = "-- All Statuses --";
+    cus.name =
+        "-- All Statuses --";
     _statuses.add(cus);
     statuses.forEach((status) {
       setState(() {
@@ -392,158 +392,164 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     });
   }
 
-  _loadPriorities() async {
-    var priorities = await helper.getPriorities();
-    CustomDropdownItem cus;
-    cus = new CustomDropdownItem();
+//  _loadPriorities() async {
+//    var priorities = await helper.getPriorities();
+//    CustomDropdownItem cus;
+//    cus = new CustomDropdownItem();
 //    cus.id = null;
-    cus.name =
-        "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
-    cus.name = "-- All Priorities --";
-    _priorities.add(cus);
-    priorities.forEach((priority) {
-      setState(() {
-        cus = new CustomDropdownItem();
-        cus.id = priority['id'].toString();
-        String tempPriority;
-        if (priority['name'].toString().length > 30)
-          tempPriority = priority['name'].toString().substring(0, 30) + "...";
-        else
-          tempPriority = priority['name'];
+//    cus.name =
+//        "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
+//    cus.name =
+//        "-- All Priorities --";
+//    _priorities.add(cus);
+//    priorities.forEach((priority) {
+//      setState(() {
+//        cus = new CustomDropdownItem();
+//        cus.id = priority['id'].toString();
+//        String tempPriority;
+//        if (priority['name'].toString().length > 30)
+//          tempPriority = priority['name'].toString().substring(0, 30) + "...";
+//        else
+//          tempPriority = priority['name'];
 
-        cus.name = tempPriority;
+//        cus.name = tempPriority;
 
-        _priorities.add(cus);
-      });
-    });
-  }
+//        _priorities.add(cus);
+//      });
+//    });
+//  }
 
-  _loadAction1s() async {
-    var action1s = await helper.getAction1s();
-    CustomDropdownItem cus;
-    cus = new CustomDropdownItem();
+//  _loadAction1s() async {
+//    var action1s = await helper.getAction1s();
+//    CustomDropdownItem cus;
+//    cus = new CustomDropdownItem();
 //    cus.id = null;
-    cus.name =
-        "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
-    cus.name = "-- All Actions --";
-    _action1s.add(cus);
-    action1s.forEach((action1) {
-      setState(() {
-        cus = new CustomDropdownItem();
-        cus.id = action1['id'].toString();
-        String tempAct;
-        if (action1['name'].toString().length > 20)
-          tempAct = action1['name'].toString().substring(0, 20) + "...";
-        else
-          tempAct = action1['name'];
+//    cus.name =
+//        "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
+//    cus.name =
+//        "-- All Actions --";
+//    _action1s.add(cus);
+//    action1s.forEach((action1) {
+//      setState(() {
+//        cus = new CustomDropdownItem();
+//        cus.id = action1['id'].toString();
+//        String tempAct;
+//        if (action1['name'].toString().length > 20)
+//          tempAct = action1['name'].toString().substring(0, 20) + "...";
+//        else
+//          tempAct = action1['name'];
 
-        cus.name = tempAct;
-        _action1s.add(cus);
-      });
-    });
-  }
+//        cus.name = tempAct;
+//        _action1s.add(cus);
+//      });
+//    });
+//  }
 
-  _loadContext1s() async {
-    var context1s = await helper.getContext1s();
-    CustomDropdownItem cus;
-    cus = new CustomDropdownItem();
+//  _loadContext1s() async {
+//    var context1s = await helper.getContext1s();
+//    CustomDropdownItem cus;
+//    cus = new CustomDropdownItem();
 //    cus.id = null;
-    cus.name =
-        "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
-    cus.name = "-- All Contexts --";
-    _context1s.add(cus);
-    context1s.forEach((context1) {
-      setState(() {
-        cus = new CustomDropdownItem();
-        cus.id = context1['id'].toString();
-        String tempCon;
-        if (context1['name'].toString().length > 30)
-          tempCon = context1['name'].toString().substring(0, 30) + "...";
-        else
-          tempCon = context1['name'];
+//    cus.name =
+//        "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
+//    cus.name =
+//        "-- All Contexts --";
+//    _context1s.add(cus);
+//    context1s.forEach((context1) {
+//      setState(() {
+//        cus = new CustomDropdownItem();
+//        cus.id = context1['id'].toString();
+//        String tempCon;
+//        if (context1['name'].toString().length > 30)
+//          tempCon = context1['name'].toString().substring(0, 30) + "...";
+//        else
+//          tempCon = context1['name'];
 
-        cus.name = tempCon;
+//        cus.name = tempCon;
 
-        _context1s.add(cus);
-      });
-    });
-  }
+//        _context1s.add(cus);
+//      });
+//    });
+//  }
 
-  _loadLocation1s() async {
-    var location1s = await helper.getLocation1s();
-    CustomDropdownItem cus;
-    cus = new CustomDropdownItem();
+//  _loadLocation1s() async {
+//    var location1s = await helper.getLocation1s();
+//    CustomDropdownItem cus;
+//    cus = new CustomDropdownItem();
 //    cus.id = null;
-    cus.name =
-        "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
-    cus.name = "-- All Locations --";
-    _location1s.add(cus);
-    location1s.forEach((location1) {
-      setState(() {
-        cus = new CustomDropdownItem();
-        cus.id = location1['id'].toString();
-        String tempLoc;
-        if (location1['name'].toString().length > 30)
-          tempLoc = location1['name'].toString().substring(0, 30) + "...";
-        else
-          tempLoc = location1['name'];
+//    cus.name =
+//        "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
+//    cus.name =
+//        "-- All Locations --";
+//    _location1s.add(cus);
+//    location1s.forEach((location1) {
+//      setState(() {
+//        cus = new CustomDropdownItem();
+//        cus.id = location1['id'].toString();
+//        String tempLoc;
+//        if (location1['name'].toString().length > 30)
+//          tempLoc = location1['name'].toString().substring(0, 30) + "...";
+//        else
+//          tempLoc = location1['name'];
 
-        cus.name = tempLoc;
+//        cus.name = tempLoc;
 
-        _location1s.add(cus);
-      });
-    });
-  }
+//        _location1s.add(cus);
+//      });
+//    });
+//  }
 
-  _loadTag1s() async {
-    var tag1s = await helper.getTag1s();
-    CustomDropdownItem cus;
-    cus = new CustomDropdownItem();
+//  _loadTag1s() async {
+//    var tag1s = await helper.getTag1s();
+//    CustomDropdownItem cus;
+//    cus = new CustomDropdownItem();
 //    cus.id = null;
-    cus.name =
-        "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
-    cus.name = "-- All Tags --";
-    _tag1s.add(cus);
-    tag1s.forEach((tag1) {
-      setState(() {
-        cus = new CustomDropdownItem();
-        cus.id = tag1['id'].toString();
-        String tempTag;
-        if (tag1['name'].toString().length > 30)
-          tempTag = tag1['name'].toString().substring(0, 30) + "...";
-        else
-          tempTag = tag1['name'];
+//    cus.name =
+//        "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
+//    cus.name =
+//        "-- All Tags --";
+//    _tag1s.add(cus);
+//    tag1s.forEach((tag1) {
+//      setState(() {
+//        cus = new CustomDropdownItem();
+//        cus.id = tag1['id'].toString();
+//        String tempTag;
+//        if (tag1['name'].toString().length > 30)
+//          tempTag = tag1['name'].toString().substring(0, 30) + "...";
+//        else
+//          tempTag = tag1['name'];
 
-        cus.name = tempTag;
-        _tag1s.add(cus);
-      });
-    });
-  }
+//        cus.name = tempTag;
+//        _tag1s.add(cus);
+//      });
+//    });
+//  }
 
-  _loadGoal1s() async {
-    var goal1s = await helper.getGoal1s();
-    CustomDropdownItem cus;
-    cus = new CustomDropdownItem();
+//  _loadGoal1s() async {
+//    var goal1s = await helper.getGoal1s();
+//    CustomDropdownItem cus;
+//    cus = new CustomDropdownItem();
 //    cus.id = null;
-    cus.name =
-        "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
-    cus.name = "-- All Goals --";
-    _goal1s.add(cus);
-    goal1s.forEach((goal1) {
-      setState(() {
-        cus = new CustomDropdownItem();
-        cus.id = goal1['id'].toString();
-        String tempGoal;
-        if (goal1['name'].toString().length > 30)
-          tempGoal = goal1['name'].toString().substring(0, 30) + "...";
-        else
-          tempGoal = goal1['name'];
+//    cus.name =
+//        "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
+//    cus.name =
+//        "-- All Goals --";
+//    _goal1s.add(cus);
+//    goal1s.forEach((goal1) {
+//      setState(() {
+//        cus = new CustomDropdownItem();
+//        cus.id = goal1['id'].toString();
+//        String tempGoal;
+//        if (goal1['name'].toString().length > 30)
+//          tempGoal = goal1['name'].toString().substring(0, 30) + "...";
+//        else
+//          tempGoal = goal1['name'];
 
-        cus.name = tempGoal;
-        _goal1s.add(cus);
-      });
-    });
-  }
+//        cus.name = tempGoal;
+//        _goal1s.add(cus);
+//      });
+//    });
+//  }
 
 //##########################################end of Dropdown #################################################################
 
@@ -724,7 +730,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                   globals.sortField3 = _selectedSortField3!.id;
                 if (_selectedSortOrder3 != null)
                   globals.sortOrder3 = _selectedSortOrder3!.id;
-                print(globals.showMain2);
+//                print(globals.showMain2);
                 if (_selectedShowSec1 != null)
                   globals.showSec1 = _selectedShowSec1!.id;
                 print(globals.showSec1);
@@ -756,14 +762,6 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                     '',
                     '',
                     '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    "",
-                    "",
-                    "",
                     0,
                     0,
                   );
@@ -823,27 +821,27 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                     }
                   }
 
-                  customSetting!.filterStatus =
-                      _selectedStatus == null ? "" : _selectedStatus.toString();
-                  customSetting!.filterPriority = _selectedPriority == null
-                      ? ""
-                      : _selectedPriority.toString();
                   customSetting!.filterCategory = _selectedCategory == null
                       ? ""
                       : _selectedCategory.toString();
-                  customSetting!.filterAction = _selectedAction1 == null
-                      ? ""
-                      : _selectedAction1.toString();
-                  customSetting!.filterContext = _selectedContext1 == null
-                      ? ""
-                      : _selectedContext1.toString();
-                  customSetting!.filterLocation = _selectedLocation1 == null
-                      ? ""
-                      : _selectedLocation1.toString();
-                  customSetting!.filterTag =
-                      _selectedTag1 == null ? "" : _selectedTag1.toString();
-                  customSetting!.filterGoal =
-                      _selectedGoal1 == null ? "" : _selectedGoal1.toString();
+                  customSetting!.filterStatus =
+                      _selectedStatus == null ? "" : _selectedStatus.toString();
+//                  customSetting!.filterPriority = _selectedPriority == null
+//                      ? ""
+//                      : _selectedPriority.toString();
+//                  customSetting!.filterAction = _selectedAction1 == null
+//                      ? ""
+//                      : _selectedAction1.toString();
+//                  customSetting!.filterContext = _selectedContext1 == null
+//                      ? ""
+//                      : _selectedContext1.toString();
+//                  customSetting!.filterLocation = _selectedLocation1 == null
+//                      ? ""
+//                      : _selectedLocation1.toString();
+//                  customSetting!.filterTag =
+//                      _selectedTag1 == null ? "" : _selectedTag1.toString();
+//                  customSetting!.filterGoal =
+//                      _selectedGoal1 == null ? "" : _selectedGoal1.toString();
 
                   var result;
 
@@ -915,12 +913,11 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.blue[100]),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     DropdownButton<String>(
                         style: _textStyleControls,
-                        isExpanded: true,
                         items: _categories.map((CustomDropdownItem value) {
                           return DropdownMenuItem<String>(
                               value: value.id,
@@ -944,11 +941,10 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.blue[100]),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     DropdownButton<String>(
-                        isExpanded: true,
                         style: _textStyleControls,
                         items: _statuses.map((CustomDropdownItem value) {
                           return DropdownMenuItem<String>(
@@ -969,33 +965,32 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
               ),
 
 //#################################Priority#####################################################
-              Container(
-                margin: const EdgeInsets.all(2.0),
-                decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.blue[100]),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    DropdownButton<String>(
-                        isExpanded: true,
-                        style: _textStyleControls,
-                        items: _priorities.map((CustomDropdownItem value) {
-                          return DropdownMenuItem<String>(
-                              value: value.id,
-                              child: Text(
-                                value.name!,
-                                overflow: TextOverflow.ellipsis,
-                              ));
-                        }).toList(),
-                        value: _selectedPriority,
-                        onChanged: (newValue) {
-                          setState(() {
-                            _selectedPriority = newValue;
-                          });
-                        }),
-                  ],
-                ),
-              ),
+//              Container(
+//                margin: const EdgeInsets.all(2.0),
+//                decoration: BoxDecoration(
+//                    shape: BoxShape.rectangle, color: Colors.blue[100]),
+//                child: Row(
+//                  crossAxisAlignment: CrossAxisAlignment.center,
+//                  children: [
+//                    DropdownButton<String>(
+//                        style: _textStyleControls,
+//                        items: _priorities.map((CustomDropdownItem value) {
+//                          return DropdownMenuItem<String>(
+//                              value: value.id,
+//                              child: Text(
+//                                value.name!,
+//                                overflow: TextOverflow.ellipsis,
+//                              ));
+//                        }).toList(),
+//                        value: _selectedPriority,
+//                        onChanged: (newValue) {
+//                          setState(() {
+//                            _selectedPriority = newValue;
+//                          });
+//                        }),
+//                  ],
+//                ),
+//              ),
 
 //########################################### Action  ######### #################################3
 //              Container(
@@ -1073,31 +1068,29 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
 //              ),
 
 // //######### Tag  #########
-              Container(
-                margin: const EdgeInsets.all(2.0),
-                decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.blue[100]),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    DropdownButton<String>(
-                      isExpanded: true,
-                      elevation: 8,
-                      style: _textStyleControls,
-                      items: _tag1s.map((CustomDropdownItem value) {
-                        return DropdownMenuItem<String>(
-                            value: value.id, child: Text(value.name!));
-                      }).toList(),
-                      value: _selectedTag1,
-                      onChanged: (value) {
-                        setState(() {
-                          _selectedTag1 = value;
-                        });
-                      },
-                    )
-                  ],
-                ),
-              ),
+//              Container(
+//                margin: const EdgeInsets.all(2.0),
+//                decoration: BoxDecoration(
+//                    shape: BoxShape.rectangle, color: Colors.blue[100]),
+//                child: Row(
+//                  crossAxisAlignment: CrossAxisAlignment.center,
+//                  children: [
+//                    DropdownButton<String>(
+//                      style: _textStyleControls,
+//                      items: _tag1s.map((CustomDropdownItem value) {
+//                        return DropdownMenuItem<String>(
+//                            value: value.id, child: Text(value.name!));
+//                      }).toList(),
+//                      value: _selectedTag1,
+//                      onChanged: (value) {
+//                        setState(() {
+//                          _selectedTag1 = value;
+//                        });
+//                      },
+//                    )
+//                  ],
+//                ),
+//              ),
 
 // //######### Goal  #########
 //              Container(
@@ -1341,16 +1334,16 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
 ///////////////////////////
 //  Picklist - Priorities
 ///////////////////////////
-              Card(
-                elevation: 8.0,
-                child: ListTile(
-                  tileColor: Colors.orange[100],
-                  title: Text('Priorities', style: _textStyleControls),
-                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => PrioritiesScreen())),
-                ),
-              ),
-              SizedBox(height: 2),
+//              Card(
+//                elevation: 8.0,
+//                child: ListTile(
+//                  tileColor: Colors.orange[100],
+//                  title: Text('Priorities', style: _textStyleControls),
+//                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
+//                      builder: (context) => PrioritiesScreen())),
+//                ),
+//              ),
+//              SizedBox(height: 2),
 ///////////////////////////
 //  Picklist - Contexts
 ///////////////////////////
@@ -1382,16 +1375,16 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
 ///////////////////////////
 //  Picklist - Tags
 ///////////////////////////
-              Card(
-                elevation: 8.0,
-                child: ListTile(
-                  tileColor: Colors.orange[100],
-                  title: Text('Tags', style: _textStyleControls),
-                  onTap: () => Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => Tag1sScreen())),
-                ),
-              ),
-              SizedBox(height: 2),
+//              Card(
+//                elevation: 8.0,
+//                child: ListTile(
+//                  tileColor: Colors.orange[100],
+//                  title: Text('Tags', style: _textStyleControls),
+//                  onTap: () => Navigator.of(context).push(
+//                      MaterialPageRoute(builder: (context) => Tag1sScreen())),
+//                ),
+//              ),
+//              SizedBox(height: 2),
 
 ///////////////////////////
 //  Picklist - Goals
@@ -1805,22 +1798,6 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     ////////////////////////////
     /// filter - picklists
     ////////////////////////////
-    if (customSetting!.filterStatus == "") {
-      _selectedStatus = null;
-      customSetting!.filterStatus = "";
-    } else {
-      _selectedStatus = customSetting!.filterStatus.toString();
-      globals.filterStatus = int.parse(customSetting!.filterStatus!);
-    }
-
-    if (customSetting!.filterPriority == "") {
-      _selectedPriority = null;
-      customSetting!.filterPriority = "";
-    } else {
-      _selectedCategory = customSetting!.filterCategory.toString();
-      globals.filterCategory = int.parse(customSetting!.filterCategory!);
-    }
-
     if (customSetting!.filterCategory == "") {
       _selectedCategory = null;
       customSetting!.filterCategory = "";
@@ -1829,44 +1806,60 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
       globals.filterCategory = int.parse(customSetting!.filterCategory!);
     }
 
-    if (customSetting!.filterAction == "") {
-      _selectedAction1 = null;
-      customSetting!.filterAction = "";
+    if (customSetting!.filterStatus == "") {
+      _selectedStatus = null;
+      customSetting!.filterStatus = "";
     } else {
-      _selectedAction1 = customSetting!.filterAction.toString();
-      globals.filterAction = int.parse(customSetting!.filterAction!);
-    }
-    if (customSetting!.filterContext == "") {
-      _selectedContext1 = null;
-      customSetting!.filterContext = "";
-    } else {
-      _selectedContext1 = customSetting!.filterContext.toString();
-      globals.filterContext = int.parse(customSetting!.filterContext!);
+      _selectedStatus = customSetting!.filterStatus.toString();
+      globals.filterStatus = int.parse(customSetting!.filterStatus!);
     }
 
-    if (customSetting!.filterTag == "") {
-      _selectedTag1 = null;
-      customSetting!.filterTag = "";
-    } else {
-      _selectedTag1 = customSetting!.filterTag.toString();
-      globals.filterTag = int.parse(customSetting!.filterTag!);
-    }
+//    if (customSetting!.filterPriority == "") {
+//      _selectedPriority = null;
+//      customSetting!.filterPriority = "";
+//    } else {
+//      _selectedCategory = customSetting!.filterCategory.toString();
+//      globals.filterCategory = int.parse(customSetting!.filterCategory!);
+//    }
 
-    if (customSetting!.filterGoal == "") {
-      _selectedGoal1 = null;
-      customSetting!.filterGoal = "";
-    } else {
-      _selectedGoal1 = customSetting!.filterGoal.toString();
-      globals.filterGoal = int.parse(customSetting!.filterGoal!);
-    }
+//    if (customSetting!.filterAction == "") {
+//      _selectedAction1 = null;
+//      customSetting!.filterAction = "";
+//    } else {
+//      _selectedAction1 = customSetting!.filterAction.toString();
+//      globals.filterAction = int.parse(customSetting!.filterAction!);
+//    }
+//    if (customSetting!.filterContext == "") {
+//      _selectedContext1 = null;
+//      customSetting!.filterContext = "";
+//    } else {
+//      _selectedContext1 = customSetting!.filterContext.toString();
+//      globals.filterContext = int.parse(customSetting!.filterContext!);
+//    }
 
-    if (customSetting!.filterLocation == "") {
-      _selectedLocation1 = null;
-      customSetting!.filterLocation = "";
-    } else {
-      _selectedLocation1 = customSetting!.filterLocation.toString();
-      globals.filterLocation = int.parse(customSetting!.filterLocation!);
-    }
+//    if (customSetting!.filterTag == "") {
+//      _selectedTag1 = null;
+//      customSetting!.filterTag = "";
+//    } else {
+//      _selectedTag1 = customSetting!.filterTag.toString();
+//      globals.filterTag = int.parse(customSetting!.filterTag!);
+//    }
+
+//    if (customSetting!.filterGoal == "") {
+//      _selectedGoal1 = null;
+//      customSetting!.filterGoal = "";
+//    } else {
+//      _selectedGoal1 = customSetting!.filterGoal.toString();
+//      globals.filterGoal = int.parse(customSetting!.filterGoal!);
+//    }
+
+//    if (customSetting!.filterLocation == "") {
+//      _selectedLocation1 = null;
+//      customSetting!.filterLocation = "";
+//    } else {
+//      _selectedLocation1 = customSetting!.filterLocation.toString();
+//      globals.filterLocation = int.parse(customSetting!.filterLocation!);
+//    }
 
     setState(() {
       customSetting = customSetting;

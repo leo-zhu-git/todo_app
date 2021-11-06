@@ -27,13 +27,13 @@ class DbHelper {
   String colDateDue = 'dateDue';
   String colTimeDue = 'timeDue';
   String colStatus = 'status';
-  String colPriority = 'priority';
+//  String colPriority = 'priority';
   String colCategory = 'category';
-  String colAction1 = 'action1';
-  String colContext1 = 'context1';
-  String colLocation1 = 'location1';
-  String colTag1 = 'tag1';
-  String colGoal1 = 'goal1';
+//  String colAction1 = 'action1';
+//  String colContext1 = 'context1';
+//  String colLocation1 = 'location1';
+//  String colTag1 = 'tag1';
+//  String colGoal1 = 'goal1';
   String colIsStar = 'isStar';
   String colIsDone = 'isDone';
   String colDateDone = 'dateDone';
@@ -53,14 +53,14 @@ class DbHelper {
   String colshowSec3 = 'showSec3';
   String colfilterDateDue = 'filterDateDue';
   String colfilterTimeDue = 'filterTimeDue';
-  String colfilterStatus = 'filterStatus';
-  String colfilterPriority = 'filterPriority';
   String colfilterCategory = 'filterCategory';
-  String colfilterAction = 'filterAction';
-  String colfilterContext = 'filterContext';
-  String colfilterLocation = 'filterLocation';
-  String colfilterTag = 'filterTag';
-  String colfilterGoal = 'filterGoal';
+  String colfilterStatus = 'filterStatus';
+  //String colfilterPriority = 'filterPriority';
+  //String colfilterAction = 'filterAction';
+  //String colfilterContext = 'filterContext';
+  //String colfilterLocation = 'filterLocation';
+  //String colfilterTag = 'filterTag';
+  //String colfilterGoal = 'filterGoal';
   String colfilterIsStar = 'filterIsStar';
   String colfilterIsDone = 'filterIsDone';
 
@@ -81,60 +81,76 @@ class DbHelper {
 
   Future<Database> initializeDb() async {
     Directory dir = await getApplicationDocumentsDirectory();
-    String path = dir.path + "todo_V22.h5.db";
+    String path = dir.path + "todo_V22.h9.db";
     var dbTodovn = await openDatabase(path, version: 1, onCreate: _createDb);
     return dbTodovn;
   }
 
+//  void _createDb(Database db, int newVersion) async {
+//    await db.execute(
+//        "CREATE TABLE $tblTodo($colId INTEGER PRIMARY KEY, $colTask TEXT, $colNote TEXT, " +
+//            "$colDateDue TEXT, $colTimeDue TEXT, $colStatus TEXT, $colPriority TEXT,  " +
+//            "$colCategory TEXT, $colAction1 TEXT, " +
+//            "$colContext1 TEXT, $colLocation1 TEXT, $colTag1 TEXT, $colGoal1 TEXT, " +
+//            "$colIsStar INTEGER, $colIsDone INTEGER, $colDateDone TEXT, $colLastModified TEXT)");
+
   void _createDb(Database db, int newVersion) async {
     await db.execute(
         "CREATE TABLE $tblTodo($colId INTEGER PRIMARY KEY, $colTask TEXT, $colNote TEXT, " +
-            "$colDateDue TEXT, $colTimeDue TEXT, $colStatus TEXT, $colPriority TEXT,  " +
-            "$colCategory TEXT, $colAction1 TEXT, " +
-            "$colContext1 TEXT, $colLocation1 TEXT, $colTag1 TEXT, $colGoal1 TEXT, " +
+            "$colDateDue TEXT, $colTimeDue TEXT, " +
+            "$colCategory TEXT, $colStatus TEXT, " +
             "$colIsStar INTEGER, $colIsDone INTEGER, $colDateDone TEXT, $colLastModified TEXT)");
 
 //this table need to include hash key to track users.... i would say all the tables
+//    await db.execute(
+//        "CREATE TABLE $tblCustomSettings($colId INTEGER PRIMARY KEY, $colsortField1 TEXT, $colsortOrder1 TEXT, $colsortField2 TEXT, " +
+//            "$colsortOrder2 TEXT, $colsortField3 TEXT, $colsortOrder3 TEXT, $colshowMain1 TEXT,$colshowMain2 TEXT, " +
+//            "$colshowSec1 TEXT,$colshowSec2 TEXT,$colshowSec3 TEXT, " +
+//            "$colfilterDateDue TEXT, $colfilterTimeDue TEXT, " +
+//            "$colfilterStatus TEXT, $colfilterPriority TEXT,  " +
+//            "$colfilterCategory TEXT, $colfilterAction TEXT, $colfilterContext TEXT, $colfilterLocation TEXT, $colfilterTag TEXT, " +
+//            "$colfilterGoal TEXT, $colfilterIsStar INTEGER, $colfilterIsDone INTEGER)");
+
     await db.execute(
         "CREATE TABLE $tblCustomSettings($colId INTEGER PRIMARY KEY, $colsortField1 TEXT, $colsortOrder1 TEXT, $colsortField2 TEXT, " +
-            "$colsortOrder2 TEXT, $colsortField3 TEXT, $colsortOrder3 TEXT, $colshowMain1 TEXT,$colshowMain2 TEXT, " +
+            "$colsortOrder2 TEXT, $colsortField3 TEXT, $colsortOrder3 TEXT, " +
             "$colshowSec1 TEXT,$colshowSec2 TEXT,$colshowSec3 TEXT, " +
             "$colfilterDateDue TEXT, $colfilterTimeDue TEXT, " +
-            "$colfilterStatus TEXT, $colfilterPriority TEXT,  " +
-            "$colfilterCategory TEXT, $colfilterAction TEXT, $colfilterContext TEXT, $colfilterLocation TEXT, $colfilterTag TEXT, " +
-            "$colfilterGoal TEXT, $colfilterIsStar INTEGER, $colfilterIsDone INTEGER)");
+            "$colfilterCategory TEXT,  " +
+            "$colfilterStatus TEXT, " +
+            "$colfilterIsStar INTEGER, $colfilterIsDone INTEGER)");
+
+    // Create table categories
+    await db.execute(
+        "CREATE TABLE categories(id INTEGER PRIMARY KEY, name TEXT, description TEXT)");
 
     // Create table statuses
     await db.execute(
         "CREATE TABLE statuses(id INTEGER PRIMARY KEY, name TEXT, description TEXT)");
 
     // Create table priorities
-    await db.execute(
-        "CREATE TABLE priorities(id INTEGER PRIMARY KEY, name TEXT, description TEXT)");
-
-    // Create table categories
-    await db.execute(
-        "CREATE TABLE categories(id INTEGER PRIMARY KEY, name TEXT, description TEXT)");
+//    await db.execute(
+//        "CREATE TABLE priorities(id INTEGER PRIMARY KEY, name TEXT, description TEXT)");
 
     // Create table actions
-    await db.execute(
-        "CREATE TABLE action1s(id INTEGER PRIMARY KEY, name TEXT, description TEXT)");
+//    await db.execute(
+//        "CREATE TABLE action1s(id INTEGER PRIMARY KEY, name TEXT, description TEXT)");
 
     // Create table contexts
-    await db.execute(
-        "CREATE TABLE context1s(id INTEGER PRIMARY KEY, name TEXT, description TEXT)");
+//    await db.execute(
+//        "CREATE TABLE context1s(id INTEGER PRIMARY KEY, name TEXT, description TEXT)");
 
     // Create table locations
-    await db.execute(
-        "CREATE TABLE location1s(id INTEGER PRIMARY KEY, name TEXT, description TEXT)");
+//    await db.execute(
+//        "CREATE TABLE location1s(id INTEGER PRIMARY KEY, name TEXT, description TEXT)");
 
     // Create table tags
-    await db.execute(
-        "CREATE TABLE tag1s(id INTEGER PRIMARY KEY, name TEXT, description TEXT)");
+//    await db.execute(
+//        "CREATE TABLE tag1s(id INTEGER PRIMARY KEY, name TEXT, description TEXT)");
 
     // Create table goals
-    await db.execute(
-        "CREATE TABLE goal1s(id INTEGER PRIMARY KEY, name TEXT, description TEXT)");
+//    await db.execute(
+//        "CREATE TABLE goal1s(id INTEGER PRIMARY KEY, name TEXT, description TEXT)");
 
     // Create table USers
     await db.execute(
@@ -145,6 +161,43 @@ class DbHelper {
   }
 
   void setDefaultDB(Database db) async {
+    //////
+    //Create Default Values for Catergories
+    //////
+    await db.execute(
+        "INSERT INTO categories ( 'name', 'description')  values (?, ?)",
+        ['zen moment', 'Bootstrap - please delete or rename if necessary']);
+
+    await db.execute(
+        "INSERT INTO categories ( 'name', 'description')  values (?, ?)", [
+      'lifelong learning',
+      'Bootstrap - please delete or rename if necessary'
+    ]);
+
+    await db.execute(
+        "INSERT INTO categories ( 'name', 'description')  values (?, ?)",
+        ['connect', 'Bootstrap - please delete or rename if necessary']);
+
+    await db.execute(
+        "INSERT INTO categories ( 'name', 'description')  values (?, ?)",
+        ['work', 'Bootstrap - please delete or rename if necessary']);
+
+    await db.execute(
+        "INSERT INTO categories ( 'name', 'description')  values (?, ?)",
+        ['health', '2Bootstrap - please delete or rename if necessary']);
+
+    await db.execute(
+        "INSERT INTO categories ( 'name', 'description')  values (?, ?)",
+        ['wealth', '2Bootstrap - please delete or rename if necessary']);
+
+    await db.execute(
+        "INSERT INTO categories ( 'name', 'description')  values (?, ?)",
+        ['flow', '2Bootstrap - please delete or rename if necessary']);
+
+    await db.execute(
+        "INSERT INTO categories ( 'name', 'description')  values (?, ?)",
+        ['outdoors', '2Bootstrap - please delete or rename if necessary']);
+
     //////
     //Create Default Values for statuses
     //////
@@ -175,186 +228,171 @@ class DbHelper {
     //////
     //Create Default Values for priorities
     //////
-    await db.execute(
-        "INSERT INTO priorities ( 'name', 'description')  values (?, ?)",
-        ['Low1', '1Bootstrap - please delete or rename if necessary']);
+//    await db.execute(
+//        "INSERT INTO priorities ( 'name', 'description')  values (?, ?)",
+//        ['Low1', '1Bootstrap - please delete or rename if necessary']);
 
-    await db.execute(
-        "INSERT INTO priorities ( 'name', 'description')  values (?, ?)",
-        ['Low2', '2Bootstrap - please delete or rename if necessary']);
+//    await db.execute(
+//        "INSERT INTO priorities ( 'name', 'description')  values (?, ?)",
+//        ['Low2', '2Bootstrap - please delete or rename if necessary']);
 
-    await db.execute(
-        "INSERT INTO priorities ( 'name', 'description')  values (?, ?)",
-        ['Medium1', '3Bootstrap - please delete or rename if necessary']);
+//    await db.execute(
+//        "INSERT INTO priorities ( 'name', 'description')  values (?, ?)",
+//        ['Medium1', '3Bootstrap - please delete or rename if necessary']);
 
-    await db.execute(
-        "INSERT INTO priorities ( 'name', 'description')  values (?, ?)",
-        ['Medium2', '4Bootstrap - please delete or rename if necessary']);
+//    await db.execute(
+//        "INSERT INTO priorities ( 'name', 'description')  values (?, ?)",
+//        ['Medium2', '4Bootstrap - please delete or rename if necessary']);
 
-    await db.execute(
-        "INSERT INTO priorities ( 'name', 'description')  values (?, ?)",
-        ['High1', '5Bootstrap - please delete or rename if necessary']);
+//    await db.execute(
+//        "INSERT INTO priorities ( 'name', 'description')  values (?, ?)",
+//        ['High1', '5Bootstrap - please delete or rename if necessary']);
 
-    await db.execute(
-        "INSERT INTO priorities ( 'name', 'description')  values (?, ?)",
-        ['High2', '6Bootstrap - please delete or rename if necessary']);
+//    await db.execute(
+//        "INSERT INTO priorities ( 'name', 'description')  values (?, ?)",
+//        ['High2', '6Bootstrap - please delete or rename if necessary']);
 
-    await db.execute(
-        "INSERT INTO priorities ( 'name', 'description')  values (?, ?)",
-        ['Top', '7Bootstrap - please delete or rename if necessary']);
-
-    //////
-    //Create Default Values for Catergories
-    //////
-    await db.execute(
-        "INSERT INTO categories ( 'name', 'description')  values (?, ?)",
-        ['Inbox', '1Bootstrap - please delete or rename if necessary']);
-
-    await db.execute(
-        "INSERT INTO categories ( 'name', 'description')  values (?, ?)",
-        ['Personal', '1Bootstrap - please delete or rename if necessary']);
-
-    await db.execute(
-        "INSERT INTO categories ( 'name', 'description')  values (?, ?)",
-        ['Work', '2Bootstrap - please delete or rename if necessary']);
+//    await db.execute(
+//        "INSERT INTO priorities ( 'name', 'description')  values (?, ?)",
+//        ['Top', '7Bootstrap - please delete or rename if necessary']);
 
     //////
     //Create Default Values for Action
     //////
-    await db.execute(
-        "INSERT INTO action1s ( 'name', 'description')  values (?, ?)",
-        ['Call', '2Bootstrap - please delete or rename if necessary']);
+//    await db.execute(
+//        "INSERT INTO action1s ( 'name', 'description')  values (?, ?)",
+//        ['Call', '2Bootstrap - please delete or rename if necessary']);
 
-    await db.execute(
-        "INSERT INTO action1s ( 'name', 'description')  values (?, ?)",
-        ['Email', '2Bootstrap - please delete or rename if necessary']);
+//    await db.execute(
+//        "INSERT INTO action1s ( 'name', 'description')  values (?, ?)",
+//        ['Email', '2Bootstrap - please delete or rename if necessary']);
 
-    await db.execute(
-        "INSERT INTO action1s ( 'name', 'description')  values (?, ?)",
-        ['Meet', '2Bootstrap - please delete or rename if necessary']);
+//    await db.execute(
+//        "INSERT INTO action1s ( 'name', 'description')  values (?, ?)",
+//        ['Meet', '2Bootstrap - please delete or rename if necessary']);
 
-    await db.execute(
-        "INSERT INTO action1s ( 'name', 'description')  values (?, ?)",
-        ['Buy', '1Bootstrap - please delete or rename if necessary']);
+//    await db.execute(
+//        "INSERT INTO action1s ( 'name', 'description')  values (?, ?)",
+//        ['Buy', '1Bootstrap - please delete or rename if necessary']);
 
-    await db.execute(
-        "INSERT INTO action1s ( 'name', 'description')  values (?, ?)",
-        ['Pay', '1Bootstrap - please delete or rename if necessary']);
+//    await db.execute(
+//        "INSERT INTO action1s ( 'name', 'description')  values (?, ?)",
+//        ['Pay', '1Bootstrap - please delete or rename if necessary']);
 
-    await db.execute(
-        "INSERT INTO action1s ( 'name', 'description')  values (?, ?)",
-        ['Read', '1Bootstrap - please delete or rename if necessary']);
+//    await db.execute(
+//        "INSERT INTO action1s ( 'name', 'description')  values (?, ?)",
+//        ['Read', '1Bootstrap - please delete or rename if necessary']);
 
-    await db.execute(
-        "INSERT INTO action1s ( 'name', 'description')  values (?, ?)",
-        ['Study', '1Bootstrap - please delete or rename if necessary']);
+//    await db.execute(
+//        "INSERT INTO action1s ( 'name', 'description')  values (?, ?)",
+//        ['Study', '1Bootstrap - please delete or rename if necessary']);
 
-    await db.execute(
-        "INSERT INTO action1s ( 'name', 'description')  values (?, ?)",
-        ['Print', '1Bootstrap - please delete or rename if necessary']);
+//    await db.execute(
+//        "INSERT INTO action1s ( 'name', 'description')  values (?, ?)",
+//        ['Print', '1Bootstrap - please delete or rename if necessary']);
 
     //////
     //Create Default Values for Context
     //////
-    await db.execute(
-        "INSERT INTO context1s ( 'name', 'description')  values (?, ?)",
-        ['Quiet Time', '1Bootstrap - please delete or rename if necessary']);
+//    await db.execute(
+//        "INSERT INTO context1s ( 'name', 'description')  values (?, ?)",
+//        ['Quiet Time', '1Bootstrap - please delete or rename if necessary']);
 
-    await db.execute(
-        "INSERT INTO context1s ( 'name', 'description')  values (?, ?)", [
-      'Internet Time',
-      '2Bootstrap - please delete or rename if necessary'
-    ]);
+//    await db.execute(
+//        "INSERT INTO context1s ( 'name', 'description')  values (?, ?)", [
+//      'Internet Time',
+//      '2Bootstrap - please delete or rename if necessary'
+//    ]);
 
-    await db.execute(
-        "INSERT INTO context1s ( 'name', 'description')  values (?, ?)",
-        ['Morning', '3Bootstrap - please delete or rename if necessary']);
+//    await db.execute(
+//        "INSERT INTO context1s ( 'name', 'description')  values (?, ?)",
+//        ['Morning', '3Bootstrap - please delete or rename if necessary']);
 
-    await db.execute(
-        "INSERT INTO context1s ( 'name', 'description')  values (?, ?)",
-        ['Afternoon', '4Bootstrap - please delete or rename if necessary']);
+//    await db.execute(
+//        "INSERT INTO context1s ( 'name', 'description')  values (?, ?)",
+//        ['Afternoon', '4Bootstrap - please delete or rename if necessary']);
 
-    await db.execute(
-        "INSERT INTO context1s ( 'name', 'description')  values (?, ?)",
-        ['Evening', '5Bootstrap - please delete or rename if necessary']);
+//    await db.execute(
+//        "INSERT INTO context1s ( 'name', 'description')  values (?, ?)",
+//        ['Evening', '5Bootstrap - please delete or rename if necessary']);
 
     //////
     //Create Default Values for Locations
     //////
-    await db.execute(
-        "INSERT INTO location1s ( 'name', 'description')  values (?, ?)",
-        ['Home', '1Bootstrap - please delete or rename if necessary']);
+//    await db.execute(
+//        "INSERT INTO location1s ( 'name', 'description')  values (?, ?)",
+//        ['Home', '1Bootstrap - please delete or rename if necessary']);
 
-    await db.execute(
-        "INSERT INTO location1s ( 'name', 'description')  values (?, ?)",
-        ['Grocery', '2Bootstrap - please delete or rename if necessary']);
+//    await db.execute(
+//        "INSERT INTO location1s ( 'name', 'description')  values (?, ?)",
+//        ['Grocery', '2Bootstrap - please delete or rename if necessary']);
 
-    await db.execute(
-        "INSERT INTO location1s ( 'name', 'description')  values (?, ?)",
-        ['Outdoor', '3Bootstrap - please delete or rename if necessary']);
+//    await db.execute(
+//        "INSERT INTO location1s ( 'name', 'description')  values (?, ?)",
+//        ['Outdoor', '3Bootstrap - please delete or rename if necessary']);
 
     //////
     //Create Default Values for Tags
     //////
-    await db.execute(
-        "INSERT INTO tag1s ( 'name', 'description')  values (?, ?)",
-        ['Family', '1Bootstrap - please delete or rename if necessary']);
+//    await db.execute(
+//        "INSERT INTO tag1s ( 'name', 'description')  values (?, ?)",
+//        ['Family', '1Bootstrap - please delete or rename if necessary']);
 
-    await db.execute(
-        "INSERT INTO tag1s ( 'name', 'description')  values (?, ?)",
-        ['Friend1', '2Bootstrap - please delete or rename if necessary']);
+//    await db.execute(
+//        "INSERT INTO tag1s ( 'name', 'description')  values (?, ?)",
+//        ['Friend', '2Bootstrap - please delete or rename if necessary']);
 
     //////
     //Create Default Values for Goals
     //////
-    await db.execute(
-        "INSERT INTO goal1s ( 'name', 'description')  values (?, ?)",
-        ['Eat Healthy', '1Bootstrap - please delete or rename if necessary']);
+//    await db.execute(
+//        "INSERT INTO goal1s ( 'name', 'description')  values (?, ?)",
+//        ['Eat Healthy', '1Bootstrap - please delete or rename if necessary']);
 
-    await db.execute(
-        "INSERT INTO goal1s ( 'name', 'description')  values (?, ?)",
-        ['Drink Water', '2Bootstrap - please delete or rename if necessary']);
+//    await db.execute(
+//        "INSERT INTO goal1s ( 'name', 'description')  values (?, ?)",
+//        ['Drink Water', '2Bootstrap - please delete or rename if necessary']);
 
-    await db.execute(
-        "INSERT INTO goal1s ( 'name', 'description')  values (?, ?)",
-        ['Exercise', '3Bootstrap - please delete or rename if necessary']);
+//    await db.execute(
+//        "INSERT INTO goal1s ( 'name', 'description')  values (?, ?)",
+//        ['Exercise', '3Bootstrap - please delete or rename if necessary']);
 
-    await db.execute(
-        "INSERT INTO goal1s ( 'name', 'description')  values (?, ?)",
-        ['Meditate', '4Bootstrap - please delete or rename if necessary']);
+//    await db.execute(
+//        "INSERT INTO goal1s ( 'name', 'description')  values (?, ?)",
+//        ['Meditate', '4Bootstrap - please delete or rename if necessary']);
 
-    await db.execute(
-        "INSERT INTO goal1s ( 'name', 'description')  values (?, ?)",
-        ['Read', '5Bootstrap - please delete or rename if necessary']);
+//    await db.execute(
+//        "INSERT INTO goal1s ( 'name', 'description')  values (?, ?)",
+//        ['Read', '5Bootstrap - please delete or rename if necessary']);
 
-    await db.execute(
-        "INSERT INTO goal1s ( 'name', 'description')  values (?, ?)", [
-      'Better Sleep',
-      '6Bootstrap - please delete or rename if necessary'
-    ]);
+//    await db.execute(
+//        "INSERT INTO goal1s ( 'name', 'description')  values (?, ?)", [
+//      'Better Sleep',
+//      '6Bootstrap - please delete or rename if necessary'
+//    ]);
 
     //Default value for Custom Setting
     CustomSettings customSetting = new CustomSettings(
-      "8", // sort1 - star
+      "6", // sort1 - star
       '1', // order1 - descending order
       '2', // sort2 - due date
       '0', // order2
       '3', // sort3 - due time
       '0', // order3
-      '0', // main1 - task
-      '', // main2
+//      '0', // main1 - task
+//      '', // main2
       '0', // sec1 - dateDue
       '1', // sec2 - dueTime
       '2', // sec3 - Category
       '0', // dateDue
-      "", // priority
-      "", // status
       "", // category - set to null
-      "", // action
-      "", // context
-      "", // location
-      "", // tag
-      "", // goal
+      "", // status
+//      "", // priority
+//      "", // action
+//      "", // context
+//      "", // location
+//      "", // tag
+//      "", // goal
       0, // isStar
       1, //isDone
     ); //
@@ -381,20 +419,20 @@ Connect soon
     ''',
         formattedate, // dateDue
         '', // timeDue
+        '', // category
         '', // status
-        '1', // priority
-        '1', // category
-        '', // action
-        '', // context
-        '', // location
-        '', // tag
-        '', // goal
+//        '1', // priority
+//        '', // action
+//        '', // context
+//        '', // location
+//        '', // tag
+//        '', // goal
         0, // isStar
         0, // isDone
         '', // dateDone
         '', // last modified
-        '', // main1
-        '', // main2
+//        '', // main1
+//        '', // main2
         '1', // sec1
         '3', // sec2
         '2'); // sec3
@@ -415,20 +453,20 @@ Bottom-Right (Search) | keyword search or more powerful advance dropdown search
 ''',
         formattedate, // dateDue
         '', // timeDue
+        '', // category
         '', // status
-        '1', // priority
-        '1', // category
-        '', // action
-        '', // context
-        '', // location
-        '', // tag
-        '', // goal
+//        '1', // priority
+//        '', // action
+//        '', // context
+//        '', // location
+//        '', // tag
+        //      '', // goal
         0, // isStar
         0, // isDone
         '', // dateDone
         '', // last modified
-        '', // main1
-        '', // main2
+//        '', // main1
+//        '', // main2
         '1', // sec1
         '3', // sec2
         '2'); // sec3
@@ -450,20 +488,20 @@ Contact us | share the good, bad, ugly
     ''',
         formattedate, // dateDue
         '', // timeDue
+        '', // category
         '', // status
-        '1', // priority
-        '1', // category
-        '', // action
-        '', // context
-        '', // location
-        '', // tag
-        '', // goal
+//        '1', // priority
+//        '', // action
+//        '', // context
+//        '', // location
+//        '', // tag
+//        '', // goal
         0, // isStar
         0, // isDone
         '', // dateDone
         '', // last modified
-        '', // main1
-        '', // main2
+//        '', // main1
+//        '', // main2
         '1', // sec1
         '3', // sec2
         '2'); // sec3
@@ -482,20 +520,20 @@ Plan C - USD 24 | 12 month
         ''',
         formattedate, // dateDue
         '', // timeDue
+        '', // category
         '', // status
-        '1', // priority
-        '1', // category
-        '', // action
-        '', // context
-        '', // location
-        '', // tag
-        '', // goal
+//        '1', // priority
+//        '', // action
+//        '', // context
+//        '', // location
+//        '', // tag
+//        '', // goal
         0, // isStar
         0, // isDone
         '', // dateDone
         '', // last modified
-        '', // main1
-        '', // main2
+//        '', // main1
+//        '', // main2
         '1', // sec1
         '3', // sec2
         '2'); // sec3
@@ -547,14 +585,14 @@ Plan C - USD 24 | 12 month
       String? colsortField3,
       String? colsortOrder3,
       String? colfilterDateDue,
-      String? colfilterStatus,
-      String? colfilterPriority,
       String? colfilterCategory,
-      String? colfilterAction,
-      String? colfilterContext,
-      String? colfilterLocation,
-      String? colfilterTag,
-      String? colfilterGoal,
+      String? colfilterStatus,
+//      String? colfilterPriority,
+//      String? colfilterAction,
+//      String? colfilterContext,
+//      String? colfilterLocation,
+//      String? colfilterTag,
+//      String? colfilterGoal,
       int? colfilterIsStar,
       int? colfilterIsDone) async {
 ////////////////
@@ -563,26 +601,36 @@ Plan C - USD 24 | 12 month
     Database? db = await this.db;
 
     String queryStr = "";
+//    queryStr =
+//        "SELECT $tblTodo.id,$tblTodo.task, $tblTodo.note, dateDue,timeDue,   " +
+//            "status, priority, category,action1,context1,location1,tag1,goal1, " +
+//            "isStar, isDone, dateDone, lastModified, " +
+//            "statuses.name as statusesname, " +
+//            "priorities.name as prioritiesname, " +
+//            "categories.name as categoriesname, " +
+//            "action1s.name as action1name, " +
+//            "context1s.name as context1name, " +
+//            "location1s.name as location1name, " +
+//            "tag1s.name as tag1name, " +
+//            "goal1s.name as goal1name  FROM $tblTodo  " +
+//            " LEFT JOIN statuses ON  $tblTodo.status = statuses.id" +
+//            " LEFT JOIN priorities ON  $tblTodo.priority = priorities.id" +
+//            " LEFT JOIN categories ON  $tblTodo.category = categories.id" +
+//            " LEFT JOIN action1s ON $tblTodo.action1 = action1s.id " +
+//            " LEFT JOIN context1s ON  $tblTodo.context1 = context1s.id" +
+//            " LEFT JOIN location1s ON  $tblTodo.location1 = location1s.id" +
+//            " LEFT JOIN tag1s ON  $tblTodo.tag1 = tag1s.id" +
+//            " LEFT JOIN goal1s ON  $tblTodo.goal1 = goal1s.id ";
+
     queryStr =
         "SELECT $tblTodo.id,$tblTodo.task, $tblTodo.note, dateDue,timeDue,   " +
-            "status, priority, category,action1,context1,location1,tag1,goal1, " +
+            "category, status, " +
             "isStar, isDone, dateDone, lastModified, " +
             "statuses.name as statusesname, " +
-            "priorities.name as prioritiesname, " +
-            "categories.name as categoriesname, " +
-            "action1s.name as action1name, " +
-            "context1s.name as context1name, " +
-            "location1s.name as location1name, " +
-            "tag1s.name as tag1name, " +
-            "goal1s.name as goal1name  FROM $tblTodo  " +
-            " LEFT JOIN statuses ON  $tblTodo.status = statuses.id" +
-            " LEFT JOIN priorities ON  $tblTodo.priority = priorities.id" +
+            "categories.name as categoriesname " +
+            "FROM $tblTodo  " +
             " LEFT JOIN categories ON  $tblTodo.category = categories.id" +
-            " LEFT JOIN action1s ON $tblTodo.action1 = action1s.id " +
-            " LEFT JOIN context1s ON  $tblTodo.context1 = context1s.id" +
-            " LEFT JOIN location1s ON  $tblTodo.location1 = location1s.id" +
-            " LEFT JOIN tag1s ON  $tblTodo.tag1 = tag1s.id" +
-            " LEFT JOIN goal1s ON  $tblTodo.goal1 = goal1s.id ";
+            " LEFT JOIN statuses ON  $tblTodo.status = statuses.id";
 
 ////////////////
     /// build query - add filterDateDue
@@ -654,7 +702,18 @@ Plan C - USD 24 | 12 month
     } else if (colfilterDateDue == "All Tasks") {
     } else {
 // select all tasks regardless of due dates
-    };
+    }
+    ;
+
+////////////////
+    /// build query - add category
+////////////////
+    if (colfilterCategory == "0" || colfilterCategory == "null") {
+    } // hide
+// include all
+    else {
+      queryStr = queryStr + " and ($colCategory == $colfilterCategory)";
+    }
 
 ////////////////
     /// build query - add status
@@ -669,62 +728,52 @@ Plan C - USD 24 | 12 month
 ////////////////
     /// build query - add priority
 ////////////////
-    if (colfilterPriority == "0" || colfilterPriority == "null") {
-    } // hide
-// include all
-    else {
-      queryStr = queryStr + " and ($colPriority == $colfilterPriority)";
-    }
+//    if (colfilterPriority == "0" || colfilterPriority == "null") {
+//    } // hide
+//    else {
+//      queryStr = queryStr + " and ($colPriority == $colfilterPriority)";
+//    }
 
-////////////////
-    /// build query - add category
-////////////////
-    if (colfilterCategory == "0" || colfilterCategory == "null") {
-    } // hide
-// include all
-    else {
-      queryStr = queryStr + " and ($colCategory == $colfilterCategory)";
-    }
 
 ////////////////
     /// build query - add action
 ////////////////
-    if (colfilterAction == "0" || colfilterAction == "null") {
-    } else {
-      queryStr = queryStr + " and ($colAction1 == $colfilterAction)";
-    }
+//    if (colfilterAction == "0" || colfilterAction == "null") {
+//    } else {
+//      queryStr = queryStr + " and ($colAction1 == $colfilterAction)";
+//    }
 
 ////////////////
     /// build query - add context
 ////////////////
-    if (colfilterContext == "0" || colfilterContext == "null") {
-    } else {
-      queryStr = queryStr + " and ($colContext1 == $colfilterContext)";
-    }
+//    if (colfilterContext == "0" || colfilterContext == "null") {
+//    } else {
+//      queryStr = queryStr + " and ($colContext1 == $colfilterContext)";
+//    }
 
 ////////////////
     /// build query - add location
 ////////////////
-    if (colfilterLocation == "0" || colfilterLocation == "null") {
-    } else {
-      queryStr = queryStr + " and ($colLocation1 == $colfilterLocation)";
-    }
+//    if (colfilterLocation == "0" || colfilterLocation == "null") {
+//    } else {
+//      queryStr = queryStr + " and ($colLocation1 == $colfilterLocation)";
+//    }
 
 ////////////////
     /// build query - add tag
 ////////////////
-    if (colfilterTag == "0" || colfilterTag == "null") {
-    } else {
-      queryStr = queryStr + " and ($colTag1 == $colfilterTag)";
-    }
+//    if (colfilterTag == "0" || colfilterTag == "null") {
+//    } else {
+//      queryStr = queryStr + " and ($colTag1 == $colfilterTag)";
+//    }
 
 ////////////////
     /// build query - add goal
 ////////////////
-    if (colfilterGoal == "0" || colfilterGoal == "null") {
-    } else {
-      queryStr = queryStr + " and ($colGoal1 == $colfilterGoal)";
-    }
+//    if (colfilterGoal == "0" || colfilterGoal == "null") {
+//    } else {
+//      queryStr = queryStr + " and ($colGoal1 == $colfilterGoal)";
+//    }
 
 ////////////////
     /// build query - add order by
@@ -739,42 +788,52 @@ Plan C - USD 24 | 12 month
 
   Future<List> searchTasks(
       String? searchText,
-      String? searchStatus,
-      String? searchPriority,
       String? searchCategory,
-      String? searchAction1,
-      String? searchContext1,
-      String? searchLocation1,
-      String? searchTag1,
-      String? searchGoal1,
+      String? searchStatus,
+//      String? searchPriority,
+//      String? searchAction1,
+//      String? searchContext1,
+//      String? searchLocation1,
+//      String? searchTag1,
+//      String? searchGoal1,
       int? includeIsStar,
       int? includeIsDone) async {
     Database? db = await this.db;
 
     String queryStr = "";
 
+//    queryStr =
+//        "SELECT $tblTodo.id,$tblTodo.task, $tblTodo.note, dateDue,timeDue,   " +
+//            "status, priority, category,action1,context1,location1,tag1,goal1, " +
+//            "isStar, isDone, dateDone, lastModified, " +
+//            "statuses.name as statusesname, " +
+//            "priorities.name as prioritiesname, " +
+//            "categories.name as categoriesname, " +
+//            "action1s.name as action1name, " +
+//            "context1s.name as context1name, " +
+//            "location1s.name as location1name, " +
+//            "tag1s.name as tag1name, " +
+//            "goal1s.name as goal1name  FROM $tblTodo  " +
+//            " LEFT JOIN statuses ON  $tblTodo.status = statuses.id" +
+//            " LEFT JOIN priorities ON  $tblTodo.priority = priorities.id" +
+//            " LEFT JOIN categories ON  $tblTodo.category = categories.id" +
+//            " LEFT JOIN action1s ON $tblTodo.action1 = action1s.id " +
+//            " LEFT JOIN context1s ON  $tblTodo.context1 = context1s.id" +
+//            " LEFT JOIN location1s ON  $tblTodo.location1 = location1s.id" +
+//            " LEFT JOIN tag1s ON  $tblTodo.tag1 = tag1s.id" +
+//            " LEFT JOIN goal1s ON  $tblTodo.goal1 = goal1s.id " +
+//            "WHERE ($colTask LIKE '%$searchText%' OR $colNote LIKE '%$searchText%')";
+
     queryStr =
         "SELECT $tblTodo.id,$tblTodo.task, $tblTodo.note, dateDue,timeDue,   " +
-            "status, priority, category,action1,context1,location1,tag1,goal1, " +
+            "category, status, " +
             "isStar, isDone, dateDone, lastModified, " +
-            "statuses.name as statusesname, " +
-            "priorities.name as prioritiesname, " +
             "categories.name as categoriesname, " +
-            "action1s.name as action1name, " +
-            "context1s.name as context1name, " +
-            "location1s.name as location1name, " +
-            "tag1s.name as tag1name, " +
-            "goal1s.name as goal1name  FROM $tblTodo  " +
-            " LEFT JOIN statuses ON  $tblTodo.status = statuses.id" +
-            " LEFT JOIN priorities ON  $tblTodo.priority = priorities.id" +
+            "statuses.name as statusesname " +
+            " FROM $tblTodo  " +
             " LEFT JOIN categories ON  $tblTodo.category = categories.id" +
-            " LEFT JOIN action1s ON $tblTodo.action1 = action1s.id " +
-            " LEFT JOIN context1s ON  $tblTodo.context1 = context1s.id" +
-            " LEFT JOIN location1s ON  $tblTodo.location1 = location1s.id" +
-            " LEFT JOIN tag1s ON  $tblTodo.tag1 = tag1s.id" +
-            " LEFT JOIN goal1s ON  $tblTodo.goal1 = goal1s.id " +
+            " LEFT JOIN statuses ON  $tblTodo.status = statuses.id " +
             "WHERE ($colTask LIKE '%$searchText%' OR $colNote LIKE '%$searchText%')";
-
 
 //    queryStr =
 //        "SELECT * FROM $tblTodo WHERE ($colTask LIKE '%$searchText%' OR $colNote LIKE '%$searchText%') ";
@@ -791,30 +850,31 @@ Plan C - USD 24 | 12 month
       queryStr = queryStr + " AND  $colIsStar = 1 ";
     }
 
-    if (searchStatus != "null") {
-      queryStr = queryStr + " AND $colStatus = '$searchStatus' ";
-    }
-    if (searchPriority != "null") {
-      queryStr = queryStr + " AND $colPriority = '$searchPriority' ";
-    }
     if (searchCategory != "null") {
       queryStr = queryStr + " AND $colCategory = '$searchCategory' ";
     }
-    if (searchAction1 != "null") {
-      queryStr = queryStr + " AND $colAction1 = '$searchAction1' ";
+
+    if (searchStatus != "null") {
+      queryStr = queryStr + " AND $colStatus = '$searchStatus' ";
     }
-    if (searchContext1 != "null") {
-      queryStr = queryStr + " AND $colContext1 = '$searchContext1' ";
-    }
-    if (searchLocation1 != "null") {
-      queryStr = queryStr + " AND $colLocation1 = '$searchLocation1' ";
-    }
-    if (searchTag1 != "null") {
-      queryStr = queryStr + " AND $colTag1 = '$searchTag1' ";
-    }
-    if (searchGoal1 != "null") {
-      queryStr = queryStr + " AND $colGoal1 = '$searchGoal1' ";
-    }
+//    if (searchPriority != "null") {
+//      queryStr = queryStr + " AND $colPriority = '$searchPriority' ";
+//    }
+//    if (searchAction1 != "null") {
+//      queryStr = queryStr + " AND $colAction1 = '$searchAction1' ";
+//    }
+//    if (searchContext1 != "null") {
+//      queryStr = queryStr + " AND $colContext1 = '$searchContext1' ";
+//    }
+//    if (searchLocation1 != "null") {
+//      queryStr = queryStr + " AND $colLocation1 = '$searchLocation1' ";
+//    }
+//    if (searchTag1 != "null") {
+//      queryStr = queryStr + " AND $colTag1 = '$searchTag1' ";
+//    }
+//    if (searchGoal1 != "null") {
+//      queryStr = queryStr + " AND $colGoal1 = '$searchGoal1' ";
+//    }
 
     var result = await db!.rawQuery(queryStr);
     return result;
@@ -849,7 +909,52 @@ Plan C - USD 24 | 12 month
     return result;
   }
 
-//######################### Statuses ##########################################
+//////#########################Categories ##########################################
+
+  Future<int> insertCategories(Category categories) async {
+    Database? db = await this.db;
+
+    var result = await db!.insert('categories', categories.categoryMap());
+    return result;
+  }
+
+  Future<List> getCategories() async {
+    Database? db = await this.db;
+    var result = await db!.rawQuery("SELECT * FROM categories");
+
+    return result;
+  }
+
+  Future<List> getCategoriesbyID(int categoriesId) async {
+    Database? db = await this.db;
+    var result =
+        await db!.rawQuery("SELECT * FROM categories WHERE id=$categoriesId");
+    return result;
+  }
+
+  Future<int> updateCategories(Category categories) async {
+    Database? db = await this.db;
+    var result = await db!.update("categories", categories.categoryMap(),
+        where: "$colId =?", whereArgs: [categories.id]);
+    return result;
+  }
+
+  Future<int> deleteCategoriesbyID(int id) async {
+    int result;
+    Database? db = await this.db;
+    result = await db!.rawDelete('DELETE FROM categories WHERE id = $id');
+    return result;
+  }
+
+  Future<int> deleteAllCategories() async {
+    int result;
+    Database? db = await this.db;
+    result = await db!.rawDelete('DELETE FROM categories WHERE id <> 0');
+    return result;
+  }
+
+//######################### ENd of Categories ##########################################
+////######################### Statuses ##########################################
 
   Future<int> insertStatuses(Status statuses) async {
     Database? db = await this.db;
@@ -940,51 +1045,7 @@ Plan C - USD 24 | 12 month
   }
 
 //######################### ENd of Priorities ##########################################
-//////#########################Categories ##########################################
 
-  Future<int> insertCategories(Category categories) async {
-    Database? db = await this.db;
-
-    var result = await db!.insert('categories', categories.categoryMap());
-    return result;
-  }
-
-  Future<List> getCategories() async {
-    Database? db = await this.db;
-    var result = await db!.rawQuery("SELECT * FROM categories");
-
-    return result;
-  }
-
-  Future<List> getCategoriesbyID(int categoriesId) async {
-    Database? db = await this.db;
-    var result =
-        await db!.rawQuery("SELECT * FROM categories WHERE id=$categoriesId");
-    return result;
-  }
-
-  Future<int> updateCategories(Category categories) async {
-    Database? db = await this.db;
-    var result = await db!.update("categories", categories.categoryMap(),
-        where: "$colId =?", whereArgs: [categories.id]);
-    return result;
-  }
-
-  Future<int> deleteCategoriesbyID(int id) async {
-    int result;
-    Database? db = await this.db;
-    result = await db!.rawDelete('DELETE FROM categories WHERE id = $id');
-    return result;
-  }
-
-  Future<int> deleteAllCategories() async {
-    int result;
-    Database? db = await this.db;
-    result = await db!.rawDelete('DELETE FROM categories WHERE id <> 0');
-    return result;
-  }
-
-//######################### ENd of Categories ##########################################
 
 //#########################Action ##########################################
 
