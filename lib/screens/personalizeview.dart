@@ -351,6 +351,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     categories.forEach((category) {
       setState(() {
         cus = new CustomDropdownItem();
+
         cus.id = category['id'].toString();
         String tempCat;
         if (category['name'].toString().length > 30)
@@ -372,8 +373,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
 //    cus.id = null;
     cus.name =
         "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
-    cus.name =
-        "-- All Statuses --";
+    cus.name = "-- All Statuses --";
     _statuses.add(cus);
     statuses.forEach((status) {
       setState(() {
@@ -399,8 +399,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
 //    cus.id = null;
     cus.name =
         "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
-    cus.name =
-        "-- All Priorities --";
+    cus.name = "-- All Priorities --";
     _priorities.add(cus);
     priorities.forEach((priority) {
       setState(() {
@@ -426,8 +425,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
 //    cus.id = null;
     cus.name =
         "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
-    cus.name =
-        "-- All Actions --";
+    cus.name = "-- All Actions --";
     _action1s.add(cus);
     action1s.forEach((action1) {
       setState(() {
@@ -452,8 +450,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
 //    cus.id = null;
     cus.name =
         "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
-    cus.name =
-        "-- All Contexts --";
+    cus.name = "-- All Contexts --";
     _context1s.add(cus);
     context1s.forEach((context1) {
       setState(() {
@@ -479,8 +476,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
 //    cus.id = null;
     cus.name =
         "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
-    cus.name =
-        "-- All Locations --";
+    cus.name = "-- All Locations --";
     _location1s.add(cus);
     location1s.forEach((location1) {
       setState(() {
@@ -506,8 +502,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
 //    cus.id = null;
     cus.name =
         "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
-    cus.name =
-        "-- All Tags --";
+    cus.name = "-- All Tags --";
     _tag1s.add(cus);
     tag1s.forEach((tag1) {
       setState(() {
@@ -532,8 +527,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
 //    cus.id = null;
     cus.name =
         "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
-    cus.name =
-        "-- All Goals --";
+    cus.name = "-- All Goals --";
     _goal1s.add(cus);
     goal1s.forEach((goal1) {
       setState(() {
@@ -921,11 +915,12 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.blue[100]),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     DropdownButton<String>(
                         style: _textStyleControls,
+                        isExpanded: true,
                         items: _categories.map((CustomDropdownItem value) {
                           return DropdownMenuItem<String>(
                               value: value.id,
@@ -949,10 +944,11 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.blue[100]),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     DropdownButton<String>(
+                        isExpanded: true,
                         style: _textStyleControls,
                         items: _statuses.map((CustomDropdownItem value) {
                           return DropdownMenuItem<String>(
@@ -977,10 +973,11 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.blue[100]),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     DropdownButton<String>(
+                        isExpanded: true,
                         style: _textStyleControls,
                         items: _priorities.map((CustomDropdownItem value) {
                           return DropdownMenuItem<String>(
@@ -1080,10 +1077,12 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.blue[100]),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     DropdownButton<String>(
+                      isExpanded: true,
+                      elevation: 8,
                       style: _textStyleControls,
                       items: _tag1s.map((CustomDropdownItem value) {
                         return DropdownMenuItem<String>(
