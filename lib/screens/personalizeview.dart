@@ -715,7 +715,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
         actions: [
           IconButton(
             icon: Icon(Icons.save_alt, color: Colors.white),
-            tooltip: 'Add Tag',
+            tooltip: 'Save',
             onPressed: () {
               setState(() {
                 if (_selectedSortField1 != null)
@@ -785,12 +785,6 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 customSetting!.sortOrder3 = _selectedSortOrder3 == null
                     ? ""
                     : _selectedSortOrder3!.id.toString();
-//                          customSetting.showMain1 = _selectedShowMain1 == null
-//                              ? ""
-//                              : _selectedShowMain1.id.toString();
-//                          customSetting.showMain2 = _selectedShowMain2 == null
-//                              ? ""
-//                              : _selectedShowMain2.id.toString();
                 customSetting!.showSec1 = _selectedShowSec1 == null
                     ? ""
                     : _selectedShowSec1!.id.toString();
@@ -821,27 +815,11 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                     }
                   }
 
-                  customSetting!.filterCategory = _selectedCategory == null
+                  customSetting!.filterCategory = (_selectedCategory == null)
                       ? ""
                       : _selectedCategory.toString();
                   customSetting!.filterStatus =
                       _selectedStatus == null ? "" : _selectedStatus.toString();
-//                  customSetting!.filterPriority = _selectedPriority == null
-//                      ? ""
-//                      : _selectedPriority.toString();
-//                  customSetting!.filterAction = _selectedAction1 == null
-//                      ? ""
-//                      : _selectedAction1.toString();
-//                  customSetting!.filterContext = _selectedContext1 == null
-//                      ? ""
-//                      : _selectedContext1.toString();
-//                  customSetting!.filterLocation = _selectedLocation1 == null
-//                      ? ""
-//                      : _selectedLocation1.toString();
-//                  customSetting!.filterTag =
-//                      _selectedTag1 == null ? "" : _selectedTag1.toString();
-//                  customSetting!.filterGoal =
-//                      _selectedGoal1 == null ? "" : _selectedGoal1.toString();
 
                   var result;
 
