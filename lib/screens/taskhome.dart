@@ -112,12 +112,12 @@ class TaskHomeState extends State {
 //        ),
         actions: <Widget>[
 
-          IconButton(
-              icon: const Icon(Icons.sync, color: Colors.white),
-              tooltip: 'Sync',
-              onPressed: () {
-                Navigator.of(context).pushNamed('/syncview');
-              }),
+//          IconButton(
+//              icon: const Icon(Icons.sync, color: Colors.white),
+//              tooltip: 'Sync',
+//              onPressed: () {
+//                Navigator.of(context).pushNamed('/syncview');
+//              }),
         ],
       ),
       body: taskListItems(),
@@ -172,9 +172,9 @@ class TaskHomeState extends State {
                 String formattedDate = DateFormat('yyyy-mm-dd').format(now);
                 this.tasklist![position].isDone = 1;
                 this.tasklist![position].dateDone = formattedDate;
-                Scaffold.of(context).showSnackBar(new SnackBar(
-                  content: new Text("Task Completed"),
-                ));
+//                Scaffold.of(context).showSnackBar(new SnackBar(
+//                  content: new Text("Task Completed"),
+//                ));
                 dbHelper.updateTask(tasklist![position]);
                 getData();
               });
