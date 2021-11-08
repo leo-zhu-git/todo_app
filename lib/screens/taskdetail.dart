@@ -698,13 +698,36 @@ class TaskDetailState extends State //<TaskDetail>
                   hintText: ' Pick a Date',
                   prefixIcon: InkWell(
                     onTap: () {
-                      _showCupertinoDatePicker(context);
+                      _selectedTodoDate(context);
                     },
                     child: Icon(Icons.calendar_today),
                   ),
                 ),
               ),
             ),
+
+//            Container(
+//              margin:
+//                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+//              decoration: BoxDecoration(
+//                shape: BoxShape.rectangle,
+//                color: Colors.blue[100],
+//              ),
+//              child: TextField(
+//                controller: _todoDateController,
+//                style: _textStyleControls,
+//                decoration: InputDecoration(
+//                  labelText: ' Due Date',
+//                  hintText: ' Pick a Date',
+//                  prefixIcon: InkWell(
+//                    onTap: () {
+//                      _showCupertinoDatePicker(context);
+//                    },
+//                    child: Icon(Icons.calendar_today),
+//                  ),
+//                ),
+//              ),
+//            ),
 
 ///////////////////////////
 //  WHEN - TIME DUE
