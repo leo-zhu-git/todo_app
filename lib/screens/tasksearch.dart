@@ -24,22 +24,12 @@ class TaskSearchState extends State {
   List<CustomDropdownItem> _categories = [];
   List<CustomDropdownItem> _statuses = [];
 //  List<CustomDropdownItem> _priorities = [];
-//  List<CustomDropdownItem> _action1s = [];
-//  List<CustomDropdownItem> _context1s = [];
-//  List<CustomDropdownItem> _location1s = [];
-//  List<CustomDropdownItem> _tag1s = [];
-//  List<CustomDropdownItem> _goal1s = [];
   List<Task> tasklist = [];
   int count = 0;
   TextEditingController searchController = TextEditingController();
   String? _selectedCategory;
   String? _selectedStatus;
 //  String? _selectedPriority;
-//  String? _selectedAction1;
-//  String? _selectedContext1;
-//  String? _selectedLocation1;
-//  String? _selectedTag1;
- // String? _selectedGoal1;
   int? isChecked = 0;
   int? _showIsStar = 0;
   int? _showIsDone = 1;
@@ -51,11 +41,6 @@ class TaskSearchState extends State {
     _loadCategories();
     _loadStatuses();
 //    _loadPriorities();
-//    _loadAction1s();
-//    _loadContext1s();
-//    _loadLocation1s();
-//    _loadTag1s();
-//    _loadGoal1s();
   }
 
   //##################Drop Down Items Load from DB #################################################################
@@ -418,10 +403,11 @@ class TaskSearchState extends State {
                             EdgeInsets.only(top: 1.0, left: 8.0, right: 8.0),
                         decoration: BoxDecoration(
                             shape: BoxShape.rectangle, color: Colors.blue[100]),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             DropdownButton<String?>(
+                                isExpanded: true,
                                 items:
                                     _categories.map((CustomDropdownItem value) {
                                   return DropdownMenuItem<String>(
@@ -460,10 +446,11 @@ class TaskSearchState extends State {
                             EdgeInsets.only(top: 1.0, left: 8.0, right: 8.0),
                         decoration: BoxDecoration(
                             shape: BoxShape.rectangle, color: Colors.blue[100]),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             DropdownButton<String?>(
+                              isExpanded: true,
                                 items:
                                     _statuses.map((CustomDropdownItem value) {
                                   return DropdownMenuItem<String>(

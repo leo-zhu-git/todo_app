@@ -51,29 +51,17 @@ class TaskDetailState extends State //<TaskDetail>
   var _todoNoteController = TextEditingController();
   var _todoDateController = TextEditingController();
   var _todoTimeController = TextEditingController();
-  var _categoryController = TextEditingController();
-  var _statusController = TextEditingController();
-//  var _priorityController = TextEditingController();
-//  var _tag1Controller = TextEditingController();
+//  var _categoryController = TextEditingController();
+//  var _statusController = TextEditingController();
   var _selectedIsStar;
-  var _selectedStatus;
-//  var _selectedPriority;
-  var _selectedCategory;
-//  var _selectedAction1;
-//  var _selectedContext1;
-//  var _selectedLocation1;
-//  var _selectedTag1;
-//  var _selectedGoal1;
   var _nTitle;
 
+  List<CustomDropdownItem> _categories = [];
   List<CustomDropdownItem> _statuses = [];
 //  List<CustomDropdownItem> _priorities = [];
-  List<CustomDropdownItem> _categories = [];
-//  List<CustomDropdownItem> _action1s = [];
-//  List<CustomDropdownItem> _context1s = [];
-//  List<CustomDropdownItem> _location1s = [];
-//  List<CustomDropdownItem> _tag1s = [];
-//  List<CustomDropdownItem> _goal1s = [];
+  var _selectedCategory = null;
+  var _selectedStatus = null;
+//  var _selectedPriority;
 
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
 
@@ -86,14 +74,9 @@ class TaskDetailState extends State //<TaskDetail>
     super.initState();
 
     _initFields();
+    _loadCategories();
     _loadStatuses();
 //    _loadPriorities();
-    _loadCategories();
-//    _loadAction1s();
-//    _loadContext1s();
-//    _loadLocation1s();
-//    _loadTag1s();
-//    _loadGoal1s();
     notificationPlugin
         .setListenerForLowerVersions(onNotificationInLowerVersions);
     notificationPlugin.setOnNotificationClick(onNotificationClick);
@@ -131,39 +114,22 @@ class TaskDetailState extends State //<TaskDetail>
     print(_todoTimeController.text);
     task.category != ""
         ? {
-            _categoryController.text = task.categoryText!,
+//            _categoryController.text = task.categoryText!,
             _selectedCategory = task.category,
           }
-        : _selectedCategory = "";
+        : _selectedCategory = null;
     task.status != ""
         ? {
-            _statusController.text = task.statusText!,
+//            _statusController.text = task.statusText!,
             _selectedStatus = task.status,
           }
-        : _selectedStatus = "";
+        : _selectedStatus = null;
 //    task.priority != ""
 //        ? {
 //            _priorityController.text = task.priorityText!,
 //            _selectedPriority = task.priority,
 //          }
 //        : _selectedPriority = "";
-//    task.action1 != ""
-//        ? _selectedAction1 = task.action1
-//        : _selectedAction1 = null;
-//    task.context1 != ""
-//        ? _selectedContext1 = task.context1
-//        : _selectedContext1 = null;
-//    task.location1 != ""
-//        ? _selectedLocation1 = task.location1
-//        : _selectedLocation1 = null;
-//    task.tag1 != "" ? _selectedTag1 = task.tag1 : _selectedTag1 = null;
-//    task.tag1 != ""
-//        ? {
-//            _tag1Controller.text = task.tag1Text!,
-//            _selectedTag1 = task.tag1,
-//          }
-//        : _selectedTag1 = "";
-//    task.goal1 != "" ? _selectedGoal1 = task.goal1 : _selectedGoal1 = null;
   }
 
 //##################Drop Down Items Load from DB #################################################################
@@ -171,9 +137,7 @@ class TaskDetailState extends State //<TaskDetail>
     var categories = await helper.getCategories();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
-    cus.id = null;
-    cus.name =
-        "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
+//    cus.id = null;
     cus.name = "-- All Categories --";
     _categories.add(cus);
     categories.forEach((category) {
@@ -198,8 +162,6 @@ class TaskDetailState extends State //<TaskDetail>
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
 //    cus.id = null;
-    cus.name =
-        "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
     cus.name = "-- Select Status --";
     _statuses.add(cus);
     statuses.forEach((status) {
@@ -241,135 +203,6 @@ class TaskDetailState extends State //<TaskDetail>
 //        cus.name = tempPriority;
 
 //        _priorities.add(cus);
-//      });
-//    });
-//  }
-
-//  _loadAction1s() async {
-//    var action1s = await helper.getAction1s();
-//    CustomDropdownItem cus;
-//    cus = new CustomDropdownItem();
-//    cus.id = null;
-//    cus.name =
-//        "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
-//    cus.name =
-//        "-- Select Action --                                              ";
-//    _action1s.add(cus);
-//    action1s.forEach((action1) {
-//      setState(() {
-//        cus = new CustomDropdownItem();
-//        cus.id = action1['id'].toString();
-//        String tempAct;
-//        if (action1['name'].toString().length > 20)
-//          tempAct = action1['name'].toString().substring(0, 20) + "...";
-//        else
-//          tempAct = action1['name'];
-
-//        cus.name = tempAct;
-//        _action1s.add(cus);
-//      });
-//    });
-//  }
-
-//  _loadContext1s() async {
-//    var context1s = await helper.getContext1s();
-//    CustomDropdownItem cus;
-//    cus = new CustomDropdownItem();
-//    cus.id = null;
-//    cus.name =
-//        "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
-//    cus.name = "-- Select Context --";
-//    _context1s.add(cus);
-//    context1s.forEach((context1) {
-//      setState(() {
-//        cus = new CustomDropdownItem();
-//        cus.id = context1['id'].toString();
-//        String tempCon;
-//        if (context1['name'].toString().length > 30)
-//          tempCon = context1['name'].toString().substring(0, 30) + "...";
-//        else
-//          tempCon = context1['name'];
-
-//        cus.name = tempCon;
-
-//        _context1s.add(cus);
-//      });
-//    });
-//  }
-
-//  _loadLocation1s() async {
-//    var location1s = await helper.getLocation1s();
-//    CustomDropdownItem cus;
-//    cus = new CustomDropdownItem();
-//    cus.id = null;
-//    cus.name =
-//        "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
-//    cus.name = "-- Select Location --";
-//    _location1s.add(cus);
-//    location1s.forEach((location1) {
-//      setState(() {
-//        cus = new CustomDropdownItem();
-//        cus.id = location1['id'].toString();
-//        String tempLoc;
-//        if (location1['name'].toString().length > 30)
-//          tempLoc = location1['name'].toString().substring(0, 30) + "...";
-//        else
-//          tempLoc = location1['name'];
-
-//        cus.name = tempLoc;
-
-//        _location1s.add(cus);
-//      });
-//    });
-//  }
-
-//  _loadTag1s() async {
-//    var tag1s = await helper.getTag1s();
-//    CustomDropdownItem cus;
-//    cus = new CustomDropdownItem();
-//    cus.id = null;
-//    cus.name =
-//        "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
-//    cus.name = "-- Select Tag --";
-//    _tag1s.add(cus);
-//    tag1s.forEach((tag1) {
-//      setState(() {
-//        cus = new CustomDropdownItem();
-//        cus.id = tag1['id'].toString();
-//        String tempTag;
-//        if (tag1['name'].toString().length > 30)
-//          tempTag = tag1['name'].toString().substring(0, 30) + "...";
-//        else
-//          tempTag = tag1['name'];
-
-//        cus.name = tempTag;
-//        _tag1s.add(cus);
-//      });
-//    });
-//  }
-
-//  _loadGoal1s() async {
-//    var goal1s = await helper.getGoal1s();
-//    CustomDropdownItem cus;
-//    cus = new CustomDropdownItem();
-//    cus.id = null;
-//    cus.name =
-//        "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
-//    cus.name =
-//        "-- Select Goal --                                                  ";
-//    _goal1s.add(cus);
-//    goal1s.forEach((goal1) {
-//      setState(() {
-//        cus = new CustomDropdownItem();
-//        cus.id = goal1['id'].toString();
-//        String tempGoal;
-//        if (goal1['name'].toString().length > 30)
-//          tempGoal = goal1['name'].toString().substring(0, 30) + "...";
-//        else
-//          tempGoal = goal1['name'];
-
-//        cus.name = tempGoal;
-//        _goal1s.add(cus);
 //      });
 //    });
 //  }
@@ -543,77 +376,77 @@ class TaskDetailState extends State //<TaskDetail>
     return _time;
   }
 
-  Widget buildCategoryPicker() => SizedBox(
-        height: 400,
-        child: StatefulBuilder(
-          builder: (context, setState) => CupertinoPicker(
-              //            scrollController: scrollController,
-              backgroundColor: Colors.teal[50],
-              looping: true,
-              itemExtent: 64,
-              selectionOverlay: CupertinoPickerDefaultSelectionOverlay(
-                background: CupertinoColors.activeGreen.withOpacity(0.2),
-              ),
-              children: List.generate(_categories.length, (index) {
-                final isSelected = this.index == index;
-                final category = _categories[index];
-                final color = isSelected ? Colors.teal[800] : Colors.black87;
-                return Center(
-                  child: Text(
-                    category.name!,
-                    style: TextStyle(color: color, fontSize: 32),
-                  ),
-                );
-              }),
-              onSelectedItemChanged: (index) => {
-                    setState(() {
-                      _selectedCategory = index;
-                      _categoryController.text = _categories[index].name!;
-                      print(index);
-                      print(_categories[index].name);
-                    }),
-                  }),
-        ),
-      );
+//  Widget buildCategoryPicker() => SizedBox(
+//        height: 400,
+//        child: StatefulBuilder(
+//          builder: (context, setState) => CupertinoPicker(
+//              //            scrollController: scrollController,
+//              backgroundColor: Colors.teal[50],
+//              looping: true,
+//              itemExtent: 64,
+//              selectionOverlay: CupertinoPickerDefaultSelectionOverlay(
+//                background: CupertinoColors.activeGreen.withOpacity(0.2),
+//              ),
+//              children: List.generate(_categories.length, (index) {
+//                final isSelected = this.index == index;
+//                final category = _categories[index];
+//                final color = isSelected ? Colors.teal[800] : Colors.black87;
+//                return Center(
+//                  child: Text(
+//                    category.name!,
+//                    style: TextStyle(color: color, fontSize: 32),
+//                  ),
+//                );
+//              }),
+//              onSelectedItemChanged: (index) => {
+//                    setState(() {
+//                      _selectedCategory = index;
+//                      _categoryController.text = _categories[index].name!;
+//                      print(index);
+//                      print(_categories[index].name);
+//                    }),
+//                  }),
+//        ),
+//      );
 
-  Widget buildStatusPicker() => SizedBox(
-        height: 400,
-        child: StatefulBuilder(
-          builder: (context, setState) => CupertinoPicker(
-              //            scrollController: scrollController,
-              backgroundColor: Colors.teal[50],
-              looping: true,
-              itemExtent: 64,
-              selectionOverlay: CupertinoPickerDefaultSelectionOverlay(
-                background: CupertinoColors.activeGreen.withOpacity(0.2),
-              ),
-              children: List.generate(_statuses.length, (index) {
-                final isSelected = this.index == index;
-                final status = _statuses[index];
-                final color = isSelected ? Colors.teal[800] : Colors.black87;
-                return Center(
-                  child: Text(
-                    status.name!,
-                    style: TextStyle(color: color, fontSize: 32),
-                  ),
-                );
-              }),
-              onSelectedItemChanged: (index) => {
-                    setState(() {
-                      _selectedStatus = index;
-                      _statusController.text = _statuses[index].name!;
-                      print(index);
-                      print(_statuses[index].name);
-                    }),
-                  }),
-        ),
-      );
+//  Widget buildStatusPicker() => SizedBox(
+//        height: 400,
+//        child: StatefulBuilder(
+//          builder: (context, setState) => CupertinoPicker(
+//              //            scrollController: scrollController,
+//              backgroundColor: Colors.teal[50],
+//              looping: true,
+//              itemExtent: 64,
+//              selectionOverlay: CupertinoPickerDefaultSelectionOverlay(
+//                background: CupertinoColors.activeGreen.withOpacity(0.2),
+//              ),
+//              children: List.generate(_statuses.length, (index) {
+//                final isSelected = this.index == index;
+//                final status = _statuses[index];
+//                final color = isSelected ? Colors.teal[800] : Colors.black87;
+//                return Center(
+//                  child: Text(
+//                    status.name!,
+//                    style: TextStyle(color: color, fontSize: 32),
+//                  ),
+//                );
+//              }),
+//              onSelectedItemChanged: (index) => {
+//                    setState(() {
+//                      _selectedStatus = index;
+//                      _statusController.text = _statuses[index].name!;
+//                      print(index);
+//                      print(_statuses[index].name);
+//                    }),
+//                  }),
+//        ),
+//      );
 
 //  Widget buildPriorityPicker() => SizedBox(
 //        height: 400,
 //        child: StatefulBuilder(
 //          builder: (context, setState) => CupertinoPicker(
-              //            scrollController: scrollController,
+//            scrollController: scrollController,
 //              backgroundColor: Colors.teal[50],
 //              looping: true,
 //              itemExtent: 64,
@@ -719,14 +552,19 @@ class TaskDetailState extends State //<TaskDetail>
 
                   task.task = _todoTaskController.text;
                   task.note = _todoNoteController.text;
+                  (_selectedCategory == null)
+                      ? {
+                          task.category = "",
+                        }
+                      : {
+                          task.category = _selectedCategory.toString(),
+                        };
                   (_selectedStatus == null)
                       ? {
                           task.status = "",
-                          task.statusText = "",
                         }
                       : {
                           task.status = _selectedStatus.toString(),
-                          task.statusText = _statusController.text,
                         };
 //                  (_selectedPriority == null)
 //                      ? {
@@ -737,34 +575,7 @@ class TaskDetailState extends State //<TaskDetail>
 //                          task.priority = _selectedPriority.toString(),
 //                          task.priorityText = _priorityController.text,
 //                        };
-                  (_selectedCategory == "")
-                      ? {
-                          task.category = "",
-                          task.categoryText = "",
-                        }
-                      : {
-                          task.category = _selectedCategory.toString(),
-                          task.categoryText = _categoryController.text,
-                        };
-//                  task.action1 = _selectedAction1 == null
-//                      ? ""
-//                      : _selectedAction1.toString();
-//                  task.context1 = _selectedContext1 == null
-//                      ? ""
-//                      : _selectedContext1.toString();
-//                  task.tag1 =
-//                      _selectedTag1 == null ? "" : _selectedTag1.toString();
-//                  (_selectedTag1 == null)
-//                      ? {
-//                          task.tag1 = "",
-//                          task.tag1Text = "",
-//                        }
-//                      : {
-//                          task.tag1 = _selectedTag1.toString(),
-//                          task.tag1Text = _tag1Controller.text,
-//                        };
-//                  task.goal1 =
-//                      _selectedGoal1 == null ? "" : _selectedGoal1.toString();
+
                   task.dateDue = _todoDateController.text;
                   task.timeDue = _todoTimeController.text;
 
@@ -921,142 +732,129 @@ class TaskDetailState extends State //<TaskDetail>
               ),
             ),
 
-//            Container(
-//              margin:
-//                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
-//              decoration: BoxDecoration(
-//                  shape: BoxShape.rectangle, color: Colors.blue[100]),
-//              child: Row(
-//                crossAxisAlignment: CrossAxisAlignment.center,
-//                children: [
-//                  DropdownButton<String>(
-//                      items: _categories.map((CustomDropdownItem value) {
-//                        return DropdownMenuItem<String>(
-//                            value: value.id,
-//                            child: Text(
-//                              value.name!,
-//                              overflow: TextOverflow.ellipsis,
-//                            ));
-//                      }).toList(),
-//                      style: _textStyleControls,
-//                      value: _selectedCategory,
-//                      onChanged: (newValue) {
-//                        setState(() {
-//                          _selectedCategory = newValue;
-//                          task.category = newValue!;
-//                        });
-//                      }),
-//                ],
-//              ),
-//            ),
-
 ///////////////////////////
 //  CATEGORY
 ///////////////////////////
             Container(
               margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
               decoration: BoxDecoration(
-                shape: BoxShape.rectangle,
-                color: Colors.blue[100],
-              ),
-              child: TextField(
-                controller: _categoryController,
-                readOnly: true,
-                style: _textStyleControls,
-                decoration: InputDecoration(
-                  labelText: ' Category',
-                  hintText: ' Pick a Category',
-                  prefixIcon: InkWell(
-                      onTap: () {
-//                      scrollController.dispose();
-//                      scrollController = FixedExtentScrollController(
-//                          initialItem: (_selectedCategory != null)
-//                              ? _selectedCategory
-//                              : index);
-                        showCupertinoModalPopup(
-                            context: context,
-                            builder: (context) => CupertinoActionSheet(
-                                  actions: [buildCategoryPicker()],
-//                                cancelButton: CupertinoActionSheetAction(
-//                                  child: Text('Cancel'),
-//                                  onPressed: () => Navigator.pop(context),
-//                                )
-                                ));
-                      },
-                      child: Icon(Icons.category_outlined)),
-                ),
+                  shape: BoxShape.rectangle, color: Colors.blue[100]),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  DropdownButton<String>(
+                     isExpanded: true,
+                      style: _textStyleControls,
+                      items: _categories.map((CustomDropdownItem value) {
+                        return DropdownMenuItem<String>(
+                            value: value.id,
+                            child: Text(
+                              value.name!,
+                              overflow: TextOverflow.ellipsis,
+                            ));
+                      }).toList(),
+                      value: _selectedCategory,
+                     onChanged: (newValue) {
+                        setState(() {
+                          _selectedCategory = newValue;
+//                          task.category = newValue!;
+                        });
+                      }),
+                ],
               ),
             ),
+
+///////////////////////////
+//  CATEGORY
+///////////////////////////
+//            Container(
+//              margin:
+//                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+//              decoration: BoxDecoration(
+//                shape: BoxShape.rectangle,
+//                color: Colors.blue[100],
+//              ),
+//              child: TextField(
+//               controller: _categoryController,
+//                readOnly: true,
+//                style: _textStyleControls,
+//                decoration: InputDecoration(
+//                  labelText: ' Category',
+//                  hintText: ' Pick a Category',
+//                  prefixIcon: InkWell(
+//                      onTap: () {
+//                        showCupertinoModalPopup(
+//                            context: context,
+//                            builder: (context) => CupertinoActionSheet(
+//                                  actions: [buildCategoryPicker()],
+//                                ));
+//                      },
+//                      child: Icon(Icons.category_outlined)),
+//                ),
+//              ),
+//            ),
 
 ///////////////////////////
 //  STATUS
 ///////////////////////////
-            Container(
-              margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
-              decoration: BoxDecoration(
-                shape: BoxShape.rectangle,
-                color: Colors.blue[100],
-              ),
-              child: TextField(
-                controller: _statusController,
-                readOnly: true,
-                style: _textStyleControls,
-                decoration: InputDecoration(
-                  labelText: ' Status',
-                  hintText: ' Pick a Status',
-                  prefixIcon: InkWell(
-                    onTap: () {
-//                      scrollController.dispose();
-//                      scrollController = FixedExtentScrollController(
-//                          initialItem: (_selectedCategory != null)
-//                              ? _selectedCategory
-//                              : index);
-                      showCupertinoModalPopup(
-                          context: context,
-                          builder: (context) => CupertinoActionSheet(
-                                actions: [buildStatusPicker()],
-//                              cancelButton: CupertinoActionSheetAction(
-//                                child: Text('Cancel'),
-//                                onPressed: () => Navigator.pop(context),
-//                              )
-                              ));
-                    },
-                    child: Icon(Icons.next_plan_outlined),
-                  ),
-                ),
-              ),
-            ),
-
 //            Container(
 //              margin:
-//                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
+//                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
 //              decoration: BoxDecoration(
-//                  shape: BoxShape.rectangle, color: Colors.blue[100]),
-//              child: Row(
-//                crossAxisAlignment: CrossAxisAlignment.center,
-//                children: [
-//                  DropdownButton<String>(
-//                      items: _statuses.map((CustomDropdownItem value) {
-//                        return DropdownMenuItem<String>(
-//                            value: value.id,
-//                            child: Text(
-//                              value.name!,
-//                              overflow: TextOverflow.ellipsis,
-//                            ));
-//                      }).toList(),
-//                      style: _textStyleControls,
-//                      value: _selectedStatus,
-//                      onChanged: (newValue) {
-//                        setState(() {
-//                          _selectedStatus = newValue;
-//                          task.status = newValue!;
-//                        });
-//                      }),
-//                ],
+//                shape: BoxShape.rectangle,
+//                color: Colors.blue[100],
+//              ),
+//              child: TextField(
+//                controller: _statusController,
+//                readOnly: true,
+//                style: _textStyleControls,
+//                decoration: InputDecoration(
+//                  labelText: ' Status',
+//                  hintText: ' Pick a Status',
+//                  prefixIcon: InkWell(
+//                    onTap: () {
+//                      showCupertinoModalPopup(
+//                          context: context,
+//                          builder: (context) => CupertinoActionSheet(
+//                                actions: [buildStatusPicker()],
+//                              ));
+//                    },
+//                    child: Icon(Icons.next_plan_outlined),
+//                  ),
+//                ),
 //              ),
 //            ),
+
+            Container(
+             margin:
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
+              decoration: BoxDecoration(
+                  shape: BoxShape.rectangle, color: Colors.blue[100]),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  DropdownButton<String>(
+                      isExpanded: true,
+                      style: _textStyleControls,
+                      items: _statuses.map((CustomDropdownItem value) {
+                        return DropdownMenuItem<String>(
+                            value: value.id,
+                            child: Text(
+                              value.name!,
+                              overflow: TextOverflow.ellipsis,
+                            ));
+                      }).toList(),
+                      value: _selectedStatus,
+                      onChanged: (newValue) {
+                        setState(() {
+                          _selectedStatus = newValue;
+//                          task.status = newValue!;
+                        });
+                      }),
+                ],
+              ),
+            ),
 
 ///////////////////////////
 //  PRIORITY
@@ -1098,45 +896,7 @@ class TaskDetailState extends State //<TaskDetail>
 //              ),
 //            ),
 
-///////////////////////////
-//  TAG
-///////////////////////////
-//            Container(
-//              margin:
-//                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
-//              decoration: BoxDecoration(
-//                shape: BoxShape.rectangle,
-//                color: Colors.blue[100],
-//              ),
-//              child: TextField(
-//                controller: _tag1Controller,
-//                readOnly: true,
-//                style: _textStyleControls,
-//                decoration: InputDecoration(
-//                  labelText: ' Tag',
-//                  hintText: ' Pick a Tag',
-//                  prefixIcon: InkWell(
-//                    onTap: () {
-//                      scrollController.dispose();
-//                      scrollController = FixedExtentScrollController(
-//                          initialItem: (_selectedCategory != null)
-//                              ? _selectedCategory
-//                              : index);
-//                      showCupertinoModalPopup(
-//                          context: context,
-//                          builder: (context) => CupertinoActionSheet(
-//                                actions: [buildTag1Picker()],
-//                              cancelButton: CupertinoActionSheetAction(
-//                                child: Text('Cancel'),
-//                                onPressed: () => Navigator.pop(context),
-//                              )
-//                              ));
-//                    },
-//                    child: Icon(Icons.tag_outlined),
-//                  ),
-//                ),
-//              ),
-//            ),
+
 ///////////////////////////
 //  FOCUS
 ///////////////////////////
@@ -1148,7 +908,6 @@ class TaskDetailState extends State //<TaskDetail>
                 color: Colors.blue[100],
               ),
               child: TextField(
-//                controller: _tag1Controller,
                 readOnly: true,
                 style: _textStyleControls,
                 decoration: InputDecoration(

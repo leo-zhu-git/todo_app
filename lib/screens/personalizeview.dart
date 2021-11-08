@@ -344,8 +344,6 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
 //    cus.id = null;
-    cus.name =
-        "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
     cus.name = "-- All Categories -- ";
     _categories.add(cus);
     categories.forEach((category) {
@@ -370,8 +368,6 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
 //    cus.id = null;
-    cus.name =
-        "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
     cus.name = "-- All Statuses --";
     _statuses.add(cus);
     statuses.forEach((status) {
