@@ -1135,7 +1135,121 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
               SizedBox(
                 height: 20,
               ),
+              Text("Picklist | User-defined Dropdowns",
+                  style: _textStyleControls),
 
+///////////////////////////
+//  Picklist - Categories
+///////////////////////////
+              Card(
+                elevation: 8.0,
+                child: ListTile(
+                  tileColor: Colors.orange[100],
+                  title: Text('Categories', style: _textStyleControls),
+                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => CategoriesScreen())),
+                ),
+              ),
+              SizedBox(height: 2),
+
+///////////////////////////
+//  Picklist - Action
+///////////////////////////
+//              Card(
+//                elevation: 8.0,
+//                child: ListTile(
+//                  tileColor: Colors.orange[100],
+//                  title: Text('Actions'),
+//                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
+//                      builder: (context) => Action1sScreen())),
+//                ),
+//              ),
+//              SizedBox(height: 2),
+
+///////////////////////////
+//  Picklist - Statuses
+///////////////////////////
+              Card(
+                elevation: 8.0,
+                child: ListTile(
+                  tileColor: Colors.orange[100],
+                  title: Text('Statuses', style: _textStyleControls),
+                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => StatusesScreen())),
+                ),
+              ),
+              SizedBox(height: 2),
+
+///////////////////////////
+//  Picklist - Priorities
+///////////////////////////
+//              Card(
+//                elevation: 8.0,
+//                child: ListTile(
+//                  tileColor: Colors.orange[100],
+//                  title: Text('Priorities', style: _textStyleControls),
+//                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
+//                      builder: (context) => PrioritiesScreen())),
+//                ),
+//              ),
+//              SizedBox(height: 2),
+///////////////////////////
+//  Picklist - Contexts
+///////////////////////////
+//              Card(
+//                elevation: 8.0,
+//                child: ListTile(
+//                  tileColor: Colors.orange[100],
+//                  title: Text('Contexts'),
+//                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
+//                     builder: (context) => Context1sScreen())),
+//                ),
+//              ),
+//              SizedBox(height: 2),
+
+///////////////////////////
+//  Picklist - Locations
+///////////////////////////
+//              Card(
+//                elevation: 8.0,
+//                child: ListTile(
+//                  tileColor: Colors.orange[100],
+//                  title: Text('Locations'),
+//                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
+//                      builder: (context) => Location1sScreen())),
+//                ),
+//              ),
+//              SizedBox(height: 2),
+
+///////////////////////////
+//  Picklist - Tags
+///////////////////////////
+//              Card(
+//                elevation: 8.0,
+//                child: ListTile(
+//                  tileColor: Colors.orange[100],
+//                  title: Text('Tags', style: _textStyleControls),
+//                  onTap: () => Navigator.of(context).push(
+//                      MaterialPageRoute(builder: (context) => Tag1sScreen())),
+//                ),
+//              ),
+//              SizedBox(height: 2),
+
+///////////////////////////
+//  Picklist - Goals
+///////////////////////////
+//              Card(
+//                elevation: 8.0,
+//                child: ListTile(
+//                  tileColor: Colors.orange[100],
+//                  title: Text('Goals'),
+//                  onTap: () => Navigator.of(context).push(
+//                      MaterialPageRoute(builder: (context) => Goal1sScreen())),
+//                ),
+//              ),
+              SizedBox(
+                height: 20,
+              ),
 ///////////////////////////
 //  SORT ORDER 1
 ///////////////////////////
@@ -1261,121 +1375,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 height: 20,
               ),
 
-              Text("Picklist | User-defined Dropdowns",
-                  style: _textStyleControls),
 
-///////////////////////////
-//  Picklist - Categories
-///////////////////////////
-              Card(
-                elevation: 8.0,
-                child: ListTile(
-                  tileColor: Colors.orange[100],
-                  title: Text('Categories', style: _textStyleControls),
-                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => CategoriesScreen())),
-                ),
-              ),
-              SizedBox(height: 2),
-
-///////////////////////////
-//  Picklist - Action
-///////////////////////////
-//              Card(
-//                elevation: 8.0,
-//                child: ListTile(
-//                  tileColor: Colors.orange[100],
-//                  title: Text('Actions'),
-//                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
-//                      builder: (context) => Action1sScreen())),
-//                ),
-//              ),
-//              SizedBox(height: 2),
-
-///////////////////////////
-//  Picklist - Statuses
-///////////////////////////
-              Card(
-                elevation: 8.0,
-                child: ListTile(
-                  tileColor: Colors.orange[100],
-                  title: Text('Statuses', style: _textStyleControls),
-                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => StatusesScreen())),
-                ),
-              ),
-              SizedBox(height: 2),
-
-///////////////////////////
-//  Picklist - Priorities
-///////////////////////////
-//              Card(
-//                elevation: 8.0,
-//                child: ListTile(
-//                  tileColor: Colors.orange[100],
-//                  title: Text('Priorities', style: _textStyleControls),
-//                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
-//                      builder: (context) => PrioritiesScreen())),
-//                ),
-//              ),
-//              SizedBox(height: 2),
-///////////////////////////
-//  Picklist - Contexts
-///////////////////////////
-//              Card(
-//                elevation: 8.0,
-//                child: ListTile(
-//                  tileColor: Colors.orange[100],
-//                  title: Text('Contexts'),
-//                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
-//                     builder: (context) => Context1sScreen())),
-//                ),
-//              ),
-//              SizedBox(height: 2),
-
-///////////////////////////
-//  Picklist - Locations
-///////////////////////////
-//              Card(
-//                elevation: 8.0,
-//                child: ListTile(
-//                  tileColor: Colors.orange[100],
-//                  title: Text('Locations'),
-//                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
-//                      builder: (context) => Location1sScreen())),
-//                ),
-//              ),
-//              SizedBox(height: 2),
-
-///////////////////////////
-//  Picklist - Tags
-///////////////////////////
-//              Card(
-//                elevation: 8.0,
-//                child: ListTile(
-//                  tileColor: Colors.orange[100],
-//                  title: Text('Tags', style: _textStyleControls),
-//                  onTap: () => Navigator.of(context).push(
-//                      MaterialPageRoute(builder: (context) => Tag1sScreen())),
-//                ),
-//              ),
-//              SizedBox(height: 2),
-
-///////////////////////////
-//  Picklist - Goals
-///////////////////////////
-//              Card(
-//                elevation: 8.0,
-//                child: ListTile(
-//                  tileColor: Colors.orange[100],
-//                  title: Text('Goals'),
-//                  onTap: () => Navigator.of(context).push(
-//                      MaterialPageRoute(builder: (context) => Goal1sScreen())),
-//                ),
-//              ),
-              SizedBox(
-                height: 20,
-              ),
               Text("View - second line up to 3 fields",
                   style: _textStyleControls),
 ///////////////////////////
