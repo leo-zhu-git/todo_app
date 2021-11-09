@@ -187,9 +187,9 @@ class _WipeScreenState extends State<WipeScreen> {
                         //mysqlDBhelper.wipeGoalToMySql();
                         //mysqlDBhelper.wipeContextToMySql();
                         //mysqlDBhelper.wipeLocationToMySql();
-                        mysqlDBhelper.wipePriorityToMySql();
+                        //mysqlDBhelper.wipePriorityToMySql();
                         mysqlDBhelper.wipeStatusToMySql();
-                        mysqlDBhelper.wipeTagToMySql();
+                        //mysqlDBhelper.wipeTagToMySql();
                         Navigator.pop(context);
 //                      _showSuccessSnackBar(Container(
 //                        color: Colors.tealAccent[100],
@@ -211,12 +211,12 @@ class _WipeScreenState extends State<WipeScreen> {
                       } else {
                         mysqlDBhelper.wipeTaskDataFromMySql();
                         mysqlDBhelper.syncStatusesData();
-                        mysqlDBhelper.syncPrioritiesData();
+                        //mysqlDBhelper.syncPrioritiesData();
                         mysqlDBhelper.syncCategoriesData();
                         // mysqlDBhelper.syncAction1sData();
                         // mysqlDBhelper.syncContext1sData();
                         // mysqlDBhelper.syncLocation1sData();
-                        mysqlDBhelper.syncTag1sData();
+                        // mysqlDBhelper.syncTag1sData();
                         // mysqlDBhelper.syncGoal1sData();
 
                         Navigator.pop(context);

@@ -61,8 +61,7 @@ class MySql_DBHelper {
         if (swiperDataList[i]['TaskCategory'] != "" &&
             swiperDataList[i]['TaskCategory'] != null) {
           String dbCategoryID = swiperDataList[i]['TaskCategory'];
-          appCategoryID =
-              dbTaskID.substring(dbUserID.length, dbCategoryID.length);
+          appCategoryID = dbTaskID.substring(dbUserID.length);
         }
 
         var appContextID = "";
@@ -142,7 +141,12 @@ class MySql_DBHelper {
 //            "",
 //            "",
             "");
-        // print("TaskID" + appTaskID);
+        print("TaskID" + appTaskID);
+        print("IIII::" + i.toString());
+
+        if (i == 190 || i == 191) {
+          print("stop");
+        }
         // print("CategoryID::::::::" + swiperDataList[i]['TaskCategory']);
         // print("ContextID::::::::" + swiperDataList[i]['TaskContext']);
         // print("TagID::::::::" + swiperDataList[i]['TaskTag']);

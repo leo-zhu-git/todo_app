@@ -81,7 +81,7 @@ class DbHelper {
 
   Future<Database> initializeDb() async {
     Directory dir = await getApplicationDocumentsDirectory();
-    String path = dir.path + "todo_V22.h9.db";
+    String path = dir.path + "todo_V22.h10.db";
     var dbTodovn = await openDatabase(path, version: 1, onCreate: _createDb);
     return dbTodovn;
   }
@@ -734,7 +734,6 @@ Plan C - USD 24 | 12 month
 //      queryStr = queryStr + " and ($colPriority == $colfilterPriority)";
 //    }
 
-
 ////////////////
     /// build query - add action
 ////////////////
@@ -1045,7 +1044,6 @@ Plan C - USD 24 | 12 month
   }
 
 //######################### ENd of Priorities ##########################################
-
 
 //#########################Action ##########################################
 
