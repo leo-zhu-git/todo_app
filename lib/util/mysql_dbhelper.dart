@@ -132,7 +132,7 @@ class MySql_DBHelper {
 //            appLocationID,
 //            appTagID,
 //            appGoalID,
-            int.parse("0"),
+            0,
             //int.parse(swiperDataList[i]['TaskStar']),
             int.parse(swiperDataList[i]['TaskIsDone']),
             swiperDataList[i]['TaskDateDone'],
@@ -142,10 +142,10 @@ class MySql_DBHelper {
 //            "",
 //            "",
             "");
-        print("TaskID" + appTaskID);
-        print("CategoryID::::::::" + swiperDataList[i]['TaskCategory']);
-        print("ContextID::::::::" + swiperDataList[i]['TaskContext']);
-        print("TagID::::::::" + swiperDataList[i]['TaskTag']);
+        // print("TaskID" + appTaskID);
+        // print("CategoryID::::::::" + swiperDataList[i]['TaskCategory']);
+        // print("ContextID::::::::" + swiperDataList[i]['TaskContext']);
+        // print("TagID::::::::" + swiperDataList[i]['TaskTag']);
 
         helper.insertTask(task);
 
@@ -576,11 +576,11 @@ class MySql_DBHelper {
         var status = "";
         var priority = "";
         var category = "";
-        var action1 = "";
-        var context1 = "";
-        var location1 = "";
+        // var action1 = "";
+        // var context1 = "";
+        // var location1 = "";
         var tag1 = "";
-        var goal1 = "";
+        // var goal1 = "";
         var isStar = "";
         var isDone = "";
         var lastModified = "";
@@ -607,21 +607,21 @@ class MySql_DBHelper {
         if (result[i]["category"] != null) {
           category = result[i]["category"].toString();
         }
-        if (result[i]["action1"] != null) {
-          action1 = result[i]["action1"];
-        }
-        if (result[i]["context1"] != null) {
-          context1 = result[i]["context1"].toString();
-        }
-        if (result[i]["location1"] != null) {
-          location1 = result[i]["location1"].toString();
-        }
+        // if (result[i]["action1"] != null) {
+        //   action1 = result[i]["action1"];
+        // }
+        // if (result[i]["context1"] != null) {
+        //   context1 = result[i]["context1"].toString();
+        // }
+        // if (result[i]["location1"] != null) {
+        //   location1 = result[i]["location1"].toString();
+        // }
         if (result[i]["tag1"] != null) {
           tag1 = result[i]["tag1"].toString();
         }
-        if (result[i]["goal1"] != null) {
-          goal1 = result[i]["goal1"].toString();
-        }
+        // if (result[i]["goal1"] != null) {
+        //   goal1 = result[i]["goal1"].toString();
+        // }
         if (result[i]["isStar"] != null) {
           isStar = result[i]["isStar"].toString();
         }
@@ -634,9 +634,9 @@ class MySql_DBHelper {
         if (result[i]["timeDue"] != null) {
           timeDue = result[i]["timeDue"].toString();
         }
-        if (result[i]["goal1"] != null) {
-          goal1 = result[i]["goal1"].toString();
-        }
+        // if (result[i]["goal1"] != null) {
+        //   goal1 = result[i]["goal1"].toString();
+        // }
         if (result[i]["location1"] != null) {
           timeDue = result[i]["location1"].toString();
         }
@@ -669,20 +669,20 @@ class MySql_DBHelper {
             '"taskCategory":"' +
             category +
             '",' +
-            '"taskAction":"' +
-            action1 +
-            '",' +
-            '"taskContext":"' +
-            context1 +
-            '",' +
-            '"taskLocation":"' +
-            location1 +
-            '",' +
+            // '"taskAction":"' +
+            // action1 +
+            // '",' +
+            // '"taskContext":"' +
+            // context1 +
+            // '",' +
+            // '"taskLocation":"' +
+            // location1 +
+            // '",' +
             '"taskTag":"' +
             tag1 +
-            '",' +
-            '"taskGoal":"' +
-            goal1 +
+            // '",' +
+            // '"taskGoal":"' +
+            // goal1 +
             '",' +
             '"taskIsStar":"' +
             isStar +
