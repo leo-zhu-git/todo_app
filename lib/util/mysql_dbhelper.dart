@@ -687,7 +687,7 @@ class MySql_DBHelper {
             // '",' +
             // '"taskGoal":"' +
             // goal1 +
-            '",' +
+            //'",' +
             '"taskIsStar":"' +
             isStar +
             '",' +
