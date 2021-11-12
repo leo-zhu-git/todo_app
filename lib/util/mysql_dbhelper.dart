@@ -125,11 +125,11 @@ class MySql_DBHelper {
             swiperDataList[i]['TaskTimeDue'],
             appCategoryID,
             appStatusID,
-//            appPriorityID,
+            appPriorityID,
+            appTagID,
 //            appActionID,
 //            appContextID,
 //            appLocationID,
-//            appTagID,
 //            appGoalID,
             0,
             //int.parse(swiperDataList[i]['TaskStar']),
@@ -193,11 +193,11 @@ class MySql_DBHelper {
             swiperDataList[i]['TaskTimeDue'],
             swiperDataList[i]['TaskCategory'],
             swiperDataList[i]['TaskStatus'],
-//            swiperDataList[i]['TaskPriority'],
+            swiperDataList[i]['TaskPriority'],
+            swiperDataList[i]['TaskTag'],
 //            swiperDataList[i]['TaskAction'],
 //            swiperDataList[i]['TaskContext'],
 //            swiperDataList[i]['TaskLocation'],
-//            swiperDataList[i]['TaskTag'],
 //            swiperDataList[i]['TaskGoal'],
             int.parse(swiperDataList[i]['TaskIsStar']),
             int.parse(swiperDataList[i]['TaskIsDone']),
@@ -577,13 +577,13 @@ class MySql_DBHelper {
         var note = "";
         var dateDue = "";
         var timeDue = "";
+        var category = "";
         var status = "";
         var priority = "";
-        var category = "";
+        var tag1 = "";
         // var action1 = "";
         // var context1 = "";
         // var location1 = "";
-        var tag1 = "";
         // var goal1 = "";
         var isStar = "";
         var isDone = "";
@@ -602,14 +602,17 @@ class MySql_DBHelper {
         if (result[i]["timeDue"] != null) {
           timeDue = result[i]["timeDue"];
         }
+        if (result[i]["category"] != null) {
+          category = result[i]["category"].toString();
+        }
         if (result[i]["status"] != null) {
           status = result[i]["status"].toString();
         }
         if (result[i]["priority"] != null) {
           priority = result[i]["priority"].toString();
         }
-        if (result[i]["category"] != null) {
-          category = result[i]["category"].toString();
+        if (result[i]["tag1"] != null) {
+          tag1 = result[i]["tag1"].toString();
         }
         // if (result[i]["action1"] != null) {
         //   action1 = result[i]["action1"];
@@ -620,9 +623,6 @@ class MySql_DBHelper {
         // if (result[i]["location1"] != null) {
         //   location1 = result[i]["location1"].toString();
         // }
-        if (result[i]["tag1"] != null) {
-          tag1 = result[i]["tag1"].toString();
-        }
         // if (result[i]["goal1"] != null) {
         //   goal1 = result[i]["goal1"].toString();
         // }
@@ -664,14 +664,17 @@ class MySql_DBHelper {
             '"taskTimeDue":"' +
             timeDue +
             '",' +
+            '"taskCategory":"' +
+            category +
+            '",' +
             '"taskStatus":"' +
             status +
             '",' +
             '"taskPriority":"' +
             priority +
             '",' +
-            '"taskCategory":"' +
-            category +
+            '"taskTag":"' +
+            tag1 +
             '",' +
             // '"taskAction":"' +
             // action1 +
@@ -681,9 +684,6 @@ class MySql_DBHelper {
             // '",' +
             // '"taskLocation":"' +
             // location1 +
-            // '",' +
-            '"taskTag":"' +
-            tag1 +
             // '",' +
             // '"taskGoal":"' +
             // goal1 +

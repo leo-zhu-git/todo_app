@@ -23,13 +23,15 @@ class TaskSearchState extends State {
   DbHelper helper = DbHelper();
   List<CustomDropdownItem> _categories = [];
   List<CustomDropdownItem> _statuses = [];
-//  List<CustomDropdownItem> _priorities = [];
+  List<CustomDropdownItem> _priorities = [];
+  List<CustomDropdownItem> _tag1s = [];
   List<Task> tasklist = [];
   int count = 0;
   TextEditingController searchController = TextEditingController();
   String? _selectedCategory;
   String? _selectedStatus;
-//  String? _selectedPriority;
+  String? _selectedPriority;
+  String? _selectedTag1;
   int? isChecked = 0;
   int? _showIsStar = 0;
   int? _showIsDone = 1;
@@ -40,7 +42,8 @@ class TaskSearchState extends State {
     _getCustomSettings();
     _loadCategories();
     _loadStatuses();
-//    _loadPriorities();
+    _loadPriorities();
+    _loadTag1s();
   }
 
   //##################Drop Down Items Load from DB #################################################################
@@ -92,30 +95,52 @@ class TaskSearchState extends State {
     });
   }
 
-//  _loadPriorities() async {
-//    var priorities = await helper.getPriorities();
-//    CustomDropdownItem cus;
-//    cus = new CustomDropdownItem();
-//    cus.id = null;
-//    cus.name = "-- All Priorities --";
-//    _priorities.add(cus);
-//    priorities.forEach((priority) {
-//      setState(() {
-//        cus = new CustomDropdownItem();
-//        cus.id = priority['id'].toString();
-//        String tempPriority;
-//        if (priority['name'].toString().length > 30)
-//          tempPriority = priority['name'].toString().substring(0, 30) + "...";
-//        else
-//          tempPriority = priority['name'];
+  _loadPriorities() async {
+    var priorities = await helper.getPriorities();
+    CustomDropdownItem cus;
+    cus = new CustomDropdownItem();
+    cus.id = null;
+    cus.name = "-- All Priorities --";
+    _priorities.add(cus);
+    priorities.forEach((priority) {
+      setState(() {
+        cus = new CustomDropdownItem();
+        cus.id = priority['id'].toString();
+        String tempPriority;
+        if (priority['name'].toString().length > 30)
+          tempPriority = priority['name'].toString().substring(0, 30) + "...";
+        else
+          tempPriority = priority['name'];
 
-//        cus.name = tempPriority;
+        cus.name = tempPriority;
 
-//        _priorities.add(cus);
-//      });
-//    });
-//  }
+        _priorities.add(cus);
+      });
+    });
+  }
 
+  _loadTag1s() async {
+    var tag1s = await helper.getTag1s();
+    CustomDropdownItem cus;
+    cus = new CustomDropdownItem();
+    cus.id = null;
+    cus.name = "-- All Tags --";
+    _tag1s.add(cus);
+    tag1s.forEach((tag1) {
+      setState(() {
+        cus = new CustomDropdownItem();
+       cus.id = tag1['id'].toString();
+        String tempTag;
+        if (tag1['name'].toString().length > 30)
+          tempTag = tag1['name'].toString().substring(0, 30) + "...";
+        else
+          tempTag = tag1['name'];
+
+        cus.name = tempTag;
+        _tag1s.add(cus);
+      });
+    });
+  }
 
 
 //  _loadAction1s() async {
@@ -188,28 +213,6 @@ class TaskSearchState extends State {
 //    });
 //  }
 
-//  _loadTag1s() async {
-//    var tag1s = await helper.getTag1s();
-//    CustomDropdownItem cus;
-//    cus = new CustomDropdownItem();
-//    cus.id = null;
-//    cus.name = "-- All Tags --";
-//    _tag1s.add(cus);
-//    tag1s.forEach((tag1) {
-//      setState(() {
-//        cus = new CustomDropdownItem();
-//        cus.id = tag1['id'].toString();
-//        String tempTag;
-//        if (tag1['name'].toString().length > 30)
-//          tempTag = tag1['name'].toString().substring(0, 30) + "...";
-//        else
-//          tempTag = tag1['name'];
-
-//        cus.name = tempTag;
-//        _tag1s.add(cus);
-//      });
-//    });
-//  }
 
 //  _loadGoal1s() async {
 //    var goal1s = await helper.getGoal1s();
@@ -294,11 +297,11 @@ class TaskSearchState extends State {
                     value,
                     _selectedCategory,
                     _selectedStatus,
-//                    _selectedPriority,
+                    _selectedPriority,
+                    _selectedTag1,
 //                    _selectedAction1,
 //                    _selectedContext1,
 //                    _selectedLocation1,
-//                    _selectedTag1,
 //                   _selectedGoal1,
                     _showIsStar,
                     1);
@@ -345,11 +348,11 @@ class TaskSearchState extends State {
                                       _searchText,
                                       _selectedCategory,
                                       _selectedStatus,
-//                                      _selectedPriority,
+                                      _selectedPriority,
+                                      _selectedTag1,
 //                                      _selectedAction1,
 //                                      _selectedContext1,
 //                                      _selectedLocation1,
-//                                      _selectedTag1,
 //                                      _selectedGoal1,
                                       _showIsStar,
                                       _showIsDone);
@@ -381,11 +384,11 @@ class TaskSearchState extends State {
                                       _searchText,
                                       _selectedCategory,
                                       _selectedStatus,
-//                                      _selectedPriority,
+                                      _selectedPriority,
+                                      _selectedTag1,
 //                                      _selectedAction1,
 //                                      _selectedContext1,
 //                                      _selectedLocation1,
-//                                      _selectedTag1,
 //                                      _selectedGoal1,
                                       _showIsStar,
                                       _showIsDone);
@@ -426,11 +429,11 @@ class TaskSearchState extends State {
                                         _searchText,
                                         _selectedCategory,
                                         _selectedStatus,
-//                                        _selectedPriority,
+                                        _selectedPriority,
+                                        _selectedTag1,
 //                                        _selectedAction1,
 //                                        _selectedContext1,
 //                                        _selectedLocation1,
-//                                        _selectedTag1,
 //                                        _selectedGoal1,
                                         _showIsStar,
                                         _showIsDone);
@@ -469,11 +472,11 @@ class TaskSearchState extends State {
                                         _searchText,
                                         _selectedStatus,
                                         _selectedCategory,
-//                                        _selectedPriority,
+                                        _selectedPriority,
+                                        _selectedTag1,
 //                                        _selectedAction1,
 //                                        _selectedContext1,
 //                                        _selectedLocation1,
-//                                        _selectedTag1,
 //                                        _selectedGoal1,
                                         _showIsStar,
                                         _showIsDone);
@@ -484,48 +487,84 @@ class TaskSearchState extends State {
                       ),
 
 //#################################Priority#####################################################
-//                      Container(
-//                        margin:
-//                            EdgeInsets.only(top: 1.0, left: 8.0, right: 8.0),
-//                        decoration: BoxDecoration(
-//                            shape: BoxShape.rectangle, color: Colors.blue[100]),
-//                        child: Row(
-//                          crossAxisAlignment: CrossAxisAlignment.center,
-//                          children: [
-//                            DropdownButton<String?>(
-//                                items:
-//                                    _priorities.map((CustomDropdownItem value) {
-//                                  return DropdownMenuItem<String>(
-//                                      value: value.id,
-//                                      child: Text(
-//                                        value.name!,
-//                                        overflow: TextOverflow.ellipsis,
-//                                      ));
-//                                }).toList(),
-//                                style: _textStyleControls,
-//                                value: _selectedPriority,
-//                                onChanged: (newValue) {
-//                                  setState(() {
-//                                    _selectedPriority = newValue;
-//                                    searchData(
-//                                        _searchText,
-//                                        _selectedStatus,
-//                                        _selectedPriority,
-//                                        _selectedCategory,
+                      Container(
+                        margin:
+                            EdgeInsets.only(top: 1.0, left: 8.0, right: 8.0),
+                        decoration: BoxDecoration(
+                            shape: BoxShape.rectangle, color: Colors.blue[100]),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            DropdownButton<String?>(
+                                items:
+                                    _priorities.map((CustomDropdownItem value) {
+                                  return DropdownMenuItem<String>(
+                                      value: value.id,
+                                      child: Text(
+                                        value.name!,
+                                        overflow: TextOverflow.ellipsis,
+                                      ));
+                                }).toList(),
+                                style: _textStyleControls,
+                                value: _selectedPriority,
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    _selectedPriority = newValue;
+                                    searchData(
+                                        _searchText,
+                                        _selectedCategory,
+                                        _selectedStatus,
+                                        _selectedPriority,
+                                        _selectedTag1,
 //                                        _selectedAction1,
 //                                        _selectedContext1,
 //                                        _selectedLocation1,
-//                                        _selectedTag1,
 //                                        _selectedGoal1,
-//                                        _showIsStar,
-//                                        _showIsDone);
-//                                  });
-//                                }),
-//                          ],
-//                        ),
-//                      ),
+                                        _showIsStar,
+                                        _showIsDone);
+                                  });
+                                }),
+                          ],
+                        ),
+                      ),
 
-
+// //######### Tag  #########
+                      Container(
+                        margin:
+                            EdgeInsets.only(top: 1.0, left: 8.0, right: 8.0),
+                        decoration: BoxDecoration(
+                            shape: BoxShape.rectangle, color: Colors.blue[100]),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            DropdownButton<String?>(
+                              items: _tag1s.map((CustomDropdownItem value) {
+                                return DropdownMenuItem<String>(
+                                    value: value.id, child: Text(value.name!));
+                              }).toList(),
+                             style: _textStyleControls,
+                              value: _selectedTag1,
+                              onChanged: (value) {
+                                setState(() {
+                                  _selectedTag1 = value;
+                                  searchData(
+                                      _searchText,
+                                      _selectedCategory,
+                                      _selectedStatus,
+                                      _selectedPriority,
+                                      _selectedTag1,
+//                                      _selectedAction1,
+//                                      _selectedContext1,
+//                                      _selectedLocation1,
+//                                      _selectedGoal1,
+                                      _showIsStar,
+                                      _showIsDone);
+                                });
+                              },
+                            )
+                          ],
+                        ),
+                      ),
 
 //########################################### Action  ######### #################################3
 //                      Container(
@@ -643,43 +682,7 @@ class TaskSearchState extends State {
 //                          ],
 //                        ),
 //                      ),
-// //######### Tag  #########
-//                      Container(
-//                        margin:
-//                            EdgeInsets.only(top: 1.0, left: 8.0, right: 8.0),
-//                        decoration: BoxDecoration(
-//                            shape: BoxShape.rectangle, color: Colors.blue[100]),
-//                        child: Row(
-//                          crossAxisAlignment: CrossAxisAlignment.center,
-//                          children: [
-//                            DropdownButton<String?>(
-//                              items: _tag1s.map((CustomDropdownItem value) {
-//                                return DropdownMenuItem<String>(
-//                                    value: value.id, child: Text(value.name!));
-//                              }).toList(),
-//                             style: _textStyleControls,
-//                              value: _selectedTag1,
-//                              onChanged: (value) {
-//                                setState(() {
-//                                  _selectedTag1 = value;
-//                                  searchData(
-//                                      _searchText,
-//                                      _selectedStatus,
-//                                      _selectedPriority,
-//                                      _selectedCategory,
-//                                      _selectedAction1,
-//                                      _selectedContext1,
-//                                      _selectedLocation1,
-//                                      _selectedTag1,
-//                                      _selectedGoal1,
-//                                      _showIsStar,
-//                                      _showIsDone);
-//                                });
-//                              },
-//                            )
-//                          ],
-//                        ),
-//                      ),
+
 // //######### Goal  #########
 //                      Container(
 //                        margin: EdgeInsets.only(
@@ -775,11 +778,11 @@ class TaskSearchState extends State {
                     _searchText,
                     _selectedStatus,
                     _selectedCategory,
-//                    _selectedPriority,
+                    _selectedPriority,
+                    _selectedTag1,
 //                    _selectedAction1,
 //                    _selectedContext1,
 //                    _selectedLocation1,
-//                    _selectedTag1,
 //                    _selectedGoal1,
                     _showIsStar,
                     _showIsDone);
@@ -886,9 +889,11 @@ class TaskSearchState extends State {
     int? _sortField1 = globals.sortField1 != null ? globals.sortField1 : 8;
     int? _sortField2 = globals.sortField2 != null ? globals.sortField2 : 2;
     int? _sortField3 = globals.sortField3 != null ? globals.sortField3 : 3;
+    int? _sortField4 = globals.sortField4 != null ? globals.sortField4 : 0;
     int? _sortOrder1 = globals.sortOrder1 != null ? globals.sortOrder1 : 1;
     int? _sortOrder2 = globals.sortOrder2 != null ? globals.sortOrder2 : 0;
     int? _sortOrder3 = globals.sortOrder3 != null ? globals.sortOrder3 : 0;
+    int? _sortOrder4 = globals.sortOrder4 != null ? globals.sortOrder4 : 0;
 
     int? _filterDateDue =
         globals.filterDateDue != 0 ? globals.filterDateDue : 0;
@@ -908,14 +913,16 @@ class TaskSearchState extends State {
         getOrderColumn(_sortOrder2!),
         getSortColumn(_sortField3!),
         getOrderColumn(_sortOrder3!),
+        getSortColumn(_sortField4!),
+        getOrderColumn(_sortOrder4!),
         getDateDueColumn(_filterDateDue!),
         globals.filterCategory.toString(),
         globals.filterStatus.toString(),
-//        globals.filterPriority.toString(),
+        globals.filterPriority.toString(),
+        globals.filterTag.toString(),
 //        globals.filterAction.toString(),
 //        globals.filterContext.toString(),
 //        globals.filterLocation.toString(),
-//        globals.filterTag.toString(),
 //        globals.filterGoal.toString(),
         globals.filterIsStar,
         globals.filterIsDone,
@@ -1028,11 +1035,16 @@ class TaskSearchState extends State {
                 taskList[i].sec1 = taskList[i].statusText;
               }
               break;
-//            case 4:
-//              {
-//                taskList[i].sec1 = taskList[i].priorityText;
-//              }
-//              break;
+            case 4:
+              {
+                taskList[i].sec1 = taskList[i].priorityText;
+              }
+              break;
+            case 5:
+              {
+                taskList[i].sec1 = taskList[i].tag1Text;
+              }
+              break;
 //            case 5:
 //              {
 //                taskList[i].sec1 = taskList[i].action1Text;
@@ -1048,17 +1060,12 @@ class TaskSearchState extends State {
 //                taskList[i].sec1 = taskList[i].location1Text;
 //              }
 //              break;
-//            case 5:
-//              {
-//                taskList[i].sec1 = taskList[i].tag1Text;
-//              }
-//              break;
 //            case 9:
 //              {
 //                taskList[i].sec1 = taskList[i].goal1Text;
 //              }
 //              break;
-            case 4:
+            case 6:
               {
                 taskList[i].sec1 = taskList[i].isStar.toString();
               }
@@ -1093,11 +1100,16 @@ class TaskSearchState extends State {
                 taskList[i].sec2 = taskList[i].statusText;
               }
               break;
-//            case 4:
-//              {
-//                taskList[i].sec2 = taskList[i].priorityText;
-//              }
-//              break;
+            case 4:
+              {
+                taskList[i].sec2 = taskList[i].priorityText;
+              }
+              break;
+            case 5:
+              {
+                taskList[i].sec2 = taskList[i].tag1Text;
+              }
+              break;
 //            case 5:
 //              {
 //                taskList[i].sec2 = taskList[i].action1Text;
@@ -1111,11 +1123,6 @@ class TaskSearchState extends State {
 //            case 7:
 //              {
 //                taskList[i].sec2 = taskList[i].location1Text;
-//              }
-//              break;
-//            case 5:
-//              {
-//                taskList[i].sec2 = taskList[i].tag1Text;
 //              }
 //              break;
 //            case 9:
@@ -1158,11 +1165,16 @@ class TaskSearchState extends State {
                 taskList[i].sec3 = taskList[i].statusText;
               }
               break;
-//            case 4:
-//              {
-//                taskList[i].sec3 = taskList[i].priorityText;
-//              }
-//              break;
+            case 4:
+              {
+                taskList[i].sec3 = taskList[i].priorityText;
+              }
+              break;
+            case 5:
+              {
+                taskList[i].sec3 = taskList[i].tag1Text;
+              }
+              break;
 //            case 5:
 //              {
 //                taskList[i].sec3 = taskList[i].action1Text;
@@ -1176,11 +1188,6 @@ class TaskSearchState extends State {
 //            case 7:
 //              {
 //                taskList[i].sec3 = taskList[i].location1Text;
-//              }
-//              break;
-//            case 5:
-//              {
-//                taskList[i].sec3 = taskList[i].tag1Text;
 //              }
 //              break;
 //            case 9:
@@ -1220,11 +1227,11 @@ class TaskSearchState extends State {
       String? searchText,
       String? category,
       String? status,
-//      String? priority,
+      String? priority,
+      String? tag1,
 //      String? action1,
 //      String? context1,
 //      String? location1,
-//      String? tag1,
 //      String? goal1,
       int? showIsStar,
       int? showIsDone) {
@@ -1235,11 +1242,11 @@ class TaskSearchState extends State {
             searchText!,
             category.toString(),
             status.toString(),
-//            priority.toString(),
+            priority.toString(),
+            tag1.toString(),
 //            action1.toString(),
 //            context1.toString(),
 //            location1.toString(),
-//            tag1.toString(),
 //            goal1.toString(),
             showIsStar!,
             showIsDone!);
@@ -1284,11 +1291,16 @@ class TaskSearchState extends State {
                   taskList[i].sec1 = taskList[i].status;
                 }
                 break;
-//              case 5:
-//                {
-//                  taskList[i].sec1 = taskList[i].priority;
-//                }
-//                break;
+              case 6:
+                {
+                  taskList[i].sec1 = taskList[i].priority;
+                }
+                break;
+              case 7:
+                {
+                  taskList[i].sec1 = taskList[i].tag1;
+                }
+                break;
 //              case 7:
 //                {
 //                  taskList[i].sec1 = taskList[i].action1;
@@ -1304,22 +1316,17 @@ class TaskSearchState extends State {
 //                  taskList[i].sec1 = taskList[i].location1;
 //                }
 //                break;
-//              case 10:
-//                {
-//                  taskList[i].sec1 = taskList[i].tag1;
-//                }
-//                break;
 //              case 11:
 //                {
 //                  taskList[i].sec1 = taskList[i].goal1;
 //                }
 //                break;
-              case 6:
+              case 8:
                 {
                   taskList[i].sec1 = taskList[i].isStar.toString();
                 }
                 break;
-              case 7:
+              case 9:
                 {
                   taskList[i].sec1 = taskList[i].isDone.toString();
                 }
@@ -1365,11 +1372,16 @@ class TaskSearchState extends State {
                   taskList[i].sec2 = taskList[i].status;
                 }
                 break;
-//              case 5:
-//                {
-//                  taskList[i].sec2 = taskList[i].priority;
-//                }
-//                break;
+              case 6:
+                {
+                  taskList[i].sec2 = taskList[i].priority;
+                }
+                break;
+              case 7:
+                {
+                  taskList[i].sec2 = taskList[i].tag1;
+                }
+                break;
 //              case 7:
 //                {
 //                  taskList[i].sec2 = taskList[i].action1;
@@ -1385,22 +1397,17 @@ class TaskSearchState extends State {
 //                  taskList[i].sec2 = taskList[i].location1;
 //                }
 //                break;
-//              case 10:
-//                {
-//                  taskList[i].sec2 = taskList[i].tag1;
-//                }
-//                break;
 //              case 11:
 //                {
 //                  taskList[i].sec2 = taskList[i].goal1;
 //                }
 //                break;
-              case 6:
+              case 8:
                 {
                   taskList[i].sec2 = taskList[i].isStar.toString();
                 }
                 break;
-              case 7:
+              case 9:
                 {
                   taskList[i].sec2 = taskList[i].isDone.toString();
                 }
@@ -1446,11 +1453,16 @@ class TaskSearchState extends State {
                   taskList[i].sec3 = taskList[i].status;
                 }
                 break;
-//              case 5:
-//                {
-//                  taskList[i].sec3 = taskList[i].priority;
-//                }
-//                break;
+              case 6:
+                {
+                  taskList[i].sec3 = taskList[i].priority;
+                }
+                break;
+              case 7:
+                {
+                  taskList[i].sec3 = taskList[i].tag1;
+                }
+                break;
 //              case 7:
 //                {
 //                  taskList[i].sec3 = taskList[i].action1;
@@ -1466,22 +1478,17 @@ class TaskSearchState extends State {
 //                  taskList[i].sec3 = taskList[i].location1;
 //                }
 //                break;
-//              case 10:
-//                {
-//                  taskList[i].sec3 = taskList[i].tag1;
-//                }
-//                break;
 //              case 11:
 //                {
 //                  taskList[i].sec3 = taskList[i].goal1;
 //                }
 //                break;
-              case 6:
+              case 8:
                 {
                   taskList[i].sec3 = taskList[i].isStar.toString();
                 }
                 break;
-              case 7:
+              case 9:
                 {
                   taskList[i].sec3 = taskList[i].isDone.toString();
                 }
@@ -1527,6 +1534,9 @@ class TaskSearchState extends State {
         if (customSetting!.sortField3 != "") {
           globals.sortField3 = int.parse(customSetting!.sortField3!);
         }
+        if (customSetting!.sortField4 != "") {
+          globals.sortField4 = int.parse(customSetting!.sortField4!);
+        }
 //        if (customSetting!.showMain1 != "") {
 //          globals.showMain1 = int.parse(customSetting!.showMain1!);
 //        }
@@ -1561,14 +1571,14 @@ class TaskSearchState extends State {
         globals.filterStatus = customSetting!.filterStatus != ""
             ? int.parse(customSetting!.filterStatus!)
             : 0;
-//        globals.filterPriority = customSetting!.filterPriority != ""
-//            ? int.parse(customSetting!.filterPriority!)
-//            : 0;
+        globals.filterPriority = customSetting!.filterPriority != ""
+            ? int.parse(customSetting!.filterPriority!)
+            : 0;
+        globals.filterTag = customSetting!.filterTag != ""
+            ? int.parse(customSetting!.filterTag!)
+            : 0;
 //        globals.filterLocation = customSetting!.filterLocation != ""
 //            ? int.parse(customSetting!.filterLocation!)
-//            : 0;
-//        globals.filterTag = customSetting!.filterTag != ""
-//            ? int.parse(customSetting!.filterTag!)
 //            : 0;
 //        globals.filterGoal = customSetting!.filterGoal != ""
 //            ? int.parse(customSetting!.filterGoal!)
@@ -1609,9 +1619,12 @@ class TaskSearchState extends State {
       case 5:
         return "status";
         break;
-//      case 6:
-//        return "priority";
-//        break;
+      case 6:
+        return "priority";
+        break;
+      case 7:
+        return "tag1";
+        break;
 //      case 7:
 //        return "action1";
 //        break;
@@ -1621,16 +1634,13 @@ class TaskSearchState extends State {
 //      case 9:
 //        return "location1";
 //        break;
-//      case 7:
-//        return "tag1";
-//        break;
 //      case 11:
 //        return "goal1";
 //        break;
-      case 6:
+      case 8:
         return "isStar";
         break;
-      case 7:
+      case 9:
         return "isDone";
         break;
 

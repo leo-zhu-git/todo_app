@@ -58,10 +58,13 @@ class TaskDetailState extends State //<TaskDetail>
 
   List<CustomDropdownItem> _categories = [];
   List<CustomDropdownItem> _statuses = [];
+  List<CustomDropdownItem> _priorities = [];
+  List<CustomDropdownItem> _tag1s = [];
 //  List<CustomDropdownItem> _priorities = [];
   var _selectedCategory = null;
   var _selectedStatus = null;
-//  var _selectedPriority;
+  var _selectedPriority = null;
+  var _selectedTag1 = null;
 
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
 
@@ -76,7 +79,8 @@ class TaskDetailState extends State //<TaskDetail>
     _initFields();
     _loadCategories();
     _loadStatuses();
-//    _loadPriorities();
+    _loadPriorities();
+    _loadTag1s();
     notificationPlugin
         .setListenerForLowerVersions(onNotificationInLowerVersions);
     notificationPlugin.setOnNotificationClick(onNotificationClick);
@@ -124,12 +128,18 @@ class TaskDetailState extends State //<TaskDetail>
             _selectedStatus = task.status,
           }
         : _selectedStatus = null;
-//    task.priority != ""
-//        ? {
+    task.priority != ""
+        ? {
 //            _priorityController.text = task.priorityText!,
-//            _selectedPriority = task.priority,
-//          }
-//        : _selectedPriority = "";
+            _selectedPriority = task.priority,
+          }
+        : _selectedPriority = null;
+    task.tag1 != ""
+        ? {
+//            _priorityController.text = task.priorityText!,
+            _selectedTag1 = task.tag1,
+          }
+        : _selectedTag1 = null;
   }
 
 //##################Drop Down Items Load from DB #################################################################
@@ -181,31 +191,55 @@ class TaskDetailState extends State //<TaskDetail>
     });
   }
 
-//  _loadPriorities() async {
-//    var priorities = await helper.getPriorities();
-//    CustomDropdownItem cus;
-//    cus = new CustomDropdownItem();
+  _loadPriorities() async {
+    var priorities = await helper.getPriorities();
+    CustomDropdownItem cus;
+    cus = new CustomDropdownItem();
 //    cus.id = null;
-//    cus.name =
-//        "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
-//    cus.name = "-- Select Priority --";
-//    _priorities.add(cus);
-//    priorities.forEach((priority) {
-//      setState(() {
-//        cus = new CustomDropdownItem();
-//        cus.id = priority['id'].toString();
-//        String tempPriority;
-//        if (priority['name'].toString().length > 30)
-//          tempPriority = priority['name'].toString().substring(0, 30) + "...";
-//        else
-//          tempPriority = priority['name'];
+    cus.name = "-- Select Priority --";
+    _priorities.add(cus);
+    priorities.forEach((priority) {
+      setState(() {
+        cus = new CustomDropdownItem();
+        cus.id = priority['id'].toString();
+        String tempPriority;
+        if (priority['name'].toString().length > 30)
+          tempPriority = priority['name'].toString().substring(0, 30) + "...";
+        else
+          tempPriority = priority['name'];
 
-//        cus.name = tempPriority;
+        cus.name = tempPriority;
 
-//        _priorities.add(cus);
-//      });
-//    });
-//  }
+        _priorities.add(cus);
+      });
+    });
+  }
+
+  _loadTag1s() async {
+    var tag1s = await helper.getTag1s();
+    CustomDropdownItem cus;
+    cus = new CustomDropdownItem();
+//    cus.id = null;
+    cus.name = "-- Select Tag --";
+    _tag1s.add(cus);
+    tag1s.forEach((tag1) {
+      setState(() {
+        cus = new CustomDropdownItem();
+        cus.id = tag1['id'].toString();
+        String tempTag1;
+        if (tag1['name'].toString().length > 30)
+          tempTag1 = tag1['name'].toString().substring(0, 30) + "...";
+        else
+          tempTag1 = tag1['name'];
+
+        cus.name = tempTag1;
+
+        _tag1s.add(cus);
+      });
+    });
+  }
+
+
 
 //##########################################end of Dropdown #################################################################
 
@@ -357,9 +391,9 @@ class TaskDetailState extends State //<TaskDetail>
             ));
   }
 
-  TimeOfDay timeConvert(String s) {
-    TimeOfDay _time = TimeOfDay(
-        hour: int.parse(s.split(":")[0]), minute: int.parse(s.split(":")[1]));
+//  TimeOfDay timeConvert(String normTime) {
+//    TimeOfDay _time = TimeOfDay(
+//        hour: int.parse(s.split(":")[0]), minute: int.parse(s.split(":")[1]));
 //    String ampm = normTime.substring(normTime.length - 2);
 //    String result = normTime.substring(0, normTime.indexOf(' '));
 //    if (ampm == 'AM' && int.parse(result.split(":")[1]) != 12) {
@@ -373,8 +407,30 @@ class TaskDetailState extends State //<TaskDetail>
 //      }
 //      minute = int.parse(result.split(":")[1]);
 //    }
-    return _time;
+//    return _time;
+//  }
+
+
+TimeOfDay timeConvert(String normTime) {
+    int hour;
+    int minute;
+    String ampm = normTime.substring(normTime.length - 2);
+    String result = normTime.substring(0, normTime.indexOf(' '));
+    if (ampm == 'AM' && int.parse(result.split(":")[1]) != 12) {
+      hour = int.parse(result.split(':')[0]);
+      if (hour == 12) hour = 0;
+      minute = int.parse(result.split(":")[1]);
+    } else {
+      hour = int.parse(result.split(':')[0]) - 12;
+      if (hour <= 0) {
+        hour = 24 + hour;
+      }
+      minute = int.parse(result.split(":")[1]);
+    }
+    return TimeOfDay(hour: hour, minute: minute);
   }
+
+
 
 //  Widget buildCategoryPicker() => SizedBox(
 //        height: 400,
@@ -882,42 +938,67 @@ class TaskDetailState extends State //<TaskDetail>
 ///////////////////////////
 //  PRIORITY
 ///////////////////////////
-//            Container(
-//              margin:
-//                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
-//              decoration: BoxDecoration(
-//                shape: BoxShape.rectangle,
-//                color: Colors.blue[100],
-//              ),
-//              child: TextField(
-//                controller: _priorityController,
-//                readOnly: true,
-//                style: _textStyleControls,
-//                decoration: InputDecoration(
-//                  labelText: ' Priority',
-//                  hintText: ' Pick a Priority',
-//                  prefixIcon: InkWell(
-//                    onTap: () {
-//                      scrollController.dispose();
-//                      scrollController = FixedExtentScrollController(
-//                          initialItem: (_selectedCategory != null)
-//                              ? _selectedCategory
-//                              : index);
-//                      showCupertinoModalPopup(
-//                          context: context,
-//                          builder: (context) => CupertinoActionSheet(
-//                                actions: [buildPriorityPicker()],
-//                              cancelButton: CupertinoActionSheetAction(
-//                                child: Text('Cancel'),
-//                                onPressed: () => Navigator.pop(context),
-//                              )
-//                              ));
-//                    },
-//                    child: Icon(Icons.low_priority),
-//                  ),
-//                ),
-//              ),
-//            ),
+            Container(
+              margin:
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
+              decoration: BoxDecoration(
+                  shape: BoxShape.rectangle, color: Colors.blue[100]),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  DropdownButton<String>(
+                     isExpanded: true,
+                      style: _textStyleControls,
+                      items: _priorities.map((CustomDropdownItem value) {
+                        return DropdownMenuItem<String>(
+                            value: value.id,
+                            child: Text(
+                              value.name!,
+                              overflow: TextOverflow.ellipsis,
+                            ));
+                      }).toList(),
+                      value: _selectedPriority,
+                     onChanged: (newValue) {
+                        setState(() {
+                          _selectedPriority = newValue;
+                        });
+                      }),
+                ],
+              ),
+            ),
+
+
+///////////////////////////
+//  TAG
+///////////////////////////
+            Container(
+              margin:
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
+              decoration: BoxDecoration(
+                  shape: BoxShape.rectangle, color: Colors.blue[100]),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  DropdownButton<String>(
+                     isExpanded: true,
+                      style: _textStyleControls,
+                      items: _tag1s.map((CustomDropdownItem value) {
+                        return DropdownMenuItem<String>(
+                            value: value.id,
+                            child: Text(
+                              value.name!,
+                              overflow: TextOverflow.ellipsis,
+                            ));
+                      }).toList(),
+                      value: _selectedTag1,
+                     onChanged: (newValue) {
+                        setState(() {
+                          _selectedTag1 = newValue;
+                        });
+                      }),
+                ],
+              ),
+            ),
 
 
 ///////////////////////////

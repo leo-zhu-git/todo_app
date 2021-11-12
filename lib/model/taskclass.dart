@@ -18,19 +18,19 @@ class Task {
   String? _timeDue;
   String? _category;
   String? _status;
-//  String? _priority;
+  String? _priority;
+  String? _tag1;
 //  String? _action1;
 //  String? _context1;
 //  String? _location1;
-//  String? _tag1;
 //  String? _goal1;
-//  String? _priorityText;
   String? _categoryText;
   String? _statusText;
+  String? _priorityText;
+  String? _tag1Text;
 //  String? _action1Text;
 //  String? _context1Text;
 //  String? _location1Text;
-//  String? _tag1Text;
 //  String? _goal1Text;
   int? _isStar;
   int? _isDone;
@@ -49,11 +49,11 @@ class Task {
       this._timeDue,
       this._category,
       this._status,
-//      this._priority,
+      this._priority,
+      this._tag1,
 //      this._action1,
 //      this._context1,
 //      this._location1,
-//      this._tag1,
 //      this._goal1,
       this._isStar,
       this._isDone,
@@ -72,11 +72,11 @@ class Task {
       this._timeDue,
       this._category,
       this._status,
-//      this._priority,
+      this._priority,
+      this._tag1,
 //      this._action1,
 //      this._context1,
 //      this._location1,
-//      this._tag1,
 //      this._goal1,
       this._isStar,
       this._isDone,
@@ -94,19 +94,19 @@ class Task {
   String? get timeDue => _timeDue;
   String? get category => _category;
   String? get status => _status;
-//  String? get priority => _priority;
+  String? get priority => _priority;
+  String? get tag1 => _tag1;
 //  String? get action1 => _action1;
 //  String? get context1 => _context1;
 //  String? get location1 => _location1;
-//  String? get tag1 => _tag1;
 //  String? get goal1 => _goal1;
   String? get categoryText => _categoryText;
   String? get statusText => _statusText;
-//  String? get priorityText => _priorityText;
+  String? get priorityText => _priorityText;
+  String? get tag1Text => _tag1Text;
 //  String? get action1Text => _action1Text;
 //  String? get context1Text => _context1Text;
 //  String? get location1Text => _location1Text;
-//  String? get tag1Text => _tag1Text;
 //  String? get goal1Text => _goal1Text;
   int? get isStar => _isStar;
   int? get isDone => _isDone;
@@ -142,9 +142,13 @@ class Task {
     this._status = newStatus;
   }
 
-//  set priority(String? newPriority) {
-//    this._priority = newPriority;
-//  }
+  set priority(String? newPriority) {
+    this._priority = newPriority;
+  }
+
+  set tag1(String? newTag) {
+    this._tag1 = newTag;
+  }
 
 //  set action1(String? newaction1) {
 //    this._action1 = newaction1;
@@ -158,9 +162,6 @@ class Task {
 //    this._location1 = newlocation;
 //  }
 
-//  set tag1(String? newTag) {
-//    this._tag1 = newTag;
-//  }
 
 //  set goal1(String? newGoal) {
 //    this._goal1 = newGoal;
@@ -174,9 +175,13 @@ class Task {
     this._statusText = newstatusText;
   }
 
-//  set priorityText(String? newpriorityText) {
-//    this._priorityText = newpriorityText;
-//  }
+  set priorityText(String? newpriorityText) {
+    this._priorityText = newpriorityText;
+  }
+
+  set tag1Text(String? newTagText) {
+    this._tag1Text = newTagText;
+  }
 
 //  set action1Text(String? newaction1Text) {
 //    this._action1Text = newaction1Text;
@@ -190,9 +195,6 @@ class Task {
 //    this._location1Text = newlocationText;
 //  }
 
-//  set tag1Text(String? newTagText) {
-//    this._tag1Text = newTagText;
-//  }
 
 //  set goal1Text(String? newGoalText) {
 //    this._goal1Text = newGoalText;
@@ -241,11 +243,11 @@ class Task {
   String colTimeDue = '';
   String colCategory = '';
   String colStatus = '';
-  //String colPriority = '';
+  String colPriority = '';
+  String colTag1 = '';
   //String colAction1 = '';
   //String colContext1 = '';
   //String colLocation1 = '';
-  //String colTag1 = '';
   //String colGoal1 = '';
   String colIsStar = '';
   String colIsDone = '';
@@ -264,11 +266,11 @@ class Task {
     map['timeDue'] = _timeDue;
     map['category'] = _category;
     map['status'] = _status;
-  //  map['priority'] = _priority;
+    map['priority'] = _priority;
+    map['tag1'] = _tag1;
   //  map['action1'] = _action1;
   //  map['context1'] = _context1;
   //  map['location1'] = _location1;
-  //  map['tag1'] = _tag1;
   //  map['goal1'] = _goal1;
     map['isStar'] = _isStar;
     map['isDone'] = _isDone;
@@ -290,19 +292,19 @@ class Task {
     this._timeDue = o['timeDue'];
     this._category = o['category'];
     this._status = o['status'];
-  //  this._priority = o['priority'];
+    this._priority = o['priority'];
+    this._tag1 = o['tag1'];
   //  this._action1 = o['action1'];
   //  this._context1 = o['context1'];
   //  this._location1 = o['location1'];
-  //  this._tag1 = o['tag1'];
   //  this._goal1 = o['goal1'];
     this._categoryText = o['categoriesname'] == null ? "" : o['categoriesname'];
     this._statusText = o['statusesname'] == null ? "" : o['statusesname'];
-//    this._priorityText = o['prioritiesname'] == null ? "" : o['prioritiesname'];
+    this._priorityText = o['prioritiesname'] == null ? "" : o['prioritiesname'];
+    this._tag1Text = o['tag1name'] == null ? "" : o['tag1name'];
   //  this._action1Text = o['action1name'] == null ? "" : o['action1name'];
   //  this._context1Text = o['context1name'] == null ? "" : o['context1name'];
   //  this._location1Text = o['location1name'] == null ? "" : o['location1name'];
-  //  this._tag1Text = o['tag1name'] == null ? "" : o['tag1name'];
   //  this._goal1Text = o['goal1name'] == null ? "" : o['goal1name'];
     this._isStar = o['isStar'];
     this._isDone = o['isDone'];

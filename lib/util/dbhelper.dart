@@ -27,12 +27,12 @@ class DbHelper {
   String colDateDue = 'dateDue';
   String colTimeDue = 'timeDue';
   String colStatus = 'status';
-//  String colPriority = 'priority';
+  String colPriority = 'priority';
   String colCategory = 'category';
+  String colTag1 = 'tag1';
 //  String colAction1 = 'action1';
 //  String colContext1 = 'context1';
 //  String colLocation1 = 'location1';
-//  String colTag1 = 'tag1';
 //  String colGoal1 = 'goal1';
   String colIsStar = 'isStar';
   String colIsDone = 'isDone';
@@ -46,6 +46,8 @@ class DbHelper {
   String colsortOrder2 = "sortOrder2";
   String colsortField3 = "sortField3";
   String colsortOrder3 = "sortOrder3";
+  String colsortField4 = "sortField4";
+  String colsortOrder4 = "sortOrder4";
   String colshowMain1 = 'showMain1';
   String colshowMain2 = 'showMain2';
   String colshowSec1 = 'showSec1';
@@ -55,11 +57,11 @@ class DbHelper {
   String colfilterTimeDue = 'filterTimeDue';
   String colfilterCategory = 'filterCategory';
   String colfilterStatus = 'filterStatus';
-  //String colfilterPriority = 'filterPriority';
+  String colfilterPriority = 'filterPriority';
+  String colfilterTag1 = 'filterTag';
   //String colfilterAction = 'filterAction';
   //String colfilterContext = 'filterContext';
   //String colfilterLocation = 'filterLocation';
-  //String colfilterTag = 'filterTag';
   //String colfilterGoal = 'filterGoal';
   String colfilterIsStar = 'filterIsStar';
   String colfilterIsDone = 'filterIsDone';
@@ -81,7 +83,7 @@ class DbHelper {
 
   Future<Database> initializeDb() async {
     Directory dir = await getApplicationDocumentsDirectory();
-    String path = dir.path + "todo_V22.h10.db";
+    String path = dir.path + "todo_V22.i4.db";
     var dbTodovn = await openDatabase(path, version: 1, onCreate: _createDb);
     return dbTodovn;
   }
@@ -99,6 +101,7 @@ class DbHelper {
         "CREATE TABLE $tblTodo($colId INTEGER PRIMARY KEY, $colTask TEXT, $colNote TEXT, " +
             "$colDateDue TEXT, $colTimeDue TEXT, " +
             "$colCategory TEXT, $colStatus TEXT, " +
+            "$colPriority TEXT, $colTag1 TEXT, " +
             "$colIsStar INTEGER, $colIsDone INTEGER, $colDateDone TEXT, $colLastModified TEXT)");
 
 //this table need to include hash key to track users.... i would say all the tables
@@ -113,11 +116,13 @@ class DbHelper {
 
     await db.execute(
         "CREATE TABLE $tblCustomSettings($colId INTEGER PRIMARY KEY, $colsortField1 TEXT, $colsortOrder1 TEXT, $colsortField2 TEXT, " +
-            "$colsortOrder2 TEXT, $colsortField3 TEXT, $colsortOrder3 TEXT, " +
+            "$colsortOrder2 TEXT, $colsortField3 TEXT, $colsortOrder3 TEXT, $colsortField4 TEXT, $colsortOrder4 TEXT, " +
             "$colshowSec1 TEXT,$colshowSec2 TEXT,$colshowSec3 TEXT, " +
             "$colfilterDateDue TEXT, $colfilterTimeDue TEXT, " +
             "$colfilterCategory TEXT,  " +
             "$colfilterStatus TEXT, " +
+            "$colfilterPriority TEXT, " +
+            "$colfilterTag1 TEXT, " +
             "$colfilterIsStar INTEGER, $colfilterIsDone INTEGER)");
 
     // Create table categories
@@ -129,8 +134,8 @@ class DbHelper {
         "CREATE TABLE statuses(id INTEGER PRIMARY KEY, name TEXT, description TEXT)");
 
     // Create table priorities
-//    await db.execute(
-//        "CREATE TABLE priorities(id INTEGER PRIMARY KEY, name TEXT, description TEXT)");
+    await db.execute(
+        "CREATE TABLE priorities(id INTEGER PRIMARY KEY, name TEXT, description TEXT)");
 
     // Create table actions
 //    await db.execute(
@@ -145,8 +150,8 @@ class DbHelper {
 //        "CREATE TABLE location1s(id INTEGER PRIMARY KEY, name TEXT, description TEXT)");
 
     // Create table tags
-//    await db.execute(
-//        "CREATE TABLE tag1s(id INTEGER PRIMARY KEY, name TEXT, description TEXT)");
+    await db.execute(
+        "CREATE TABLE tag1s(id INTEGER PRIMARY KEY, name TEXT, description TEXT)");
 
     // Create table goals
 //    await db.execute(
@@ -228,33 +233,44 @@ class DbHelper {
     //////
     //Create Default Values for priorities
     //////
-//    await db.execute(
-//        "INSERT INTO priorities ( 'name', 'description')  values (?, ?)",
-//        ['Low1', '1Bootstrap - please delete or rename if necessary']);
+    await db.execute(
+        "INSERT INTO priorities ( 'name', 'description')  values (?, ?)",
+        ['Low1', '1Bootstrap - please delete or rename if necessary']);
 
-//    await db.execute(
-//        "INSERT INTO priorities ( 'name', 'description')  values (?, ?)",
-//        ['Low2', '2Bootstrap - please delete or rename if necessary']);
+    await db.execute(
+        "INSERT INTO priorities ( 'name', 'description')  values (?, ?)",
+        ['Low2', '2Bootstrap - please delete or rename if necessary']);
 
-//    await db.execute(
-//        "INSERT INTO priorities ( 'name', 'description')  values (?, ?)",
-//        ['Medium1', '3Bootstrap - please delete or rename if necessary']);
+    await db.execute(
+        "INSERT INTO priorities ( 'name', 'description')  values (?, ?)",
+        ['Medium1', '3Bootstrap - please delete or rename if necessary']);
 
-//    await db.execute(
-//        "INSERT INTO priorities ( 'name', 'description')  values (?, ?)",
-//        ['Medium2', '4Bootstrap - please delete or rename if necessary']);
+    await db.execute(
+        "INSERT INTO priorities ( 'name', 'description')  values (?, ?)",
+        ['Medium2', '4Bootstrap - please delete or rename if necessary']);
 
-//    await db.execute(
-//        "INSERT INTO priorities ( 'name', 'description')  values (?, ?)",
-//        ['High1', '5Bootstrap - please delete or rename if necessary']);
+    await db.execute(
+        "INSERT INTO priorities ( 'name', 'description')  values (?, ?)",
+        ['High1', '5Bootstrap - please delete or rename if necessary']);
 
-//    await db.execute(
-//        "INSERT INTO priorities ( 'name', 'description')  values (?, ?)",
-//        ['High2', '6Bootstrap - please delete or rename if necessary']);
+    await db.execute(
+        "INSERT INTO priorities ( 'name', 'description')  values (?, ?)",
+        ['High2', '6Bootstrap - please delete or rename if necessary']);
 
-//    await db.execute(
-//        "INSERT INTO priorities ( 'name', 'description')  values (?, ?)",
-//        ['Top', '7Bootstrap - please delete or rename if necessary']);
+    await db.execute(
+        "INSERT INTO priorities ( 'name', 'description')  values (?, ?)",
+        ['Top', '7Bootstrap - please delete or rename if necessary']);
+
+    //////
+    //Create Default Values for Tags
+    //////
+    await db.execute(
+        "INSERT INTO tag1s ( 'name', 'description')  values (?, ?)",
+        ['Family', '1Bootstrap - please delete or rename if necessary']);
+
+    await db.execute(
+        "INSERT INTO tag1s ( 'name', 'description')  values (?, ?)",
+        ['Friend', '2Bootstrap - please delete or rename if necessary']);
 
     //////
     //Create Default Values for Action
@@ -332,17 +348,6 @@ class DbHelper {
 //        ['Outdoor', '3Bootstrap - please delete or rename if necessary']);
 
     //////
-    //Create Default Values for Tags
-    //////
-//    await db.execute(
-//        "INSERT INTO tag1s ( 'name', 'description')  values (?, ?)",
-//        ['Family', '1Bootstrap - please delete or rename if necessary']);
-
-//    await db.execute(
-//        "INSERT INTO tag1s ( 'name', 'description')  values (?, ?)",
-//        ['Friend', '2Bootstrap - please delete or rename if necessary']);
-
-    //////
     //Create Default Values for Goals
     //////
 //    await db.execute(
@@ -373,12 +378,14 @@ class DbHelper {
 
     //Default value for Custom Setting
     CustomSettings customSetting = new CustomSettings(
-      "6", // sort1 - star
+      "8", // sort1 - star
       '1', // order1 - descending order
       '2', // sort2 - due date
       '0', // order2
       '3', // sort3 - due time
       '0', // order3
+      '0', // sort4 - task
+      '0', // order4
 //      '0', // main1 - task
 //      '', // main2
       '0', // sec1 - dateDue
@@ -387,11 +394,11 @@ class DbHelper {
       '0', // dateDue
       "", // category - set to null
       "", // status
-//      "", // priority
+      "", // priority
+      "", // tag
 //      "", // action
 //      "", // context
 //      "", // location
-//      "", // tag
 //      "", // goal
       0, // isStar
       1, //isDone
@@ -421,11 +428,11 @@ Connect soon
         '', // timeDue
         '', // category
         '', // status
-//        '1', // priority
+        '', // priority
+        '', // tag
 //        '', // action
 //        '', // context
 //        '', // location
-//        '', // tag
 //        '', // goal
         0, // isStar
         0, // isDone
@@ -455,11 +462,11 @@ Bottom-Right (Search) | keyword search or more powerful advance dropdown search
         '', // timeDue
         '', // category
         '', // status
-//        '1', // priority
+        '', // priority
+        '', // tag
 //        '', // action
 //        '', // context
 //        '', // location
-//        '', // tag
         //      '', // goal
         0, // isStar
         0, // isDone
@@ -490,11 +497,11 @@ Contact us | share the good, bad, ugly
         '', // timeDue
         '', // category
         '', // status
-//        '1', // priority
+        '', // priority
+        '', // tag
 //        '', // action
 //        '', // context
 //        '', // location
-//        '', // tag
 //        '', // goal
         0, // isStar
         0, // isDone
@@ -522,11 +529,11 @@ Plan C - USD 24 | 12 month
         '', // timeDue
         '', // category
         '', // status
-//        '1', // priority
+        '', // priority
+        '', // tag
 //        '', // action
 //        '', // context
 //        '', // location
-//        '', // tag
 //        '', // goal
         0, // isStar
         0, // isDone
@@ -584,14 +591,16 @@ Plan C - USD 24 | 12 month
       String? colsortOrder2,
       String? colsortField3,
       String? colsortOrder3,
+      String? colsortField4,
+      String? colsortOrder4,
       String? colfilterDateDue,
       String? colfilterCategory,
       String? colfilterStatus,
-//      String? colfilterPriority,
+      String? colfilterPriority,
+      String? colfilterTag,
 //      String? colfilterAction,
 //      String? colfilterContext,
 //      String? colfilterLocation,
-//      String? colfilterTag,
 //      String? colfilterGoal,
       int? colfilterIsStar,
       int? colfilterIsDone) async {
@@ -627,10 +636,14 @@ Plan C - USD 24 | 12 month
             "category, status, " +
             "isStar, isDone, dateDone, lastModified, " +
             "statuses.name as statusesname, " +
-            "categories.name as categoriesname " +
+            "categories.name as categoriesname, " +
+            "priorities.name as prioritiesname, " +
+            "tag1s.name as tag1sname " +
             "FROM $tblTodo  " +
             " LEFT JOIN categories ON  $tblTodo.category = categories.id" +
-            " LEFT JOIN statuses ON  $tblTodo.status = statuses.id";
+            " LEFT JOIN statuses ON  $tblTodo.status = statuses.id" +
+            " LEFT JOIN priorities ON  $tblTodo.priority = priorities.id" +
+            " LEFT JOIN tag1s ON  $tblTodo.tag1 = tag1s.id";
 
 ////////////////
     /// build query - add filterDateDue
@@ -726,13 +739,21 @@ Plan C - USD 24 | 12 month
     }
 
 ////////////////
-    /// build query - add priority
+/// build query - add priority
 ////////////////
-//    if (colfilterPriority == "0" || colfilterPriority == "null") {
-//    } // hide
-//    else {
-//      queryStr = queryStr + " and ($colPriority == $colfilterPriority)";
-//    }
+    if (colfilterPriority == "0" || colfilterPriority == "null") {
+    } // hide
+    else {
+      queryStr = queryStr + " and ($colPriority == $colfilterPriority)";
+    }
+
+////////////////
+/// build query - add tag
+////////////////
+    if (colfilterTag == "0" || colfilterTag == "null") {
+    } else {
+      queryStr = queryStr + " and ($colTag1 == $colfilterTag)";
+    }
 
 ////////////////
     /// build query - add action
@@ -759,14 +780,6 @@ Plan C - USD 24 | 12 month
 //    }
 
 ////////////////
-    /// build query - add tag
-////////////////
-//    if (colfilterTag == "0" || colfilterTag == "null") {
-//    } else {
-//      queryStr = queryStr + " and ($colTag1 == $colfilterTag)";
-//    }
-
-////////////////
     /// build query - add goal
 ////////////////
 //    if (colfilterGoal == "0" || colfilterGoal == "null") {
@@ -778,7 +791,7 @@ Plan C - USD 24 | 12 month
     /// build query - add order by
 ////////////////
     queryStr = queryStr +
-        " order by $colsortField1 $colsortOrder1, $colsortField2 $colsortOrder2, $colsortField3 $colsortOrder3";
+        " order by $colsortField1 $colsortOrder1, $colsortField2 $colsortOrder2, $colsortField3 $colsortOrder3, $colsortField4 $colsortOrder4";
 
     print(queryStr);
     var result = await db!.rawQuery(queryStr);
@@ -789,11 +802,11 @@ Plan C - USD 24 | 12 month
       String? searchText,
       String? searchCategory,
       String? searchStatus,
-//      String? searchPriority,
+      String? searchPriority,
+      String? searchTag1,
 //      String? searchAction1,
 //      String? searchContext1,
 //      String? searchLocation1,
-//      String? searchTag1,
 //      String? searchGoal1,
       int? includeIsStar,
       int? includeIsDone) async {
@@ -825,13 +838,17 @@ Plan C - USD 24 | 12 month
 
     queryStr =
         "SELECT $tblTodo.id,$tblTodo.task, $tblTodo.note, dateDue,timeDue,   " +
-            "category, status, " +
+            "category, status, priority, tag1" +
             "isStar, isDone, dateDone, lastModified, " +
             "categories.name as categoriesname, " +
             "statuses.name as statusesname " +
+            "priorities.name as prioritiesname " +
+            "tag1s.name as tag1sname " +
             " FROM $tblTodo  " +
             " LEFT JOIN categories ON  $tblTodo.category = categories.id" +
             " LEFT JOIN statuses ON  $tblTodo.status = statuses.id " +
+            " LEFT JOIN priorities ON  $tblTodo.priority = priority.id " +
+            " LEFT JOIN tag1s ON  $tblTodo.tag1 = tag1s.id " +
             "WHERE ($colTask LIKE '%$searchText%' OR $colNote LIKE '%$searchText%')";
 
 //    queryStr =
@@ -856,9 +873,15 @@ Plan C - USD 24 | 12 month
     if (searchStatus != "null") {
       queryStr = queryStr + " AND $colStatus = '$searchStatus' ";
     }
-//    if (searchPriority != "null") {
-//      queryStr = queryStr + " AND $colPriority = '$searchPriority' ";
-//    }
+
+    if (searchPriority != "null") {
+      queryStr = queryStr + " AND $colPriority = '$searchPriority' ";
+    }
+
+    if (searchTag1 != "null") {
+      queryStr = queryStr + " AND $colTag1 = '$searchTag1' ";
+    }
+
 //    if (searchAction1 != "null") {
 //      queryStr = queryStr + " AND $colAction1 = '$searchAction1' ";
 //    }
@@ -867,9 +890,6 @@ Plan C - USD 24 | 12 month
 //    }
 //    if (searchLocation1 != "null") {
 //      queryStr = queryStr + " AND $colLocation1 = '$searchLocation1' ";
-//    }
-//    if (searchTag1 != "null") {
-//      queryStr = queryStr + " AND $colTag1 = '$searchTag1' ";
 //    }
 //    if (searchGoal1 != "null") {
 //      queryStr = queryStr + " AND $colGoal1 = '$searchGoal1' ";

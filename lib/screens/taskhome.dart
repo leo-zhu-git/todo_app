@@ -138,7 +138,7 @@ class TaskHomeState extends State {
               IconButton(
                 icon: Icon(Icons.add, color: Colors.white),
                 onPressed: () {
-                  navigateToDetail(Task("", "", "", "", "", "", 
+                  navigateToDetail(Task("", "", "", "", "", "", "","",
                        0, 0, "", "","","",""));
                   getData();
                 },
@@ -288,12 +288,14 @@ class TaskHomeState extends State {
   }
 
   void getData() {
-    int? _sortField1 = globals.sortField1 != null ? globals.sortField1 : 6;
+    int? _sortField1 = globals.sortField1 != null ? globals.sortField1 : 8;
     int? _sortField2 = globals.sortField2 != null ? globals.sortField2 : 2;
     int? _sortField3 = globals.sortField3 != null ? globals.sortField3 : 3;
+    int? _sortField4 = globals.sortField4 != null ? globals.sortField4 : 0;
     int? _sortOrder1 = globals.sortOrder1 != null ? globals.sortOrder1 : 1;
     int? _sortOrder2 = globals.sortOrder2 != null ? globals.sortOrder2 : 0;
     int? _sortOrder3 = globals.sortOrder3 != null ? globals.sortOrder3 : 0;
+    int? _sortOrder4 = globals.sortOrder4 != null ? globals.sortOrder4 : 0;
 
     int? _filterDateDue =
         globals.filterDateDue != 0 ? globals.filterDateDue : 0;
@@ -313,14 +315,16 @@ class TaskHomeState extends State {
         getOrderColumn(_sortOrder2!),
         getSortColumn(_sortField3!),
         getOrderColumn(_sortOrder3!),
+        getSortColumn(_sortField4!),
+        getOrderColumn(_sortOrder4!),
         getDateDueColumn(_filterDateDue!),
         globals.filterCategory.toString(),
         globals.filterStatus.toString(),
-//        globals.filterPriority.toString(),
+        globals.filterPriority.toString(),
+        globals.filterTag.toString(),
 //        globals.filterAction.toString(),
 //        globals.filterContext.toString(),
 //        globals.filterLocation.toString(),
-//        globals.filterTag.toString(),
 //        globals.filterGoal.toString(),
         globals.filterIsStar,
         globals.filterIsDone,
@@ -433,11 +437,16 @@ class TaskHomeState extends State {
                 taskList[i].sec1 = taskList[i].statusText;
               }
               break;
-//            case 4:
-//              {
-//                taskList[i].sec1 = taskList[i].priorityText;
-//              }
-//              break;
+            case 4:
+              {
+                taskList[i].sec1 = taskList[i].priorityText;
+              }
+              break;
+            case 5:
+              {
+                taskList[i].sec1 = taskList[i].tag1Text;
+              }
+              break;
 //            case 5:
 //              {
 //                taskList[i].sec1 = taskList[i].action1Text;
@@ -453,17 +462,12 @@ class TaskHomeState extends State {
 //                taskList[i].sec1 = taskList[i].location1Text;
 //              }
 //              break;
-//            case 5:
-//              {
-//                taskList[i].sec1 = taskList[i].tag1Text;
-//              }
-//              break;
 //            case 9:
 //              {
 //                taskList[i].sec1 = taskList[i].goal1Text;
 //              }
 //              break;
-            case 4:
+            case 6:
               {
                 taskList[i].sec1 = taskList[i].isStar.toString();
               }
@@ -498,11 +502,16 @@ class TaskHomeState extends State {
                 taskList[i].sec2 = taskList[i].statusText;
               }
               break;
-//            case 4:
-//              {
-//                taskList[i].sec2 = taskList[i].priorityText;
-//              }
-//              break;
+            case 4:
+              {
+                taskList[i].sec2 = taskList[i].priorityText;
+              }
+              break;
+            case 5:
+              {
+                taskList[i].sec2 = taskList[i].tag1Text;
+              }
+              break;
 //            case 5:
 //              {
 //                taskList[i].sec2 = taskList[i].action1Text;
@@ -518,17 +527,12 @@ class TaskHomeState extends State {
 //                taskList[i].sec2 = taskList[i].location1Text;
 //              }
 //              break;
-//            case 5:
-//              {
-//                taskList[i].sec2 = taskList[i].tag1Text;
-//              }
-//              break;
 //            case 9:
 //              {
 //                taskList[i].sec2 = taskList[i].goal1Text;
 //              }
 //              break;
-            case 4:
+            case 6:
               {
                 taskList[i].sec2 = taskList[i].isStar.toString();
               }
@@ -563,11 +567,16 @@ class TaskHomeState extends State {
                 taskList[i].sec3 = taskList[i].statusText;
               }
               break;
-//            case 4:
-//              {
-//                taskList[i].sec3 = taskList[i].priorityText;
-//              }
-//              break;
+            case 4:
+              {
+                taskList[i].sec3 = taskList[i].priorityText;
+              }
+              break;
+            case 5:
+              {
+                taskList[i].sec3 = taskList[i].tag1Text;
+              }
+              break;
 //            case 5:
 //              {
 //                taskList[i].sec3 = taskList[i].action1Text;
@@ -583,17 +592,12 @@ class TaskHomeState extends State {
 //                taskList[i].sec3 = taskList[i].location1Text;
 //              }
 //              break;
-//            case 5:
-//              {
-//                taskList[i].sec3 = taskList[i].tag1Text;
-//              }
-//              break;
 //            case 9:
 //              {
 //                taskList[i].sec3 = taskList[i].goal1Text;
 //              }
 //              break;
-            case 4:
+            case 6:
               {
                 taskList[i].sec3 = taskList[i].isStar.toString();
               }
@@ -637,6 +641,9 @@ class TaskHomeState extends State {
         if (customSetting!.sortField3 != "") {
           globals.sortField3 = int.parse(customSetting!.sortField3!);
         }
+        if (customSetting!.sortField4 != "") {
+          globals.sortField4 = int.parse(customSetting!.sortField4!);
+        }
 //        if (customSetting!.showMain1 != "") {
 //          globals.showMain1 = int.parse(customSetting!.showMain1!);
 //        }
@@ -671,14 +678,14 @@ class TaskHomeState extends State {
         globals.filterStatus = customSetting!.filterStatus != ""
             ? int.parse(customSetting!.filterStatus!)
             : 0;
-//        globals.filterPriority = customSetting!.filterPriority != ""
-//            ? int.parse(customSetting!.filterPriority!)
-//            : 0;
+        globals.filterPriority = customSetting!.filterPriority != ""
+            ? int.parse(customSetting!.filterPriority!)
+            : 0;
+        globals.filterTag = customSetting!.filterTag != ""
+            ? int.parse(customSetting!.filterTag!)
+            : 0;
 //        globals.filterLocation = customSetting!.filterLocation != ""
 //            ? int.parse(customSetting!.filterLocation!)
-//            : 0;
-//        globals.filterTag = customSetting!.filterTag != ""
-//            ? int.parse(customSetting!.filterTag!)
 //            : 0;
 //        globals.filterGoal = customSetting!.filterGoal != ""
 //            ? int.parse(customSetting!.filterGoal!)
@@ -719,9 +726,12 @@ class TaskHomeState extends State {
       case 5:
         return "status";
         break;
-//      case 6:
-//        return "priority";
-//        break;
+      case 6:
+        return "priority";
+        break;
+      case 7:
+        return "tag1";
+        break;
 //      case 7:
 //        return "action1";
 //        break;
@@ -731,16 +741,13 @@ class TaskHomeState extends State {
 //      case 9:
 //        return "location1";
 //        break;
-//      case 7:
-//        return "tag1";
-//        break;
 //      case 11:
 //        return "goal1";
 //        break;
-      case 6:
+      case 8:
         return "isStar";
         break;
-      case 7:
+      case 9:
         return "isDone";
         break;
 
