@@ -838,16 +838,16 @@ Plan C - USD 24 | 12 month
 
     queryStr =
         "SELECT $tblTodo.id,$tblTodo.task, $tblTodo.note, dateDue,timeDue,   " +
-            "category, status, priority, tag1" +
+            "category, status, priority, tag1, " +
             "isStar, isDone, dateDone, lastModified, " +
             "categories.name as categoriesname, " +
-            "statuses.name as statusesname " +
-            "priorities.name as prioritiesname " +
+            "statuses.name as statusesname, " +
+            "priorities.name as prioritiesname, " +
             "tag1s.name as tag1sname " +
             " FROM $tblTodo  " +
             " LEFT JOIN categories ON  $tblTodo.category = categories.id" +
             " LEFT JOIN statuses ON  $tblTodo.status = statuses.id " +
-            " LEFT JOIN priorities ON  $tblTodo.priority = priority.id " +
+            " LEFT JOIN priorities ON  $tblTodo.priority = priorities.id " +
             " LEFT JOIN tag1s ON  $tblTodo.tag1 = tag1s.id " +
             "WHERE ($colTask LIKE '%$searchText%' OR $colNote LIKE '%$searchText%')";
 
