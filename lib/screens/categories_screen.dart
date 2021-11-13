@@ -303,11 +303,11 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                       child: Text(_categoryList[index].name!,
                           overflow: TextOverflow.ellipsis),
                     ),
-                    IconButton(
-                        icon: Icon(Icons.delete, color: Colors.grey),
-                        onPressed: () {
-                          _deleteFormDialogue(context, _categoryList[index].id);
-                        })
+//                    IconButton(
+//                        icon: Icon(Icons.delete, color: Colors.grey),
+//                        onPressed: () {
+//                          _deleteFormDialogue(context, _categoryList[index].id);
+//                        })
                   ],
                 ),
 //                subtitle: Text(_categoryList[index].description),

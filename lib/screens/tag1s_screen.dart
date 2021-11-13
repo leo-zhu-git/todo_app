@@ -357,11 +357,11 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
                       child: Text(_tag1List[index].name!,
                           overflow: TextOverflow.ellipsis),
                     ),
-                    IconButton(
-                        icon: Icon(Icons.delete, color: Colors.grey),
-                        onPressed: () {
-                          _deleteFormDialogue(context, _tag1List[index].id);
-                        }),
+//                    IconButton(
+//                        icon: Icon(Icons.delete, color: Colors.grey),
+//                        onPressed: () {
+//                          _deleteFormDialogue(context, _tag1List[index].id);
+//                        }),
                   ],
                 ),
 //                subtitle: Text(_tag1List[index].description),

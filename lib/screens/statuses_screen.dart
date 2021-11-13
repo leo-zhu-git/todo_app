@@ -372,11 +372,11 @@ class _StatusesScreenState extends State<StatusesScreen> {
                       child: Text(_statusList[index].name!,
                           overflow: TextOverflow.ellipsis),
                     ),
-                    IconButton(
-                        icon: Icon(Icons.delete, color: Colors.grey),
-                        onPressed: () {
-                          _deleteFormDialogue(context, _statusList[index].id);
-                        })
+//                    IconButton(
+//                        icon: Icon(Icons.delete, color: Colors.grey),
+//                        onPressed: () {
+//                          _deleteFormDialogue(context, _statusList[index].id);
+//                        })
                   ],
                 ),
 //                subtitle: Text(_statusList[index].description),
