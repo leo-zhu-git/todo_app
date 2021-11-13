@@ -279,21 +279,6 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
       _selectedSortOrder4 = _dropdownMenuSortOrder[globals.sortOrder4!].value!;
 
     ////////////////////////////
-    /// show - main1 is hard coded to tasks always RT
-    ////////////////////////////
-//    if (globals.showMain1 == null) {
-//      _selectedShowMain1 = _dropdownMenuItemsShow[0].value;
-//      globals.showMain1 = 0;
-//    } else
-//      _selectedShowMain1 = _dropdownMenuItemsShow[globals.showMain1].value;
-
-//    if (globals.showMain2 == null) {
-//      _selectedShowMain2 = _dropdownMenuItemsShow[2].value;
-//      globals.showMain2 = 2;
-//    } else
-//      _selectedShowMain2 = _dropdownMenuItemsShow[globals.showMain2].value;
-
-    ////////////////////////////
     /// show - sec defaults star, dateDue, timeDue RT
     ////////////////////////////
     if (globals.showSec1 == null) {
@@ -414,114 +399,6 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     });
   }
 
-//  _loadAction1s() async {
-//    var action1s = await helper.getAction1s();
-//    CustomDropdownItem cus;
-//    cus = new CustomDropdownItem();
-//    cus.id = null;
-//    cus.name =
-//        "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
-//    cus.name =
-//        "-- All Actions --";
-//    _action1s.add(cus);
-//    action1s.forEach((action1) {
-//      setState(() {
-//        cus = new CustomDropdownItem();
-//        cus.id = action1['id'].toString();
-//        String tempAct;
-//        if (action1['name'].toString().length > 20)
-//          tempAct = action1['name'].toString().substring(0, 20) + "...";
-//        else
-//          tempAct = action1['name'];
-
-//        cus.name = tempAct;
-//        _action1s.add(cus);
-//      });
-//    });
-//  }
-
-//  _loadContext1s() async {
-//    var context1s = await helper.getContext1s();
-//    CustomDropdownItem cus;
-//    cus = new CustomDropdownItem();
-//    cus.id = null;
-//    cus.name =
-//        "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
-//    cus.name =
-//        "-- All Contexts --";
-//    _context1s.add(cus);
-//    context1s.forEach((context1) {
-//      setState(() {
-//        cus = new CustomDropdownItem();
-//        cus.id = context1['id'].toString();
-//        String tempCon;
-//        if (context1['name'].toString().length > 30)
-//          tempCon = context1['name'].toString().substring(0, 30) + "...";
-//        else
-//          tempCon = context1['name'];
-
-//        cus.name = tempCon;
-
-//        _context1s.add(cus);
-//      });
-//    });
-//  }
-
-//  _loadLocation1s() async {
-//    var location1s = await helper.getLocation1s();
-//    CustomDropdownItem cus;
-//    cus = new CustomDropdownItem();
-//    cus.id = null;
-//    cus.name =
-//        "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
-//    cus.name =
-//        "-- All Locations --";
-//    _location1s.add(cus);
-//    location1s.forEach((location1) {
-//      setState(() {
-//        cus = new CustomDropdownItem();
-//        cus.id = location1['id'].toString();
-//        String tempLoc;
-//        if (location1['name'].toString().length > 30)
-//          tempLoc = location1['name'].toString().substring(0, 30) + "...";
-//        else
-//          tempLoc = location1['name'];
-
-//        cus.name = tempLoc;
-
-//        _location1s.add(cus);
-//      });
-//    });
-//  }
-
-
-
-//  _loadGoal1s() async {
-//    var goal1s = await helper.getGoal1s();
-//    CustomDropdownItem cus;
-//    cus = new CustomDropdownItem();
-//    cus.id = null;
-//    cus.name =
-//        "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
-//    cus.name =
-//        "-- All Goals --";
-//    _goal1s.add(cus);
-//    goal1s.forEach((goal1) {
-//      setState(() {
-//        cus = new CustomDropdownItem();
-//        cus.id = goal1['id'].toString();
-//        String tempGoal;
-//        if (goal1['name'].toString().length > 30)
-//          tempGoal = goal1['name'].toString().substring(0, 30) + "...";
-//        else
-//          tempGoal = goal1['name'];
-
-//        cus.name = tempGoal;
-//        _goal1s.add(cus);
-//      });
-//    });
-//  }
-
 //##########################################end of Dropdown #################################################################
 
   List<DropdownMenuItem<ShowItem>> buildDropdownMenuShow(List showItems) {
@@ -618,7 +495,6 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     return Scaffold(
       key: _globalKey,
       resizeToAvoidBottomInset: false,
-//      backgroundColor: Colors.teal[50],
       appBar: new AppBar(
         centerTitle: true,
         flexibleSpace: Container(
@@ -631,13 +507,11 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
           ),
         ),
         backgroundColor: Colors.teal[800],
-//        backgroundColor: Colors.indigo[600],
         automaticallyImplyLeading: true,
         leading: IconButton(
           icon: Icon(Icons.home, color: Colors.pink[100]),
           tooltip: 'Home',
           onPressed: () {
-//            Navigator.pop(context, true);
             Navigator.of(context)
                 .push(MaterialPageRoute(builder: (context) => TaskHome()));
           },
@@ -664,7 +538,6 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                   globals.sortField4 = _selectedSortField4!.id;
                 if (_selectedSortOrder4 != null)
                   globals.sortOrder4 = _selectedSortOrder4!.id;
-//                print(globals.showMain2);
                 if (_selectedShowSec1 != null)
                   globals.showSec1 = _selectedShowSec1!.id;
                 print(globals.showSec1);
@@ -782,25 +655,6 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
 //end of save
                 }
               });
-//                        _showSuccessSnackBar(
-//                          Container(
-//                            color: Colors.tealAccent[100],
-//                            height: 40,
-//                            child: Row(
-//                              mainAxisAlignment: MainAxisAlignment.center,
-//                              children: [
-//                                (Icon(
-//                                  Icons.thumb_up,
-//                                  color: Colors.black,
-//                                )),
-//                                Text(
-//                                  ' Added ',
-//                                  style: (TextStyle(color: Colors.black)),
-//                                )
-//                              ],
-//                            ),
-//                          ),
-//                        );
               Navigator.of(context).pushNamed('/dashboard');
             },
           ),
@@ -814,11 +668,13 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
+
 ///////////////////////////
-//  Filter Date Due
+//  Filters
 ///////////////////////////
               Text("Filter - Reduce tasks to view", style: _textStyleControls),
 
+//################################# Due Dates #####################################################
               new Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
@@ -836,7 +692,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 ),
               ),
 
-//#################################Category#####################################################
+//################################# Category #####################################################
               Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
@@ -867,7 +723,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 ),
               ),
 
-//#################################Status#####################################################
+//################################# Status #####################################################
               Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
@@ -898,7 +754,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 ),
               ),
 
-//#################################Priority#####################################################
+//################################# Priority #####################################################
               Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
@@ -929,7 +785,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 ),
               ),
 
- //######### Tag  #########
+//################################# Tag #####################################################
               Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
@@ -957,111 +813,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 ),
               ),
 
-
-//########################################### Action  ######### #################################3
-//              Container(
-//                margin: const EdgeInsets.all(2.0),
-//                decoration: BoxDecoration(
-//                    shape: BoxShape.rectangle, color: Colors.blue[100]),
-//                child: Flexible(
-//                  child: Row(
-//                    crossAxisAlignment: CrossAxisAlignment.center,
-//                    children: [
-//                      DropdownButton<String>(
-//                        items: _action1s.map((CustomDropdownItem value) {
-//                          return DropdownMenuItem<String>(
-//                              value: value.id, child: Text(value.name!));
-//                        }).toList(),
-//                        value: _selectedAction1,
-//                        onChanged: (value) {
-//                          setState(() {
-//                            _selectedAction1 = value;
-//                            //                    searchData(_searchText, _selectedpriority, _selectedCategory, _selectedAction1, _selectedContext1, _selectedLocation1, _selectedTag1, _selectedGoal1);
-//                          });
-//                        },
-//                      )
-//                    ],
-//                  ),
-//                ),
-//              ),
-
-//######### Context  #########
-//              Container(
-//                margin: const EdgeInsets.all(2.0),
-//                decoration: BoxDecoration(
-//                    shape: BoxShape.rectangle, color: Colors.blue[100]),
-//                child: Row(
-//                  crossAxisAlignment: CrossAxisAlignment.center,
-//                  children: [
-//                    DropdownButton<String>(
-//                      items: _context1s.map((CustomDropdownItem value) {
-//                        return DropdownMenuItem<String>(
-//                            value: value.id, child: Text(value.name!));
-//                      }).toList(),
-//                      value: _selectedContext1,
-//                      onChanged: (value) {
-//                        setState(() {
-//                          _selectedContext1 = value;
-//                        });
-//                      },
-//                    )
-//                  ],
-//                ),
-//              ),
-
-// //######### Location  #########
-//              Container(
-//                margin: const EdgeInsets.all(2.0),
-//                decoration: BoxDecoration(
-//                    shape: BoxShape.rectangle, color: Colors.blue[100]),
-//                child: Row(
-//                  crossAxisAlignment: CrossAxisAlignment.center,
-//                  children: [
-//                    DropdownButton<String>(
-//                      items: _location1s.map((CustomDropdownItem value) {
-//                        return DropdownMenuItem<String>(
-//                            value: value.id, child: Text(value.name!));
-//                      }).toList(),
-//                      value: _selectedLocation1,
-//                      onChanged: (value) {
-//                        setState(() {
-//                          _selectedLocation1 = value;
-//                        });
-//                      },
-//                    )
-//                  ],
-//                ),
-//              ),
-
-
-// //######### Goal  #########
-//              Container(
-//                margin: const EdgeInsets.all(2.0),
-//                decoration: BoxDecoration(
-//                    shape: BoxShape.rectangle, color: Colors.blue[100]),
-//                child: Row(
-//                  crossAxisAlignment: CrossAxisAlignment.center,
-//                  children: [
-//                    DropdownButton<String>(
-//                      items: _goal1s.map((CustomDropdownItem value) {
-//                        return DropdownMenuItem<String>(
-//                            value: value.id, child: Text(value.name!));
-//                      }).toList(),
-//                      value: _selectedGoal1,
-//                      onChanged: (value) {
-//                        setState(() {
-//                          _selectedGoal1 = value;
-//                        });
-//                      },
-//                    )
-//                  ],
-//                ),
-//              ),
-
-///////////////////////////
-//  Filter Is Star
-///////////////////////////
-
+//################################# Focus #####################################################
               new Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
@@ -1078,10 +830,9 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                   },
                 ),
               ),
-///////////////////////////
-//  Filter Is Done
-///////////////////////////
 
+
+//################################# IsDone #####################################################
               new Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
@@ -1106,8 +857,10 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                   style: _textStyleControls),
 
 ///////////////////////////
-//  Picklist - Categories
+//  Picklists  
 ///////////////////////////
+
+//################################# Categories #####################################################
               Card(
                 elevation: 8.0,
                 child: ListTile(
@@ -1119,23 +872,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
               ),
               SizedBox(height: 2),
 
-///////////////////////////
-//  Picklist - Action
-///////////////////////////
-//              Card(
-//                elevation: 8.0,
-//                child: ListTile(
-//                  tileColor: Colors.orange[100],
-//                  title: Text('Actions'),
-//                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
-//                      builder: (context) => Action1sScreen())),
-//                ),
-//              ),
-//              SizedBox(height: 2),
-
-///////////////////////////
-//  Picklist - Statuses
-///////////////////////////
+//################################# Statuses  #####################################################
               Card(
                 elevation: 8.0,
                 child: ListTile(
@@ -1147,9 +884,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
               ),
               SizedBox(height: 2),
 
-///////////////////////////
-//  Picklist - Priorities
-///////////////////////////
+//################################# Priorities  #####################################################
               Card(
                 elevation: 8.0,
                 child: ListTile(
@@ -1160,37 +895,9 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 ),
               ),
               SizedBox(height: 2),
-///////////////////////////
-//  Picklist - Contexts
-///////////////////////////
-//              Card(
-//                elevation: 8.0,
-//                child: ListTile(
-//                  tileColor: Colors.orange[100],
-//                  title: Text('Contexts'),
-//                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
-//                     builder: (context) => Context1sScreen())),
-//                ),
-//              ),
-//              SizedBox(height: 2),
 
-///////////////////////////
-//  Picklist - Locations
-///////////////////////////
-//              Card(
-//                elevation: 8.0,
-//                child: ListTile(
-//                  tileColor: Colors.orange[100],
-//                  title: Text('Locations'),
-//                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
-//                      builder: (context) => Location1sScreen())),
-//                ),
-//              ),
-//              SizedBox(height: 2),
+//################################# Tags  #####################################################
 
-///////////////////////////
-//  Picklist - Tags
-///////////////////////////
               Card(
                 elevation: 8.0,
                 child: ListTile(
@@ -1201,29 +908,16 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 ),
               ),
               SizedBox(height: 2),
-
-///////////////////////////
-//  Picklist - Goals
-///////////////////////////
-//              Card(
-//                elevation: 8.0,
-//                child: ListTile(
-//                  tileColor: Colors.orange[100],
-//                  title: Text('Goals'),
-//                  onTap: () => Navigator.of(context).push(
-//                      MaterialPageRoute(builder: (context) => Goal1sScreen())),
-//                ),
-//              ),
               SizedBox(
                 height: 20,
               ),
+
 ///////////////////////////
-//  SORT ORDER 1
+//  SORT   
 ///////////////////////////
               Text("Sort Order", style: _textStyleControls),
-///////////////////////////
-//  SORT ORDER 1
-///////////////////////////
+
+//################################# Sort Order 1  #####################################################
               new Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
@@ -1240,9 +934,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                   },
                 ),
               ),
-///////////////////////////
-//  SORT ORDER 1 ASC/DESC
-///////////////////////////
+
               new Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
@@ -1259,10 +951,8 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                   },
                 ),
               ),
-///////////////////////////
-//  SORT ORDER 2
-///////////////////////////
-//              Text("Sort 2"),
+
+//################################# Sort Order 2  #####################################################
               new Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
@@ -1279,9 +969,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                   },
                 ),
               ),
-///////////////////////////
-//  SORT ORDER 2 ASC/DESC
-///////////////////////////
+
               new Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
@@ -1298,10 +986,8 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                   },
                 ),
               ),
-///////////////////////////
-//  SORT ORDER 3
-///////////////////////////
-//              Text("Sort 3"),
+
+//################################# Sort Order 3  #####################################################
               new Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
@@ -1318,10 +1004,8 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                   },
                 ),
               ),
-///////////////////////////
-//  SORT ORDER 3 ASC/DESC
-///////////////////////////
-              new Container(
+
+               new Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.green[100]),
@@ -1338,10 +1022,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 ),
               ),
 
-///////////////////////////
-//  SORT ORDER 4
-///////////////////////////
-//              Text("Sort 4"),
+//################################# Sort Order 4  #####################################################
               new Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
@@ -1358,10 +1039,8 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                   },
                 ),
               ),
-///////////////////////////
-//  SORT ORDER 4 ASC/DESC
-///////////////////////////
-              new Container(
+
+               new Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.green[100]),
@@ -1383,29 +1062,14 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
               ),
 
 
+///////////////////////////
+//  Show Sec 
+///////////////////////////
               Text("View - second line up to 3 fields",
                   style: _textStyleControls),
-///////////////////////////
-//  Show Main 1
-///////////////////////////
-//              new Container(
-//                margin: const EdgeInsets.all(2.0),
-//                decoration: BoxDecoration(
-//                    shape: BoxShape.rectangle, color: Colors.yellow[200]),
-//                child: DropdownButtonFormField(
-//                  items: _dropdownMenuItemsSort,
-//                  hint: Text('Display Main1'),
-//                  value: _selectedShowMain1,
-//                  onChanged: (selectedShow) {
-//                    setState(() {
-//                      _selectedShowMain1 = selectedShow;
-//                    });
-//                  },
-//                ),
-//              ),
-///////////////////////////
-//  Show Secondary 1
-///////////////////////////
+
+///################################# Show Sec 1  #####################################################
+
               new Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
@@ -1423,9 +1087,8 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 ),
               ),
 
-///////////////////////////
-//  Show Secondary 2
-///////////////////////////
+///################################# Show Sec 2  #####################################################
+
               new Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
@@ -1443,9 +1106,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 ),
               ),
 
-///////////////////////////
-//  Show Secondary 3
-///////////////////////////
+///################################# Show Sec 3  #####################################################
               new Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
@@ -1463,221 +1124,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 ),
               ),
 
-//              SizedBox(
-//                height: 20,
-//              ),
 
-              /// form - save or cancel
-//              Row(
-//                mainAxisAlignment: MainAxisAlignment.center,
-//                children: [
-//                  ElevatedButton(
-//                      onPressed: () {
-//                        Navigator.pop(context);
-//                      },
-//                      style: ElevatedButton.styleFrom(
-//                        primary: Colors.grey[300],
-//                      ),
-//                      child: Text(
-//                        'Cancel',
-//                        style: TextStyle(color: Colors.teal[800]),
-//                      )),
-//                  SizedBox(width: 5),
-//                  ElevatedButton(
-//                      onPressed: () {
-//                        setState(() {
-//                          if (_selectedSortField1 != null)
-//                            globals.sortField1 = _selectedSortField1!.id;
-//                          if (_selectedSortOrder1 != null)
-//                            globals.sortOrder1 = _selectedSortOrder1!.id;
-//                          if (_selectedSortField2 != null)
-//                            globals.sortField2 = _selectedSortField2!.id;
-//                          if (_selectedSortOrder2 != null)
-//                            globals.sortOrder2 = _selectedSortOrder2!.id;
-//                          if (_selectedSortField3 != null)
-//                            globals.sortField3 = _selectedSortField3!.id;
-//                          if (_selectedSortOrder3 != null)
-//                            globals.sortOrder3 = _selectedSortOrder3!.id;
-//                          print(globals.showMain2);
-//                          if (_selectedShowSec1 != null)
-//                            globals.showSec1 = _selectedShowSec1!.id;
-//                          print(globals.showSec1);
-//                          if (_selectedShowSec2 != null)
-//                            globals.showSec2 = _selectedShowSec2!.id;
-//                          print(globals.showSec2);
-//                          if (_selectedShowSec3 != null)
-//                            globals.showSec3 = _selectedShowSec3!.id;
-//                         print(globals.showSec3);
-//                          if (_selectedFilterIsStar != null)
-//                            globals.filterIsStar = _selectedFilterIsStar!.id;
-//                          if (_selectedFilterIsDone != null)
-//                            globals.filterIsDone = _selectedFilterIsDone!.id;
-//                          if (_selectedFilterDateDue != null)
-//                            globals.filterDateDue = _selectedFilterDateDue!.id;
-
-//Save
-//                          if (customSetting == null) {
-//                            customSetting = new CustomSettings(
-//                              '',
-//                              '',
-//                              '',
-//                              '',
-//                              '',
-//                              '',
-//                              '',
-//                              '',
-//                              '',
-//                              '',
-//                              '',
-//                              '',
-//                              '',
-//                              '',
-//                              '',
-//                              '',
-//                              '',
-//                              "",
-//                              "",
-//                              "",
-//                              0,
-//                              0,
-//                            );
-//                          }
-
-//                          customSetting!.sortField1 =
-//                              _selectedSortField1 == null
-//                                  ? ""
-//                                  : _selectedSortField1!.id.toString();
-//                          customSetting!.sortOrder1 =
-//                              _selectedSortOrder1 == null
-//                                  ? ""
-//                                  : _selectedSortOrder1!.id.toString();
-//                          customSetting!.sortField2 =
-//                              _selectedSortField2 == null
-//                                  ? ""
-//                                  : _selectedSortField2!.id.toString();
-//                          customSetting!.sortOrder2 =
-//                              _selectedSortOrder2 == null
-//                                  ? ""
-//                                  : _selectedSortOrder2!.id.toString();
-//                          customSetting!.sortField3 =
-//                              _selectedSortField3 == null
-//                                  ? ""
-//                                  : _selectedSortField3!.id.toString();
-//                          customSetting!.sortOrder3 =
-//                              _selectedSortOrder3 == null
-//                                  ? ""
-//                                  : _selectedSortOrder3!.id.toString();
-//                          customSetting.showMain1 = _selectedShowMain1 == null
-//                              ? ""
-//                              : _selectedShowMain1.id.toString();
-//                          customSetting.showMain2 = _selectedShowMain2 == null
-//                              ? ""
-//                              : _selectedShowMain2.id.toString();
-//                          customSetting!.showSec1 = _selectedShowSec1 == null
-//                              ? ""
-//                            : _selectedShowSec1!.id.toString();
-//                          customSetting!.showSec2 = _selectedShowSec2 == null
-//                              ? ""
-//                              : _selectedShowSec2!.id.toString();
-//                          customSetting!.showSec3 = _selectedShowSec3 == null
-//                              ? ""
-//                              : _selectedShowSec3!.id.toString();
-//                          customSetting!.filterDateDue =
-//                             _selectedFilterDateDue == null
-//                                  ? ""
-//                                  : _selectedFilterDateDue!.id.toString();
-//                          if (_selectedFilterIsStar == null) {
-//                            customSetting!.filterIsStar = 0;
-//                          } else {
-//                            if (_selectedFilterIsStar!.id == 0) {
-//                              customSetting!.filterIsStar = 0;
-//                            } else {
-//                              customSetting!.filterIsStar = 1;
-//                            }
-//                            if (_selectedFilterIsDone == null) {
-//                              customSetting!.filterIsDone = 0;
-//                            } else {
-//                              if (_selectedFilterIsDone!.id == 0) {
-//                                customSetting!.filterIsDone = 0;
-//                              } else {
-//                                customSetting!.filterIsDone = 1;
-//                              }
-//                            }
-
-//                            customSetting!.filterStatus =
-//                                _selectedStatus == null
-//                                    ? ""
-//                                    : _selectedStatus.toString();
-//                            customSetting!.filterPriority =
-//                                _selectedPriority == null
-//                                    ? ""
-//                                    : _selectedPriority.toString();
-//                            customSetting!.filterCategory =
-//                                _selectedCategory == null
-//                                    ? ""
-//                                    : _selectedCategory.toString();
-//                            customSetting!.filterAction =
-//                                _selectedAction1 == null
-//                                    ? ""
-//                                    : _selectedAction1.toString();
-//                            customSetting!.filterContext =
-//                                _selectedContext1 == null
-//                                    ? ""
-//                                    : _selectedContext1.toString();
-//                            customSetting!.filterLocation =
-//                                _selectedLocation1 == null
-//                                    ? ""
-//                                    : _selectedLocation1.toString();
-//                            customSetting!.filterTag = _selectedTag1 == null
-//                                ? ""
-//                                : _selectedTag1.toString();
-//                            customSetting!.filterGoal = _selectedGoal1 == null
-//                                ? ""
-//                                : _selectedGoal1.toString();
-
-//                            var result;
-
-//                            if (customSetting!.id != null) {
-//                              result =
-//                                  helper.updateCustomSettings(customSetting!);
-//                            } else {
-//                              result =
-//                                  helper.insertCustomSettings(customSetting!);
-//                            }
-
-//end of save
-//                          }
-//                        });
-//                        _showSuccessSnackBar(
-//                          Container(
-//                            color: Colors.tealAccent[100],
-//                            height: 40,
-//                            child: Row(
-//                              mainAxisAlignment: MainAxisAlignment.center,
-//                              children: [
-//                                (Icon(
-//                                  Icons.thumb_up,
-//                                  color: Colors.black,
-//                                )),
-//                                Text(
-//                                  ' Added ',
-//                                  style: (TextStyle(color: Colors.black)),
-//                                )
-//                              ],
-//                            ),
-//                          ),
-//                        );
-//                        Navigator.of(context).pushNamed('/dashboard');
-//                      },
-//                      style: ElevatedButton.styleFrom(
-//                        primary: Colors.teal[800],
-//                      ),
-//                      child: Text(
-//                        'Save',
-//                        style: TextStyle(color: Colors.white),
-//                      ))
-//                ],
-//              ),
             ],
           ),
         ),
@@ -1730,16 +1177,6 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
           globals.sortField3 = int.parse(
               customSetting!.sortOrder3!); //convert it to session variables
         }
-//        if (customSetting.showMain1 != "") {
-//          _selectedShowMain1 =
-//              _dropdownMenuItemsSort[int.parse(customSetting.showMain1)].value;
-//          globals.showMain1 = int.parse(customSetting.showMain1);
-//        }
-//        if (customSetting.showMain2 != "") {
-//          _selectedShowMain2 =
-//              _dropdownMenuItemsSort[int.parse(customSetting.showMain2)].value;
-//          globals.showMain2 = int.parse(customSetting.showMain2);
-//        }
         if (customSetting!.showSec1 != "") {
           _selectedShowSec1 =
               _dropdownMenuItemsShow[int.parse(customSetting!.showSec1!)]
@@ -1777,10 +1214,8 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
               .value!;
       globals.filterDateDue = int.parse(customSetting!.filterDateDue!);
     }
-    ////////////////////////////
-    /// filter - picklists
-    ////////////////////////////
-    if (customSetting!.filterCategory == "") {
+ 
+     if (customSetting!.filterCategory == "") {
       _selectedCategory = null;
       customSetting!.filterCategory = "";
     } else {
@@ -1811,38 +1246,6 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
       _selectedTag1 = customSetting!.filterTag.toString();
       globals.filterTag = int.parse(customSetting!.filterTag!);
     }
-
-//    if (customSetting!.filterAction == "") {
-//      _selectedAction1 = null;
-//      customSetting!.filterAction = "";
-//    } else {
-//      _selectedAction1 = customSetting!.filterAction.toString();
-//      globals.filterAction = int.parse(customSetting!.filterAction!);
-//    }
-//    if (customSetting!.filterContext == "") {
-//      _selectedContext1 = null;
-//      customSetting!.filterContext = "";
-//    } else {
-//      _selectedContext1 = customSetting!.filterContext.toString();
-//      globals.filterContext = int.parse(customSetting!.filterContext!);
-//    }
-
-
-//    if (customSetting!.filterGoal == "") {
-//      _selectedGoal1 = null;
-//      customSetting!.filterGoal = "";
-//    } else {
-//      _selectedGoal1 = customSetting!.filterGoal.toString();
-//      globals.filterGoal = int.parse(customSetting!.filterGoal!);
-//    }
-
-//    if (customSetting!.filterLocation == "") {
-//      _selectedLocation1 = null;
-//      customSetting!.filterLocation = "";
-//    } else {
-//      _selectedLocation1 = customSetting!.filterLocation.toString();
-//      globals.filterLocation = int.parse(customSetting!.filterLocation!);
-//    }
 
     setState(() {
       customSetting = customSetting;

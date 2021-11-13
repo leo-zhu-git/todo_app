@@ -36,7 +36,7 @@ class _LocalNotificationScreenState extends State<LocalNotificationScreen> {
             Center(
               child: ElevatedButton(
                 onPressed: () async {
-                  await notificationPlugin.scheduleNotification('todoMIT task title', 'todoMIT task body', '2021-10-12', '18:45');
+                  await notificationPlugin.scheduleNotification('todoMIT scheduled ', 'todoMIT scheduled body', '2021-11-13', '16:55');
                 },
                 child: Text('Scheduled - 5s delay [working]'),
               ),

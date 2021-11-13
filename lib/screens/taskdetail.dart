@@ -356,13 +356,16 @@ class TaskDetailState extends State //<TaskDetail>
                     child: CupertinoDatePicker(
                         initialDateTime: (_dateDue == null)
                             ? DateTime.now()
-                            : _dateDue!.add(Duration(
-                                hours: (_timeDue == null)
-                                    ? DateTime.now().hour
-                                    : _timeDue!.hour,
-                                minutes: (_timeDue == null)
-                                    ? DateTime.now().minute
-                                    : _timeDue!.minute)),
+                            : _dateDue, 
+//                            : (
+//                              _dateDue!.add(Duration(
+//                                hours: (_timeDue == null)
+//                                    ? DateTime.now().hour
+//                                    : _timeDue!.hour,
+//                                minutes: (_timeDue == null)
+//                                    ? DateTime.now().minute
+//                                    : _timeDue!.minute))
+//                                    ),
                         mode: CupertinoDatePickerMode.dateAndTime,
                         onDateTimeChanged: (val) {
                           setState(() {
@@ -635,16 +638,16 @@ class TaskDetailState extends State //<TaskDetail>
                   task.dateDue = _todoDateController.text;
                   task.timeDue = _todoTimeController.text;
 
-////////// notificaiton to move outside setstate
-//                  task.timeDue != ""
-//                      ? {
-//                          _nTitle = task.timeDue.toString() +
-//                              ' reminder: ' +
-//                              task.task!,
-//                          await notificationPlugin.scheduleNotification(
-//                              _nTitle, task.note!, task.dateDue!, task.timeDue!)
-//                        }
-//                      : {};
+                  task.timeDue != ""
+                      ? {
+                          _nTitle = task.timeDue.toString() +
+                              ' reminder: ' +
+                              task.task!,
+                          notificationPlugin.scheduleNotification(
+                              _nTitle, task.note!, task.dateDue!, task.timeDue!)
+                        }
+                      : {};
+
                   task.isDone = 0;
                   task.lastModified =
                       DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.now());

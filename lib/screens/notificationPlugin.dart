@@ -78,21 +78,18 @@ class NotificationPlugin {
   }
 
 ////////////////////////
-  /// 1. Show notification now
-////////////////////////
+/// 1. Show notification now
+//////////////////////
   Future<void> showNotification(String _nTitle, String _nBody) async {
     var androidChannelSpecifics = AndroidNotificationDetails(
       'CHANNEL_ID_31',
       'CHANNEL_NAME',
-//      'CHANNEL_DESCRIPTION',
-//      color: const Color.fromARGB(255, 0, 255, 0),
-//      icon: 'notifytodomit',
       icon: 'secondhalf_notify_icon',
       color: Color.fromARGB(255, 255, 204, 0),
       importance: Importance.max,
       priority: Priority.high,
       playSound: true,
-      timeoutAfter: 10000,
+//      timeoutAfter: 10000,
       ledColor: const Color.fromARGB(255, 0, 255, 0),
       ledOnMs: 1000,
       ledOffMs: 500,
@@ -131,7 +128,7 @@ class NotificationPlugin {
   }
 
 ////////////////////////
-  /// 2. scheduled notification
+/// 2. scheduled notification
 ////////////////////////
   Future<void> scheduleNotification(
       String _nTitle, String _nBody, String _nDate, String _nTime) async {
@@ -139,8 +136,8 @@ class NotificationPlugin {
     int hour;
     int minute;
     var androidChannelSpecifics = AndroidNotificationDetails(
-      'CHANNEL_ID 1',
-      'CHANNEL_NAME 1',
+      'CHANNEL_ID 33',
+      'CHANNEL_NAME 33',
       //"CHANNEL_DESCRIPTION 1",
 //      icon: 'secondary_icon',
 //      largeIcon: DrawableResourceAndroidBitmap('large_notf_icon'),
@@ -167,7 +164,7 @@ class NotificationPlugin {
     TimeOfDay _scheduledTime;
 
 /////////////////
-    /// check _timeDue is 24h or 12h format
+/// check _timeDue is 24h or 12h format
 /////////////////
     if (_nTime.contains('M')) {
       _scheduledTime = timeConvert(_nTime);
@@ -197,12 +194,11 @@ class NotificationPlugin {
             0,
             _nTitle,
             _nBody,
-//        tz.TZDateTime.now(tz.local).add(const Duration(seconds: 5)),
             _tzNotifyDateTime,
             NotificationDetails(
                 android: AndroidNotificationDetails(
-              'CHANNEL_ID 1',
-              'CHANNEL_NAME 1',
+              'CHANNEL_ID 31',
+              'CHANNEL_NAME 33',
             )),
             androidAllowWhileIdle: true,
             uiLocalNotificationDateInterpretation:
@@ -213,7 +209,7 @@ class NotificationPlugin {
   }
 
 ////////////////////////
-  /// 3. repeat notification - every minute
+/// 3. repeat notification - every minute
 ////////////////////////
 
   Future<void> repeatNotification() async {
@@ -239,7 +235,7 @@ class NotificationPlugin {
   }
 
 ////////////////////////
-  /// 4. showDaily at time
+/// 4. showDaily at time
 ////////////////////////
 
   Future<void> showDailyAtTime() async {
