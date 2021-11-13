@@ -356,16 +356,15 @@ class TaskDetailState extends State //<TaskDetail>
                     child: CupertinoDatePicker(
                         initialDateTime: (_dateDue == null)
                             ? DateTime.now()
-                            : _dateDue, 
-//                            : (
-//                              _dateDue!.add(Duration(
-//                                hours: (_timeDue == null)
-//                                    ? DateTime.now().hour
-//                                    : _timeDue!.hour,
-//                                minutes: (_timeDue == null)
-//                                    ? DateTime.now().minute
-//                                    : _timeDue!.minute))
-//                                    ),
+                            : (
+                              _dateDue!.add(Duration(
+                                hours: (_timeDue == null)
+                                    ? DateTime.now().hour
+                                    : _timeDue!.hour,
+                                minutes: (_timeDue == null)
+                                    ? DateTime.now().minute
+                                    : _timeDue!.minute))
+                                    ),
                         mode: CupertinoDatePickerMode.dateAndTime,
                         onDateTimeChanged: (val) {
                           setState(() {
