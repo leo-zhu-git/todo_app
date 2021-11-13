@@ -899,10 +899,11 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.blue[100]),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     DropdownButton<String>(
+                       isExpanded: true,
                        style: _textStyleControls,
                         items: _priorities.map((CustomDropdownItem value) {
                           return DropdownMenuItem<String>(
@@ -927,10 +928,11 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.blue[100]),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     DropdownButton<String>(
+                      isExpanded: true,
                       style: _textStyleControls,
                       items: _tag1s.map((CustomDropdownItem value) {
                         return DropdownMenuItem<String>(

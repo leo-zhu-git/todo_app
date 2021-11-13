@@ -70,8 +70,8 @@ class TaskSearchState extends State {
       });
     });
   }
-  
-    _loadStatuses() async {
+
+  _loadStatuses() async {
     var statuses = await helper.getStatuses();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
@@ -129,7 +129,7 @@ class TaskSearchState extends State {
     tag1s.forEach((tag1) {
       setState(() {
         cus = new CustomDropdownItem();
-       cus.id = tag1['id'].toString();
+        cus.id = tag1['id'].toString();
         String tempTag;
         if (tag1['name'].toString().length > 30)
           tempTag = tag1['name'].toString().substring(0, 30) + "...";
@@ -141,7 +141,6 @@ class TaskSearchState extends State {
       });
     });
   }
-
 
 //  _loadAction1s() async {
 //    var action1s = await helper.getAction1s();
@@ -213,7 +212,6 @@ class TaskSearchState extends State {
 //    });
 //  }
 
-
 //  _loadGoal1s() async {
 //    var goal1s = await helper.getGoal1s();
 //    CustomDropdownItem cus;
@@ -255,7 +253,7 @@ class TaskSearchState extends State {
           ),
         ),
         leading: IconButton(
-                    icon: Icon(Icons.home, color: Colors.pink[100]),
+          icon: Icon(Icons.home, color: Colors.pink[100]),
           onPressed: () {
             Navigator.of(context)
                 .push(MaterialPageRoute(builder: (context) => TaskHome()));
@@ -453,7 +451,7 @@ class TaskSearchState extends State {
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             DropdownButton<String?>(
-                              isExpanded: true,
+                                isExpanded: true,
                                 items:
                                     _statuses.map((CustomDropdownItem value) {
                                   return DropdownMenuItem<String>(
@@ -492,10 +490,11 @@ class TaskSearchState extends State {
                             EdgeInsets.only(top: 1.0, left: 8.0, right: 8.0),
                         decoration: BoxDecoration(
                             shape: BoxShape.rectangle, color: Colors.blue[100]),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             DropdownButton<String?>(
+                                isExpanded: true,
                                 items:
                                     _priorities.map((CustomDropdownItem value) {
                                   return DropdownMenuItem<String>(
@@ -534,15 +533,16 @@ class TaskSearchState extends State {
                             EdgeInsets.only(top: 1.0, left: 8.0, right: 8.0),
                         decoration: BoxDecoration(
                             shape: BoxShape.rectangle, color: Colors.blue[100]),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             DropdownButton<String?>(
+                              isExpanded: true,
                               items: _tag1s.map((CustomDropdownItem value) {
                                 return DropdownMenuItem<String>(
                                     value: value.id, child: Text(value.name!));
                               }).toList(),
-                             style: _textStyleControls,
+                              style: _textStyleControls,
                               value: _selectedTag1,
                               onChanged: (value) {
                                 setState(() {
