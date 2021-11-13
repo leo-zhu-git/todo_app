@@ -844,23 +844,25 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    DropdownButton<String>(
-                        isExpanded: true,
-                        style: _textStyleControls,
-                        items: _categories.map((CustomDropdownItem value) {
-                          return DropdownMenuItem<String>(
-                              value: value.id,
-                              child: Text(
-                                value.name!,
-                                overflow: TextOverflow.ellipsis,
-                              ));
-                        }).toList(),
-                        value: _selectedCategory,
-                        onChanged: (newValue) {
-                          setState(() {
-                            _selectedCategory = newValue;
-                          });
-                        }),
+                    DropdownButtonHideUnderline(
+                      child: DropdownButton<String>(
+                          isExpanded: true,
+                          style: _textStyleControls,
+                          items: _categories.map((CustomDropdownItem value) {
+                            return DropdownMenuItem<String>(
+                                value: value.id,
+                                child: Text(
+                                  value.name!,
+                                  overflow: TextOverflow.ellipsis,
+                                ));
+                          }).toList(),
+                          value: _selectedCategory,
+                          onChanged: (newValue) {
+                            setState(() {
+                              _selectedCategory = newValue;
+                            });
+                          }),
+                    ),
                   ],
                 ),
               ),
@@ -873,23 +875,25 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    DropdownButton<String>(
-                        isExpanded: true,
-                        style: _textStyleControls,
-                        items: _statuses.map((CustomDropdownItem value) {
-                          return DropdownMenuItem<String>(
-                              value: value.id,
-                              child: Text(
-                                value.name!,
-                                overflow: TextOverflow.ellipsis,
-                              ));
-                        }).toList(),
-                        value: _selectedStatus,
-                        onChanged: (newValue) {
-                          setState(() {
-                            _selectedStatus = newValue;
-                          });
-                        }),
+                    DropdownButtonHideUnderline(
+                      child: DropdownButton<String>(
+                          isExpanded: true,
+                          style: _textStyleControls,
+                          items: _statuses.map((CustomDropdownItem value) {
+                            return DropdownMenuItem<String>(
+                                value: value.id,
+                                child: Text(
+                                  value.name!,
+                                  overflow: TextOverflow.ellipsis,
+                                ));
+                          }).toList(),
+                          value: _selectedStatus,
+                          onChanged: (newValue) {
+                            setState(() {
+                              _selectedStatus = newValue;
+                            });
+                          }),
+                    ),
                   ],
                 ),
               ),
@@ -902,23 +906,25 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    DropdownButton<String>(
-                       isExpanded: true,
-                       style: _textStyleControls,
-                        items: _priorities.map((CustomDropdownItem value) {
-                          return DropdownMenuItem<String>(
-                              value: value.id,
-                              child: Text(
-                                value.name!,
-                                overflow: TextOverflow.ellipsis,
-                              ));
-                        }).toList(),
-                        value: _selectedPriority,
-                        onChanged: (newValue) {
-                          setState(() {
-                            _selectedPriority = newValue;
-                          });
-                        }),
+                    DropdownButtonHideUnderline(
+                      child: DropdownButton<String>(
+                         isExpanded: true,
+                         style: _textStyleControls,
+                          items: _priorities.map((CustomDropdownItem value) {
+                            return DropdownMenuItem<String>(
+                                value: value.id,
+                                child: Text(
+                                  value.name!,
+                                  overflow: TextOverflow.ellipsis,
+                                ));
+                          }).toList(),
+                          value: _selectedPriority,
+                          onChanged: (newValue) {
+                            setState(() {
+                              _selectedPriority = newValue;
+                            });
+                          }),
+                    ),
                   ],
                 ),
               ),
@@ -931,19 +937,21 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    DropdownButton<String>(
-                      isExpanded: true,
-                      style: _textStyleControls,
-                      items: _tag1s.map((CustomDropdownItem value) {
-                        return DropdownMenuItem<String>(
-                            value: value.id, child: Text(value.name!));
-                      }).toList(),
-                      value: _selectedTag1,
-                      onChanged: (value) {
-                        setState(() {
-                          _selectedTag1 = value;
-                        });
-                      },
+                    DropdownButtonHideUnderline(
+                      child: DropdownButton<String>(
+                        isExpanded: true,
+                        style: _textStyleControls,
+                        items: _tag1s.map((CustomDropdownItem value) {
+                          return DropdownMenuItem<String>(
+                              value: value.id, child: Text(value.name!));
+                        }).toList(),
+                        value: _selectedTag1,
+                        onChanged: (value) {
+                          setState(() {
+                            _selectedTag1 = value;
+                          });
+                        },
+                      ),
                     )
                   ],
                 ),

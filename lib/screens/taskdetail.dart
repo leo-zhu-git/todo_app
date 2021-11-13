@@ -822,88 +822,33 @@ class TaskDetailState extends State //<TaskDetail>
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  DropdownButton<String>(
-                     isExpanded: true,
-                      style: _textStyleControls,
-                      items: _categories.map((CustomDropdownItem value) {
-                        return DropdownMenuItem<String>(
-                            value: value.id,
-                            child: Text(
-                              value.name!,
-                              overflow: TextOverflow.ellipsis,
-                            ));
-                      }).toList(),
-                      value: _selectedCategory,
-                     onChanged: (newValue) {
-                        setState(() {
-                          _selectedCategory = newValue;
-//                          task.category = newValue!;
-                        });
-                      }),
+                  DropdownButtonHideUnderline(
+                    child: DropdownButton<String>(
+                       isExpanded: true,
+                        style: _textStyleControls,
+                        items: _categories.map((CustomDropdownItem value) {
+                          return DropdownMenuItem<String>(
+                              value: value.id,
+                              child: Text(
+                                value.name!,
+                                overflow: TextOverflow.ellipsis,
+                              ));
+                        }).toList(),
+                        value: _selectedCategory,
+                       onChanged: (newValue) {
+                          setState(() {
+                            _selectedCategory = newValue;
+                          });
+                        }),
+                  ),
                 ],
               ),
             ),
 
-///////////////////////////
-//  CATEGORY
-///////////////////////////
-//            Container(
-//              margin:
-//                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
-//              decoration: BoxDecoration(
-//                shape: BoxShape.rectangle,
-//                color: Colors.blue[100],
-//              ),
-//              child: TextField(
-//               controller: _categoryController,
-//                readOnly: true,
-//                style: _textStyleControls,
-//                decoration: InputDecoration(
-//                  labelText: ' Category',
-//                  hintText: ' Pick a Category',
-//                  prefixIcon: InkWell(
-//                      onTap: () {
-//                        showCupertinoModalPopup(
-//                            context: context,
-//                            builder: (context) => CupertinoActionSheet(
-//                                  actions: [buildCategoryPicker()],
-//                                ));
-//                      },
-//                      child: Icon(Icons.category_outlined)),
-//                ),
-//              ),
-//            ),
 
 ///////////////////////////
 //  STATUS
 ///////////////////////////
-//            Container(
-//              margin:
-//                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
-//              decoration: BoxDecoration(
-//                shape: BoxShape.rectangle,
-//                color: Colors.blue[100],
-//              ),
-//              child: TextField(
-//                controller: _statusController,
-//                readOnly: true,
-//                style: _textStyleControls,
-//                decoration: InputDecoration(
-//                  labelText: ' Status',
-//                  hintText: ' Pick a Status',
-//                  prefixIcon: InkWell(
-//                    onTap: () {
-//                      showCupertinoModalPopup(
-//                          context: context,
-//                          builder: (context) => CupertinoActionSheet(
-//                                actions: [buildStatusPicker()],
-//                              ));
-//                    },
-//                    child: Icon(Icons.next_plan_outlined),
-//                  ),
-//                ),
-//              ),
-//            ),
 
             Container(
              margin:
@@ -913,24 +858,26 @@ class TaskDetailState extends State //<TaskDetail>
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  DropdownButton<String>(
-                      isExpanded: true,
-                      style: _textStyleControls,
-                      items: _statuses.map((CustomDropdownItem value) {
-                        return DropdownMenuItem<String>(
-                            value: value.id,
-                            child: Text(
-                              value.name!,
-                              overflow: TextOverflow.ellipsis,
-                            ));
-                      }).toList(),
-                      value: _selectedStatus,
-                      onChanged: (newValue) {
-                        setState(() {
-                          _selectedStatus = newValue;
-//                          task.status = newValue!;
-                        });
-                      }),
+                  DropdownButtonHideUnderline(
+                    child: DropdownButton<String>(
+                        isExpanded: true,
+                        style: _textStyleControls,
+                        items: _statuses.map((CustomDropdownItem value) {
+                          return DropdownMenuItem<String>(
+                              value: value.id,
+                              child: Text(
+                                value.name!,
+                                overflow: TextOverflow.ellipsis,
+                              ));
+                        }).toList(),
+                        value: _selectedStatus,
+                        onChanged: (newValue) {
+                          setState(() {
+                            _selectedStatus = newValue;
+                  //                          task.status = newValue!;
+                          });
+                        }),
+                  ),
                 ],
               ),
             ),
@@ -946,23 +893,25 @@ class TaskDetailState extends State //<TaskDetail>
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  DropdownButton<String>(
-                     isExpanded: true,
-                      style: _textStyleControls,
-                      items: _priorities.map((CustomDropdownItem value) {
-                        return DropdownMenuItem<String>(
-                            value: value.id,
-                            child: Text(
-                              value.name!,
-                              overflow: TextOverflow.ellipsis,
-                            ));
-                      }).toList(),
-                      value: _selectedPriority,
-                     onChanged: (newValue) {
-                        setState(() {
-                          _selectedPriority = newValue;
-                        });
-                      }),
+                  DropdownButtonHideUnderline(
+                    child: DropdownButton<String>(
+                       isExpanded: true,
+                        style: _textStyleControls,
+                        items: _priorities.map((CustomDropdownItem value) {
+                          return DropdownMenuItem<String>(
+                              value: value.id,
+                              child: Text(
+                                value.name!,
+                                overflow: TextOverflow.ellipsis,
+                              ));
+                        }).toList(),
+                        value: _selectedPriority,
+                       onChanged: (newValue) {
+                          setState(() {
+                            _selectedPriority = newValue;
+                          });
+                        }),
+                  ),
                 ],
               ),
             ),
@@ -979,23 +928,25 @@ class TaskDetailState extends State //<TaskDetail>
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  DropdownButton<String>(
-                     isExpanded: true,
-                      style: _textStyleControls,
-                      items: _tag1s.map((CustomDropdownItem value) {
-                        return DropdownMenuItem<String>(
-                            value: value.id,
-                            child: Text(
-                              value.name!,
-                              overflow: TextOverflow.ellipsis,
-                            ));
-                      }).toList(),
-                      value: _selectedTag1,
-                     onChanged: (newValue) {
-                        setState(() {
-                          _selectedTag1 = newValue;
-                        });
-                      }),
+                  DropdownButtonHideUnderline(
+                    child: DropdownButton<String>(
+                       isExpanded: true,
+                        style: _textStyleControls,
+                        items: _tag1s.map((CustomDropdownItem value) {
+                          return DropdownMenuItem<String>(
+                              value: value.id,
+                              child: Text(
+                                value.name!,
+                                overflow: TextOverflow.ellipsis,
+                              ));
+                        }).toList(),
+                        value: _selectedTag1,
+                       onChanged: (newValue) {
+                          setState(() {
+                            _selectedTag1 = newValue;
+                          });
+                        }),
+                  ),
                 ],
               ),
             ),
