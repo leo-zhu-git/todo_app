@@ -112,6 +112,7 @@ class FilterDateDue {
       FilterDateDue(5, 'Any Due Date'),
       FilterDateDue(6, 'No Due Date'),
       FilterDateDue(7, 'Overdues Only'),
+      FilterDateDue(8, 'Today and Overdues'),
     ];
   }
 }

@@ -701,6 +701,10 @@ Plan C - USD 24 | 12 month
       _endDate = formattedYesterday;
       queryStr = queryStr +
           " and ($colDateDue <= '$_endDate') and ($colDateDue != '')";
+    } else if (colfilterDateDue == "Today and Overdues") {
+      _endDate = formattedToday;
+      queryStr = queryStr +
+          " and ($colDateDue <= '$_endDate') and ($colDateDue != '')";
     } else if (colfilterDateDue == "All Tasks") {
     } else {
 // select all tasks regardless of due dates
