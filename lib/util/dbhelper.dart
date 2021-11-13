@@ -584,6 +584,12 @@ Plan C - USD 24 | 12 month
     return result;
   }
 
+////////////////////////////////
+///
+/// MAIN SCREEN GET TASKS SORT
+///
+/////////////////////////////////
+
   Future<List> getTasksSort(
       String? colsortField1,
       String? colsortOrder1,
@@ -598,38 +604,14 @@ Plan C - USD 24 | 12 month
       String? colfilterStatus,
       String? colfilterPriority,
       String? colfilterTag,
-//      String? colfilterAction,
-//      String? colfilterContext,
-//      String? colfilterLocation,
-//      String? colfilterGoal,
       int? colfilterIsStar,
       int? colfilterIsDone) async {
-////////////////
-    /// build query 0
-////////////////
     Database? db = await this.db;
 
+////////////////
+/// build query 
+////////////////
     String queryStr = "";
-//    queryStr =
-//        "SELECT $tblTodo.id,$tblTodo.task, $tblTodo.note, dateDue,timeDue,   " +
-//            "status, priority, category,action1,context1,location1,tag1,goal1, " +
-//            "isStar, isDone, dateDone, lastModified, " +
-//            "statuses.name as statusesname, " +
-//            "priorities.name as prioritiesname, " +
-//            "categories.name as categoriesname, " +
-//            "action1s.name as action1name, " +
-//            "context1s.name as context1name, " +
-//            "location1s.name as location1name, " +
-//            "tag1s.name as tag1name, " +
-//            "goal1s.name as goal1name  FROM $tblTodo  " +
-//            " LEFT JOIN statuses ON  $tblTodo.status = statuses.id" +
-//            " LEFT JOIN priorities ON  $tblTodo.priority = priorities.id" +
-//            " LEFT JOIN categories ON  $tblTodo.category = categories.id" +
-//            " LEFT JOIN action1s ON $tblTodo.action1 = action1s.id " +
-//            " LEFT JOIN context1s ON  $tblTodo.context1 = context1s.id" +
-//            " LEFT JOIN location1s ON  $tblTodo.location1 = location1s.id" +
-//            " LEFT JOIN tag1s ON  $tblTodo.tag1 = tag1s.id" +
-//            " LEFT JOIN goal1s ON  $tblTodo.goal1 = goal1s.id ";
 
     queryStr =
         "SELECT $tblTodo.id,$tblTodo.task, $tblTodo.note, dateDue,timeDue,   " +
@@ -646,7 +628,25 @@ Plan C - USD 24 | 12 month
             " LEFT JOIN tag1s ON  $tblTodo.tag1 = tag1s.id";
 
 ////////////////
-    /// build query - add filterDateDue
+/// build query - add filterIsDone
+////////////////
+    if (colfilterIsDone == 0 || colfilterIsDone == null) // show
+    {
+      queryStr = queryStr + " where ($colIsDone == $colIsDone)";
+    } else
+      queryStr = queryStr + " where ($colIsDone != 1)";
+
+////////////////
+/// build query - add filterIsStar
+////////////////
+    if (colfilterIsStar == 0 || colfilterIsStar == null) // show
+    {
+//      queryStr = queryStr + " and ($colIsStar == $colIsStar)";
+    } else
+      queryStr = queryStr + " and ($colIsStar == '1')";
+
+////////////////
+/// build query - add DateDue
 ////////////////
 
     String _startDate;
@@ -665,27 +665,6 @@ Plan C - USD 24 | 12 month
     final String formattedN7D = formatter.format(_N7D);
     final String formattedN30D = formatter.format(_N30D);
 
-////////////////
-    /// build query - add filterIsDone
-////////////////
-    if (colfilterIsDone == 0 || colfilterIsDone == null) // show
-    {
-      queryStr = queryStr + " where ($colIsDone == $colIsDone)";
-    } else
-      queryStr = queryStr + " where ($colIsDone != 1)";
-
-////////////////
-    /// build query - add filterIsStar
-////////////////
-    if (colfilterIsStar == 0 || colfilterIsStar == null) // show
-    {
-//      queryStr = queryStr + " and ($colIsStar == $colIsStar)";
-    } else
-      queryStr = queryStr + " and ($colIsStar == '1')";
-
-////////////////
-    /// build query - add DateDue
-////////////////
     if (colfilterDateDue == "Today") {
       _startDate = formattedToday;
       _endDate = formattedToday;
@@ -719,7 +698,7 @@ Plan C - USD 24 | 12 month
     ;
 
 ////////////////
-    /// build query - add category
+/// build query - add category
 ////////////////
     if (colfilterCategory == "0" || colfilterCategory == "null") {
     } // hide
@@ -729,7 +708,7 @@ Plan C - USD 24 | 12 month
     }
 
 ////////////////
-    /// build query - add status
+/// build query - add status
 ////////////////
     if (colfilterStatus == "0" || colfilterStatus == "null") {
     } // hide
@@ -755,40 +734,9 @@ Plan C - USD 24 | 12 month
       queryStr = queryStr + " and ($colTag1 == $colfilterTag)";
     }
 
-////////////////
-    /// build query - add action
-////////////////
-//    if (colfilterAction == "0" || colfilterAction == "null") {
-//    } else {
-//      queryStr = queryStr + " and ($colAction1 == $colfilterAction)";
-//    }
 
 ////////////////
-    /// build query - add context
-////////////////
-//    if (colfilterContext == "0" || colfilterContext == "null") {
-//    } else {
-//      queryStr = queryStr + " and ($colContext1 == $colfilterContext)";
-//    }
-
-////////////////
-    /// build query - add location
-////////////////
-//    if (colfilterLocation == "0" || colfilterLocation == "null") {
-//    } else {
-//      queryStr = queryStr + " and ($colLocation1 == $colfilterLocation)";
-//    }
-
-////////////////
-    /// build query - add goal
-////////////////
-//    if (colfilterGoal == "0" || colfilterGoal == "null") {
-//    } else {
-//      queryStr = queryStr + " and ($colGoal1 == $colfilterGoal)";
-//    }
-
-////////////////
-    /// build query - add order by
+/// build query - add order by
 ////////////////
     queryStr = queryStr +
         " order by $colsortField1 $colsortOrder1, $colsortField2 $colsortOrder2, $colsortField3 $colsortOrder3, $colsortField4 $colsortOrder4";
@@ -798,43 +746,27 @@ Plan C - USD 24 | 12 month
     return result;
   }
 
+////////////////////////////////
+///
+/// SEARCH SCREEN  
+///
+/////////////////////////////////
+
+
   Future<List> searchTasks(
       String? searchText,
       String? searchCategory,
       String? searchStatus,
       String? searchPriority,
       String? searchTag1,
-//      String? searchAction1,
-//      String? searchContext1,
-//      String? searchLocation1,
-//      String? searchGoal1,
       int? includeIsStar,
       int? includeIsDone) async {
     Database? db = await this.db;
 
+////////////////
+/// build query 
+////////////////
     String queryStr = "";
-
-//    queryStr =
-//        "SELECT $tblTodo.id,$tblTodo.task, $tblTodo.note, dateDue,timeDue,   " +
-//            "status, priority, category,action1,context1,location1,tag1,goal1, " +
-//            "isStar, isDone, dateDone, lastModified, " +
-//            "statuses.name as statusesname, " +
-//            "priorities.name as prioritiesname, " +
-//            "categories.name as categoriesname, " +
-//            "action1s.name as action1name, " +
-//            "context1s.name as context1name, " +
-//            "location1s.name as location1name, " +
-//            "tag1s.name as tag1name, " +
-//            "goal1s.name as goal1name  FROM $tblTodo  " +
-//            " LEFT JOIN statuses ON  $tblTodo.status = statuses.id" +
-//            " LEFT JOIN priorities ON  $tblTodo.priority = priorities.id" +
-//            " LEFT JOIN categories ON  $tblTodo.category = categories.id" +
-//            " LEFT JOIN action1s ON $tblTodo.action1 = action1s.id " +
-//            " LEFT JOIN context1s ON  $tblTodo.context1 = context1s.id" +
-//            " LEFT JOIN location1s ON  $tblTodo.location1 = location1s.id" +
-//            " LEFT JOIN tag1s ON  $tblTodo.tag1 = tag1s.id" +
-//            " LEFT JOIN goal1s ON  $tblTodo.goal1 = goal1s.id " +
-//            "WHERE ($colTask LIKE '%$searchText%' OR $colNote LIKE '%$searchText%')";
 
     queryStr =
         "SELECT $tblTodo.id,$tblTodo.task, $tblTodo.note, dateDue,timeDue,   " +
@@ -851,8 +783,9 @@ Plan C - USD 24 | 12 month
             " LEFT JOIN tag1s ON  $tblTodo.tag1 = tag1s.id " +
             "WHERE ($colTask LIKE '%$searchText%' OR $colNote LIKE '%$searchText%')";
 
-//    queryStr =
-//        "SELECT * FROM $tblTodo WHERE ($colTask LIKE '%$searchText%' OR $colNote LIKE '%$searchText%') ";
+////////////////
+/// build query - add filterIsDone
+////////////////
 
     if (includeIsDone! == 1) {
       //queryStr = queryStr + " AND  $colIsDone = $includeIsDone";
@@ -860,41 +793,49 @@ Plan C - USD 24 | 12 month
       queryStr = queryStr + " AND  $colIsDone = 0 ";
     }
 
+////////////////
+/// build query - add filterIsStar
+////////////////
+
     if (includeIsStar! == 0) {
       //queryStr = queryStr + " AND  $colIsDone = $includeIsDone";
     } else {
       queryStr = queryStr + " AND  $colIsStar = 1 ";
     }
 
+////////////////
+/// build query - add category
+////////////////
+
     if (searchCategory != "null") {
       queryStr = queryStr + " AND $colCategory = '$searchCategory' ";
     }
+
+////////////////
+/// build query - add status
+////////////////
 
     if (searchStatus != "null") {
       queryStr = queryStr + " AND $colStatus = '$searchStatus' ";
     }
 
+////////////////
+/// build query - add priority
+////////////////
+
     if (searchPriority != "null") {
       queryStr = queryStr + " AND $colPriority = '$searchPriority' ";
     }
+
+////////////////
+/// build query - add tag
+////////////////
 
     if (searchTag1 != "null") {
       queryStr = queryStr + " AND $colTag1 = '$searchTag1' ";
     }
 
-//    if (searchAction1 != "null") {
-//      queryStr = queryStr + " AND $colAction1 = '$searchAction1' ";
-//    }
-//    if (searchContext1 != "null") {
-//      queryStr = queryStr + " AND $colContext1 = '$searchContext1' ";
-//    }
-//    if (searchLocation1 != "null") {
-//      queryStr = queryStr + " AND $colLocation1 = '$searchLocation1' ";
-//    }
-//    if (searchGoal1 != "null") {
-//      queryStr = queryStr + " AND $colGoal1 = '$searchGoal1' ";
-//    }
-
+    print(queryStr);
     var result = await db!.rawQuery(queryStr);
     return result;
   }
