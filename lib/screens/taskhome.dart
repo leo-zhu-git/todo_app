@@ -322,10 +322,6 @@ class TaskHomeState extends State {
         globals.filterStatus.toString(),
         globals.filterPriority.toString(),
         globals.filterTag.toString(),
-//        globals.filterAction.toString(),
-//        globals.filterContext.toString(),
-//        globals.filterLocation.toString(),
-//        globals.filterGoal.toString(),
         globals.filterIsStar,
         globals.filterIsDone,
       );
@@ -336,82 +332,6 @@ class TaskHomeState extends State {
         for (int i = 0; i < count; i++) {
           countDone = countDone + 1;
           taskList.add(Task.fromObject(result[i]));
-
-/////////////////
-          /// display main1
-////////////////
-//          switch (globals.showMain1) {
-//            case 0:
-//              {
-//                taskList[i].main1 = taskList[i].task;
-//              }
-//              break;
-//            case 1:
-//              {
-//                taskList[i].main1 = taskList[i].note;
-//              }
-//              break;
-//           case 2:
-//              {
-//                taskList[i].main1 = taskList[i].dateDue;
-//              }
-//              break;
-//            case 3:
-//              {
-//                taskList[i].main1 = taskList[i].timeDue;
-//              }
-//              break;
-//            case 4:
-//              {
-//                taskList[i].main1 = taskList[i].statusText;
-//              }
-//              break;
-//            case 5:
-//              {
-//                taskList[i].main1 = taskList[i].priorityText;
-//              }
-//              break;
-//            case 6:
-//              {
-//                taskList[i].main1 = taskList[i].categoryText;
-//              }
-//              break;
-//            case 7:
-//              {
-//                taskList[i].main1 = taskList[i].action1Text;
-//              }
-//              break;
-//            case 8:
-//              {
-//                taskList[i].main1 = taskList[i].context1Text;
-//              }
-//              break;
-//            case 9:
-//              {
-//                taskList[i].main1 = taskList[i].location1Text;
-//              }
-//              break;
-//            case 10:
-//              {
-//                taskList[i].main1 = taskList[i].tag1Text;
-//              }
-//              break;
-//            case 11:
-//              {
-//                taskList[i].main1 = taskList[i].goal1Text;
-//              }
-//              break;
-//            case 12:
-//              {
-//                taskList[i].main1 = taskList[i].isStar.toString();
-//              }
-//              break;
-//            default:
-//              {
-//                taskList[i].main1 = taskList[i].task;
-//              }
-//              break;
-//          }
 
 /////////////////
           /// display sec1
@@ -447,26 +367,6 @@ class TaskHomeState extends State {
                 taskList[i].sec1 = taskList[i].tag1Text;
               }
               break;
-//            case 5:
-//              {
-//                taskList[i].sec1 = taskList[i].action1Text;
-//              }
-//              break;
-//            case 6:
-//              {
-//                taskList[i].sec1 = taskList[i].context1Text;
-//              }
-//              break;
-//            case 7:
-//              {
-//                taskList[i].sec1 = taskList[i].location1Text;
-//              }
-//              break;
-//            case 9:
-//              {
-//                taskList[i].sec1 = taskList[i].goal1Text;
-//              }
-//              break;
             case 6:
               {
                 taskList[i].sec1 = taskList[i].isStar.toString();
@@ -512,26 +412,6 @@ class TaskHomeState extends State {
                 taskList[i].sec2 = taskList[i].tag1Text;
               }
               break;
-//            case 5:
-//              {
-//                taskList[i].sec2 = taskList[i].action1Text;
-//              }
-//              break;
-//            case 6:
-//              {
-//                taskList[i].sec2 = taskList[i].context1Text;
-//              }
-//              break;
-//            case 7:
-//              {
-//                taskList[i].sec2 = taskList[i].location1Text;
-//              }
-//              break;
-//            case 9:
-//              {
-//                taskList[i].sec2 = taskList[i].goal1Text;
-//              }
-//              break;
             case 6:
               {
                 taskList[i].sec2 = taskList[i].isStar.toString();
@@ -577,26 +457,6 @@ class TaskHomeState extends State {
                 taskList[i].sec3 = taskList[i].tag1Text;
               }
               break;
-//            case 5:
-//              {
-//                taskList[i].sec3 = taskList[i].action1Text;
-//              }
-//              break;
-//            case 6:
-//              {
-//                taskList[i].sec3 = taskList[i].context1Text;
-//              }
-//              break;
-//            case 7:
-//              {
-//                taskList[i].sec3 = taskList[i].location1Text;
-//              }
-//              break;
-//            case 9:
-//              {
-//                taskList[i].sec3 = taskList[i].goal1Text;
-//              }
-//              break;
             case 6:
               {
                 taskList[i].sec3 = taskList[i].isStar.toString();
@@ -644,12 +504,6 @@ class TaskHomeState extends State {
         if (customSetting!.sortField4 != "") {
           globals.sortField4 = int.parse(customSetting!.sortField4!);
         }
-//        if (customSetting!.showMain1 != "") {
-//          globals.showMain1 = int.parse(customSetting!.showMain1!);
-//        }
-//        if (customSetting!.showMain2 != "") {
-//          globals.showMain2 = int.parse(customSetting!.showMain2!);
-//        }
         if (customSetting!.showSec1 != "") {
           globals.showSec1 = int.parse(customSetting!.showSec1!);
         }
@@ -684,18 +538,6 @@ class TaskHomeState extends State {
         globals.filterTag = customSetting!.filterTag != ""
             ? int.parse(customSetting!.filterTag!)
             : 0;
-//        globals.filterLocation = customSetting!.filterLocation != ""
-//            ? int.parse(customSetting!.filterLocation!)
-//            : 0;
-//        globals.filterGoal = customSetting!.filterGoal != ""
-//            ? int.parse(customSetting!.filterGoal!)
-//            : 0;
-//        globals.filterContext = customSetting!.filterContext != ""
-//            ? int.parse(customSetting!.filterContext!)
-//            : 0;
-//        globals.filterAction = customSetting!.filterAction != ""
-//            ? int.parse(customSetting!.filterAction!)
-//            : 0;
       }
     }
     getData();
@@ -732,18 +574,6 @@ class TaskHomeState extends State {
       case 7:
         return "tag1";
         break;
-//      case 7:
-//        return "action1";
-//        break;
-//      case 8:
-//        return "context1";
-//        break;
-//      case 9:
-//        return "location1";
-//        break;
-//      case 11:
-//        return "goal1";
-//        break;
       case 8:
         return "isStar";
         break;
