@@ -165,6 +165,16 @@ class DbHelper {
     setDefaultDB(db);
   }
 
+  Future<List> addCategorytemp() async {
+    Database? db = await this.db;
+//    var result = await db.rawQuery("SELECT * FROM todo where $colId < 6");
+    await db!.rawQuery(
+        "INSERT INTO categories ( 'id', 'name', 'description')  values (10, 'xxxx', 'Bootstrap - please delete or rename if necessary')");
+    var result = await db.rawQuery("SELECT * FROM categories");
+    print(result);
+    return result;
+  }
+
   void setDefaultDB(Database db) async {
     //////
     //Create Default Values for Catergories
@@ -585,9 +595,9 @@ Plan C - USD 24 | 12 month
   }
 
 ////////////////////////////////
-///
-/// MAIN SCREEN GET TASKS SORT
-///
+  ///
+  /// MAIN SCREEN GET TASKS SORT
+  ///
 /////////////////////////////////
 
   Future<List> getTasksSort(
@@ -609,7 +619,7 @@ Plan C - USD 24 | 12 month
     Database? db = await this.db;
 
 ////////////////
-/// build query 
+    /// build query
 ////////////////
     String queryStr = "";
 
@@ -628,7 +638,7 @@ Plan C - USD 24 | 12 month
             " LEFT JOIN tag1s ON  $tblTodo.tag1 = tag1s.id";
 
 ////////////////
-/// build query - add filterIsDone
+    /// build query - add filterIsDone
 ////////////////
     if (colfilterIsDone == 0 || colfilterIsDone == null) // show
     {
@@ -637,7 +647,7 @@ Plan C - USD 24 | 12 month
       queryStr = queryStr + " where ($colIsDone != 1)";
 
 ////////////////
-/// build query - add filterIsStar
+    /// build query - add filterIsStar
 ////////////////
     if (colfilterIsStar == 0 || colfilterIsStar == null) // show
     {
@@ -646,7 +656,7 @@ Plan C - USD 24 | 12 month
       queryStr = queryStr + " and ($colIsStar == '1')";
 
 ////////////////
-/// build query - add DateDue
+    /// build query - add DateDue
 ////////////////
 
     String _startDate;
@@ -698,7 +708,7 @@ Plan C - USD 24 | 12 month
     ;
 
 ////////////////
-/// build query - add category
+    /// build query - add category
 ////////////////
     if (colfilterCategory == "0" || colfilterCategory == "null") {
     } // hide
@@ -708,7 +718,7 @@ Plan C - USD 24 | 12 month
     }
 
 ////////////////
-/// build query - add status
+    /// build query - add status
 ////////////////
     if (colfilterStatus == "0" || colfilterStatus == "null") {
     } // hide
@@ -718,7 +728,7 @@ Plan C - USD 24 | 12 month
     }
 
 ////////////////
-/// build query - add priority
+    /// build query - add priority
 ////////////////
     if (colfilterPriority == "0" || colfilterPriority == "null") {
     } // hide
@@ -727,16 +737,15 @@ Plan C - USD 24 | 12 month
     }
 
 ////////////////
-/// build query - add tag
+    /// build query - add tag
 ////////////////
     if (colfilterTag == "0" || colfilterTag == "null") {
     } else {
       queryStr = queryStr + " and ($colTag1 == $colfilterTag)";
     }
 
-
 ////////////////
-/// build query - add order by
+    /// build query - add order by
 ////////////////
     queryStr = queryStr +
         " order by $colsortField1 $colsortOrder1, $colsortField2 $colsortOrder2, $colsortField3 $colsortOrder3, $colsortField4 $colsortOrder4";
@@ -747,11 +756,10 @@ Plan C - USD 24 | 12 month
   }
 
 ////////////////////////////////
-///
-/// SEARCH SCREEN  
-///
+  ///
+  /// SEARCH SCREEN
+  ///
 /////////////////////////////////
-
 
   Future<List> searchTasks(
       String? searchText,
@@ -764,7 +772,7 @@ Plan C - USD 24 | 12 month
     Database? db = await this.db;
 
 ////////////////
-/// build query 
+    /// build query
 ////////////////
     String queryStr = "";
 
@@ -784,7 +792,7 @@ Plan C - USD 24 | 12 month
             "WHERE ($colTask LIKE '%$searchText%' OR $colNote LIKE '%$searchText%')";
 
 ////////////////
-/// build query - add filterIsDone
+    /// build query - add filterIsDone
 ////////////////
 
     if (includeIsDone! == 1) {
@@ -794,7 +802,7 @@ Plan C - USD 24 | 12 month
     }
 
 ////////////////
-/// build query - add filterIsStar
+    /// build query - add filterIsStar
 ////////////////
 
     if (includeIsStar! == 0) {
@@ -804,7 +812,7 @@ Plan C - USD 24 | 12 month
     }
 
 ////////////////
-/// build query - add category
+    /// build query - add category
 ////////////////
 
     if (searchCategory != "null") {
@@ -812,7 +820,7 @@ Plan C - USD 24 | 12 month
     }
 
 ////////////////
-/// build query - add status
+    /// build query - add status
 ////////////////
 
     if (searchStatus != "null") {
@@ -820,7 +828,7 @@ Plan C - USD 24 | 12 month
     }
 
 ////////////////
-/// build query - add priority
+    /// build query - add priority
 ////////////////
 
     if (searchPriority != "null") {
@@ -828,7 +836,7 @@ Plan C - USD 24 | 12 month
     }
 
 ////////////////
-/// build query - add tag
+    /// build query - add tag
 ////////////////
 
     if (searchTag1 != "null") {

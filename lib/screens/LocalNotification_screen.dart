@@ -27,8 +27,17 @@ class _LocalNotificationScreenState extends State<LocalNotificationScreen> {
           children: [
             Center(
               child: ElevatedButton(
+                onPressed: () {
+                  // addCategorytemp();
+                },
+                child: Text('Insert Category'),
+              ),
+            ),
+            Center(
+              child: ElevatedButton(
                 onPressed: () async {
-                  await notificationPlugin.showNotification('todoMIT showNow title', 'todoMIT showNow body');
+                  await notificationPlugin.showNotification(
+                      'todoMIT showNow title', 'todoMIT showNow body');
                 },
                 child: Text('Send Notification Now [working]'),
               ),
@@ -36,7 +45,11 @@ class _LocalNotificationScreenState extends State<LocalNotificationScreen> {
             Center(
               child: ElevatedButton(
                 onPressed: () async {
-                  await notificationPlugin.scheduleNotification('todoMIT scheduled ', 'todoMIT scheduled body', '2021-11-13', '16:55');
+                  await notificationPlugin.scheduleNotification(
+                      'todoMIT scheduled ',
+                      'todoMIT scheduled body',
+                      '2021-11-13',
+                      '16:55');
                 },
                 child: Text('Scheduled - 5s delay [working]'),
               ),
@@ -60,7 +73,8 @@ class _LocalNotificationScreenState extends State<LocalNotificationScreen> {
             Center(
               child: ElevatedButton(
                 onPressed: () async {
-                  count = await notificationPlugin.getPendingNotificationCount();
+                  count =
+                      await notificationPlugin.getPendingNotificationCount();
                 },
                 child: Text('Pending Notification Count: $count [working]'),
               ),
