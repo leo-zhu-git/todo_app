@@ -239,8 +239,6 @@ class TaskDetailState extends State //<TaskDetail>
     });
   }
 
-
-
 //##########################################end of Dropdown #################################################################
 
   DateTime? _dateDue;
@@ -356,15 +354,13 @@ class TaskDetailState extends State //<TaskDetail>
                     child: CupertinoDatePicker(
                         initialDateTime: (_dateDue == null)
                             ? DateTime.now()
-                            : (
-                              _dateDue!.add(Duration(
+                            : (_dateDue!.add(Duration(
                                 hours: (_timeDue == null)
                                     ? DateTime.now().hour
                                     : _timeDue!.hour,
                                 minutes: (_timeDue == null)
                                     ? DateTime.now().minute
-                                    : _timeDue!.minute))
-                                    ),
+                                    : _timeDue!.minute))),
                         mode: CupertinoDatePickerMode.dateAndTime,
                         onDateTimeChanged: (val) {
                           setState(() {
@@ -394,11 +390,35 @@ class TaskDetailState extends State //<TaskDetail>
   }
 
   TimeOfDay timeConvert(String s) {
-    TimeOfDay _time = TimeOfDay(
-        hour: int.parse(s.split(":")[0]), minute: int.parse(s.split(":")[1]));
-    return _time; 
+    String ampm = s.substring(s.length - 2);
+    int hour;
+    int minute;
+    if (ampm == "AM" || ampm == "PM") {
+      String result = s.substring(0, s.indexOf(' '));
+      if (ampm == 'AM' && int.parse(result.split(":")[1]) != 12) {
+        hour = int.parse(result.split(':')[0]);
+        if (hour == 12) hour = 0;
+        minute = int.parse(result.split(":")[1]);
+      } else {
+        hour = int.parse(result.split(':')[0]) - 12;
+        if (hour <= 0) {
+          hour = 24 + hour;
+        }
+        minute = int.parse(result.split(":")[1]);
+      }
+      return TimeOfDay(hour: hour, minute: minute);
+    } else {
+      TimeOfDay _time = TimeOfDay(
+          hour: int.parse(s.split(":")[0]), minute: int.parse(s.split(":")[1]));
+      return _time;
+    }
   }
 
+//  TimeOfDay timeConvert(String s) {
+//    TimeOfDay _time = TimeOfDay(
+//        hour: int.parse(s.split(":")[0]), minute: int.parse(s.split(":")[1]));
+//    return _time;
+//  }
 
 //TimeOfDay timeConvert(String normTime) {
 //   int hour;
@@ -418,8 +438,6 @@ class TaskDetailState extends State //<TaskDetail>
 //    }
 //    return TimeOfDay(hour: hour, minute: minute);
 //  }
-
-
 
 //  Widget buildCategoryPicker() => SizedBox(
 //        height: 400,
@@ -592,7 +610,7 @@ class TaskDetailState extends State //<TaskDetail>
               icon: Icon(Icons.save_alt, color: Colors.white),
               tooltip: 'Save',
               onPressed: () {
-                setState(()  {
+                setState(() {
 //////////////
 
                   task.task = _todoTaskController.text;
@@ -616,17 +634,17 @@ class TaskDetailState extends State //<TaskDetail>
                           task.priority = "",
                           task.priorityText = "",
                         }
-                     : {
+                      : {
                           task.priority = _selectedPriority.toString(),
-                       };
+                        };
                   (_selectedTag1 == null)
                       ? {
                           task.tag1 = "",
                           task.tag1Text = "",
                         }
-                     : {
+                      : {
                           task.tag1 = _selectedTag1.toString(),
-                       };
+                        };
 
                   task.dateDue = _todoDateController.text;
                   task.timeDue = _todoTimeController.text;
@@ -820,7 +838,7 @@ class TaskDetailState extends State //<TaskDetail>
                 children: [
                   DropdownButtonHideUnderline(
                     child: DropdownButton<String>(
-                       isExpanded: true,
+                        isExpanded: true,
                         style: _textStyleControls,
                         items: _categories.map((CustomDropdownItem value) {
                           return DropdownMenuItem<String>(
@@ -831,7 +849,7 @@ class TaskDetailState extends State //<TaskDetail>
                               ));
                         }).toList(),
                         value: _selectedCategory,
-                       onChanged: (newValue) {
+                        onChanged: (newValue) {
                           setState(() {
                             _selectedCategory = newValue;
                           });
@@ -841,13 +859,12 @@ class TaskDetailState extends State //<TaskDetail>
               ),
             ),
 
-
 ///////////////////////////
 //  STATUS
 ///////////////////////////
 
             Container(
-             margin:
+              margin:
                   EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
               decoration: BoxDecoration(
                   shape: BoxShape.rectangle, color: Colors.blue[100]),
@@ -870,7 +887,7 @@ class TaskDetailState extends State //<TaskDetail>
                         onChanged: (newValue) {
                           setState(() {
                             _selectedStatus = newValue;
-                  //                          task.status = newValue!;
+                            //                          task.status = newValue!;
                           });
                         }),
                   ),
@@ -891,7 +908,7 @@ class TaskDetailState extends State //<TaskDetail>
                 children: [
                   DropdownButtonHideUnderline(
                     child: DropdownButton<String>(
-                       isExpanded: true,
+                        isExpanded: true,
                         style: _textStyleControls,
                         items: _priorities.map((CustomDropdownItem value) {
                           return DropdownMenuItem<String>(
@@ -902,7 +919,7 @@ class TaskDetailState extends State //<TaskDetail>
                               ));
                         }).toList(),
                         value: _selectedPriority,
-                       onChanged: (newValue) {
+                        onChanged: (newValue) {
                           setState(() {
                             _selectedPriority = newValue;
                           });
@@ -911,7 +928,6 @@ class TaskDetailState extends State //<TaskDetail>
                 ],
               ),
             ),
-
 
 ///////////////////////////
 //  TAG
@@ -926,7 +942,7 @@ class TaskDetailState extends State //<TaskDetail>
                 children: [
                   DropdownButtonHideUnderline(
                     child: DropdownButton<String>(
-                       isExpanded: true,
+                        isExpanded: true,
                         style: _textStyleControls,
                         items: _tag1s.map((CustomDropdownItem value) {
                           return DropdownMenuItem<String>(
@@ -937,7 +953,7 @@ class TaskDetailState extends State //<TaskDetail>
                               ));
                         }).toList(),
                         value: _selectedTag1,
-                       onChanged: (newValue) {
+                        onChanged: (newValue) {
                           setState(() {
                             _selectedTag1 = newValue;
                           });
@@ -946,7 +962,6 @@ class TaskDetailState extends State //<TaskDetail>
                 ],
               ),
             ),
-
 
 ///////////////////////////
 //  FOCUS
@@ -966,27 +981,25 @@ class TaskDetailState extends State //<TaskDetail>
                   hintText: '',
                   prefixIcon: InkWell(
                     onTap: () {
-                        setState(() {
-                          if (task.isStar == 1) {
-                            task.isStar = 0;
-                            Icon(Icons.lightbulb, color: Colors.black38);
-                            dbHelper.updateTask(task);
-                          } else {
-                            task.isStar = 1;
-                            Icon(Icons.lightbulb, color: Colors.amber[800]);
-                            dbHelper.updateTask(task);
-                          }
-                        });
-                      },
+                      setState(() {
+                        if (task.isStar == 1) {
+                          task.isStar = 0;
+                          Icon(Icons.lightbulb, color: Colors.black38);
+                          dbHelper.updateTask(task);
+                        } else {
+                          task.isStar = 1;
+                          Icon(Icons.lightbulb, color: Colors.amber[800]);
+                          dbHelper.updateTask(task);
+                        }
+                      });
+                    },
                     child: Icon(Icons.lightbulb,
-                          color: (task.isStar == 0)
-                              ? Colors.black12
-                              : Colors.teal),
+                        color:
+                            (task.isStar == 0) ? Colors.black12 : Colors.teal),
                   ),
                 ),
               ),
             ),
-
 
 ///////////////////////////
 //  GOAL
