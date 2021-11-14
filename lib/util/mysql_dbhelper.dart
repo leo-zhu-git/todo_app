@@ -569,7 +569,7 @@ class MySql_DBHelper {
     var taskList = [];
     var tasks = {};
     dbTaskFuture.then((result) {
-      print(result.length);
+      print(result);
 
       for (int i = 0; i < result.length; i++) {
         print(result[i]);
@@ -687,7 +687,7 @@ class MySql_DBHelper {
             // '",' +
             // '"taskGoal":"' +
             // goal1 +
-            //'",' +
+            // '",' +
             '"taskIsStar":"' +
             isStar +
             '",' +
