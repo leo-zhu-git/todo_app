@@ -1236,8 +1236,8 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
       _selectedPriority = null;
       customSetting!.filterPriority = "";
     } else {
-      _selectedCategory = customSetting!.filterCategory.toString();
-      globals.filterCategory = int.parse(customSetting!.filterCategory!);
+      _selectedPriority = customSetting!.filterPriority.toString();
+      globals.filterPriority = int.parse(customSetting!.filterPriority!);
     }
 
     if (customSetting!.filterTag == "") {
