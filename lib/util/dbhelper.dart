@@ -396,8 +396,6 @@ class DbHelper {
       '0', // order3
       '0', // sort4 - task
       '0', // order4
-//      '0', // main1 - task
-//      '', // main2
       '0', // sec1 - dateDue
       '1', // sec2 - dueTime
       '2', // sec3 - Category
@@ -406,10 +404,6 @@ class DbHelper {
       "", // status
       "", // priority
       "", // tag
-//      "", // action
-//      "", // context
-//      "", // location
-//      "", // goal
       0, // isStar
       1, //isDone
     ); //
@@ -440,16 +434,10 @@ Connect soon
         '', // status
         '', // priority
         '', // tag
-//        '', // action
-//        '', // context
-//        '', // location
-//        '', // goal
         0, // isStar
         0, // isDone
         '', // dateDone
         '', // last modified
-//        '', // main1
-//        '', // main2
         '1', // sec1
         '3', // sec2
         '2'); // sec3
@@ -474,16 +462,10 @@ Bottom-Right (Search) | keyword search or more powerful advance dropdown search
         '', // status
         '', // priority
         '', // tag
-//        '', // action
-//        '', // context
-//        '', // location
-        //      '', // goal
         0, // isStar
         0, // isDone
         '', // dateDone
         '', // last modified
-//        '', // main1
-//        '', // main2
         '1', // sec1
         '3', // sec2
         '2'); // sec3
@@ -509,16 +491,10 @@ Contact us | share the good, bad, ugly
         '', // status
         '', // priority
         '', // tag
-//        '', // action
-//        '', // context
-//        '', // location
-//        '', // goal
         0, // isStar
         0, // isDone
         '', // dateDone
         '', // last modified
-//        '', // main1
-//        '', // main2
         '1', // sec1
         '3', // sec2
         '2'); // sec3
@@ -541,16 +517,10 @@ Plan C - USD 24 | 12 month
         '', // status
         '', // priority
         '', // tag
-//        '', // action
-//        '', // context
-//        '', // location
-//        '', // goal
         0, // isStar
         0, // isDone
         '', // dateDone
         '', // last modified
-//        '', // main1
-//        '', // main2
         '1', // sec1
         '3', // sec2
         '2'); // sec3

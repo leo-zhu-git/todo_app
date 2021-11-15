@@ -244,8 +244,6 @@ class CustomSettings {
     this._sortOrder3 = o['sortOrder3'];
     this._sortField4 = o['sortField4'];
     this._sortOrder4 = o['sortOrder4'];
-  //  this._showMain1 = o['showMain1'];
-  //  this._showMain2 = o['showMain2'];
     this._showSec1 = o['showSec1'];
     this._showSec2 = o['showSec2'];
     this._showSec3 = o['showSec3'];
@@ -254,10 +252,6 @@ class CustomSettings {
     this._filterStatus = o['filterStatus'];
     this._filterPriority = o['filterPriority'];
     this._filterTag = o['filterTag'];
-  //  this._filterAction = o['filterAction'];
-  //  this._filterContext = o['filterContext'];
-  //  this._filterLocation = o['filterLocation'];
-  //  this._filterGoal = o['filterGoal'];
     this._filterIsStar = o['filterIsStar']; 
     this._filterIsDone = o['filterIsDone'];
   }
