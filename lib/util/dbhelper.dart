@@ -83,7 +83,7 @@ class DbHelper {
 
   Future<Database> initializeDb() async {
     Directory dir = await getApplicationDocumentsDirectory();
-    String path = dir.path + "todo_V22.i4.db";
+    String path = dir.path + "todo_V22.i5.db";
     var dbTodovn = await openDatabase(path, version: 1, onCreate: _createDb);
     return dbTodovn;
   }
@@ -719,7 +719,7 @@ Plan C - USD 24 | 12 month
     }
 
 ////////////////
-/// build query - add order by
+    /// build query - add order by
 ////////////////
     queryStr = queryStr +
         " order by $colsortField1 $colsortOrder1, $colsortField2 $colsortOrder2, $colsortField3 $colsortOrder3, $colsortField4 $colsortOrder4";
@@ -730,9 +730,9 @@ Plan C - USD 24 | 12 month
   }
 
 ////////////////////////////////
-///
-/// SEARCH SCREEN
-///
+  ///
+  /// SEARCH SCREEN
+  ///
 /////////////////////////////////
 
   Future<List> searchTasks(
@@ -754,7 +754,7 @@ Plan C - USD 24 | 12 month
     Database? db = await this.db;
 
 ////////////////
-/// build query
+    /// build query
 ////////////////
     String queryStr = "";
 
@@ -774,7 +774,7 @@ Plan C - USD 24 | 12 month
             "WHERE ($colTask LIKE '%$searchText%' OR $colNote LIKE '%$searchText%')";
 
 ////////////////
-/// build query - add filterIsDone
+    /// build query - add filterIsDone
 ////////////////
 
     if (includeIsDone! == 1) {
@@ -784,7 +784,7 @@ Plan C - USD 24 | 12 month
     }
 
 ////////////////
-/// build query - add filterIsStar
+    /// build query - add filterIsStar
 ////////////////
 
     if (includeIsStar! == 0) {
@@ -794,7 +794,7 @@ Plan C - USD 24 | 12 month
     }
 
 ////////////////
-/// build query - add category
+    /// build query - add category
 ////////////////
 
     if (searchCategory != "null") {
@@ -802,7 +802,7 @@ Plan C - USD 24 | 12 month
     }
 
 ////////////////
-/// build query - add status
+    /// build query - add status
 ////////////////
 
     if (searchStatus != "null") {
@@ -810,7 +810,7 @@ Plan C - USD 24 | 12 month
     }
 
 ////////////////
-/// build query - add priority
+    /// build query - add priority
 ////////////////
 
     if (searchPriority != "null") {
@@ -818,7 +818,7 @@ Plan C - USD 24 | 12 month
     }
 
 ////////////////
-/// build query - add tag
+    /// build query - add tag
 ////////////////
 
     if (searchTag1 != "null") {
@@ -826,11 +826,10 @@ Plan C - USD 24 | 12 month
     }
 
 ////////////////
-/// build query - add order by
+    /// build query - add order by
 ////////////////
     queryStr = queryStr +
         " order by $colsortField1 $colsortOrder1, $colsortField2 $colsortOrder2, $colsortField3 $colsortOrder3, $colsortField4 $colsortOrder4";
-
 
     print(queryStr);
     var result = await db!.rawQuery(queryStr);
