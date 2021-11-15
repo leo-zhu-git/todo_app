@@ -625,10 +625,10 @@ Plan C - USD 24 | 12 month
 
     queryStr =
         "SELECT $tblTodo.id,$tblTodo.task, $tblTodo.note, dateDue,timeDue,   " +
-            "category, status, " +
+            "category, status, priority, tag1, " +
             "isStar, isDone, dateDone, lastModified, " +
-            "statuses.name as statusesname, " +
             "categories.name as categoriesname, " +
+            "statuses.name as statusesname, " +
             "priorities.name as prioritiesname, " +
             "tag1s.name as tag1sname " +
             "FROM $tblTodo  " +
