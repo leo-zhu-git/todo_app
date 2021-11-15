@@ -117,6 +117,14 @@ class MySql_DBHelper {
               dbStatusID.substring(dbUserID.length, dbStatusID.length);
         }
 
+        // int isStarNum;
+        // if (swiperDataList[i]['taskIsStar'] != "" &&
+        //     swiperDataList[i]['taskIsStar'] != null) {
+        //   String dbIsStar = swiperDataList[i]['taskIsStar'].toString();
+
+        //   isStarNum = int.parse(dbIsStar);
+        // }
+
         Task task = Task.withId(
             int.parse(appTaskID),
             swiperDataList[i]['TaskTask'],
@@ -131,7 +139,7 @@ class MySql_DBHelper {
 //            appContextID,
 //            appLocationID,
 //            appGoalID,
-            0,
+            int.parse(swiperDataList[i]['taskIsStar']),
             //int.parse(swiperDataList[i]['TaskStar']),
             int.parse(swiperDataList[i]['TaskIsDone']),
             swiperDataList[i]['TaskDateDone'],
