@@ -19,6 +19,8 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
 
   var _editTag1NameController = TextEditingController();
   var _editTag1DescriptionController = TextEditingController();
+  TextStyle _textStyleControls =
+      TextStyle(fontSize: 17.0, color: Colors.black87);
 
   List<Tag1> _tag1List = [];
 
@@ -88,7 +90,9 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
                     _tag1.description = _tag1DescriptionController.text;
                     _tag1.id = null;
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text("Tag Added"),
+                      backgroundColor: Colors.teal[100],
+                      duration: Duration(seconds: 3),
+                      content: Text("Tag Added", style: _textStyleControls),
                     ));
 
                     var result = _tag1Service.insertTag1s(_tag1);
@@ -152,7 +156,9 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
                     _tag1.name = _editTag1NameController.text;
                     _tag1.description = _editTag1DescriptionController.text;
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text("Tag Updated"),
+                      backgroundColor: Colors.teal[100],
+                      duration: Duration(seconds: 3),
+                      content: Text("Tag Updated", style: _textStyleControls),
                     ));
 
                     var result = await _tag1Service.updateTag1s(_tag1);

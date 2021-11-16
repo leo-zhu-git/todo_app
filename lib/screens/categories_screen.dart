@@ -18,6 +18,8 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
 
   var _editCategoryNameController = TextEditingController();
   var _editCategoryDescriptionController = TextEditingController();
+  TextStyle _textStyleControls =
+      TextStyle(fontSize: 17.0, color: Colors.black87);
 
   List<Category> _categoryList = [];
 
@@ -88,7 +90,10 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                     _category.id = null;
                     var result = _categoryService.insertCategories(_category);
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text("Category Added"),
+                      backgroundColor: Colors.teal[100],
+                      duration: Duration(seconds: 3),
+                      content:
+                          Text("Category Added", style: _textStyleControls),
                     ));
 
                     Navigator.pop(context);
@@ -150,7 +155,10 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                     _category.description =
                         _editCategoryDescriptionController.text;
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text("Category Updated"),
+                      backgroundColor: Colors.teal[100],
+                      duration: Duration(seconds: 3),
+                      content:
+                          Text("Category Updated", style: _textStyleControls),
                     ));
 
                     var result =

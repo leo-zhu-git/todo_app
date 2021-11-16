@@ -18,6 +18,8 @@ class _PrioritiesScreenState extends State<PrioritiesScreen> {
 
   var _editPriorityNameController = TextEditingController();
   var _editPriorityDescriptionController = TextEditingController();
+  TextStyle _textStyleControls =
+      TextStyle(fontSize: 17.0, color: Colors.black87);
 
   List<Priority> _priorityList = [];
 
@@ -87,7 +89,10 @@ class _PrioritiesScreenState extends State<PrioritiesScreen> {
                     _priority.description = _priorityDescriptionController.text;
                     _priority.id = null;
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text("Priority Added"),
+                      backgroundColor: Colors.teal[100],
+                      duration: Duration(seconds: 3),
+                      content:
+                          Text("Priority Added", style: _textStyleControls),
                     ));
 
                     var result = _priorityService.insertPriorities(_priority);
@@ -152,7 +157,10 @@ class _PrioritiesScreenState extends State<PrioritiesScreen> {
                     _priority.description =
                         _editPriorityDescriptionController.text;
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text("Priority Updated"),
+                      backgroundColor: Colors.teal[100],
+                      duration: Duration(seconds: 3),
+                      content:
+                          Text("Priority Updated", style: _textStyleControls),
                     ));
 
                     var result =

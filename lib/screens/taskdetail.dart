@@ -481,7 +481,9 @@ class TaskDetailState extends State //<TaskDetail>
                 setState(() {
                   dbHelper.insertTaskClone(task);
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: Text("Task Cloned"),
+                    backgroundColor: Colors.teal[100],
+                    duration: Duration(seconds: 3),
+                    content: Text("Task Cloned", style: _textStyleControls),
                   ));
                 });
               }),
@@ -543,12 +545,16 @@ class TaskDetailState extends State //<TaskDetail>
                   if (task.id != null) {
                     result = dbHelper.updateTask(task);
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text("Task Updated"),
+                      backgroundColor: Colors.teal[100],
+                      duration: Duration(seconds: 3),
+                      content: Text("Task Updated", style: _textStyleControls),
                     ));
                   } else {
                     result = dbHelper.insertTask(task);
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text("Task Saved"),
+                      backgroundColor: Colors.teal[100],
+                      duration: Duration(seconds: 3),
+                      content: Text("Task Saved", style: _textStyleControls),
                     ));
                   }
 

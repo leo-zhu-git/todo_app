@@ -482,11 +482,15 @@ class TaskSearchState extends State {
                 this.tasklist[position].isDone = 1;
                 this.tasklist[position].dateDone = formattedDate;
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: Text("Item Dismissed"),
+                  backgroundColor: Colors.teal[100],
+                  duration: Duration(seconds: 3),
+                  content: Text("Task Completed", style: _textStyleControls),
                 ));
                 dbHelper.updateTask(tasklist[position]);
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: Text("Task Completed"),
+                  backgroundColor: Colors.teal[100],
+                  duration: Duration(seconds: 3),
+                  content: Text("Task Completed", style: _textStyleControls),
                 ));
                 getData();
 
@@ -523,7 +527,10 @@ class TaskSearchState extends State {
                             dbHelper.updateTask(tasklist[position]);
                           }
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text("Task Completed"),
+                            backgroundColor: Colors.teal[100],
+                            duration: Duration(seconds: 3),
+                            content: Text("Task Completed",
+                                style: _textStyleControls),
                           ));
 
                           getData();
