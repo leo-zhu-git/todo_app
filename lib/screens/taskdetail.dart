@@ -446,11 +446,6 @@ class TaskDetailState extends State //<TaskDetail>
 
 //##################End of Drop Down Items Load from DB #################################################################
 
-//  _showSuccessSnackBar(message) {
-//    var _snackBar = SnackBar(content: message);
-//    _globalKey.currentState.showSnackBar(_snackBar);
-//  }
-
   @override
   Widget build(BuildContext context) {
 //    TextStyle textStyle = Theme.of(context).textTheme.headline6;
@@ -485,7 +480,9 @@ class TaskDetailState extends State //<TaskDetail>
               onPressed: () {
                 setState(() {
                   dbHelper.insertTaskClone(task);
-                  print(task.task);
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text("Task Cloned"),
+                  ));
                 });
               }),
           IconButton(
@@ -545,31 +542,16 @@ class TaskDetailState extends State //<TaskDetail>
 
                   if (task.id != null) {
                     result = dbHelper.updateTask(task);
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text("Task Updated"),
+                    ));
                   } else {
                     result = dbHelper.insertTask(task);
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text("Task Saved"),
+                    ));
                   }
 
-//                      _showSuccessSnackBar(
-//                        Container(
-//                          color: Colors.lAccent[100],
-//                          //KK height: 40,
-//                          child: Row(
-//                            mainAxisAlignment: MainAxisAlignment.center,
-//                            children: [
-//                              (Icon(
-//                                Icons.thumb_up,
-//                                color: Colors.black,
-//                              )),
-//                              Text(
-//                                ' Successfully Saved ',
-//                                style: (TextStyle(color: Colors.black)),
-//                              )
-//                            ],
-//                          ),
-//                        ),
-//                      );
-//                      await Future.delayed(
-//                          const Duration(milliseconds: 500), () {});
                   Navigator.pop(context);
 
 //////////////

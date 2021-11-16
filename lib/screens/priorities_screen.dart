@@ -74,51 +74,35 @@ class _PrioritiesScreenState extends State<PrioritiesScreen> {
             actions: <Widget>[
               ElevatedButton(
                   onPressed: () => Navigator.pop(context),
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.grey[300],
-                    ),
-                    child: Text(
-                      'Cancel',
-                      style: TextStyle(color: Colors.teal[800]),
-                    )),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.grey[300],
+                  ),
+                  child: Text(
+                    'Cancel',
+                    style: TextStyle(color: Colors.teal[800]),
+                  )),
               ElevatedButton(
                   onPressed: () async {
                     _priority.name = _priorityNameController.text;
                     _priority.description = _priorityDescriptionController.text;
                     _priority.id = null;
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text("Priority Added"),
+                    ));
 
                     var result = _priorityService.insertPriorities(_priority);
                     print(result);
                     print(_priority.name);
                     Navigator.pop(context);
                     getAllPriorities();
-//                    _showSuccessSnackBar(Container(
-//                      color: Colors.tealAccent[100],
-//                      height: 40,
-//                      child: Row(
-//                        mainAxisAlignment: MainAxisAlignment.center,
-//                        children: [
-//                          (Icon(
-//                            Icons.thumb_up,
-//                            color: Colors.black,
-//                          )),
-//                          Text(
-//                            ' Added ',
-//                            style: (TextStyle(color: Colors.black)),
-//                          )
-//                        ],
-//                      ),
-//                    ));
                   },
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.teal[800],
-                    ),
-                    child: Text(
-                      'Save',
-                      style: TextStyle(color: Colors.white),
-                    )
-                    ),
-          
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.teal[800],
+                  ),
+                  child: Text(
+                    'Save',
+                    style: TextStyle(color: Colors.white),
+                  )),
             ],
             title: Text('Add Priority'),
             content: SingleChildScrollView(
@@ -167,6 +151,9 @@ class _PrioritiesScreenState extends State<PrioritiesScreen> {
                     _priority.name = _editPriorityNameController.text;
                     _priority.description =
                         _editPriorityDescriptionController.text;
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text("Priority Updated"),
+                    ));
 
                     var result =
                         await _priorityService.updatePriorities(_priority);
@@ -174,36 +161,15 @@ class _PrioritiesScreenState extends State<PrioritiesScreen> {
                     if (result > 0) {
                       Navigator.pop(context);
                       getAllPriorities();
-//                      _showSuccessSnackBar(
-//                        Container(
-//                          color: Colors.tealAccent[100],
-//                          height: 40,
-//                          child: Row(
-//                            mainAxisAlignment: MainAxisAlignment.center,
-//                            children: [
-//                              (Icon(
-//                                Icons.thumb_up,
-//                                color: Colors.black,
-//                              )),
-//                              Text(
-//                                ' Updated ',
-//                                style: (TextStyle(color: Colors.black)),
-//                              )
-//                            ],
-//                          ),
-//                        ),
-//                      );
                     }
                   },
                   style: ElevatedButton.styleFrom(
                     primary: Colors.teal[800],
                   ),
-                  child: 
-                  Text(
+                  child: Text(
                     'Update',
                     style: TextStyle(color: Colors.white),
-                  )
-                  ),
+                  )),
             ],
             title: Text('Edit Priority'),
             content: SingleChildScrollView(
@@ -238,27 +204,26 @@ class _PrioritiesScreenState extends State<PrioritiesScreen> {
             backgroundColor: Colors.orange[100],
             actions: <Widget>[
               ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.teal[800],
-                    ),
-                    child: Text(
-                      'Cancel',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  onPressed: () => Navigator.pop(context),
-                  ),
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.teal[800],
+                ),
+                child: Text(
+                  'Cancel',
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () => Navigator.pop(context),
+              ),
               ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.white,
-                    ),
-
-                onPressed: () async {
-                  var result =
-                      await _priorityService.deletePrioritiesbyID(priorityId);
-                  print(result);
-                  if (result > 0) {
-                    Navigator.pop(context);
-                    getAllPriorities();
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.white,
+                  ),
+                  onPressed: () async {
+                    var result =
+                        await _priorityService.deletePrioritiesbyID(priorityId);
+                    print(result);
+                    if (result > 0) {
+                      Navigator.pop(context);
+                      getAllPriorities();
 //                    _showSuccessSnackBar(
 //                      Container(
 //                        color: Colors.tealAccent[100],
@@ -277,15 +242,13 @@ class _PrioritiesScreenState extends State<PrioritiesScreen> {
 //                          ],
 //                        ),
 //                      ),
- //                   );
-                  }
-                },
-                child: 
-                  Text(
+                      //                   );
+                    }
+                  },
+                  child: Text(
                     'Delete',
                     style: TextStyle(color: Colors.teal[800]),
-                  )
-              ),
+                  )),
             ],
             title: Text('Are you sure you want to delete this'),
           );

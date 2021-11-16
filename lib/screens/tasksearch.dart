@@ -233,7 +233,6 @@ class TaskSearchState extends State {
                 children: [
                   Column(
                     children: [
-
 //####################################Show Completed Task Check box
                       Container(
                         margin:
@@ -467,8 +466,6 @@ class TaskSearchState extends State {
           ),
         ],
       ),
-
-
     );
   }
 
@@ -484,8 +481,8 @@ class TaskSearchState extends State {
                 String formattedDate = DateFormat('yyyy-mm-dd').format(now);
                 this.tasklist[position].isDone = 1;
                 this.tasklist[position].dateDone = formattedDate;
-                Scaffold.of(context).showSnackBar(new SnackBar(
-                  content: new Text("Item Dismissed"),
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text("Item Dismissed"),
                 ));
                 dbHelper.updateTask(tasklist[position]);
                 searchData(_searchText, _selectedStatus, _selectedCategory,
@@ -520,6 +517,11 @@ class TaskSearchState extends State {
                             this.tasklist[position].dateDone = '';
                             dbHelper.updateTask(tasklist[position]);
                           }
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text("Task Completed"),
+                          ));
+
+                          getData();
                         });
                       },
                     ),
@@ -617,7 +619,7 @@ class TaskSearchState extends State {
           taskList.add(Task.fromObject(result[i]));
 
 /////////////////
-/// display sec1
+          /// display sec1
 ////////////////
           switch (globals.showSec1) {
             case 0:
@@ -662,7 +664,7 @@ class TaskSearchState extends State {
               break;
           }
 /////////////////
-/// display sec2
+          /// display sec2
 ////////////////
           switch (globals.showSec2) {
             case 0:
@@ -708,7 +710,7 @@ class TaskSearchState extends State {
               break;
           }
 /////////////////
-/// display sec3
+          /// display sec3
 ////////////////
           switch (globals.showSec3) {
             case 0:
@@ -799,7 +801,7 @@ class TaskSearchState extends State {
             debugPrint(taskList[i].note);
 
 /////////////////
-/// display sec1
+            /// display sec1
 ////////////////
             switch (globals.showSec1) {
               case 0:
@@ -860,7 +862,7 @@ class TaskSearchState extends State {
             }
 
 /////////////////
-/// display sec2
+            /// display sec2
 ////////////////
             switch (globals.showSec2) {
               case 0:
@@ -922,7 +924,7 @@ class TaskSearchState extends State {
             }
 
 /////////////////
-/// display sec3
+            /// display sec3
 ////////////////
             switch (globals.showSec3) {
               case 0:
@@ -1007,9 +1009,8 @@ class TaskSearchState extends State {
     if (_customSetting.length > 0) {
       customSetting = CustomSettings.fromObject(_customSetting[0]);
       if (customSetting != null && customSetting!.id != null) {
-
 //////////////////////
-/// SORT
+        /// SORT
 //////////////////////
         if (customSetting!.sortField1 != "") {
           globals.sortField1 = int.parse(
@@ -1026,7 +1027,7 @@ class TaskSearchState extends State {
         }
 
 //////////////////////
-/// SHOW
+        /// SHOW
 //////////////////////
         if (customSetting!.showSec1 != "") {
           globals.showSec1 = int.parse(customSetting!.showSec1!);
@@ -1038,9 +1039,8 @@ class TaskSearchState extends State {
           globals.showSec3 = int.parse(customSetting!.showSec3!);
         }
 
-
 //////////////////////
-/// FOCUS, ISDONE
+        /// FOCUS, ISDONE
 //////////////////////
         if (customSetting!.filterIsStar == 1) {
           globals.filterIsStar = 1;
@@ -1054,14 +1054,14 @@ class TaskSearchState extends State {
         }
 
 //////////////////////
-/// DATE DUE
+        /// DATE DUE
 //////////////////////
         if (customSetting!.filterDateDue != "") {
           globals.filterDateDue = int.parse(customSetting!.filterDateDue!);
         }
 
 //////////////////////
-/// FILTERS
+        /// FILTERS
 //////////////////////
         globals.filterCategory = customSetting!.filterCategory != ""
             ? int.parse(customSetting!.filterCategory!)

@@ -85,10 +85,12 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                   onPressed: () async {
                     _category.name = _categoryNameController.text;
                     _category.description = _categoryDescriptionController.text;
-                    _category.id = null; 
+                    _category.id = null;
                     var result = _categoryService.insertCategories(_category);
-                    print(result);
-                    print(_category.name);
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text("Category Added"),
+                    ));
+
                     Navigator.pop(context);
                     getAllCategories();
                   },
@@ -147,6 +149,9 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                     _category.name = _editCategoryNameController.text;
                     _category.description =
                         _editCategoryDescriptionController.text;
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text("Category Updated"),
+                    ));
 
                     var result =
                         await _categoryService.updateCategories(_category);

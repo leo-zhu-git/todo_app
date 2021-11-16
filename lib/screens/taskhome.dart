@@ -54,11 +54,6 @@ class TaskHomeState extends State {
     getData();
   }
 
-//  _showSuccessSnackBar(message) {
-//    var _snackBar = SnackBar(content: message);
-//    _globalKey.currentState.showSnackBar(_snackBar);
-//  }
-
   @override
   Widget build(BuildContext context) {
     if (tasklist == null) {
@@ -89,12 +84,12 @@ class TaskHomeState extends State {
         title:
 //        Center(
             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.home, color: Colors.pink[100]),
-                Text(count.toString(), style: TextStyle(color: Colors.pink[100])),
-              ],
-            ),
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.home, color: Colors.pink[100]),
+            Text(count.toString(), style: TextStyle(color: Colors.pink[100])),
+          ],
+        ),
 //          child: Row(
 //            children: <Widget>[
 //              Center(
@@ -111,7 +106,6 @@ class TaskHomeState extends State {
 //          ),
 //        ),
         actions: <Widget>[
-
 //          IconButton(
 //              icon: const Icon(Icons.sync, color: Colors.white),
 //              tooltip: 'Sync',
@@ -138,8 +132,8 @@ class TaskHomeState extends State {
               IconButton(
                 icon: Icon(Icons.add, color: Colors.white),
                 onPressed: () {
-                  navigateToDetail(Task("", "", "", "", "", "", "","",
-                       0, 0, "", "","","",""));
+                  navigateToDetail(Task("", "", "", "", "", "", "", "", 0, 0,
+                      "", "", "", "", ""));
                   getData();
                 },
               ),
@@ -172,9 +166,9 @@ class TaskHomeState extends State {
                 String formattedDate = DateFormat('yyyy-mm-dd').format(now);
                 this.tasklist![position].isDone = 1;
                 this.tasklist![position].dateDone = formattedDate;
-//                Scaffold.of(context).showSnackBar(new SnackBar(
-//                  content: new Text("Task Completed"),
-//                ));
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text("Task Completed"),
+                ));
                 dbHelper.updateTask(tasklist![position]);
                 getData();
               });
@@ -203,13 +197,15 @@ class TaskHomeState extends State {
                             this.tasklist![position].dateDone = formattedDate;
                             dbHelper.updateTask(tasklist![position]);
                             getData();
-
                           } else {
                             this.tasklist![position].isDone = 0;
                             this.tasklist![position].dateDone = '';
                             dbHelper.updateTask(tasklist![position]);
                             getData();
                           }
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text("Task Completed"),
+                          ));
                         });
                       },
                     ),

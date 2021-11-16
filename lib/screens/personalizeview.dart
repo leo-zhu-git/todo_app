@@ -357,8 +357,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
-    cus.name =
-        "-- All Priorities --";
+    cus.name = "-- All Priorities --";
     _priorities.add(cus);
     priorities.forEach((priority) {
       setState(() {
@@ -381,8 +380,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
     cus.id = null;
-    cus.name =
-        "-- All Tags --";
+    cus.name = "-- All Tags --";
     _tag1s.add(cus);
     tag1s.forEach((tag1) {
       setState(() {
@@ -483,7 +481,6 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     return items;
   }
 
-
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
 //  _showSuccessSnackBar(message) {
 //    var _snackBar = SnackBar(content: message);
@@ -513,6 +510,9 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
           icon: Icon(Icons.home, color: Colors.pink[100]),
           tooltip: 'Home',
           onPressed: () {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text("Exit to Home"),
+            ));
             Navigator.of(context)
                 .push(MaterialPageRoute(builder: (context) => TaskHome()));
           },
@@ -641,9 +641,8 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                   customSetting!.filterPriority = (_selectedPriority == null)
                       ? ""
                       : _selectedPriority.toString();
-                  customSetting!.filterTag = (_selectedTag1 == null)
-                      ? ""
-                      : _selectedTag1.toString();
+                  customSetting!.filterTag =
+                      (_selectedTag1 == null) ? "" : _selectedTag1.toString();
 
                   var result;
 
@@ -656,20 +655,21 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
 //end of save
                 }
               });
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text("Personalized Successfully Saved"),
+              ));
+
               Navigator.of(context).pushNamed('/dashboard');
             },
           ),
         ],
-
         title: Center(child: Text('Personalize')),
       ),
-
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-
 ///////////////////////////
 //  Filters
 ///////////////////////////
@@ -765,8 +765,8 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                   children: [
                     DropdownButtonHideUnderline(
                       child: DropdownButton<String>(
-                         isExpanded: true,
-                         style: _textStyleControls,
+                          isExpanded: true,
+                          style: _textStyleControls,
                           items: _priorities.map((CustomDropdownItem value) {
                             return DropdownMenuItem<String>(
                                 value: value.id,
@@ -832,7 +832,6 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 ),
               ),
 
-
 //################################# IsDone #####################################################
               new Container(
                 margin: const EdgeInsets.all(2.0),
@@ -858,7 +857,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                   style: _textStyleControls),
 
 ///////////////////////////
-//  Picklists  
+//  Picklists
 ///////////////////////////
 
 //################################# Categories #####################################################
@@ -914,7 +913,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
               ),
 
 ///////////////////////////
-//  SORT   
+//  SORT
 ///////////////////////////
               Text("Sort Order", style: _textStyleControls),
 
@@ -1006,7 +1005,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 ),
               ),
 
-               new Container(
+              new Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.green[100]),
@@ -1041,7 +1040,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 ),
               ),
 
-               new Container(
+              new Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.green[100]),
@@ -1062,14 +1061,13 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 height: 20,
               ),
 
-
 ///////////////////////////
-//  Show Sec 
+//  Show Sec
 ///////////////////////////
               Text("View - second line up to 3 fields",
                   style: _textStyleControls),
 
-///################################# Show Sec 1  #####################################################
+              ///################################# Show Sec 1  #####################################################
 
               new Container(
                 margin: const EdgeInsets.all(2.0),
@@ -1088,7 +1086,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 ),
               ),
 
-///################################# Show Sec 2  #####################################################
+              ///################################# Show Sec 2  #####################################################
 
               new Container(
                 margin: const EdgeInsets.all(2.0),
@@ -1107,7 +1105,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 ),
               ),
 
-///################################# Show Sec 3  #####################################################
+              ///################################# Show Sec 3  #####################################################
               new Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
@@ -1124,8 +1122,6 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                   },
                 ),
               ),
-
-
             ],
           ),
         ),
@@ -1215,8 +1211,8 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
               .value!;
       globals.filterDateDue = int.parse(customSetting!.filterDateDue!);
     }
- 
-     if (customSetting!.filterCategory == "") {
+
+    if (customSetting!.filterCategory == "") {
       _selectedCategory = null;
       customSetting!.filterCategory = "";
     } else {

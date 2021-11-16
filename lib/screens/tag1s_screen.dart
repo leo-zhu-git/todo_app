@@ -87,27 +87,13 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
                     _tag1.name = _tag1NameController.text;
                     _tag1.description = _tag1DescriptionController.text;
                     _tag1.id = null;
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text("Tag Added"),
+                    ));
 
                     var result = _tag1Service.insertTag1s(_tag1);
                     Navigator.pop(context);
                     getAllTag1s();
-//                    _showSuccessSnackBar(Container(
-//                      color: Colors.tealAccent[100],
-//                      height: 40,
-//                      child: Row(
-//                        mainAxisAlignment: MainAxisAlignment.center,
-//                        children: [
-//                          (Icon(
-//                            Icons.thumb_up,
-//                            color: Colors.black,
-//                          )),
-//                          Text(
-//                            ' Added ',
-//                            style: (TextStyle(color: Colors.black)),
-//                          )
-//                        ],
-//                      ),
-//                    ));
                   },
                   child: Text(
                     'Save',
@@ -165,31 +151,15 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
                     _tag1.id = tag1[0]['id'];
                     _tag1.name = _editTag1NameController.text;
                     _tag1.description = _editTag1DescriptionController.text;
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text("Tag Updated"),
+                    ));
 
                     var result = await _tag1Service.updateTag1s(_tag1);
                     print(result);
                     if (result > 0) {
                       Navigator.pop(context);
                       getAllTag1s();
-//                      _showSuccessSnackBar(
-//                        Container(
-//                          color: Colors.tealAccent[100],
-//                          height: 40,
-//                          child: Row(
-//                            mainAxisAlignment: MainAxisAlignment.center,
-//                            children: [
-//                              (Icon(
-//                                Icons.thumb_up,
-//                                color: Colors.black,
-//                              )),
-//                              Text(
-//                                ' Updated ',
-//                                style: (TextStyle(color: Colors.black)),
-//                              )
-//                            ],
-//                         ),
-//                        ),
-//                      );
                     }
                   },
                   child: Text(
@@ -248,25 +218,6 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
                     if (result > 0) {
                       Navigator.pop(context);
                       getAllTag1s();
-//                      _showSuccessSnackBar(
-//                        Container(
-//                          color: Colors.tealAccent[100],
-//                          height: 40,
-//                          child: Row(
-//                            mainAxisAlignment: MainAxisAlignment.center,
-//                            children: [
-//                              (Icon(
-//                                Icons.thumb_up,
-//                                color: Colors.black,
-//                              )),
-//                              Text(
-//                                ' Deleted ',
-//                                style: (TextStyle(color: Colors.black)),
-//                              )
-//                            ],
-//                          ),
-//                        ),
-//                      );
                     }
                   },
                   child: Text(
@@ -317,7 +268,6 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
             },
           ),
         ],
-
         backgroundColor: Colors.teal[800],
         title: Center(
           child: Container(

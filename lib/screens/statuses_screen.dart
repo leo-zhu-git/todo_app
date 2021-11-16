@@ -70,55 +70,39 @@ class _StatusesScreenState extends State<StatusesScreen> {
         barrierDismissible: true,
         builder: (param) {
           return AlertDialog(
-            backgroundColor: Colors.amber[100],
+            backgroundColor: Colors.orange[100],
             actions: <Widget>[
               ElevatedButton(
                   onPressed: () => Navigator.pop(context),
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.grey[300],
-                    ),
-                    child: Text(
-                      'Cancel',
-                      style: TextStyle(color: Colors.teal[800]),
-                    )),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.grey[300],
+                  ),
+                  child: Text(
+                    'Cancel',
+                    style: TextStyle(color: Colors.teal[800]),
+                  )),
               ElevatedButton(
                   onPressed: () async {
                     _status.name = _statusNameController.text;
                     _status.description = _statusDescriptionController.text;
                     _status.id = null;
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text("Status Added"),
+                    ));
 
                     var result = _statusService.insertStatuses(_status);
                     print(result);
                     print(_status.name);
                     Navigator.pop(context);
                     getAllStatuses();
-//                    _showSuccessSnackBar(Container(
-//                      color: Colors.tealAccent[100],
-//                      height: 40,
-//                      child: Row(
-//                        mainAxisAlignment: MainAxisAlignment.center,
-//                        children: [
-//                          (Icon(
-//                            Icons.thumb_up,
-//                            color: Colors.black,
-//                          )),
-//                          Text(
-//                            ' Added ',
-//                            style: (TextStyle(color: Colors.black)),
-//                          )
-//                        ],
-//                      ),
-//                    ));
                   },
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.teal[800],
-                    ),
-                    child: Text(
-                      'Save',
-                      style: TextStyle(color: Colors.white),
-                    )
-                    ),
-          
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.teal[800],
+                  ),
+                  child: Text(
+                    'Save',
+                    style: TextStyle(color: Colors.white),
+                  )),
             ],
             title: Text('Add Status'),
             content: SingleChildScrollView(
@@ -165,45 +149,25 @@ class _StatusesScreenState extends State<StatusesScreen> {
                   onPressed: () async {
                     _status.id = status[0]['id'];
                     _status.name = _editStatusNameController.text;
-                    _status.description =
-                        _editStatusDescriptionController.text;
+                    _status.description = _editStatusDescriptionController.text;
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text("Status Updated"),
+                    ));
 
-                    var result =
-                        await _statusService.updateStatuses(_status);
+                    var result = await _statusService.updateStatuses(_status);
                     print(result);
                     if (result > 0) {
                       Navigator.pop(context);
                       getAllStatuses();
-//                      _showSuccessSnackBar(
-//                        Container(
-//                          color: Colors.tealAccent[100],
-//                          height: 40,
-//                          child: Row(
-//                            mainAxisAlignment: MainAxisAlignment.center,
-//                            children: [
-//                              (Icon(
-//                                Icons.thumb_up,
-//                                color: Colors.black,
-//                              )),
-//                              Text(
-//                                ' Updated ',
-//                                style: (TextStyle(color: Colors.black)),
-//                              )
-//                            ],
-//                          ),
-//                        ),
-//                      );
                     }
                   },
                   style: ElevatedButton.styleFrom(
                     primary: Colors.teal[800],
                   ),
-                  child: 
-                  Text(
+                  child: Text(
                     'Update',
                     style: TextStyle(color: Colors.white),
-                  )
-                  ),
+                  )),
             ],
             title: Text('Edit Status'),
             content: SingleChildScrollView(
@@ -238,64 +202,37 @@ class _StatusesScreenState extends State<StatusesScreen> {
             backgroundColor: Colors.orange[100],
             actions: <Widget>[
               ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.teal[800],
-                    ),
-                    child: Text(
-                      'Cancel',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  onPressed: () => Navigator.pop(context),
-                  ),
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.teal[800],
+                ),
+                child: Text(
+                  'Cancel',
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () => Navigator.pop(context),
+              ),
               ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.white,
-                    ),
-
-                onPressed: () async {
-                  var result =
-                      await _statusService.deleteStatusesbyID(statusId);
-                  print(result);
-                  if (result > 0) {
-                    Navigator.pop(context);
-                    getAllStatuses();
-//                    _showSuccessSnackBar(
-//                      Container(
-//                        color: Colors.tealAccent[100],
-//                        height: 40,
-//                        child: Row(
-//                          mainAxisAlignment: MainAxisAlignment.center,
-//                         children: [
-//                            (Icon(
-//                              Icons.thumb_up,
-//                              color: Colors.black,
-//                            )),
-//                            Text(
-//                              ' Deleted ',
-//                              style: (TextStyle(color: Colors.black)),
-//                            )
-//                          ],
-//                        ),
-//                      ),
-//                    );
-                  }
-                },
-                child: 
-                  Text(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.white,
+                  ),
+                  onPressed: () async {
+                    var result =
+                        await _statusService.deleteStatusesbyID(statusId);
+                    print(result);
+                    if (result > 0) {
+                      Navigator.pop(context);
+                      getAllStatuses();
+                    }
+                  },
+                  child: Text(
                     'Delete',
                     style: TextStyle(color: Colors.teal[800]),
-                  )
-              ),
+                  )),
             ],
             title: Text('Are you sure you want to delete this'),
           );
         });
   }
-
-//  _showSuccessSnackBar(message) {
-//    var _snackBar = SnackBar(content: message);
-//    _globalKey.currentState.showSnackBar(_snackBar);
-//  }
 
   @override
   Widget build(BuildContext context) {
@@ -330,7 +267,6 @@ class _StatusesScreenState extends State<StatusesScreen> {
             ),
           ),
         ),
-        
         backgroundColor: Colors.teal[800],
         elevation: 8,
         title: Center(
