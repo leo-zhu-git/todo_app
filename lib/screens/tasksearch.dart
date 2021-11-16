@@ -485,6 +485,11 @@ class TaskSearchState extends State {
                   content: Text("Item Dismissed"),
                 ));
                 dbHelper.updateTask(tasklist[position]);
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text("Task Completed"),
+                ));
+                getData();
+
                 searchData(_searchText, _selectedStatus, _selectedCategory,
                     _selectedPriority, _selectedTag1, _showIsStar, _showIsDone);
               });
