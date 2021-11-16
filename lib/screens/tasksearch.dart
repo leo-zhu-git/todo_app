@@ -35,7 +35,7 @@ class TaskSearchState extends State {
   String? _selectedTag1;
   int? isChecked = 0;
   int? _showIsStar = 0;
-  int? _showIsDone = 1;
+  int? _showIsDone = 0;
 
   int? _sortField1 = globals.sortField1 != null ? globals.sortField1 : 8;
   int? _sortField2 = globals.sortField2 != null ? globals.sortField2 : 2;
@@ -233,6 +233,7 @@ class TaskSearchState extends State {
                 children: [
                   Column(
                     children: [
+
 //####################################Show Completed Task Check box
                       Container(
                         margin:
@@ -467,31 +468,7 @@ class TaskSearchState extends State {
         ],
       ),
 
-//footer
-      //bottomNavigationBar: footerBar,
 
-//      bottomNavigationBar: Container(
-//        height: 28.0,
-//        child: BottomAppBar(
-//          // color: Color.fromRGBO(58, 66, 86, 1.0),
-//          color: Colors.teal[800],
-//          color: Colors.brown[900],
-//          child: Row(
-//            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//            children: <Widget>[
-//              IconButton(
-//                icon: Icon(Icons.home, color: Colors.white),
-//                tooltip: 'Back to Home',
-//                onPressed: () {
-//                  // Navigator.pop(context, true);
-//                  Navigator.of(context).push(
-//                      MaterialPageRoute(builder: (context) => TaskHome()));
-//                },
-//              ),
-//            ],
-//          ),
-//        ),
-//      ),
     );
   }
 
@@ -640,7 +617,7 @@ class TaskSearchState extends State {
           taskList.add(Task.fromObject(result[i]));
 
 /////////////////
-          /// display sec1
+/// display sec1
 ////////////////
           switch (globals.showSec1) {
             case 0:
@@ -685,7 +662,7 @@ class TaskSearchState extends State {
               break;
           }
 /////////////////
-          /// display sec2
+/// display sec2
 ////////////////
           switch (globals.showSec2) {
             case 0:
@@ -731,7 +708,7 @@ class TaskSearchState extends State {
               break;
           }
 /////////////////
-          /// display sec3
+/// display sec3
 ////////////////
           switch (globals.showSec3) {
             case 0:
@@ -822,7 +799,7 @@ class TaskSearchState extends State {
             debugPrint(taskList[i].note);
 
 /////////////////
-            /// display sec1
+/// display sec1
 ////////////////
             switch (globals.showSec1) {
               case 0:
@@ -883,7 +860,7 @@ class TaskSearchState extends State {
             }
 
 /////////////////
-            /// display sec2
+/// display sec2
 ////////////////
             switch (globals.showSec2) {
               case 0:
@@ -945,7 +922,7 @@ class TaskSearchState extends State {
             }
 
 /////////////////
-            /// display sec3
+/// display sec3
 ////////////////
             switch (globals.showSec3) {
               case 0:
@@ -1030,6 +1007,10 @@ class TaskSearchState extends State {
     if (_customSetting.length > 0) {
       customSetting = CustomSettings.fromObject(_customSetting[0]);
       if (customSetting != null && customSetting!.id != null) {
+
+//////////////////////
+/// SORT
+//////////////////////
         if (customSetting!.sortField1 != "") {
           globals.sortField1 = int.parse(
               customSetting!.sortField1!); //convert it to session variables
@@ -1043,6 +1024,10 @@ class TaskSearchState extends State {
         if (customSetting!.sortField4 != "") {
           globals.sortField4 = int.parse(customSetting!.sortField4!);
         }
+
+//////////////////////
+/// SHOW
+//////////////////////
         if (customSetting!.showSec1 != "") {
           globals.showSec1 = int.parse(customSetting!.showSec1!);
         }
@@ -1052,6 +1037,11 @@ class TaskSearchState extends State {
         if (customSetting!.showSec3 != "") {
           globals.showSec3 = int.parse(customSetting!.showSec3!);
         }
+
+
+//////////////////////
+/// FOCUS, ISDONE
+//////////////////////
         if (customSetting!.filterIsStar == 1) {
           globals.filterIsStar = 1;
         } else {
@@ -1062,9 +1052,17 @@ class TaskSearchState extends State {
         } else {
           globals.filterIsDone = 0;
         }
+
+//////////////////////
+/// DATE DUE
+//////////////////////
         if (customSetting!.filterDateDue != "") {
           globals.filterDateDue = int.parse(customSetting!.filterDateDue!);
         }
+
+//////////////////////
+/// FILTERS
+//////////////////////
         globals.filterCategory = customSetting!.filterCategory != ""
             ? int.parse(customSetting!.filterCategory!)
             : 0;
