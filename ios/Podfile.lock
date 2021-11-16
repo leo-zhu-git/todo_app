@@ -1,53 +1,53 @@
 PODS:
-  - Amplify (1.15.2):
-    - Amplify/Default (= 1.15.2)
-  - Amplify/Default (1.15.2)
+  - Amplify (1.15.6):
+    - Amplify/Default (= 1.15.6)
+  - Amplify/Default (1.15.6)
   - amplify_analytics_pinpoint (0.0.1):
-    - Amplify (~> 1.15.2)
+    - Amplify (~> 1.15.3)
     - amplify_core
-    - AmplifyPlugins/AWSPinpointAnalyticsPlugin (~> 1.15.2)
+    - AmplifyPlugins/AWSPinpointAnalyticsPlugin (~> 1.15.3)
     - Flutter
   - amplify_auth_cognito (0.0.1):
-    - Amplify (~> 1.15.2)
+    - Amplify (~> 1.15.3)
     - amplify_core
-    - AmplifyPlugins/AWSCognitoAuthPlugin (~> 1.15.2)
+    - AmplifyPlugins/AWSCognitoAuthPlugin (~> 1.15.3)
     - Flutter
     - ObjectMapper
   - amplify_core (0.0.1):
     - Flutter
   - amplify_flutter (0.0.1):
-    - Amplify (~> 1.15.2)
+    - Amplify (~> 1.15.3)
     - amplify_core
-    - AmplifyPlugins/AWSCognitoAuthPlugin (~> 1.15.2)
-    - AWSPluginsCore (~> 1.15.2)
+    - AmplifyPlugins/AWSCognitoAuthPlugin (~> 1.15.3)
+    - AWSPluginsCore (~> 1.15.3)
     - Flutter
-  - AmplifyPlugins/AWSCognitoAuthPlugin (1.15.2):
+  - AmplifyPlugins/AWSCognitoAuthPlugin (1.15.6):
     - AWSAuthCore (~> 2.26.1)
     - AWSCognitoIdentityProvider (~> 2.26.1)
     - AWSCognitoIdentityProviderASF (~> 2.26.1)
     - AWSCore (~> 2.26.1)
     - AWSMobileClient (~> 2.26.1)
-    - AWSPluginsCore (= 1.15.2)
-  - AmplifyPlugins/AWSPinpointAnalyticsPlugin (1.15.2):
+    - AWSPluginsCore (= 1.15.6)
+  - AmplifyPlugins/AWSPinpointAnalyticsPlugin (1.15.6):
     - AWSCore (~> 2.26.1)
     - AWSPinpoint (~> 2.26.1)
-    - AWSPluginsCore (= 1.15.2)
-  - AWSAuthCore (2.26.1):
-    - AWSCore (= 2.26.1)
-  - AWSCognitoIdentityProvider (2.26.1):
-    - AWSCognitoIdentityProviderASF (= 2.26.1)
-    - AWSCore (= 2.26.1)
-  - AWSCognitoIdentityProviderASF (2.26.1)
-  - AWSCore (2.26.1)
-  - AWSMobileClient (2.26.1):
-    - AWSAuthCore (= 2.26.1)
-    - AWSCognitoIdentityProvider (= 2.26.1)
-    - AWSCognitoIdentityProviderASF (= 2.26.1)
-    - AWSCore (= 2.26.1)
-  - AWSPinpoint (2.26.1):
-    - AWSCore (= 2.26.1)
-  - AWSPluginsCore (1.15.2):
-    - Amplify (= 1.15.2)
+    - AWSPluginsCore (= 1.15.6)
+  - AWSAuthCore (2.26.4):
+    - AWSCore (= 2.26.4)
+  - AWSCognitoIdentityProvider (2.26.4):
+    - AWSCognitoIdentityProviderASF (= 2.26.4)
+    - AWSCore (= 2.26.4)
+  - AWSCognitoIdentityProviderASF (2.26.4)
+  - AWSCore (2.26.4)
+  - AWSMobileClient (2.26.4):
+    - AWSAuthCore (= 2.26.4)
+    - AWSCognitoIdentityProvider (= 2.26.4)
+    - AWSCognitoIdentityProviderASF (= 2.26.4)
+    - AWSCore (= 2.26.4)
+  - AWSPinpoint (2.26.4):
+    - AWSCore (= 2.26.4)
+  - AWSPluginsCore (1.15.6):
+    - Amplify (= 1.15.6)
     - AWSCore (~> 2.26.1)
   - Flutter (1.0.0)
   - flutter_local_notifications (0.0.1):
@@ -110,19 +110,19 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/url_launcher/ios"
 
 SPEC CHECKSUMS:
-  Amplify: f0e9e511d05925a1dd7b2b097b13694b2015aa25
-  amplify_analytics_pinpoint: 2ea07b84415b6561dc3a1fb99a87845075ed0548
-  amplify_auth_cognito: ab222144b999a09c4cba4c1942797f195770d776
+  Amplify: d6ec04316dd74852f6a968d89c0f8cab9947d4d5
+  amplify_analytics_pinpoint: ddaccf69451b42f24e91c864d987314fdb090497
+  amplify_auth_cognito: e33255ea6c8fd07a559736e67eef73aa3c0ce12c
   amplify_core: 8b38d20089fe4f225c14db6892f586bd03824a42
-  amplify_flutter: 4502b83ab61612fb34212b0c69c26d09c27197b5
-  AmplifyPlugins: bf1558a4efb6ed94b80eff7a20fda020322409e3
-  AWSAuthCore: 264faaa6af5990af2c77effe8f398a4b80e6c44e
-  AWSCognitoIdentityProvider: 5df455775b57eb4e61862acd88d93e56113950c4
-  AWSCognitoIdentityProviderASF: b2c180f69537d57ff485f7314fd266032ca3f898
-  AWSCore: 0f855e20ccb13e028932b737f0706023a9561399
-  AWSMobileClient: ba255030a481b8a123b21585548e761456efc64b
-  AWSPinpoint: 1f5ee40a31fc0ef8187a671bcb8340139f5ef943
-  AWSPluginsCore: ff09e8b86b7969327a1ba0b8c6946d83008cbf81
+  amplify_flutter: d6dab5d246a6d607af75617d1acf1134ed91b201
+  AmplifyPlugins: 7cfe5a34e97c6091855c10d83ccda538fb371cd1
+  AWSAuthCore: 10fdd6eccf789389d32fc00790e605627e359e8f
+  AWSCognitoIdentityProvider: 677c7fdd1554d1ac66ebcd515047f626883cf2f9
+  AWSCognitoIdentityProviderASF: 2f1f5aa9f69244a88839f128ced10782b19b2717
+  AWSCore: ee7217d84a3ec7f6748462e7f765a794d47f23c6
+  AWSMobileClient: f1ad9a17ff292fbb673689c3442b72fce5467b86
+  AWSPinpoint: 0a5dba4f0bb7613970a67c44b6cf7e08e3ade6fb
+  AWSPluginsCore: 46b75ee57b0a1f10d64f4fa6b3b4153f5900dd4f
   Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
   flutter_local_notifications: 0c0b1ae97e741e1521e4c1629a459d04b9aec743
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
