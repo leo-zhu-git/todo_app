@@ -202,10 +202,13 @@ class TaskHomeState extends State {
                             this.tasklist![position].isDone = 1;
                             this.tasklist![position].dateDone = formattedDate;
                             dbHelper.updateTask(tasklist![position]);
+                            getData();
+
                           } else {
                             this.tasklist![position].isDone = 0;
                             this.tasklist![position].dateDone = '';
                             dbHelper.updateTask(tasklist![position]);
+                            getData();
                           }
                         });
                       },

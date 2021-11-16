@@ -789,8 +789,8 @@ class TaskSearchState extends State {
             status.toString(),
             priority.toString(),
             tag1.toString(),
-            showIsStar!,
-            showIsDone!);
+            _showIsStar!,
+            _showIsDone!);
         tasksFuture.then((result) {
           List<Task> taskList = [];
           count = result.length;
