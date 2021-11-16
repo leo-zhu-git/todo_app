@@ -535,6 +535,14 @@ Plan C - USD 24 | 12 month
     return result;
   }
 
+  Future<int> insertTaskClone(Task task) async {
+    Database? db = await this.db;
+
+    var result = await db!.insert(tblTodo, task.toMapNoID());
+    print(result);
+    return result;
+  }
+
   Future<List> getTasksByID(String taskID) async {
     Database? db = await this.db;
     var result =

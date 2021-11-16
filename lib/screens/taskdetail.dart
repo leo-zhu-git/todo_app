@@ -134,6 +134,13 @@ class TaskDetailState extends State //<TaskDetail>
         : _selectedTag1 = null;
   }
 
+  void navigateToDetail(Task task) async {
+    await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => TaskDetail(task)),
+    );
+  }
+
 //##################Drop Down Items Load from DB #################################################################
   _loadCategories() async {
     var categories = await helper.getCategories();
@@ -346,7 +353,12 @@ class TaskDetailState extends State //<TaskDetail>
                     child: CupertinoDatePicker(
                         initialDateTime: (_dateDue == null)
                             ? DateTime.now()
-                            : DateTime(_dateDue!.year, _dateDue!.month, _dateDue!.day, _timeDue!.hour, _timeDue!.minute),
+                            : DateTime(
+                                _dateDue!.year,
+                                _dateDue!.month,
+                                _dateDue!.day,
+                                _timeDue!.hour,
+                                _timeDue!.minute),
 //                            : (_dateDue!.add(Duration(
 //                                hours: (_timeDue == null)
 //                                    ? DateTime.now().hour
@@ -467,6 +479,15 @@ class TaskDetailState extends State //<TaskDetail>
           },
         ),
         actions: [
+          IconButton(
+              icon: Icon(Icons.content_copy, color: Colors.white),
+              tooltip: 'Clone',
+              onPressed: () {
+                setState(() {
+                  dbHelper.insertTaskClone(task);
+                  print(task.task);
+                });
+              }),
           IconButton(
               icon: Icon(Icons.save_alt, color: Colors.white),
               tooltip: 'Save',
@@ -856,8 +877,6 @@ class TaskDetailState extends State //<TaskDetail>
                 ),
               ),
             ),
-
-
           ],
         ),
       ),
