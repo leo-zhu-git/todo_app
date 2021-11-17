@@ -531,8 +531,10 @@ class TaskSearchState extends State {
                             content: Text("Task Completed",
                                 style: _textStyleControls),
                           ));
+                searchData(_searchText, _selectedStatus, _selectedCategory,
+                    _selectedPriority, _selectedTag1, _showIsStar, _showIsDone);
 
-                          getData();
+//                          getData();
                         });
                       },
                     ),
