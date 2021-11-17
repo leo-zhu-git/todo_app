@@ -14,6 +14,8 @@ import 'package:todo_app/model/globals.dart' as globals;
 DbHelper helper = DbHelper();
 String? _searchText = "";
 TextStyle _textStyleControls = TextStyle(fontSize: 17.0, color: Colors.black87);
+TextStyle _textStyleSnack = TextStyle(
+    fontSize: 16.0, color: Colors.pink[100], fontWeight: FontWeight.w600);
 
 class TaskSearch extends StatefulWidget {
   @override
@@ -482,15 +484,15 @@ class TaskSearchState extends State {
                 this.tasklist[position].isDone = 1;
                 this.tasklist[position].dateDone = formattedDate;
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  backgroundColor: Colors.teal[100],
+                  backgroundColor: Colors.teal[800],
                   duration: Duration(seconds: 3),
-                  content: Text("Task Completed", style: _textStyleControls),
+                  content: Text("Task Completed", style: _textStyleSnack),
                 ));
                 dbHelper.updateTask(tasklist[position]);
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  backgroundColor: Colors.teal[100],
+                  backgroundColor: Colors.teal[800],
                   duration: Duration(seconds: 3),
-                  content: Text("Task Completed", style: _textStyleControls),
+                  content: Text("Task Completed", style: _textStyleSnack),
                 ));
 //                getData();
                 searchData(_searchText, _selectedStatus, _selectedCategory,
@@ -526,10 +528,10 @@ class TaskSearchState extends State {
                             dbHelper.updateTask(tasklist[position]);
                           }
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            backgroundColor: Colors.teal[100],
+                            backgroundColor: Colors.teal[800],
                             duration: Duration(seconds: 3),
                             content: Text("Task Completed",
-                                style: _textStyleControls),
+                                style: _textStyleSnack),
                           ));
                 searchData(_searchText, _selectedStatus, _selectedCategory,
                     _selectedPriority, _selectedTag1, _showIsStar, _showIsDone);

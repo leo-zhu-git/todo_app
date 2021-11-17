@@ -19,6 +19,8 @@ String formattedDate = DateFormat('yyyymmdd').format(currentDate);
 String _searchText = "";
 TextStyle _textStyleControls = TextStyle(
     fontSize: 18.0, color: Colors.black87, fontWeight: FontWeight.w600);
+TextStyle _textStyleSnack = TextStyle(
+    fontSize: 16.0, color: Colors.pink[100], fontWeight: FontWeight.w600);
 
 final List<String> choices = const <String>[
   'Save Task & Back',
@@ -481,9 +483,9 @@ class TaskDetailState extends State //<TaskDetail>
                 setState(() {
                   dbHelper.insertTaskClone(task);
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    backgroundColor: Colors.teal[100],
+                    backgroundColor: Colors.teal[800],
                     duration: Duration(seconds: 3),
-                    content: Text("Task Cloned", style: _textStyleControls),
+                    content: Text("Task Cloned", style: _textStyleSnack),
                   ));
                 });
               }),
@@ -545,16 +547,16 @@ class TaskDetailState extends State //<TaskDetail>
                   if (task.id != null) {
                     result = dbHelper.updateTask(task);
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      backgroundColor: Colors.teal[100],
+                      backgroundColor: Colors.teal[800],
                       duration: Duration(seconds: 3),
-                      content: Text("Task Updated", style: _textStyleControls),
+                      content: Text("Task Updated", style: _textStyleSnack),
                     ));
                   } else {
                     result = dbHelper.insertTask(task);
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      backgroundColor: Colors.teal[100],
+                      backgroundColor: Colors.teal[800],
                       duration: Duration(seconds: 3),
-                      content: Text("Task Saved", style: _textStyleControls),
+                      content: Text("Task Saved", style: _textStyleSnack),
                     ));
                   }
 

@@ -21,6 +21,9 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
   var _editTag1DescriptionController = TextEditingController();
   TextStyle _textStyleControls =
       TextStyle(fontSize: 17.0, color: Colors.black87);
+  TextStyle _textStyleSnack = TextStyle(
+    fontSize: 16.0, color: Colors.pink[100], fontWeight: FontWeight.w600);
+
 
   List<Tag1> _tag1List = [];
 
@@ -90,9 +93,9 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
                     _tag1.description = _tag1DescriptionController.text;
                     _tag1.id = null;
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      backgroundColor: Colors.teal[100],
+                      backgroundColor: Colors.teal[800],
                       duration: Duration(seconds: 3),
-                      content: Text("Tag Added", style: _textStyleControls),
+                      content: Text("Tag Added", style: _textStyleSnack),
                     ));
 
                     var result = _tag1Service.insertTag1s(_tag1);
@@ -156,9 +159,9 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
                     _tag1.name = _editTag1NameController.text;
                     _tag1.description = _editTag1DescriptionController.text;
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      backgroundColor: Colors.teal[100],
+                      backgroundColor: Colors.teal[800],
                       duration: Duration(seconds: 3),
-                      content: Text("Tag Updated", style: _textStyleControls),
+                      content: Text("Tag Updated", style: _textStyleSnack),
                     ));
 
                     var result = await _tag1Service.updateTag1s(_tag1);
@@ -235,11 +238,6 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
           );
         });
   }
-
-//  _showSuccessSnackBar(message) {
-//    var _snackBar = SnackBar(content: message);
-//    _globalKey.currentState.showSnackBar(_snackBar);
-//  }
 
   @override
   Widget build(BuildContext context) {

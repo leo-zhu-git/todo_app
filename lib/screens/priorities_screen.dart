@@ -20,6 +20,9 @@ class _PrioritiesScreenState extends State<PrioritiesScreen> {
   var _editPriorityDescriptionController = TextEditingController();
   TextStyle _textStyleControls =
       TextStyle(fontSize: 17.0, color: Colors.black87);
+      TextStyle _textStyleSnack = TextStyle(
+    fontSize: 16.0, color: Colors.pink[100], fontWeight: FontWeight.w600);
+
 
   List<Priority> _priorityList = [];
 
@@ -89,10 +92,10 @@ class _PrioritiesScreenState extends State<PrioritiesScreen> {
                     _priority.description = _priorityDescriptionController.text;
                     _priority.id = null;
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      backgroundColor: Colors.teal[100],
+                      backgroundColor: Colors.teal[800],
                       duration: Duration(seconds: 3),
                       content:
-                          Text("Priority Added", style: _textStyleControls),
+                          Text("Priority Added", style: _textStyleSnack),
                     ));
 
                     var result = _priorityService.insertPriorities(_priority);
@@ -157,10 +160,10 @@ class _PrioritiesScreenState extends State<PrioritiesScreen> {
                     _priority.description =
                         _editPriorityDescriptionController.text;
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      backgroundColor: Colors.teal[100],
+                      backgroundColor: Colors.teal[800],
                       duration: Duration(seconds: 3),
                       content:
-                          Text("Priority Updated", style: _textStyleControls),
+                          Text("Priority Updated", style: _textStyleSnack),
                     ));
 
                     var result =
@@ -232,24 +235,6 @@ class _PrioritiesScreenState extends State<PrioritiesScreen> {
                     if (result > 0) {
                       Navigator.pop(context);
                       getAllPriorities();
-//                    _showSuccessSnackBar(
-//                      Container(
-//                        color: Colors.tealAccent[100],
-//                        height: 40,
-//                        child: Row(
-//                          mainAxisAlignment: MainAxisAlignment.center,
-//                          children: [
-//                            (Icon(
-//                              Icons.thumb_up,
-//                              color: Colors.black,
-//                            )),
-//                            Text(
-//                              ' Deleted ',
-//                              style: (TextStyle(color: Colors.black)),
-//                            )
-//                          ],
-//                        ),
-//                      ),
                       //                   );
                     }
                   },
@@ -262,11 +247,6 @@ class _PrioritiesScreenState extends State<PrioritiesScreen> {
           );
         });
   }
-
-//  _showSuccessSnackBar(message) {
-//    var _snackBar = SnackBar(content: message);
-//    _globalKey.currentState.showSnackBar(_snackBar);
-//  }
 
   @override
   Widget build(BuildContext context) {

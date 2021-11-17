@@ -31,6 +31,8 @@ CustomSettings? customSetting;
 MySql_DBHelper mysqlDBhelper = MySql_DBHelper();
 TextStyle _textStyleControls = TextStyle(fontSize: 17.0, color: Colors.black87);
 TextStyle _textStyleControlsSub = TextStyle(color: Colors.black);
+TextStyle _textStyleSnack = TextStyle(
+    fontSize: 16.0, color: Colors.pink[100], fontWeight: FontWeight.w600);
 
 class TaskHome extends StatefulWidget {
   @override
@@ -167,9 +169,9 @@ class TaskHomeState extends State {
                 this.tasklist![position].isDone = 1;
                 this.tasklist![position].dateDone = formattedDate;
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  backgroundColor: Colors.teal[100],
+                  backgroundColor: Colors.teal[800],
                   duration: Duration(seconds: 3),
-                  content: Text("Task Completed", style: _textStyleControls),
+                  content: Text("Task Completed", style: _textStyleSnack),
                 ));
                 dbHelper.updateTask(tasklist![position]);
                 getData();
@@ -206,10 +208,10 @@ class TaskHomeState extends State {
                             getData();
                           }
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            backgroundColor: Colors.teal[100],
+                            backgroundColor: Colors.teal[800],
                             duration: Duration(seconds: 3),
                             content:
-                                Text("Task Saved", style: _textStyleControls),
+                                Text("Task Saved", style: _textStyleSnack),
                           ));
                         });
                       },

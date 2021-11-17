@@ -20,6 +20,9 @@ class _StatusesScreenState extends State<StatusesScreen> {
   var _editStatusDescriptionController = TextEditingController();
   TextStyle _textStyleControls =
       TextStyle(fontSize: 17.0, color: Colors.black87);
+  TextStyle _textStyleSnack = TextStyle(
+    fontSize: 16.0, color: Colors.pink[100], fontWeight: FontWeight.w600);
+
 
   List<Status> _statusList = [];
 
@@ -89,9 +92,9 @@ class _StatusesScreenState extends State<StatusesScreen> {
                     _status.description = _statusDescriptionController.text;
                     _status.id = null;
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      backgroundColor: Colors.teal[100],
+                      backgroundColor: Colors.teal[800],
                       duration: Duration(seconds: 3),
-                      content: Text("Status Added", style: _textStyleControls),
+                      content: Text("Status Added", style: _textStyleSnack),
                     ));
 
                     var result = _statusService.insertStatuses(_status);
@@ -155,10 +158,10 @@ class _StatusesScreenState extends State<StatusesScreen> {
                     _status.name = _editStatusNameController.text;
                     _status.description = _editStatusDescriptionController.text;
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      backgroundColor: Colors.teal[100],
+                      backgroundColor: Colors.teal[800],
                       duration: Duration(seconds: 3),
                       content:
-                          Text("Status Updated", style: _textStyleControls),
+                          Text("Status Updated", style: _textStyleSnack),
                     ));
 
                     var result = await _statusService.updateStatuses(_status);
