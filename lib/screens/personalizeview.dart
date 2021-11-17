@@ -39,10 +39,6 @@ class SortItem {
       SortItem(5, 'Status'),
       SortItem(6, 'Priority'),
       SortItem(7, 'Tag'),
-//      SortItem(7, 'Action'),
-//      SortItem(8, 'Context'),
-//      SortItem(9, 'Location'),
-//      SortItem(11, 'Goal'),
       SortItem(8, 'Focus'),
       SortItem(9, 'Done'),
     ];
@@ -165,10 +161,6 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
   List<CustomDropdownItem> _statuses = [];
   List<CustomDropdownItem> _priorities = [];
   List<CustomDropdownItem> _tag1s = [];
-//  List<CustomDropdownItem> _action1s = [];
-//  List<CustomDropdownItem> _context1s = [];
-//  List<CustomDropdownItem> _location1s = [];
-//  List<CustomDropdownItem> _goal1s = [];
   List<Task> tasklist = [];
   int count = 0;
   TextEditingController searchController = TextEditingController();
@@ -176,10 +168,8 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
   var _selectedStatus = null;
   var _selectedPriority = null;
   var _selectedTag1 = null;
-//  var _selectedAction1 = null;
-//  var _selectedContext1 = null;
-//  var _selectedLocation1 = null;
-//  var _selectedGoal1 = null;
+  TextStyle _textStyleSnack = TextStyle(
+      fontSize: 16.0, color: Colors.pink[100], fontWeight: FontWeight.w600);
 
   //
   @override
@@ -195,10 +185,6 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     _loadStatuses();
     _loadPriorities();
     _loadTag1s();
-//    _loadAction1s();
-//    _loadContext1s();
-//    _loadLocation1s();
-//    _loadGoal1s();
 
     _getCustomSettings();
     ////////////////////////////
@@ -482,10 +468,6 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
   }
 
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
-//  _showSuccessSnackBar(message) {
-//    var _snackBar = SnackBar(content: message);
-//    _globalKey.currentState.showSnackBar(_snackBar);
-//  }
 
   Widget build(BuildContext context) {
 //    TextStyle textStyle = Theme.of(context).textTheme.headline6;
@@ -511,7 +493,9 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
           tooltip: 'Home',
           onPressed: () {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text("Exit to Home"),
+              backgroundColor: Colors.teal[800],
+              duration: Duration(seconds: 3),
+              content: Text("Exit to Home", style: _textStyleSnack),
             ));
             Navigator.of(context)
                 .push(MaterialPageRoute(builder: (context) => TaskHome()));
@@ -656,7 +640,10 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 }
               });
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: Text("Personalized Successfully Saved"),
+                backgroundColor: Colors.teal[800],
+                duration: Duration(seconds: 3),
+                content: Text("Personalized Successfully Saved",
+                    style: _textStyleSnack),
               ));
 
               Navigator.of(context).pushNamed('/dashboard');
