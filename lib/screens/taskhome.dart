@@ -2,6 +2,7 @@ import 'dart:ffi';
 
 import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_badger/flutter_app_badger.dart';
 import 'package:todo_app/model/category.dart';
 import 'package:todo_app/model/action1.dart';
 import 'package:todo_app/model/context1.dart';
@@ -66,6 +67,7 @@ class TaskHomeState extends State {
     }
 
     return Scaffold(
+
       backgroundColor: Colors.teal[50],
       drawer: DrawerNagivation(),
       appBar: AppBar(
@@ -84,7 +86,6 @@ class TaskHomeState extends State {
         backgroundColor: Colors.teal[800],
         elevation: 8,
         title:
-//        Center(
             Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -92,21 +93,8 @@ class TaskHomeState extends State {
             Text(count.toString(), style: TextStyle(color: Colors.pink[100])),
           ],
         ),
-//          child: Row(
-//            children: <Widget>[
-//              Center(
-//                child: Badge(
-//                  child: Icon(Icons.home, color: Colors.pink[100]),
-//                  shape: BadgeShape.square,
-//                  position: BadgePosition.topEnd(),
-//                  badgeContent: Text(count.toString(),
-//                      style: TextStyle(color: Colors.black)),
-//                  badgeColor: Colors.yellow[200]!,
-//                ),
-//              ),
-//            ],
-//          ),
-//        ),
+
+
         actions: <Widget>[
 //          IconButton(
 //              icon: const Icon(Icons.sync, color: Colors.white),
@@ -164,6 +152,7 @@ class TaskHomeState extends State {
             key: new UniqueKey(),
             onDismissed: (direction) {
               setState(() {
+                FlutterAppBadger.updateBadgeCount(1); 
                 DateTime now = DateTime.now();
                 String formattedDate = DateFormat('yyyy-mm-dd').format(now);
                 this.tasklist![position].isDone = 1;

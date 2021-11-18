@@ -483,11 +483,6 @@ class TaskSearchState extends State {
                 String formattedDate = DateFormat('yyyy-mm-dd').format(now);
                 this.tasklist[position].isDone = 1;
                 this.tasklist[position].dateDone = formattedDate;
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  backgroundColor: Colors.teal[800],
-                  duration: Duration(seconds: 3),
-                  content: Text("Task Completed", style: _textStyleSnack),
-                ));
                 dbHelper.updateTask(tasklist[position]);
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                   backgroundColor: Colors.teal[800],
@@ -530,13 +525,17 @@ class TaskSearchState extends State {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             backgroundColor: Colors.teal[800],
                             duration: Duration(seconds: 3),
-                            content: Text("Task Completed",
-                                style: _textStyleSnack),
+                            content:
+                                Text("Task Completed", style: _textStyleSnack),
                           ));
-                searchData(_searchText, _selectedStatus, _selectedCategory,
-                    _selectedPriority, _selectedTag1, _showIsStar, _showIsDone);
-
-//                          getData();
+                          searchData(
+                              _searchText,
+                              _selectedStatus,
+                              _selectedCategory,
+                              _selectedPriority,
+                              _selectedTag1,
+                              _showIsStar,
+                              _showIsDone);
                         });
                       },
                     ),

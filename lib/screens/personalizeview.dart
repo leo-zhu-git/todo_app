@@ -642,7 +642,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 backgroundColor: Colors.teal[800],
                 duration: Duration(seconds: 3),
-                content: Text("Personalized Successfully Saved",
+                content: Text("Personalized Saved",
                     style: _textStyleSnack),
               ));
 

@@ -11,6 +11,8 @@ class WipeScreen extends StatefulWidget {
 
 class _WipeScreenState extends State<WipeScreen> {
   late GlobalKey<ScaffoldState> _key;
+  TextStyle _textStyleSnack = TextStyle(
+      fontSize: 16.0, color: Colors.pink[100], fontWeight: FontWeight.w600);
 
   @override
   void initState() {
@@ -49,25 +51,6 @@ class _WipeScreenState extends State<WipeScreen> {
           actionChips(),
         ],
       ),
-//      bottomNavigationBar: Container(
-//        height: 55.0,
-//        child: BottomAppBar(
-//          color: Colors.teal[800],
-//          child: Row(
-//            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//            children: <Widget>[
-//              IconButton(
-//                icon: Icon(Icons.home, color: Colors.white),
-//                tooltip: 'Back to Home',
-//                onPressed: () {
-//                  Navigator.of(context).push(
-//                      MaterialPageRoute(builder: (context) => TaskHome()));
-//                },
-//              ),
-//            ],
-//          ),
-//        ),
-//      ),
     );
   }
 
@@ -140,10 +123,6 @@ class _WipeScreenState extends State<WipeScreen> {
       margin: EdgeInsets.all(6.0),
       child: Chip(
         labelPadding: EdgeInsets.all(5.0),
-//          avatar: CircleAvatar(
-//            backgroundColor: Colors.green,
-//            child: Text('AB'),
-//          ),
         label: Text(label,
             style: TextStyle(
               color: Colors.white,
@@ -155,11 +134,6 @@ class _WipeScreenState extends State<WipeScreen> {
       ),
     );
   }
-
-//  _showSuccessSnackBar(message) {
-//    var _snackBar = SnackBar(content: message);
-//    _key.currentState.showSnackBar(_snackBar);
-//  }
 
   _ConfirmDialogue(int _option, String message) {
     return showDialog(
@@ -180,6 +154,7 @@ class _WipeScreenState extends State<WipeScreen> {
                     )),
                 ElevatedButton(
                     onPressed: () async {
+                      Navigator.of(context).pushNamed('/loading');
                       if (_option == 0) {
                         mysqlDBhelper.wipeTaskDataToMySql();
                         //mysqlDBhelper.wipeActionToMySql();
@@ -190,24 +165,13 @@ class _WipeScreenState extends State<WipeScreen> {
                         mysqlDBhelper.wipePriorityToMySql();
                         mysqlDBhelper.wipeStatusToMySql();
                         mysqlDBhelper.wipeTagToMySql();
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          backgroundColor: Colors.teal[800],
+                          duration: Duration(seconds: 3),
+                          content: Text("DEVICE -> CLOUD wipe SUCCESSFUL",
+                              style: _textStyleSnack),
+                        ));
                         Navigator.pop(context);
-//                      _showSuccessSnackBar(Container(
-//                        color: Colors.tealAccent[100],
-//                        height: 40,
-//                        child: Row(
-//                          mainAxisAlignment: MainAxisAlignment.center,
-//                          children: [
-//                            (Icon(
-//                              Icons.thumb_up,
-//                              color: Colors.black,
-//                            )),
-//                            Text(
-//                              ' DEVICE -> CLOUD wipe SUCCESSFUL ',
-//                              style: (TextStyle(color: Colors.black)),
-//                            ),
-//                          ],
-//                        ),
-//                      ));
                       } else {
                         mysqlDBhelper.wipeTaskDataFromMySql();
                         mysqlDBhelper.syncStatusesData();
@@ -219,24 +183,13 @@ class _WipeScreenState extends State<WipeScreen> {
                         mysqlDBhelper.syncTag1sData();
                         // mysqlDBhelper.syncGoal1sData();
 
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          backgroundColor: Colors.teal[800],
+                          duration: Duration(seconds: 3),
+                          content: Text("CLOUD ->DEVICE wipe SUCCESSFUL",
+                              style: _textStyleSnack),
+                        ));
                         Navigator.pop(context);
-//                      _showSuccessSnackBar(Container(
-//                        color: Colors.tealAccent[100],
-//                        height: 40,
-//                        child: Row(
-//                          mainAxisAlignment: MainAxisAlignment.center,
-//                          children: [
-//                            (Icon(
-//                              Icons.thumb_up,
-//                              color: Colors.black,
-//                            )),
-//                            Text(
-//                              ' CLOUD ->DEVICE wipe SUCCESSFUL ',
-//                              style: (TextStyle(color: Colors.black)),
-//                            ),
-//                          ],
-//                        ),
-//                      ));
                       }
                     },
                     style: ElevatedButton.styleFrom(
