@@ -58,10 +58,6 @@ class ShowItem {
       ShowItem(3, 'Status'),
       ShowItem(4, 'Priority'),
       ShowItem(5, 'Tag'),
-//      ShowItem(5, 'Action'),
-//      ShowItem(6, 'Context'),
-//      ShowItem(7, 'Location'),
-//      ShowItem(9, 'Goal'),
       ShowItem(6, 'Focus'),
     ];
   }
@@ -108,7 +104,8 @@ class FilterDateDue {
       FilterDateDue(5, 'Any Due Date'),
       FilterDateDue(6, 'No Due Date'),
       FilterDateDue(7, 'Overdues Only'),
-      FilterDateDue(8, 'Today and Overdues'),
+      FilterDateDue(8, 'Overdues and Today'),
+      FilterDateDue(9, 'Overdues, Today and Tomorrow'),
     ];
   }
 }

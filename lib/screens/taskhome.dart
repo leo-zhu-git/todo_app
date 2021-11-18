@@ -611,7 +611,10 @@ class TaskHomeState extends State {
         return "Overdues Only";
         break;
       case 8:
-        return "Today and Overdues";
+        return "Overdues and Today";
+        break;
+      case 9:
+        return "Overdues, Today and Tomorrow";
         break;
       default:
         return "All Tasks";

@@ -59,10 +59,6 @@ class DbHelper {
   String colfilterStatus = 'filterStatus';
   String colfilterPriority = 'filterPriority';
   String colfilterTag1 = 'filterTag';
-  //String colfilterAction = 'filterAction';
-  //String colfilterContext = 'filterContext';
-  //String colfilterLocation = 'filterLocation';
-  //String colfilterGoal = 'filterGoal';
   String colfilterIsStar = 'filterIsStar';
   String colfilterIsDone = 'filterIsDone';
 
@@ -88,14 +84,6 @@ class DbHelper {
     return dbTodovn;
   }
 
-//  void _createDb(Database db, int newVersion) async {
-//    await db.execute(
-//        "CREATE TABLE $tblTodo($colId INTEGER PRIMARY KEY, $colTask TEXT, $colNote TEXT, " +
-//            "$colDateDue TEXT, $colTimeDue TEXT, $colStatus TEXT, $colPriority TEXT,  " +
-//            "$colCategory TEXT, $colAction1 TEXT, " +
-//            "$colContext1 TEXT, $colLocation1 TEXT, $colTag1 TEXT, $colGoal1 TEXT, " +
-//            "$colIsStar INTEGER, $colIsDone INTEGER, $colDateDone TEXT, $colLastModified TEXT)");
-
   void _createDb(Database db, int newVersion) async {
     await db.execute(
         "CREATE TABLE $tblTodo($colId INTEGER PRIMARY KEY, $colTask TEXT, $colNote TEXT, " +
@@ -103,16 +91,6 @@ class DbHelper {
             "$colCategory TEXT, $colStatus TEXT, " +
             "$colPriority TEXT, $colTag1 TEXT, " +
             "$colIsStar INTEGER, $colIsDone INTEGER, $colDateDone TEXT, $colLastModified TEXT)");
-
-//this table need to include hash key to track users.... i would say all the tables
-//    await db.execute(
-//        "CREATE TABLE $tblCustomSettings($colId INTEGER PRIMARY KEY, $colsortField1 TEXT, $colsortOrder1 TEXT, $colsortField2 TEXT, " +
-//            "$colsortOrder2 TEXT, $colsortField3 TEXT, $colsortOrder3 TEXT, $colshowMain1 TEXT,$colshowMain2 TEXT, " +
-//            "$colshowSec1 TEXT,$colshowSec2 TEXT,$colshowSec3 TEXT, " +
-//            "$colfilterDateDue TEXT, $colfilterTimeDue TEXT, " +
-//            "$colfilterStatus TEXT, $colfilterPriority TEXT,  " +
-//            "$colfilterCategory TEXT, $colfilterAction TEXT, $colfilterContext TEXT, $colfilterLocation TEXT, $colfilterTag TEXT, " +
-//            "$colfilterGoal TEXT, $colfilterIsStar INTEGER, $colfilterIsDone INTEGER)");
 
     await db.execute(
         "CREATE TABLE $tblCustomSettings($colId INTEGER PRIMARY KEY, $colsortField1 TEXT, $colsortOrder1 TEXT, $colsortField2 TEXT, " +
@@ -137,25 +115,9 @@ class DbHelper {
     await db.execute(
         "CREATE TABLE priorities(id INTEGER PRIMARY KEY, name TEXT, description TEXT)");
 
-    // Create table actions
-//    await db.execute(
-//        "CREATE TABLE action1s(id INTEGER PRIMARY KEY, name TEXT, description TEXT)");
-
-    // Create table contexts
-//    await db.execute(
-//        "CREATE TABLE context1s(id INTEGER PRIMARY KEY, name TEXT, description TEXT)");
-
-    // Create table locations
-//    await db.execute(
-//        "CREATE TABLE location1s(id INTEGER PRIMARY KEY, name TEXT, description TEXT)");
-
     // Create table tags
     await db.execute(
         "CREATE TABLE tag1s(id INTEGER PRIMARY KEY, name TEXT, description TEXT)");
-
-    // Create table goals
-//    await db.execute(
-//        "CREATE TABLE goal1s(id INTEGER PRIMARY KEY, name TEXT, description TEXT)");
 
     // Create table USers
     await db.execute(
@@ -281,110 +243,6 @@ class DbHelper {
     await db.execute(
         "INSERT INTO tag1s ( 'name', 'description')  values (?, ?)",
         ['Friend', '2Bootstrap - please delete or rename if necessary']);
-
-    //////
-    //Create Default Values for Action
-    //////
-//    await db.execute(
-//        "INSERT INTO action1s ( 'name', 'description')  values (?, ?)",
-//        ['Call', '2Bootstrap - please delete or rename if necessary']);
-
-//    await db.execute(
-//        "INSERT INTO action1s ( 'name', 'description')  values (?, ?)",
-//        ['Email', '2Bootstrap - please delete or rename if necessary']);
-
-//    await db.execute(
-//        "INSERT INTO action1s ( 'name', 'description')  values (?, ?)",
-//        ['Meet', '2Bootstrap - please delete or rename if necessary']);
-
-//    await db.execute(
-//        "INSERT INTO action1s ( 'name', 'description')  values (?, ?)",
-//        ['Buy', '1Bootstrap - please delete or rename if necessary']);
-
-//    await db.execute(
-//        "INSERT INTO action1s ( 'name', 'description')  values (?, ?)",
-//        ['Pay', '1Bootstrap - please delete or rename if necessary']);
-
-//    await db.execute(
-//        "INSERT INTO action1s ( 'name', 'description')  values (?, ?)",
-//        ['Read', '1Bootstrap - please delete or rename if necessary']);
-
-//    await db.execute(
-//        "INSERT INTO action1s ( 'name', 'description')  values (?, ?)",
-//        ['Study', '1Bootstrap - please delete or rename if necessary']);
-
-//    await db.execute(
-//        "INSERT INTO action1s ( 'name', 'description')  values (?, ?)",
-//        ['Print', '1Bootstrap - please delete or rename if necessary']);
-
-    //////
-    //Create Default Values for Context
-    //////
-//    await db.execute(
-//        "INSERT INTO context1s ( 'name', 'description')  values (?, ?)",
-//        ['Quiet Time', '1Bootstrap - please delete or rename if necessary']);
-
-//    await db.execute(
-//        "INSERT INTO context1s ( 'name', 'description')  values (?, ?)", [
-//      'Internet Time',
-//      '2Bootstrap - please delete or rename if necessary'
-//    ]);
-
-//    await db.execute(
-//        "INSERT INTO context1s ( 'name', 'description')  values (?, ?)",
-//        ['Morning', '3Bootstrap - please delete or rename if necessary']);
-
-//    await db.execute(
-//        "INSERT INTO context1s ( 'name', 'description')  values (?, ?)",
-//        ['Afternoon', '4Bootstrap - please delete or rename if necessary']);
-
-//    await db.execute(
-//        "INSERT INTO context1s ( 'name', 'description')  values (?, ?)",
-//        ['Evening', '5Bootstrap - please delete or rename if necessary']);
-
-    //////
-    //Create Default Values for Locations
-    //////
-//    await db.execute(
-//        "INSERT INTO location1s ( 'name', 'description')  values (?, ?)",
-//        ['Home', '1Bootstrap - please delete or rename if necessary']);
-
-//    await db.execute(
-//        "INSERT INTO location1s ( 'name', 'description')  values (?, ?)",
-//        ['Grocery', '2Bootstrap - please delete or rename if necessary']);
-
-//    await db.execute(
-//        "INSERT INTO location1s ( 'name', 'description')  values (?, ?)",
-//        ['Outdoor', '3Bootstrap - please delete or rename if necessary']);
-
-    //////
-    //Create Default Values for Goals
-    //////
-//    await db.execute(
-//        "INSERT INTO goal1s ( 'name', 'description')  values (?, ?)",
-//        ['Eat Healthy', '1Bootstrap - please delete or rename if necessary']);
-
-//    await db.execute(
-//        "INSERT INTO goal1s ( 'name', 'description')  values (?, ?)",
-//        ['Drink Water', '2Bootstrap - please delete or rename if necessary']);
-
-//    await db.execute(
-//        "INSERT INTO goal1s ( 'name', 'description')  values (?, ?)",
-//        ['Exercise', '3Bootstrap - please delete or rename if necessary']);
-
-//    await db.execute(
-//        "INSERT INTO goal1s ( 'name', 'description')  values (?, ?)",
-//        ['Meditate', '4Bootstrap - please delete or rename if necessary']);
-
-//    await db.execute(
-//        "INSERT INTO goal1s ( 'name', 'description')  values (?, ?)",
-//        ['Read', '5Bootstrap - please delete or rename if necessary']);
-
-//    await db.execute(
-//        "INSERT INTO goal1s ( 'name', 'description')  values (?, ?)", [
-//      'Better Sleep',
-//      '6Bootstrap - please delete or rename if necessary'
-//    ]);
 
     //Default value for Custom Setting
     CustomSettings customSetting = new CustomSettings(
@@ -679,8 +537,12 @@ Plan C - USD 24 | 12 month
       _endDate = formattedYesterday;
       queryStr = queryStr +
           " and ($colDateDue <= '$_endDate') and ($colDateDue != '')";
-    } else if (colfilterDateDue == "Today and Overdues") {
+    } else if (colfilterDateDue == "Overdues and Today") {
       _endDate = formattedToday;
+      queryStr = queryStr +
+          " and ($colDateDue <= '$_endDate') and ($colDateDue != '')";
+    } else if (colfilterDateDue == "Overdues, Today and Tomorrow") {
+      _endDate = formattedTomo;
       queryStr = queryStr +
           " and ($colDateDue <= '$_endDate') and ($colDateDue != '')";
     } else if (colfilterDateDue == "All Tasks") {
