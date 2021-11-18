@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:todo_app/screens/taskhome.dart';
 import 'package:todo_app/util/dbhelper.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:todo_app/screens/loading.dart';
 
 class WipeScreen extends StatefulWidget {
   @override
@@ -135,6 +136,36 @@ class _WipeScreenState extends State<WipeScreen> {
     );
   }
 
+  Future deviceToCloud() async {
+    EasyLoading.show(status: "Wiping...");
+    mysqlDBhelper.wipeTaskDataToMySql();
+    mysqlDBhelper.wipeCatatoryToMySql();
+    mysqlDBhelper.wipeStatusToMySql();
+    mysqlDBhelper.wipePriorityToMySql();
+    mysqlDBhelper.wipeTagToMySql();
+//    var response = await request.send();
+//    if (response.statusCode ==200) {
+//      EasyLoading.show(status: "Successful!");
+//      Navigator.pop(context);
+//      EasyLoading.dismiss();
+//    }
+  }
+
+  Future cloudToCDevice() async {
+    EasyLoading.show(status: "Wiping...");
+    mysqlDBhelper.wipeTaskDataFromMySql();
+    mysqlDBhelper.syncCategoriesData();
+    mysqlDBhelper.syncStatusesData();
+    mysqlDBhelper.syncPrioritiesData();
+    mysqlDBhelper.syncTag1sData();
+//    var response = await request.send();
+//    if (response.statusCode ==200) {
+//      EasyLoading.show(status: "Successful!");
+//      Navigator.pop(context);
+//      EasyLoading.dismiss();
+//    }
+  }
+
   _ConfirmDialogue(int _option, String message) {
     return showDialog(
         context: context,
@@ -154,42 +185,10 @@ class _WipeScreenState extends State<WipeScreen> {
                     )),
                 ElevatedButton(
                     onPressed: () async {
-                      Navigator.of(context).pushNamed('/loading');
                       if (_option == 0) {
-                        mysqlDBhelper.wipeTaskDataToMySql();
-                        //mysqlDBhelper.wipeActionToMySql();
-                        mysqlDBhelper.wipeCatatoryToMySql();
-                        //mysqlDBhelper.wipeGoalToMySql();
-                        //mysqlDBhelper.wipeContextToMySql();
-                        //mysqlDBhelper.wipeLocationToMySql();
-                        mysqlDBhelper.wipePriorityToMySql();
-                        mysqlDBhelper.wipeStatusToMySql();
-                        mysqlDBhelper.wipeTagToMySql();
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          backgroundColor: Colors.teal[800],
-                          duration: Duration(seconds: 3),
-                          content: Text("DEVICE -> CLOUD wipe SUCCESSFUL",
-                              style: _textStyleSnack),
-                        ));
-                        Navigator.pop(context);
+                        deviceToCloud();
                       } else {
-                        mysqlDBhelper.wipeTaskDataFromMySql();
-                        mysqlDBhelper.syncStatusesData();
-                        mysqlDBhelper.syncPrioritiesData();
-                        mysqlDBhelper.syncCategoriesData();
-                        // mysqlDBhelper.syncAction1sData();
-                        // mysqlDBhelper.syncContext1sData();
-                        // mysqlDBhelper.syncLocation1sData();
-                        mysqlDBhelper.syncTag1sData();
-                        // mysqlDBhelper.syncGoal1sData();
-
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          backgroundColor: Colors.teal[800],
-                          duration: Duration(seconds: 3),
-                          content: Text("CLOUD ->DEVICE wipe SUCCESSFUL",
-                              style: _textStyleSnack),
-                        ));
-                        Navigator.pop(context);
+                        cloudToCDevice();
                       }
                     },
                     style: ElevatedButton.styleFrom(
@@ -204,3 +203,5 @@ class _WipeScreenState extends State<WipeScreen> {
         });
   }
 }
+
+class Loading {}

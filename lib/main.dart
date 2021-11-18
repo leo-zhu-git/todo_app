@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:todo_app/model/taskclass.dart';
 import 'package:todo_app/screens/LocalNotification_screen.dart';
 import 'package:todo_app/screens/loading.dart';
 import 'package:todo_app/screens/signUp.dart';
 import 'package:todo_app/screens/signin.dart';
 import 'package:todo_app/screens/personalizeview.dart';
+import 'package:todo_app/screens/loading.dart';
 import 'package:todo_app/screens/syncview.dart';
 import 'package:todo_app/screens/swipe.dart';
 import 'package:todo_app/screens/taskdetail.dart';
@@ -21,17 +23,32 @@ import 'screens/confirm_reset.dart';
 //import 'package:todo_app/screens/ExpandApp.dart';
 
 void main() {
-//  runApp(MyApp());
-  // runApp(new TileApp1());
-  //runApp(Swipe());
-
   runApp(MyApp());
+  configLoading();
+}
+
+void configLoading() {
+  EasyLoading.instance
+    ..displayDuration = const Duration(milliseconds: 2000)
+    ..indicatorType = EasyLoadingIndicatorType.fadingCircle
+    ..loadingStyle = EasyLoadingStyle.dark
+    ..indicatorSize = 45.0
+    ..radius = 10.0
+    ..progressColor = Colors.yellow
+    ..backgroundColor = Colors.green
+    ..indicatorColor = Colors.yellow
+    ..textColor = Colors.yellow
+    ..maskColor = Colors.blue.withOpacity(0.5)
+    ..userInteractions = true
+    ..dismissOnTap = false;
+//    ..customAnimation = CustomAnimation();
 }
 
 class MyApp extends StatelessWidget {
+  
   // This widget is the root of your application.
 
-    initPlatformState() async {
+  initPlatformState() async {
     String appBadgeSupported;
     try {
       bool res = await FlutterAppBadger.isAppBadgeSupported();
@@ -54,7 +71,7 @@ class MyApp extends StatelessWidget {
 //    });
   }
 
-    void _addBadge() {
+  void _addBadge() {
     FlutterAppBadger.updateBadgeCount(1);
   }
 
@@ -70,7 +87,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.teal,
       ),
-      
+      builder: EasyLoading.init(),
       onGenerateRoute: (settings) {
         if (settings.name == '/confirm') {
           return PageRouteBuilder(
@@ -108,18 +125,17 @@ class MyApp extends StatelessWidget {
           );
         }
 
-        if (settings.name == '/loading') {
-          return PageRouteBuilder(
-            pageBuilder: (_, __, ___) => Loading(),
-            transitionsBuilder: (_, __, ___, child) => child,
-          );
-        }
+//        if (settings.name == '/loadingview') {
+//          return PageRouteBuilder(
+//            pageBuilder: (_, __, ___) => LoadingView(),
+//            transitionsBuilder: (_, __, ___, child) => child,
+//          );
+//        }
 
-        FlutterAppBadger.updateBadgeCount(2); 
+        FlutterAppBadger.updateBadgeCount(2);
 
         return MaterialPageRoute(builder: (_) => EntryScreen());
       },
     );
   }
 }
-

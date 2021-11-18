@@ -29,7 +29,7 @@ class _SyncViewState extends State<SyncView> {
           child: Text('Sync - never lose your data'),
         ),
       ),
-      body: Loading(),
+//      body: LoadingView(),
     );
   }
 }

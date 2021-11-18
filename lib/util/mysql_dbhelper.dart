@@ -135,10 +135,6 @@ class MySql_DBHelper {
             appStatusID,
             appPriorityID,
             appTagID,
-//            appActionID,
-//            appContextID,
-//            appLocationID,
-//            appGoalID,
             int.parse(swiperDataList[i]['taskIsStar']),
             //int.parse(swiperDataList[i]['TaskStar']),
             int.parse(swiperDataList[i]['TaskIsDone']),
@@ -146,8 +142,6 @@ class MySql_DBHelper {
             swiperDataList[i]['LastModified'],
             "",
             "",
-//            "",
-//            "",
             "");
         print("TaskID" + appTaskID);
         print("IIII::" + i.toString());
@@ -155,24 +149,9 @@ class MySql_DBHelper {
         if (i == 190 || i == 191) {
           print("stop");
         }
-        // print("CategoryID::::::::" + swiperDataList[i]['TaskCategory']);
-        // print("ContextID::::::::" + swiperDataList[i]['TaskContext']);
-        // print("TagID::::::::" + swiperDataList[i]['TaskTag']);
 
         helper.insertTask(task);
 
-        // final tasksFuture = helper.getTasksByID(appTaskID);
-        // tasksFuture.then((result) {
-        //   count = result.length;
-
-        // if (count > 0) {
-        //   helper.updateTask(task);
-        //   //helper.deleteTask(swiperDataList[i]['TaskID']);
-        // } else {
-        //   helper.insertTask(task);
-        //   //helper.deleteTask(swiperDataList[i]['TaskID']);
-        // }
-        // });
       }
     });
   }
@@ -203,16 +182,10 @@ class MySql_DBHelper {
             swiperDataList[i]['TaskStatus'],
             swiperDataList[i]['TaskPriority'],
             swiperDataList[i]['TaskTag'],
-//            swiperDataList[i]['TaskAction'],
-//            swiperDataList[i]['TaskContext'],
-//            swiperDataList[i]['TaskLocation'],
-//            swiperDataList[i]['TaskGoal'],
             int.parse(swiperDataList[i]['TaskIsStar']),
             int.parse(swiperDataList[i]['TaskIsDone']),
             swiperDataList[i]['TaskDateDone'],
             swiperDataList[i]['LastModified'],
-//            "",
-//            "",
             "",
             "",
             "");

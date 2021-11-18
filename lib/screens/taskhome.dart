@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:ffi';
 
 import 'package:flutter/rendering.dart';
@@ -21,6 +22,7 @@ import 'package:intl/intl.dart';
 import 'package:badges/badges.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:todo_app/util/mysql_dbhelper.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:todo_app/model/globals.dart' as globals;
 
 DateTime currentDate = DateTime.now();
@@ -42,6 +44,7 @@ class TaskHome extends StatefulWidget {
 
 class TaskHomeState extends State {
   DbHelper helper = DbHelper();
+  Timer? _timer;
 
   List<Task>? tasklist;
   List<DisplayTask>? displaytasklist;
@@ -55,6 +58,13 @@ class TaskHomeState extends State {
     displaytasklist = [];
     _getCustomSettings();
     getData();
+    EasyLoading.addStatusCallback((status) {
+      print('EasyLoading Status $status');
+      if (status == EasyLoadingStatus.dismiss) {
+        _timer  ?.cancel();
+      }
+    });
+    EasyLoading.showSuccess('EasyLoader in InitState');
   }
 
   @override
@@ -67,7 +77,6 @@ class TaskHomeState extends State {
     }
 
     return Scaffold(
-
       backgroundColor: Colors.teal[50],
       drawer: DrawerNagivation(),
       appBar: AppBar(
@@ -82,19 +91,15 @@ class TaskHomeState extends State {
             ),
           ),
         ),
-
         backgroundColor: Colors.teal[800],
         elevation: 8,
-        title:
-            Row(
+        title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Icons.home, color: Colors.pink[100]),
             Text(count.toString(), style: TextStyle(color: Colors.pink[100])),
           ],
         ),
-
-
         actions: <Widget>[
 //          IconButton(
 //              icon: const Icon(Icons.sync, color: Colors.white),
@@ -116,7 +121,8 @@ class TaskHomeState extends State {
               IconButton(
                 icon: Icon(Icons.settings, color: Colors.white),
                 onPressed: () {
-                  Navigator.of(context).pushNamed('/personalizeview');
+//                  Navigator.of(context).pushNamed('/personalizeview');
+                  Navigator.of(context).pushNamed('/loadingview');
                 },
               ),
               IconButton(
@@ -152,7 +158,7 @@ class TaskHomeState extends State {
             key: new UniqueKey(),
             onDismissed: (direction) {
               setState(() {
-                FlutterAppBadger.updateBadgeCount(1); 
+                FlutterAppBadger.updateBadgeCount(1);
                 DateTime now = DateTime.now();
                 String formattedDate = DateFormat('yyyy-mm-dd').format(now);
                 this.tasklist![position].isDone = 1;
@@ -199,8 +205,7 @@ class TaskHomeState extends State {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             backgroundColor: Colors.teal[800],
                             duration: Duration(seconds: 3),
-                            content:
-                                Text("Task Saved", style: _textStyleSnack),
+                            content: Text("Task Saved", style: _textStyleSnack),
                           ));
                         });
                       },
