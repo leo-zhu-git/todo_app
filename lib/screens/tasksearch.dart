@@ -308,33 +308,37 @@ class TaskSearchState extends State {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
-                            DropdownButtonHideUnderline(
-                              child: DropdownButton<String?>(
-                                  isExpanded: true,
-                                  items: _categories
-                                      .map((CustomDropdownItem value) {
-                                    return DropdownMenuItem<String>(
-                                        value: value.id,
-                                        child: Text(
-                                          value.name!,
-                                          overflow: TextOverflow.ellipsis,
-                                        ));
-                                  }).toList(),
-                                  style: _textStyleControls,
-                                  value: _selectedCategory,
-                                  onChanged: (newValue) {
-                                    setState(() {
-                                      _selectedCategory = newValue;
-                                      searchData(
-                                          _searchText,
-                                          _selectedCategory,
-                                          _selectedStatus,
-                                          _selectedPriority,
-                                          _selectedTag1,
-                                          _showIsStar,
-                                          _showIsDone);
-                                    });
-                                  }),
+                            Theme(
+                              data: Theme.of(context)
+                                  .copyWith(canvasColor: Colors.green[100]),
+                              child: DropdownButtonHideUnderline(
+                                child: DropdownButton<String?>(
+                                    isExpanded: true,
+                                    items: _categories
+                                        .map((CustomDropdownItem value) {
+                                      return DropdownMenuItem<String>(
+                                          value: value.id,
+                                          child: Text(
+                                            value.name!,
+                                            overflow: TextOverflow.ellipsis,
+                                          ));
+                                    }).toList(),
+                                    style: _textStyleControls,
+                                    value: _selectedCategory,
+                                    onChanged: (newValue) {
+                                      setState(() {
+                                        _selectedCategory = newValue;
+                                        searchData(
+                                            _searchText,
+                                            _selectedCategory,
+                                            _selectedStatus,
+                                            _selectedPriority,
+                                            _selectedTag1,
+                                            _showIsStar,
+                                            _showIsDone);
+                                      });
+                                    }),
+                              ),
                             ),
                           ],
                         ),
@@ -349,33 +353,37 @@ class TaskSearchState extends State {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
-                            DropdownButtonHideUnderline(
-                              child: DropdownButton<String?>(
-                                  isExpanded: true,
-                                  items:
-                                      _statuses.map((CustomDropdownItem value) {
-                                    return DropdownMenuItem<String>(
-                                        value: value.id,
-                                        child: Text(
-                                          value.name!,
-                                          overflow: TextOverflow.ellipsis,
-                                        ));
-                                  }).toList(),
-                                  style: _textStyleControls,
-                                  value: _selectedStatus,
-                                  onChanged: (newValue) {
-                                    setState(() {
-                                      _selectedStatus = newValue;
-                                      searchData(
-                                          _searchText,
-                                          _selectedStatus,
-                                          _selectedCategory,
-                                          _selectedPriority,
-                                          _selectedTag1,
-                                          _showIsStar,
-                                          _showIsDone);
-                                    });
-                                  }),
+                            Theme(
+                              data: Theme.of(context)
+                                  .copyWith(canvasColor: Colors.green[100]),
+                              child: DropdownButtonHideUnderline(
+                                child: DropdownButton<String?>(
+                                    isExpanded: true,
+                                    items: _statuses
+                                        .map((CustomDropdownItem value) {
+                                      return DropdownMenuItem<String>(
+                                          value: value.id,
+                                          child: Text(
+                                            value.name!,
+                                            overflow: TextOverflow.ellipsis,
+                                          ));
+                                    }).toList(),
+                                    style: _textStyleControls,
+                                    value: _selectedStatus,
+                                    onChanged: (newValue) {
+                                      setState(() {
+                                        _selectedStatus = newValue;
+                                        searchData(
+                                            _searchText,
+                                            _selectedStatus,
+                                            _selectedCategory,
+                                            _selectedPriority,
+                                            _selectedTag1,
+                                            _showIsStar,
+                                            _showIsDone);
+                                      });
+                                    }),
+                              ),
                             ),
                           ],
                         ),
@@ -390,33 +398,37 @@ class TaskSearchState extends State {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
-                            DropdownButtonHideUnderline(
-                              child: DropdownButton<String?>(
-                                  isExpanded: true,
-                                  items: _priorities
-                                      .map((CustomDropdownItem value) {
-                                    return DropdownMenuItem<String>(
-                                        value: value.id,
-                                        child: Text(
-                                          value.name!,
-                                          overflow: TextOverflow.ellipsis,
-                                        ));
-                                  }).toList(),
-                                  style: _textStyleControls,
-                                  value: _selectedPriority,
-                                  onChanged: (newValue) {
-                                    setState(() {
-                                      _selectedPriority = newValue;
-                                      searchData(
-                                          _searchText,
-                                          _selectedCategory,
-                                          _selectedStatus,
-                                          _selectedPriority,
-                                          _selectedTag1,
-                                          _showIsStar,
-                                          _showIsDone);
-                                    });
-                                  }),
+                            Theme(
+                              data: Theme.of(context)
+                                  .copyWith(canvasColor: Colors.green[100]),
+                              child: DropdownButtonHideUnderline(
+                                child: DropdownButton<String?>(
+                                    isExpanded: true,
+                                    items: _priorities
+                                        .map((CustomDropdownItem value) {
+                                      return DropdownMenuItem<String>(
+                                          value: value.id,
+                                          child: Text(
+                                            value.name!,
+                                            overflow: TextOverflow.ellipsis,
+                                          ));
+                                    }).toList(),
+                                    style: _textStyleControls,
+                                    value: _selectedPriority,
+                                    onChanged: (newValue) {
+                                      setState(() {
+                                        _selectedPriority = newValue;
+                                        searchData(
+                                            _searchText,
+                                            _selectedCategory,
+                                            _selectedStatus,
+                                            _selectedPriority,
+                                            _selectedTag1,
+                                            _showIsStar,
+                                            _showIsDone);
+                                      });
+                                    }),
+                              ),
                             ),
                           ],
                         ),
@@ -431,29 +443,33 @@ class TaskSearchState extends State {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
-                            DropdownButtonHideUnderline(
-                              child: DropdownButton<String?>(
-                                isExpanded: true,
-                                items: _tag1s.map((CustomDropdownItem value) {
-                                  return DropdownMenuItem<String>(
-                                      value: value.id,
-                                      child: Text(value.name!));
-                                }).toList(),
-                                style: _textStyleControls,
-                                value: _selectedTag1,
-                                onChanged: (value) {
-                                  setState(() {
-                                    _selectedTag1 = value;
-                                    searchData(
-                                        _searchText,
-                                        _selectedCategory,
-                                        _selectedStatus,
-                                        _selectedPriority,
-                                        _selectedTag1,
-                                        _showIsStar,
-                                        _showIsDone);
-                                  });
-                                },
+                            Theme(
+                              data: Theme.of(context)
+                                  .copyWith(canvasColor: Colors.green[100]),
+                              child: DropdownButtonHideUnderline(
+                                child: DropdownButton<String?>(
+                                  isExpanded: true,
+                                  items: _tag1s.map((CustomDropdownItem value) {
+                                    return DropdownMenuItem<String>(
+                                        value: value.id,
+                                        child: Text(value.name!));
+                                  }).toList(),
+                                  style: _textStyleControls,
+                                  value: _selectedTag1,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _selectedTag1 = value;
+                                      searchData(
+                                          _searchText,
+                                          _selectedCategory,
+                                          _selectedStatus,
+                                          _selectedPriority,
+                                          _selectedTag1,
+                                          _showIsStar,
+                                          _showIsDone);
+                                    });
+                                  },
+                                ),
                               ),
                             )
                           ],

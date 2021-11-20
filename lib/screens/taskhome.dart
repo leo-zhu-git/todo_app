@@ -14,7 +14,7 @@ import 'package:todo_app/model/customSettings.dart';
 import 'package:todo_app/model/taskclass.dart';
 import 'package:todo_app/util/dbhelper.dart';
 import 'package:todo_app/screens/taskdetail.dart';
-// import 'package:todo_app/screens/personalizeview.dart';
+import 'package:todo_app/screens/personalizeview.dart';
 import 'package:todo_app/screens/swipe.dart';
 import 'package:todo_app/screens/tasksearch.dart';
 import 'package:todo_app/util/drawer_navigation.dart';
@@ -121,8 +121,8 @@ class TaskHomeState extends State {
               IconButton(
                 icon: Icon(Icons.settings, color: Colors.white),
                 onPressed: () {
-//                  Navigator.of(context).pushNamed('/personalizeview');
-                  Navigator.of(context).pushNamed('/loadingview');
+                  Navigator.of(context).pushNamed('/personalizeview');
+//                  Navigator.of(context).pushNamed('/loadingview');
                 },
               ),
               IconButton(

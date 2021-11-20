@@ -282,8 +282,6 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
       globals.showSec3 = 1;
     } else
       _selectedShowSec3 = _dropdownMenuItemsShow[globals.showSec3!].value!;
-
-    // super.initState();
   }
 
 //##################Drop Down Items Load from DB #################################################################
@@ -315,7 +313,6 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     var statuses = await helper.getStatuses();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
-//    cus.id = null;
     cus.name = "-- All Statuses --";
     _statuses.add(cus);
     statuses.forEach((status) {
@@ -467,8 +464,6 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
 
   Widget build(BuildContext context) {
-//    TextStyle textStyle = Theme.of(context).textTheme.headline6;
-
     return Scaffold(
       key: _globalKey,
       resizeToAvoidBottomInset: false,
@@ -639,8 +634,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 backgroundColor: Colors.teal[800],
                 duration: Duration(seconds: 3),
-                content: Text("Personalized Saved",
-                    style: _textStyleSnack),
+                content: Text("Personalized Saved", style: _textStyleSnack),
               ));
 
               Navigator.of(context).pushNamed('/dashboard');
@@ -664,16 +658,20 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.blue[100]),
-                child: DropdownButtonFormField<FilterDateDue>(
-                  style: _textStyleControls,
-                  items: _dropdownFilterDateDue,
-                  hint: Text('Filter by Due Date'),
-                  value: _selectedFilterDateDue,
-                  onChanged: (selectedFilterDateDue) {
-                    setState(() {
-                      _selectedFilterDateDue = selectedFilterDateDue!;
-                    });
-                  },
+                child: Theme(
+                  data: Theme.of(context)
+                      .copyWith(canvasColor: Colors.green[100]),
+                  child: DropdownButtonFormField<FilterDateDue>(
+                    style: _textStyleControls,
+                    items: _dropdownFilterDateDue,
+                    hint: Text('Filter by Due Date'),
+                    value: _selectedFilterDateDue,
+                    onChanged: (selectedFilterDateDue) {
+                      setState(() {
+                        _selectedFilterDateDue = selectedFilterDateDue!;
+                      });
+                    },
+                  ),
                 ),
               ),
 
@@ -685,24 +683,28 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    DropdownButtonHideUnderline(
-                      child: DropdownButton<String>(
-                          isExpanded: true,
-                          style: _textStyleControls,
-                          items: _categories.map((CustomDropdownItem value) {
-                            return DropdownMenuItem<String>(
-                                value: value.id,
-                                child: Text(
-                                  value.name!,
-                                  overflow: TextOverflow.ellipsis,
-                                ));
-                          }).toList(),
-                          value: _selectedCategory,
-                          onChanged: (newValue) {
-                            setState(() {
-                              _selectedCategory = newValue;
-                            });
-                          }),
+                    Theme(
+                      data: Theme.of(context)
+                          .copyWith(canvasColor: Colors.green[100]),
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton<String>(
+                            isExpanded: true,
+                            style: _textStyleControls,
+                            items: _categories.map((CustomDropdownItem value) {
+                              return DropdownMenuItem<String>(
+                                  value: value.id,
+                                  child: Text(
+                                    value.name!,
+                                    overflow: TextOverflow.ellipsis,
+                                  ));
+                            }).toList(),
+                            value: _selectedCategory,
+                            onChanged: (newValue) {
+                              setState(() {
+                                _selectedCategory = newValue;
+                              });
+                            }),
+                      ),
                     ),
                   ],
                 ),
@@ -716,24 +718,28 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    DropdownButtonHideUnderline(
-                      child: DropdownButton<String>(
-                          isExpanded: true,
-                          style: _textStyleControls,
-                          items: _statuses.map((CustomDropdownItem value) {
-                            return DropdownMenuItem<String>(
-                                value: value.id,
-                                child: Text(
-                                  value.name!,
-                                  overflow: TextOverflow.ellipsis,
-                                ));
-                          }).toList(),
-                          value: _selectedStatus,
-                          onChanged: (newValue) {
-                            setState(() {
-                              _selectedStatus = newValue;
-                            });
-                          }),
+                    Theme(
+                      data: Theme.of(context)
+                          .copyWith(canvasColor: Colors.green[100]),
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton<String>(
+                            isExpanded: true,
+                            style: _textStyleControls,
+                            items: _statuses.map((CustomDropdownItem value) {
+                              return DropdownMenuItem<String>(
+                                  value: value.id,
+                                  child: Text(
+                                    value.name!,
+                                    overflow: TextOverflow.ellipsis,
+                                  ));
+                            }).toList(),
+                            value: _selectedStatus,
+                            onChanged: (newValue) {
+                              setState(() {
+                                _selectedStatus = newValue;
+                              });
+                            }),
+                      ),
                     ),
                   ],
                 ),
@@ -747,24 +753,28 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    DropdownButtonHideUnderline(
-                      child: DropdownButton<String>(
-                          isExpanded: true,
-                          style: _textStyleControls,
-                          items: _priorities.map((CustomDropdownItem value) {
-                            return DropdownMenuItem<String>(
-                                value: value.id,
-                                child: Text(
-                                  value.name!,
-                                  overflow: TextOverflow.ellipsis,
-                                ));
-                          }).toList(),
-                          value: _selectedPriority,
-                          onChanged: (newValue) {
-                            setState(() {
-                              _selectedPriority = newValue;
-                            });
-                          }),
+                    Theme(
+                      data: Theme.of(context)
+                          .copyWith(canvasColor: Colors.green[100]),
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton<String>(
+                            isExpanded: true,
+                            style: _textStyleControls,
+                            items: _priorities.map((CustomDropdownItem value) {
+                              return DropdownMenuItem<String>(
+                                  value: value.id,
+                                  child: Text(
+                                    value.name!,
+                                    overflow: TextOverflow.ellipsis,
+                                  ));
+                            }).toList(),
+                            value: _selectedPriority,
+                            onChanged: (newValue) {
+                              setState(() {
+                                _selectedPriority = newValue;
+                              });
+                            }),
+                      ),
                     ),
                   ],
                 ),
@@ -778,20 +788,24 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    DropdownButtonHideUnderline(
-                      child: DropdownButton<String>(
-                        isExpanded: true,
-                        style: _textStyleControls,
-                        items: _tag1s.map((CustomDropdownItem value) {
-                          return DropdownMenuItem<String>(
-                              value: value.id, child: Text(value.name!));
-                        }).toList(),
-                        value: _selectedTag1,
-                        onChanged: (value) {
-                          setState(() {
-                            _selectedTag1 = value;
-                          });
-                        },
+                    Theme(
+                      data: Theme.of(context)
+                          .copyWith(canvasColor: Colors.green[100]),
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton<String>(
+                          isExpanded: true,
+                          style: _textStyleControls,
+                          items: _tag1s.map((CustomDropdownItem value) {
+                            return DropdownMenuItem<String>(
+                                value: value.id, child: Text(value.name!));
+                          }).toList(),
+                          value: _selectedTag1,
+                          onChanged: (value) {
+                            setState(() {
+                              _selectedTag1 = value;
+                            });
+                          },
+                        ),
                       ),
                     )
                   ],
@@ -803,16 +817,20 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.blue[100]),
-                child: DropdownButtonFormField<FilterIsStar>(
-                  style: _textStyleControls,
-                  items: _dropdownFilterIsStar,
-                  hint: Text('Filter by Focus Tasks'),
-                  value: _selectedFilterIsStar,
-                  onChanged: (selectedFilterIsStar) {
-                    setState(() {
-                      _selectedFilterIsStar = selectedFilterIsStar!;
-                    });
-                  },
+                child: Theme(
+                  data: Theme.of(context)
+                      .copyWith(canvasColor: Colors.green[100]),
+                  child: DropdownButtonFormField<FilterIsStar>(
+                    style: _textStyleControls,
+                    items: _dropdownFilterIsStar,
+                    hint: Text('Filter by Focus Tasks'),
+                    value: _selectedFilterIsStar,
+                    onChanged: (selectedFilterIsStar) {
+                      setState(() {
+                        _selectedFilterIsStar = selectedFilterIsStar!;
+                      });
+                    },
+                  ),
                 ),
               ),
 
@@ -821,16 +839,20 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.blue[100]),
-                child: DropdownButtonFormField<FilterIsDone>(
-                  style: _textStyleControls,
-                  items: _dropdownFilterIsDone,
-                  hint: Text('Filter by Is Done Tasks'),
-                  value: _selectedFilterIsDone,
-                  onChanged: (selectedFilterIsDone) {
-                    setState(() {
-                      _selectedFilterIsDone = selectedFilterIsDone!;
-                    });
-                  },
+                child: Theme(
+                  data: Theme.of(context)
+                      .copyWith(canvasColor: Colors.green[100]),
+                  child: DropdownButtonFormField<FilterIsDone>(
+                    style: _textStyleControls,
+                    items: _dropdownFilterIsDone,
+                    hint: Text('Filter by Is Done Tasks'),
+                    value: _selectedFilterIsDone,
+                    onChanged: (selectedFilterIsDone) {
+                      setState(() {
+                        _selectedFilterIsDone = selectedFilterIsDone!;
+                      });
+                    },
+                  ),
                 ),
               ),
 
@@ -906,16 +928,20 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.green[100]),
-                child: DropdownButtonFormField<SortItem>(
-                  style: _textStyleControls,
-                  value: _selectedSortField1,
-                  items: _dropdownMenuItemsSort,
-                  hint: Text('Sort Order 1'),
-                  onChanged: (selectedSort) {
-                    setState(() {
-                      _selectedSortField1 = selectedSort!;
-                    });
-                  },
+                child: Theme(
+                  data: Theme.of(context)
+                      .copyWith(canvasColor: Colors.green[100]),
+                  child: DropdownButtonFormField<SortItem>(
+                    style: _textStyleControls,
+                    value: _selectedSortField1,
+                    items: _dropdownMenuItemsSort,
+                    hint: Text('Sort Order 1'),
+                    onChanged: (selectedSort) {
+                      setState(() {
+                        _selectedSortField1 = selectedSort!;
+                      });
+                    },
+                  ),
                 ),
               ),
 
@@ -923,16 +949,20 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.green[100]),
-                child: DropdownButtonFormField<SortOrder>(
-                  style: _textStyleControls,
-                  value: _selectedSortOrder1,
-                  items: _dropdownMenuSortOrder,
-                  hint: Text('Sort 1 Ascending/Descending'),
-                  onChanged: (selectedOrder) {
-                    setState(() {
-                      _selectedSortOrder1 = selectedOrder!;
-                    });
-                  },
+                child: Theme(
+                  data: Theme.of(context)
+                      .copyWith(canvasColor: Colors.green[100]),
+                  child: DropdownButtonFormField<SortOrder>(
+                    style: _textStyleControls,
+                    value: _selectedSortOrder1,
+                    items: _dropdownMenuSortOrder,
+                    hint: Text('Sort 1 Ascending/Descending'),
+                    onChanged: (selectedOrder) {
+                      setState(() {
+                        _selectedSortOrder1 = selectedOrder!;
+                      });
+                    },
+                  ),
                 ),
               ),
 
@@ -941,16 +971,20 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.green[100]),
-                child: DropdownButtonFormField<SortItem>(
-                  style: _textStyleControls,
-                  items: _dropdownMenuItemsSort,
-                  hint: Text('Sort 2'),
-                  value: _selectedSortField2,
-                  onChanged: (selectedSort) {
-                    setState(() {
-                      _selectedSortField2 = selectedSort!;
-                    });
-                  },
+                child: Theme(
+                  data: Theme.of(context)
+                      .copyWith(canvasColor: Colors.green[100]),
+                  child: DropdownButtonFormField<SortItem>(
+                    style: _textStyleControls,
+                    items: _dropdownMenuItemsSort,
+                    hint: Text('Sort 2'),
+                    value: _selectedSortField2,
+                    onChanged: (selectedSort) {
+                      setState(() {
+                        _selectedSortField2 = selectedSort!;
+                      });
+                    },
+                  ),
                 ),
               ),
 
@@ -958,16 +992,20 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.green[100]),
-                child: DropdownButtonFormField<SortOrder>(
-                  style: _textStyleControls,
-                  value: _selectedSortOrder2,
-                  items: _dropdownMenuSortOrder,
-                  hint: Text('Sort 2 Ascending/Descending'),
-                  onChanged: (selectedOrder) {
-                    setState(() {
-                      _selectedSortOrder2 = selectedOrder!;
-                    });
-                  },
+                child: Theme(
+                  data: Theme.of(context)
+                      .copyWith(canvasColor: Colors.green[100]),
+                  child: DropdownButtonFormField<SortOrder>(
+                    style: _textStyleControls,
+                    value: _selectedSortOrder2,
+                    items: _dropdownMenuSortOrder,
+                    hint: Text('Sort 2 Ascending/Descending'),
+                    onChanged: (selectedOrder) {
+                      setState(() {
+                        _selectedSortOrder2 = selectedOrder!;
+                      });
+                    },
+                  ),
                 ),
               ),
 
@@ -976,16 +1014,20 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.green[100]),
-                child: DropdownButtonFormField<SortItem>(
-                  style: _textStyleControls,
-                  items: _dropdownMenuItemsSort,
-                  hint: Text('Sort 3'),
-                  value: _selectedSortField3,
-                  onChanged: (selectedSort) {
-                    setState(() {
-                      _selectedSortField3 = selectedSort!;
-                    });
-                  },
+                child: Theme(
+                  data: Theme.of(context)
+                      .copyWith(canvasColor: Colors.green[100]),
+                  child: DropdownButtonFormField<SortItem>(
+                    style: _textStyleControls,
+                    items: _dropdownMenuItemsSort,
+                    hint: Text('Sort 3'),
+                    value: _selectedSortField3,
+                    onChanged: (selectedSort) {
+                      setState(() {
+                        _selectedSortField3 = selectedSort!;
+                      });
+                    },
+                  ),
                 ),
               ),
 
@@ -993,16 +1035,20 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.green[100]),
-                child: DropdownButtonFormField<SortOrder>(
-                  style: _textStyleControls,
-                  value: _selectedSortOrder3,
-                  items: _dropdownMenuSortOrder,
-                  hint: Text('Sort Order 3 Ascending/Descending'),
-                  onChanged: (selectedOrder) {
-                    setState(() {
-                      _selectedSortOrder3 = selectedOrder!;
-                    });
-                  },
+                child: Theme(
+                  data: Theme.of(context)
+                      .copyWith(canvasColor: Colors.green[100]),
+                  child: DropdownButtonFormField<SortOrder>(
+                    style: _textStyleControls,
+                    value: _selectedSortOrder3,
+                    items: _dropdownMenuSortOrder,
+                    hint: Text('Sort Order 3 Ascending/Descending'),
+                    onChanged: (selectedOrder) {
+                      setState(() {
+                        _selectedSortOrder3 = selectedOrder!;
+                      });
+                    },
+                  ),
                 ),
               ),
 
@@ -1011,16 +1057,20 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.green[100]),
-                child: DropdownButtonFormField<SortItem>(
-                  style: _textStyleControls,
-                  items: _dropdownMenuItemsSort,
-                  hint: Text('Sort 4'),
-                  value: _selectedSortField4,
-                  onChanged: (selectedSort) {
-                    setState(() {
-                      _selectedSortField4 = selectedSort!;
-                    });
-                  },
+                child: Theme(
+                  data: Theme.of(context)
+                      .copyWith(canvasColor: Colors.green[100]),
+                  child: DropdownButtonFormField<SortItem>(
+                    style: _textStyleControls,
+                    items: _dropdownMenuItemsSort,
+                    hint: Text('Sort 4'),
+                    value: _selectedSortField4,
+                    onChanged: (selectedSort) {
+                      setState(() {
+                        _selectedSortField4 = selectedSort!;
+                      });
+                    },
+                  ),
                 ),
               ),
 
@@ -1028,16 +1078,20 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.green[100]),
-                child: DropdownButtonFormField<SortOrder>(
-                  style: _textStyleControls,
-                  value: _selectedSortOrder4,
-                  items: _dropdownMenuSortOrder,
-                  hint: Text('Sort Order 4 Ascending/Descending'),
-                  onChanged: (selectedOrder) {
-                    setState(() {
-                      _selectedSortOrder4 = selectedOrder!;
-                    });
-                  },
+                child: Theme(
+                  data: Theme.of(context)
+                      .copyWith(canvasColor: Colors.green[100]),
+                  child: DropdownButtonFormField<SortOrder>(
+                    style: _textStyleControls,
+                    value: _selectedSortOrder4,
+                    items: _dropdownMenuSortOrder,
+                    hint: Text('Sort Order 4 Ascending/Descending'),
+                    onChanged: (selectedOrder) {
+                      setState(() {
+                        _selectedSortOrder4 = selectedOrder!;
+                      });
+                    },
+                  ),
                 ),
               ),
 
@@ -1057,16 +1111,20 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.pink[100]),
-                child: DropdownButtonFormField<ShowItem>(
-                  style: _textStyleControls,
-                  items: _dropdownMenuItemsShow,
-                  hint: Text('Display Secondary1'),
-                  value: _selectedShowSec1,
-                  onChanged: (selectedShow) {
-                    setState(() {
-                      _selectedShowSec1 = selectedShow!;
-                    });
-                  },
+                child: Theme(
+                  data: Theme.of(context)
+                      .copyWith(canvasColor: Colors.green[100]),
+                  child: DropdownButtonFormField<ShowItem>(
+                    style: _textStyleControls,
+                    items: _dropdownMenuItemsShow,
+                    hint: Text('Display Secondary1'),
+                    value: _selectedShowSec1,
+                    onChanged: (selectedShow) {
+                      setState(() {
+                        _selectedShowSec1 = selectedShow!;
+                      });
+                    },
+                  ),
                 ),
               ),
 
@@ -1076,16 +1134,20 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.pink[100]),
-                child: DropdownButtonFormField<ShowItem>(
-                  style: _textStyleControls,
-                  items: _dropdownMenuItemsShow,
-                  hint: Text('Display Secondary2'),
-                  value: _selectedShowSec2,
-                  onChanged: (selectedShow) {
-                    setState(() {
-                      _selectedShowSec2 = selectedShow!;
-                    });
-                  },
+                child: Theme(
+                  data: Theme.of(context)
+                      .copyWith(canvasColor: Colors.green[100]),
+                  child: DropdownButtonFormField<ShowItem>(
+                    style: _textStyleControls,
+                    items: _dropdownMenuItemsShow,
+                    hint: Text('Display Secondary2'),
+                    value: _selectedShowSec2,
+                    onChanged: (selectedShow) {
+                      setState(() {
+                        _selectedShowSec2 = selectedShow!;
+                      });
+                    },
+                  ),
                 ),
               ),
 
@@ -1094,16 +1156,20 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.pink[100]),
-                child: DropdownButtonFormField<ShowItem>(
-                  style: _textStyleControls,
-                  items: _dropdownMenuItemsShow,
-                  hint: Text('Display Secondary3'),
-                  value: _selectedShowSec3,
-                  onChanged: (selectedShow) {
-                    setState(() {
-                      _selectedShowSec3 = selectedShow!;
-                    });
-                  },
+                child: Theme(
+                  data: Theme.of(context)
+                      .copyWith(canvasColor: Colors.green[100]),
+                  child: DropdownButtonFormField<ShowItem>(
+                    style: _textStyleControls,
+                    items: _dropdownMenuItemsShow,
+                    hint: Text('Display Secondary3'),
+                    value: _selectedShowSec3,
+                    onChanged: (selectedShow) {
+                      setState(() {
+                        _selectedShowSec3 = selectedShow!;
+                      });
+                    },
+                  ),
                 ),
               ),
             ],
