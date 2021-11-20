@@ -660,7 +660,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                     shape: BoxShape.rectangle, color: Colors.blue[100]),
                 child: Theme(
                   data: Theme.of(context)
-                      .copyWith(canvasColor: Colors.green[100]),
+                      .copyWith(canvasColor: Colors.lime[100]),
                   child: DropdownButtonFormField<FilterDateDue>(
                     style: _textStyleControls,
                     items: _dropdownFilterDateDue,
@@ -685,7 +685,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                   children: [
                     Theme(
                       data: Theme.of(context)
-                          .copyWith(canvasColor: Colors.green[100]),
+                          .copyWith(canvasColor: Colors.lime[100]),
                       child: DropdownButtonHideUnderline(
                         child: DropdownButton<String>(
                             isExpanded: true,
@@ -720,7 +720,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                   children: [
                     Theme(
                       data: Theme.of(context)
-                          .copyWith(canvasColor: Colors.green[100]),
+                          .copyWith(canvasColor: Colors.lime[100]),
                       child: DropdownButtonHideUnderline(
                         child: DropdownButton<String>(
                             isExpanded: true,
@@ -755,7 +755,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                   children: [
                     Theme(
                       data: Theme.of(context)
-                          .copyWith(canvasColor: Colors.green[100]),
+                          .copyWith(canvasColor: Colors.lime[100]),
                       child: DropdownButtonHideUnderline(
                         child: DropdownButton<String>(
                             isExpanded: true,
@@ -790,7 +790,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                   children: [
                     Theme(
                       data: Theme.of(context)
-                          .copyWith(canvasColor: Colors.green[100]),
+                          .copyWith(canvasColor: Colors.lime[100]),
                       child: DropdownButtonHideUnderline(
                         child: DropdownButton<String>(
                           isExpanded: true,
@@ -819,7 +819,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                     shape: BoxShape.rectangle, color: Colors.blue[100]),
                 child: Theme(
                   data: Theme.of(context)
-                      .copyWith(canvasColor: Colors.green[100]),
+                      .copyWith(canvasColor: Colors.lime[100]),
                   child: DropdownButtonFormField<FilterIsStar>(
                     style: _textStyleControls,
                     items: _dropdownFilterIsStar,
@@ -841,7 +841,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                     shape: BoxShape.rectangle, color: Colors.blue[100]),
                 child: Theme(
                   data: Theme.of(context)
-                      .copyWith(canvasColor: Colors.green[100]),
+                      .copyWith(canvasColor: Colors.lime[100]),
                   child: DropdownButtonFormField<FilterIsDone>(
                     style: _textStyleControls,
                     items: _dropdownFilterIsDone,
@@ -927,10 +927,10 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
               new Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.green[100]),
+                    shape: BoxShape.rectangle, color: Colors.purple[100]),
                 child: Theme(
                   data: Theme.of(context)
-                      .copyWith(canvasColor: Colors.green[100]),
+                      .copyWith(canvasColor: Colors.lime[100]),
                   child: DropdownButtonFormField<SortItem>(
                     style: _textStyleControls,
                     value: _selectedSortField1,
@@ -948,10 +948,10 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
               new Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.green[100]),
+                    shape: BoxShape.rectangle, color: Colors.purple[100]),
                 child: Theme(
                   data: Theme.of(context)
-                      .copyWith(canvasColor: Colors.green[100]),
+                      .copyWith(canvasColor: Colors.lime[100]),
                   child: DropdownButtonFormField<SortOrder>(
                     style: _textStyleControls,
                     value: _selectedSortOrder1,
@@ -970,10 +970,10 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
               new Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.green[100]),
+                    shape: BoxShape.rectangle, color: Colors.purple[100]),
                 child: Theme(
                   data: Theme.of(context)
-                      .copyWith(canvasColor: Colors.green[100]),
+                      .copyWith(canvasColor: Colors.lime[100]),
                   child: DropdownButtonFormField<SortItem>(
                     style: _textStyleControls,
                     items: _dropdownMenuItemsSort,
@@ -991,10 +991,10 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
               new Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.green[100]),
+                    shape: BoxShape.rectangle, color: Colors.purple[100]),
                 child: Theme(
                   data: Theme.of(context)
-                      .copyWith(canvasColor: Colors.green[100]),
+                      .copyWith(canvasColor: Colors.lime[100]),
                   child: DropdownButtonFormField<SortOrder>(
                     style: _textStyleControls,
                     value: _selectedSortOrder2,
@@ -1013,10 +1013,10 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
               new Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.green[100]),
+                    shape: BoxShape.rectangle, color: Colors.purple[100]),
                 child: Theme(
                   data: Theme.of(context)
-                      .copyWith(canvasColor: Colors.green[100]),
+                      .copyWith(canvasColor: Colors.lime[100]),
                   child: DropdownButtonFormField<SortItem>(
                     style: _textStyleControls,
                     items: _dropdownMenuItemsSort,
@@ -1034,10 +1034,10 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
               new Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.green[100]),
+                    shape: BoxShape.rectangle, color: Colors.purple[100]),
                 child: Theme(
                   data: Theme.of(context)
-                      .copyWith(canvasColor: Colors.green[100]),
+                      .copyWith(canvasColor: Colors.lime[100]),
                   child: DropdownButtonFormField<SortOrder>(
                     style: _textStyleControls,
                     value: _selectedSortOrder3,
@@ -1056,10 +1056,10 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
               new Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.green[100]),
+                    shape: BoxShape.rectangle, color: Colors.purple[100]),
                 child: Theme(
                   data: Theme.of(context)
-                      .copyWith(canvasColor: Colors.green[100]),
+                      .copyWith(canvasColor: Colors.lime[100]),
                   child: DropdownButtonFormField<SortItem>(
                     style: _textStyleControls,
                     items: _dropdownMenuItemsSort,
@@ -1077,10 +1077,10 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
               new Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.green[100]),
+                    shape: BoxShape.rectangle, color: Colors.purple[100]),
                 child: Theme(
                   data: Theme.of(context)
-                      .copyWith(canvasColor: Colors.green[100]),
+                      .copyWith(canvasColor: Colors.lime[100]),
                   child: DropdownButtonFormField<SortOrder>(
                     style: _textStyleControls,
                     value: _selectedSortOrder4,
@@ -1110,10 +1110,10 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
               new Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.pink[100]),
+                    shape: BoxShape.rectangle, color: Colors.green[100]),
                 child: Theme(
                   data: Theme.of(context)
-                      .copyWith(canvasColor: Colors.green[100]),
+                      .copyWith(canvasColor: Colors.lime[100]),
                   child: DropdownButtonFormField<ShowItem>(
                     style: _textStyleControls,
                     items: _dropdownMenuItemsShow,
@@ -1133,10 +1133,10 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
               new Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.pink[100]),
+                    shape: BoxShape.rectangle, color: Colors.green[100]),
                 child: Theme(
                   data: Theme.of(context)
-                      .copyWith(canvasColor: Colors.green[100]),
+                      .copyWith(canvasColor: Colors.lime[100]),
                   child: DropdownButtonFormField<ShowItem>(
                     style: _textStyleControls,
                     items: _dropdownMenuItemsShow,
@@ -1155,10 +1155,10 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
               new Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.pink[100]),
+                    shape: BoxShape.rectangle, color: Colors.green[100]),
                 child: Theme(
                   data: Theme.of(context)
-                      .copyWith(canvasColor: Colors.green[100]),
+                      .copyWith(canvasColor: Colors.lime[100]),
                   child: DropdownButtonFormField<ShowItem>(
                     style: _textStyleControls,
                     items: _dropdownMenuItemsShow,

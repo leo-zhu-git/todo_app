@@ -310,7 +310,7 @@ class TaskSearchState extends State {
                           children: [
                             Theme(
                               data: Theme.of(context)
-                                  .copyWith(canvasColor: Colors.green[100]),
+                                  .copyWith(canvasColor: Colors.lime[100]),
                               child: DropdownButtonHideUnderline(
                                 child: DropdownButton<String?>(
                                     isExpanded: true,
@@ -355,7 +355,7 @@ class TaskSearchState extends State {
                           children: [
                             Theme(
                               data: Theme.of(context)
-                                  .copyWith(canvasColor: Colors.green[100]),
+                                  .copyWith(canvasColor: Colors.lime[100]),
                               child: DropdownButtonHideUnderline(
                                 child: DropdownButton<String?>(
                                     isExpanded: true,
@@ -400,7 +400,7 @@ class TaskSearchState extends State {
                           children: [
                             Theme(
                               data: Theme.of(context)
-                                  .copyWith(canvasColor: Colors.green[100]),
+                                  .copyWith(canvasColor: Colors.lime[100]),
                               child: DropdownButtonHideUnderline(
                                 child: DropdownButton<String?>(
                                     isExpanded: true,
@@ -445,7 +445,7 @@ class TaskSearchState extends State {
                           children: [
                             Theme(
                               data: Theme.of(context)
-                                  .copyWith(canvasColor: Colors.green[100]),
+                                  .copyWith(canvasColor: Colors.lime[100]),
                               child: DropdownButtonHideUnderline(
                                 child: DropdownButton<String?>(
                                   isExpanded: true,
