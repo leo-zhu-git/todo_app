@@ -180,23 +180,12 @@ class TaskSearchState extends State {
         ),
         backgroundColor: Colors.teal[800],
         automaticallyImplyLeading: true,
-        title: Center(
-          child: Container(
-            height: 30,
-            child: Column(
-              children: <Widget>[
-                Badge(
-                  child: Text('Search     '),
-                  shape: BadgeShape.square,
-                  stackFit: StackFit.loose,
-                  position: BadgePosition.topEnd(),
-                  badgeContent: Text(count.toString(),
-                      style: TextStyle(color: Colors.black)),
-                  badgeColor: Colors.green[100]!,
-                ),
-              ],
-            ),
-          ),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.find_in_page, color: Colors.pink[100]),
+            Text(count.toString(), style: TextStyle(color: Colors.pink[100])),
+          ],
         ),
       ),
       resizeToAvoidBottomInset: false,

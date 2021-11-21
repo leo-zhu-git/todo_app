@@ -70,9 +70,6 @@ class TaskHomeState extends State {
   @override
   Widget build(BuildContext context) {
     if (tasklist == null) {
-      // tasklist = List<Task>();
-      // displaytasklist = List<DisplayTask>();
-      //  getData();  // get data moved inside getcustom settings.
 
     }
 
@@ -105,7 +102,6 @@ class TaskHomeState extends State {
             icon: Icon(Icons.filter_alt_outlined, color: Colors.white),
             onPressed: () {
               Navigator.of(context).pushNamed('/filterview');
-//                  Navigator.of(context).pushNamed('/loadingview');
             },
           ),
           IconButton(
