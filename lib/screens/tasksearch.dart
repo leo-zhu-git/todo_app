@@ -183,8 +183,8 @@ class TaskSearchState extends State {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.find_in_page, color: Colors.pink[100]),
-            Text(count.toString(), style: TextStyle(color: Colors.pink[100])),
+            Icon(Icons.find_in_page, color: Colors.green[100]),
+            Text(count.toString(), style: TextStyle(color: Colors.green[100])),
           ],
         ),
       ),
@@ -816,7 +816,6 @@ class TaskSearchState extends State {
           count = result.length;
           for (int i = 0; i < count; i++) {
             taskList.add(Task.fromObject(result[i]));
-            debugPrint(taskList[i].note);
 
 /////////////////
             /// display sec1

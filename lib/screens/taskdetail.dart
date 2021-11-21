@@ -566,7 +566,7 @@ class TaskDetailState extends State //<TaskDetail>
                 });
               }),
         ],
-        title: Center(child: Text('Todo Detail')),
+        title: Center(child: Icon(Icons.add, color: Colors.yellow[100]),),
       ),
       body: SingleChildScrollView(
         // this will make your body scrollable
@@ -821,7 +821,7 @@ class TaskDetailState extends State //<TaskDetail>
                 children: [
                   Theme(
                     data: Theme.of(context)
-                        .copyWith(canvasColor: Colors.lime[100]),
+                        .copyWith(canvasColor: Colors.green[100]),
                     child: DropdownButtonHideUnderline(
                       child: DropdownButton<String>(
                           isExpanded: true,
