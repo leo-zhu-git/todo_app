@@ -30,10 +30,6 @@ class DbHelper {
   String colPriority = 'priority';
   String colCategory = 'category';
   String colTag1 = 'tag1';
-//  String colAction1 = 'action1';
-//  String colContext1 = 'context1';
-//  String colLocation1 = 'location1';
-//  String colGoal1 = 'goal1';
   String colIsStar = 'isStar';
   String colIsDone = 'isDone';
   String colDateDone = 'dateDone';

@@ -12,7 +12,6 @@ import 'package:intl/intl.dart';
 import 'package:todo_app/model/globals.dart' as globals;
 
 DbHelper helper = DbHelper();
-String? _searchText = "";
 TextStyle _textStyleControls = TextStyle(fontSize: 17.0, color: Colors.black87);
 TextStyle _textStyleSnack = TextStyle(
     fontSize: 16.0, color: Colors.pink[100], fontWeight: FontWeight.w600);
@@ -38,6 +37,7 @@ class TaskSearchState extends State {
   int? isChecked = 0;
   int? _showIsStar = 0;
   int? _showIsDone = 0;
+  String? _searchText = "";
 
   int? _sortField1 = globals.sortField1 != null ? globals.sortField1 : 8;
   int? _sortField2 = globals.sortField2 != null ? globals.sortField2 : 2;
