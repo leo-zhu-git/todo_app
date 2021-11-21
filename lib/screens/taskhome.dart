@@ -64,7 +64,7 @@ class TaskHomeState extends State {
         _timer?.cancel();
       }
     });
-    EasyLoading.showSuccess('focus on Most Important Tasks ...');
+    EasyLoading.showSuccess('focus on the Most Important Tasks ...');
   }
 
   @override
@@ -102,9 +102,9 @@ class TaskHomeState extends State {
         ),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.settings, color: Colors.white),
+            icon: Icon(Icons.filter_alt_outlined, color: Colors.white),
             onPressed: () {
-              Navigator.of(context).pushNamed('/personalizeview');
+              Navigator.of(context).pushNamed('/filterview');
 //                  Navigator.of(context).pushNamed('/loadingview');
             },
           ),

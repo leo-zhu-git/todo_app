@@ -81,6 +81,13 @@ class _DrawerNagivation extends State<DrawerNagivation> {
               ),
               Divider(color: Colors.teal[50]),
               ListTile(
+                leading: Icon(Icons.settings),
+                tileColor: Colors.teal[50],
+                title: Text('Personalize'),
+                onTap: () => Navigator.of(context).pushNamed('/personalizeview'),
+              ),
+              Divider(color: Colors.teal[50]),
+              ListTile(
                 leading: Icon(Icons.cloud_download),
                 tileColor: Colors.teal[50],
                 title: Text('Wipe'),

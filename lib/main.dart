@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:todo_app/model/taskclass.dart';
 import 'package:todo_app/screens/LocalNotification_screen.dart';
+import 'package:todo_app/screens/filter.dart';
 import 'package:todo_app/screens/loading.dart';
 import 'package:todo_app/screens/signUp.dart';
 import 'package:todo_app/screens/signin.dart';
@@ -114,6 +115,12 @@ class MyApp extends StatelessWidget {
         if (settings.name == '/personalizeview') {
           return PageRouteBuilder(
             pageBuilder: (_, __, ___) => PersonalizeView(),
+            transitionsBuilder: (_, __, ___, child) => child,
+          );
+        }
+        if (settings.name == '/filterview') {
+          return PageRouteBuilder(
+            pageBuilder: (_, __, ___) => FilterView(),
             transitionsBuilder: (_, __, ___, child) => child,
           );
         }
