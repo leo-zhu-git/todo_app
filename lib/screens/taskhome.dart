@@ -61,10 +61,10 @@ class TaskHomeState extends State {
     EasyLoading.addStatusCallback((status) {
       print('EasyLoading Status $status');
       if (status == EasyLoadingStatus.dismiss) {
-        _timer  ?.cancel();
+        _timer?.cancel();
       }
     });
-    EasyLoading.showSuccess('Most Important Things ...');
+    EasyLoading.showSuccess('focus on Most Important Tasks ...');
   }
 
   @override
@@ -101,52 +101,77 @@ class TaskHomeState extends State {
           ],
         ),
         actions: <Widget>[
-//          IconButton(
-//              icon: const Icon(Icons.sync, color: Colors.white),
-//              tooltip: 'Sync',
-//              onPressed: () {
+          IconButton(
+            icon: Icon(Icons.settings, color: Colors.white),
+            onPressed: () {
+              Navigator.of(context).pushNamed('/personalizeview');
+//                  Navigator.of(context).pushNamed('/loadingview');
+            },
+          ),
+          IconButton(
+              icon: const Icon(Icons.sync, color: Colors.white),
+              tooltip: 'Sync',
+              onPressed: () {
 //                Navigator.of(context).pushNamed('/syncview');
-//              }),
+              }),
+          IconButton(
+            icon: Icon(Icons.find_in_page, color: Colors.white),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => TaskSearch()),
+              );
+              getData();
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.add, color: Colors.white),
+            tooltip: 'Add Task',
+            onPressed: () {
+              navigateToDetail(Task(
+                  "", "", "", "", "", "", "", "", 0, 0, "", "", "", "", ""));
+              getData();
+            },
+          ),
         ],
       ),
       body: taskListItems(),
-      bottomNavigationBar: (Container(
-        height: 55.0,
-        child: BottomAppBar(
-          // color: Color.fromRGBO(58, 66, 86, 1.0),
-          color: Colors.teal[800],
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              IconButton(
-                icon: Icon(Icons.settings, color: Colors.white),
-                onPressed: () {
-                  Navigator.of(context).pushNamed('/personalizeview');
-//                  Navigator.of(context).pushNamed('/loadingview');
-                },
-              ),
-              IconButton(
-                icon: Icon(Icons.add, color: Colors.white),
-                onPressed: () {
-                  navigateToDetail(Task("", "", "", "", "", "", "", "", 0, 0,
-                      "", "", "", "", ""));
-                  getData();
-                },
-              ),
-              IconButton(
-                icon: Icon(Icons.find_in_page, color: Colors.white),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => TaskSearch()),
-                  );
-                  getData();
-                },
-              ),
-            ],
-          ),
-        ),
-      )),
+//      bottomNavigationBar: (Container(
+//        height: 55.0,
+//        child: BottomAppBar(
+//          // color: Color.fromRGBO(58, 66, 86, 1.0),
+//          color: Colors.teal[800],
+//          child: Row(
+//            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//            children: <Widget>[
+//              IconButton(
+//                icon: Icon(Icons.settings, color: Colors.white),
+//                onPressed: () {
+//                  Navigator.of(context).pushNamed('/personalizeview');
+//                },
+//              ),
+//              IconButton(
+//                icon: Icon(Icons.add, color: Colors.white),
+//                onPressed: () {
+//                  navigateToDetail(Task("", "", "", "", "", "", "", "", 0, 0,
+//                      "", "", "", "", ""));
+//                  getData();
+//                },
+//              ),
+//              IconButton(
+//                icon: Icon(Icons.find_in_page, color: Colors.white),
+//                onPressed: () {
+//                  Navigator.push(
+//                    context,
+//                    MaterialPageRoute(builder: (context) => TaskSearch()),
+//                  );
+//                  getData();
+//                },
+//              ),
+//            ],
+//          ),
+//        ),
+//      )),
     );
   }
 
