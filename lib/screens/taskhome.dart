@@ -64,7 +64,7 @@ class TaskHomeState extends State {
         _timer  ?.cancel();
       }
     });
-    EasyLoading.showSuccess('focus on Most Important Things ...');
+    EasyLoading.showSuccess('Most Important Things ...');
   }
 
   @override
