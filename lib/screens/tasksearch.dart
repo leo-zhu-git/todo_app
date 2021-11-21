@@ -34,7 +34,6 @@ class TaskSearchState extends State {
   String? _selectedStatus;
   String? _selectedPriority;
   String? _selectedTag1;
-  int? isChecked = 0;
   int? _showIsStar = 0;
   int? _showIsDone = 0;
   String? _searchText = "";
@@ -525,7 +524,7 @@ class TaskSearchState extends State {
                       value: (this.tasklist[position].isDone == 1),
                       onChanged: (value) {
                         setState(() {
-                          isChecked = (value! == false) ? 0 : 1;
+                          _showIsStar = (value! == false) ? 0 : 1;
                           DateTime now = DateTime.now();
                           String formattedDate =
                               DateFormat('yyyy-MM-dd').format(now);
