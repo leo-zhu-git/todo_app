@@ -64,7 +64,7 @@ class TaskHomeState extends State {
         _timer?.cancel();
       }
     });
-    EasyLoading.showSuccess('just MIT (Most Important Tasks) ...');
+    EasyLoading.showSuccess('MIT - Most Important Tasks');
   }
 
   @override
