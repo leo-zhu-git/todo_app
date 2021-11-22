@@ -493,7 +493,6 @@ class TaskSearchState extends State {
                   duration: Duration(seconds: 3),
                   content: Text("Task Completed", style: _textStyleSnack),
                 ));
-//                getData();
                 searchData(_searchText, _selectedStatus, _selectedCategory,
                     _selectedPriority, _selectedTag1, _showIsStar, _showIsDone);
               });
@@ -582,6 +581,14 @@ class TaskSearchState extends State {
                     contentPadding: EdgeInsets.symmetric(horizontal: 0.0),
                     onTap: () {
                       navigateToDetail(this.tasklist[position]);
+                      searchData(
+                          _searchText,
+                          _selectedStatus,
+                          _selectedCategory,
+                          _selectedPriority,
+                          _selectedTag1,
+                          _showIsStar,
+                          _showIsDone);
                     },
                     autofocus: true,
                   )),
@@ -600,7 +607,7 @@ class TaskSearchState extends State {
     int? _sortOrder3 = globals.sortOrder3 != null ? globals.sortOrder3 : 0;
     int? _sortOrder4 = globals.sortOrder4 != null ? globals.sortOrder4 : 0;
 
-    int? _filterDateDue =
+    int? _filterDateDue = 
         globals.filterDateDue != 0 ? globals.filterDateDue : 0;
     int? _filterIsStar =
         globals.filterIsStar != "null" ? globals.filterIsStar : 0;
@@ -611,7 +618,8 @@ class TaskSearchState extends State {
     final dbFuture = helper.initializeDb();
 
     dbFuture.then((result) {
-      final tasksFuture = helper.getTasksSort(
+//      final tasksFuture = helper.getTasksSort(
+      final tasksFuture = helper.searchTasks(
         getSortColumn(_sortField1!),
         getOrderColumn(_sortOrder1!),
         getSortColumn(_sortField2!),
@@ -620,7 +628,8 @@ class TaskSearchState extends State {
         getOrderColumn(_sortOrder3!),
         getSortColumn(_sortField4!),
         getOrderColumn(_sortOrder4!),
-        getDateDueColumn(_filterDateDue!),
+//        getDateDueColumn(_filterDateDue!),
+        _searchText,
         globals.filterCategory.toString(),
         globals.filterStatus.toString(),
         globals.filterPriority.toString(),
