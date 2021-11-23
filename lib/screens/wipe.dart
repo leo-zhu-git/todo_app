@@ -137,33 +137,42 @@ class _WipeScreenState extends State<WipeScreen> {
   }
 
   Future deviceToCloud() async {
-    EasyLoading.show(status: "Wiping...");
-    mysqlDBhelper.wipeTaskDataToMySql();
-    mysqlDBhelper.wipeCatatoryToMySql();
-    mysqlDBhelper.wipeStatusToMySql();
-    mysqlDBhelper.wipePriorityToMySql();
-    mysqlDBhelper.wipeTagToMySql();
-//    var response = await request.send();
-//    if (response.statusCode ==200) {
-//      EasyLoading.show(status: "Successful!");
-//      Navigator.pop(context);
-//      EasyLoading.dismiss();
-//    }
+    EasyLoading.showProgress(0.3, status: 'Wipe Device To Cloud ...');
+
+// wait for leo's code
+//    mysqlDBhelper.syncTasks();
+    await Future.delayed(Duration(seconds: 10), () {});
+//    mysqlDBhelper.wipeTaskDataToMySql();
+//    mysqlDBhelper.wipeCatatoryToMySql();
+//    mysqlDBhelper.wipeStatusToMySql();
+//    mysqlDBhelper.wipePriorityToMySql();
+//    mysqlDBhelper.wipeTagToMySql();
+
+    await EasyLoading.showSuccess('Wipe Device to Cloud Success');
   }
 
   Future cloudToCDevice() async {
-    EasyLoading.show(status: "Wiping...");
-    mysqlDBhelper.wipeTaskDataFromMySql();
-    mysqlDBhelper.syncCategoriesData();
-    mysqlDBhelper.syncStatusesData();
-    mysqlDBhelper.syncPrioritiesData();
-    mysqlDBhelper.syncTag1sData();
-//    var response = await request.send();
-//    if (response.statusCode ==200) {
-//      EasyLoading.show(status: "Successful!");
-//      Navigator.pop(context);
-//      EasyLoading.dismiss();
-//    }
+    EasyLoading.showProgress(0.3, status: 'Wipe Cloud To Device ...');
+
+// wait for leo's code
+//    mysqlDBhelper.syncTasks();
+    await Future.delayed(Duration(seconds: 10), () {});
+//    mysqlDBhelper.wipeTaskDataFromMySql();
+//    mysqlDBhelper.syncCategoriesData();
+//    mysqlDBhelper.syncStatusesData();
+//    mysqlDBhelper.syncPrioritiesData();
+//    mysqlDBhelper.syncTag1sData();
+    await EasyLoading.showSuccess('Wipe Cloud to Device Success');
+  }
+
+  void getData() async {
+    EasyLoading.showProgress(0.3, status: 'Downloading ...');
+
+// wait for leo's code
+//    mysqlDBhelper.syncTasks();
+    await Future.delayed(Duration(seconds: 5), () {});
+
+    await EasyLoading.showSuccess('Sync completed successfully');
   }
 
   _ConfirmDialogue(int _option, String message) {
@@ -187,8 +196,10 @@ class _WipeScreenState extends State<WipeScreen> {
                     onPressed: () async {
                       if (_option == 0) {
                         deviceToCloud();
+                        Navigator.pop(context);
                       } else {
                         cloudToCDevice();
+                        Navigator.pop(context);
                       }
                     },
                     style: ElevatedButton.styleFrom(

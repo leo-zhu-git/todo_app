@@ -108,7 +108,7 @@ class TaskHomeState extends State {
               icon: const Icon(Icons.sync, color: Colors.white),
               tooltip: 'Sync',
               onPressed: () {
-//                Navigator.of(context).pushNamed('/syncview');
+                Navigator.of(context).pushNamed('/syncview');
               }),
           IconButton(
             icon: Icon(Icons.find_in_page, color: Colors.white),
