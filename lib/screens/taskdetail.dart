@@ -761,7 +761,6 @@ class TaskDetailState extends State //<TaskDetail>
                           onChanged: (newValue) {
                             setState(() {
                               _selectedStatus = newValue;
-                              //                          task.status = newValue!;
                             });
                           }),
                     ),

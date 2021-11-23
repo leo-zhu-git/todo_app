@@ -512,7 +512,6 @@ class TaskHomeState extends State {
     if (_customSetting.length > 0) {
       customSetting = CustomSettings.fromObject(_customSetting[0]);
       if (customSetting != null && customSetting!.id != "") {
-//      if (customSetting != null && customSetting!.id != "null") {
         if (customSetting!.sortField1 != "") {
           globals.sortField1 = int.parse(
               customSetting!.sortField1!); //convert it to session variables
@@ -535,16 +534,6 @@ class TaskHomeState extends State {
         if (customSetting!.showSec3 != "") {
           globals.showSec3 = int.parse(customSetting!.showSec3!);
         }
-        if (customSetting!.filterIsStar == 1) {
-          globals.filterIsStar = 1;
-        } else {
-          globals.filterIsStar = 0;
-        }
-        if (customSetting!.filterIsDone == 1) {
-          globals.filterIsDone = 1;
-        } else {
-          globals.filterIsDone = 0;
-        }
         if (customSetting!.filterDateDue != "") {
           globals.filterDateDue = int.parse(customSetting!.filterDateDue!);
         }
@@ -560,6 +549,16 @@ class TaskHomeState extends State {
         globals.filterTag = customSetting!.filterTag != ""
             ? int.parse(customSetting!.filterTag!)
             : 0;
+        if (customSetting!.filterIsStar == 1) {
+          globals.filterIsStar = 1;
+        } else {
+          globals.filterIsStar = 0;
+        }
+        if (customSetting!.filterIsDone == 1) {
+          globals.filterIsDone = 1;
+        } else {
+          globals.filterIsDone = 0;
+        }
       }
     }
     getData();

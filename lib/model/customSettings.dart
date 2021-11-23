@@ -8,8 +8,6 @@ class CustomSettings {
   String? _sortOrder3;
   String? _sortField4;
   String? _sortOrder4;
-//  String? _showMain1;
-//  String? _showMain2;
   String? _showSec1;
   String? _showSec2;
   String? _showSec3;
@@ -18,10 +16,6 @@ class CustomSettings {
   String? _filterStatus;
   String? _filterPriority;
   String? _filterTag;
-//  String? _filterAction;
-//  String? _filterContext;
-//  String? _filterLocation;
-//  String? _filterGoal;
   int? _filterIsStar;
   int? _filterIsDone;
 
@@ -34,8 +28,6 @@ class CustomSettings {
     this._sortOrder3,
     this._sortField4,
     this._sortOrder4,
-//    this._showMain1,
-//    this._showMain2,
     this._showSec1,
     this._showSec2,
     this._showSec3,
@@ -44,10 +36,6 @@ class CustomSettings {
     this._filterStatus,
     this._filterPriority,
     this._filterTag,
-//    this._filterAction,
-//    this._filterContext,
-//    this._filterLocation,
-//    this._filterGoal,
     this._filterIsStar,
     this._filterIsDone,
   );
@@ -61,8 +49,6 @@ class CustomSettings {
     this._sortOrder3,
     this._sortField4,
     this._sortOrder4,
-//    this._showMain1,
-//    this._showMain2,
     this._showSec1,
     this._showSec2,
     this._showSec3,
@@ -71,10 +57,6 @@ class CustomSettings {
     this._filterStatus,
     this._filterPriority,
     this._filterTag,
-//    this._filterAction,
-//    this._filterContext,
-//    this._filterLocation,
-//    this._filterGoal,
     this._filterIsStar,
     this._filterIsDone,
   );
@@ -87,8 +69,6 @@ class CustomSettings {
   String? get sortOrder3 => _sortOrder3;
   String? get sortField4 => _sortField4;
   String? get sortOrder4 => _sortOrder4;
-//  String? get showMain1 => _showMain1;
-//  String? get showMain2 => _showMain2;
   String? get showSec1 => _showSec1;
   String? get showSec2 => _showSec2;
   String? get showSec3 => _showSec3;
@@ -97,10 +77,6 @@ class CustomSettings {
   String? get filterStatus => _filterStatus;
   String? get filterPriority => _filterPriority;
   String? get filterTag => _filterTag;
-//  String? get filterAction => _filterAction;
-//  String? get filterContext => _filterContext;
-//  String? get filterLocation => _filterLocation;
-//  String? get filterGoal => _filterGoal;
   int? get filterIsStar => _filterIsStar;
   int? get filterIsDone => _filterIsDone;
 
@@ -135,13 +111,6 @@ class CustomSettings {
   set sortOrder4(String? newSortOrder4) {
     this._sortOrder4 = newSortOrder4;
   }
-//  set showMain1(String? newShowMain1) {
-//    this._showMain1 = newShowMain1;
-//  }
-
-//  set showMain2(String? newShowMain2) {
-//    this._showMain2 = newShowMain2;
-//  }
 
   set showSec1(String? newShowSec1) {
     this._showSec1 = newShowSec1;
@@ -175,22 +144,6 @@ class CustomSettings {
     this._filterTag = newFilterTag;
   }
 
-//  set filterAction(String? newFilterAction) {
-//    this._filterAction = newFilterAction;
-//  }
-
-//  set filterContext(String? newFilterContext) {
-//    this._filterContext = newFilterContext;
-//  }
-
-//  set filterLocation(String? newFilterLocation) {
-//    this._filterLocation = newFilterLocation;
-//  }
-
-//  set filterGoal(String? newFilterGoal) {
-//    this._filterGoal = newFilterGoal;
-//  }
-
   set filterIsStar(int? newFilterIsStar) {
     this._filterIsStar = newFilterIsStar;
   }
@@ -210,8 +163,6 @@ class CustomSettings {
     map['sortOrder3'] = _sortOrder3;
     map['sortField4'] = _sortField4;
     map['sortOrder4'] = _sortOrder4;
-//    map['showMain1'] = _showMain1;
-//    map['showMain2'] = _showMain2;
     map['showSec1'] = _showSec1;
     map['showSec2'] = _showSec2;
     map['showSec3'] = _showSec3;
@@ -220,10 +171,6 @@ class CustomSettings {
     map['filterStatus'] = _filterStatus;
     map['filterPriority'] = _filterPriority;
     map['filterTag'] = _filterTag;
-//    map['filterAction'] = _filterAction;
-//    map['filterContext'] = _filterContext;
-//    map['filterLocation'] = _filterLocation;
-//    map['filterGoal'] = _filterGoal;
     map['filterIsStar'] = _filterIsStar;
     map['filterIsDone'] = _filterIsDone;
 

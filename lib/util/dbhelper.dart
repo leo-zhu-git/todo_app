@@ -49,7 +49,7 @@ class DbHelper {
   String colshowSec1 = 'showSec1';
   String colshowSec2 = 'showSec2';
   String colshowSec3 = 'showSec3';
-  String colfilterDateDue = 'filterDateDue';
+  String? colfilterDateDue = 'filterDateDue';
   String colfilterTimeDue = 'filterTimeDue';
   String colfilterCategory = 'filterCategory';
   String colfilterStatus = 'filterStatus';
@@ -451,7 +451,7 @@ Plan C - USD 24 | 12 month
     Database? db = await this.db;
 
 ////////////////
-    /// build query
+/// build query
 ////////////////
     String queryStr = "";
 

@@ -363,8 +363,8 @@ class TaskSearchState extends State {
                                         _selectedStatus = newValue;
                                         searchData(
                                             _searchText,
-                                            _selectedStatus,
                                             _selectedCategory,
+                                            _selectedStatus,
                                             _selectedPriority,
                                             _selectedTag1,
                                             _showIsStar,
@@ -493,7 +493,7 @@ class TaskSearchState extends State {
                   duration: Duration(seconds: 3),
                   content: Text("Task Completed", style: _textStyleSnack),
                 ));
-                searchData(_searchText, _selectedStatus, _selectedCategory,
+                searchData(_searchText, _selectedCategory, _selectedStatus, 
                     _selectedPriority, _selectedTag1, _showIsStar, _showIsDone);
               });
             },
@@ -533,8 +533,8 @@ class TaskSearchState extends State {
                           ));
                           searchData(
                               _searchText,
-                              _selectedStatus,
                               _selectedCategory,
+                              _selectedStatus,
                               _selectedPriority,
                               _selectedTag1,
                               _showIsStar,
@@ -583,8 +583,8 @@ class TaskSearchState extends State {
                       navigateToDetail(this.tasklist[position]);
                       searchData(
                           _searchText,
-                          _selectedStatus,
                           _selectedCategory,
+                          _selectedStatus,
                           _selectedPriority,
                           _selectedTag1,
                           _showIsStar,
@@ -607,7 +607,7 @@ class TaskSearchState extends State {
     int? _sortOrder3 = globals.sortOrder3 != null ? globals.sortOrder3 : 0;
     int? _sortOrder4 = globals.sortOrder4 != null ? globals.sortOrder4 : 0;
 
-    int? _filterDateDue = 
+    int? _filterDateDue =
         globals.filterDateDue != 0 ? globals.filterDateDue : 0;
     int? _filterIsStar =
         globals.filterIsStar != "null" ? globals.filterIsStar : 0;

@@ -6,7 +6,6 @@ class DisplayTask {
   String? _sec2;
   String? _sec3;
 
-//  DisplayTask(this._main1, this._main2, this._sec1, this._sec2, this._sec3);
   DisplayTask(this._sec1, this._sec2, this._sec3);
 }
 
