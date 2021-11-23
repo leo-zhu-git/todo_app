@@ -589,8 +589,8 @@ class TaskSearchState extends State {
                     isThreeLine: false,
                     dense: true,
                     contentPadding: EdgeInsets.symmetric(horizontal: 0.0),
-                    onTap: () {
-                      navigateToDetail(this.tasklist[position]);
+                    onTap: () async {
+                      await navigateToDetail(this.tasklist[position]);
                       searchData(
                           _searchText,
                           _selectedCategory,
@@ -800,12 +800,12 @@ class TaskSearchState extends State {
     });
   }
 
-  void navigateToDetail(Task task) async {
+  Future navigateToDetail(Task task) async {
     await Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => TaskDetail(task)),
     );
-    getData();
+//    getData();
   }
 
   void searchData(String? searchText, String? category, String? status,
