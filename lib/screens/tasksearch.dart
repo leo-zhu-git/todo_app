@@ -34,8 +34,10 @@ class TaskSearchState extends State {
   String? _selectedStatus;
   String? _selectedPriority;
   String? _selectedTag1;
-  int? _showIsStar = 0;
-  int? _showIsDone = 0;
+  int? _selectedIsStar;
+  int? _selectedIsDone;
+  int? _includeIsStar = 0;
+  int? _includeIsDone = 0;
   String? _searchText = "";
 
   int? _sortField1 = globals.sortField1 != null ? globals.sortField1 : 8;
@@ -199,7 +201,7 @@ class TaskSearchState extends State {
               controller: searchController,
               onChanged: (value) {
                 searchData(value, _selectedCategory, _selectedStatus,
-                    _selectedPriority, _selectedTag1, _showIsStar, 1);
+                    _selectedPriority, _selectedTag1, _includeIsStar, _includeIsDone);
               },
               decoration: InputDecoration(
                 fillColor: Colors.green[100],
@@ -235,18 +237,18 @@ class TaskSearchState extends State {
                             Text('Include Completed Tasks:',
                                 style: _textStyleControls),
                             Checkbox(
-                              value: (_showIsDone == 0) ? false : true,
+                              value: (_includeIsDone == 0) ? false : true,
                               onChanged: (value) {
                                 setState(() {
-                                  _showIsDone = (value! == false) ? 0 : 1;
+                                  _includeIsDone = (value! == false) ? 0 : 1;
                                   searchData(
                                       _searchText,
                                       _selectedCategory,
                                       _selectedStatus,
                                       _selectedPriority,
                                       _selectedTag1,
-                                      _showIsStar,
-                                      _showIsDone);
+                                      _includeIsStar,
+                                      _includeIsDone);
                                 });
                               },
                             ),
@@ -267,18 +269,18 @@ class TaskSearchState extends State {
                             Text('Focus Tasks Only:',
                                 style: _textStyleControls),
                             Checkbox(
-                              value: (_showIsStar == 0) ? false : true,
+                              value: (_includeIsStar == 0) ? false : true,
                               onChanged: (value) {
                                 setState(() {
-                                  _showIsStar = (value! == false) ? 0 : 1;
+                                  _includeIsStar = (value! == false) ? 0 : 1;
                                   searchData(
                                       _searchText,
                                       _selectedCategory,
                                       _selectedStatus,
                                       _selectedPriority,
                                       _selectedTag1,
-                                      _showIsStar,
-                                      _showIsDone);
+                                      _includeIsStar,
+                                      _includeIsDone);
                                 });
                               },
                             ),
@@ -322,8 +324,8 @@ class TaskSearchState extends State {
                                             _selectedStatus,
                                             _selectedPriority,
                                             _selectedTag1,
-                                            _showIsStar,
-                                            _showIsDone);
+                                            _includeIsStar,
+                                            _includeIsDone);
                                       });
                                     }),
                               ),
@@ -367,8 +369,8 @@ class TaskSearchState extends State {
                                             _selectedStatus,
                                             _selectedPriority,
                                             _selectedTag1,
-                                            _showIsStar,
-                                            _showIsDone);
+                                            _includeIsStar,
+                                            _includeIsDone);
                                       });
                                     }),
                               ),
@@ -412,8 +414,8 @@ class TaskSearchState extends State {
                                             _selectedStatus,
                                             _selectedPriority,
                                             _selectedTag1,
-                                            _showIsStar,
-                                            _showIsDone);
+                                            _includeIsStar,
+                                            _includeIsDone);
                                       });
                                     }),
                               ),
@@ -453,8 +455,8 @@ class TaskSearchState extends State {
                                           _selectedStatus,
                                           _selectedPriority,
                                           _selectedTag1,
-                                          _showIsStar,
-                                          _showIsDone);
+                                          _includeIsStar,
+                                          _includeIsDone);
                                     });
                                   },
                                 ),
@@ -494,7 +496,7 @@ class TaskSearchState extends State {
                   content: Text("Task Completed", style: _textStyleSnack),
                 ));
                 searchData(_searchText, _selectedCategory, _selectedStatus, 
-                    _selectedPriority, _selectedTag1, _showIsStar, _showIsDone);
+                    _selectedPriority, _selectedTag1, _includeIsStar, _includeIsDone);
               });
             },
             background: Container(
@@ -512,7 +514,7 @@ class TaskSearchState extends State {
                       value: (this.tasklist[position].isDone == 1),
                       onChanged: (value) {
                         setState(() {
-                          _showIsStar = (value! == false) ? 0 : 1;
+                          _selectedIsDone = (value! == false) ? 0 : 1;
                           DateTime now = DateTime.now();
                           String formattedDate =
                               DateFormat('yyyy-MM-dd').format(now);
@@ -537,8 +539,8 @@ class TaskSearchState extends State {
                               _selectedStatus,
                               _selectedPriority,
                               _selectedTag1,
-                              _showIsStar,
-                              _showIsDone);
+                              _includeIsStar,
+                              _includeIsDone);
                         });
                       },
                     ),
@@ -558,7 +560,15 @@ class TaskSearchState extends State {
                             Icon(Icons.lightbulb, color: Colors.amber[800]);
                             dbHelper.updateTask(tasklist[position]);
                           }
-                          getData();
+//                          getData();
+                          searchData(
+                              _searchText,
+                              _selectedCategory,
+                              _selectedStatus,
+                              _selectedPriority,
+                              _selectedTag1,
+                              _includeIsStar,
+                              _includeIsDone);
                         });
                       },
                     ),
@@ -587,8 +597,8 @@ class TaskSearchState extends State {
                           _selectedStatus,
                           _selectedPriority,
                           _selectedTag1,
-                          _showIsStar,
-                          _showIsDone);
+                          _includeIsStar,
+                          _includeIsDone);
                     },
                     autofocus: true,
                   )),
@@ -628,7 +638,6 @@ class TaskSearchState extends State {
         getOrderColumn(_sortOrder3!),
         getSortColumn(_sortField4!),
         getOrderColumn(_sortOrder4!),
-//        getDateDueColumn(_filterDateDue!),
         _searchText,
         globals.filterCategory.toString(),
         globals.filterStatus.toString(),
@@ -800,7 +809,7 @@ class TaskSearchState extends State {
   }
 
   void searchData(String? searchText, String? category, String? status,
-      String? priority, String? tag1, int? showIsStar, int? showIsDone) {
+      String? priority, String? tag1, int? showIsStar, int? includeIsDone) {
     if (searchText?.trim() != "" || searchText?.trim() == "") {
       final dbFuture = helper.initializeDb();
       dbFuture.then((result) {
@@ -818,8 +827,8 @@ class TaskSearchState extends State {
             status.toString(),
             priority.toString(),
             tag1.toString(),
-            _showIsStar!,
-            _showIsDone!);
+            _includeIsStar!,
+            _includeIsDone!);
         tasksFuture.then((result) {
           List<Task> taskList = [];
           count = result.length;
