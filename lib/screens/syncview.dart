@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -17,20 +19,35 @@ class _SyncViewState extends State<SyncView> {
   @override
   void initState() {
     super.initState();
-    getData();
+    syncData();
     Navigator.pop(context);
   }
 
-  void getData() async {
+  void syncData() async {
+    Timer? _timer;
+    late double _progress;
 
-    EasyLoading.showProgress(0.3, status: 'Downloading ...');
-    
-// wait for leo's code
-//    mysqlDBhelper.syncTasks();
+    {
+      _progress = 0;
+      _timer?.cancel();
+      _timer = Timer.periodic(const Duration(milliseconds: 100), (Timer timer) {
+        EasyLoading.showProgress(_progress,
+            status: '${(_progress * 100).toStringAsFixed(0)}%');
+        _progress += 0.03;
+
+        if (_progress >= 1) {
+          _timer?.cancel();
+          EasyLoading.dismiss();
+        }
+      });
+    }
+    EasyLoading.showProgress(0.3, status: 'Syncing ...');
     await Future.delayed(Duration(seconds: 5), () {});
 
-    await EasyLoading.showSuccess('Sync completed successfully');
+// wait for leo's code
+//    mysqlDBhelper.syncTasks();
 
+    await EasyLoading.showSuccess('Sync completed successfully');
   }
 
   @override

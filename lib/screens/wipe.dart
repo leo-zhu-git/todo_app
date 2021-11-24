@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -137,12 +139,30 @@ class _WipeScreenState extends State<WipeScreen> {
   }
 
   Future deviceToCloud() async {
+    Timer? _timer;
+    late double _progress;
+
+    {
+      _progress = 0;
+      _timer?.cancel();
+      _timer = Timer.periodic(const Duration(milliseconds: 100), (Timer timer) {
+        EasyLoading.showProgress(_progress,
+            status: '${(_progress * 100).toStringAsFixed(0)}%');
+        _progress += 0.03;
+
+        if (_progress >= 1) {
+          _timer?.cancel();
+          EasyLoading.dismiss();
+        }
+      });
+    }
     EasyLoading.showProgress(0.3, status: 'Wipe Device To Cloud ...');
+    await Future.delayed(Duration(seconds: 5), () {});
+
 
 // wait for leo's code
 //    mysqlDBhelper.syncTasks();
 
-    await Future.delayed(Duration(seconds: 10), () {});
 //    mysqlDBhelper.wipeTaskDataToMySql();
 //    mysqlDBhelper.wipeCatatoryToMySql();
 //    mysqlDBhelper.wipeStatusToMySql();
@@ -150,10 +170,30 @@ class _WipeScreenState extends State<WipeScreen> {
 //    mysqlDBhelper.wipeTagToMySql();
 
     await EasyLoading.showSuccess('Wipe Device to Cloud Success');
+    await Future.delayed(Duration(seconds: 2), () {});
   }
 
   Future cloudToCDevice() async {
+    Timer? _timer;
+    late double _progress;
+
+    {
+      _progress = 0;
+      _timer?.cancel();
+      _timer = Timer.periodic(const Duration(milliseconds: 100), (Timer timer) {
+        EasyLoading.showProgress(_progress,
+            status: '${(_progress * 100).toStringAsFixed(0)}%');
+        _progress += 0.03;
+
+        if (_progress >= 1) {
+          _timer?.cancel();
+          EasyLoading.dismiss();
+        }
+      });
+    }
     EasyLoading.showProgress(0.3, status: 'Wipe Cloud To Device ...');
+    await Future.delayed(Duration(seconds: 5), () {});
+
 
 // wait for leo's code
 //    mysqlDBhelper.syncTasks();
@@ -165,16 +205,7 @@ class _WipeScreenState extends State<WipeScreen> {
 //    mysqlDBhelper.syncPrioritiesData();
 //    mysqlDBhelper.syncTag1sData();
     await EasyLoading.showSuccess('Wipe Cloud to Device Success');
-  }
-
-  void getData() async {
-    EasyLoading.showProgress(0.3, status: 'Downloading ...');
-
-// wait for leo's code
-//    mysqlDBhelper.syncTasks();
-    await Future.delayed(Duration(seconds: 5), () {});
-
-    await EasyLoading.showSuccess('Sync completed successfully');
+    await Future.delayed(Duration(seconds: 2), () {});
   }
 
   _ConfirmDialogue(int _option, String message) {
@@ -197,12 +228,12 @@ class _WipeScreenState extends State<WipeScreen> {
                 ElevatedButton(
                     onPressed: () async {
                       if (_option == 0) {
-                        deviceToCloud();
+                        await deviceToCloud();
 //                        Navigator.pop(context);
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => TaskHome()));
                       } else {
-                        cloudToCDevice();
+                        await cloudToCDevice();
 //                        Navigator.pop(context);
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => TaskHome()));
@@ -220,5 +251,3 @@ class _WipeScreenState extends State<WipeScreen> {
         });
   }
 }
-
-class Loading {}
