@@ -141,6 +141,7 @@ class _WipeScreenState extends State<WipeScreen> {
 
 // wait for leo's code
 //    mysqlDBhelper.syncTasks();
+
     await Future.delayed(Duration(seconds: 10), () {});
 //    mysqlDBhelper.wipeTaskDataToMySql();
 //    mysqlDBhelper.wipeCatatoryToMySql();
@@ -156,7 +157,8 @@ class _WipeScreenState extends State<WipeScreen> {
 
 // wait for leo's code
 //    mysqlDBhelper.syncTasks();
-    await Future.delayed(Duration(seconds: 10), () {});
+//    await Future.delayed(Duration(seconds: 10), () {});
+
 //    mysqlDBhelper.wipeTaskDataFromMySql();
 //    mysqlDBhelper.syncCategoriesData();
 //    mysqlDBhelper.syncStatusesData();
@@ -196,10 +198,14 @@ class _WipeScreenState extends State<WipeScreen> {
                     onPressed: () async {
                       if (_option == 0) {
                         deviceToCloud();
-                        Navigator.pop(context);
+//                        Navigator.pop(context);
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => TaskHome()));
                       } else {
                         cloudToCDevice();
-                        Navigator.pop(context);
+//                        Navigator.pop(context);
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => TaskHome()));
                       }
                     },
                     style: ElevatedButton.styleFrom(
