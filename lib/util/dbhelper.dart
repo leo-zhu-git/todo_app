@@ -125,7 +125,6 @@ class DbHelper {
 
   Future<List> addCategorytemp() async {
     Database? db = await this.db;
-//    var result = await db.rawQuery("SELECT * FROM todo where $colId < 6");
     await db!.rawQuery(
         "INSERT INTO categories ( 'id', 'name', 'description')  values (10, 'xxxx', 'Bootstrap - please delete or rename if necessary')");
     var result = await db.rawQuery("SELECT * FROM categories");
@@ -406,7 +405,6 @@ Plan C - USD 24 | 12 month
 
   Future<List> getAllTasks() async {
     Database? db = await this.db;
-//    var result = await db.rawQuery("SELECT * FROM todo where $colId < 6");
     var result = await db!.rawQuery("SELECT * FROM todo");
     return result;
   }
