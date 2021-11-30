@@ -111,7 +111,7 @@ class TaskHomeState extends State {
                 Navigator.of(context).pushNamed('/syncview');
               }),
           IconButton(
-            icon: Icon(Icons.find_in_page, color: Colors.white),
+            icon: Icon(Icons.search, color: Colors.white),
             onPressed: () {
               Navigator.push(
                 context,

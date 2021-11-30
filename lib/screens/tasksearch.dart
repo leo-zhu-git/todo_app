@@ -185,7 +185,7 @@ class TaskSearchState extends State {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.find_in_page, color: Colors.green[100]),
+            Icon(Icons.search, color: Colors.green[100]),
             Text(count.toString(), style: TextStyle(color: Colors.green[100])),
           ],
         ),
@@ -220,7 +220,7 @@ class TaskSearchState extends State {
           Padding(
               padding: EdgeInsets.all(0.0),
               child: ExpansionTile(
-title: Icon(Icons.filter_alt_outlined),
+title: Icon(Icons.filter_alt_outlined, color: Colors.black54,),
 //                title: Text(
 //                  "Advanced Filters",
 //                  style: _textStyleControls,
