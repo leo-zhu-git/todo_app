@@ -200,8 +200,14 @@ class TaskSearchState extends State {
               style: _textStyleControls,
               controller: searchController,
               onChanged: (value) {
-                searchData(value, _selectedCategory, _selectedStatus,
-                    _selectedPriority, _selectedTag1, _includeIsStar, _includeIsDone);
+                searchData(
+                    value,
+                    _selectedCategory,
+                    _selectedStatus,
+                    _selectedPriority,
+                    _selectedTag1,
+                    _includeIsStar,
+                    _includeIsDone);
               },
               decoration: InputDecoration(
                 fillColor: Colors.green[100],
@@ -495,8 +501,14 @@ class TaskSearchState extends State {
                   duration: Duration(seconds: 3),
                   content: Text("Task Completed", style: _textStyleSnack),
                 ));
-                searchData(_searchText, _selectedCategory, _selectedStatus, 
-                    _selectedPriority, _selectedTag1, _includeIsStar, _includeIsDone);
+                searchData(
+                    _searchText,
+                    _selectedCategory,
+                    _selectedStatus,
+                    _selectedPriority,
+                    _selectedTag1,
+                    _includeIsStar,
+                    _includeIsDone);
               });
             },
             background: Container(
@@ -810,6 +822,8 @@ class TaskSearchState extends State {
 
   void searchData(String? searchText, String? category, String? status,
       String? priority, String? tag1, int? showIsStar, int? includeIsDone) {
+    var countDone = 0;
+
     if (searchText?.trim() != "" || searchText?.trim() == "") {
       final dbFuture = helper.initializeDb();
       dbFuture.then((result) {
@@ -831,8 +845,19 @@ class TaskSearchState extends State {
             _includeIsDone!);
         tasksFuture.then((result) {
           List<Task> taskList = [];
+          List<DisplayTask> displaytaskList = [];
           count = result.length;
+          if (result.length == 0) {
+            List<Task> taskList = [];
+            List<DisplayTask> displaytaskList = [];
+            count = 0;
+            setState(() {
+              tasklist = taskList;
+              count = count;
+            });
+          }
           for (int i = 0; i < count; i++) {
+            countDone = countDone + 1;
             taskList.add(Task.fromObject(result[i]));
 
 /////////////////
@@ -1027,13 +1052,6 @@ class TaskSearchState extends State {
             });
           }
         });
-      });
-    } else {
-      List<Task> taskList = [];
-      count = 0;
-      setState(() {
-        tasklist = taskList;
-        count = count;
       });
     }
   }
