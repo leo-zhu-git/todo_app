@@ -220,12 +220,12 @@ class TaskSearchState extends State {
           Padding(
               padding: EdgeInsets.all(0.0),
               child: ExpansionTile(
-                title: Text(
-                  "Advanced Filters",
-                  style: _textStyleControls,
-                ),
-
-                trailing: Icon(Icons.filter_list_outlined),
+title: Icon(Icons.filter_alt_outlined),
+//                title: Text(
+//                  "Advanced Filters",
+//                  style: _textStyleControls,
+//                ),
+//                trailing: Icon(Icons.filter_alt_outlined),
 
                 // backgroundColor: Colors.yellow,
                 children: [
