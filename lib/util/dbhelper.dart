@@ -635,7 +635,8 @@ Plan C - USD 24 | 12 month
             " LEFT JOIN statuses ON  $tblTodo.status = statuses.id " +
             " LEFT JOIN priorities ON  $tblTodo.priority = priorities.id " +
             " LEFT JOIN tag1s ON  $tblTodo.tag1 = tag1s.id " +
-            "WHERE ($colTask LIKE '%$searchText%' OR $colNote LIKE '%$searchText% ')";
+            "WHERE ($colTask LIKE '%$searchText%' OR $colNote LIKE '%$searchText%' " +
+            " OR categoriesname LIKE '%$searchText%' OR statusesname LIKE '%$searchText%' OR prioritiesname LIKE '%$searchText%' OR tag1sname LIKE '%$searchText%')";
 
 ////////////////
     /// build query - add filterIsDone
