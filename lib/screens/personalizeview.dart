@@ -63,52 +63,52 @@ class ShowItem {
   }
 }
 
-class FilterIsStar {
-  int id;
-  String name;
+//class FilterIsStar {
+//  int id;
+//  String name;
 
-  FilterIsStar(this.id, this.name);
-  static List<FilterIsStar> getIsStar() {
-    return <FilterIsStar>[
-      FilterIsStar(0, '-- Focus & All Tasks --'),
-      FilterIsStar(1, 'Focus Tasks Only'),
-    ];
-  }
-}
+//  FilterIsStar(this.id, this.name);
+//  static List<FilterIsStar> getIsStar() {
+//    return <FilterIsStar>[
+//      FilterIsStar(0, '-- Focus & All Tasks --'),
+//      FilterIsStar(1, 'Focus Tasks Only'),
+//    ];
+//  }
+//}
 
-class FilterIsDone {
-  int id;
-  String name;
+//class FilterIsDone {
+//  int id;
+//  String name;
 
-  FilterIsDone(this.id, this.name);
-  static List<FilterIsDone> getIsDone() {
-    return <FilterIsDone>[
-      FilterIsDone(0, '-- Include Completed Tasks --'),
-      FilterIsDone(1, 'Hide Completed Tasks'),
-    ];
-  }
-}
+//  FilterIsDone(this.id, this.name);
+//  static List<FilterIsDone> getIsDone() {
+//    return <FilterIsDone>[
+//      FilterIsDone(0, '-- Include Completed Tasks --'),
+//      FilterIsDone(1, 'Hide Completed Tasks'),
+//    ];
+//  }
+//}
 
-class FilterDateDue {
-  int id;
-  String name;
+//class FilterDateDue {
+//  int id;
+//  String name;
 
-  FilterDateDue(this.id, this.name);
-  static List<FilterDateDue> getDateDue() {
-    return <FilterDateDue>[
-      FilterDateDue(0, '-- All Due Dates --'),
-      FilterDateDue(1, 'Today'),
-      FilterDateDue(2, 'Tomorrow'),
-      FilterDateDue(3, 'Next 7 days'),
-      FilterDateDue(4, 'Next 30 days'),
-      FilterDateDue(5, 'Any Due Date'),
-      FilterDateDue(6, 'No Due Date'),
-      FilterDateDue(7, 'Overdues Only'),
-      FilterDateDue(8, 'Overdues and Today'),
-      FilterDateDue(9, 'Overdues, Today and Tomorrow'),
-    ];
-  }
-}
+//  FilterDateDue(this.id, this.name);
+//  static List<FilterDateDue> getDateDue() {
+//    return <FilterDateDue>[
+//      FilterDateDue(0, '-- All Due Dates --'),
+//      FilterDateDue(1, 'Today'),
+//      FilterDateDue(2, 'Tomorrow'),
+//      FilterDateDue(3, 'Next 7 days'),
+//      FilterDateDue(4, 'Next 30 days'),
+//      FilterDateDue(5, 'Any Due Date'),
+//      FilterDateDue(6, 'No Due Date'),
+//      FilterDateDue(7, 'Overdues Only'),
+//      FilterDateDue(8, 'Overdues and Today'),
+//      FilterDateDue(9, 'Overdues, Today and Tomorrow'),
+//    ];
+//  }
+//}
 
 class SortOrder {
   int id;
@@ -128,18 +128,18 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
   List<ShowItem> _show = ShowItem.getShow();
   List<SortItem> _sort = SortItem.getSort();
   List<SortOrder> _order = SortOrder.getOrder();
-  List<FilterIsStar> _filterIsStar = FilterIsStar.getIsStar();
-  List<FilterIsDone> _filterIsDone = FilterIsDone.getIsDone();
-  List<FilterDateDue> _filterDateDue = FilterDateDue.getDateDue();
+//  List<FilterIsStar> _filterIsStar = FilterIsStar.getIsStar();
+//  List<FilterIsDone> _filterIsDone = FilterIsDone.getIsDone();
+//  List<FilterDateDue> _filterDateDue = FilterDateDue.getDateDue();
   late List<DropdownMenuItem<ShowItem>> _dropdownMenuItemsShow;
   late List<DropdownMenuItem<SortItem>> _dropdownMenuItemsSort;
   late List<DropdownMenuItem<SortOrder>> _dropdownMenuSortOrder;
-  late List<DropdownMenuItem<FilterIsStar>> _dropdownFilterIsStar;
-  late List<DropdownMenuItem<FilterIsDone>> _dropdownFilterIsDone;
-  late List<DropdownMenuItem<FilterDateDue>> _dropdownFilterDateDue;
-  FilterIsStar? _selectedFilterIsStar;
-  FilterIsDone? _selectedFilterIsDone;
-  FilterDateDue? _selectedFilterDateDue;
+//  late List<DropdownMenuItem<FilterIsStar>> _dropdownFilterIsStar;
+//  late List<DropdownMenuItem<FilterIsDone>> _dropdownFilterIsDone;
+//  late List<DropdownMenuItem<FilterDateDue>> _dropdownFilterDateDue;
+//  FilterIsStar? _selectedFilterIsStar;
+//  FilterIsDone? _selectedFilterIsDone;
+//  FilterDateDue? _selectedFilterDateDue;
   SortItem? _selectedSortField1;
   SortOrder? _selectedSortOrder1;
   SortItem? _selectedSortField2;
@@ -154,17 +154,17 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
   ShowItem? _selectedShowSec3;
   DbHelper helper = DbHelper();
   CustomSettings? customSetting;
-  List<CustomDropdownItem> _categories = [];
-  List<CustomDropdownItem> _statuses = [];
-  List<CustomDropdownItem> _priorities = [];
-  List<CustomDropdownItem> _tag1s = [];
+//  List<CustomDropdownItem> _categories = [];
+//  List<CustomDropdownItem> _statuses = [];
+  ///  List<CustomDropdownItem> _priorities = [];
+//  List<CustomDropdownItem> _tag1s = [];
   List<Task> tasklist = [];
   int count = 0;
   TextEditingController searchController = TextEditingController();
-  var _selectedCategory = null;
-  var _selectedStatus = null;
-  var _selectedPriority = null;
-  var _selectedTag1 = null;
+//  var _selectedCategory = null;
+//  var _selectedStatus = null;
+//  var _selectedPriority = null;
+//  var _selectedTag1 = null;
   TextStyle _textStyleSnack = TextStyle(
       fontSize: 16.0, color: Colors.pink[100], fontWeight: FontWeight.w600);
 
@@ -175,44 +175,44 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     _dropdownMenuItemsShow = buildDropdownMenuShow(_show);
     _dropdownMenuItemsSort = buildDropdownMenuItems(_sort);
     _dropdownMenuSortOrder = buildDropdownMenuOrder(_order);
-    _dropdownFilterIsStar = buildDropdownFilterIsStar(_filterIsStar);
-    _dropdownFilterIsDone = buildDropdownFilterIsDone(_filterIsDone);
-    _dropdownFilterDateDue = buildDropdownFilterDateDue(_filterDateDue);
-    _loadCategories();
-    _loadStatuses();
-    _loadPriorities();
-    _loadTag1s();
+//    _dropdownFilterIsStar = buildDropdownFilterIsStar(_filterIsStar);
+//    _dropdownFilterIsDone = buildDropdownFilterIsDone(_filterIsDone);
+//    _dropdownFilterDateDue = buildDropdownFilterDateDue(_filterDateDue);
+//    _loadCategories();
+//    _loadStatuses();
+//    _loadPriorities();
+//    _loadTag1s();
 
     _getCustomSettings();
     ////////////////////////////
     /// filter - date due
     ////////////////////////////
-    if (globals.filterDateDue == null) {
-      _selectedFilterDateDue = _dropdownFilterDateDue[0].value!;
-      globals.filterDateDue = 0;
-    } else
-      _selectedFilterDateDue =
-          _dropdownFilterDateDue[globals.filterDateDue!].value!;
+//    if (globals.filterDateDue == null) {
+//      _selectedFilterDateDue = _dropdownFilterDateDue[0].value!;
+//      globals.filterDateDue = 0;
+//    } else
+//      _selectedFilterDateDue =
+//          _dropdownFilterDateDue[globals.filterDateDue!].value!;
 
     ////////////////////////////
     /// filter - is star
     ////////////////////////////
-    if (globals.filterIsStar == null) {
-      _selectedFilterIsStar = _dropdownFilterIsStar[0].value!;
-      globals.filterIsStar = 0;
-    } else
-      _selectedFilterIsStar =
-          _dropdownFilterIsStar[globals.filterIsStar!].value!;
+//    if (globals.filterIsStar == null) {
+//      _selectedFilterIsStar = _dropdownFilterIsStar[0].value!;
+//      globals.filterIsStar = 0;
+//    } else
+//      _selectedFilterIsStar =
+//          _dropdownFilterIsStar[globals.filterIsStar!].value!;
 
     ////////////////////////////
     /// filter - is done
     ////////////////////////////
-    if (globals.filterIsDone == null) {
-      _selectedFilterIsDone = _dropdownFilterIsDone[0].value!;
-      globals.filterIsDone = 0;
-    } else
-      _selectedFilterIsDone =
-          _dropdownFilterIsDone[globals.filterIsDone!].value!;
+//    if (globals.filterIsDone == null) {
+//      _selectedFilterIsDone = _dropdownFilterIsDone[0].value!;
+//      globals.filterIsDone = 0;
+//    } else
+//      _selectedFilterIsDone =
+//          _dropdownFilterIsDone[globals.filterIsDone!].value!;
 
     ////////////////////////////
     // Sort and Order
@@ -285,98 +285,97 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
   }
 
 //##################Drop Down Items Load from DB #################################################################
-  _loadCategories() async {
-    var categories = await helper.getCategories();
-    CustomDropdownItem cus;
-    cus = new CustomDropdownItem();
+//  _loadCategories() async {
+//    var categories = await helper.getCategories();
+//    CustomDropdownItem cus;
+//    cus = new CustomDropdownItem();
+//    cus.name = "-- All Categories -- ";
+//    _categories.add(cus);
+//    categories.forEach((category) {
+//      setState(() {
+//        cus = new CustomDropdownItem();
+//        cus.id = category['id'].toString();
+//        String tempCat;
+//        if (category['name'].toString().length > 30)
+//          tempCat = category['name'].toString().substring(0, 30) + "...";
+//        else
+//          tempCat = category['name'];
+
+//        cus.name = tempCat;
+
+//        _categories.add(cus);
+//      });
+//    });
+//  }
+
+//  _loadStatuses() async {
+//    var statuses = await helper.getStatuses();
+//    CustomDropdownItem cus;
+//    cus = new CustomDropdownItem();
+//    cus.name = "-- All Statuses --";
+//    _statuses.add(cus);
+//    statuses.forEach((status) {
+//      setState(() {
+//        cus = new CustomDropdownItem();
+//        cus.id = status['id'].toString();
+//        String tempStatus;
+//        if (status['name'].toString().length > 30)
+//          tempStatus = status['name'].toString().substring(0, 30) + "...";
+//        else
+//          tempStatus = status['name'];
+
+//        cus.name = tempStatus;
+
+//        _statuses.add(cus);
+//      });
+//    });
+//  }
+
+//  _loadPriorities() async {
+//    var priorities = await helper.getPriorities();
+//    CustomDropdownItem cus;
+//    cus = new CustomDropdownItem();
 //    cus.id = null;
-    cus.name = "-- All Categories -- ";
-    _categories.add(cus);
-    categories.forEach((category) {
-      setState(() {
-        cus = new CustomDropdownItem();
-        cus.id = category['id'].toString();
-        String tempCat;
-        if (category['name'].toString().length > 30)
-          tempCat = category['name'].toString().substring(0, 30) + "...";
-        else
-          tempCat = category['name'];
+//    cus.name = "-- All Priorities --";
+//    _priorities.add(cus);
+//    priorities.forEach((priority) {
+//      setState(() {
+//        cus = new CustomDropdownItem();
+//        cus.id = priority['id'].toString();
+//        String tempPriority;
+//        if (priority['name'].toString().length > 30)
+//          tempPriority = priority['name'].toString().substring(0, 30) + "...";
+//        else
+//          tempPriority = priority['name'];
+//        cus.name = tempPriority;
 
-        cus.name = tempCat;
+//        _priorities.add(cus);
+//      });
+//    });
+//  }
 
-        _categories.add(cus);
-      });
-    });
-  }
+//  _loadTag1s() async {
+//    var tag1s = await helper.getTag1s();
+//    CustomDropdownItem cus;
+//    cus = new CustomDropdownItem();
+//    cus.id = null;
+//    cus.name = "-- All Tags --";
+//    _tag1s.add(cus);
+//    tag1s.forEach((tag1) {
+//      setState(() {
+//        cus = new CustomDropdownItem();
+//        cus.id = tag1['id'].toString();
+//        String tempTag;
+//        if (tag1['name'].toString().length > 30)
+//          tempTag = tag1['name'].toString().substring(0, 30) + "...";
+//        else
+//          tempTag = tag1['name'];
 
-  _loadStatuses() async {
-    var statuses = await helper.getStatuses();
-    CustomDropdownItem cus;
-    cus = new CustomDropdownItem();
-    cus.name = "-- All Statuses --";
-    _statuses.add(cus);
-    statuses.forEach((status) {
-      setState(() {
-        cus = new CustomDropdownItem();
-        cus.id = status['id'].toString();
-        String tempStatus;
-        if (status['name'].toString().length > 30)
-          tempStatus = status['name'].toString().substring(0, 30) + "...";
-        else
-          tempStatus = status['name'];
-
-        cus.name = tempStatus;
-
-        _statuses.add(cus);
-      });
-    });
-  }
-
-  _loadPriorities() async {
-    var priorities = await helper.getPriorities();
-    CustomDropdownItem cus;
-    cus = new CustomDropdownItem();
-    cus.id = null;
-    cus.name = "-- All Priorities --";
-    _priorities.add(cus);
-    priorities.forEach((priority) {
-      setState(() {
-        cus = new CustomDropdownItem();
-        cus.id = priority['id'].toString();
-        String tempPriority;
-        if (priority['name'].toString().length > 30)
-          tempPriority = priority['name'].toString().substring(0, 30) + "...";
-        else
-          tempPriority = priority['name'];
-        cus.name = tempPriority;
-
-        _priorities.add(cus);
-      });
-    });
-  }
-
-  _loadTag1s() async {
-    var tag1s = await helper.getTag1s();
-    CustomDropdownItem cus;
-    cus = new CustomDropdownItem();
-    cus.id = null;
-    cus.name = "-- All Tags --";
-    _tag1s.add(cus);
-    tag1s.forEach((tag1) {
-      setState(() {
-        cus = new CustomDropdownItem();
-        cus.id = tag1['id'].toString();
-        String tempTag;
-        if (tag1['name'].toString().length > 30)
-          tempTag = tag1['name'].toString().substring(0, 30) + "...";
-        else
-          tempTag = tag1['name'];
-
-        cus.name = tempTag;
-        _tag1s.add(cus);
-      });
-    });
-  }
+//        cus.name = tempTag;
+//        _tag1s.add(cus);
+//      });
+//    });
+//  }
 
 //##########################################end of Dropdown #################################################################
 
@@ -419,47 +418,47 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
     return order;
   }
 
-  List<DropdownMenuItem<FilterIsStar>> buildDropdownFilterIsStar(
-      List filterIsStarItems) {
-    List<DropdownMenuItem<FilterIsStar>> items = [];
-    for (FilterIsStar filterIsStar in filterIsStarItems) {
-      items.add(
-        DropdownMenuItem(
-          value: filterIsStar,
-          child: Text(filterIsStar.name),
-        ),
-      );
-    }
-    return items;
-  }
+//  List<DropdownMenuItem<FilterIsStar>> buildDropdownFilterIsStar(
+//      List filterIsStarItems) {
+//    List<DropdownMenuItem<FilterIsStar>> items = [];
+//    for (FilterIsStar filterIsStar in filterIsStarItems) {
+//      items.add(
+//        DropdownMenuItem(
+//          value: filterIsStar,
+//          child: Text(filterIsStar.name),
+//        ),
+//      );
+//    }
+//    return items;
+//  }
 
-  List<DropdownMenuItem<FilterIsDone>> buildDropdownFilterIsDone(
-      List filterIsDoneItems) {
-    List<DropdownMenuItem<FilterIsDone>> items = [];
-    for (FilterIsDone filterIsDone in filterIsDoneItems) {
-      items.add(
-        DropdownMenuItem(
-          value: filterIsDone,
-          child: Text(filterIsDone.name),
-        ),
-      );
-    }
-    return items;
-  }
+//  List<DropdownMenuItem<FilterIsDone>> buildDropdownFilterIsDone(
+//      List filterIsDoneItems) {
+//    List<DropdownMenuItem<FilterIsDone>> items = [];
+//    for (FilterIsDone filterIsDone in filterIsDoneItems) {
+//      items.add(
+//        DropdownMenuItem(
+//          value: filterIsDone,
+//          child: Text(filterIsDone.name),
+//        ),
+//      );
+//    }
+//    return items;
+//  }
 
-  List<DropdownMenuItem<FilterDateDue>> buildDropdownFilterDateDue(
-      List filterDateDueItems) {
-    List<DropdownMenuItem<FilterDateDue>> items = [];
-    for (FilterDateDue filterDateDue in filterDateDueItems) {
-      items.add(
-        DropdownMenuItem(
-          value: filterDateDue,
-          child: Text(filterDateDue.name),
-        ),
-      );
-    }
-    return items;
-  }
+//  List<DropdownMenuItem<FilterDateDue>> buildDropdownFilterDateDue(
+//      List filterDateDueItems) {
+//    List<DropdownMenuItem<FilterDateDue>> items = [];
+//    for (FilterDateDue filterDateDue in filterDateDueItems) {
+//      items.add(
+//        DropdownMenuItem(
+//          value: filterDateDue,
+//          child: Text(filterDateDue.name),
+//        ),
+//      );
+//    }
+//    return items;
+//  }
 
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
 
@@ -525,12 +524,12 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 if (_selectedShowSec3 != null)
                   globals.showSec3 = _selectedShowSec3!.id;
                 print(globals.showSec3);
-                if (_selectedFilterIsStar != null)
-                  globals.filterIsStar = _selectedFilterIsStar!.id;
-                if (_selectedFilterIsDone != null)
-                  globals.filterIsDone = _selectedFilterIsDone!.id;
-                if (_selectedFilterDateDue != null)
-                  globals.filterDateDue = _selectedFilterDateDue!.id;
+//                if (_selectedFilterIsStar != null)
+//                  globals.filterIsStar = _selectedFilterIsStar!.id;
+//                if (_selectedFilterIsDone != null)
+//                  globals.filterIsDone = _selectedFilterIsDone!.id;
+//                if (_selectedFilterDateDue != null)
+//                  globals.filterDateDue = _selectedFilterDateDue!.id;
 
 //Save
                 if (customSetting == null) {
@@ -589,48 +588,49 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 customSetting!.showSec3 = _selectedShowSec3 == null
                     ? ""
                     : _selectedShowSec3!.id.toString();
-                customSetting!.filterDateDue = _selectedFilterDateDue == null
-                    ? ""
-                    : _selectedFilterDateDue!.id.toString();
-                if (_selectedFilterIsStar == null) {
-                  customSetting!.filterIsStar = 0;
+
+//                customSetting!.filterDateDue = _selectedFilterDateDue == null
+//                    ? ""
+//                    : _selectedFilterDateDue!.id.toString();
+
+//                if (_selectedFilterIsStar == null) {
+//                  customSetting!.filterIsStar = 0;
+//                } else {
+//                  if (_selectedFilterIsStar!.id == 0) {
+//                    customSetting!.filterIsStar = 0;
+//                  } else {
+//                    customSetting!.filterIsStar = 1;
+//                  }
+
+//                  if (_selectedFilterIsDone == null) {
+//                    customSetting!.filterIsDone = 0;
+//                  } else {
+//                    if (_selectedFilterIsDone!.id == 0) {
+//                      customSetting!.filterIsDone = 0;
+//                    } else {
+//                      customSetting!.filterIsDone = 1;
+//                    }
+
+//                  customSetting!.filterCategory = (_selectedCategory == null)
+//                      ? ""
+//                      : _selectedCategory.toString();
+//                  customSetting!.filterStatus =
+//                      _selectedStatus == null ? "" : _selectedStatus.toString();
+//                  customSetting!.filterPriority = (_selectedPriority == null)
+//                      ? ""
+//                      : _selectedPriority.toString();
+//                  customSetting!.filterTag =
+//                      (_selectedTag1 == null) ? "" : _selectedTag1.toString();
+
+                var result;
+
+                if (customSetting!.id != null) {
+                  result = helper.updateCustomSettings(customSetting!);
                 } else {
-                  if (_selectedFilterIsStar!.id == 0) {
-                    customSetting!.filterIsStar = 0;
-                  } else {
-                    customSetting!.filterIsStar = 1;
-                  }
-                  if (_selectedFilterIsDone == null) {
-                    customSetting!.filterIsDone = 0;
-                  } else {
-                    if (_selectedFilterIsDone!.id == 0) {
-                      customSetting!.filterIsDone = 0;
-                    } else {
-                      customSetting!.filterIsDone = 1;
-                    }
-                  }
-
-                  customSetting!.filterCategory = (_selectedCategory == null)
-                      ? ""
-                      : _selectedCategory.toString();
-                  customSetting!.filterStatus =
-                      _selectedStatus == null ? "" : _selectedStatus.toString();
-                  customSetting!.filterPriority = (_selectedPriority == null)
-                      ? ""
-                      : _selectedPriority.toString();
-                  customSetting!.filterTag =
-                      (_selectedTag1 == null) ? "" : _selectedTag1.toString();
-
-                  var result;
-
-                  if (customSetting!.id != null) {
-                    result = helper.updateCustomSettings(customSetting!);
-                  } else {
-                    result = helper.insertCustomSettings(customSetting!);
-                  }
+                  result = helper.insertCustomSettings(customSetting!);
+                }
 
 //end of save
-                }
               });
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 backgroundColor: Colors.teal[800],
@@ -652,215 +652,215 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
 ///////////////////////////
 //  Filters
 ///////////////////////////
-              Text("Filter - Reduce tasks to view", style: _textStyleControls),
+//              Text("Filter - Reduce tasks to view", style: _textStyleControls),
 
 //################################# Due Dates #####################################################
-              new Container(
-                margin: const EdgeInsets.all(2.0),
-                decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.blue[100]),
-                child: Theme(
-                  data: Theme.of(context)
-                      .copyWith(canvasColor: Colors.lime[100]),
-                  child: DropdownButtonFormField<FilterDateDue>(
-                    style: _textStyleControls,
-                    items: _dropdownFilterDateDue,
-                    hint: Text('Filter by Due Date'),
-                    value: _selectedFilterDateDue,
-                    onChanged: (selectedFilterDateDue) {
-                      setState(() {
-                        _selectedFilterDateDue = selectedFilterDateDue!;
-                      });
-                    },
-                  ),
-                ),
-              ),
+//              new Container(
+//                margin: const EdgeInsets.all(2.0),
+//                decoration: BoxDecoration(
+//                    shape: BoxShape.rectangle, color: Colors.blue[100]),
+//                child: Theme(
+//                  data: Theme.of(context)
+//                      .copyWith(canvasColor: Colors.lime[100]),
+//                  child: DropdownButtonFormField<FilterDateDue>(
+//                    style: _textStyleControls,
+//                    items: _dropdownFilterDateDue,
+//                    hint: Text('Filter by Due Date'),
+//                    value: _selectedFilterDateDue,
+//                    onChanged: (selectedFilterDateDue) {
+//                      setState(() {
+//                        _selectedFilterDateDue = selectedFilterDateDue!;
+//                      });
+//                    },
+//                  ),
+//                ),
+//              ),
 
 //################################# Category #####################################################
-              Container(
-                margin: const EdgeInsets.all(2.0),
-                decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.blue[100]),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Theme(
-                      data: Theme.of(context)
-                          .copyWith(canvasColor: Colors.lime[100]),
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton<String>(
-                            isExpanded: true,
-                            style: _textStyleControls,
-                            items: _categories.map((CustomDropdownItem value) {
-                              return DropdownMenuItem<String>(
-                                  value: value.id,
-                                  child: Text(
-                                    value.name!,
-                                    overflow: TextOverflow.ellipsis,
-                                  ));
-                            }).toList(),
-                            value: _selectedCategory,
-                            onChanged: (newValue) {
-                              setState(() {
-                                _selectedCategory = newValue;
-                              });
-                            }),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+//              Container(
+//                margin: const EdgeInsets.all(2.0),
+//                decoration: BoxDecoration(
+//                    shape: BoxShape.rectangle, color: Colors.blue[100]),
+//                child: Column(
+//                  crossAxisAlignment: CrossAxisAlignment.stretch,
+//                  children: [
+//                    Theme(
+//                      data: Theme.of(context)
+//                          .copyWith(canvasColor: Colors.lime[100]),
+//                      child: DropdownButtonHideUnderline(
+//                        child: DropdownButton<String>(
+//                            isExpanded: true,
+//                            style: _textStyleControls,
+//                            items: _categories.map((CustomDropdownItem value) {
+//                              return DropdownMenuItem<String>(
+//                                  value: value.id,
+//                                  child: Text(
+//                                    value.name!,
+//                                    overflow: TextOverflow.ellipsis,
+//                                  ));
+//                            }).toList(),
+//                            value: _selectedCategory,
+//                            onChanged: (newValue) {
+//                              setState(() {
+//                                _selectedCategory = newValue;
+//                              });
+//                            }),
+//                      ),
+//                    ),
+//                  ],
+//                ),
+//              ),
 
 //################################# Status #####################################################
-              Container(
-                margin: const EdgeInsets.all(2.0),
-                decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.blue[100]),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Theme(
-                      data: Theme.of(context)
-                          .copyWith(canvasColor: Colors.lime[100]),
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton<String>(
-                            isExpanded: true,
-                            style: _textStyleControls,
-                            items: _statuses.map((CustomDropdownItem value) {
-                              return DropdownMenuItem<String>(
-                                  value: value.id,
-                                  child: Text(
-                                    value.name!,
-                                    overflow: TextOverflow.ellipsis,
-                                  ));
-                            }).toList(),
-                            value: _selectedStatus,
-                            onChanged: (newValue) {
-                              setState(() {
-                                _selectedStatus = newValue;
-                              });
-                            }),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+//              Container(
+//                margin: const EdgeInsets.all(2.0),
+//                decoration: BoxDecoration(
+//                    shape: BoxShape.rectangle, color: Colors.blue[100]),
+//                child: Column(
+//                  crossAxisAlignment: CrossAxisAlignment.stretch,
+//                  children: [
+//                    Theme(
+//                      data: Theme.of(context)
+//                          .copyWith(canvasColor: Colors.lime[100]),
+//                      child: DropdownButtonHideUnderline(
+//                       child: DropdownButton<String>(
+//                            isExpanded: true,
+//                            style: _textStyleControls,
+//                            items: _statuses.map((CustomDropdownItem value) {
+//                              return DropdownMenuItem<String>(
+//                                  value: value.id,
+//                                  child: Text(
+//                                    value.name!,
+//                                    overflow: TextOverflow.ellipsis,
+//                                  ));
+//                            }).toList(),
+//                            value: _selectedStatus,
+//                            onChanged: (newValue) {
+//                              setState(() {
+//                                _selectedStatus = newValue;
+//                              });
+//                            }),
+//                      ),
+//                    ),
+//                  ],
+//                ),
+//              ),
 
 //################################# Priority #####################################################
-              Container(
-                margin: const EdgeInsets.all(2.0),
-                decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.blue[100]),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Theme(
-                      data: Theme.of(context)
-                          .copyWith(canvasColor: Colors.lime[100]),
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton<String>(
-                            isExpanded: true,
-                            style: _textStyleControls,
-                            items: _priorities.map((CustomDropdownItem value) {
-                              return DropdownMenuItem<String>(
-                                  value: value.id,
-                                  child: Text(
-                                    value.name!,
-                                    overflow: TextOverflow.ellipsis,
-                                  ));
-                            }).toList(),
-                            value: _selectedPriority,
-                            onChanged: (newValue) {
-                              setState(() {
-                                _selectedPriority = newValue;
-                              });
-                            }),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+//              Container(
+//                margin: const EdgeInsets.all(2.0),
+//                decoration: BoxDecoration(
+//                    shape: BoxShape.rectangle, color: Colors.blue[100]),
+//                child: Column(
+//                  crossAxisAlignment: CrossAxisAlignment.stretch,
+//                  children: [
+//                    Theme(
+//                      data: Theme.of(context)
+//                          .copyWith(canvasColor: Colors.lime[100]),
+//                      child: DropdownButtonHideUnderline(
+//                        child: DropdownButton<String>(
+//                            isExpanded: true,
+//                            style: _textStyleControls,
+//                            items: _priorities.map((CustomDropdownItem value) {
+//                              return DropdownMenuItem<String>(
+//                                  value: value.id,
+//                                  child: Text(
+//                                   value.name!,
+//                                    overflow: TextOverflow.ellipsis,
+//                                  ));
+//                            }).toList(),
+//                            value: _selectedPriority,
+//                            onChanged: (newValue) {
+//                             setState(() {
+//                                _selectedPriority = newValue;
+//                              });
+//                            }),
+//                      ),
+//                    ),
+//                  ],
+//                ),
+//              ),
 
 //################################# Tag #####################################################
-              Container(
-                margin: const EdgeInsets.all(2.0),
-                decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.blue[100]),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Theme(
-                      data: Theme.of(context)
-                          .copyWith(canvasColor: Colors.lime[100]),
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton<String>(
-                          isExpanded: true,
-                          style: _textStyleControls,
-                          items: _tag1s.map((CustomDropdownItem value) {
-                            return DropdownMenuItem<String>(
-                                value: value.id, child: Text(value.name!));
-                          }).toList(),
-                          value: _selectedTag1,
-                          onChanged: (value) {
-                            setState(() {
-                              _selectedTag1 = value;
-                            });
-                          },
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
+//              Container(
+//                margin: const EdgeInsets.all(2.0),
+//                decoration: BoxDecoration(
+//                    shape: BoxShape.rectangle, color: Colors.blue[100]),
+//                child: Column(
+//                  crossAxisAlignment: CrossAxisAlignment.stretch,
+//                  children: [
+//                    Theme(
+//                      data: Theme.of(context)
+//                          .copyWith(canvasColor: Colors.lime[100]),
+//                      child: DropdownButtonHideUnderline(
+//                        child: DropdownButton<String>(
+//                          isExpanded: true,
+//                          style: _textStyleControls,
+//                          items: _tag1s.map((CustomDropdownItem value) {
+//                            return DropdownMenuItem<String>(
+//                                value: value.id, child: Text(value.name!));
+//                          }).toList(),
+//                          value: _selectedTag1,
+//                          onChanged: (value) {
+//                            setState(() {
+//                              _selectedTag1 = value;
+//                            });
+//                          },
+//                        ),
+//                      ),
+//                    )
+//                 ],
+//                ),
+//              ),
 
 //################################# Focus #####################################################
-              new Container(
-                margin: const EdgeInsets.all(2.0),
-                decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.blue[100]),
-                child: Theme(
-                  data: Theme.of(context)
-                      .copyWith(canvasColor: Colors.lime[100]),
-                  child: DropdownButtonFormField<FilterIsStar>(
-                    style: _textStyleControls,
-                    items: _dropdownFilterIsStar,
-                    hint: Text('Filter by Focus Tasks'),
-                    value: _selectedFilterIsStar,
-                    onChanged: (selectedFilterIsStar) {
-                      setState(() {
-                        _selectedFilterIsStar = selectedFilterIsStar!;
-                      });
-                    },
-                  ),
-                ),
-              ),
+//              new Container(
+//                margin: const EdgeInsets.all(2.0),
+//                decoration: BoxDecoration(
+//                    shape: BoxShape.rectangle, color: Colors.blue[100]),
+//                child: Theme(
+//                  data: Theme.of(context)
+//                      .copyWith(canvasColor: Colors.lime[100]),
+//                  child: DropdownButtonFormField<FilterIsStar>(
+//                    style: _textStyleControls,
+//                    items: _dropdownFilterIsStar,
+//                    hint: Text('Filter by Focus Tasks'),
+//                    value: _selectedFilterIsStar,
+//                    onChanged: (selectedFilterIsStar) {
+//                      setState(() {
+//                        _selectedFilterIsStar = selectedFilterIsStar!;
+//                      });
+//                    },
+//                  ),
+//                ),
+//              ),
 
 //################################# IsDone #####################################################
-              new Container(
-                margin: const EdgeInsets.all(2.0),
-                decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.blue[100]),
-                child: Theme(
-                  data: Theme.of(context)
-                      .copyWith(canvasColor: Colors.lime[100]),
-                  child: DropdownButtonFormField<FilterIsDone>(
-                    style: _textStyleControls,
-                    items: _dropdownFilterIsDone,
-                    hint: Text('Filter by Is Done Tasks'),
-                    value: _selectedFilterIsDone,
-                    onChanged: (selectedFilterIsDone) {
-                      setState(() {
-                        _selectedFilterIsDone = selectedFilterIsDone!;
-                      });
-                    },
-                  ),
-                ),
-              ),
+//              new Container(
+//                margin: const EdgeInsets.all(2.0),
+//                decoration: BoxDecoration(
+//                    shape: BoxShape.rectangle, color: Colors.blue[100]),
+//                child: Theme(
+//                  data: Theme.of(context)
+//                      .copyWith(canvasColor: Colors.lime[100]),
+//                  child: DropdownButtonFormField<FilterIsDone>(
+//                    style: _textStyleControls,
+//                    items: _dropdownFilterIsDone,
+//                    hint: Text('Filter by Is Done Tasks'),
+//                    value: _selectedFilterIsDone,
+//                    onChanged: (selectedFilterIsDone) {
+//                      setState(() {
+//                        _selectedFilterIsDone = selectedFilterIsDone!;
+//                      });
+//                    },
+//                  ),
+//                ),
+//              ),
 
-              SizedBox(
-                height: 20,
-              ),
-              Text("Picklist | User-defined Dropdowns",
+//              SizedBox(
+//                height: 20,
+//              ),
+              Text("User-defined Dropdowns",
                   style: _textStyleControls),
 
 ///////////////////////////
@@ -930,8 +930,8 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.purple[100]),
                 child: Theme(
-                  data: Theme.of(context)
-                      .copyWith(canvasColor: Colors.lime[100]),
+                  data:
+                      Theme.of(context).copyWith(canvasColor: Colors.lime[100]),
                   child: DropdownButtonFormField<SortItem>(
                     style: _textStyleControls,
                     value: _selectedSortField1,
@@ -951,8 +951,8 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.purple[100]),
                 child: Theme(
-                  data: Theme.of(context)
-                      .copyWith(canvasColor: Colors.lime[100]),
+                  data:
+                      Theme.of(context).copyWith(canvasColor: Colors.lime[100]),
                   child: DropdownButtonFormField<SortOrder>(
                     style: _textStyleControls,
                     value: _selectedSortOrder1,
@@ -973,8 +973,8 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.purple[100]),
                 child: Theme(
-                  data: Theme.of(context)
-                      .copyWith(canvasColor: Colors.lime[100]),
+                  data:
+                      Theme.of(context).copyWith(canvasColor: Colors.lime[100]),
                   child: DropdownButtonFormField<SortItem>(
                     style: _textStyleControls,
                     items: _dropdownMenuItemsSort,
@@ -994,8 +994,8 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.purple[100]),
                 child: Theme(
-                  data: Theme.of(context)
-                      .copyWith(canvasColor: Colors.lime[100]),
+                  data:
+                      Theme.of(context).copyWith(canvasColor: Colors.lime[100]),
                   child: DropdownButtonFormField<SortOrder>(
                     style: _textStyleControls,
                     value: _selectedSortOrder2,
@@ -1016,8 +1016,8 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.purple[100]),
                 child: Theme(
-                  data: Theme.of(context)
-                      .copyWith(canvasColor: Colors.lime[100]),
+                  data:
+                      Theme.of(context).copyWith(canvasColor: Colors.lime[100]),
                   child: DropdownButtonFormField<SortItem>(
                     style: _textStyleControls,
                     items: _dropdownMenuItemsSort,
@@ -1037,8 +1037,8 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.purple[100]),
                 child: Theme(
-                  data: Theme.of(context)
-                      .copyWith(canvasColor: Colors.lime[100]),
+                  data:
+                      Theme.of(context).copyWith(canvasColor: Colors.lime[100]),
                   child: DropdownButtonFormField<SortOrder>(
                     style: _textStyleControls,
                     value: _selectedSortOrder3,
@@ -1059,8 +1059,8 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.purple[100]),
                 child: Theme(
-                  data: Theme.of(context)
-                      .copyWith(canvasColor: Colors.lime[100]),
+                  data:
+                      Theme.of(context).copyWith(canvasColor: Colors.lime[100]),
                   child: DropdownButtonFormField<SortItem>(
                     style: _textStyleControls,
                     items: _dropdownMenuItemsSort,
@@ -1080,8 +1080,8 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.purple[100]),
                 child: Theme(
-                  data: Theme.of(context)
-                      .copyWith(canvasColor: Colors.lime[100]),
+                  data:
+                      Theme.of(context).copyWith(canvasColor: Colors.lime[100]),
                   child: DropdownButtonFormField<SortOrder>(
                     style: _textStyleControls,
                     value: _selectedSortOrder4,
@@ -1103,7 +1103,7 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
 ///////////////////////////
 //  Show Sec
 ///////////////////////////
-              Text("View - second line up to 3 fields",
+              Text("View - Second Line",
                   style: _textStyleControls),
 
               ///################################# Show Sec 1  #####################################################
@@ -1113,8 +1113,8 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.green[100]),
                 child: Theme(
-                  data: Theme.of(context)
-                      .copyWith(canvasColor: Colors.lime[100]),
+                  data:
+                      Theme.of(context).copyWith(canvasColor: Colors.lime[100]),
                   child: DropdownButtonFormField<ShowItem>(
                     style: _textStyleControls,
                     items: _dropdownMenuItemsShow,
@@ -1136,8 +1136,8 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.green[100]),
                 child: Theme(
-                  data: Theme.of(context)
-                      .copyWith(canvasColor: Colors.lime[100]),
+                  data:
+                      Theme.of(context).copyWith(canvasColor: Colors.lime[100]),
                   child: DropdownButtonFormField<ShowItem>(
                     style: _textStyleControls,
                     items: _dropdownMenuItemsShow,
@@ -1158,8 +1158,8 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.green[100]),
                 child: Theme(
-                  data: Theme.of(context)
-                      .copyWith(canvasColor: Colors.lime[100]),
+                  data:
+                      Theme.of(context).copyWith(canvasColor: Colors.lime[100]),
                   child: DropdownButtonFormField<ShowItem>(
                     style: _textStyleControls,
                     items: _dropdownMenuItemsShow,
@@ -1243,60 +1243,62 @@ class _PersonalizeViewState extends State //State<PersonalizeView>
                   .value!;
           globals.showSec3 = int.parse(customSetting!.showSec3!);
         }
-        if (customSetting!.filterIsStar == 1) {
-          _selectedFilterIsStar = _dropdownFilterIsStar[1].value!;
-          globals.filterIsStar = 1;
-        } else
-          _selectedFilterIsStar = _dropdownFilterIsStar[0].value!;
+//        if (customSetting!.filterIsStar == 1) {
+//          _selectedFilterIsStar = _dropdownFilterIsStar[1].value!;
+//          globals.filterIsStar = 1;
+//        } else
+//          _selectedFilterIsStar = _dropdownFilterIsStar[0].value!;
+//      }
+//      if (customSetting!.filterIsDone == 1) {
+//        _selectedFilterIsDone = _dropdownFilterIsDone[1].value!;
+//        globals.filterIsDone = 1;
+//      } else
+//        _selectedFilterIsDone = _dropdownFilterIsDone[0].value!;
+//    }
+
+//    if (customSetting!.filterDateDue != "") {
+//      _selectedFilterDateDue =
+//          _dropdownFilterDateDue[int.parse(customSetting!.filterDateDue!)]
+//              .value!;
+//      globals.filterDateDue = int.parse(customSetting!.filterDateDue!);
+//    }
+
+//    if (customSetting!.filterCategory == "") {
+//      _selectedCategory = null;
+//      customSetting!.filterCategory = "";
+//    } else {
+//      _selectedCategory = customSetting!.filterCategory.toString();
+//      globals.filterCategory = int.parse(customSetting!.filterCategory!);
+//    }
+
+//    if (customSetting!.filterStatus == "") {
+//      _selectedStatus = null;
+//      customSetting!.filterStatus = "";
+//    } else {
+//      _selectedStatus = customSetting!.filterStatus.toString();
+//      globals.filterStatus = int.parse(customSetting!.filterStatus!);
+//    }
+
+//    if (customSetting!.filterPriority == "") {
+//      _selectedPriority = null;
+//      customSetting!.filterPriority = "";
+//    } else {
+//      _selectedPriority = customSetting!.filterPriority.toString();
+//      globals.filterPriority = int.parse(customSetting!.filterPriority!);
+//    }
+
+//    if (customSetting!.filterTag == "") {
+//      _selectedTag1 = null;
+//      customSetting!.filterTag = "";
+//    } else {
+//      _selectedTag1 = customSetting!.filterTag.toString();
+//     globals.filterTag = int.parse(customSetting!.filterTag!);
+//    }
+
+        setState(() {
+          customSetting = customSetting;
+        });
       }
-      if (customSetting!.filterIsDone == 1) {
-        _selectedFilterIsDone = _dropdownFilterIsDone[1].value!;
-        globals.filterIsDone = 1;
-      } else
-        _selectedFilterIsDone = _dropdownFilterIsDone[0].value!;
     }
-
-    if (customSetting!.filterDateDue != "") {
-      _selectedFilterDateDue =
-          _dropdownFilterDateDue[int.parse(customSetting!.filterDateDue!)]
-              .value!;
-      globals.filterDateDue = int.parse(customSetting!.filterDateDue!);
-    }
-
-    if (customSetting!.filterCategory == "") {
-      _selectedCategory = null;
-      customSetting!.filterCategory = "";
-    } else {
-      _selectedCategory = customSetting!.filterCategory.toString();
-      globals.filterCategory = int.parse(customSetting!.filterCategory!);
-    }
-
-    if (customSetting!.filterStatus == "") {
-      _selectedStatus = null;
-      customSetting!.filterStatus = "";
-    } else {
-      _selectedStatus = customSetting!.filterStatus.toString();
-      globals.filterStatus = int.parse(customSetting!.filterStatus!);
-    }
-
-    if (customSetting!.filterPriority == "") {
-      _selectedPriority = null;
-      customSetting!.filterPriority = "";
-    } else {
-      _selectedPriority = customSetting!.filterPriority.toString();
-      globals.filterPriority = int.parse(customSetting!.filterPriority!);
-    }
-
-    if (customSetting!.filterTag == "") {
-      _selectedTag1 = null;
-      customSetting!.filterTag = "";
-    } else {
-      _selectedTag1 = customSetting!.filterTag.toString();
-      globals.filterTag = int.parse(customSetting!.filterTag!);
-    }
-
-    setState(() {
-      customSetting = customSetting;
-    });
   }
 }
