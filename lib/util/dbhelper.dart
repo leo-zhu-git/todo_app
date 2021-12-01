@@ -449,7 +449,7 @@ Plan C - USD 24 | 12 month
     Database? db = await this.db;
 
 ////////////////
-/// build query
+    /// build query
 ////////////////
     String queryStr = "";
 
@@ -622,21 +622,20 @@ Plan C - USD 24 | 12 month
 ////////////////
     String queryStr = "";
 
-    queryStr =
-        "SELECT $tblTodo.id,$tblTodo.task, $tblTodo.note, dateDue,timeDue,   " +
-            "category, status, priority, tag1, " +
-            "isStar, isDone, dateDone, lastModified, " +
-            "categories.name as categoriesname, " +
-            "statuses.name as statusesname, " +
-            "priorities.name as prioritiesname, " +
-            "tag1s.name as tag1sname " +
-            " FROM $tblTodo  " +
-            " LEFT JOIN categories ON  $tblTodo.category = categories.id" +
-            " LEFT JOIN statuses ON  $tblTodo.status = statuses.id " +
-            " LEFT JOIN priorities ON  $tblTodo.priority = priorities.id " +
-            " LEFT JOIN tag1s ON  $tblTodo.tag1 = tag1s.id " +
-            "WHERE ($colTask LIKE '%$searchText%' OR $colNote LIKE '%$searchText%' " +
-            " OR categoriesname LIKE '%$searchText%' OR statusesname LIKE '%$searchText%' OR prioritiesname LIKE '%$searchText%' OR tag1sname LIKE '%$searchText%')";
+    queryStr = "SELECT $tblTodo.id,$tblTodo.task, $tblTodo.note, dateDue,timeDue,   " +
+        "category, status, priority, tag1, " +
+        "isStar, isDone, dateDone, lastModified, " +
+        "categories.name as categoriesname, " +
+        "statuses.name as statusesname, " +
+        "priorities.name as prioritiesname, " +
+        "tag1s.name as tag1sname " +
+        " FROM $tblTodo  " +
+        " LEFT JOIN categories ON  $tblTodo.category = categories.id" +
+        " LEFT JOIN statuses ON  $tblTodo.status = statuses.id " +
+        " LEFT JOIN priorities ON  $tblTodo.priority = priorities.id " +
+        " LEFT JOIN tag1s ON  $tblTodo.tag1 = tag1s.id " +
+        "WHERE ($colTask LIKE '%$searchText%' OR $colNote LIKE '%$searchText%' " +
+        " OR categoriesname LIKE '%$searchText%' OR statusesname LIKE '%$searchText%' OR prioritiesname LIKE '%$searchText%' OR tag1sname LIKE '%$searchText%')";
 
 ////////////////
     /// build query - add filterIsDone
@@ -662,7 +661,12 @@ Plan C - USD 24 | 12 month
     /// build query - add category
 ////////////////
 
-    if (searchCategory != "null") {
+    if (searchCategory == "CAT0") {
+      queryStr = queryStr + " AND $colCategory = '' ";
+    } else if (searchCategory == "CAT9") {
+      // select all do nothing 
+    } else
+    if (searchCategory != "null" && searchCategory != "CAT9" && searchCategory != "CAT0") {
       queryStr = queryStr + " AND $colCategory = '$searchCategory' ";
     }
 
@@ -670,7 +674,12 @@ Plan C - USD 24 | 12 month
     /// build query - add status
 ////////////////
 
-    if (searchStatus != "null") {
+    if (searchStatus == "STA0") {
+      queryStr = queryStr + " AND $colStatus = '' ";
+    } else if (searchStatus == "STA9") {
+      // select all do nothing 
+    } else
+    if (searchStatus != "null" && searchStatus != "STA9"  && searchStatus != "STA0") {
       queryStr = queryStr + " AND $colStatus = '$searchStatus' ";
     }
 
@@ -678,7 +687,12 @@ Plan C - USD 24 | 12 month
     /// build query - add priority
 ////////////////
 
-    if (searchPriority != "null") {
+    if (searchPriority == "PRI0") {
+      queryStr = queryStr + " AND $colPriority = '' ";
+    } else if (searchPriority == "PRI9") {
+      // select all do nothing 
+    } else
+    if (searchPriority != "null" && searchPriority != "PRI9" && searchPriority != "PRI0") {
       queryStr = queryStr + " AND $colPriority = '$searchPriority' ";
     }
 
@@ -686,7 +700,12 @@ Plan C - USD 24 | 12 month
     /// build query - add tag
 ////////////////
 
-    if (searchTag1 != "null") {
+    if (searchTag1 == "TAG0") {
+      queryStr = queryStr + " AND $colTag1 = '' ";
+    } else if (searchTag1 == "TAG9") {
+      // select all do nothing 
+    } else
+    if (searchTag1 != "null" && searchTag1 != "TAG9" && searchTag1 != "TAG0") {
       queryStr = queryStr + " AND $colTag1 = '$searchTag1' ";
     }
 

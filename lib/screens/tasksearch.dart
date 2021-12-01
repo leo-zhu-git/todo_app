@@ -30,10 +30,10 @@ class TaskSearchState extends State {
   List<Task> tasklist = [];
   int count = 0;
   TextEditingController searchController = TextEditingController();
-  String? _selectedCategory;
-  String? _selectedStatus;
-  String? _selectedPriority;
-  String? _selectedTag1;
+  String? _selectedCategory = "CAT9";
+  String? _selectedStatus = "STA9";
+  String? _selectedPriority = 'PRI9';
+  String? _selectedTag1 = "TAG9";
   int? _selectedIsStar;
   int? _selectedIsDone;
   int? _includeIsStar = 0;
@@ -64,8 +64,12 @@ class TaskSearchState extends State {
     var categories = await helper.getCategories();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
-//    cus.id = null;
-    cus.name = "-- All Categories --";
+    cus.id = "CAT9";
+    cus.name = "[ All Categories ]";
+    _categories.add(cus);
+    cus = new CustomDropdownItem();
+    cus.id = "CAT0";
+    cus.name = "[ No Category ]";
     _categories.add(cus);
     categories.forEach((category) {
       setState(() {
@@ -88,8 +92,12 @@ class TaskSearchState extends State {
     var statuses = await helper.getStatuses();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
-//    cus.id = null;
-    cus.name = "-- All Statuses --";
+    cus.id = "STA9";
+    cus.name = "[ All Statuses ]";
+    _statuses.add(cus);
+    cus = new CustomDropdownItem();
+    cus.id = "STA0";
+    cus.name = "[ No Status ]";
     _statuses.add(cus);
     statuses.forEach((status) {
       setState(() {
@@ -112,8 +120,12 @@ class TaskSearchState extends State {
     var priorities = await helper.getPriorities();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
-    cus.id = null;
-    cus.name = "-- All Priorities --";
+    cus.id = "PRI9";
+    cus.name = "[ All Priorities ]";
+    _priorities.add(cus);
+    cus = new CustomDropdownItem();
+    cus.id = "PRI0";
+    cus.name = "[ No Priority ]";
     _priorities.add(cus);
     priorities.forEach((priority) {
       setState(() {
@@ -136,8 +148,12 @@ class TaskSearchState extends State {
     var tag1s = await helper.getTag1s();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
-    cus.id = null;
-    cus.name = "-- All Tags --";
+    cus.id = "TAG9";
+    cus.name = "[ All Tags ]";
+    _tag1s.add(cus);
+    cus = new CustomDropdownItem();
+    cus.id = "TAG0";
+    cus.name = "[ No Tag ]";
     _tag1s.add(cus);
     tag1s.forEach((tag1) {
       setState(() {

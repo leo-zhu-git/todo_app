@@ -147,9 +147,12 @@ class TaskDetailState extends State //<TaskDetail>
   _loadCategories() async {
     var categories = await helper.getCategories();
     CustomDropdownItem cus;
+//    cus = new CustomDropdownItem();
+//    cus.id = 'CAT9';
+//    cus.name = "[ Any Category ]";
+//    _categories.add(cus);
     cus = new CustomDropdownItem();
-//    cus.id = null;
-    cus.name = "-- All Categories --";
+    cus.name = "[ No Category ]";
     _categories.add(cus);
     categories.forEach((category) {
       setState(() {
@@ -172,8 +175,7 @@ class TaskDetailState extends State //<TaskDetail>
     var statuses = await helper.getStatuses();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
-//    cus.id = null;
-    cus.name = "-- Select Status --";
+    cus.name = "[ No Status ]";
     _statuses.add(cus);
     statuses.forEach((status) {
       setState(() {
@@ -196,8 +198,7 @@ class TaskDetailState extends State //<TaskDetail>
     var priorities = await helper.getPriorities();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
-//    cus.id = null;
-    cus.name = "-- Select Priority --";
+    cus.name = "[ No Priority ]";
     _priorities.add(cus);
     priorities.forEach((priority) {
       setState(() {
@@ -221,7 +222,7 @@ class TaskDetailState extends State //<TaskDetail>
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
 //    cus.id = null;
-    cus.name = "-- Select Tag --";
+    cus.name = "[ No Tag ]";
     _tag1s.add(cus);
     tag1s.forEach((tag1) {
       setState(() {
