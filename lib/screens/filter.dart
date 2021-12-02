@@ -1,3 +1,4 @@
+// import 'dart:html';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -161,10 +162,10 @@ class _FilterViewState extends State //State<FilterView>
   List<Task> tasklist = [];
   int count = 0;
   TextEditingController searchController = TextEditingController();
-  var _selectedCategory = null;
-  var _selectedStatus = null;
-  var _selectedPriority = null;
-  var _selectedTag1 = null;
+  String? _selectedCategory = "999";
+  String? _selectedStatus = "999";
+  String? _selectedPriority = '999';
+  String? _selectedTag1 = "999";
   TextStyle _textStyleSnack = TextStyle(
       fontSize: 16.0, color: Colors.pink[100], fontWeight: FontWeight.w600);
 
@@ -289,8 +290,12 @@ class _FilterViewState extends State //State<FilterView>
     var categories = await helper.getCategories();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
-//    cus.id = null;
-    cus.name = "-- All Categories -- ";
+    cus.id = "999";
+    cus.name = "[ All Categories ]";
+    _categories.add(cus);
+    cus = new CustomDropdownItem();
+    cus.id = "900";
+    cus.name = "[ No Category ]";
     _categories.add(cus);
     categories.forEach((category) {
       setState(() {
@@ -313,7 +318,12 @@ class _FilterViewState extends State //State<FilterView>
     var statuses = await helper.getStatuses();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
-    cus.name = "-- All Statuses --";
+    cus.id = "999";
+    cus.name = "[ All Statuses ]";
+    _statuses.add(cus);
+    cus = new CustomDropdownItem();
+    cus.id = "900";
+    cus.name = "[ No Status ]";
     _statuses.add(cus);
     statuses.forEach((status) {
       setState(() {
@@ -336,8 +346,12 @@ class _FilterViewState extends State //State<FilterView>
     var priorities = await helper.getPriorities();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
-    cus.id = null;
-    cus.name = "-- All Priorities --";
+    cus.id = "999";
+    cus.name = "[ All Priorities ]";
+    _priorities.add(cus);
+    cus = new CustomDropdownItem();
+    cus.id = "900";
+    cus.name = "[ No Priority ]";
     _priorities.add(cus);
     priorities.forEach((priority) {
       setState(() {
@@ -348,6 +362,7 @@ class _FilterViewState extends State //State<FilterView>
           tempPriority = priority['name'].toString().substring(0, 30) + "...";
         else
           tempPriority = priority['name'];
+
         cus.name = tempPriority;
 
         _priorities.add(cus);
@@ -359,8 +374,12 @@ class _FilterViewState extends State //State<FilterView>
     var tag1s = await helper.getTag1s();
     CustomDropdownItem cus;
     cus = new CustomDropdownItem();
-    cus.id = null;
-    cus.name = "-- All Tags --";
+    cus.id = "999";
+    cus.name = "[ All Tags ]";
+    _tag1s.add(cus);
+    cus = new CustomDropdownItem();
+    cus.id = "900";
+    cus.name = "[ No Tag ]";
     _tag1s.add(cus);
     tag1s.forEach((tag1) {
       setState(() {
@@ -609,16 +628,41 @@ class _FilterViewState extends State //State<FilterView>
                     }
                   }
 
-                  customSetting!.filterCategory = (_selectedCategory == null)
-                      ? ""
-                      : _selectedCategory.toString();
-                  customSetting!.filterStatus =
-                      _selectedStatus == null ? "" : _selectedStatus.toString();
-                  customSetting!.filterPriority = (_selectedPriority == null)
-                      ? ""
-                      : _selectedPriority.toString();
-                  customSetting!.filterTag =
-                      (_selectedTag1 == null) ? "" : _selectedTag1.toString();
+                  if (_selectedCategory == null) {
+                    customSetting!.filterCategory = "999";
+                  } else if (_selectedCategory == "900") {
+                    customSetting!.filterCategory = "900";
+                  } else {
+                    customSetting!.filterCategory = _selectedCategory;
+                  }
+                  ;
+
+                  if (_selectedStatus == null) {
+                    customSetting!.filterStatus = "999";
+                  } else if (_selectedStatus == "900") {
+                    customSetting!.filterStatus = "900";
+                  } else {
+                    customSetting!.filterStatus = _selectedStatus;
+                  }
+                  ;
+
+                  if (_selectedPriority == null) {
+                    customSetting!.filterPriority = "999";
+                  } else if (_selectedPriority == "900") {
+                    customSetting!.filterPriority = "900";
+                  } else {
+                    customSetting!.filterPriority = _selectedPriority;
+                  }
+                  ;
+
+                  if (_selectedTag1 == null) {
+                    customSetting!.filterTag = "999";
+                  } else if (_selectedTag1 == "900") {
+                    customSetting!.filterTag = "900";
+                  } else {
+                    customSetting!.filterTag = _selectedTag1;
+                  }
+                  ;
 
                   var result;
 
@@ -658,8 +702,8 @@ class _FilterViewState extends State //State<FilterView>
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.blue[100]),
                 child: Theme(
-                  data: Theme.of(context)
-                      .copyWith(canvasColor: Colors.lime[100]),
+                  data:
+                      Theme.of(context).copyWith(canvasColor: Colors.lime[100]),
                   child: DropdownButtonFormField<FilterDateDue>(
                     style: _textStyleControls,
                     items: _dropdownFilterDateDue,
@@ -817,8 +861,8 @@ class _FilterViewState extends State //State<FilterView>
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.blue[100]),
                 child: Theme(
-                  data: Theme.of(context)
-                      .copyWith(canvasColor: Colors.lime[100]),
+                  data:
+                      Theme.of(context).copyWith(canvasColor: Colors.lime[100]),
                   child: DropdownButtonFormField<FilterIsStar>(
                     style: _textStyleControls,
                     items: _dropdownFilterIsStar,
@@ -839,8 +883,8 @@ class _FilterViewState extends State //State<FilterView>
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.blue[100]),
                 child: Theme(
-                  data: Theme.of(context)
-                      .copyWith(canvasColor: Colors.lime[100]),
+                  data:
+                      Theme.of(context).copyWith(canvasColor: Colors.lime[100]),
                   child: DropdownButtonFormField<FilterIsDone>(
                     style: _textStyleControls,
                     items: _dropdownFilterIsDone,
@@ -945,7 +989,7 @@ class _FilterViewState extends State //State<FilterView>
     }
 
     if (customSetting!.filterCategory == "") {
-      _selectedCategory = null;
+      _selectedCategory = "999";
       customSetting!.filterCategory = "";
     } else {
       _selectedCategory = customSetting!.filterCategory.toString();
@@ -953,7 +997,7 @@ class _FilterViewState extends State //State<FilterView>
     }
 
     if (customSetting!.filterStatus == "") {
-      _selectedStatus = null;
+      _selectedStatus = "999";
       customSetting!.filterStatus = "";
     } else {
       _selectedStatus = customSetting!.filterStatus.toString();
@@ -961,7 +1005,7 @@ class _FilterViewState extends State //State<FilterView>
     }
 
     if (customSetting!.filterPriority == "") {
-      _selectedPriority = null;
+      _selectedPriority = "999";
       customSetting!.filterPriority = "";
     } else {
       _selectedPriority = customSetting!.filterPriority.toString();
@@ -969,7 +1013,7 @@ class _FilterViewState extends State //State<FilterView>
     }
 
     if (customSetting!.filterTag == "") {
-      _selectedTag1 = null;
+      _selectedTag1 = "999";
       customSetting!.filterTag = "";
     } else {
       _selectedTag1 = customSetting!.filterTag.toString();

@@ -75,7 +75,7 @@ class DbHelper {
 
   Future<Database> initializeDb() async {
     Directory dir = await getApplicationDocumentsDirectory();
-    String path = dir.path + "todo_V22.i4.db";
+    String path = dir.path + "todo_V22.k2.db";
     var dbTodovn = await openDatabase(path, version: 1, onCreate: _createDb);
     return dbTodovn;
   }
@@ -137,12 +137,8 @@ class DbHelper {
     //Create Default Values for Catergories
     //////
     await db.execute(
-        "INSERT INTO categories ( 'name', 'description')  values (?, ?)",
-        ['zen moment', 'Bootstrap - please delete or rename if necessary']);
-
-    await db.execute(
         "INSERT INTO categories ( 'name', 'description')  values (?, ?)", [
-      'lifelong learning',
+      'zen moment/ m16',
       'Bootstrap - please delete or rename if necessary'
     ]);
 
@@ -151,16 +147,16 @@ class DbHelper {
         ['connect', 'Bootstrap - please delete or rename if necessary']);
 
     await db.execute(
-        "INSERT INTO categories ( 'name', 'description')  values (?, ?)",
-        ['work', 'Bootstrap - please delete or rename if necessary']);
+        "INSERT INTO categories ( 'name', 'description')  values (?, ?)", [
+      'health/ temple',
+      '2Bootstrap - please delete or rename if necessary'
+    ]);
 
     await db.execute(
-        "INSERT INTO categories ( 'name', 'description')  values (?, ?)",
-        ['health', '2Bootstrap - please delete or rename if necessary']);
-
-    await db.execute(
-        "INSERT INTO categories ( 'name', 'description')  values (?, ?)",
-        ['wealth', '2Bootstrap - please delete or rename if necessary']);
+        "INSERT INTO categories ( 'name', 'description')  values (?, ?)", [
+      'wealth/ snowball',
+      '2Bootstrap - please delete or rename if necessary'
+    ]);
 
     await db.execute(
         "INSERT INTO categories ( 'name', 'description')  values (?, ?)",
@@ -169,6 +165,22 @@ class DbHelper {
     await db.execute(
         "INSERT INTO categories ( 'name', 'description')  values (?, ?)",
         ['outdoors', '2Bootstrap - please delete or rename if necessary']);
+
+    await db.execute(
+        "INSERT INTO categories ( 'name', 'description')  values (?, ?)",
+        ['todoMIT', '2Bootstrap - please delete or rename if necessary']);
+
+    await db.execute(
+        "INSERT INTO categories ( 'name', 'description')  values (?, ?)",
+        ['work', 'Bootstrap - please delete or rename if necessary']);
+
+    await db.execute(
+        "INSERT INTO categories ( 'name', 'description')  values (?, ?)",
+        ['meeting', '2Bootstrap - please delete or rename if necessary']);
+
+    await db.execute(
+        "INSERT INTO categories ( 'name', 'description')  values (?, ?)",
+        ['30,000 ft', '2Bootstrap - please delete or rename if necessary']);
 
     //////
     //Create Default Values for statuses
@@ -443,7 +455,7 @@ Plan C - USD 24 | 12 month
       String? colfilterCategory,
       String? colfilterStatus,
       String? colfilterPriority,
-      String? colfilterTag,
+      String? colfilterTag1,
       int? colfilterIsStar,
       int? colfilterIsDone) async {
     Database? db = await this.db;
@@ -548,39 +560,60 @@ Plan C - USD 24 | 12 month
 ////////////////
     /// build query - add category
 ////////////////
-    if (colfilterCategory == "0" || colfilterCategory == "null") {
-    } // hide
-// include all
-    else {
+    if (colfilterCategory == "0" || colfilterCategory == "999") {
+// show all
+    } else if (colfilterCategory == "900") {
+// show NO categories
+      queryStr = queryStr + " and ($colCategory == '')";
+    } else {
+// show ONE category
       queryStr = queryStr + " and ($colCategory == $colfilterCategory)";
     }
 
 ////////////////
     /// build query - add status
 ////////////////
-    if (colfilterStatus == "0" || colfilterStatus == "null") {
-    } // hide
-// include all
-    else {
+    if (colfilterStatus == "0" || colfilterStatus == "999") {
+// show all
+    } else if (colfilterStatus == "900") {
+// show NO statuses
+      queryStr = queryStr + " and ($colStatus == '')";
+    } else {
+// show ONE status
       queryStr = queryStr + " and ($colStatus == $colfilterStatus)";
     }
 
 ////////////////
     /// build query - add priority
 ////////////////
-    if (colfilterPriority == "0" || colfilterPriority == "null") {
-    } // hide
-    else {
+
+    if (colfilterPriority == "0" || colfilterPriority == "999") {
+// show all
+    } else if (colfilterPriority == "900") {
+// show NO priorities
+      queryStr = queryStr + " and ($colPriority == '')";
+    } else {
+// show ONE priority
       queryStr = queryStr + " and ($colPriority == $colfilterPriority)";
     }
 
 ////////////////
     /// build query - add tag
 ////////////////
-    if (colfilterTag == "0" || colfilterTag == "null") {
+    if (colfilterTag1 == "0" || colfilterTag1 == "999") {
+// show all
+    } else if (colfilterTag1 == "900") {
+// show NO tag1
+      queryStr = queryStr + " and ($colTag1 == '')";
     } else {
-      queryStr = queryStr + " and ($colTag1 == $colfilterTag)";
+// show ONE tag
+      queryStr = queryStr + " and ($colTag1 == $colfilterTag1)";
     }
+
+//    if (colfilterTag == "0" || colfilterTag == "null") {
+//    } else {
+//      queryStr = queryStr + " and ($colTag1 == $colfilterTag)";
+//    }
 
 ////////////////
     /// build query - add order by
@@ -661,12 +694,13 @@ Plan C - USD 24 | 12 month
     /// build query - add category
 ////////////////
 
-    if (searchCategory == "CAT0") {
+    if (searchCategory == "900") {
       queryStr = queryStr + " AND $colCategory = '' ";
-    } else if (searchCategory == "CAT9") {
-      // select all do nothing 
-    } else
-    if (searchCategory != "null" && searchCategory != "CAT9" && searchCategory != "CAT0") {
+    } else if (searchCategory == "999") {
+      // select all do nothing
+    } else if (searchCategory != "null" &&
+        searchCategory != "999" &&
+        searchCategory != "900") {
       queryStr = queryStr + " AND $colCategory = '$searchCategory' ";
     }
 
@@ -674,12 +708,13 @@ Plan C - USD 24 | 12 month
     /// build query - add status
 ////////////////
 
-    if (searchStatus == "STA0") {
+    if (searchStatus == "900") {
       queryStr = queryStr + " AND $colStatus = '' ";
-    } else if (searchStatus == "STA9") {
-      // select all do nothing 
-    } else
-    if (searchStatus != "null" && searchStatus != "STA9"  && searchStatus != "STA0") {
+    } else if (searchStatus == "999") {
+      // select all do nothing
+    } else if (searchStatus != "null" &&
+        searchStatus != "999" &&
+        searchStatus != "900") {
       queryStr = queryStr + " AND $colStatus = '$searchStatus' ";
     }
 
@@ -687,12 +722,13 @@ Plan C - USD 24 | 12 month
     /// build query - add priority
 ////////////////
 
-    if (searchPriority == "PRI0") {
+    if (searchPriority == "900") {
       queryStr = queryStr + " AND $colPriority = '' ";
-    } else if (searchPriority == "PRI9") {
-      // select all do nothing 
-    } else
-    if (searchPriority != "null" && searchPriority != "PRI9" && searchPriority != "PRI0") {
+    } else if (searchPriority == "999") {
+      // select all do nothing
+    } else if (searchPriority != "null" &&
+        searchPriority != "999" &&
+        searchPriority != "900") {
       queryStr = queryStr + " AND $colPriority = '$searchPriority' ";
     }
 
@@ -700,12 +736,13 @@ Plan C - USD 24 | 12 month
     /// build query - add tag
 ////////////////
 
-    if (searchTag1 == "TAG0") {
+    if (searchTag1 == "900") {
       queryStr = queryStr + " AND $colTag1 = '' ";
-    } else if (searchTag1 == "TAG9") {
-      // select all do nothing 
-    } else
-    if (searchTag1 != "null" && searchTag1 != "TAG9" && searchTag1 != "TAG0") {
+    } else if (searchTag1 == "999") {
+      // select all do nothing
+    } else if (searchTag1 != "null" &&
+        searchTag1 != "999" &&
+        searchTag1 != "900") {
       queryStr = queryStr + " AND $colTag1 = '$searchTag1' ";
     }
 
