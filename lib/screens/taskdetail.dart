@@ -319,29 +319,6 @@ class TaskDetailState extends State //<TaskDetail>
     }
   }
 
-//    void _showCupertinoPicker(ctx) {
-//          itemExtent: 64,
-//          diameterRatio: 0.7,
-//         looping: true,
-//          onSelectedItemChanged: (index) => setState(() => this.index = index),
-//          // selectionOverlay: Container(),
-//          selectionOverlay: CupertinoPickerDefaultSelectionOverlay(
-//            background: Colors.pink.withOpacity(0.12),
-//          ),
-//          children: Utils.modelBuilder<String>(
-//            values,
-//            (index, value) {
-//              final isSelected = this.index == index;
-//              final color = isSelected ? Colors.pink : Colors.black;
-//
-//              return Center(
-//                child: Text(
-//                  value,
-//                  style: TextStyle(color: color, fontSize: 24),
-//                ),
-//              );
-//            }}
-
   void _showCupertinoDateTimePicker(ctx) {
     // showCupertinoModalPopup is a built-in function of the cupertino library
     showCupertinoModalPopup(
@@ -492,7 +469,7 @@ class TaskDetailState extends State //<TaskDetail>
               }),
           IconButton(
 //              icon: Icon(Icons.save_alt, color: Colors.white),
-              icon: Icon(Icons.savings_outlined , color: Colors.white),
+              icon: Icon(Icons.savings_outlined, color: Colors.white),
               tooltip: 'Save',
               onPressed: () {
                 setState(() {
@@ -568,7 +545,9 @@ class TaskDetailState extends State //<TaskDetail>
                 });
               }),
         ],
-        title: Center(child: Icon(Icons.add, color: Colors.yellow[100]),),
+        title: Center(
+          child: Icon(Icons.add, color: Colors.yellow[100]),
+        ),
       ),
       body: SingleChildScrollView(
         // this will make your body scrollable
@@ -595,12 +574,13 @@ class TaskDetailState extends State //<TaskDetail>
                 ),
               ),
             ),
+
 ///////////////////////////
 //  WHAT - NOTE
 ///////////////////////////
             Container(
               margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
               decoration: new BoxDecoration(
                 color: Colors.yellow[200],
               ),
@@ -695,13 +675,52 @@ class TaskDetailState extends State //<TaskDetail>
             ),
 
 ///////////////////////////
+//  FOCUS
+///////////////////////////
+            Container(
+              margin:
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+              decoration: BoxDecoration(
+                shape: BoxShape.rectangle,
+                color: Colors.blue[100],
+              ),
+              child: TextField(
+                readOnly: true,
+                style: _textStyleControls,
+                decoration: InputDecoration(
+                  labelText: ' Focus',
+                  hintText: '',
+                  prefixIcon: InkWell(
+                    onTap: () {
+                      setState(() {
+                        if (task.isStar == 1) {
+                          task.isStar = 0;
+                          Icon(Icons.lightbulb, color: Colors.black38);
+                          dbHelper.updateTask(task);
+                        } else {
+                          task.isStar = 1;
+                          Icon(Icons.lightbulb, color: Colors.amber[800]);
+                          dbHelper.updateTask(task);
+                        }
+                      });
+                    },
+                    child: Icon(Icons.lightbulb,
+                        color:
+                            (task.isStar == 0) ? Colors.black12 : Colors.teal),
+                  ),
+                ),
+              ),
+            ),
+
+///////////////////////////
 //  CATEGORY
 ///////////////////////////
             Container(
               margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
               decoration: BoxDecoration(
-                  shape: BoxShape.rectangle, color: Colors.blue[100]),
+                  shape: BoxShape.rectangle, 
+                  color: Colors.blue[100]),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -738,7 +757,7 @@ class TaskDetailState extends State //<TaskDetail>
 
             Container(
               margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
               decoration: BoxDecoration(
                   shape: BoxShape.rectangle, color: Colors.blue[100]),
               child: Column(
@@ -776,7 +795,7 @@ class TaskDetailState extends State //<TaskDetail>
 ///////////////////////////
             Container(
               margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
               decoration: BoxDecoration(
                   shape: BoxShape.rectangle, color: Colors.blue[100]),
               child: Column(
@@ -814,7 +833,7 @@ class TaskDetailState extends State //<TaskDetail>
 ///////////////////////////
             Container(
               margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 0.0),
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
               decoration: BoxDecoration(
                   shape: BoxShape.rectangle, color: Colors.blue[100]),
               child: Column(
@@ -844,44 +863,6 @@ class TaskDetailState extends State //<TaskDetail>
                     ),
                   ),
                 ],
-              ),
-            ),
-
-///////////////////////////
-//  FOCUS
-///////////////////////////
-            Container(
-              margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
-              decoration: BoxDecoration(
-                shape: BoxShape.rectangle,
-                color: Colors.blue[100],
-              ),
-              child: TextField(
-                readOnly: true,
-                style: _textStyleControls,
-                decoration: InputDecoration(
-                  labelText: ' Focus',
-                  hintText: '',
-                  prefixIcon: InkWell(
-                    onTap: () {
-                      setState(() {
-                        if (task.isStar == 1) {
-                          task.isStar = 0;
-                          Icon(Icons.lightbulb, color: Colors.black38);
-                          dbHelper.updateTask(task);
-                        } else {
-                          task.isStar = 1;
-                          Icon(Icons.lightbulb, color: Colors.amber[800]);
-                          dbHelper.updateTask(task);
-                        }
-                      });
-                    },
-                    child: Icon(Icons.lightbulb,
-                        color:
-                            (task.isStar == 0) ? Colors.black12 : Colors.teal),
-                  ),
-                ),
               ),
             ),
           ],

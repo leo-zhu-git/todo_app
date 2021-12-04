@@ -153,10 +153,8 @@ class DbHelper {
     ]);
 
     await db.execute(
-        "INSERT INTO categories ( 'name', 'description')  values (?, ?)", [
-      'LLL/ digest',
-      '2Bootstrap - please delete or rename if necessary'
-    ]);
+        "INSERT INTO categories ( 'name', 'description')  values (?, ?)",
+        ['LLL/ digest', '2Bootstrap - please delete or rename if necessary']);
 
     await db.execute(
         "INSERT INTO categories ( 'name', 'description')  values (?, ?)", [
@@ -639,21 +637,23 @@ Plan C - USD 24 | 12 month
 /////////////////////////////////
 
   Future<List> searchTasks(
-      String? colsortField1,
-      String? colsortOrder1,
-      String? colsortField2,
-      String? colsortOrder2,
-      String? colsortField3,
-      String? colsortOrder3,
-      String? colsortField4,
-      String? colsortOrder4,
-      String? searchText,
-      String? searchCategory,
-      String? searchStatus,
-      String? searchPriority,
-      String? searchTag1,
-      int? includeIsStar,
-      int? includeIsDone) async {
+    String? colsortField1,
+    String? colsortOrder1,
+    String? colsortField2,
+    String? colsortOrder2,
+    String? colsortField3,
+    String? colsortOrder3,
+    String? colsortField4,
+    String? colsortOrder4,
+    String? searchText,
+    String? searchDateDue,
+    int? includeIsStar,
+    int? includeIsDone,
+    String? searchCategory,
+    String? searchStatus,
+    String? searchPriority,
+    String? searchTag1,
+  ) async {
     Database? db = await this.db;
 
 ////////////////
@@ -675,6 +675,66 @@ Plan C - USD 24 | 12 month
         " LEFT JOIN tag1s ON  $tblTodo.tag1 = tag1s.id " +
         "WHERE ($colTask LIKE '%$searchText%' OR $colNote LIKE '%$searchText%' " +
         " OR categoriesname LIKE '%$searchText%' OR statusesname LIKE '%$searchText%' OR prioritiesname LIKE '%$searchText%' OR tag1sname LIKE '%$searchText%')";
+
+////////////////
+    /// build query - add DateDue
+////////////////
+
+    String _startDate;
+    String _endDate;
+
+    final DateTime _today = DateTime.now();
+    final DateTime _yesterday =
+        DateTime(_today.year, _today.month, _today.day - 1);
+    final DateTime _tomo = DateTime(_today.year, _today.month, _today.day + 1);
+    final DateTime _N7D = DateTime(_today.year, _today.month, _today.day + 6);
+    final DateTime _N30D = DateTime(_today.year, _today.month, _today.day + 29);
+    final DateFormat formatter = DateFormat('yyyy-MM-dd');
+    final String formattedToday = formatter.format(_today);
+    final String formattedYesterday = formatter.format(_yesterday);
+    final String formattedTomo = formatter.format(_tomo);
+    final String formattedN7D = formatter.format(_N7D);
+    final String formattedN30D = formatter.format(_N30D);
+
+    if (searchDateDue == "Today") {
+      _startDate = formattedToday;
+      _endDate = formattedToday;
+      queryStr = queryStr + " and ($colDateDue == '$_startDate')";
+    } else if (searchDateDue == "Tomorrow") {
+      _startDate = formattedTomo;
+      _endDate = formattedTomo;
+      queryStr = queryStr + " and ($colDateDue == '$_startDate')";
+    } else if (searchDateDue == "Next 7 days") {
+      _startDate = formattedToday;
+      _endDate = formattedN7D;
+      queryStr = queryStr +
+          " and ($colDateDue >= '$_startDate') and ($colDateDue<= '$_endDate')";
+    } else if (searchDateDue == "Next 30 days") {
+      _startDate = formattedToday;
+      _endDate = formattedN30D;
+      queryStr = queryStr +
+          " and ($colDateDue >= '$_startDate') and ($colDateDue<= '$_endDate')";
+    } else if (searchDateDue == "Any Due Date") {
+      queryStr = queryStr + " and ($colDateDue != '')";
+    } else if (searchDateDue == "No Due Date") {
+      queryStr = queryStr + " and ($colDateDue == '')";
+    } else if (searchDateDue == "Overdues Only") {
+      _endDate = formattedYesterday;
+      queryStr = queryStr +
+          " and ($colDateDue <= '$_endDate') and ($colDateDue != '')";
+    } else if (searchDateDue == "Overdues and Today") {
+      _endDate = formattedToday;
+      queryStr = queryStr +
+          " and ($colDateDue <= '$_endDate') and ($colDateDue != '')";
+    } else if (searchDateDue == "Overdues, Today and Tomorrow") {
+      _endDate = formattedTomo;
+      queryStr = queryStr +
+          " and ($colDateDue <= '$_endDate') and ($colDateDue != '')";
+    } else if (searchDateDue == "All Tasks") {
+    } else {
+// select all tasks regardless of due dates
+    }
+    ;
 
 ////////////////
     /// build query - add filterIsDone

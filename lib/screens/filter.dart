@@ -64,31 +64,31 @@ class ShowItem {
   }
 }
 
-class FilterIsStar {
-  int id;
-  String name;
+//class FilterIsStar {
+//  int id;
+//  String name;
 
-  FilterIsStar(this.id, this.name);
-  static List<FilterIsStar> getIsStar() {
-    return <FilterIsStar>[
-      FilterIsStar(0, '[ Focus & All Tasks]'),
-      FilterIsStar(1, '[ Focus Tasks Only ]'),
-    ];
-  }
-}
+//  FilterIsStar(this.id, this.name);
+//  static List<FilterIsStar> getIsStar() {
+//    return <FilterIsStar>[
+//      FilterIsStar(0, '[ Focus & All Tasks]'),
+//      FilterIsStar(1, '[ Focus Tasks Only ]'),
+//    ];
+//  }
+//}
 
-class FilterIsDone {
-  int id;
-  String name;
+//class FilterIsDone {
+//  int id;
+//  String name;
 
-  FilterIsDone(this.id, this.name);
-  static List<FilterIsDone> getIsDone() {
-    return <FilterIsDone>[
-      FilterIsDone(0, '[ Completed Tasks & All Tasks ]'),
-      FilterIsDone(1, '[ Completed Tasks - Hide]'),
-    ];
-  }
-}
+//  FilterIsDone(this.id, this.name);
+//  static List<FilterIsDone> getIsDone() {
+//    return <FilterIsDone>[
+//      FilterIsDone(0, '[ Completed Tasks & All Tasks ]'),
+//      FilterIsDone(1, '[ Completed Tasks - Hide]'),
+//    ];
+//  }
+//}
 
 class FilterDateDue {
   int id;
@@ -129,17 +129,19 @@ class _FilterViewState extends State //State<FilterView>
   List<ShowItem> _show = ShowItem.getShow();
   List<SortItem> _sort = SortItem.getSort();
   List<SortOrder> _order = SortOrder.getOrder();
-  List<FilterIsStar> _filterIsStar = FilterIsStar.getIsStar();
-  List<FilterIsDone> _filterIsDone = FilterIsDone.getIsDone();
+//  List<FilterIsStar> _filterIsStar = FilterIsStar.getIsStar();
+//  List<FilterIsDone> _filterIsDone = FilterIsDone.getIsDone();
   List<FilterDateDue> _filterDateDue = FilterDateDue.getDateDue();
   late List<DropdownMenuItem<ShowItem>> _dropdownMenuItemsShow;
   late List<DropdownMenuItem<SortItem>> _dropdownMenuItemsSort;
   late List<DropdownMenuItem<SortOrder>> _dropdownMenuSortOrder;
-  late List<DropdownMenuItem<FilterIsStar>> _dropdownFilterIsStar;
-  late List<DropdownMenuItem<FilterIsDone>> _dropdownFilterIsDone;
+//  late List<DropdownMenuItem<FilterIsStar>> _dropdownFilterIsStar;
+  int? _selectedFilterIsStar;
+//  late List<DropdownMenuItem<FilterIsDone>> _dropdownFilterIsDone;
+  int? _selectedFilterIsDone;
   late List<DropdownMenuItem<FilterDateDue>> _dropdownFilterDateDue;
-  FilterIsStar? _selectedFilterIsStar;
-  FilterIsDone? _selectedFilterIsDone;
+//  FilterIsStar? _selectedFilterIsStar;
+//  FilterIsDone? _selectedFilterIsDone;
   FilterDateDue? _selectedFilterDateDue;
   SortItem? _selectedSortField1;
   SortOrder? _selectedSortOrder1;
@@ -168,7 +170,6 @@ class _FilterViewState extends State //State<FilterView>
   String? _selectedTag1 = "999";
   TextStyle _textStyleSnack = TextStyle(
       fontSize: 16.0, color: Colors.pink[100], fontWeight: FontWeight.w600);
-
   //
   @override
   void initState() {
@@ -176,8 +177,8 @@ class _FilterViewState extends State //State<FilterView>
     _dropdownMenuItemsShow = buildDropdownMenuShow(_show);
     _dropdownMenuItemsSort = buildDropdownMenuItems(_sort);
     _dropdownMenuSortOrder = buildDropdownMenuOrder(_order);
-    _dropdownFilterIsStar = buildDropdownFilterIsStar(_filterIsStar);
-    _dropdownFilterIsDone = buildDropdownFilterIsDone(_filterIsDone);
+//    _dropdownFilterIsStar = buildDropdownFilterIsStar(_filterIsStar);
+//    _dropdownFilterIsDone = buildDropdownFilterIsDone(_filterIsDone);
     _dropdownFilterDateDue = buildDropdownFilterDateDue(_filterDateDue);
     _loadCategories();
     _loadStatuses();
@@ -199,21 +200,23 @@ class _FilterViewState extends State //State<FilterView>
     /// filter - is star
     ////////////////////////////
     if (globals.filterIsStar == null) {
-      _selectedFilterIsStar = _dropdownFilterIsStar[0].value!;
+//      _selectedFilterIsStar = _dropdownFilterIsStar[0].value!;
+      _selectedFilterIsStar = 0;
       globals.filterIsStar = 0;
     } else
-      _selectedFilterIsStar =
-          _dropdownFilterIsStar[globals.filterIsStar!].value!;
+      _selectedFilterIsStar = 1;
+//          _dropdownFilterIsStar[globals.filterIsStar!].value!;
 
     ////////////////////////////
     /// filter - is done
     ////////////////////////////
     if (globals.filterIsDone == null) {
-      _selectedFilterIsDone = _dropdownFilterIsDone[0].value!;
+//      _selectedFilterIsDone = _dropdownFilterIsDone[0].value!;
+      _selectedFilterIsDone = 0;
       globals.filterIsDone = 0;
     } else
-      _selectedFilterIsDone =
-          _dropdownFilterIsDone[globals.filterIsDone!].value!;
+      _selectedFilterIsDone = 1;
+//          _dropdownFilterIsDone[globals.filterIsDone!].value!;
 
     ////////////////////////////
     // Sort and Order
@@ -438,33 +441,33 @@ class _FilterViewState extends State //State<FilterView>
     return order;
   }
 
-  List<DropdownMenuItem<FilterIsStar>> buildDropdownFilterIsStar(
-      List filterIsStarItems) {
-    List<DropdownMenuItem<FilterIsStar>> items = [];
-    for (FilterIsStar filterIsStar in filterIsStarItems) {
-      items.add(
-        DropdownMenuItem(
-          value: filterIsStar,
-          child: Text(filterIsStar.name),
-        ),
-      );
-    }
-    return items;
-  }
+//  List<DropdownMenuItem<FilterIsStar>> buildDropdownFilterIsStar(
+//      List filterIsStarItems) {
+//    List<DropdownMenuItem<FilterIsStar>> items = [];
+//    for (FilterIsStar filterIsStar in filterIsStarItems) {
+//      items.add(
+//        DropdownMenuItem(
+//          value: filterIsStar,
+//          child: Text(filterIsStar.name),
+//        ),
+//      );
+//    }
+//    return items;
+//  }
 
-  List<DropdownMenuItem<FilterIsDone>> buildDropdownFilterIsDone(
-      List filterIsDoneItems) {
-    List<DropdownMenuItem<FilterIsDone>> items = [];
-    for (FilterIsDone filterIsDone in filterIsDoneItems) {
-      items.add(
-        DropdownMenuItem(
-          value: filterIsDone,
-          child: Text(filterIsDone.name),
-        ),
-      );
-    }
-    return items;
-  }
+//  List<DropdownMenuItem<FilterIsDone>> buildDropdownFilterIsDone(
+//      List filterIsDoneItems) {
+//    List<DropdownMenuItem<FilterIsDone>> items = [];
+//    for (FilterIsDone filterIsDone in filterIsDoneItems) {
+//      items.add(
+//        DropdownMenuItem(
+//          value: filterIsDone,
+//          child: Text(filterIsDone.name),
+//        ),
+//      );
+//    }
+//    return items;
+//  }
 
   List<DropdownMenuItem<FilterDateDue>> buildDropdownFilterDateDue(
       List filterDateDueItems) {
@@ -544,9 +547,11 @@ class _FilterViewState extends State //State<FilterView>
                   globals.showSec3 = _selectedShowSec3!.id;
                 print(globals.showSec3);
                 if (_selectedFilterIsStar != null)
-                  globals.filterIsStar = _selectedFilterIsStar!.id;
+//                  globals.filterIsStar = _selectedFilterIsStar!.id;
+                  globals.filterIsStar = _selectedFilterIsStar;
                 if (_selectedFilterIsDone != null)
-                  globals.filterIsDone = _selectedFilterIsDone!.id;
+//                  globals.filterIsDone = _selectedFilterIsDone!.id;
+                  globals.filterIsDone = _selectedFilterIsDone;
                 if (_selectedFilterDateDue != null)
                   globals.filterDateDue = _selectedFilterDateDue!.id;
 
@@ -613,7 +618,8 @@ class _FilterViewState extends State //State<FilterView>
                 if (_selectedFilterIsStar == null) {
                   customSetting!.filterIsStar = 0;
                 } else {
-                  if (_selectedFilterIsStar!.id == 0) {
+//                  if (_selectedFilterIsStar!.id == 0) {
+                  if (_selectedFilterIsStar == 0) {
                     customSetting!.filterIsStar = 0;
                   } else {
                     customSetting!.filterIsStar = 1;
@@ -621,7 +627,8 @@ class _FilterViewState extends State //State<FilterView>
                   if (_selectedFilterIsDone == null) {
                     customSetting!.filterIsDone = 0;
                   } else {
-                    if (_selectedFilterIsDone!.id == 0) {
+//                    if (_selectedFilterIsDone!.id == 0) {
+                    if (_selectedFilterIsDone == 0) {
                       customSetting!.filterIsDone = 0;
                     } else {
                       customSetting!.filterIsDone = 1;
@@ -698,7 +705,8 @@ class _FilterViewState extends State //State<FilterView>
 ///////////////////////////
 //################################# Due Dates #####################################################
               new Container(
-                margin: const EdgeInsets.all(2.0),
+              margin:
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.blue[100]),
                 child: Theme(
@@ -718,9 +726,113 @@ class _FilterViewState extends State //State<FilterView>
                 ),
               ),
 
+//################################# IsDone #####################################################
+              Container(
+              margin:
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+                decoration: BoxDecoration(
+                    shape: BoxShape.rectangle, color: Colors.blue[100]),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Checkbox(
+                      value: (_selectedFilterIsDone == 0) ? true : false,
+                      onChanged: (value) {
+                        setState(() {
+                          _selectedFilterIsDone = (value! == true) ? 0 : 1;
+                        });
+                      },
+                    ),
+                    Text('Include Completed Tasks', style: _textStyleControls),
+                  ],
+                ),
+              ),
+
+//              new Container(
+//                margin: const EdgeInsets.all(2.0),
+//                decoration: BoxDecoration(
+//                    shape: BoxShape.rectangle, color: Colors.blue[100]),
+//                child: Theme(
+//                  data:
+//                      Theme.of(context).copyWith(canvasColor: Colors.lime[100]),
+//                  child: DropdownButtonFormField<FilterIsDone>(
+//                    style: _textStyleControls,
+//                    items: _dropdownFilterIsDone,
+//                    hint: Text('Filter by Is Done Tasks'),
+//                    value: _selectedFilterIsDone,
+//                    onChanged: (selectedFilterIsDone) {
+//                      setState(() {
+//                        _selectedFilterIsDone = selectedFilterIsDone!;
+//                      });
+//                    },
+//                  ),
+//                ),
+//              ),
+
+//################################# Focus #####################################################
+
+              Container(
+              margin:
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.rectangle,
+                          color: Colors.blue[100],
+                        ),
+                        child: TextField(
+                          readOnly: true,
+                          style: _textStyleControls,
+                          decoration: InputDecoration(
+                            labelText: ' Focus Tasks Only ',
+                            labelStyle: _textStyleControls,
+                            hintText: '',
+                            prefixIcon: InkWell(
+                              onTap: () {
+                                setState(() {
+                                  if (_selectedFilterIsStar == 1) {
+                                    _selectedFilterIsStar = 0;
+                                    Icon(Icons.lightbulb,
+                                        color: Colors.black38);
+                                  } else {
+                                    _selectedFilterIsStar = 1;
+                                    Icon(Icons.lightbulb,
+                                        color: Colors.amber[800]);
+                                  }
+                                });
+                              },
+                              child: Icon(Icons.lightbulb,
+                                  color: (_selectedFilterIsStar == 0)
+                                      ? Colors.black12
+                                      : Colors.teal),
+                            ),
+                          ),
+                        ),
+                      ),
+
+//              new Container(
+//                margin: const EdgeInsets.all(2.0),
+//                decoration: BoxDecoration(
+//                    shape: BoxShape.rectangle, color: Colors.blue[100]),
+//                child: Theme(
+//                  data:
+//                      Theme.of(context).copyWith(canvasColor: Colors.lime[100]),
+//                  child: DropdownButtonFormField<FilterIsStar>(
+//                    style: _textStyleControls,
+//                    items: _dropdownFilterIsStar,
+//                    hint: Text('Filter by Focus Tasks'),
+//                    value: _selectedFilterIsStar,
+//                    onChanged: (selectedFilterIsStar) {
+//                      setState(() {
+//                        _selectedFilterIsStar = selectedFilterIsStar!;
+//                      });
+//                    },
+//                  ),
+//                ),
+//              ),
+
 //################################# Category #####################################################
               Container(
-                margin: const EdgeInsets.all(2.0),
+              margin:
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.blue[100]),
                 child: Column(
@@ -755,7 +867,8 @@ class _FilterViewState extends State //State<FilterView>
 
 //################################# Status #####################################################
               Container(
-                margin: const EdgeInsets.all(2.0),
+              margin:
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.blue[100]),
                 child: Column(
@@ -790,7 +903,8 @@ class _FilterViewState extends State //State<FilterView>
 
 //################################# Priority #####################################################
               Container(
-                margin: const EdgeInsets.all(2.0),
+              margin:
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.blue[100]),
                 child: Column(
@@ -825,7 +939,8 @@ class _FilterViewState extends State //State<FilterView>
 
 //################################# Tag #####################################################
               Container(
-                margin: const EdgeInsets.all(2.0),
+              margin:
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.blue[100]),
                 child: Column(
@@ -852,50 +967,6 @@ class _FilterViewState extends State //State<FilterView>
                       ),
                     )
                   ],
-                ),
-              ),
-
-//################################# Focus #####################################################
-              new Container(
-                margin: const EdgeInsets.all(2.0),
-                decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.blue[100]),
-                child: Theme(
-                  data:
-                      Theme.of(context).copyWith(canvasColor: Colors.lime[100]),
-                  child: DropdownButtonFormField<FilterIsStar>(
-                    style: _textStyleControls,
-                    items: _dropdownFilterIsStar,
-                    hint: Text('Filter by Focus Tasks'),
-                    value: _selectedFilterIsStar,
-                    onChanged: (selectedFilterIsStar) {
-                      setState(() {
-                        _selectedFilterIsStar = selectedFilterIsStar!;
-                      });
-                    },
-                  ),
-                ),
-              ),
-
-//################################# IsDone #####################################################
-              new Container(
-                margin: const EdgeInsets.all(2.0),
-                decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.blue[100]),
-                child: Theme(
-                  data:
-                      Theme.of(context).copyWith(canvasColor: Colors.lime[100]),
-                  child: DropdownButtonFormField<FilterIsDone>(
-                    style: _textStyleControls,
-                    items: _dropdownFilterIsDone,
-                    hint: Text('Filter by Is Done Tasks'),
-                    value: _selectedFilterIsDone,
-                    onChanged: (selectedFilterIsDone) {
-                      setState(() {
-                        _selectedFilterIsDone = selectedFilterIsDone!;
-                      });
-                    },
-                  ),
                 ),
               ),
             ],
@@ -969,16 +1040,20 @@ class _FilterViewState extends State //State<FilterView>
           globals.showSec3 = int.parse(customSetting!.showSec3!);
         }
         if (customSetting!.filterIsStar == 1) {
-          _selectedFilterIsStar = _dropdownFilterIsStar[1].value!;
+//          _selectedFilterIsStar = _dropdownFilterIsStar[1].value!;
+          _selectedFilterIsStar = 1;
           globals.filterIsStar = 1;
         } else
-          _selectedFilterIsStar = _dropdownFilterIsStar[0].value!;
+//          _selectedFilterIsStar = _dropdownFilterIsStar[0].value!;
+          _selectedFilterIsStar = 0;
       }
       if (customSetting!.filterIsDone == 1) {
-        _selectedFilterIsDone = _dropdownFilterIsDone[1].value!;
+//        _selectedFilterIsDone = _dropdownFilterIsDone[1].value!;
+        _selectedFilterIsDone = 1;
         globals.filterIsDone = 1;
       } else
-        _selectedFilterIsDone = _dropdownFilterIsDone[0].value!;
+        _selectedFilterIsDone = 0;
+//        _selectedFilterIsDone = _dropdownFilterIsDone[0].value!;
     }
 
     if (customSetting!.filterDateDue != "") {

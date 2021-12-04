@@ -16,6 +16,27 @@ TextStyle _textStyleControls = TextStyle(fontSize: 17.0, color: Colors.black87);
 TextStyle _textStyleSnack = TextStyle(
     fontSize: 16.0, color: Colors.pink[100], fontWeight: FontWeight.w600);
 
+class FilterDateDue {
+  int id;
+  String name;
+
+  FilterDateDue(this.id, this.name);
+  static List<FilterDateDue> getDateDue() {
+    return <FilterDateDue>[
+      FilterDateDue(0, '[ All Due Dates ]'),
+      FilterDateDue(1, 'Today'),
+      FilterDateDue(2, 'Tomorrow'),
+      FilterDateDue(3, 'Next 7 days'),
+      FilterDateDue(4, 'Next 30 days'),
+      FilterDateDue(5, 'Any Due Date'),
+      FilterDateDue(6, 'No Due Date'),
+      FilterDateDue(7, 'Overdues Only'),
+      FilterDateDue(8, 'Overdues and Today'),
+      FilterDateDue(9, 'Overdues, Today and Tomorrow'),
+    ];
+  }
+}
+
 class TaskSearch extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => TaskSearchState();
@@ -23,6 +44,7 @@ class TaskSearch extends StatefulWidget {
 
 class TaskSearchState extends State {
   DbHelper helper = DbHelper();
+  List<FilterDateDue> _filterDateDue = FilterDateDue.getDateDue();
   List<CustomDropdownItem> _categories = [];
   List<CustomDropdownItem> _statuses = [];
   List<CustomDropdownItem> _priorities = [];
@@ -30,15 +52,18 @@ class TaskSearchState extends State {
   List<Task> tasklist = [];
   int count = 0;
   TextEditingController searchController = TextEditingController();
-  String? _selectedCategory = "999";
-  String? _selectedStatus = "999";
-  String? _selectedPriority = '999';
-  String? _selectedTag1 = "999";
+  String? _searchText = "";
+  FilterDateDue? _selectedDateDue;
+  String? _searchDateDue = "";
   int? _selectedIsStar;
   int? _selectedIsDone;
   int? _includeIsStar = 0;
   int? _includeIsDone = 0;
-  String? _searchText = "";
+  String? _selectedCategory = "999";
+  String? _selectedStatus = "999";
+  String? _selectedPriority = '999';
+  String? _selectedTag1 = "999";
+  late List<DropdownMenuItem<FilterDateDue>> _dropdownFilterDateDue;
 
   int? _sortField1 = globals.sortField1 != null ? globals.sortField1 : 8;
   int? _sortField2 = globals.sortField2 != null ? globals.sortField2 : 2;
@@ -53,6 +78,7 @@ class TaskSearchState extends State {
   void initState() {
     super.initState();
     _getCustomSettings();
+    _dropdownFilterDateDue = buildDropdownFilterDateDue(_filterDateDue);
     _loadCategories();
     _loadStatuses();
     _loadPriorities();
@@ -171,6 +197,20 @@ class TaskSearchState extends State {
     });
   }
 
+  List<DropdownMenuItem<FilterDateDue>> buildDropdownFilterDateDue(
+      List filterDateDueItems) {
+    List<DropdownMenuItem<FilterDateDue>> items = [];
+    for (FilterDateDue filterDateDue in filterDateDueItems) {
+      items.add(
+        DropdownMenuItem(
+          value: filterDateDue,
+          child: Text(filterDateDue.name),
+        ),
+      );
+    }
+    return items;
+  }
+
 //##########################################end of Dropdown #################################################################
 
   @override
@@ -218,46 +258,77 @@ class TaskSearchState extends State {
               onChanged: (value) {
                 searchData(
                     value,
+                    _searchDateDue,
+                    _includeIsStar,
+                    _includeIsDone,
                     _selectedCategory,
                     _selectedStatus,
                     _selectedPriority,
-                    _selectedTag1,
-                    _includeIsStar,
-                    _includeIsDone);
+                    _selectedTag1);
               },
               decoration: InputDecoration(
                 fillColor: Colors.green[100],
                 border: InputBorder.none,
                 filled: true, // dont forget this line
                 labelText: "Searching for ...",
+                labelStyle: _textStyleControls,
               ),
             ),
           ),
           Padding(
               padding: EdgeInsets.all(0.0),
               child: ExpansionTile(
-title: Icon(Icons.filter_alt_outlined, color: Colors.black54,),
-//                title: Text(
-//                  "Advanced Filters",
-//                  style: _textStyleControls,
-//                ),
-//                trailing: Icon(Icons.filter_alt_outlined),
+                title: Icon(
+                  Icons.filter_alt_outlined,
+                  color: Colors.black54,
+                ),
 
                 // backgroundColor: Colors.yellow,
                 children: [
                   Column(
                     children: [
+//################################# Due Dates #####################################################
+                      new Container(
+              margin:
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+                        decoration: BoxDecoration(
+                            shape: BoxShape.rectangle, color: Colors.blue[100]),
+                        child: Theme(
+                          data: Theme.of(context)
+                              .copyWith(canvasColor: Colors.lime[100]),
+                          child: DropdownButtonFormField<FilterDateDue>(
+                            style: _textStyleControls,
+                            items: _dropdownFilterDateDue,
+                            hint: Text('Filter by Due Date', style: _textStyleControls),
+                            value: _selectedDateDue,
+                            onChanged: (selectedDateDue) {
+                              setState(() {
+                                _selectedDateDue = selectedDateDue!;
+                                _searchDateDue = selectedDateDue.name;
+                                searchData(
+                                    _searchText,
+                                    _searchDateDue,
+                                    _includeIsStar,
+                                    _includeIsDone,
+                                    _selectedCategory,
+                                    _selectedStatus,
+                                    _selectedPriority,
+                                    _selectedTag1);
+                              });
+                            },
+                          ),
+                        ),
+                      ),
+
 //####################################Show Completed Task Check box
                       Container(
-                        margin:
-                            EdgeInsets.only(left: 8.0, right: 8.0, bottom: 1.0),
+              margin:
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
                         decoration: BoxDecoration(
                             shape: BoxShape.rectangle, color: Colors.blue[100]),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Text('Include Completed Tasks:',
-                                style: _textStyleControls),
                             Checkbox(
                               value: (_includeIsDone == 0) ? false : true,
                               onChanged: (value) {
@@ -265,56 +336,107 @@ title: Icon(Icons.filter_alt_outlined, color: Colors.black54,),
                                   _includeIsDone = (value! == false) ? 0 : 1;
                                   searchData(
                                       _searchText,
+                                      _searchDateDue,
+                                      _includeIsStar,
+                                      _includeIsDone,
                                       _selectedCategory,
                                       _selectedStatus,
                                       _selectedPriority,
-                                      _selectedTag1,
-                                      _includeIsStar,
-                                      _includeIsDone);
+                                      _selectedTag1);
                                 });
                               },
                             ),
+                            Text('Include Completed Tasks',
+                                style: _textStyleControls),
                           ],
                         ),
                       ),
 //####################################end of Show completed
 
 //####################################Show Focus Tasks Task Check box
-                      Container(
-                        margin:
-                            EdgeInsets.only(left: 8.0, right: 8.0, bottom: 1.0),
+
+              Container(
+              margin:
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
                         decoration: BoxDecoration(
-                            shape: BoxShape.rectangle, color: Colors.blue[100]),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text('Focus Tasks Only:',
-                                style: _textStyleControls),
-                            Checkbox(
-                              value: (_includeIsStar == 0) ? false : true,
-                              onChanged: (value) {
+                          shape: BoxShape.rectangle,
+                          color: Colors.blue[100],
+                        ),
+                        child: TextField(
+                          readOnly: true,
+                          style: _textStyleControls,
+                          decoration: InputDecoration(
+                            labelText: ' Focus Tasks Only ',
+                            labelStyle: _textStyleControls,
+                            hintText: '',
+                            prefixIcon: InkWell(
+                              onTap: () {
                                 setState(() {
-                                  _includeIsStar = (value! == false) ? 0 : 1;
+                                  if (_includeIsStar == 1) {
+                                    _includeIsStar = 0;
+                                    Icon(Icons.lightbulb,
+                                        color: Colors.black38);
+                                  } else {
+                                    _includeIsStar = 1;
+                                    Icon(Icons.lightbulb,
+                                        color: Colors.amber[800]);
+                                  }
                                   searchData(
                                       _searchText,
+                                      _searchDateDue,
+                                      _includeIsStar,
+                                      _includeIsDone,
                                       _selectedCategory,
                                       _selectedStatus,
                                       _selectedPriority,
-                                      _selectedTag1,
-                                      _includeIsStar,
-                                      _includeIsDone);
+                                      _selectedTag1);
                                 });
                               },
+                              child: Icon(Icons.lightbulb,
+                                  color: (_includeIsStar == 0)
+                                      ? Colors.black12
+                                      : Colors.teal),
                             ),
-                          ],
+                          ),
                         ),
                       ),
+
+//                      Container(
+//                        margin:
+//                            EdgeInsets.only(left: 8.0, right: 8.0, bottom: 1.0),
+//                        decoration: BoxDecoration(
+//                            shape: BoxShape.rectangle,
+//                            color: Colors.blue[100]),
+//                        child: Row(
+//                          crossAxisAlignment: CrossAxisAlignment.center,
+//                          children: [
+//                            Text('Focus Tasks Only:',
+//                                style: _textStyleControls),
+//                            Checkbox(
+//                              value: (_includeIsStar == 0) ? false : true,
+//                              onChanged: (value) {
+//                                setState(() {
+//                                  _includeIsStar = (value! == false) ? 0 : 1;
+//                                  searchData(
+//                                      _searchText,
+//                                      _selectedCategory,
+//                                      _selectedStatus,
+                      ///                                      _selectedPriority,
+//                                     _selectedTag1,
+//                                      _includeIsStar,
+//                                      _includeIsDone);
+//                                });
+//                              },
+//                            ),
+//                          ],
+//                       ),
+//                      ),
 //####################################end of Show Focus Tasks
 
 //#################################Category#####################################################
                       Container(
                         margin:
-                            EdgeInsets.only(top: 1.0, left: 8.0, right: 8.0),
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
                         decoration: BoxDecoration(
                             shape: BoxShape.rectangle, color: Colors.blue[100]),
                         child: Column(
@@ -342,12 +464,13 @@ title: Icon(Icons.filter_alt_outlined, color: Colors.black54,),
                                         _selectedCategory = newValue;
                                         searchData(
                                             _searchText,
+                                            _searchDateDue,
+                                            _includeIsStar,
+                                            _includeIsDone,
                                             _selectedCategory,
                                             _selectedStatus,
                                             _selectedPriority,
-                                            _selectedTag1,
-                                            _includeIsStar,
-                                            _includeIsDone);
+                                            _selectedTag1);
                                       });
                                     }),
                               ),
@@ -358,8 +481,8 @@ title: Icon(Icons.filter_alt_outlined, color: Colors.black54,),
 
 //#################################Status#####################################################
                       Container(
-                        margin:
-                            EdgeInsets.only(top: 1.0, left: 8.0, right: 8.0),
+              margin:
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
                         decoration: BoxDecoration(
                             shape: BoxShape.rectangle, color: Colors.blue[100]),
                         child: Column(
@@ -387,12 +510,13 @@ title: Icon(Icons.filter_alt_outlined, color: Colors.black54,),
                                         _selectedStatus = newValue;
                                         searchData(
                                             _searchText,
+                                            _searchDateDue,
+                                            _includeIsStar,
+                                            _includeIsDone,
                                             _selectedCategory,
                                             _selectedStatus,
                                             _selectedPriority,
-                                            _selectedTag1,
-                                            _includeIsStar,
-                                            _includeIsDone);
+                                            _selectedTag1);
                                       });
                                     }),
                               ),
@@ -403,8 +527,8 @@ title: Icon(Icons.filter_alt_outlined, color: Colors.black54,),
 
 //#################################Priority#####################################################
                       Container(
-                        margin:
-                            EdgeInsets.only(top: 1.0, left: 8.0, right: 8.0),
+              margin:
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
                         decoration: BoxDecoration(
                             shape: BoxShape.rectangle, color: Colors.blue[100]),
                         child: Column(
@@ -432,12 +556,13 @@ title: Icon(Icons.filter_alt_outlined, color: Colors.black54,),
                                         _selectedPriority = newValue;
                                         searchData(
                                             _searchText,
+                                            _searchDateDue,
+                                            _includeIsStar,
+                                            _includeIsDone,
                                             _selectedCategory,
                                             _selectedStatus,
                                             _selectedPriority,
-                                            _selectedTag1,
-                                            _includeIsStar,
-                                            _includeIsDone);
+                                            _selectedTag1);
                                       });
                                     }),
                               ),
@@ -448,8 +573,8 @@ title: Icon(Icons.filter_alt_outlined, color: Colors.black54,),
 
 // //######### Tag  #########
                       Container(
-                        margin:
-                            EdgeInsets.only(top: 1.0, left: 8.0, right: 8.0),
+              margin:
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
                         decoration: BoxDecoration(
                             shape: BoxShape.rectangle, color: Colors.blue[100]),
                         child: Column(
@@ -473,12 +598,13 @@ title: Icon(Icons.filter_alt_outlined, color: Colors.black54,),
                                       _selectedTag1 = value;
                                       searchData(
                                           _searchText,
+                                          _searchDateDue,
+                                          _includeIsStar,
+                                          _includeIsDone,
                                           _selectedCategory,
                                           _selectedStatus,
                                           _selectedPriority,
-                                          _selectedTag1,
-                                          _includeIsStar,
-                                          _includeIsDone);
+                                          _selectedTag1);
                                     });
                                   },
                                 ),
@@ -519,12 +645,13 @@ title: Icon(Icons.filter_alt_outlined, color: Colors.black54,),
                 ));
                 searchData(
                     _searchText,
+                    _searchDateDue,
+                    _includeIsStar,
+                    _includeIsDone,
                     _selectedCategory,
                     _selectedStatus,
                     _selectedPriority,
-                    _selectedTag1,
-                    _includeIsStar,
-                    _includeIsDone);
+                    _selectedTag1);
               });
             },
             background: Container(
@@ -563,12 +690,13 @@ title: Icon(Icons.filter_alt_outlined, color: Colors.black54,),
                           ));
                           searchData(
                               _searchText,
+                              _searchDateDue,
+                              _includeIsStar,
+                              _includeIsDone,
                               _selectedCategory,
                               _selectedStatus,
                               _selectedPriority,
-                              _selectedTag1,
-                              _includeIsStar,
-                              _includeIsDone);
+                              _selectedTag1);
                         });
                       },
                     ),
@@ -588,15 +716,15 @@ title: Icon(Icons.filter_alt_outlined, color: Colors.black54,),
                             Icon(Icons.lightbulb, color: Colors.amber[800]);
                             dbHelper.updateTask(tasklist[position]);
                           }
-//                          getData();
                           searchData(
                               _searchText,
+                              _searchDateDue,
+                              _includeIsStar,
+                              _includeIsDone,
                               _selectedCategory,
                               _selectedStatus,
                               _selectedPriority,
-                              _selectedTag1,
-                              _includeIsStar,
-                              _includeIsDone);
+                              _selectedTag1);
                         });
                       },
                     ),
@@ -621,12 +749,13 @@ title: Icon(Icons.filter_alt_outlined, color: Colors.black54,),
                       await navigateToDetail(this.tasklist[position]);
                       searchData(
                           _searchText,
+                          _searchDateDue,
+                          _includeIsStar,
+                          _includeIsDone,
                           _selectedCategory,
                           _selectedStatus,
                           _selectedPriority,
-                          _selectedTag1,
-                          _includeIsStar,
-                          _includeIsDone);
+                          _selectedTag1);
                     },
                     autofocus: true,
                   )),
@@ -667,12 +796,13 @@ title: Icon(Icons.filter_alt_outlined, color: Colors.black54,),
         getSortColumn(_sortField4!),
         getOrderColumn(_sortOrder4!),
         _searchText,
+        _searchText,
+        globals.filterIsStar,
+        globals.filterIsDone,
         globals.filterCategory.toString(),
         globals.filterStatus.toString(),
         globals.filterPriority.toString(),
         globals.filterTag.toString(),
-        globals.filterIsStar,
-        globals.filterIsDone,
       );
       tasksFuture.then((result) {
         List<Task> taskList = [];
@@ -836,29 +966,38 @@ title: Icon(Icons.filter_alt_outlined, color: Colors.black54,),
 //    getData();
   }
 
-  void searchData(String? searchText, String? category, String? status,
-      String? priority, String? tag1, int? showIsStar, int? includeIsDone) {
+  void searchData(
+      String? searchText,
+      String? searchDateDue,
+      int? showIsStar,
+      int? includeIsDone,
+      String? category,
+      String? status,
+      String? priority,
+      String? tag1) {
     var countDone = 0;
 
     if (searchText?.trim() != "" || searchText?.trim() == "") {
       final dbFuture = helper.initializeDb();
       dbFuture.then((result) {
         final tasksFuture = helper.searchTasks(
-            getSortColumn(_sortField1!),
-            getOrderColumn(_sortOrder1!),
-            getSortColumn(_sortField2!),
-            getOrderColumn(_sortOrder2!),
-            getSortColumn(_sortField3!),
-            getOrderColumn(_sortOrder3!),
-            getSortColumn(_sortField4!),
-            getOrderColumn(_sortOrder4!),
-            searchText!,
-            category.toString(),
-            status.toString(),
-            priority.toString(),
-            tag1.toString(),
-            _includeIsStar!,
-            _includeIsDone!);
+          getSortColumn(_sortField1!),
+          getOrderColumn(_sortOrder1!),
+          getSortColumn(_sortField2!),
+          getOrderColumn(_sortOrder2!),
+          getSortColumn(_sortField3!),
+          getOrderColumn(_sortOrder3!),
+          getSortColumn(_sortField4!),
+          getOrderColumn(_sortOrder4!),
+          searchText!,
+          searchDateDue!,
+          _includeIsStar!,
+          _includeIsDone!,
+          category.toString(),
+          status.toString(),
+          priority.toString(),
+          tag1.toString(),
+        );
         tasksFuture.then((result) {
           List<Task> taskList = [];
           List<DisplayTask> displaytaskList = [];
