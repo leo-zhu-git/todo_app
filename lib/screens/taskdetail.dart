@@ -294,6 +294,9 @@ class TaskDetailState extends State //<TaskDetail>
         _dateDue = pickedDate;
         final DateFormat formatter = DateFormat('yyyy-MM-dd');
         final String formatted = formatter.format(_dateDue!);
+        if (DateTime.tryParse(formatted) != null) {
+          DateTime date = DateTime.parse(formatted);
+        }
         _todoDateController.text = formatter.format(_dateDue!);
       });
     }
@@ -719,8 +722,7 @@ class TaskDetailState extends State //<TaskDetail>
               margin:
                   EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
               decoration: BoxDecoration(
-                  shape: BoxShape.rectangle, 
-                  color: Colors.blue[100]),
+                  shape: BoxShape.rectangle, color: Colors.blue[100]),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
