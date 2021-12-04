@@ -705,16 +705,18 @@ class _FilterViewState extends State //State<FilterView>
 ///////////////////////////
 //################################# Due Dates #####################################################
               new Container(
-              margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+                margin: EdgeInsets.only(
+                    left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
                 decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.blue[100]),
+                    shape: BoxShape.rectangle, color: Colors.blue[100]
+                    ),
                 child: Theme(
                   data:
                       Theme.of(context).copyWith(canvasColor: Colors.lime[100]),
                   child: DropdownButtonFormField<FilterDateDue>(
                     style: _textStyleControls,
                     items: _dropdownFilterDateDue,
+                    
                     hint: Text('Filter by Due Date'),
                     value: _selectedFilterDateDue,
                     onChanged: (selectedFilterDateDue) {
@@ -728,8 +730,8 @@ class _FilterViewState extends State //State<FilterView>
 
 //################################# IsDone #####################################################
               Container(
-              margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+                margin: EdgeInsets.only(
+                    left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.blue[100]),
                 child: Row(
@@ -772,41 +774,40 @@ class _FilterViewState extends State //State<FilterView>
 //################################# Focus #####################################################
 
               Container(
-              margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.rectangle,
-                          color: Colors.blue[100],
-                        ),
-                        child: TextField(
-                          readOnly: true,
-                          style: _textStyleControls,
-                          decoration: InputDecoration(
-                            labelText: ' Focus Tasks Only ',
-                            labelStyle: _textStyleControls,
-                            hintText: '',
-                            prefixIcon: InkWell(
-                              onTap: () {
-                                setState(() {
-                                  if (_selectedFilterIsStar == 1) {
-                                    _selectedFilterIsStar = 0;
-                                    Icon(Icons.lightbulb,
-                                        color: Colors.black38);
-                                  } else {
-                                    _selectedFilterIsStar = 1;
-                                    Icon(Icons.lightbulb,
-                                        color: Colors.amber[800]);
-                                  }
-                                });
-                              },
-                              child: Icon(Icons.lightbulb,
-                                  color: (_selectedFilterIsStar == 0)
-                                      ? Colors.black12
-                                      : Colors.teal),
-                            ),
-                          ),
-                        ),
-                      ),
+                margin: EdgeInsets.only(
+                    left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+                decoration: BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  color: Colors.blue[100],
+                ),
+                child: TextField(
+                  readOnly: true,
+                  style: _textStyleControls,
+                  decoration: InputDecoration(
+                    labelText: ' Focus Tasks Only ',
+                    labelStyle: _textStyleControls,
+                    border: InputBorder.none,
+                    hintText: '',
+                    prefixIcon: InkWell(
+                      onTap: () {
+                        setState(() {
+                          if (_selectedFilterIsStar == 1) {
+                            _selectedFilterIsStar = 0;
+                            Icon(Icons.lightbulb, color: Colors.black38);
+                          } else {
+                            _selectedFilterIsStar = 1;
+                            Icon(Icons.lightbulb, color: Colors.amber[800]);
+                          }
+                        });
+                      },
+                      child: Icon(Icons.lightbulb,
+                          color: (_selectedFilterIsStar == 0)
+                              ? Colors.black12
+                              : Colors.teal),
+                    ),
+                  ),
+                ),
+              ),
 
 //              new Container(
 //                margin: const EdgeInsets.all(2.0),
@@ -831,8 +832,8 @@ class _FilterViewState extends State //State<FilterView>
 
 //################################# Category #####################################################
               Container(
-              margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+                margin: EdgeInsets.only(
+                    left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.blue[100]),
                 child: Column(
@@ -867,8 +868,8 @@ class _FilterViewState extends State //State<FilterView>
 
 //################################# Status #####################################################
               Container(
-              margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+                margin: EdgeInsets.only(
+                    left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.blue[100]),
                 child: Column(
@@ -903,8 +904,8 @@ class _FilterViewState extends State //State<FilterView>
 
 //################################# Priority #####################################################
               Container(
-              margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+                margin: EdgeInsets.only(
+                    left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.blue[100]),
                 child: Column(
@@ -939,8 +940,8 @@ class _FilterViewState extends State //State<FilterView>
 
 //################################# Tag #####################################################
               Container(
-              margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+                margin: EdgeInsets.only(
+                    left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle, color: Colors.blue[100]),
                 child: Column(

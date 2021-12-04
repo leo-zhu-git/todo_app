@@ -251,7 +251,8 @@ class TaskSearchState extends State {
         children: [
           Padding(
             padding:
-                EdgeInsets.only(top: 6.0, left: 4.0, right: 4.0, bottom: 1.0),
+                EdgeInsets.only(left: 8.0, right: 8.0, top: 6.0, bottom: 2.0),
+//                EdgeInsets.only(top: 6.0, left: 4.0, right: 4.0, bottom: 1.0),
             child: TextField(
               style: _textStyleControls,
               controller: searchController,
@@ -289,41 +290,43 @@ class TaskSearchState extends State {
                     children: [
 //################################# Due Dates #####################################################
                       new Container(
-              margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+                        margin: EdgeInsets.only(
+                            left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
                         decoration: BoxDecoration(
                             shape: BoxShape.rectangle, color: Colors.blue[100]),
                         child: Theme(
                           data: Theme.of(context)
                               .copyWith(canvasColor: Colors.lime[100]),
-                          child: DropdownButtonFormField<FilterDateDue>(
-                            style: _textStyleControls,
-                            items: _dropdownFilterDateDue,
-                            hint: Text('Filter by Due Date', style: _textStyleControls),
-                            value: _selectedDateDue,
-                            onChanged: (selectedDateDue) {
-                              setState(() {
-                                _selectedDateDue = selectedDateDue!;
-                                _searchDateDue = selectedDateDue.name;
-                                searchData(
-                                    _searchText,
-                                    _searchDateDue,
-                                    _includeIsStar,
-                                    _includeIsDone,
-                                    _selectedCategory,
-                                    _selectedStatus,
-                                    _selectedPriority,
-                                    _selectedTag1);
-                              });
-                            },
+                          child: DropdownButtonHideUnderline(
+                            child: DropdownButtonFormField<FilterDateDue>(
+                              style: _textStyleControls,
+                              items: _dropdownFilterDateDue,
+                              hint: Text('Due Date', style: _textStyleControls),
+                              value: _selectedDateDue,
+                              onChanged: (selectedDateDue) {
+                                setState(() {
+                                  _selectedDateDue = selectedDateDue!;
+                                  _searchDateDue = selectedDateDue.name;
+                                  searchData(
+                                      _searchText,
+                                      _searchDateDue,
+                                      _includeIsStar,
+                                      _includeIsDone,
+                                      _selectedCategory,
+                                      _selectedStatus,
+                                      _selectedPriority,
+                                      _selectedTag1);
+                                });
+                              },
+                            ),
                           ),
                         ),
                       ),
 
 //####################################Show Completed Task Check box
                       Container(
-              margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+                        margin: EdgeInsets.only(
+                            left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
                         decoration: BoxDecoration(
                             shape: BoxShape.rectangle, color: Colors.blue[100]),
                         child: Row(
@@ -355,9 +358,9 @@ class TaskSearchState extends State {
 
 //####################################Show Focus Tasks Task Check box
 
-              Container(
-              margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+                      Container(
+                        margin: EdgeInsets.only(
+                            left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
                         decoration: BoxDecoration(
                           shape: BoxShape.rectangle,
                           color: Colors.blue[100],
@@ -369,6 +372,7 @@ class TaskSearchState extends State {
                             labelText: ' Focus Tasks Only ',
                             labelStyle: _textStyleControls,
                             hintText: '',
+                            border: InputBorder.none,
                             prefixIcon: InkWell(
                               onTap: () {
                                 setState(() {
@@ -435,8 +439,8 @@ class TaskSearchState extends State {
 
 //#################################Category#####################################################
                       Container(
-                        margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+                        margin: EdgeInsets.only(
+                            left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
                         decoration: BoxDecoration(
                             shape: BoxShape.rectangle, color: Colors.blue[100]),
                         child: Column(
@@ -481,8 +485,8 @@ class TaskSearchState extends State {
 
 //#################################Status#####################################################
                       Container(
-              margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+                        margin: EdgeInsets.only(
+                            left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
                         decoration: BoxDecoration(
                             shape: BoxShape.rectangle, color: Colors.blue[100]),
                         child: Column(
@@ -527,8 +531,8 @@ class TaskSearchState extends State {
 
 //#################################Priority#####################################################
                       Container(
-              margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+                        margin: EdgeInsets.only(
+                            left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
                         decoration: BoxDecoration(
                             shape: BoxShape.rectangle, color: Colors.blue[100]),
                         child: Column(
@@ -573,8 +577,8 @@ class TaskSearchState extends State {
 
 // //######### Tag  #########
                       Container(
-              margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+                        margin: EdgeInsets.only(
+                            left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
                         decoration: BoxDecoration(
                             shape: BoxShape.rectangle, color: Colors.blue[100]),
                         child: Column(
@@ -662,6 +666,7 @@ class TaskSearchState extends State {
                   EdgeInsets.only(top: 1.0, left: 4.0, right: 4.0, bottom: 1.0),
               child: Card(
                   color: Colors.yellow[200],
+                  elevation: 8,
                   child: ListTile(
                     visualDensity: VisualDensity(horizontal: -4),
                     leading: Checkbox(
