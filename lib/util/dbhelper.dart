@@ -75,7 +75,7 @@ class DbHelper {
 
   Future<Database> initializeDb() async {
     Directory dir = await getApplicationDocumentsDirectory();
-    String path = dir.path + "todo_V22.k2.db";
+    String path = dir.path + "todo_V22.k3.db";
     var dbTodovn = await openDatabase(path, version: 1, onCreate: _createDb);
     return dbTodovn;
   }
@@ -149,6 +149,12 @@ class DbHelper {
     await db.execute(
         "INSERT INTO categories ( 'name', 'description')  values (?, ?)", [
       'health/ temple',
+      '2Bootstrap - please delete or rename if necessary'
+    ]);
+
+    await db.execute(
+        "INSERT INTO categories ( 'name', 'description')  values (?, ?)", [
+      'LLL/ digest',
       '2Bootstrap - please delete or rename if necessary'
     ]);
 

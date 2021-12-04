@@ -71,8 +71,8 @@ class FilterIsStar {
   FilterIsStar(this.id, this.name);
   static List<FilterIsStar> getIsStar() {
     return <FilterIsStar>[
-      FilterIsStar(0, '-- Focus & All Tasks --'),
-      FilterIsStar(1, 'Focus Tasks Only'),
+      FilterIsStar(0, '[ Focus & All Tasks]'),
+      FilterIsStar(1, '[ Focus Tasks Only ]'),
     ];
   }
 }
@@ -84,8 +84,8 @@ class FilterIsDone {
   FilterIsDone(this.id, this.name);
   static List<FilterIsDone> getIsDone() {
     return <FilterIsDone>[
-      FilterIsDone(0, '-- Include Completed Tasks --'),
-      FilterIsDone(1, 'Hide Completed Tasks'),
+      FilterIsDone(0, '[ Completed Tasks & All Tasks ]'),
+      FilterIsDone(1, '[ Completed Tasks - Hide]'),
     ];
   }
 }
@@ -97,7 +97,7 @@ class FilterDateDue {
   FilterDateDue(this.id, this.name);
   static List<FilterDateDue> getDateDue() {
     return <FilterDateDue>[
-      FilterDateDue(0, '-- All Due Dates --'),
+      FilterDateDue(0, '[ All Due Dates ]'),
       FilterDateDue(1, 'Today'),
       FilterDateDue(2, 'Tomorrow'),
       FilterDateDue(3, 'Next 7 days'),
