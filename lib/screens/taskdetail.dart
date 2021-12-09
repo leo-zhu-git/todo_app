@@ -12,6 +12,7 @@ import 'package:todo_app/util/dbhelper.dart';
 import 'package:intl/intl.dart';
 import 'dart:io';
 import 'tasksearch.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
 DbHelper dbHelper = DbHelper();
 
@@ -76,7 +77,7 @@ class TaskDetailState extends State //<TaskDetail>
   void initState() {
     super.initState();
 
-   SystemChannels.textInput.invokeMethod('TextInput.hide');
+    SystemChannels.textInput.invokeMethod('TextInput.hide');
     _loadCategories();
     _loadStatuses();
     _loadPriorities();
@@ -671,7 +672,34 @@ class TaskDetailState extends State //<TaskDetail>
                   hintText: ' Pick a Time',
                   prefixIcon: InkWell(
                     onTap: () {
-                      _showCupertinoDateTimePicker(context);
+//                      _showCupertinoDateTimePicker(context);
+                      DatePicker.showDateTimePicker(context,
+                          showTitleActions: true,
+                          minTime: DateTime(2020, 5, 5, 20, 50),
+                          maxTime: DateTime(2020, 6, 7, 05, 09),
+                          onChanged: (date) {
+                        print('change $date in time zone ' +
+                            date.timeZoneOffset.inHours.toString());
+                      }, onConfirm: (date) {
+                        _dateDue = date;
+                        final DateFormat formatter = DateFormat('yyyy-MM-dd');
+                        final String formatted = formatter.format(_dateDue!);
+                        _todoDateController.text = formatter.format(_dateDue!);
+
+                        _timeDue = TimeOfDay.fromDateTime(date);
+                        _todoTimeController.text = _timeDue!.format(context);
+
+                        print('confirm $date');
+//                      }, locale: LocaleType.zh);
+                      },
+                          currentTime: (_dateDue == null)
+                              ? DateTime.now()
+                              : DateTime(
+                                  _dateDue!.year,
+                                  _dateDue!.month,
+                                  _dateDue!.day,
+                                  _timeDue!.hour,
+                                  _timeDue!.minute));
                     },
                     child: Icon(Icons.access_time),
                   ),
