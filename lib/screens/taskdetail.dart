@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:todo_app/model/category.dart';
 import 'package:todo_app/model/customDropdownItem.dart';
 import 'package:todo_app/model/priority.dart';
@@ -75,6 +76,7 @@ class TaskDetailState extends State //<TaskDetail>
   void initState() {
     super.initState();
 
+   SystemChannels.textInput.invokeMethod('TextInput.hide');
     _loadCategories();
     _loadStatuses();
     _loadPriorities();

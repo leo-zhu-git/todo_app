@@ -1,6 +1,7 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:todo_app/model/globals.dart';
 import 'package:todo_app/model/taskclass.dart';
 import 'package:todo_app/screens/taskhome.dart';
@@ -74,6 +75,9 @@ class TaskSearchState extends State {
   int? _sortOrder3 = globals.sortOrder3 != null ? globals.sortOrder3 : 0;
   int? _sortOrder4 = globals.sortOrder4 != null ? globals.sortOrder4 : 0;
 
+  late FocusNode myFocusNode;
+
+
   @override
   void initState() {
     super.initState();
@@ -83,7 +87,18 @@ class TaskSearchState extends State {
     _loadStatuses();
     _loadPriorities();
     _loadTag1s();
+    
   }
+
+  @override
+  void dispose() {
+    // Clean up the focus node when the Form is 
+        myFocusNode.dispose();
+
+    super.dispose();
+  }
+
+
 
   //##################Drop Down Items Load from DB #################################################################
   _loadCategories() async {
@@ -214,7 +229,11 @@ class TaskSearchState extends State {
 //##########################################end of Dropdown #################################################################
 
   @override
+
+
   Widget build(BuildContext context) {
+//    Future.delayed(const Duration(), () => SystemChannels.textInput.invokeMethod('TextInput.hide'));
+
     return Scaffold(
       backgroundColor: Colors.teal[50],
       appBar: AppBar(
@@ -252,8 +271,8 @@ class TaskSearchState extends State {
           Padding(
             padding:
                 EdgeInsets.only(left: 8.0, right: 8.0, top: 6.0, bottom: 2.0),
-//                EdgeInsets.only(top: 6.0, left: 4.0, right: 4.0, bottom: 1.0),
             child: TextField(
+              autofocus: true,
               style: _textStyleControls,
               controller: searchController,
               onChanged: (value) {
@@ -762,7 +781,7 @@ class TaskSearchState extends State {
                           _selectedPriority,
                           _selectedTag1);
                     },
-                    autofocus: true,
+//                    autofocus: true,
                   )),
             ));
       },
