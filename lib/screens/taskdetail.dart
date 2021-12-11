@@ -55,7 +55,8 @@ class TaskDetailState extends State //<TaskDetail>
   var _todoNoteController = TextEditingController();
   var _todoDateController = TextEditingController();
   var _todoTimeController = TextEditingController();
-  var _selectedIsStar;
+  bool _selectedIsStar = false;
+  bool _selectedIsDone = false;
   var _nTitle;
 
   List<CustomDropdownItem> _categories = [];
@@ -137,6 +138,16 @@ class TaskDetailState extends State //<TaskDetail>
             _selectedTag1 = task.tag1,
           }
         : _selectedTag1 = null;
+    task.isStar == 0
+        ? {
+            _selectedIsStar = false,
+          }
+        : _selectedIsStar = true;
+    task.isDone == 0
+        ? {
+            _selectedIsDone = false,
+          }
+        : _selectedIsDone = true;
   }
 
   void navigateToDetail(Task task) async {
@@ -510,6 +521,22 @@ class TaskDetailState extends State //<TaskDetail>
                           task.tag1 = _selectedTag1.toString(),
                         };
 
+                  if (_selectedIsStar == false) {
+                    task.isStar = 0;
+                  } else {
+                    task.isStar = 1;
+                  }
+
+                  if (_selectedIsDone == false) {
+                    task.isDone = 0;
+                    task.dateDone = null;
+                  } else {
+                    task.isDone = 1;
+                    DateTime now = DateTime.now();
+                    String formattedDate = DateFormat('yyyy-mm-dd').format(now);
+                    task.dateDone = formattedDate;
+                  }
+
                   task.dateDue = _todoDateController.text;
                   task.timeDue = _todoTimeController.text;
 
@@ -523,7 +550,7 @@ class TaskDetailState extends State //<TaskDetail>
                         }
                       : {};
 
-                  task.isDone = 0;
+//                  task.isDone = 0;
                   task.lastModified =
                       DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.now());
 
@@ -726,20 +753,28 @@ class TaskDetailState extends State //<TaskDetail>
                   prefixIcon: InkWell(
                     onTap: () {
                       setState(() {
-                        if (task.isStar == 1) {
-                          task.isStar = 0;
-                          Icon(Icons.lightbulb, color: Colors.black38);
-                          dbHelper.updateTask(task);
-                        } else {
-                          task.isStar = 1;
-                          Icon(Icons.lightbulb, color: Colors.amber[800]);
-                          dbHelper.updateTask(task);
-                        }
+//                        if (task.isStar == 1) {
+//                          task.isStar = 0;
+//                          Icon(Icons.lightbulb, color: Colors.black38);
+//                          dbHelper.updateTask(task);
+//                        } else {
+//                          task.isStar = 1;
+//                          Icon(Icons.lightbulb, color: Colors.amber[800]);
+//                          dbHelper.updateTask(task);
+//                        }
+                        (_selectedIsStar == true) ? {
+                          _selectedIsStar = false,
+                          Icon(Icons.lightbulb, color: Colors.black38),
+                          } : {
+                          _selectedIsStar = true,
+                          Icon(Icons.lightbulb, color: Colors.amber[800]),
+                            };
                       });
                     },
                     child: Icon(Icons.lightbulb,
-                        color:
-                            (task.isStar == 0) ? Colors.black12 : Colors.teal),
+                        color: (_selectedIsStar == false)
+                            ? Colors.black12
+                            : Colors.teal),
                   ),
                 ),
               ),
@@ -897,6 +932,43 @@ class TaskDetailState extends State //<TaskDetail>
                 ],
               ),
             ),
+///////////////////////////
+//  IS COMPLETED
+///////////////////////////
+            Container(
+              margin:
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+              decoration: BoxDecoration(
+                  shape: BoxShape.rectangle, color: Colors.blue[100]),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Checkbox(
+//                    value: (task.isDone == 0) ? false : true,
+                    value: _selectedIsDone ? true : false,
+                    onChanged: (value) {
+                      setState(() {
+                        _selectedIsDone = (value == true) ? true : false;
+//                        if (value == false) {
+//                          task.isDone = 0;
+//                          task.dateDone = null;
+//                          dbHelper.updateTask(task);
+//                        } else {
+//                          task.isDone = 1;
+//                          DateTime now = DateTime.now();
+//                          String formattedDate =
+//                              DateFormat('yyyy-mm-dd').format(now);
+//                          task.dateDone = formattedDate;
+//                          dbHelper.updateTask(task);
+//                       }
+                      });
+                    },
+                  ),
+                  Text('Completed', style: _textStyleControls),
+                ],
+              ),
+            ),
+///////////////////////////
           ],
         ),
       ),
