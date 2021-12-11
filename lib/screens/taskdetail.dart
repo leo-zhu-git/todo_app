@@ -718,7 +718,7 @@ class TaskDetailState extends State //<TaskDetail>
 //            ),
 
 ///////////////////////////
-//  Date Time Combined
+//  Combined: Date Time Clear
 ///////////////////////////
             Container(
                 margin: EdgeInsets.only(
@@ -727,7 +727,6 @@ class TaskDetailState extends State //<TaskDetail>
                   shape: BoxShape.rectangle,
                   color: Colors.blue[100],
                 ),
-//                padding: const EdgeInsets.all(15),
                 child: Flexible(
                   child: Row(children: [
                     Expanded(
@@ -807,16 +806,16 @@ class TaskDetailState extends State //<TaskDetail>
                     ),
                     IconButton(
                       icon: Icon(Icons.clear),
-                      onPressed:() {
+                      onPressed: () {
 // clear date due
-      _todoDateController.text = "";
-      _dateDue = null;
+                        _todoDateController.text = "";
+                        _dateDue = null;
 // clear time due
-      _todoTimeController.text = "";
-      _savedTime = null;
-      _timeDue = null;
+                        _todoTimeController.text = "";
+                        _savedTime = null;
+                        _timeDue = null;
                       },
-                      ),
+                    ),
                     SizedBox(
                       width: 5,
                     ),
@@ -826,50 +825,115 @@ class TaskDetailState extends State //<TaskDetail>
 ///////////////////////////
 //  FOCUS
 ///////////////////////////
+//            Container(
+//              margin:
+//                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+//              decoration: BoxDecoration(
+//                shape: BoxShape.rectangle,
+//                color: Colors.blue[100],
+//              ),
+//              child: TextField(
+//                readOnly: true,
+//                style: _textStyleControls,
+//                decoration: InputDecoration(
+//                  labelText: ' Focus',
+//                  hintText: '',
+//                  prefixIcon: InkWell(
+//                    onTap: () {
+//                      setState(() {
+////                        if (task.isStar == 1) {
+////                          task.isStar = 0;
+////                          Icon(Icons.lightbulb, color: Colors.black38);
+////                          dbHelper.updateTask(task);
+////                        } else {
+////                          task.isStar = 1;
+////                          Icon(Icons.lightbulb, color: Colors.amber[800]);
+////                          dbHelper.updateTask(task);
+////                        }
+//                        (_selectedIsStar == true)
+//                            ? {
+//                                _selectedIsStar = false,
+//                                Icon(Icons.lightbulb, color: Colors.black38),
+//                              }
+//                            : {
+//                                _selectedIsStar = true,
+//                                Icon(Icons.lightbulb, color: Colors.amber[800]),
+//                              };
+//                      });
+//                    },
+//                    child: Icon(Icons.lightbulb,
+//                        color: (_selectedIsStar == false)
+//                            ? Colors.black12
+//                            : Colors.teal),
+//                  ),
+//                ),
+//              ),
+//            ),
+
+///////////////////////////
+//  Combined: IsDone, Focus
+///////////////////////////
             Container(
-              margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
-              decoration: BoxDecoration(
-                shape: BoxShape.rectangle,
-                color: Colors.blue[100],
-              ),
-              child: TextField(
-                readOnly: true,
-                style: _textStyleControls,
-                decoration: InputDecoration(
-                  labelText: ' Focus',
-                  hintText: '',
-                  prefixIcon: InkWell(
-                    onTap: () {
-                      setState(() {
-//                        if (task.isStar == 1) {
-//                          task.isStar = 0;
-//                          Icon(Icons.lightbulb, color: Colors.black38);
-//                          dbHelper.updateTask(task);
-//                        } else {
-//                          task.isStar = 1;
-//                          Icon(Icons.lightbulb, color: Colors.amber[800]);
-//                          dbHelper.updateTask(task);
-//                        }
-                        (_selectedIsStar == true)
-                            ? {
-                                _selectedIsStar = false,
-                                Icon(Icons.lightbulb, color: Colors.black38),
-                              }
-                            : {
-                                _selectedIsStar = true,
-                                Icon(Icons.lightbulb, color: Colors.amber[800]),
-                              };
-                      });
-                    },
-                    child: Icon(Icons.lightbulb,
-                        color: (_selectedIsStar == false)
-                            ? Colors.black12
-                            : Colors.teal),
-                  ),
+                margin: EdgeInsets.only(
+                    left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+                decoration: BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  color: Colors.blue[100],
                 ),
-              ),
-            ),
+                child: Flexible(
+                  child: Row(children: [
+                    Expanded(
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Checkbox(
+                            value: _selectedIsDone ? true : false,
+                            onChanged: (value) {
+                              setState(() {
+                                _selectedIsDone =
+                                    (value == true) ? true : false;
+                              });
+                            },
+                          ),
+                          Text('Completed', style: _textStyleControls),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Expanded(
+                      child: TextField(
+                        readOnly: true,
+                        style: _textStyleControls,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          prefixIcon: InkWell(
+                            onTap: () {
+                              setState(() {
+                                (_selectedIsStar == true)
+                                    ? {
+                                        _selectedIsStar = false,
+                                        Icon(Icons.lightbulb,
+                                            color: Colors.black38),
+                                      }
+                                    : {
+                                        _selectedIsStar = true,
+                                        Icon(Icons.lightbulb,
+                                            color: Colors.amber[800]),
+                                      };
+                              });
+                            },
+                            child: Icon(Icons.lightbulb,
+                                color: (_selectedIsStar == false)
+                                    ? Colors.black12
+                                    : Colors.teal),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ]),
+                )),
 
 ///////////////////////////
 //  CATEGORY
@@ -1026,39 +1090,40 @@ class TaskDetailState extends State //<TaskDetail>
 ///////////////////////////
 //  IS COMPLETED
 ///////////////////////////
-            Container(
-              margin:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
-              decoration: BoxDecoration(
-                  shape: BoxShape.rectangle, color: Colors.blue[100]),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Checkbox(
-//                    value: (task.isDone == 0) ? false : true,
-                    value: _selectedIsDone ? true : false,
-                    onChanged: (value) {
-                      setState(() {
-                        _selectedIsDone = (value == true) ? true : false;
-//                        if (value == false) {
-//                          task.isDone = 0;
-//                          task.dateDone = null;
-//                          dbHelper.updateTask(task);
-//                        } else {
-//                          task.isDone = 1;
-//                          DateTime now = DateTime.now();
-//                          String formattedDate =
-//                              DateFormat('yyyy-mm-dd').format(now);
-//                          task.dateDone = formattedDate;
-//                          dbHelper.updateTask(task);
-//                       }
-                      });
-                    },
-                  ),
-                  Text('Completed', style: _textStyleControls),
-                ],
-              ),
-            ),
+//            Container(
+//              margin:
+//                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+//              decoration: BoxDecoration(
+//                  shape: BoxShape.rectangle, color: Colors.blue[100]),
+//              child: Row(
+//                crossAxisAlignment: CrossAxisAlignment.center,
+//                children: [
+//                  Checkbox(
+////                    value: (task.isDone == 0) ? false : true,
+//                    value: _selectedIsDone ? true : false,
+//                    onChanged: (value) {
+//                      setState(() {
+//                        _selectedIsDone = (value == true) ? true : false;
+////                        if (value == false) {
+////                          task.isDone = 0;
+////                          task.dateDone = null;
+////                          dbHelper.updateTask(task);
+////                        } else {
+////                          task.isDone = 1;
+////                          DateTime now = DateTime.now();
+////                          String formattedDate =
+////                              DateFormat('yyyy-mm-dd').format(now);
+////                          task.dateDone = formattedDate;
+////                          dbHelper.updateTask(task);
+////                       }
+//                      });
+//                    },
+//                  ),
+//                  Text('Completed', style: _textStyleControls),
+//                ],
+//              ),
+//            ),
+
 ///////////////////////////
           ],
         ),
