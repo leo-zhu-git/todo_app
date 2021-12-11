@@ -485,8 +485,8 @@ class TaskDetailState extends State //<TaskDetail>
                 });
               }),
           IconButton(
-//              icon: Icon(Icons.save_alt, color: Colors.white),
-              icon: Icon(Icons.savings_outlined, color: Colors.white),
+              icon: Icon(Icons.save, color: Colors.white),
+//              icon: Icon(Icons.savings_outlined, color: Colors.white),
               tooltip: 'Save',
               onPressed: () {
                 setState(() {

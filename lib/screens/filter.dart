@@ -517,7 +517,8 @@ class _FilterViewState extends State //State<FilterView>
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.save_alt, color: Colors.white),
+//            icon: Icon(Icons.save_alt, color: Colors.white),
+            icon: Icon(Icons.save, color: Colors.white),
             tooltip: 'Save',
             onPressed: () {
               setState(() {
