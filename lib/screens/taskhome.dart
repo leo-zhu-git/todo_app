@@ -132,42 +132,7 @@ class TaskHomeState extends State {
         ],
       ),
       body: taskListItems(),
-//      bottomNavigationBar: (Container(
-//        height: 55.0,
-//        child: BottomAppBar(
-//          // color: Color.fromRGBO(58, 66, 86, 1.0),
-//          color: Colors.teal[800],
-//          child: Row(
-//            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//            children: <Widget>[
-//              IconButton(
-//                icon: Icon(Icons.settings, color: Colors.white),
-//                onPressed: () {
-//                  Navigator.of(context).pushNamed('/personalizeview');
-//                },
-//              ),
-//              IconButton(
-//                icon: Icon(Icons.add, color: Colors.white),
-//                onPressed: () {
-//                  navigateToDetail(Task("", "", "", "", "", "", "", "", 0, 0,
-//                      "", "", "", "", ""));
-//                  getData();
-//                },
-//              ),
-//              IconButton(
-//                icon: Icon(Icons.find_in_page, color: Colors.white),
-//                onPressed: () {
-//                  Navigator.push(
-//                    context,
-//                    MaterialPageRoute(builder: (context) => TaskSearch()),
-//                  );
-//                  getData();
-//                },
-//              ),
-//            ],
-//          ),
-//        ),
-//      )),
+
     );
   }
 
@@ -260,7 +225,6 @@ class TaskHomeState extends State {
                                 child: Text(
                                   this.tasklist![position].task.toString(),
                                   style: _textStyleControls,
-//                                    overflow: TextOverflow.ellipsis)
                                 ))),
                       ],
                     ),
@@ -272,8 +236,6 @@ class TaskHomeState extends State {
                                 child: Text(
                                   this.tasklist![position].sec1!,
                                   style: _textStyleControlsSub,
-
-//                                    overflow: TextOverflow.ellipsis
                                 ))),
                         SizedBox(width: 10),
                         Flexible(
@@ -282,7 +244,6 @@ class TaskHomeState extends State {
                                 child: Text(
                                   this.tasklist![position].sec2!,
                                   style: _textStyleControlsSub,
-//                                    overflow: TextOverflow.ellipsis
                                 ))),
                         SizedBox(width: 10),
                         Flexible(
@@ -291,7 +252,6 @@ class TaskHomeState extends State {
                                 child: Text(
                                   this.tasklist![position].sec3!,
                                   style: _textStyleControlsSub,
-//                                    overflow: TextOverflow.ellipsis
                                 ))),
                       ],
                     ),
@@ -388,11 +348,6 @@ class TaskHomeState extends State {
                 taskList[i].sec1 = taskList[i].tag1Text;
               }
               break;
-            case 6:
-              {
-                taskList[i].sec1 = taskList[i].isStar.toString();
-              }
-              break;
             default:
               {
                 taskList[i].sec1 = taskList[i].dateDue;
@@ -433,11 +388,6 @@ class TaskHomeState extends State {
                 taskList[i].sec2 = taskList[i].tag1Text;
               }
               break;
-            case 6:
-              {
-                taskList[i].sec2 = taskList[i].isStar.toString();
-              }
-              break;
             default:
               {
                 taskList[i].sec2 = taskList[i].timeDue;
@@ -476,11 +426,6 @@ class TaskHomeState extends State {
             case 5:
               {
                 taskList[i].sec3 = taskList[i].tag1Text;
-              }
-              break;
-            case 6:
-              {
-                taskList[i].sec3 = taskList[i].isStar.toString();
               }
               break;
             default:

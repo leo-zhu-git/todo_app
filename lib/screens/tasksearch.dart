@@ -14,6 +14,7 @@ import 'package:todo_app/model/globals.dart' as globals;
 
 DbHelper helper = DbHelper();
 TextStyle _textStyleControls = TextStyle(fontSize: 17.0, color: Colors.black87);
+TextStyle _textStyleControlsSub = TextStyle(color: Colors.black);
 TextStyle _textStyleSnack = TextStyle(
     fontSize: 16.0, color: Colors.pink[100], fontWeight: FontWeight.w600);
 
@@ -77,7 +78,6 @@ class TaskSearchState extends State {
 
   late FocusNode myFocusNode;
 
-
   @override
   void initState() {
     super.initState();
@@ -87,18 +87,15 @@ class TaskSearchState extends State {
     _loadStatuses();
     _loadPriorities();
     _loadTag1s();
-    
   }
 
   @override
   void dispose() {
-    // Clean up the focus node when the Form is 
-        myFocusNode.dispose();
+    // Clean up the focus node when the Form is
+    myFocusNode.dispose();
 
     super.dispose();
   }
-
-
 
   //##################Drop Down Items Load from DB #################################################################
   _loadCategories() async {
@@ -229,8 +226,6 @@ class TaskSearchState extends State {
 //##########################################end of Dropdown #################################################################
 
   @override
-
-
   Widget build(BuildContext context) {
 //    Future.delayed(const Duration(), () => SystemChannels.textInput.invokeMethod('TextInput.hide'));
 
@@ -424,38 +419,6 @@ class TaskSearchState extends State {
                         ),
                       ),
 
-//                      Container(
-//                        margin:
-//                            EdgeInsets.only(left: 8.0, right: 8.0, bottom: 1.0),
-//                        decoration: BoxDecoration(
-//                            shape: BoxShape.rectangle,
-//                            color: Colors.blue[100]),
-//                        child: Row(
-//                          crossAxisAlignment: CrossAxisAlignment.center,
-//                          children: [
-//                            Text('Focus Tasks Only:',
-//                                style: _textStyleControls),
-//                            Checkbox(
-//                              value: (_includeIsStar == 0) ? false : true,
-//                              onChanged: (value) {
-//                                setState(() {
-//                                  _includeIsStar = (value! == false) ? 0 : 1;
-//                                  searchData(
-//                                      _searchText,
-//                                      _selectedCategory,
-//                                      _selectedStatus,
-                      ///                                      _selectedPriority,
-//                                     _selectedTag1,
-//                                      _includeIsStar,
-//                                      _includeIsDone);
-//                                });
-//                              },
-//                            ),
-//                          ],
-//                       ),
-//                      ),
-//####################################end of Show Focus Tasks
-
 //#################################Category#####################################################
                       Container(
                         margin: EdgeInsets.only(
@@ -594,7 +557,7 @@ class TaskSearchState extends State {
                         ),
                       ),
 
-// //######### Tag  #########
+//################################# Tag #####################################################
                       Container(
                         margin: EdgeInsets.only(
                             left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
@@ -766,6 +729,33 @@ class TaskSearchState extends State {
                                     overflow: TextOverflow.ellipsis))),
                       ],
                     ),
+                    subtitle: Row(
+                      children: [
+                        Flexible(
+                            child: Padding(
+                                padding: const EdgeInsets.only(right: 2),
+                                child: Text(
+                                  this.tasklist![position].sec1!,
+                                  style: _textStyleControlsSub,
+                                ))),
+                        SizedBox(width: 10),
+                        Flexible(
+                            child: Padding(
+                                padding: const EdgeInsets.only(right: 2),
+                                child: Text(
+                                  this.tasklist![position].sec2!,
+                                  style: _textStyleControlsSub,
+                                ))),
+                        SizedBox(width: 10),
+                        Flexible(
+                            child: Padding(
+                                padding: const EdgeInsets.only(right: 2),
+                                child: Text(
+                                  this.tasklist![position].sec3!,
+                                  style: _textStyleControlsSub,
+                                ))),
+                      ],
+                    ),
                     isThreeLine: false,
                     dense: true,
                     contentPadding: EdgeInsets.symmetric(horizontal: 0.0),
@@ -781,7 +771,6 @@ class TaskSearchState extends State {
                           _selectedPriority,
                           _selectedTag1);
                     },
-//                    autofocus: true,
                   )),
             ));
       },
@@ -809,7 +798,6 @@ class TaskSearchState extends State {
     final dbFuture = helper.initializeDb();
 
     dbFuture.then((result) {
-//      final tasksFuture = helper.getTasksSort(
       final tasksFuture = helper.searchTasks(
         getSortColumn(_sortField1!),
         getOrderColumn(_sortOrder1!),
@@ -881,6 +869,7 @@ class TaskSearchState extends State {
               }
               break;
           }
+
 /////////////////
           /// display sec2
 ////////////////
@@ -927,6 +916,7 @@ class TaskSearchState extends State {
               }
               break;
           }
+
 /////////////////
           /// display sec3
 ////////////////
@@ -1045,57 +1035,37 @@ class TaskSearchState extends State {
             switch (globals.showSec1) {
               case 0:
                 {
-                  taskList[i].sec1 = taskList[i].task;
+                  taskList[i].sec1 = taskList[i].dateDue;
                 }
                 break;
               case 1:
                 {
-                  taskList[i].sec1 = taskList[i].note;
+                  taskList[i].sec1 = taskList[i].timeDue;
                 }
                 break;
               case 2:
                 {
-                  taskList[i].sec1 = taskList[i].dateDue;
+                  taskList[i].sec1 = taskList[i].categoryText;
                 }
                 break;
               case 3:
                 {
-                  taskList[i].sec1 = taskList[i].timeDue;
+                  taskList[i].sec1 = taskList[i].statusText;
                 }
                 break;
               case 4:
                 {
-                  taskList[i].sec1 = taskList[i].category;
+                  taskList[i].sec1 = taskList[i].priorityText;
                 }
                 break;
               case 5:
                 {
-                  taskList[i].sec1 = taskList[i].status;
-                }
-                break;
-              case 6:
-                {
-                  taskList[i].sec1 = taskList[i].priority;
-                }
-                break;
-              case 7:
-                {
-                  taskList[i].sec1 = taskList[i].tag1;
-                }
-                break;
-              case 8:
-                {
-                  taskList[i].sec1 = taskList[i].isStar.toString();
-                }
-                break;
-              case 9:
-                {
-                  taskList[i].sec1 = taskList[i].isDone.toString();
+                  taskList[i].sec1 = taskList[i].tag1Text;
                 }
                 break;
               default:
                 {
-                  taskList[i].sec1 = taskList[i].task;
+                  taskList[i].sec1 = taskList[i].dateDue;
                 }
                 break;
             }
@@ -1106,58 +1076,37 @@ class TaskSearchState extends State {
             switch (globals.showSec2) {
               case 0:
                 {
-                  taskList[i].sec2 = taskList[i].task;
+                  taskList[i].sec2 = taskList[i].dateDue;
                 }
                 break;
               case 1:
                 {
-                  taskList[i].sec2 = taskList[i].note;
+                  taskList[i].sec2 = taskList[i].timeDue;
                 }
                 break;
               case 2:
                 {
-                  taskList[i].sec2 = taskList[i].dateDue;
+                  taskList[i].sec2 = taskList[i].categoryText;
                 }
                 break;
               case 3:
                 {
-                  taskList[i].sec2 = taskList[i].timeDue;
+                  taskList[i].sec2 = taskList[i].statusText;
                 }
                 break;
               case 4:
                 {
-                  taskList[i].sec2 = taskList[i].category;
+                  taskList[i].sec2 = taskList[i].priorityText;
                 }
                 break;
               case 5:
                 {
-                  taskList[i].sec2 = taskList[i].status;
-                }
-                break;
-              case 6:
-                {
-                  taskList[i].sec2 = taskList[i].priority;
-                }
-                break;
-              case 7:
-                {
-                  taskList[i].sec2 = taskList[i].tag1;
-                }
-                break;
-
-              case 8:
-                {
-                  taskList[i].sec2 = taskList[i].isStar.toString();
-                }
-                break;
-              case 9:
-                {
-                  taskList[i].sec2 = taskList[i].isDone.toString();
+                  taskList[i].sec2 = taskList[i].tag1Text;
                 }
                 break;
               default:
                 {
-                  taskList[i].sec2 = taskList[i].task;
+                  taskList[i].sec2 = taskList[i].timeDue;
                 }
                 break;
             }
@@ -1168,58 +1117,37 @@ class TaskSearchState extends State {
             switch (globals.showSec3) {
               case 0:
                 {
-                  taskList[i].sec3 = taskList[i].task;
+                  taskList[i].sec3 = taskList[i].dateDue;
                 }
                 break;
               case 1:
                 {
-                  taskList[i].sec3 = taskList[i].note;
+                  taskList[i].sec3 = taskList[i].timeDue;
                 }
                 break;
               case 2:
                 {
-                  taskList[i].sec3 = taskList[i].dateDue;
+                  taskList[i].sec3 = taskList[i].categoryText;
                 }
                 break;
               case 3:
                 {
-                  taskList[i].sec3 = taskList[i].timeDue;
+                  taskList[i].sec3 = taskList[i].statusText;
                 }
                 break;
               case 4:
                 {
-                  taskList[i].sec3 = taskList[i].category;
+                  taskList[i].sec3 = taskList[i].priorityText;
                 }
                 break;
               case 5:
                 {
-                  taskList[i].sec3 = taskList[i].status;
-                }
-                break;
-              case 6:
-                {
-                  taskList[i].sec3 = taskList[i].priority;
-                }
-                break;
-              case 7:
-                {
-                  taskList[i].sec3 = taskList[i].tag1;
-                }
-                break;
-
-              case 8:
-                {
-                  taskList[i].sec3 = taskList[i].isStar.toString();
-                }
-                break;
-              case 9:
-                {
-                  taskList[i].sec3 = taskList[i].isDone.toString();
+                  taskList[i].sec3 = taskList[i].tag1Text;
                 }
                 break;
               default:
                 {
-                  taskList[i].sec3 = taskList[i].task;
+                  taskList[i].sec3 = taskList[i].categoryText;
                 }
                 break;
             }
