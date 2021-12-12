@@ -91,9 +91,6 @@ class TaskSearchState extends State {
 
   @override
   void dispose() {
-    // Clean up the focus node when the Form is
-    myFocusNode.dispose();
-
     super.dispose();
   }
 

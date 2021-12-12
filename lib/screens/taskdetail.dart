@@ -92,11 +92,10 @@ class TaskDetailState extends State //<TaskDetail>
 //    scrollController = FixedExtentScrollController(initialItem: index);
   }
 
-//  @override
-//  void dispose() {
-//    scrollController.dispose();
-//    super.dispose();
-//  }
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   onNotificationInLowerVersions(ReceivedNotification receivedNotification) {}
 
@@ -721,106 +720,109 @@ class TaskDetailState extends State //<TaskDetail>
 //  Combined: Date Time Clear
 ///////////////////////////
             Container(
-                margin: EdgeInsets.only(
-                    left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
-                decoration: BoxDecoration(
-                  shape: BoxShape.rectangle,
-                  color: Colors.blue[100],
+              margin:
+                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+              decoration: BoxDecoration(
+                shape: BoxShape.rectangle,
+                color: Colors.blue[100],
+              ),
+//                child: Flexible(
+              child: Row(children: [
+                Expanded(
+                  child: TextField(
+                    readOnly: true,
+//                        maxLength: 15,
+                    controller: _todoDateController,
+                    style: _textStyleControls,
+                    decoration: InputDecoration(
+                      labelText: ' Date Due',
+                      hintText: ' Pick a Date',
+                      border: InputBorder.none,
+                      prefixIcon: InkWell(
+                        onTap: () {
+                          _selectedTodoDate(context);
+                        },
+                        child: Icon(Icons.calendar_today),
+                      ),
+                    ),
+                  ),
                 ),
-                child: Flexible(
-                  child: Row(children: [
-                    Expanded(
-                      child: TextField(
-                        readOnly: true,
-                        controller: _todoDateController,
-                        style: _textStyleControls,
-                        decoration: InputDecoration(
-                          labelText: ' Date Due',
-                          hintText: ' Pick a Date',
-                          border: InputBorder.none,
-                          prefixIcon: InkWell(
-                            onTap: () {
-                              _selectedTodoDate(context);
-                            },
-                            child: Icon(Icons.calendar_today),
-                          ),
-                        ),
+                SizedBox(
+                  width: 20,
+                ),
+                Expanded(
+                  child: TextField(
+                    readOnly: true,
+                    controller: _todoTimeController,
+//                        maxLength: 15,
+                    style: _textStyleControls,
+                    decoration: InputDecoration(
+                      labelText: ' Time Due',
+                      hintText: ' Pick a Time',
+                      border: InputBorder.none,
+                      prefixIcon: InkWell(
+                        onTap: () {
+                          DatePicker.showDateTimePicker(context,
+                              showTitleActions: true,
+                              minTime: DateTime(2020, 5, 5, 20, 50),
+                              maxTime: DateTime(2020, 6, 7, 05, 09),
+                              onChanged: (date) {
+                            print('change $date in time zone ' +
+                                date.timeZoneOffset.inHours.toString());
+                          }, onConfirm: (date) {
+                            _dateDue = date;
+
+                            final DateFormat formatter =
+                                DateFormat('yyyy-MM-dd');
+
+                            final String formatted =
+                                formatter.format(_dateDue!);
+
+                            _todoDateController.text =
+                                formatter.format(_dateDue!);
+
+                            _timeDue = TimeOfDay.fromDateTime(date);
+
+                            _todoTimeController.text =
+                                _timeDue!.format(context);
+
+                            print('confirm $date');
+                          },
+                              currentTime: (_dateDue == null)
+                                  ? DateTime.now()
+                                  : DateTime(
+                                      _dateDue!.year,
+                                      _dateDue!.month,
+                                      _dateDue!.day,
+                                      _timeDue!.hour,
+                                      _timeDue!.minute));
+                        },
+                        child: Icon(Icons.access_time),
                       ),
                     ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Expanded(
-                      child: TextField(
-                        readOnly: true,
-                        controller: _todoTimeController,
-                        style: _textStyleControls,
-                        decoration: InputDecoration(
-                          labelText: ' Time Due',
-                          hintText: ' Pick a Time',
-                          border: InputBorder.none,
-                          prefixIcon: InkWell(
-                            onTap: () {
-                              DatePicker.showDateTimePicker(context,
-                                  showTitleActions: true,
-                                  minTime: DateTime(2020, 5, 5, 20, 50),
-                                  maxTime: DateTime(2020, 6, 7, 05, 09),
-                                  onChanged: (date) {
-                                print('change $date in time zone ' +
-                                    date.timeZoneOffset.inHours.toString());
-                              }, onConfirm: (date) {
-                                _dateDue = date;
-
-                                final DateFormat formatter =
-                                    DateFormat('yyyy-MM-dd');
-
-                                final String formatted =
-                                    formatter.format(_dateDue!);
-
-                                _todoDateController.text =
-                                    formatter.format(_dateDue!);
-
-                                _timeDue = TimeOfDay.fromDateTime(date);
-
-                                _todoTimeController.text =
-                                    _timeDue!.format(context);
-
-                                print('confirm $date');
-                              },
-                                  currentTime: (_dateDue == null)
-                                      ? DateTime.now()
-                                      : DateTime(
-                                          _dateDue!.year,
-                                          _dateDue!.month,
-                                          _dateDue!.day,
-                                          _timeDue!.hour,
-                                          _timeDue!.minute));
-                            },
-                            child: Icon(Icons.access_time),
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.clear),
-                      onPressed: () {
+                  ),
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                IconButton(
+                  icon: Icon(Icons.clear),
+                  onPressed: () {
 // clear date due
-                        _todoDateController.text = "";
-                        _dateDue = null;
+                    _todoDateController.text = "";
+                    _dateDue = null;
 // clear time due
-                        _todoTimeController.text = "";
-                        _savedTime = null;
-                        _timeDue = null;
-                      },
-                    ),
-                    SizedBox(
-                      width: 5,
-                    ),
-                  ]),
-                )),
+                    _todoTimeController.text = "";
+                    _savedTime = null;
+                    _timeDue = null;
+                  },
+                ),
+                SizedBox(
+                  width: 5,
+                ),
+              ]),
+//                )
+            ),
 
 ///////////////////////////
 //  FOCUS
@@ -880,60 +882,60 @@ class TaskDetailState extends State //<TaskDetail>
                   shape: BoxShape.rectangle,
                   color: Colors.blue[100],
                 ),
-                child: Flexible(
-                  child: Row(children: [
-                    Expanded(
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Checkbox(
-                            value: _selectedIsDone ? true : false,
-                            onChanged: (value) {
-                              setState(() {
-                                _selectedIsDone =
-                                    (value == true) ? true : false;
-                              });
-                            },
-                          ),
-                          Text('Completed', style: _textStyleControls),
-                        ],
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Expanded(
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Checkbox(
+                              value: _selectedIsDone ? true : false,
+                              onChanged: (value) {
+                                setState(() {
+                                  _selectedIsDone =
+                                      (value == true) ? true : false;
+                                });
+                              },
+                            ),
+                            Text('Completed', style: _textStyleControls),
+                          ],
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Expanded(
-                      child: TextField(
-                        readOnly: true,
-                        style: _textStyleControls,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          prefixIcon: InkWell(
-                            onTap: () {
-                              setState(() {
-                                (_selectedIsStar == true)
-                                    ? {
-                                        _selectedIsStar = false,
-                                        Icon(Icons.lightbulb,
-                                            color: Colors.black38),
-                                      }
-                                    : {
-                                        _selectedIsStar = true,
-                                        Icon(Icons.lightbulb,
-                                            color: Colors.amber[800]),
-                                      };
-                              });
-                            },
-                            child: Icon(Icons.lightbulb,
-                                color: (_selectedIsStar == false)
-                                    ? Colors.black12
-                                    : Colors.teal),
+                      Expanded(
+                        child: TextField(
+                          readOnly: true,
+                          style: _textStyleControls,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            prefixIcon: InkWell(
+                              onTap: () {
+                                setState(() {
+                                  (_selectedIsStar == true)
+                                      ? {
+                                          _selectedIsStar = false,
+                                          Icon(Icons.lightbulb,
+                                              color: Colors.black38),
+                                        }
+                                      : {
+                                          _selectedIsStar = true,
+                                          Icon(Icons.lightbulb,
+                                              color: Colors.amber[800]),
+                                        };
+                                });
+                              },
+                              child: Icon(Icons.lightbulb,
+                                  color: (_selectedIsStar == false)
+                                      ? Colors.black12
+                                      : Colors.teal),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ]),
-                )),
+                    ]
+                    )),
 
 ///////////////////////////
 //  CATEGORY
