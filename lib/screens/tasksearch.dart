@@ -735,7 +735,7 @@ class TaskSearchState extends State {
                             child: Padding(
                                 padding: const EdgeInsets.only(right: 2),
                                 child: Text(
-                                  this.tasklist![position].sec1!,
+                                  this.tasklist[position].sec1!,
                                   style: _textStyleControlsSub,
                                 ))),
                         SizedBox(width: 10),
@@ -743,7 +743,7 @@ class TaskSearchState extends State {
                             child: Padding(
                                 padding: const EdgeInsets.only(right: 2),
                                 child: Text(
-                                  this.tasklist![position].sec2!,
+                                  this.tasklist[position].sec2!,
                                   style: _textStyleControlsSub,
                                 ))),
                         SizedBox(width: 10),
@@ -751,7 +751,7 @@ class TaskSearchState extends State {
                             child: Padding(
                                 padding: const EdgeInsets.only(right: 2),
                                 child: Text(
-                                  this.tasklist![position].sec3!,
+                                  this.tasklist[position].sec3!,
                                   style: _textStyleControlsSub,
                                 ))),
                       ],
