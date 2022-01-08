@@ -1,22 +1,23 @@
-class todoUser{
+class todoUser {
   int? id;
   String? userID;
   String? email;
+  String? lastPushDate;
 
   todouserMap() {
     var mapping = Map<String, dynamic>();
     mapping['id'] = id;
     mapping['userid'] = userID;
     mapping['email'] = email;
+    mapping['lastPushDate'] = lastPushDate;
 
-    return mapping; 
+    return mapping;
   }
 
-  fromobject(dynamic obj)
-  {
+  fromobject(dynamic obj) {
     id = obj['id'];
-    userID= obj['userid'];
+    userID = obj['userid'];
     email = obj['email'];
-
+    lastPushDate = obj['lastPushDate'];
   }
 }
