@@ -18,5 +18,5 @@ int? filterPriority;
 int? filterTag;
 int? filterIsStar;
 int? filterIsDone;
-int? bootstrap; 
-
+int? bootstrap;
+String? lastPushDate;
