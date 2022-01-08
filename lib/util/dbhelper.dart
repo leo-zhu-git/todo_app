@@ -75,7 +75,7 @@ class DbHelper {
 
   Future<Database> initializeDb() async {
     Directory dir = await getApplicationDocumentsDirectory();
-    String path = dir.path + "todo_V22.k3.db";
+    String path = dir.path + "todo_V23.db";
     var dbTodovn = await openDatabase(path, version: 1, onCreate: _createDb);
     return dbTodovn;
   }
@@ -117,7 +117,7 @@ class DbHelper {
 
     // Create table USers
     await db.execute(
-        "CREATE TABLE todouser(id INTEGER PRIMARY KEY, userid TEXT, email TEXT)");
+        "CREATE TABLE todouser(id INTEGER PRIMARY KEY, userid TEXT, email TEXT, lastPushDate TEXT)");
 
     //call tis to default the values
     setDefaultDB(db);
@@ -1270,5 +1270,27 @@ Plan C - USD 24 | 12 month
     var result = await db!.rawQuery("SELECT userid FROM todouser");
     var userid = result[0]['userid'];
     return userid;
+  }
+
+  // Get last sync date
+  Future getLastSyncDate() async {
+    Database? db = await this.db;
+    var result = await db!.rawQuery("SELECT lastPushDate FROM todouser");
+    var lastPushDate = result[0]['lastPushDate'];
+    return lastPushDate;
+  }
+
+  // Set Last sync date
+  Future<int> setLastSyncDate() async {
+    String userID = getUserID().toString();
+    Database? db = await this.db;
+    DateTime now = DateTime.now();
+    String formattedDate = DateFormat('yyyy-mm-dd').format(now);
+    var result = await db!.rawUpdate('UPDATE todouser SET lastPushDate = ' +
+        formattedDate +
+        ', WHERE  userid =' +
+        userID +
+        ' ');
+    return result;
   }
 }
