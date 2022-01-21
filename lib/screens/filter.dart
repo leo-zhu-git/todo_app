@@ -704,6 +704,7 @@ class _FilterViewState extends State //State<FilterView>
 ///////////////////////////
 //  Filters
 ///////////////////////////
+///
 //################################# Due Dates #####################################################
               new Container(
                 margin: EdgeInsets.only(
@@ -729,7 +730,57 @@ class _FilterViewState extends State //State<FilterView>
                 ),
               ),
 
-//################################# IsDone #####################################################
+//################################# IsDone v2 #####################################################
+              Container(
+                margin: EdgeInsets.only(
+                    left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+                decoration: BoxDecoration(
+                    shape: BoxShape.rectangle, color: Colors.blue[100]),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Switch(
+                      value: (_selectedFilterIsDone == 0) ? true : false,
+                      onChanged: (value) {
+                        setState(() {
+                          _selectedFilterIsDone = (value! == true) ? 0 : 1;
+                        });
+                      },
+                    ),
+                    Text('Show Open Only / Include Completed', style: _textStyleControls),
+                  ],
+                ),
+              ),
+
+//################################# Focus2 #####################################################
+
+              Container(
+                margin: EdgeInsets.only(
+                    left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+                decoration: BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  color: Colors.blue[100],
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Switch(
+                    value: (_selectedFilterIsStar == 0) ? true : false,
+                          onChanged: (value) {
+                            setState(() {
+                              if (_selectedFilterIsStar == 1) {
+                                _selectedFilterIsStar = 0;
+                              } else {
+                                _selectedFilterIsStar = 1;
+                              }
+                            });
+                          },
+                      ),
+                    Text('Show FOCUS Only / Show All', style: _textStyleControls),
+                  ],
+                ),
+              ),
+              //################################# IsDone #####################################################
               Container(
                 margin: EdgeInsets.only(
                     left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
@@ -751,26 +802,6 @@ class _FilterViewState extends State //State<FilterView>
                 ),
               ),
 
-//              new Container(
-//                margin: const EdgeInsets.all(2.0),
-//                decoration: BoxDecoration(
-//                    shape: BoxShape.rectangle, color: Colors.blue[100]),
-//                child: Theme(
-//                  data:
-//                      Theme.of(context).copyWith(canvasColor: Colors.lime[100]),
-//                  child: DropdownButtonFormField<FilterIsDone>(
-//                    style: _textStyleControls,
-//                    items: _dropdownFilterIsDone,
-//                    hint: Text('Filter by Is Done Tasks'),
-//                    value: _selectedFilterIsDone,
-//                    onChanged: (selectedFilterIsDone) {
-//                      setState(() {
-//                        _selectedFilterIsDone = selectedFilterIsDone!;
-//                      });
-//                    },
-//                  ),
-//                ),
-//              ),
 
 //################################# Focus #####################################################
 
