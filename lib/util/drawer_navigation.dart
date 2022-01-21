@@ -64,13 +64,12 @@ class _DrawerNagivation extends State<DrawerNagivation> {
                 accountName: Text('Welcome to'),
                 accountEmail: Text('todoMIT'),
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [Colors.teal, Colors.black38],
-                    begin: Alignment.bottomRight,
-                    end: Alignment.topLeft,
-                  ),
-                color: Colors.teal[800]
-                ),
+                    gradient: LinearGradient(
+                      colors: [Colors.teal, Colors.black38],
+                      begin: Alignment.bottomRight,
+                      end: Alignment.topLeft,
+                    ),
+                    color: Colors.teal[800]),
               ),
               ListTile(
                 leading: Icon(Icons.home, color: Colors.pink[200]),
@@ -84,7 +83,8 @@ class _DrawerNagivation extends State<DrawerNagivation> {
                 leading: Icon(Icons.settings),
                 tileColor: Colors.teal[50],
                 title: Text('Personalize'),
-                onTap: () => Navigator.of(context).pushNamed('/personalizeview'),
+                onTap: () =>
+                    Navigator.of(context).pushNamed('/personalizeview'),
               ),
               Divider(color: Colors.teal[50]),
               ListTile(
@@ -126,41 +126,26 @@ class _DrawerNagivation extends State<DrawerNagivation> {
               ListTile(
                 tileColor: Colors.teal[50],
                 leading: Icon(Icons.perm_device_info),
-                title: Text('About [placeholder]', style: TextStyle(color: Colors.red)),
-                onTap: () => Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) => TaskHome())),
-              ),
-//              Divider(color: Colors.teal[50]),
-//              ListTile(
-//                tileColor: Colors.teal[50],
-//                leading: Icon(Icons.people),
-//                title: Text('Early Adoptors Program [placeholder]'),
+                title: Text('About todoMIT'),
+                onTap: () {
+                  showAboutDialog(
+                    context: context,
+                    applicationName: 'todoMIT',
+                    applicationVersion: '1.0.1',
+                    applicationLegalese: 'applicaion legalese',
+                  );
+                },
+
 //                onTap: () => Navigator.of(context)
 //                    .push(MaterialPageRoute(builder: (context) => TaskHome())),
-//              ),
+              ),
 
-//              Divider(color: Colors.teal[50]),
-//              ListTile(
-//                tileColor: Colors.teal[50],
-//                leading: Icon(Icons.elevator_rounded),
-//                title: Text('Subscription Plans [placeholder]'),
-//                onTap: () {
-//                  _launchURL();
-//                },
-//              ),
-//              Divider(color: Colors.teal[50]),
-//              ListTile(
-//                tileColor: Colors.teal[50],
-//                leading: Icon(Icons.connect_without_contact),
-//                title: Text('Cupertino [temp for testing]'),
-//                onTap: () => Navigator.of(context).push(
-//                    MaterialPageRoute(builder: (context) => CupertinoScreen())),
-//              ),
               Divider(color: Colors.teal[50]),
               ListTile(
                 tileColor: Colors.teal[50],
                 leading: Icon(Icons.connect_without_contact),
-                title: Text('Notification [testing]', style: TextStyle (color: Colors.red)),
+                title: Text('Notification [testing]',
+                    style: TextStyle(color: Colors.red)),
                 onTap: () => Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => LocalNotificationScreen())),
               ),
