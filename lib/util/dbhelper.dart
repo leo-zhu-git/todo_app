@@ -1284,6 +1284,7 @@ Plan C - USD 24 | 12 month
   Future<int> setLastSyncDate() async {
     String userID = getUserID().toString();
     Database? db = await this.db;
+
     DateTime now = DateTime.now();
     String formattedDate = DateFormat('yyyy-mm-dd').format(now);
     var result = await db!.rawUpdate('UPDATE todouser SET lastPushDate = ' +
@@ -1292,5 +1293,29 @@ Plan C - USD 24 | 12 month
         userID +
         ' ');
     return result;
+  }
+
+  //Commits all of the operations in this batch as a single atomic unit
+  // if there is any failures then all operation will not be comitted
+  Future testbatchoperation() async {
+    Database? db = await this.db;
+    String userID = "1"; //Delete this for example only
+    final batch = db!.batch();
+
+    //some sample operations
+    batch.rawDelete("Delete * from priorities");
+    batch.execute(
+        "INSERT INTO priorities ( 'name', 'description')  values (?, ?)",
+        ['test', 'test']);
+    batch.rawUpdate('UPDATE todouser SET lastPushDate = ' +
+        formattedDate +
+        ', WHERE  userid =' +
+        userID +
+        ' ');
+
+    await batch.commit(
+        noResult: true); //np results: ture will improve performance
+
+    return true;
   }
 }
