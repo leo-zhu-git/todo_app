@@ -50,7 +50,7 @@ class MySql_DBHelper {
       helper.deleteAllTask();
       var taskCount = helper.getCount();
       var count = swiperDataList.length;
-      print("TaskCount:::::: $count");
+      // print("TaskCount:::::: $count");
 
       for (int i = 0; i < swiperDataList.length; i++) {
         String dbTaskID = swiperDataList[i]['TaskID'].toString();
@@ -143,15 +143,14 @@ class MySql_DBHelper {
             "",
             "",
             "");
-        print("TaskID" + appTaskID);
-        print("IIII::" + i.toString());
+        // print("TaskID" + appTaskID);
+        // print("IIII::" + i.toString());
 
-        if (i == 190 || i == 191) {
-          print("stop");
-        }
+        // if (i == 190 || i == 191) {
+        //   print("stop");
+        // }
 
         helper.insertTask(task);
-
       }
     });
   }
@@ -164,7 +163,7 @@ class MySql_DBHelper {
       List<Map> swiperDataList = (data['Tasks'] as List).cast();
 
       var count = swiperDataList.length;
-      print(count);
+      // print(count);
 
       for (int i = 0; i < swiperDataList.length; i++) {
         String dbTaskID = swiperDataList[i]['TaskID'].toString();
@@ -214,11 +213,11 @@ class MySql_DBHelper {
 
     tasksRequest.then((value) {
       final data = json.decode(value.toString());
-      print(data);
+      // print(data);
       List<Map> swiperDataList = (data['Status'] as List).cast();
 
       var count = swiperDataList.length;
-      print(count);
+      // print(count);
 
       for (int i = 0; i < swiperDataList.length; i++) {
         Status status = new Status();
@@ -256,11 +255,11 @@ class MySql_DBHelper {
 
     tasksRequest.then((value) {
       final data = json.decode(value.toString());
-      print(data);
+      // print(data);
       List<Map> swiperDataList = (data['Priority'] as List).cast();
 
       var count = swiperDataList.length;
-      print(count);
+      // print(count);
 
       for (int i = 0; i < swiperDataList.length; i++) {
         Priority priority = new Priority();
@@ -299,11 +298,11 @@ class MySql_DBHelper {
 
     tasksRequest.then((value) {
       final data = json.decode(value.toString());
-      print(data);
+      // print(data);
       List<Map> swiperDataList = (data['Categories'] as List).cast();
 
       var count = swiperDataList.length;
-      print(count);
+      // print(count);
 
       for (int i = 0; i < swiperDataList.length; i++) {
         Category action = new Category();
@@ -341,7 +340,7 @@ class MySql_DBHelper {
 
     tasksRequest.then((value) {
       final data = json.decode(value.toString());
-      print(data);
+      // print(data);
       List<Map> swiperDataList = (data['Actions'] as List).cast();
 
       var count = swiperDataList.length;
@@ -384,11 +383,11 @@ class MySql_DBHelper {
 
     tasksRequest.then((value) {
       final data = json.decode(value.toString());
-      print(data);
+      // print(data);
       List<Map> swiperDataList = (data['Contexts'] as List).cast();
 
       var count = swiperDataList.length;
-      print(count);
+      // print(count);
 
       for (int i = 0; i < swiperDataList.length; i++) {
         Context1 action = new Context1();
@@ -399,7 +398,7 @@ class MySql_DBHelper {
         action.name = swiperDataList[i]['name'];
         action.description = swiperDataList[i]['desc'];
 
-        print(swiperDataList[i]['name']);
+        // print(swiperDataList[i]['name']);
         //helper.deleteTask(swiperDataList[i]['TaskID']);
         final actionFuture = helper.getContext1sbyID(int.parse(appId));
         actionFuture.then((result) {
@@ -426,11 +425,11 @@ class MySql_DBHelper {
 
     tasksRequest.then((value) {
       final data = json.decode(value.toString());
-      print(data);
+      // print(data);
       List<Map> swiperDataList = (data['Locations'] as List).cast();
 
       var count = swiperDataList.length;
-      print(count);
+      // print(count);
 
       for (int i = 0; i < swiperDataList.length; i++) {
         Location1 action = new Location1();
@@ -441,7 +440,7 @@ class MySql_DBHelper {
         action.name = swiperDataList[i]['name'];
         action.description = swiperDataList[i]['desc'];
 
-        print(swiperDataList[i]['name']);
+        // print(swiperDataList[i]['name']);
         //helper.deleteTask(swiperDataList[i]['TaskID']);
         final actionFuture = helper.getLocation1sbyID(int.parse(appId));
         actionFuture.then((result) {
@@ -468,11 +467,11 @@ class MySql_DBHelper {
 
     tasksRequest.then((value) {
       final data = json.decode(value.toString());
-      print(data);
+      // print(data);
       List<Map> swiperDataList = (data['Tags'] as List).cast();
 
       var count = swiperDataList.length;
-      print(count);
+      // print(count);
 
       for (int i = 0; i < swiperDataList.length; i++) {
         Tag1 action = new Tag1();
@@ -483,7 +482,7 @@ class MySql_DBHelper {
         action.name = swiperDataList[i]['name'];
         action.description = swiperDataList[i]['desc'];
 
-        print(swiperDataList[i]['name']);
+        // print(swiperDataList[i]['name']);
         //helper.deleteTask(swiperDataList[i]['TaskID']);
         final actionFuture = helper.getTag1sbyID(int.parse(appId));
         actionFuture.then((result) {
@@ -510,11 +509,11 @@ class MySql_DBHelper {
 
     tasksRequest.then((value) {
       final data = json.decode(value.toString());
-      print(data);
+      // print(data);
       List<Map> swiperDataList = (data['Goals'] as List).cast();
 
       var count = swiperDataList.length;
-      print(count);
+      // print(count);
 
       for (int i = 0; i < swiperDataList.length; i++) {
         Goal1 goal = new Goal1();
@@ -525,7 +524,7 @@ class MySql_DBHelper {
         goal.name = swiperDataList[i]['name'];
         goal.description = swiperDataList[i]['desc'];
 
-        print(swiperDataList[i]['name']);
+        // print(swiperDataList[i]['name']);
         //helper.deleteTask(swiperDataList[i]['TaskID']);
         final goalFuture = helper.getGoal1sbyID(int.parse(appId));
         goalFuture.then((result) {
@@ -543,169 +542,167 @@ class MySql_DBHelper {
     });
   }
 
-  void wipeTaskDataToMySql() {
+  Future<Map<dynamic, dynamic>?> wipeTaskDataToMySql() async {
     // this.deleteAllTaskFromMySQL();
-    final dbTaskFuture = helper.getAllTasks();
+    var result = await helper.getAllTasks();
 
     var taskList = [];
     var tasks = {};
-    dbTaskFuture.then((result) {
-      print(result);
 
-      for (int i = 0; i < result.length; i++) {
-        print(result[i]);
-        var task = "";
-        var note = "";
-        var dateDue = "";
-        var timeDue = "";
-        var category = "";
-        var status = "";
-        var priority = "";
-        var tag1 = "";
-        // var action1 = "";
-        // var context1 = "";
-        // var location1 = "";
-        // var goal1 = "";
-        var isStar = "";
-        var isDone = "";
-        var lastModified = "";
-        var dateDone = "";
+    for (int i = 0; i < result.length; i++) {
+      var task = "";
+      var note = "";
+      var dateDue = "";
+      var timeDue = "";
+      var category = "";
+      var status = "";
+      var priority = "";
+      var tag1 = "";
+      // var action1 = "";
+      // var context1 = "";
+      // var location1 = "";
+      // var goal1 = "";
+      var isStar = "";
+      var isDone = "";
+      var lastModified = "";
+      var dateDone = "";
 
-        if (result[i]["task"] != null) {
-          task = result[i]["task"];
-        }
-        if (result[i]["note"] != null) {
-          note = result[i]["note"];
-        }
-        if (result[i]["dateDue"] != null) {
-          dateDue = result[i]["dateDue"].toString();
-        }
-        if (result[i]["timeDue"] != null) {
-          timeDue = result[i]["timeDue"];
-        }
-        if (result[i]["category"] != null) {
-          category = result[i]["category"].toString();
-        }
-        if (result[i]["status"] != null) {
-          status = result[i]["status"].toString();
-        }
-        if (result[i]["priority"] != null) {
-          priority = result[i]["priority"].toString();
-        }
-        if (result[i]["tag1"] != null) {
-          tag1 = result[i]["tag1"].toString();
-        }
-        // if (result[i]["action1"] != null) {
-        //   action1 = result[i]["action1"];
-        // }
-        // if (result[i]["context1"] != null) {
-        //   context1 = result[i]["context1"].toString();
-        // }
-        // if (result[i]["location1"] != null) {
-        //   location1 = result[i]["location1"].toString();
-        // }
-        // if (result[i]["goal1"] != null) {
-        //   goal1 = result[i]["goal1"].toString();
-        // }
-        if (result[i]["isStar"] != null) {
-          isStar = result[i]["isStar"].toString();
-        }
-        if (result[i]["isDone"] != null) {
-          isDone = result[i]["isDone"].toString();
-        }
-        if (result[i]["dateDone"] != null) {
-          dateDone = result[i]["dateDone"].toString();
-        }
-        if (result[i]["timeDue"] != null) {
-          timeDue = result[i]["timeDue"].toString();
-        }
-        // if (result[i]["goal1"] != null) {
-        //   goal1 = result[i]["goal1"].toString();
-        // }
-        if (result[i]["location1"] != null) {
-          timeDue = result[i]["location1"].toString();
-        }
-
-        if (result[i]["lastModified"] != null) {
-          lastModified = result[i]["lastModified"].toString();
-        }
-
-        String taskTask = '{"taskId":"' +
-            result[i]["id"].toString() +
-            '",' +
-            '"taskTask":"' +
-            task +
-            '",' +
-            '"taskNote":"' +
-            note +
-            '",' +
-            '"taskDateDue":"' +
-            dateDue +
-            '",' +
-            '"taskTimeDue":"' +
-            timeDue +
-            '",' +
-            '"taskCategory":"' +
-            category +
-            '",' +
-            '"taskStatus":"' +
-            status +
-            '",' +
-            '"taskPriority":"' +
-            priority +
-            '",' +
-            '"taskTag":"' +
-            tag1 +
-            '",' +
-            // '"taskAction":"' +
-            // action1 +
-            // '",' +
-            // '"taskContext":"' +
-            // context1 +
-            // '",' +
-            // '"taskLocation":"' +
-            // location1 +
-            // '",' +
-            // '"taskGoal":"' +
-            // goal1 +
-            // '",' +
-            '"taskIsStar":"' +
-            isStar +
-            '",' +
-            '"taskIsDone":"' +
-            isDone +
-            '",' +
-            '"taskDateDone":"' +
-            dateDone +
-            '",' +
-            '"taskLastModified":"' +
-            lastModified +
-            '"}';
-
-        taskList.add(taskTask);
+      if (result[i]["task"] != null) {
+        task = result[i]["task"];
+      }
+      if (result[i]["note"] != null) {
+        note = result[i]["note"];
+      }
+      if (result[i]["dateDue"] != null) {
+        dateDue = result[i]["dateDue"].toString();
+      }
+      if (result[i]["timeDue"] != null) {
+        timeDue = result[i]["timeDue"];
+      }
+      if (result[i]["category"] != null) {
+        category = result[i]["category"].toString();
+      }
+      if (result[i]["status"] != null) {
+        status = result[i]["status"].toString();
+      }
+      if (result[i]["priority"] != null) {
+        priority = result[i]["priority"].toString();
+      }
+      if (result[i]["tag1"] != null) {
+        tag1 = result[i]["tag1"].toString();
+      }
+      // if (result[i]["action1"] != null) {
+      //   action1 = result[i]["action1"];
+      // }
+      // if (result[i]["context1"] != null) {
+      //   context1 = result[i]["context1"].toString();
+      // }
+      // if (result[i]["location1"] != null) {
+      //   location1 = result[i]["location1"].toString();
+      // }
+      // if (result[i]["goal1"] != null) {
+      //   goal1 = result[i]["goal1"].toString();
+      // }
+      if (result[i]["isStar"] != null) {
+        isStar = result[i]["isStar"].toString();
+      }
+      if (result[i]["isDone"] != null) {
+        isDone = result[i]["isDone"].toString();
+      }
+      if (result[i]["dateDone"] != null) {
+        dateDone = result[i]["dateDone"].toString();
+      }
+      if (result[i]["timeDue"] != null) {
+        timeDue = result[i]["timeDue"].toString();
+      }
+      // if (result[i]["goal1"] != null) {
+      //   goal1 = result[i]["goal1"].toString();
+      // }
+      if (result[i]["location1"] != null) {
+        timeDue = result[i]["location1"].toString();
       }
 
-      tasks = {"tasks": taskList};
-      print(tasks);
-      request('wipeTasksfromDevice', formData: tasks);
-    });
-  }
-
-  void deleteAllTaskFromMySQL() {
-    request('deleteAllTasks', formData: null);
-  }
-
-  void pushTasksToMySql() async {
-    final dbTaskFuture = helper.getAllTasks();
-    dbTaskFuture.then((result) {
-      for (int i = 0; i < result.length; i++) {
-        final tasksRequest = request('contextSaveContent', formData: result[i]);
+      if (result[i]["lastModified"] != null) {
+        lastModified = result[i]["lastModified"].toString();
       }
-    });
+
+      String taskTask = '{"taskId":"' +
+          result[i]["id"].toString() +
+          '",' +
+          '"taskTask":"' +
+          task +
+          '",' +
+          '"taskNote":"' +
+          note +
+          '",' +
+          '"taskDateDue":"' +
+          dateDue +
+          '",' +
+          '"taskTimeDue":"' +
+          timeDue +
+          '",' +
+          '"taskCategory":"' +
+          category +
+          '",' +
+          '"taskStatus":"' +
+          status +
+          '",' +
+          '"taskPriority":"' +
+          priority +
+          '",' +
+          '"taskTag":"' +
+          tag1 +
+          '",' +
+          // '"taskAction":"' +
+          // action1 +
+          // '",' +
+          // '"taskContext":"' +
+          // context1 +
+          // '",' +
+          // '"taskLocation":"' +
+          // location1 +
+          // '",' +
+          // '"taskGoal":"' +
+          // goal1 +
+          // '",' +
+          '"taskIsStar":"' +
+          isStar +
+          '",' +
+          '"taskIsDone":"' +
+          isDone +
+          '",' +
+          '"taskDateDone":"' +
+          dateDone +
+          '",' +
+          '"taskLastModified":"' +
+          lastModified +
+          '"}';
+
+      taskList.add(taskTask);
+    }
+
+    tasks = {"tasks": taskList};
+    // print(tasks);
+    // request('wipeTasksfromDevice', formData: tasks);
+
+    return tasks;
   }
+
+  // void deleteAllTaskFromMySQL() {
+  //   request('deleteAllTasks', formData: null);
+  // }
+
+  // void pushTasksToMySql() async {
+  //   final dbTaskFuture = helper.getAllTasks();
+  //   dbTaskFuture.then((result) {
+  //     for (int i = 0; i < result.length; i++) {
+  //       final tasksRequest = request('contextSaveContent', formData: result[i]);
+  //     }
+  //   });
+  // }
 
   void syncTasks() async {
-    this.pushTasksToMySql();
+    // this.pushTasksToMySql();
     this.wipeTaskDataFromMySql();
   }
 
@@ -725,355 +722,416 @@ class MySql_DBHelper {
   //   return str;
   // }
 
-  void wipeCatatoryToMySql() {
+  Future<Map<dynamic, dynamic>?> wipeCatatoryToMySql() async {
     // this.deleteAllTaskFromMySQL();
-    final dbDataFuture = helper.getCategories();
+    var dbDataFuture = await helper.getCategories();
 
     var dataList = [];
     var data = {};
-    dbDataFuture.then((result) {
-      print(result.length);
 
-      for (int i = 0; i < result.length; i++) {
-        print(result[i]);
-        var id = "";
-        var name = "";
-        var description = "";
+    for (int i = 0; i < dbDataFuture.length; i++) {
+      var id = "";
+      var name = "";
+      var description = "";
 
-        if (result[i]["id"].toString() != null) {
-          id = result[i]["id"].toString();
-        }
-        if (result[i]["name"] != null) {
-          name = result[i]["name"];
-        }
-        if (result[i]["description"] != null) {
-          description = result[i]["description"].toString();
-        }
-
-        String datadata = '{"id":"' +
-            id +
-            '",' +
-            '"name":"' +
-            name +
-            '",' +
-            '"description":"' +
-            description +
-            '"}';
-
-        dataList.add(datadata);
+      if (dbDataFuture[i]["id"].toString() != null) {
+        id = dbDataFuture[i]["id"].toString();
+      }
+      if (dbDataFuture[i]["name"] != null) {
+        name = dbDataFuture[i]["name"];
+      }
+      if (dbDataFuture[i]["description"] != null) {
+        description = dbDataFuture[i]["description"].toString();
       }
 
-      data = {"data": dataList};
-      print(data);
-      request('wipeCatagoryfromDevice', formData: data);
-    });
+      String datadata = '{"id":"' +
+          id +
+          '",' +
+          '"name":"' +
+          name +
+          '",' +
+          '"description":"' +
+          description +
+          '"}';
+
+      dataList.add(datadata);
+    }
+
+    data = {"catatory": dataList};
+
+    return data;
   }
 
-  void wipeActionToMySql() {
+  // void wipeActionToMySql() {
+  //   // this.deleteAllTaskFromMySQL();
+  //   final dbDataFuture = helper.getAction1s();
+
+  //   var dataList = [];
+  //   var data = {};
+  //   dbDataFuture.then((result) {
+  //     print(result.length);
+
+  //     for (int i = 0; i < result.length; i++) {
+  //       print(result[i]);
+  //       var id = "";
+  //       var name = "";
+  //       var description = "";
+
+  //       if (result[i]["id"].toString() != null) {
+  //         id = result[i]["id"].toString();
+  //       }
+  //       if (result[i]["name"] != null) {
+  //         name = result[i]["name"];
+  //       }
+  //       if (result[i]["description"] != null) {
+  //         description = result[i]["description"].toString();
+  //       }
+
+  //       String datadata = '{"id":"' +
+  //           id +
+  //           '",' +
+  //           '"name":"' +
+  //           name +
+  //           '",' +
+  //           '"description":"' +
+  //           description +
+  //           '"}';
+
+  //       dataList.add(datadata);
+  //     }
+
+  //     data = {"data": dataList};
+  //     print(data);
+  //     request('wipeActionfromDevice', formData: data);
+  //   });
+  // }
+
+  // void wipeContextToMySql() {
+  //   // this.deleteAllTaskFromMySQL();
+  //   final dbDataFuture = helper.getContext1s();
+
+  //   var dataList = [];
+  //   var data = {};
+  //   dbDataFuture.then((result) {
+  //     print(result.length);
+
+  //     for (int i = 0; i < result.length; i++) {
+  //       print(result[i]);
+  //       var id = "";
+  //       var name = "";
+  //       var description = "";
+
+  //       if (result[i]["id"].toString() != null) {
+  //         id = result[i]["id"].toString();
+  //       }
+  //       if (result[i]["name"] != null) {
+  //         name = result[i]["name"];
+  //       }
+  //       if (result[i]["description"] != null) {
+  //         description = result[i]["description"].toString();
+  //       }
+
+  //       String datadata = '{"id":"' +
+  //           id +
+  //           '",' +
+  //           '"name":"' +
+  //           name +
+  //           '",' +
+  //           '"description":"' +
+  //           description +
+  //           '"}';
+
+  //       dataList.add(datadata);
+  //     }
+
+  //     data = {"data": dataList};
+  //     print(data);
+  //     request('wipeContextfromDevice', formData: data);
+  //   });
+  // }
+
+  // void wipeGoalToMySql() {
+  //   // this.deleteAllTaskFromMySQL();
+  //   final dbDataFuture = helper.getGoal1s();
+
+  //   var dataList = [];
+  //   var data = {};
+  //   dbDataFuture.then((result) {
+  //     print(result.length);
+
+  //     for (int i = 0; i < result.length; i++) {
+  //       print(result[i]);
+  //       var id = "";
+  //       var name = "";
+  //       var description = "";
+
+  //       if (result[i]["id"].toString() != null) {
+  //         id = result[i]["id"].toString();
+  //       }
+  //       if (result[i]["name"] != null) {
+  //         name = result[i]["name"];
+  //       }
+  //       if (result[i]["description"] != null) {
+  //         description = result[i]["description"].toString();
+  //       }
+
+  //       String datadata = '{"id":"' +
+  //           id +
+  //           '",' +
+  //           '"name":"' +
+  //           name +
+  //           '",' +
+  //           '"description":"' +
+  //           description +
+  //           '"}';
+
+  //       dataList.add(datadata);
+  //     }
+
+  //     data = {"data": dataList};
+  //     print(data);
+  //     request('wipeGoalfromDevice', formData: data);
+  //   });
+  // }
+
+  // void wipeLocationToMySql() {
+  //   // this.deleteAllTaskFromMySQL();
+  //   final dbDataFuture = helper.getLocation1s();
+
+  //   var dataList = [];
+  //   var data = {};
+  //   dbDataFuture.then((result) {
+  //     print(result.length);
+
+  //     for (int i = 0; i < result.length; i++) {
+  //       print(result[i]);
+  //       var id = "";
+  //       var name = "";
+  //       var description = "";
+
+  //       if (result[i]["id"].toString() != null) {
+  //         id = result[i]["id"].toString();
+  //       }
+  //       if (result[i]["name"] != null) {
+  //         name = result[i]["name"];
+  //       }
+  //       if (result[i]["description"] != null) {
+  //         description = result[i]["description"].toString();
+  //       }
+
+  //       String datadata = '{"id":"' +
+  //           id +
+  //           '",' +
+  //           '"name":"' +
+  //           name +
+  //           '",' +
+  //           '"description":"' +
+  //           description +
+  //           '"}';
+
+  //       dataList.add(datadata);
+  //     }
+
+  //     data = {"data": dataList};
+  //     print(data);
+  //     request('wipeLocationfromDevice', formData: data);
+  //   });
+  // }
+
+  Future<Map<dynamic, dynamic>?> wipePriorityToMySql() async {
     // this.deleteAllTaskFromMySQL();
-    final dbDataFuture = helper.getAction1s();
+    var dbDataFuture = await helper.getPriorities();
 
     var dataList = [];
     var data = {};
-    dbDataFuture.then((result) {
-      print(result.length);
 
-      for (int i = 0; i < result.length; i++) {
-        print(result[i]);
-        var id = "";
-        var name = "";
-        var description = "";
+    for (int i = 0; i < dbDataFuture.length; i++) {
+      // print(dbDataFuture[i]);
+      var id = "";
+      var name = "";
+      var description = "";
 
-        if (result[i]["id"].toString() != null) {
-          id = result[i]["id"].toString();
-        }
-        if (result[i]["name"] != null) {
-          name = result[i]["name"];
-        }
-        if (result[i]["description"] != null) {
-          description = result[i]["description"].toString();
-        }
-
-        String datadata = '{"id":"' +
-            id +
-            '",' +
-            '"name":"' +
-            name +
-            '",' +
-            '"description":"' +
-            description +
-            '"}';
-
-        dataList.add(datadata);
+      if (dbDataFuture[i]["id"].toString() != null) {
+        id = dbDataFuture[i]["id"].toString();
+      }
+      if (dbDataFuture[i]["name"] != null) {
+        name = dbDataFuture[i]["name"];
+      }
+      if (dbDataFuture[i]["description"] != null) {
+        description = dbDataFuture[i]["description"].toString();
       }
 
-      data = {"data": dataList};
-      print(data);
-      request('wipeActionfromDevice', formData: data);
-    });
+      String datadata = '{"id":"' +
+          id +
+          '",' +
+          '"name":"' +
+          name +
+          '",' +
+          '"description":"' +
+          description +
+          '"}';
+
+      dataList.add(datadata);
+    }
+
+    data = {"priority": dataList};
+
+    return data;
   }
 
-  void wipeContextToMySql() {
+  Future<Map<dynamic, dynamic>?> wipeStatusToMySql() async {
     // this.deleteAllTaskFromMySQL();
-    final dbDataFuture = helper.getContext1s();
+    var dbDataFuture = await helper.getStatuses();
 
     var dataList = [];
     var data = {};
-    dbDataFuture.then((result) {
-      print(result.length);
 
-      for (int i = 0; i < result.length; i++) {
-        print(result[i]);
-        var id = "";
-        var name = "";
-        var description = "";
+    for (int i = 0; i < dbDataFuture.length; i++) {
+      // print(dbDataFuture[i]);
+      var id = "";
+      var name = "";
+      var description = "";
 
-        if (result[i]["id"].toString() != null) {
-          id = result[i]["id"].toString();
-        }
-        if (result[i]["name"] != null) {
-          name = result[i]["name"];
-        }
-        if (result[i]["description"] != null) {
-          description = result[i]["description"].toString();
-        }
-
-        String datadata = '{"id":"' +
-            id +
-            '",' +
-            '"name":"' +
-            name +
-            '",' +
-            '"description":"' +
-            description +
-            '"}';
-
-        dataList.add(datadata);
+      if (dbDataFuture[i]["id"].toString() != null) {
+        id = dbDataFuture[i]["id"].toString();
+      }
+      if (dbDataFuture[i]["name"] != null) {
+        name = dbDataFuture[i]["name"];
+      }
+      if (dbDataFuture[i]["description"] != null) {
+        description = dbDataFuture[i]["description"].toString();
       }
 
-      data = {"data": dataList};
-      print(data);
-      request('wipeContextfromDevice', formData: data);
-    });
+      String datadata = '{"id":"' +
+          id +
+          '",' +
+          '"name":"' +
+          name +
+          '",' +
+          '"description":"' +
+          description +
+          '"}';
+
+      dataList.add(datadata);
+    }
+
+    data = {"status": dataList};
+    // print(data);
+
+    // request('wipeStatusfromDevice', formData: data);
+
+    return data;
   }
 
-  void wipeGoalToMySql() {
+  // Map<dynamic, dynamic> wipeTagToMySql() {
+  //   // this.deleteAllTaskFromMySQL();
+  //   try {
+  //     final dbDataFuture = helper.getTag1s();
+
+  //     var dataList = [];
+  //     var data = {};
+  //     dbDataFuture.then((result) {
+  //       print(result.length);
+
+  //       for (int i = 0; i < result.length; i++) {
+  //         print(result[i]);
+  //         var id = "";
+  //         var name = "";
+  //         var description = "";
+
+  //         if (result[i]["id"].toString() != null) {
+  //           id = result[i]["id"].toString();
+  //         }
+  //         if (result[i]["name"] != null) {
+  //           name = result[i]["name"];
+  //         }
+  //         if (result[i]["description"] != null) {
+  //           description = result[i]["description"].toString();
+  //         }
+
+  //         String datadata = '{"id":"' +
+  //             id +
+  //             '",' +
+  //             '"name":"' +
+  //             name +
+  //             '",' +
+  //             '"description":"' +
+  //             description +
+  //             '"}';
+
+  //         dataList.add(datadata);
+  //       }
+
+  //       data = {"data": dataList};
+
+  //       return data;
+  //     });
+  //   } catch (err) {
+  //     throw err;
+  //   }
+  // }
+
+  Future<Map<dynamic, dynamic>?> wipeTagToMySql1() async {
     // this.deleteAllTaskFromMySQL();
-    final dbDataFuture = helper.getGoal1s();
+    var result = await helper.getTag1s();
 
-    var dataList = [];
     var data = {};
-    dbDataFuture.then((result) {
-      print(result.length);
+    var dataList = [];
 
-      for (int i = 0; i < result.length; i++) {
-        print(result[i]);
-        var id = "";
-        var name = "";
-        var description = "";
+    for (int i = 0; i < result.length; i++) {
+      var id = "";
+      var name = "";
+      var description = "";
 
-        if (result[i]["id"].toString() != null) {
-          id = result[i]["id"].toString();
-        }
-        if (result[i]["name"] != null) {
-          name = result[i]["name"];
-        }
-        if (result[i]["description"] != null) {
-          description = result[i]["description"].toString();
-        }
-
-        String datadata = '{"id":"' +
-            id +
-            '",' +
-            '"name":"' +
-            name +
-            '",' +
-            '"description":"' +
-            description +
-            '"}';
-
-        dataList.add(datadata);
+      if (result[i]["id"].toString() != null) {
+        id = result[i]["id"].toString();
+      }
+      if (result[i]["name"] != null) {
+        name = result[i]["name"];
+      }
+      if (result[i]["description"] != null) {
+        description = result[i]["description"].toString();
       }
 
-      data = {"data": dataList};
-      print(data);
-      request('wipeGoalfromDevice', formData: data);
-    });
+      String datadata = '{"id":"' +
+          id +
+          '",' +
+          '"name":"' +
+          name +
+          '",' +
+          '"description":"' +
+          description +
+          '"}';
+
+      dataList.add(datadata);
+    }
+
+    data = {"tag": dataList};
+
+    return data;
   }
 
-  void wipeLocationToMySql() {
-    // this.deleteAllTaskFromMySQL();
-    final dbDataFuture = helper.getLocation1s();
+  void wipeAllDataToMySql() async {
+    var tasks = await wipeTaskDataToMySql();
+    var status = await wipeStatusToMySql();
+    var proiority = await wipePriorityToMySql();
+    var catagory = await wipeCatatoryToMySql();
+    var tags = await wipeTagToMySql1();
+    var allData = {};
 
-    var dataList = [];
-    var data = {};
-    dbDataFuture.then((result) {
-      print(result.length);
+    allData.addAll(tasks!);
+    allData.addAll(status!);
+    allData.addAll(proiority!);
+    allData.addAll(catagory!);
+    allData.addAll(tags!);
 
-      for (int i = 0; i < result.length; i++) {
-        print(result[i]);
-        var id = "";
-        var name = "";
-        var description = "";
+    request('wipeTasksfromDevice', formData: allData);
 
-        if (result[i]["id"].toString() != null) {
-          id = result[i]["id"].toString();
-        }
-        if (result[i]["name"] != null) {
-          name = result[i]["name"];
-        }
-        if (result[i]["description"] != null) {
-          description = result[i]["description"].toString();
-        }
-
-        String datadata = '{"id":"' +
-            id +
-            '",' +
-            '"name":"' +
-            name +
-            '",' +
-            '"description":"' +
-            description +
-            '"}';
-
-        dataList.add(datadata);
-      }
-
-      data = {"data": dataList};
-      print(data);
-      request('wipeLocationfromDevice', formData: data);
-    });
-  }
-
-  void wipePriorityToMySql() {
-    // this.deleteAllTaskFromMySQL();
-    final dbDataFuture = helper.getPriorities();
-
-    var dataList = [];
-    var data = {};
-    dbDataFuture.then((result) {
-      print(result.length);
-
-      for (int i = 0; i < result.length; i++) {
-        print(result[i]);
-        var id = "";
-        var name = "";
-        var description = "";
-
-        if (result[i]["id"].toString() != null) {
-          id = result[i]["id"].toString();
-        }
-        if (result[i]["name"] != null) {
-          name = result[i]["name"];
-        }
-        if (result[i]["description"] != null) {
-          description = result[i]["description"].toString();
-        }
-
-        String datadata = '{"id":"' +
-            id +
-            '",' +
-            '"name":"' +
-            name +
-            '",' +
-            '"description":"' +
-            description +
-            '"}';
-
-        dataList.add(datadata);
-      }
-
-      data = {"data": dataList};
-      print(data);
-      request('wipePriorityfromDevice', formData: data);
-    });
-  }
-
-  void wipeStatusToMySql() {
-    // this.deleteAllTaskFromMySQL();
-    final dbDataFuture = helper.getStatuses();
-
-    var dataList = [];
-    var data = {};
-    dbDataFuture.then((result) {
-      print(result.length);
-
-      for (int i = 0; i < result.length; i++) {
-        print(result[i]);
-        var id = "";
-        var name = "";
-        var description = "";
-
-        if (result[i]["id"].toString() != null) {
-          id = result[i]["id"].toString();
-        }
-        if (result[i]["name"] != null) {
-          name = result[i]["name"];
-        }
-        if (result[i]["description"] != null) {
-          description = result[i]["description"].toString();
-        }
-
-        String datadata = '{"id":"' +
-            id +
-            '",' +
-            '"name":"' +
-            name +
-            '",' +
-            '"description":"' +
-            description +
-            '"}';
-
-        dataList.add(datadata);
-      }
-
-      data = {"data": dataList};
-      print(data);
-      request('wipeStatusfromDevice', formData: data);
-    });
-  }
-
-  void wipeTagToMySql() {
-    // this.deleteAllTaskFromMySQL();
-    final dbDataFuture = helper.getTag1s();
-
-    var dataList = [];
-    var data = {};
-    dbDataFuture.then((result) {
-      print(result.length);
-
-      for (int i = 0; i < result.length; i++) {
-        print(result[i]);
-        var id = "";
-        var name = "";
-        var description = "";
-
-        if (result[i]["id"].toString() != null) {
-          id = result[i]["id"].toString();
-        }
-        if (result[i]["name"] != null) {
-          name = result[i]["name"];
-        }
-        if (result[i]["description"] != null) {
-          description = result[i]["description"].toString();
-        }
-
-        String datadata = '{"id":"' +
-            id +
-            '",' +
-            '"name":"' +
-            name +
-            '",' +
-            '"description":"' +
-            description +
-            '"}';
-
-        dataList.add(datadata);
-      }
-
-      data = {"data": dataList};
-      print(data);
-      request('wipeTagfromDevice', formData: data);
-    });
+    // print("task:::::$tasks");
+    // print("Status:::::::$status");
+    // print("proiority:::::::::::::::$proiority");
+    // print("catagory:::::::::::::::::::$catagory");
+    // print(catagory);
+    // print("tags:::::::::::::::$tags");
   }
 }
