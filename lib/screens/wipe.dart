@@ -159,10 +159,9 @@ class _WipeScreenState extends State<WipeScreen> {
     EasyLoading.showProgress(0.3, status: 'Wipe Device To Cloud ...');
     await Future.delayed(Duration(seconds: 5), () {});
 
-
 // wait for leo's code
 //    mysqlDBhelper.syncTasks();
-
+    mysqlDBhelper.wipeAllDataToMySql();
 //    mysqlDBhelper.wipeTaskDataToMySql();
 //    mysqlDBhelper.wipeCatatoryToMySql();
 //    mysqlDBhelper.wipeStatusToMySql();
@@ -194,9 +193,8 @@ class _WipeScreenState extends State<WipeScreen> {
     EasyLoading.showProgress(0.3, status: 'Wipe Cloud To Device ...');
     await Future.delayed(Duration(seconds: 5), () {});
 
-
 // wait for leo's code
-//    mysqlDBhelper.syncTasks();
+    mysqlDBhelper.wipeAllDataFromMysql();
 //    await Future.delayed(Duration(seconds: 10), () {});
 
 //    mysqlDBhelper.wipeTaskDataFromMySql();

@@ -41,17 +41,13 @@ class MySql_DBHelper {
     return _db;
   }
 
-  void wipeTaskDataFromMySql() async {
+  Future<List<dynamic>?> getTasksFromMySql() async {
     final tasksRequest = request('getAllTasks', formData: null);
 
     tasksRequest.then((value) {
       final data = json.decode(value.toString());
       List<Map> swiperDataList = (data['Tasks'] as List).cast();
-      helper.deleteAllTask();
-      var taskCount = helper.getCount();
-      var count = swiperDataList.length;
-      // print("TaskCount:::::: $count");
-
+      var taskList = [];
       for (int i = 0; i < swiperDataList.length; i++) {
         String dbTaskID = swiperDataList[i]['TaskID'].toString();
         String dbUserID = swiperDataList[i]['TaskUserId'].toString();
@@ -143,15 +139,18 @@ class MySql_DBHelper {
             "",
             "",
             "");
-        // print("TaskID" + appTaskID);
-        // print("IIII::" + i.toString());
+        //     // print("TaskID" + appTaskID);
+        //     // print("IIII::" + i.toString());
 
-        // if (i == 190 || i == 191) {
-        //   print("stop");
-        // }
+        //     // if (i == 190 || i == 191) {
+        //     //   print("stop");
+        //     // }
 
-        helper.insertTask(task);
+        //     helper.insertTask(task);
+        taskList.add(task);
       }
+      print(taskList);
+      return taskList;
     });
   }
 
@@ -207,18 +206,15 @@ class MySql_DBHelper {
 ///////////////////////////
   /// sync statuses
 ///////////////////////////
-  void syncStatusesData() async {
-    helper.deleteAllStatuses();
+  Future<List<dynamic>?> getStatusesDataFromMysql() async {
     final tasksRequest = request('statusContent', formData: null);
 
     tasksRequest.then((value) {
       final data = json.decode(value.toString());
       // print(data);
       List<Map> swiperDataList = (data['Status'] as List).cast();
-
-      var count = swiperDataList.length;
       // print(count);
-
+      var statusList = [];
       for (int i = 0; i < swiperDataList.length; i++) {
         Status status = new Status();
         String dbId = swiperDataList[i]['id'].toString();
@@ -228,29 +224,31 @@ class MySql_DBHelper {
         status.name = swiperDataList[i]['name'];
         status.description = swiperDataList[i]['desc'];
 
-        final statusFuture = helper.getStatusesbyID(int.parse(appId));
-        statusFuture.then((result) {
-          count = result.length;
-          //for (int i = 0; i < count; i++) {
-          //helper.deleteAction(i);
-          //}
-          if (count > 0) {
-            helper.updateStatuses(status);
-            //helper.deleteAction(swiperDataList[i]['TaskID']);
-          } else {
-            helper.insertStatuses(status);
-            // helper.deleteAction(swiperDataList[i]['TaskID']);
-          }
-        });
+        // final statusFuture = helper.getStatusesbyID(int.parse(appId));
+        // statusFuture.then((result) {
+        //   count = result.length;
+        //   //for (int i = 0; i < count; i++) {
+        //   //helper.deleteAction(i);
+        //   //}
+        //   if (count > 0) {
+        //     helper.updateStatuses(status);
+        //     //helper.deleteAction(swiperDataList[i]['TaskID']);
+        //   } else {
+        //     helper.insertStatuses(status);
+        //     // helper.deleteAction(swiperDataList[i]['TaskID']);
+        //   }
+        // });
+        statusList.add(status);
       }
+      print(statusList);
+      return statusList;
     });
   }
 
 ///////////////////////////
   /// sync priorities
 ///////////////////////////
-  void syncPrioritiesData() async {
-    helper.deleteAllPriorities();
+  Future<List<dynamic>?> getPrioritiesDataFromMysql() async {
     final tasksRequest = request('priorityContent', formData: null);
 
     tasksRequest.then((value) {
@@ -258,9 +256,8 @@ class MySql_DBHelper {
       // print(data);
       List<Map> swiperDataList = (data['Priority'] as List).cast();
 
-      var count = swiperDataList.length;
       // print(count);
-
+      var prioritiesList = [];
       for (int i = 0; i < swiperDataList.length; i++) {
         Priority priority = new Priority();
         String dbId = swiperDataList[i]['id'].toString();
@@ -270,21 +267,25 @@ class MySql_DBHelper {
         priority.name = swiperDataList[i]['name'];
         priority.description = swiperDataList[i]['desc'];
 
-        final priorityFuture = helper.getPrioritiesbyID(int.parse(appId));
-        priorityFuture.then((result) {
-          count = result.length;
-          //for (int i = 0; i < count; i++) {
-          //helper.deleteAction(i);
-          //}
-          if (count > 0) {
-            helper.updatePriorities(priority);
-            //helper.deleteAction(swiperDataList[i]['TaskID']);
-          } else {
-            helper.insertPriorities(priority);
-            // helper.deleteAction(swiperDataList[i]['TaskID']);
-          }
-        });
+        // final priorityFuture = helper.getPrioritiesbyID(int.parse(appId));
+        // priorityFuture.then((result) {
+        //   count = result.length;
+        //   //for (int i = 0; i < count; i++) {
+        //   //helper.deleteAction(i);
+        //   //}
+        //   if (count > 0) {
+        //     helper.updatePriorities(priority);
+        //     //helper.deleteAction(swiperDataList[i]['TaskID']);
+        //   } else {
+        //     helper.insertPriorities(priority);
+        //     // helper.deleteAction(swiperDataList[i]['TaskID']);
+        //   }
+        // });
+
+        prioritiesList.add(priority);
       }
+      print(prioritiesList);
+      return prioritiesList;
     });
   }
 
@@ -292,8 +293,7 @@ class MySql_DBHelper {
   /// sync categories
 ///////////////////////////
 
-  void syncCategoriesData() async {
-    helper.deleteAllCategories();
+  Future<List<dynamic>?> getCategoriesDataFromMysql() async {
     final tasksRequest = request('categoriesContent', formData: null);
 
     tasksRequest.then((value) {
@@ -301,9 +301,10 @@ class MySql_DBHelper {
       // print(data);
       List<Map> swiperDataList = (data['Categories'] as List).cast();
 
-      var count = swiperDataList.length;
-      // print(count);
-
+      // var count = swiperDataList_categories.length;
+      // // print(count);
+      // return swiperDataList_categories;
+      var categoriesList = [];
       for (int i = 0; i < swiperDataList.length; i++) {
         Category action = new Category();
         String dbId = swiperDataList[i]['id'].toString();
@@ -313,21 +314,25 @@ class MySql_DBHelper {
         action.name = swiperDataList[i]['name'];
         action.description = swiperDataList[i]['desc'];
 
-        final actionFuture = helper.getCategoriesbyID(int.parse(appId));
-        actionFuture.then((result) {
-          count = result.length;
-          //for (int i = 0; i < count; i++) {
-          //helper.deleteAction(i);
-          //}
-          if (count > 0) {
-            helper.updateCategories(action);
-            //helper.deleteAction(swiperDataList[i]['TaskID']);
-          } else {
-            helper.insertCategories(action);
-            // helper.deleteAction(swiperDataList[i]['TaskID']);
-          }
-        });
+        // final actionFuture = helper.getCategoriesbyID(int.parse(appId));
+        // actionFuture.then((result) {
+        //   count = result.length;
+        //   //for (int i = 0; i < count; i++) {
+        //   //helper.deleteAction(i);
+        //   //}
+        //   if (count > 0) {
+        //     helper.updateCategories(action);
+        //     //helper.deleteAction(swiperDataList[i]['TaskID']);
+        //   } else {
+        //     helper.insertCategories(action);
+        //     // helper.deleteAction(swiperDataList[i]['TaskID']);
+        //   }
+        // });
+
+        categoriesList.add(action);
       }
+      print(categoriesList);
+      return categoriesList;
     });
   }
 
@@ -461,8 +466,7 @@ class MySql_DBHelper {
 ///////////////////////////
   /// sync tags
 ///////////////////////////
-  void syncTag1sData() async {
-    helper.deleteAllTag1s();
+  Future<List<dynamic>?> getTag1sDataFromMysql() async {
     final tasksRequest = request('tagContent', formData: null);
 
     tasksRequest.then((value) {
@@ -470,9 +474,10 @@ class MySql_DBHelper {
       // print(data);
       List<Map> swiperDataList = (data['Tags'] as List).cast();
 
-      var count = swiperDataList.length;
+      // var count = swiperDataList_tag.length;
+      // return swiperDataList_tag;
       // print(count);
-
+      var tagsList = [];
       for (int i = 0; i < swiperDataList.length; i++) {
         Tag1 action = new Tag1();
         String dbId = swiperDataList[i]['id'].toString();
@@ -484,19 +489,23 @@ class MySql_DBHelper {
 
         // print(swiperDataList[i]['name']);
         //helper.deleteTask(swiperDataList[i]['TaskID']);
-        final actionFuture = helper.getTag1sbyID(int.parse(appId));
-        actionFuture.then((result) {
-          count = result.length;
+        // final actionFuture = helper.getTag1sbyID(int.parse(appId));
+        // actionFuture.then((result) {
+        //   count = result.length;
 
-          if (count > 0) {
-            //helper.deleteContextbyID(swiperDataList[i]['ContextID']);
-            helper.updateTag1s(action);
-          } else {
-            helper.insertTag1s(action);
-            //helper.deleteContextbyID(swiperDataList[i]['ContextID']);
-          }
-        });
+        //   if (count > 0) {
+        //     //helper.deleteContextbyID(swiperDataList[i]['ContextID']);
+        //     helper.updateTag1s(action);
+        //   } else {
+        //     helper.insertTag1s(action);
+        //     //helper.deleteContextbyID(swiperDataList[i]['ContextID']);
+        //   }
+        // });
+
+        tagsList.add(action);
       }
+      print(tagsList);
+      return tagsList;
     });
   }
 
@@ -524,18 +533,14 @@ class MySql_DBHelper {
         goal.name = swiperDataList[i]['name'];
         goal.description = swiperDataList[i]['desc'];
 
-        // print(swiperDataList[i]['name']);
-        //helper.deleteTask(swiperDataList[i]['TaskID']);
         final goalFuture = helper.getGoal1sbyID(int.parse(appId));
         goalFuture.then((result) {
           count = result.length;
 
           if (count > 0) {
-            //helper.deleteContextbyID(swiperDataList[i]['ContextID']);
             helper.updateGoal1s(goal);
           } else {
             helper.insertGoal1s(goal);
-            //helper.deleteContextbyID(swiperDataList[i]['ContextID']);
           }
         });
       }
@@ -543,7 +548,6 @@ class MySql_DBHelper {
   }
 
   Future<Map<dynamic, dynamic>?> wipeTaskDataToMySql() async {
-    // this.deleteAllTaskFromMySQL();
     var result = await helper.getAllTasks();
 
     var taskList = [];
@@ -558,10 +562,6 @@ class MySql_DBHelper {
       var status = "";
       var priority = "";
       var tag1 = "";
-      // var action1 = "";
-      // var context1 = "";
-      // var location1 = "";
-      // var goal1 = "";
       var isStar = "";
       var isDone = "";
       var lastModified = "";
@@ -591,18 +591,6 @@ class MySql_DBHelper {
       if (result[i]["tag1"] != null) {
         tag1 = result[i]["tag1"].toString();
       }
-      // if (result[i]["action1"] != null) {
-      //   action1 = result[i]["action1"];
-      // }
-      // if (result[i]["context1"] != null) {
-      //   context1 = result[i]["context1"].toString();
-      // }
-      // if (result[i]["location1"] != null) {
-      //   location1 = result[i]["location1"].toString();
-      // }
-      // if (result[i]["goal1"] != null) {
-      //   goal1 = result[i]["goal1"].toString();
-      // }
       if (result[i]["isStar"] != null) {
         isStar = result[i]["isStar"].toString();
       }
@@ -615,9 +603,6 @@ class MySql_DBHelper {
       if (result[i]["timeDue"] != null) {
         timeDue = result[i]["timeDue"].toString();
       }
-      // if (result[i]["goal1"] != null) {
-      //   goal1 = result[i]["goal1"].toString();
-      // }
       if (result[i]["location1"] != null) {
         timeDue = result[i]["location1"].toString();
       }
@@ -653,18 +638,6 @@ class MySql_DBHelper {
           '"taskTag":"' +
           tag1 +
           '",' +
-          // '"taskAction":"' +
-          // action1 +
-          // '",' +
-          // '"taskContext":"' +
-          // context1 +
-          // '",' +
-          // '"taskLocation":"' +
-          // location1 +
-          // '",' +
-          // '"taskGoal":"' +
-          // goal1 +
-          // '",' +
           '"taskIsStar":"' +
           isStar +
           '",' +
@@ -682,45 +655,14 @@ class MySql_DBHelper {
     }
 
     tasks = {"tasks": taskList};
-    // print(tasks);
-    // request('wipeTasksfromDevice', formData: tasks);
 
     return tasks;
   }
 
-  // void deleteAllTaskFromMySQL() {
-  //   request('deleteAllTasks', formData: null);
-  // }
-
-  // void pushTasksToMySql() async {
-  //   final dbTaskFuture = helper.getAllTasks();
-  //   dbTaskFuture.then((result) {
-  //     for (int i = 0; i < result.length; i++) {
-  //       final tasksRequest = request('contextSaveContent', formData: result[i]);
-  //     }
-  //   });
-  // }
-
   void syncTasks() async {
     // this.pushTasksToMySql();
-    this.wipeTaskDataFromMySql();
+    // this.wipeTaskDataFromMySql();
   }
-
-  // String stringReplace(String str) {
-  //   str = str.replaceAll("\\", "\\\\");
-  //   str = str.replaceAll("\n", "\\n");
-  //   str = str.replaceAll("\r", "\\r");
-  //   str = str.replaceAll("\t", "\\t");
-  //   str = str.replaceAll("(" ")", "\"\"");
-  //   str = str.replaceAll(" ", "&nbsp;");
-  //   str = str.replaceAll("<", "&lt;");
-  //   str = str.replaceAll(">", "&gt;");
-  //   str = str.replaceAll('"', '”');
-  //   str = str.replaceAll('@', 'a:t');
-  //   str = str.replaceAll("'", '’');
-
-  //   return str;
-  // }
 
   Future<Map<dynamic, dynamic>?> wipeCatatoryToMySql() async {
     // this.deleteAllTaskFromMySQL();
@@ -762,182 +704,6 @@ class MySql_DBHelper {
     return data;
   }
 
-  // void wipeActionToMySql() {
-  //   // this.deleteAllTaskFromMySQL();
-  //   final dbDataFuture = helper.getAction1s();
-
-  //   var dataList = [];
-  //   var data = {};
-  //   dbDataFuture.then((result) {
-  //     print(result.length);
-
-  //     for (int i = 0; i < result.length; i++) {
-  //       print(result[i]);
-  //       var id = "";
-  //       var name = "";
-  //       var description = "";
-
-  //       if (result[i]["id"].toString() != null) {
-  //         id = result[i]["id"].toString();
-  //       }
-  //       if (result[i]["name"] != null) {
-  //         name = result[i]["name"];
-  //       }
-  //       if (result[i]["description"] != null) {
-  //         description = result[i]["description"].toString();
-  //       }
-
-  //       String datadata = '{"id":"' +
-  //           id +
-  //           '",' +
-  //           '"name":"' +
-  //           name +
-  //           '",' +
-  //           '"description":"' +
-  //           description +
-  //           '"}';
-
-  //       dataList.add(datadata);
-  //     }
-
-  //     data = {"data": dataList};
-  //     print(data);
-  //     request('wipeActionfromDevice', formData: data);
-  //   });
-  // }
-
-  // void wipeContextToMySql() {
-  //   // this.deleteAllTaskFromMySQL();
-  //   final dbDataFuture = helper.getContext1s();
-
-  //   var dataList = [];
-  //   var data = {};
-  //   dbDataFuture.then((result) {
-  //     print(result.length);
-
-  //     for (int i = 0; i < result.length; i++) {
-  //       print(result[i]);
-  //       var id = "";
-  //       var name = "";
-  //       var description = "";
-
-  //       if (result[i]["id"].toString() != null) {
-  //         id = result[i]["id"].toString();
-  //       }
-  //       if (result[i]["name"] != null) {
-  //         name = result[i]["name"];
-  //       }
-  //       if (result[i]["description"] != null) {
-  //         description = result[i]["description"].toString();
-  //       }
-
-  //       String datadata = '{"id":"' +
-  //           id +
-  //           '",' +
-  //           '"name":"' +
-  //           name +
-  //           '",' +
-  //           '"description":"' +
-  //           description +
-  //           '"}';
-
-  //       dataList.add(datadata);
-  //     }
-
-  //     data = {"data": dataList};
-  //     print(data);
-  //     request('wipeContextfromDevice', formData: data);
-  //   });
-  // }
-
-  // void wipeGoalToMySql() {
-  //   // this.deleteAllTaskFromMySQL();
-  //   final dbDataFuture = helper.getGoal1s();
-
-  //   var dataList = [];
-  //   var data = {};
-  //   dbDataFuture.then((result) {
-  //     print(result.length);
-
-  //     for (int i = 0; i < result.length; i++) {
-  //       print(result[i]);
-  //       var id = "";
-  //       var name = "";
-  //       var description = "";
-
-  //       if (result[i]["id"].toString() != null) {
-  //         id = result[i]["id"].toString();
-  //       }
-  //       if (result[i]["name"] != null) {
-  //         name = result[i]["name"];
-  //       }
-  //       if (result[i]["description"] != null) {
-  //         description = result[i]["description"].toString();
-  //       }
-
-  //       String datadata = '{"id":"' +
-  //           id +
-  //           '",' +
-  //           '"name":"' +
-  //           name +
-  //           '",' +
-  //           '"description":"' +
-  //           description +
-  //           '"}';
-
-  //       dataList.add(datadata);
-  //     }
-
-  //     data = {"data": dataList};
-  //     print(data);
-  //     request('wipeGoalfromDevice', formData: data);
-  //   });
-  // }
-
-  // void wipeLocationToMySql() {
-  //   // this.deleteAllTaskFromMySQL();
-  //   final dbDataFuture = helper.getLocation1s();
-
-  //   var dataList = [];
-  //   var data = {};
-  //   dbDataFuture.then((result) {
-  //     print(result.length);
-
-  //     for (int i = 0; i < result.length; i++) {
-  //       print(result[i]);
-  //       var id = "";
-  //       var name = "";
-  //       var description = "";
-
-  //       if (result[i]["id"].toString() != null) {
-  //         id = result[i]["id"].toString();
-  //       }
-  //       if (result[i]["name"] != null) {
-  //         name = result[i]["name"];
-  //       }
-  //       if (result[i]["description"] != null) {
-  //         description = result[i]["description"].toString();
-  //       }
-
-  //       String datadata = '{"id":"' +
-  //           id +
-  //           '",' +
-  //           '"name":"' +
-  //           name +
-  //           '",' +
-  //           '"description":"' +
-  //           description +
-  //           '"}';
-
-  //       dataList.add(datadata);
-  //     }
-
-  //     data = {"data": dataList};
-  //     print(data);
-  //     request('wipeLocationfromDevice', formData: data);
-  //   });
-  // }
-
   Future<Map<dynamic, dynamic>?> wipePriorityToMySql() async {
     // this.deleteAllTaskFromMySQL();
     var dbDataFuture = await helper.getPriorities();
@@ -946,7 +712,6 @@ class MySql_DBHelper {
     var data = {};
 
     for (int i = 0; i < dbDataFuture.length; i++) {
-      // print(dbDataFuture[i]);
       var id = "";
       var name = "";
       var description = "";
@@ -980,14 +745,12 @@ class MySql_DBHelper {
   }
 
   Future<Map<dynamic, dynamic>?> wipeStatusToMySql() async {
-    // this.deleteAllTaskFromMySQL();
     var dbDataFuture = await helper.getStatuses();
 
     var dataList = [];
     var data = {};
 
     for (int i = 0; i < dbDataFuture.length; i++) {
-      // print(dbDataFuture[i]);
       var id = "";
       var name = "";
       var description = "";
@@ -1016,63 +779,11 @@ class MySql_DBHelper {
     }
 
     data = {"status": dataList};
-    // print(data);
-
-    // request('wipeStatusfromDevice', formData: data);
 
     return data;
   }
 
-  // Map<dynamic, dynamic> wipeTagToMySql() {
-  //   // this.deleteAllTaskFromMySQL();
-  //   try {
-  //     final dbDataFuture = helper.getTag1s();
-
-  //     var dataList = [];
-  //     var data = {};
-  //     dbDataFuture.then((result) {
-  //       print(result.length);
-
-  //       for (int i = 0; i < result.length; i++) {
-  //         print(result[i]);
-  //         var id = "";
-  //         var name = "";
-  //         var description = "";
-
-  //         if (result[i]["id"].toString() != null) {
-  //           id = result[i]["id"].toString();
-  //         }
-  //         if (result[i]["name"] != null) {
-  //           name = result[i]["name"];
-  //         }
-  //         if (result[i]["description"] != null) {
-  //           description = result[i]["description"].toString();
-  //         }
-
-  //         String datadata = '{"id":"' +
-  //             id +
-  //             '",' +
-  //             '"name":"' +
-  //             name +
-  //             '",' +
-  //             '"description":"' +
-  //             description +
-  //             '"}';
-
-  //         dataList.add(datadata);
-  //       }
-
-  //       data = {"data": dataList};
-
-  //       return data;
-  //     });
-  //   } catch (err) {
-  //     throw err;
-  //   }
-  // }
-
   Future<Map<dynamic, dynamic>?> wipeTagToMySql1() async {
-    // this.deleteAllTaskFromMySQL();
     var result = await helper.getTag1s();
 
     var data = {};
@@ -1111,6 +822,22 @@ class MySql_DBHelper {
     return data;
   }
 
+  void wipeAllDataFromMysql() async {
+    var tasks = await getTasksFromMySql();
+    var status = await getStatusesDataFromMysql();
+    var proiorities = await getPrioritiesDataFromMysql();
+    var catagories = await getCategoriesDataFromMysql();
+    var tags = await getTag1sDataFromMysql();
+
+    print("tasks:::::::::::::::$tasks");
+    print("status:::::::::::::::$status");
+    print("proiorities:::::::::::::::::$proiorities");
+    print("catagories::::::::::::::::::::::$catagories");
+    print("tags::::::::::::::::::::$tags");
+
+    //dbhelper.pushAlldata(tasks, status, proiorities, catagories, tags);
+  }
+
   void wipeAllDataToMySql() async {
     var tasks = await wipeTaskDataToMySql();
     var status = await wipeStatusToMySql();
@@ -1126,12 +853,5 @@ class MySql_DBHelper {
     allData.addAll(tags!);
 
     request('wipeTasksfromDevice', formData: allData);
-
-    // print("task:::::$tasks");
-    // print("Status:::::::$status");
-    // print("proiority:::::::::::::::$proiority");
-    // print("catagory:::::::::::::::::::$catagory");
-    // print(catagory);
-    // print("tags:::::::::::::::$tags");
   }
 }
