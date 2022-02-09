@@ -4,8 +4,7 @@ import 'package:todo_app/screens/notificationPlugin.dart';
 
 class CommunityScreen extends StatefulWidget {
   @override
-  _CommunityScreenState createState() =>
-      _CommunityScreenState();
+  _CommunityScreenState createState() => _CommunityScreenState();
 }
 
 class _CommunityScreenState extends State<CommunityScreen> {
@@ -13,6 +12,12 @@ class _CommunityScreenState extends State<CommunityScreen> {
   @override
   void initState() {
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    // DO STUFF
+    super.dispose();
   }
 
   Widget build(BuildContext context) {
@@ -24,9 +29,6 @@ class _CommunityScreenState extends State<CommunityScreen> {
           children: [
             Text('a'),
           ],
-        )
-
-    );
+        ));
   }
-
 }

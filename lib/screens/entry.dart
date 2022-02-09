@@ -6,7 +6,6 @@ import '../widgets/login.dart';
 import 'package:todo_app/model/todouser.dart';
 import 'package:todo_app/util/dbhelper.dart';
 
-
 class EntryScreen extends StatefulWidget {
   @override
   _EntryScreenState createState() => _EntryScreenState();
@@ -15,7 +14,7 @@ class EntryScreen extends StatefulWidget {
 class _EntryScreenState extends State<EntryScreen> {
   var _todoUser = todoUser();
   var _dbHelper = DbHelper();
- bool userexist = true;
+  bool userexist = true;
 
   @override
   void initState() {
@@ -23,28 +22,30 @@ class _EntryScreenState extends State<EntryScreen> {
     gettodoUser();
   }
 
-   gettodoUser() async {
-    
+  @override
+  void dispose() {
+    // DO STUFF
+    super.dispose();
+  }
+
+  gettodoUser() async {
     var todousers = await _dbHelper.getUser();
-    if (todousers.length > 0)
-    {
-        userexist = true;
-       // Navigator.of(context).pushNamed('/dashboard');
-       Navigator. pushReplacement(
+    if (todousers.length > 0) {
+      userexist = true;
+      // Navigator.of(context).pushNamed('/dashboard');
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) => TaskHome(),
         ),
       );
     }
-    
   }
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:  Colors.yellow[200],
+      backgroundColor: Colors.yellow[200],
       body: Center(
         child: Login(),
       ),

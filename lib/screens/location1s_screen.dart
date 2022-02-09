@@ -29,6 +29,12 @@ class _Location1sScreenState extends State<Location1sScreen> {
     getAllLocation1s();
   }
 
+  @override
+  void dispose() {
+    // DO STUFF
+    super.dispose();
+  }
+
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
 
   getAllLocation1s() async {
@@ -317,7 +323,7 @@ class _Location1sScreenState extends State<Location1sScreen> {
                   position: BadgePosition.topEnd(),
                   badgeContent: Text(_location1List.length.toString(),
                       style: TextStyle(color: Colors.black)),
-                 badgeColor: Colors.orange[100]!,
+                  badgeColor: Colors.orange[100]!,
                 ),
               ],
             ),

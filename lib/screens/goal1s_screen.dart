@@ -30,6 +30,12 @@ class _Goal1sScreenState extends State<Goal1sScreen> {
     getAllGoal1s();
   }
 
+  @override
+  void dispose() {
+    // DO STUFF
+    super.dispose();
+  }
+
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
 
   getAllGoal1s() async {
@@ -363,7 +369,8 @@ class _Goal1sScreenState extends State<Goal1sScreen> {
                 onPressed: () {
                   Navigator.pop(context, true);
                 },
-              ),              IconButton(
+              ),
+              IconButton(
                 icon: Icon(Icons.add, color: Colors.white),
                 tooltip: 'Add Goal',
                 onPressed: () {

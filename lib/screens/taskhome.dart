@@ -68,10 +68,14 @@ class TaskHomeState extends State {
   }
 
   @override
-  Widget build(BuildContext context) {
-    if (tasklist == null) {
+  void dispose() {
+    // DO STUFF
+    super.dispose();
+  }
 
-    }
+  @override
+  Widget build(BuildContext context) {
+    if (tasklist == null) {}
 
     return Scaffold(
       backgroundColor: Colors.teal[50],
@@ -132,7 +136,6 @@ class TaskHomeState extends State {
         ],
       ),
       body: taskListItems(),
-
     );
   }
 

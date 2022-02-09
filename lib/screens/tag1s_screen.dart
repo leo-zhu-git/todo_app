@@ -22,8 +22,7 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
   TextStyle _textStyleControls =
       TextStyle(fontSize: 17.0, color: Colors.black87);
   TextStyle _textStyleSnack = TextStyle(
-    fontSize: 16.0, color: Colors.pink[100], fontWeight: FontWeight.w600);
-
+      fontSize: 16.0, color: Colors.pink[100], fontWeight: FontWeight.w600);
 
   List<Tag1> _tag1List = [];
 
@@ -33,6 +32,12 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
   void initState() {
     super.initState();
     getAllTag1s();
+  }
+
+  @override
+  void dispose() {
+    // DO STUFF
+    super.dispose();
   }
 
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();

@@ -24,6 +24,12 @@ class _WipeScreenState extends State<WipeScreen> {
   }
 
   @override
+  void dispose() {
+    // DO STUFF
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _key,

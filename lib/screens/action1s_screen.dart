@@ -31,6 +31,12 @@ class _Action1sScreenState extends State<Action1sScreen> {
     getAllActions();
   }
 
+  @override
+  void dispose() {
+    // DO STUFF
+    super.dispose();
+  }
+
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
 
   getAllActions() async {

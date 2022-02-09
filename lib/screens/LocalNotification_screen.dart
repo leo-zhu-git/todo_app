@@ -18,6 +18,12 @@ class _LocalNotificationScreenState extends State<LocalNotificationScreen> {
     notificationPlugin.setOnNotificationClick(onNotificationClick);
   }
 
+  @override
+  void dispose() {
+    // DO STUFF
+    super.dispose();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(

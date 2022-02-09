@@ -48,6 +48,12 @@ class _DrawerNagivation extends State<DrawerNagivation> {
   }
 
   @override
+  void dispose() {
+    // DO STUFF
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
 //      decoration: BoxDecoration(color: Colors.amber),

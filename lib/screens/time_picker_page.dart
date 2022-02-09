@@ -20,6 +20,12 @@ class _TimePickerPageState extends State<TimePickerPage> {
   }
 
   @override
+  void dispose() {
+    // DO STUFF
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) => Scaffold(
         body: Center(
           child: Column(
