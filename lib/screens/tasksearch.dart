@@ -293,7 +293,7 @@ class TaskSearchState extends State {
                     ),
                   ),
                   IconButton(
-                    icon: Icon(Icons.cancel_outlined, color: Colors.black38),
+                    icon: Icon(Icons.clear),
                     onPressed: () {
                       setState(() {
                         _searchText = "";
