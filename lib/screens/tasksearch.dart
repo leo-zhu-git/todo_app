@@ -263,27 +263,55 @@ class TaskSearchState extends State {
           Padding(
             padding:
                 EdgeInsets.only(left: 8.0, right: 8.0, top: 6.0, bottom: 2.0),
-            child: TextField(
-              autofocus: true,
-              style: _textStyleControls,
-              controller: searchController,
-              onChanged: (value) {
-                searchData(
-                    value,
-                    _searchDateDue,
-                    _includeIsStar,
-                    _includeIsDone,
-                    _selectedCategory,
-                    _selectedStatus,
-                    _selectedPriority,
-                    _selectedTag1);
-              },
-              decoration: InputDecoration(
-                fillColor: Colors.green[100],
-                border: InputBorder.none,
-                filled: true, // dont forget this line
-                labelText: "Searching for ...",
-                labelStyle: _textStyleControls,
+            child: Container(
+              color: Colors.green [100],
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: TextField(
+                      autofocus: true,
+                      style: _textStyleControls,
+                      controller: searchController,
+                      onChanged: (value) {
+                        _searchText = value; 
+                        searchData(
+                            _searchText,
+                            _searchDateDue,
+                            _includeIsStar,
+                            _includeIsDone,
+                            _selectedCategory,
+                            _selectedStatus,
+                            _selectedPriority,
+                            _selectedTag1);
+                      },
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        labelText: "Searching for ...",
+                        labelStyle: _textStyleControls,
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.cancel_outlined, color: Colors.black38),
+                    onPressed: () {
+                      setState(() {
+                        _searchText = "";
+                        searchController.clear();
+                        searchData(
+                            _searchText,
+                            _searchDateDue,
+                            _includeIsStar,
+                            _includeIsDone,
+                            _selectedCategory,
+                            _selectedStatus,
+                            _selectedPriority,
+                            _selectedTag1);
+                      });
+                      ;
+                    },
+                  )
+                ],
               ),
             ),
           ),
