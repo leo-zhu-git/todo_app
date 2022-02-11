@@ -20,9 +20,8 @@ class _PrioritiesScreenState extends State<PrioritiesScreen> {
   var _editPriorityDescriptionController = TextEditingController();
   TextStyle _textStyleControls =
       TextStyle(fontSize: 17.0, color: Colors.black87);
-      TextStyle _textStyleSnack = TextStyle(
-    fontSize: 16.0, color: Colors.pink[100], fontWeight: FontWeight.w600);
-
+  TextStyle _textStyleSnack = TextStyle(
+      fontSize: 16.0, color: Colors.pink[100], fontWeight: FontWeight.w600);
 
   List<Priority> _priorityList = [];
 
@@ -32,6 +31,12 @@ class _PrioritiesScreenState extends State<PrioritiesScreen> {
   void initState() {
     super.initState();
     getAllPriorities();
+  }
+
+  @override
+  void dispose() {
+    // DO STUFF
+    super.dispose();
   }
 
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
@@ -94,8 +99,7 @@ class _PrioritiesScreenState extends State<PrioritiesScreen> {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       backgroundColor: Colors.teal[800],
                       duration: Duration(seconds: 3),
-                      content:
-                          Text("Priority Added", style: _textStyleSnack),
+                      content: Text("Priority Added", style: _textStyleSnack),
                     ));
 
                     var result = _priorityService.insertPriorities(_priority);
@@ -162,8 +166,7 @@ class _PrioritiesScreenState extends State<PrioritiesScreen> {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       backgroundColor: Colors.teal[800],
                       duration: Duration(seconds: 3),
-                      content:
-                          Text("Priority Updated", style: _textStyleSnack),
+                      content: Text("Priority Updated", style: _textStyleSnack),
                     ));
 
                     var result =

@@ -33,6 +33,13 @@ class _ConfirmResetScreenState extends State<ConfirmResetScreen> {
     });
   }
 
+  @override
+  void dispose() {
+    _controller.dispose();
+    _newPasswordController.dispose();
+    super.dispose();
+  }
+
   void _resetPassword(BuildContext context, LoginData data, String code,
       String password) async {
     try {
@@ -68,13 +75,6 @@ class _ConfirmResetScreenState extends State<ConfirmResetScreen> {
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    _newPasswordController.dispose();
-    super.dispose();
   }
 
   @override

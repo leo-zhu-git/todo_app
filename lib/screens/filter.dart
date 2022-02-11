@@ -177,15 +177,13 @@ class _FilterViewState extends State //State<FilterView>
     _dropdownMenuItemsShow = buildDropdownMenuShow(_show);
     _dropdownMenuItemsSort = buildDropdownMenuItems(_sort);
     _dropdownMenuSortOrder = buildDropdownMenuOrder(_order);
-//    _dropdownFilterIsStar = buildDropdownFilterIsStar(_filterIsStar);
-//    _dropdownFilterIsDone = buildDropdownFilterIsDone(_filterIsDone);
     _dropdownFilterDateDue = buildDropdownFilterDateDue(_filterDateDue);
     _loadCategories();
     _loadStatuses();
     _loadPriorities();
     _loadTag1s();
-
     _getCustomSettings();
+
     ////////////////////////////
     /// filter - date due
     ////////////////////////////
@@ -286,6 +284,11 @@ class _FilterViewState extends State //State<FilterView>
       globals.showSec3 = 1;
     } else
       _selectedShowSec3 = _dropdownMenuItemsShow[globals.showSec3!].value!;
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
 //##################Drop Down Items Load from DB #################################################################
@@ -704,21 +707,19 @@ class _FilterViewState extends State //State<FilterView>
 ///////////////////////////
 //  Filters
 ///////////////////////////
-///
+              ///
 //################################# Due Dates #####################################################
               new Container(
                 margin: EdgeInsets.only(
                     left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
                 decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.blue[100]
-                    ),
+                    shape: BoxShape.rectangle, color: Colors.blue[100]),
                 child: Theme(
                   data:
                       Theme.of(context).copyWith(canvasColor: Colors.lime[100]),
                   child: DropdownButtonFormField<FilterDateDue>(
                     style: _textStyleControls,
                     items: _dropdownFilterDateDue,
-                    
                     hint: Text('Filter by Due Date'),
                     value: _selectedFilterDateDue,
                     onChanged: (selectedFilterDateDue) {
@@ -743,11 +744,11 @@ class _FilterViewState extends State //State<FilterView>
                       value: (_selectedFilterIsDone == 0) ? true : false,
                       onChanged: (value) {
                         setState(() {
-                          _selectedFilterIsDone = (value! == true) ? 0 : 1;
+                          _selectedFilterIsDone = (value == true) ? 0 : 1;
                         });
                       },
                     ),
-                    Text('Show Open Only / Include Completed', style: _textStyleControls),
+                    Text('Include Completed Tasks', style: _textStyleControls),
                   ],
                 ),
               ),
@@ -765,102 +766,24 @@ class _FilterViewState extends State //State<FilterView>
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Switch(
-                    value: (_selectedFilterIsStar == 0) ? true : false,
-                          onChanged: (value) {
-                            setState(() {
-                              if (_selectedFilterIsStar == 1) {
-                                _selectedFilterIsStar = 0;
-                              } else {
-                                _selectedFilterIsStar = 1;
-                              }
-                            });
-                          },
-                      ),
-                    Text('Show FOCUS Only / Show All', style: _textStyleControls),
+                      value: (_selectedFilterIsStar == 0) ? false : true,
+                      onChanged: (value) {
+                        setState(() {
+                          if (_selectedFilterIsStar == 1) {
+                            _selectedFilterIsStar = 0;
+                          } else {
+                            _selectedFilterIsStar = 1;
+                          }
+                        });
+                      },
+                    ),
+                    Text('Focus Tasks Only', style: _textStyleControls),
                   ],
                 ),
               ),
               //################################# IsDone #####################################################
-              Container(
-                margin: EdgeInsets.only(
-                    left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
-                decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.blue[100]),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Checkbox(
-                      value: (_selectedFilterIsDone == 0) ? true : false,
-                      onChanged: (value) {
-                        setState(() {
-                          _selectedFilterIsDone = (value! == true) ? 0 : 1;
-                        });
-                      },
-                    ),
-                    Text('Include Completed Tasks', style: _textStyleControls),
-                  ],
-                ),
-              ),
-
 
 //################################# Focus #####################################################
-
-              Container(
-                margin: EdgeInsets.only(
-                    left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
-                decoration: BoxDecoration(
-                  shape: BoxShape.rectangle,
-                  color: Colors.blue[100],
-                ),
-                child: TextField(
-                  readOnly: true,
-                  style: _textStyleControls,
-                  decoration: InputDecoration(
-                    labelText: ' Focus Tasks Only ',
-                    labelStyle: _textStyleControls,
-                    border: InputBorder.none,
-                    hintText: '',
-                    prefixIcon: InkWell(
-                      onTap: () {
-                        setState(() {
-                          if (_selectedFilterIsStar == 1) {
-                            _selectedFilterIsStar = 0;
-                            Icon(Icons.lightbulb, color: Colors.black38);
-                          } else {
-                            _selectedFilterIsStar = 1;
-                            Icon(Icons.lightbulb, color: Colors.amber[800]);
-                          }
-                        });
-                      },
-                      child: Icon(Icons.lightbulb,
-                          color: (_selectedFilterIsStar == 0)
-                              ? Colors.black12
-                              : Colors.teal),
-                    ),
-                  ),
-                ),
-              ),
-
-//              new Container(
-//                margin: const EdgeInsets.all(2.0),
-//                decoration: BoxDecoration(
-//                    shape: BoxShape.rectangle, color: Colors.blue[100]),
-//                child: Theme(
-//                  data:
-//                      Theme.of(context).copyWith(canvasColor: Colors.lime[100]),
-//                  child: DropdownButtonFormField<FilterIsStar>(
-//                    style: _textStyleControls,
-//                    items: _dropdownFilterIsStar,
-//                    hint: Text('Filter by Focus Tasks'),
-//                    value: _selectedFilterIsStar,
-//                    onChanged: (selectedFilterIsStar) {
-//                      setState(() {
-//                        _selectedFilterIsStar = selectedFilterIsStar!;
-//                      });
-//                    },
-//                  ),
-//                ),
-//              ),
 
 //################################# Category #####################################################
               Container(

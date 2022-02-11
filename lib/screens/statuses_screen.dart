@@ -21,8 +21,7 @@ class _StatusesScreenState extends State<StatusesScreen> {
   TextStyle _textStyleControls =
       TextStyle(fontSize: 17.0, color: Colors.black87);
   TextStyle _textStyleSnack = TextStyle(
-    fontSize: 16.0, color: Colors.pink[100], fontWeight: FontWeight.w600);
-
+      fontSize: 16.0, color: Colors.pink[100], fontWeight: FontWeight.w600);
 
   List<Status> _statusList = [];
 
@@ -32,6 +31,12 @@ class _StatusesScreenState extends State<StatusesScreen> {
   void initState() {
     super.initState();
     getAllStatuses();
+  }
+
+  @override
+  void dispose() {
+    // DO STUFF
+    super.dispose();
   }
 
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
@@ -160,8 +165,7 @@ class _StatusesScreenState extends State<StatusesScreen> {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       backgroundColor: Colors.teal[800],
                       duration: Duration(seconds: 3),
-                      content:
-                          Text("Status Updated", style: _textStyleSnack),
+                      content: Text("Status Updated", style: _textStyleSnack),
                     ));
 
                     var result = await _statusService.updateStatuses(_status);

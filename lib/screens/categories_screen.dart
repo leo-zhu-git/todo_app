@@ -20,8 +20,8 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   var _editCategoryDescriptionController = TextEditingController();
   TextStyle _textStyleControls =
       TextStyle(fontSize: 17.0, color: Colors.black87);
-TextStyle _textStyleSnack = TextStyle(
-    fontSize: 16.0, color: Colors.pink[100], fontWeight: FontWeight.w600);
+  TextStyle _textStyleSnack = TextStyle(
+      fontSize: 16.0, color: Colors.pink[100], fontWeight: FontWeight.w600);
 
   List<Category> _categoryList = [];
 
@@ -31,6 +31,12 @@ TextStyle _textStyleSnack = TextStyle(
   void initState() {
     super.initState();
     getAllCategories();
+  }
+
+  @override
+  void dispose() {
+    // DO STUFF
+    super.dispose();
   }
 
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
@@ -94,8 +100,7 @@ TextStyle _textStyleSnack = TextStyle(
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       backgroundColor: Colors.teal[800],
                       duration: Duration(seconds: 3),
-                      content:
-                          Text("Category Added", style: _textStyleSnack),
+                      content: Text("Category Added", style: _textStyleSnack),
                     ));
 
                     Navigator.pop(context);
@@ -159,8 +164,7 @@ TextStyle _textStyleSnack = TextStyle(
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       backgroundColor: Colors.teal[800],
                       duration: Duration(seconds: 3),
-                      content:
-                          Text("Category Updated", style: _textStyleSnack),
+                      content: Text("Category Updated", style: _textStyleSnack),
                     ));
 
                     var result =

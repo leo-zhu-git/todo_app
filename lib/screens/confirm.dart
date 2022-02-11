@@ -26,6 +26,13 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
     });
   }
 
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+
   void _verifyCode(BuildContext context, LoginData data, String code) async {
     try {
       final res = await Amplify.Auth.confirmSignUp(
@@ -73,12 +80,6 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
   }
 
   @override

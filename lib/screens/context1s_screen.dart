@@ -29,6 +29,12 @@ class _Context1sScreenState extends State<Context1sScreen> {
     getAllContext1s();
   }
 
+  @override
+  void dispose() {
+    // DO STUFF
+    super.dispose();
+  }
+
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
 
   getAllContext1s() async {

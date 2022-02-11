@@ -48,6 +48,12 @@ class _DrawerNagivation extends State<DrawerNagivation> {
   }
 
   @override
+  void dispose() {
+    // DO STUFF
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
 //      decoration: BoxDecoration(color: Colors.amber),
@@ -132,7 +138,7 @@ class _DrawerNagivation extends State<DrawerNagivation> {
                     context: context,
                     applicationName: 'todoMIT',
                     applicationVersion: '1.0.1',
-                    applicationLegalese: 'applicaion legalese',
+                    applicationLegalese: 'todoMIT will help you manager your Most Important Things / Tasks / Thoughts on [almost] any mobile device! ',
                   );
                 },
 

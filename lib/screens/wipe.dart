@@ -24,6 +24,12 @@ class _WipeScreenState extends State<WipeScreen> {
   }
 
   @override
+  void dispose() {
+    // DO STUFF
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _key,
@@ -146,30 +152,23 @@ class _WipeScreenState extends State<WipeScreen> {
       _progress = 0;
       _timer?.cancel();
       _timer = Timer.periodic(const Duration(milliseconds: 100), (Timer timer) {
-        EasyLoading.showProgress(_progress,
-            status: '${(_progress * 100).toStringAsFixed(0)}%');
-        _progress += 0.03;
+//        EasyLoading.showProgress(_progress,
+//            status: '${(_progress * 100).toStringAsFixed(0)}%');
+//        _progress += 0.03;
 
-        if (_progress >= 1) {
-          _timer?.cancel();
-          EasyLoading.dismiss();
-        }
+//        if (_progress >= 1) {
+//          _timer?.cancel();
+//          EasyLoading.dismiss();
+//        }
       });
     }
-    EasyLoading.showProgress(0.3, status: 'Wipe Device To Cloud ...');
-    await Future.delayed(Duration(seconds: 5), () {});
+    EasyLoading.show(status: 'Wiping..');
+    await Future.delayed(Duration(seconds: 3), () {});
 
-// wait for leo's code
-//    mysqlDBhelper.syncTasks();
     mysqlDBhelper.wipeAllDataToMySql();
-//    mysqlDBhelper.wipeTaskDataToMySql();
-//    mysqlDBhelper.wipeCatatoryToMySql();
-//    mysqlDBhelper.wipeStatusToMySql();
-//    mysqlDBhelper.wipePriorityToMySql();
-//    mysqlDBhelper.wipeTagToMySql();
 
-    await EasyLoading.showSuccess('Wipe Device to Cloud Success');
-    await Future.delayed(Duration(seconds: 2), () {});
+    await EasyLoading.showSuccess('Wipe Success');
+    await Future.delayed(Duration(seconds: 1), () {});
   }
 
   Future cloudToCDevice() async {

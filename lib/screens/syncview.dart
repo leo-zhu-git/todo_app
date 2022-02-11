@@ -23,6 +23,12 @@ class _SyncViewState extends State<SyncView> {
     Navigator.pop(context);
   }
 
+  @override
+  void dispose() {
+    // DO STUFF
+    super.dispose();
+  }
+
   void syncData() async {
     Timer? _timer;
     late double _progress;

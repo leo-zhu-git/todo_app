@@ -263,27 +263,55 @@ class TaskSearchState extends State {
           Padding(
             padding:
                 EdgeInsets.only(left: 8.0, right: 8.0, top: 6.0, bottom: 2.0),
-            child: TextField(
-              autofocus: true,
-              style: _textStyleControls,
-              controller: searchController,
-              onChanged: (value) {
-                searchData(
-                    value,
-                    _searchDateDue,
-                    _includeIsStar,
-                    _includeIsDone,
-                    _selectedCategory,
-                    _selectedStatus,
-                    _selectedPriority,
-                    _selectedTag1);
-              },
-              decoration: InputDecoration(
-                fillColor: Colors.green[100],
-                border: InputBorder.none,
-                filled: true, // dont forget this line
-                labelText: "Searching for ...",
-                labelStyle: _textStyleControls,
+            child: Container(
+              color: Colors.green[100],
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: TextField(
+                      autofocus: true,
+                      style: _textStyleControls,
+                      controller: searchController,
+                      onChanged: (value) {
+                        _searchText = value;
+                        searchData(
+                            _searchText,
+                            _searchDateDue,
+                            _includeIsStar,
+                            _includeIsDone,
+                            _selectedCategory,
+                            _selectedStatus,
+                            _selectedPriority,
+                            _selectedTag1);
+                      },
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        labelText: "Searching for ...",
+                        labelStyle: _textStyleControls,
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.clear),
+                    onPressed: () {
+                      setState(() {
+                        _searchText = "";
+                        searchController.clear();
+                        searchData(
+                            _searchText,
+                            _searchDateDue,
+                            _includeIsStar,
+                            _includeIsDone,
+                            _selectedCategory,
+                            _selectedStatus,
+                            _selectedPriority,
+                            _selectedTag1);
+                      });
+                      ;
+                    },
+                  )
+                ],
               ),
             ),
           ),
@@ -335,20 +363,53 @@ class TaskSearchState extends State {
                       ),
 
 //####################################Show Completed Task Check box
-                      Container(
-                        margin: EdgeInsets.only(
-                            left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
-                        decoration: BoxDecoration(
-                            shape: BoxShape.rectangle, color: Colors.blue[100]),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Checkbox(
-                              value: (_includeIsDone == 0) ? false : true,
-                              onChanged: (value) {
-                                setState(() {
-                                  _includeIsDone = (value! == false) ? 0 : 1;
-                                  searchData(
+
+//                      Container(
+//                        margin: EdgeInsets.only(
+//                            left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+//                        decoration: BoxDecoration(
+//                            shape: BoxShape.rectangle, color: Colors.blue[100]),
+//                        child: Row(
+//                          crossAxisAlignment: CrossAxisAlignment.center,
+//                          children: [
+//                            Checkbox(
+//                              value: (_includeIsDone == 0) ? true : false,
+//                              onChanged: (value) {
+//                                setState(() {
+//                                  _includeIsDone = (value! == false) ? 0 : 1;
+//                                  searchData(
+//                                      _searchText,
+//                                      _searchDateDue,
+//                                      _includeIsStar,
+//                                      _includeIsDone,
+//                                      _selectedCategory,
+//                                      _selectedStatus,
+//                                      _selectedPriority,
+//                                      _selectedTag1);
+//                                });
+//                              },
+//                            ),
+//                            Text('Include Completed Tasks',
+//                                style: _textStyleControls),
+//                          ],
+//                        ),
+//                      ),
+//####################################end of Show completed
+
+              Container(
+                margin: EdgeInsets.only(
+                    left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+                decoration: BoxDecoration(
+                    shape: BoxShape.rectangle, color: Colors.blue[100]),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Switch(
+                      value: (_includeIsDone == 0) ? false : true,
+                      onChanged: (value) {
+                        setState(() {
+                          _includeIsDone = (value == true) ? 1 : 0;
+                                                            searchData(
                                       _searchText,
                                       _searchDateDue,
                                       _includeIsStar,
@@ -357,17 +418,17 @@ class TaskSearchState extends State {
                                       _selectedStatus,
                                       _selectedPriority,
                                       _selectedTag1);
-                                });
-                              },
-                            ),
-                            Text('Include Completed Tasks',
-                                style: _textStyleControls),
-                          ],
-                        ),
-                      ),
-//####################################end of Show completed
 
-//####################################Show Focus Tasks Task Check box
+                        });
+                      },
+                    ),
+                    Text('Include Completed Tasks', style: _textStyleControls),
+                  ],
+                ),
+              ),
+
+
+//################################# Focus2 #####################################################
 
                       Container(
                         margin: EdgeInsets.only(
@@ -376,25 +437,17 @@ class TaskSearchState extends State {
                           shape: BoxShape.rectangle,
                           color: Colors.blue[100],
                         ),
-                        child: TextField(
-                          readOnly: true,
-                          style: _textStyleControls,
-                          decoration: InputDecoration(
-                            labelText: ' Focus Tasks Only ',
-                            labelStyle: _textStyleControls,
-                            hintText: '',
-                            border: InputBorder.none,
-                            prefixIcon: InkWell(
-                              onTap: () {
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Switch(
+                              value: (_includeIsStar == 0) ? false : true,
+                              onChanged: (value) {
                                 setState(() {
                                   if (_includeIsStar == 1) {
                                     _includeIsStar = 0;
-                                    Icon(Icons.lightbulb,
-                                        color: Colors.black38);
                                   } else {
                                     _includeIsStar = 1;
-                                    Icon(Icons.lightbulb,
-                                        color: Colors.amber[800]);
                                   }
                                   searchData(
                                       _searchText,
@@ -407,14 +460,59 @@ class TaskSearchState extends State {
                                       _selectedTag1);
                                 });
                               },
-                              child: Icon(Icons.lightbulb,
-                                  color: (_includeIsStar == 0)
-                                      ? Colors.black12
-                                      : Colors.teal),
                             ),
-                          ),
+                            Text('Focus Tasks Only', style: _textStyleControls),
+                          ],
                         ),
                       ),
+//####################################Show Focus Tasks Task Check box
+
+//                      Container(
+//                        margin: EdgeInsets.only(
+//                            left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+//                        decoration: BoxDecoration(
+//                          shape: BoxShape.rectangle,
+//                          color: Colors.blue[100],
+//                        ),
+//                        child: TextField(
+//                          readOnly: true,
+//                          style: _textStyleControls,
+//                          decoration: InputDecoration(
+//                            labelText: ' Focus Tasks Only ',
+//                            labelStyle: _textStyleControls,
+//                            hintText: '',
+//                            border: InputBorder.none,
+//                            prefixIcon: InkWell(
+//                              onTap: () {
+//                                setState(() {
+//                                  if (_includeIsStar == 1) {
+//                                    _includeIsStar = 0;
+//                                    Icon(Icons.lightbulb,
+//                                        color: Colors.black38);
+//                                  } else {
+//                                    _includeIsStar = 1;
+//                                   Icon(Icons.lightbulb,
+//                                        color: Colors.amber[800]);
+//                                  }
+//                                  searchData(
+//                                      _searchText,
+//                                      _searchDateDue,
+//                                      _includeIsStar,
+//                                      _includeIsDone,
+//                                      _selectedCategory,
+//                                      _selectedStatus,
+//                                      _selectedPriority,
+//                                      _selectedTag1);
+//                                });
+//                              },
+//                              child: Icon(Icons.lightbulb,
+//                                  color: (_includeIsStar == 0)
+//                                      ? Colors.black12
+//                                      : Colors.teal),
+//                            ),
+//                          ),
+//                        ),
+//                      ),
 
 //#################################Category#####################################################
                       Container(
