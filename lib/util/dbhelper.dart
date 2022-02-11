@@ -17,6 +17,7 @@ import 'package:todo_app/model/context1.dart';
 import 'package:todo_app/model/todouser.dart';
 import 'package:todo_app/model/globals.dart' as globals;
 import 'package:todo_app/screens/taskdetail.dart';
+import 'package:todo_app/util/mysql_dbhelper.dart';
 
 class DbHelper {
   static final DbHelper _dbHelper = DbHelper._internal();
@@ -75,7 +76,7 @@ class DbHelper {
 
   Future<Database> initializeDb() async {
     Directory dir = await getApplicationDocumentsDirectory();
-    String path = dir.path + "todo_V23.db";
+    String path = dir.path + "todo_V24.db";
     var dbTodovn = await openDatabase(path, version: 1, onCreate: _createDb);
     return dbTodovn;
   }
@@ -1297,25 +1298,174 @@ Plan C - USD 24 | 12 month
 
   //Commits all of the operations in this batch as a single atomic unit
   // if there is any failures then all operation will not be comitted
-  Future testbatchoperation() async {
+  // Future testbatchoperation() async {
+  //   Database? db = await this.db;
+  //   String userID = "1"; //Delete this for example only
+  //   final batch = db!.batch();
+
+  //   //some sample operations
+  //   batch.rawDelete("Delete * from priorities");
+  //   batch.execute(
+  //       "INSERT INTO priorities ( 'name', 'description')  values (?, ?)",
+  //       ['test', 'test']);
+  //   batch.rawUpdate('UPDATE todouser SET lastPushDate = ' +
+  //       formattedDate +
+  //       ', WHERE  userid =' +
+  //       userID +
+  //       ' ');
+
+  //   await batch.commit(
+  //       noResult: true); //np results: ture will improve performance
+
+  //   return true;
+  // }
+
+  Future wipeAllDataFromMysql(List<Map> tasks, List<Map> status,
+      List<Map> proiorities, List<Map> catagories, List<Map> tags) async {
     Database? db = await this.db;
-    String userID = "1"; //Delete this for example only
+
     final batch = db!.batch();
 
-    //some sample operations
-    batch.rawDelete("Delete * from priorities");
-    batch.execute(
-        "INSERT INTO priorities ( 'name', 'description')  values (?, ?)",
-        ['test', 'test']);
-    batch.rawUpdate('UPDATE todouser SET lastPushDate = ' +
-        formattedDate +
-        ', WHERE  userid =' +
-        userID +
-        ' ');
+    batch.rawDelete("Delete from todo");
+    batch.rawDelete("Delete from categories");
+    batch.rawDelete("Delete from statuses");
+    batch.rawDelete("Delete from priorities");
+    batch.rawDelete("Delete from tag1s");
 
-    await batch.commit(
-        noResult: true); //np results: ture will improve performance
+    for (int i = 0; i < tasks!.length; i++) {
+      String dbTaskID = tasks[i]['TaskID'].toString();
+      String dbUserID = tasks[i]['TaskUserId'].toString();
+      String appTaskID = dbTaskID.substring(dbUserID.length, dbTaskID.length);
 
-    return true;
+      var appCategoryID = "";
+      if (tasks[i]['TaskCategory'] != "" && tasks[i]['TaskCategory'] != null) {
+        String dbCategoryID = tasks[i]['TaskCategory'];
+        appCategoryID = dbTaskID.substring(dbUserID.length);
+      }
+
+      var appContextID = "";
+      if (tasks[i]['TaskContext'] != "" && tasks[i]['TaskContext'] != null) {
+        String dbContextID = tasks[i]['TaskContext'].toString();
+        appContextID =
+            dbContextID.substring(dbUserID.length, dbContextID.length);
+      }
+
+      var appActionID = "";
+      if (tasks[i]['TaskAction'] != "" && tasks[i]['TaskAction'] != null) {
+        String dbActionID = tasks[i]['TaskAction'].toString();
+        appActionID = dbActionID.substring(dbUserID.length, dbActionID.length);
+      }
+      var appLocationID = "";
+      if (tasks[i]['TaskLocation'] != "" && tasks[i]['TaskLocation'] != null) {
+        String dbLocationID = tasks[i]['TaskLocation'].toString();
+        appLocationID =
+            dbLocationID.substring(dbUserID.length, dbLocationID.length);
+      }
+
+      var appTagID = "";
+      if (tasks[i]['TaskTag'] != "" && tasks[i]['TaskTag'] != null) {
+        String dbTagID = tasks[i]['TaskTag'].toString();
+        appTagID = dbTagID.substring(dbUserID.length, dbTagID.length);
+      }
+
+      var appGoalID = "";
+      if (tasks[i]['TaskGoal'] != "" && tasks[i]['TaskGoal'] != null) {
+        String dbGoalID = tasks[i]['TaskGoal'].toString();
+        appGoalID = dbGoalID.substring(dbUserID.length, dbGoalID.length);
+      }
+
+      var appPriorityID = "";
+      if (tasks[i]['TaskPriority'] != "" && tasks[i]['TaskPriority'] != null) {
+        String dbPriorityID = tasks[i]['TaskPriority'].toString();
+        appPriorityID =
+            dbPriorityID.substring(dbUserID.length, dbPriorityID.length);
+      }
+
+      var appStatusID = "4";
+      if (tasks[i]['TaskStatus'] != "" && tasks[i]['TaskStatus'] != null) {
+        String dbStatusID = tasks[i]['TaskStatus'].toString();
+        appStatusID = dbStatusID.substring(dbUserID.length, dbStatusID.length);
+      }
+
+      batch.execute(
+          "INSERT INTO todo ( 'id', 'task', 'note', 'dateDue', 'timeDue', 'status', 'priority', 'category', 'tag1', 'isStar', 'isDone', 'dateDone', 'lastModified')  values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+          [
+            int.parse(appTaskID),
+            tasks[i]['TaskTask'],
+            tasks[i]['TaskNote'],
+            tasks[i]['TaskDateDue'],
+            tasks[i]['TaskTimeDue'],
+            appStatusID,
+            appPriorityID,
+            appCategoryID,
+            appTagID,
+            int.parse(tasks[i]['taskIsStar']),
+            int.parse(tasks[i]['TaskIsDone']),
+            tasks[i]['TaskDateDone'],
+            tasks[i]['LastModified']
+          ]);
+    }
+
+    for (int i = 0; i < status!.length; i++) {
+      String dbId = status[i]['id'].toString();
+      String dbUserID = status[i]['userId'].toString();
+      String appId = dbId.substring(dbUserID.length, dbId.length);
+
+      batch.execute(
+          "INSERT INTO statuses ( 'id', 'name',  'description') values (?, ?, ?)",
+          [
+            int.parse(appId),
+            status[i]['name'],
+            status[i]['desc'],
+          ]);
+    }
+
+    for (int i = 0; i < proiorities!.length; i++) {
+      String dbId = proiorities[i]['id'].toString();
+      String dbUserID = proiorities[i]['userId'].toString();
+      String appId = dbId.substring(dbUserID.length, dbId.length);
+
+      batch.execute(
+          "INSERT INTO priorities ( 'id', 'name',  'description')  values (?, ?, ?)",
+          [
+            int.parse(appId),
+            proiorities[i]['name'],
+            proiorities[i]['desc'],
+          ]);
+    }
+
+    for (int i = 0; i < catagories!.length; i++) {
+      String dbId = catagories[i]['id'].toString();
+      String dbUserID = catagories[i]['userId'].toString();
+      String appId = dbId.substring(dbUserID.length, dbId.length);
+
+      batch.execute(
+          "INSERT INTO categories ( 'id', 'name',  'description')  values (?, ?, ?)",
+          [
+            int.parse(appId),
+            catagories[i]['name'],
+            catagories[i]['desc'],
+          ]);
+    }
+
+    for (int i = 0; i < tags!.length; i++) {
+      String dbId = tags[i]['id'].toString();
+      String dbUserID = tags[i]['userId'].toString();
+      String appId = dbId.substring(dbUserID.length, dbId.length);
+
+      batch.execute(
+          "INSERT INTO tag1s ( 'id', 'name',  'description')  values (?, ?, ?)",
+          [
+            int.parse(appId),
+            tags[i]['name'],
+            tags[i]['desc'],
+          ]);
+    }
+
+    await batch.commit(noResult: true);
+
+    // }
+
+    //dbhelper.pushAlldata(tasks, status, proiorities, catagories, tags);
   }
 }
