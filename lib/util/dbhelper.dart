@@ -1462,7 +1462,7 @@ Plan C - USD 24 | 12 month
           ]);
     }
 
-    await batch.commit(noResult: true);
+    await batch.commit(noResult: false);
 
     // }
 

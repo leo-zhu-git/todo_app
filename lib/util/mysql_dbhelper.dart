@@ -729,7 +729,7 @@ class MySql_DBHelper {
     return data;
   }
 
-  void wipeAllDataFromMysql() async {
+  Future wipeAllDataFromMysql() async {
     List<Map>? tasks = await getTasksFromMySql();
     List<Map>? status = await getStatusesDataFromMysql();
     List<Map>? proiorities = await getPrioritiesDataFromMysql();
@@ -739,7 +739,7 @@ class MySql_DBHelper {
         tasks!, status!, proiorities!, catagories!, tags!);
   }
 
-  void wipeAllDataToMySql() async {
+  Future wipeAllDataToMySql() async {
     var tasks = await wipeTaskDataToMySql();
     var status = await wipeStatusToMySql();
     var proiority = await wipePriorityToMySql();

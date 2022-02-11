@@ -165,7 +165,7 @@ class _WipeScreenState extends State<WipeScreen> {
     EasyLoading.show(status: 'Wiping..');
     await Future.delayed(Duration(seconds: 3), () {});
 
-    mysqlDBhelper.wipeAllDataToMySql();
+    await mysqlDBhelper.wipeAllDataToMySql();
 
     await EasyLoading.showSuccess('Wipe Success');
     await Future.delayed(Duration(seconds: 1), () {});
@@ -193,7 +193,7 @@ class _WipeScreenState extends State<WipeScreen> {
     await Future.delayed(Duration(seconds: 5), () {});
 
 // wait for leo's code
-    mysqlDBhelper.wipeAllDataFromMysql();
+    var result = await mysqlDBhelper.wipeAllDataFromMysql();
 //    await Future.delayed(Duration(seconds: 10), () {});
 
 //    mysqlDBhelper.wipeTaskDataFromMySql();
