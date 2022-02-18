@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:sqflite/sqflite.dart';
@@ -100,19 +101,19 @@ class DbHelper {
             "$colfilterTag1 TEXT, " +
             "$colfilterIsStar INTEGER, $colfilterIsDone INTEGER)");
 
-    // Create table categories
+    // Create table categories - add last modify
     await db.execute(
         "CREATE TABLE categories(id INTEGER PRIMARY KEY, name TEXT, description TEXT)");
 
-    // Create table statuses
+    // Create table statuses  - add last modify
     await db.execute(
         "CREATE TABLE statuses(id INTEGER PRIMARY KEY, name TEXT, description TEXT)");
 
-    // Create table priorities
+    // Create table priorities  - add last modify
     await db.execute(
         "CREATE TABLE priorities(id INTEGER PRIMARY KEY, name TEXT, description TEXT)");
 
-    // Create table tags
+    // Create table tags  - add last modify
     await db.execute(
         "CREATE TABLE tag1s(id INTEGER PRIMARY KEY, name TEXT, description TEXT)");
 
@@ -1281,6 +1282,16 @@ Plan C - USD 24 | 12 month
     return lastPushDate;
   }
 
+// Get tasks update after last Sync
+  Future getTasksforSync() async {
+    var lastPushDate = this.getLastSyncDate();
+    Database? db = await this.db;
+    var result = Sqflite.firstIntValue(await db!
+        .rawQuery('select * from todo where lastModified >= $lastPushDate'));
+
+    return result;
+  }
+
   // Set Last sync date
   Future<int> setLastSyncDate() async {
     String userID = getUserID().toString();
@@ -1332,7 +1343,7 @@ Plan C - USD 24 | 12 month
     batch.rawDelete("Delete from priorities");
     batch.rawDelete("Delete from tag1s");
 
-    for (int i = 0; i < tasks!.length; i++) {
+    for (int i = 0; i < tasks.length; i++) {
       String dbTaskID = tasks[i]['TaskID'].toString();
       String dbUserID = tasks[i]['TaskUserId'].toString();
       String appTaskID = dbTaskID.substring(dbUserID.length, dbTaskID.length);
@@ -1406,7 +1417,7 @@ Plan C - USD 24 | 12 month
           ]);
     }
 
-    for (int i = 0; i < status!.length; i++) {
+    for (int i = 0; i < status.length; i++) {
       String dbId = status[i]['id'].toString();
       String dbUserID = status[i]['userId'].toString();
       String appId = dbId.substring(dbUserID.length, dbId.length);
@@ -1420,7 +1431,7 @@ Plan C - USD 24 | 12 month
           ]);
     }
 
-    for (int i = 0; i < proiorities!.length; i++) {
+    for (int i = 0; i < proiorities.length; i++) {
       String dbId = proiorities[i]['id'].toString();
       String dbUserID = proiorities[i]['userId'].toString();
       String appId = dbId.substring(dbUserID.length, dbId.length);
@@ -1434,7 +1445,7 @@ Plan C - USD 24 | 12 month
           ]);
     }
 
-    for (int i = 0; i < catagories!.length; i++) {
+    for (int i = 0; i < catagories.length; i++) {
       String dbId = catagories[i]['id'].toString();
       String dbUserID = catagories[i]['userId'].toString();
       String appId = dbId.substring(dbUserID.length, dbId.length);
@@ -1448,7 +1459,7 @@ Plan C - USD 24 | 12 month
           ]);
     }
 
-    for (int i = 0; i < tags!.length; i++) {
+    for (int i = 0; i < tags.length; i++) {
       String dbId = tags[i]['id'].toString();
       String dbUserID = tags[i]['userId'].toString();
       String appId = dbId.substring(dbUserID.length, dbId.length);
