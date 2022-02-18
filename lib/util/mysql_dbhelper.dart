@@ -42,6 +42,9 @@ class MySql_DBHelper {
     return _db;
   }
 
+///////////////////////////
+  /// Wipe tasks
+///////////////////////////
   Future<List<Map<dynamic, dynamic>>?> getTasksFromMySql() async {
     final tasksRequest = request('getAllTasks', formData: null);
     List<Map> taskList = [];
@@ -49,62 +52,13 @@ class MySql_DBHelper {
       final data = json.decode(value.toString());
       taskList = (data['Tasks'] as List).cast();
 
-      print(taskList);
+      // print(taskList);
     });
     return taskList;
   }
 
-  void syncTaskDataFromMySqlLastSevenDays() async {
-    final tasksRequest = request('getLastSevenDaystasks', formData: null);
-
-    tasksRequest.then((value) {
-      final data = json.decode(value.toString());
-      List<Map> swiperDataList = (data['Tasks'] as List).cast();
-
-      var count = swiperDataList.length;
-      // print(count);
-
-      for (int i = 0; i < swiperDataList.length; i++) {
-        String dbTaskID = swiperDataList[i]['TaskID'].toString();
-        String dbUserID = swiperDataList[i]['TaskUserId'].toString();
-        String appTaskID = dbTaskID.substring(dbUserID.length, dbTaskID.length);
-        // print(appTaskID);
-        // print("woaibeijingtiananmen");
-        Task task = Task.withId(
-            int.parse(appTaskID),
-            swiperDataList[i]['TaskTask'],
-            swiperDataList[i]['TaskNote'],
-            swiperDataList[i]['TaskDateDue'],
-            swiperDataList[i]['TaskTimeDue'],
-            swiperDataList[i]['TaskCategory'],
-            swiperDataList[i]['TaskStatus'],
-            swiperDataList[i]['TaskPriority'],
-            swiperDataList[i]['TaskTag'],
-            int.parse(swiperDataList[i]['TaskIsStar']),
-            int.parse(swiperDataList[i]['TaskIsDone']),
-            swiperDataList[i]['TaskDateDone'],
-            swiperDataList[i]['LastModified'],
-            "",
-            "",
-            "");
-        final tasksFuture = helper.getTasksByID(appTaskID);
-        tasksFuture.then((result) {
-          count = result.length;
-
-          if (count > 0) {
-            helper.updateTask(task);
-            //helper.deleteTask(swiperDataList[i]['TaskID']);
-          } else {
-            helper.insertTask(task);
-            //helper.deleteTask(swiperDataList[i]['TaskID']);
-          }
-        });
-      }
-    });
-  }
-
 ///////////////////////////
-  /// sync statuses
+  /// Wipe statuses
 ///////////////////////////
   Future<List<Map>?> getStatusesDataFromMysql() async {
     final statusRequest = request('statusContent', formData: null);
@@ -151,7 +105,7 @@ class MySql_DBHelper {
   }
 
 ///////////////////////////
-  /// sync priorities
+  /// Wipe priorities
 ///////////////////////////
   Future<List<Map>?> getPrioritiesDataFromMysql() async {
     final prioritiesRequest = request('priorityContent', formData: null);
@@ -160,7 +114,7 @@ class MySql_DBHelper {
       final data = json.decode(value.toString());
       // print(data);
       prioritiesList = (data['Priority'] as List).cast();
-      print(prioritiesList);
+      // print(prioritiesList);
       // // print(count);
       // var prioritiesList = [];
       // for (int i = 0; i < swiperDataList.length; i++) {
@@ -196,7 +150,7 @@ class MySql_DBHelper {
   }
 
 ///////////////////////////
-  /// sync categories
+  /// Wipe categories
 ///////////////////////////
 
   Future<List<Map>?> getCategoriesDataFromMysql() async {
@@ -206,172 +160,13 @@ class MySql_DBHelper {
       final data = json.decode(value.toString());
       // print(data);
       categoriesList = (data['Categories'] as List).cast();
-      print(categoriesList);
-
-      // var count = swiperDataList_categories.length;
-      // // print(count);
-      // return swiperDataList_categories;
-      // var categoriesList = [];
-      // for (int i = 0; i < swiperDataList.length; i++) {
-      //   Category action = new Category();
-      //   String dbId = swiperDataList[i]['id'].toString();
-      //   String dbUserID = swiperDataList[i]['userId'].toString();
-      //   String appId = dbId.substring(dbUserID.length, dbId.length);
-      //   action.id = int.parse(appId);
-      //   action.name = swiperDataList[i]['name'];
-      //   action.description = swiperDataList[i]['desc'];
-
-      // final actionFuture = helper.getCategoriesbyID(int.parse(appId));
-      // actionFuture.then((result) {
-      //   count = result.length;
-      //   //for (int i = 0; i < count; i++) {
-      //   //helper.deleteAction(i);
-      //   //}
-      //   if (count > 0) {
-      //     helper.updateCategories(action);
-      //     //helper.deleteAction(swiperDataList[i]['TaskID']);
-      //   } else {
-      //     helper.insertCategories(action);
-      //     // helper.deleteAction(swiperDataList[i]['TaskID']);
-      //   }
-      // });
-
-      //   categoriesList.add(action);
-      // }
       // print(categoriesList);
     });
     return categoriesList;
   }
 
 ///////////////////////////
-  /// sync actions
-///////////////////////////
-  void syncAction1sData() async {
-    helper.deleteAllAction1s();
-    final tasksRequest = request('actionContent', formData: null);
-
-    tasksRequest.then((value) {
-      final data = json.decode(value.toString());
-      // print(data);
-      List<Map> swiperDataList = (data['Actions'] as List).cast();
-
-      var count = swiperDataList.length;
-      print(count);
-
-      for (int i = 0; i < swiperDataList.length; i++) {
-        Action1 action = new Action1();
-        String dbId = swiperDataList[i]['id'].toString();
-        String dbUserID = swiperDataList[i]['userId'].toString();
-        String appId = dbId.substring(dbUserID.length, dbId.length);
-        action.id = int.parse(appId);
-        action.name = swiperDataList[i]['name'];
-        action.description = swiperDataList[i]['desc'];
-
-        final actionFuture = helper.getAction1sbyID(int.parse(appId));
-        actionFuture.then((result) {
-          count = result.length;
-          //for (int i = 0; i < count; i++) {
-          //helper.deleteAction(i);
-          //}
-          if (count > 0) {
-            helper.updateAction1s(action);
-            //helper.deleteAction(swiperDataList[i]['TaskID']);
-          } else {
-            helper.insertAction1s(action);
-            // helper.deleteAction(swiperDataList[i]['TaskID']);
-          }
-        });
-      }
-    });
-  }
-
-///////////////////////////
-  /// sync contexts
-///////////////////////////
-
-  void syncContext1sData() async {
-    // helper.deleteAllContext1s();
-    final tasksRequest = request('contextContent', formData: null);
-
-    tasksRequest.then((value) {
-      final data = json.decode(value.toString());
-      // print(data);
-      List<Map> swiperDataList = (data['Contexts'] as List).cast();
-
-      var count = swiperDataList.length;
-      // print(count);
-
-      for (int i = 0; i < swiperDataList.length; i++) {
-        Context1 action = new Context1();
-        String dbId = swiperDataList[i]['id'].toString();
-        String dbUserID = swiperDataList[i]['userId'].toString();
-        String appId = dbId.substring(dbUserID.length, dbId.length);
-        action.id = int.parse(appId);
-        action.name = swiperDataList[i]['name'];
-        action.description = swiperDataList[i]['desc'];
-
-        // print(swiperDataList[i]['name']);
-        //helper.deleteTask(swiperDataList[i]['TaskID']);
-        final actionFuture = helper.getContext1sbyID(int.parse(appId));
-        actionFuture.then((result) {
-          count = result.length;
-
-          if (count > 0) {
-            //helper.deleteContextbyID(swiperDataList[i]['ContextID']);
-            helper.updateContext1s(action);
-          } else {
-            helper.insertContext1s(action);
-            //helper.deleteContextbyID(swiperDataList[i]['ContextID']);
-          }
-        });
-      }
-    });
-  }
-
-///////////////////////////
-  /// sync locations
-///////////////////////////
-  void syncLocation1sData() async {
-    helper.deleteAllLocation1s();
-    final tasksRequest = request('locationContent', formData: null);
-
-    tasksRequest.then((value) {
-      final data = json.decode(value.toString());
-      // print(data);
-      List<Map> swiperDataList = (data['Locations'] as List).cast();
-
-      var count = swiperDataList.length;
-      // print(count);
-
-      for (int i = 0; i < swiperDataList.length; i++) {
-        Location1 action = new Location1();
-        String dbId = swiperDataList[i]['id'].toString();
-        String dbUserID = swiperDataList[i]['userId'].toString();
-        String appId = dbId.substring(dbUserID.length, dbId.length);
-        action.id = int.parse(appId);
-        action.name = swiperDataList[i]['name'];
-        action.description = swiperDataList[i]['desc'];
-
-        // print(swiperDataList[i]['name']);
-        //helper.deleteTask(swiperDataList[i]['TaskID']);
-        final actionFuture = helper.getLocation1sbyID(int.parse(appId));
-        actionFuture.then((result) {
-          count = result.length;
-
-          if (count > 0) {
-            //helper.deleteContextbyID(swiperDataList[i]['ContextID']);
-            helper.updateLocation1s(action);
-          } else {
-            helper.insertLocation1s(action);
-            //helper.deleteContextbyID(swiperDataList[i]['ContextID']);
-          }
-        });
-      }
-    });
-  }
-
-///////////////////////////
-  /// sync tags
+  /// Wipe tags
 ///////////////////////////
   Future<List<Map>?> getTag1sDataFromMysql() async {
     final tagRequest = request('tagContent', formData: null);
@@ -380,78 +175,9 @@ class MySql_DBHelper {
       final data = json.decode(value.toString());
       // print(data);
       tagList = (data['Tags'] as List).cast();
-      print(tagList);
-      // var count = swiperDataList_tag.length;
-      // return swiperDataList_tag;
-      // print(count);
-      // var tagsList = [];
-      // for (int i = 0; i < swiperDataList.length; i++) {
-      //   Tag1 action = new Tag1();
-      //   String dbId = swiperDataList[i]['id'].toString();
-      //   String dbUserID = swiperDataList[i]['userId'].toString();
-      //   String appId = dbId.substring(dbUserID.length, dbId.length);
-      //   action.id = int.parse(appId);
-      //   action.name = swiperDataList[i]['name'];
-      //   action.description = swiperDataList[i]['desc'];
-
-      // print(swiperDataList[i]['name']);
-      //helper.deleteTask(swiperDataList[i]['TaskID']);
-      // final actionFuture = helper.getTag1sbyID(int.parse(appId));
-      // actionFuture.then((result) {
-      //   count = result.length;
-
-      //   if (count > 0) {
-      //     //helper.deleteContextbyID(swiperDataList[i]['ContextID']);
-      //     helper.updateTag1s(action);
-      //   } else {
-      //     helper.insertTag1s(action);
-      //     //helper.deleteContextbyID(swiperDataList[i]['ContextID']);
-      //   }
-      // });
-
-      //   tagsList.add(action);
-      // }
-      // print(tagsList);
+      // print(tagList);
     });
     return tagList;
-  }
-
-///////////////////////////
-  /// sync goals
-///////////////////////////
-  void syncGoal1sData() async {
-    helper.deleteAllGoal1s();
-    final tasksRequest = request('goalContent', formData: null);
-
-    tasksRequest.then((value) {
-      final data = json.decode(value.toString());
-      // print(data);
-      List<Map> swiperDataList = (data['Goals'] as List).cast();
-
-      var count = swiperDataList.length;
-      // print(count);
-
-      for (int i = 0; i < swiperDataList.length; i++) {
-        Goal1 goal = new Goal1();
-        String dbId = swiperDataList[i]['id'].toString();
-        String dbUserID = swiperDataList[i]['userId'].toString();
-        String appId = dbId.substring(dbUserID.length, dbId.length);
-        goal.id = int.parse(appId);
-        goal.name = swiperDataList[i]['name'];
-        goal.description = swiperDataList[i]['desc'];
-
-        final goalFuture = helper.getGoal1sbyID(int.parse(appId));
-        goalFuture.then((result) {
-          count = result.length;
-
-          if (count > 0) {
-            helper.updateGoal1s(goal);
-          } else {
-            helper.insertGoal1s(goal);
-          }
-        });
-      }
-    });
   }
 
   Future<Map<dynamic, dynamic>?> wipeTaskDataToMySql() async {
@@ -566,9 +292,12 @@ class MySql_DBHelper {
     return tasks;
   }
 
+///////////////////////////
+  /// Sync all Tasks
+///////////////////////////
+
   void syncTasks() async {
-    // this.pushTasksToMySql();
-    // this.wipeTaskDataFromMySql();
+    var tasks = dbHelper.getTasksforSync();
   }
 
   Future<Map<dynamic, dynamic>?> wipeCatatoryToMySql() async {
@@ -754,5 +483,7 @@ class MySql_DBHelper {
     allData.addAll(tags!);
 
     request('wipeTasksfromDevice', formData: allData);
+
+    dbHelper.setLastSyncDate();
   }
 }

@@ -77,7 +77,7 @@ class DbHelper {
 
   Future<Database> initializeDb() async {
     Directory dir = await getApplicationDocumentsDirectory();
-    String path = dir.path + "todo_V24.db";
+    String path = dir.path + "todo_V24A.db";
     var dbTodovn = await openDatabase(path, version: 1, onCreate: _createDb);
     return dbTodovn;
   }
@@ -1351,7 +1351,7 @@ Plan C - USD 24 | 12 month
       var appCategoryID = "";
       if (tasks[i]['TaskCategory'] != "" && tasks[i]['TaskCategory'] != null) {
         String dbCategoryID = tasks[i]['TaskCategory'];
-        appCategoryID = dbTaskID.substring(dbUserID.length);
+        appCategoryID = dbCategoryID.substring(dbUserID.length);
       }
 
       var appContextID = "";
@@ -1474,6 +1474,18 @@ Plan C - USD 24 | 12 month
     }
 
     await batch.commit(noResult: false);
+
+    var alltaskss = await dbHelper.getAllTasks();
+    var allcatagory = await dbHelper.getCategories();
+    var allStatues = await dbHelper.getStatuses();
+    var allPriorities = await dbHelper.getPriorities();
+    var allTags = await dbHelper.getTag1s();
+
+    print(alltaskss);
+    print(allcatagory);
+    print(allStatues);
+    print(allPriorities);
+    print(allTags);
 
     // }
 

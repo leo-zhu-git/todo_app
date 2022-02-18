@@ -51,7 +51,7 @@ class _SyncViewState extends State<SyncView> {
     await Future.delayed(Duration(seconds: 5), () {});
 
 // wait for leo's code
-//    mysqlDBhelper.syncTasks();
+    mysqlDBhelper.syncTasks();
 
     await EasyLoading.showSuccess('Sync completed successfully');
   }
