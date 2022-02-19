@@ -163,7 +163,7 @@ class _WipeScreenState extends State<WipeScreen> {
       });
     }
     EasyLoading.show(status: 'Wiping..');
-    await Future.delayed(Duration(seconds: 3), () {});
+    await Future.delayed(Duration(seconds: 1), () {});
 
     await mysqlDBhelper.wipeAllDataToMySql();
 
@@ -179,30 +179,26 @@ class _WipeScreenState extends State<WipeScreen> {
       _progress = 0;
       _timer?.cancel();
       _timer = Timer.periodic(const Duration(milliseconds: 100), (Timer timer) {
-        EasyLoading.showProgress(_progress,
-            status: '${(_progress * 100).toStringAsFixed(0)}%');
-        _progress += 0.03;
-
-        if (_progress >= 1) {
-          _timer?.cancel();
-          EasyLoading.dismiss();
-        }
+//        EasyLoading.showProgress(_progress,
+//            status: '${(_progress * 100).toStringAsFixed(0)}%');
+//        _progress += 0.03;
+//
+//        if (_progress >= 1) {
+//          _timer?.cancel();
+//          EasyLoading.dismiss();
+//        }
       });
     }
-    EasyLoading.showProgress(0.3, status: 'Wipe Cloud To Device ...');
-    await Future.delayed(Duration(seconds: 5), () {});
+    EasyLoading.show(status: 'Wiping..');
+    await Future.delayed(Duration(seconds: 1), () {});
 
 // wait for leo's code
     var result = await mysqlDBhelper.wipeAllDataFromMysql();
-//    await Future.delayed(Duration(seconds: 10), () {});
 
-//    mysqlDBhelper.wipeTaskDataFromMySql();
-//    mysqlDBhelper.syncCategoriesData();
-//    mysqlDBhelper.syncStatusesData();
-//    mysqlDBhelper.syncPrioritiesData();
-//    mysqlDBhelper.syncTag1sData();
-    await EasyLoading.showSuccess('Wipe Cloud to Device Success');
-    await Future.delayed(Duration(seconds: 2), () {});
+    await EasyLoading.showSuccess('Wipe Success');
+    await Future.delayed(Duration(seconds: 1), () {});
+
+
   }
 
   _ConfirmDialogue(int _option, String message) {
