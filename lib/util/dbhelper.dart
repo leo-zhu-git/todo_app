@@ -1284,26 +1284,27 @@ Plan C - USD 24 | 12 month
 
 // Get tasks update after last Sync
   Future getTasksforSync() async {
-    var lastPushDate = this.getLastSyncDate();
+    var lastPushDate = await this.getLastSyncDate();
     Database? db = await this.db;
-    var result = Sqflite.firstIntValue(await db!
-        .rawQuery('select * from todo where lastModified >= $lastPushDate'));
-
+    String queryTask = "";
+    if (lastPushDate != null) {
+      queryTask = 'select * from todo where lastModified >= $lastPushDate';
+    } else {
+      queryTask = 'select * from todo ';
+    }
+    var result = Sqflite.firstIntValue(await db!.rawQuery(queryTask));
     return result;
   }
 
   // Set Last sync date
   Future<int> setLastSyncDate() async {
-    String userID = getUserID().toString();
+    String userID = await getUserID();
     Database? db = await this.db;
 
     DateTime now = DateTime.now();
-    String formattedDate = DateFormat('yyyy-mm-dd').format(now);
-    var result = await db!.rawUpdate('UPDATE todouser SET lastPushDate = ' +
-        formattedDate +
-        ', WHERE  userid =' +
-        userID +
-        ' ');
+    String formattedDate = DateFormat('yyyy-MM-dd').format(now);
+    var result = await db!.rawUpdate(
+        "UPDATE todouser SET lastPushDate = '$formattedDate' WHERE  userid = '$userID'  ");
     return result;
   }
 
