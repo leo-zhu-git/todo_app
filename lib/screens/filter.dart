@@ -136,9 +136,9 @@ class _FilterViewState extends State //State<FilterView>
   late List<DropdownMenuItem<SortItem>> _dropdownMenuItemsSort;
   late List<DropdownMenuItem<SortOrder>> _dropdownMenuSortOrder;
 //  late List<DropdownMenuItem<FilterIsStar>> _dropdownFilterIsStar;
-  int? _selectedFilterIsStar;
+  int? _selectedFilterIsStar = 0;
 //  late List<DropdownMenuItem<FilterIsDone>> _dropdownFilterIsDone;
-  int? _selectedFilterIsDone;
+  int? _selectedFilterIsDone = 0;
   late List<DropdownMenuItem<FilterDateDue>> _dropdownFilterDateDue;
 //  FilterIsStar? _selectedFilterIsStar;
 //  FilterIsDone? _selectedFilterIsDone;
@@ -202,7 +202,7 @@ class _FilterViewState extends State //State<FilterView>
       _selectedFilterIsStar = 0;
       globals.filterIsStar = 0;
     } else
-      _selectedFilterIsStar = 1;
+    //  _selectedFilterIsStar = 1;
 //          _dropdownFilterIsStar[globals.filterIsStar!].value!;
 
     ////////////////////////////
@@ -765,6 +765,14 @@ class _FilterViewState extends State //State<FilterView>
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    // Switch(
+                    //   value: (_selectedFilterIsStar == 0) ? false : true,
+                    //   onChanged: (value) {
+                    //     setState(() {
+                    //       _selectedFilterIsStar = (value == true) ? 1 : 0;
+                    //     });
+                    //   },
+                    // ),
                     Switch(
                       value: (_selectedFilterIsStar == 0) ? false : true,
                       onChanged: (value) {
