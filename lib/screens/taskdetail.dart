@@ -257,44 +257,6 @@ class TaskDetailState extends State //<TaskDetail>
 //##########################################end of Dropdown #################################################################
 
   DateTime? _dateDue;
-  void _showCupertinoDatePicker(ctx) {
-    // showCupertinoModalPopup is a built-in function of the cupertino library
-    showCupertinoModalPopup(
-        context: ctx,
-        builder: (_) => Container(
-              height: 500,
-              color: Color.fromARGB(255, 255, 255, 255),
-              child: Column(
-                children: [
-                  Container(
-                    height: 400,
-                    child: CupertinoDatePicker(
-                        initialDateTime:
-                            (_dateDue == null) ? DateTime.now() : _dateDue,
-                        mode: CupertinoDatePickerMode.date,
-                        onDateTimeChanged: (val) {
-                          setState(() {
-                            _dateDue = val;
-                            final DateFormat formatter =
-                                DateFormat('yyyy-MM-dd');
-                            final String formatted =
-                                formatter.format(_dateDue!);
-                            _todoDateController.text =
-                                formatter.format(_dateDue!);
-                          });
-                        }),
-                  ),
-
-                  // Close the modal
-                  CupertinoButton(
-                    child: Text('OK'),
-                    onPressed: () => Navigator.of(ctx).pop(),
-                  )
-                ],
-              ),
-            ));
-  }
-
   _selectedTodoDate(BuildContext context) async {
     var pickedDate = await showDatePicker(
         context: context,
@@ -319,81 +281,117 @@ class TaskDetailState extends State //<TaskDetail>
   TimeOfDay? _timeDue;
   DateTime? _todoTimeDue;
   String? _savedTime;
+//  Future<void> _openTimePicker(BuildContext context) async {
+//    final pickedTime = await showTimePicker(
+//      context: context,
+//      initialTime: (_timeDue == null) ? TimeOfDay.now() : _timeDue!,
+//    );
 
-  Future<void> _openTimePicker(BuildContext context) async {
-    final pickedTime = await showTimePicker(
-      context: context,
-      initialTime: (_timeDue == null) ? TimeOfDay.now() : _timeDue!,
-    );
+//    if (pickedTime != null && pickedTime != _savedTime) {
+//      setState(() {
+//        _timeDue = pickedTime;
+//        _pickedTime = pickedTime.format(context);
+//        _todoTimeController.text = _pickedTime!;
+//      });
+//    }
+//  }
 
-    if (pickedTime != null && pickedTime != _savedTime) {
-      setState(() {
-        _timeDue = pickedTime;
-        _pickedTime = pickedTime.format(context);
-        _todoTimeController.text = _pickedTime!;
-      });
+// from String in either AMPM or 24h format
+// to String in 24h format --> save in database as 24hour format
+  String _convert24hFormat(String s) {
+    String ampm = s.substring(s.length - 2);
+    int _hour = 0;
+    String _hh = '';
+    int _minute = 0;
+    String _mm = '';
+    TimeOfDay _time;
+    String t24f;
+
+    if (ampm == "AM" || ampm == "PM") {
+      String result = s.substring(0, s.indexOf(' '));
+
+      if (ampm == 'AM' && int.parse(result.split(":")[1]) != 12) {
+        //
+        // AM format before noon
+        //
+        _hour = int.parse(result.split(':')[0]);
+        if (_hour == 12) _hour = 0;
+
+        if (_hour < 10)
+          _hh = "0" + _hour.toString();
+        else
+          _hh = _hour.toString();
+        ;
+
+        _minute = int.parse(result.split(":")[1]);
+        if (_minute < 10)
+          _mm = "0" + _minute.toString();
+        else
+          _mm = _minute.toString();
+        ;
+
+
+      } else {
+
+        //
+        // PM format before noon
+        //
+
+
+        _hour = int.parse(result.split(':')[0]) - 12;
+
+        if (_hour < 0) {
+          _hour = 24 + _hour;
+        }
+        if (_hour == 0) {
+          _hour = 12 + _hour;
+        }
+        if (_hour < 10)
+          _hh = "0" + _hour.toString();
+        else
+          _hh = _hour.toString();
+        ;
+
+        _minute = int.parse(result.split(":")[1]);
+        if (_minute < 10)
+          _mm = "0" + _minute.toString();
+        else
+          _mm = _minute.toString();
+        ;
+      }
+      _time = TimeOfDay(hour: _hour, minute: _minute);
+    } else {
+        //
+        // 24 hour format
+        //
+
+      _time = TimeOfDay(
+          hour: int.parse(s.split(":")[0]), minute: int.parse(s.split(":")[1]));
+
+        if (_time.hour < 10)
+          _hh = "0" + _time.hour.toString();
+        else
+          _hh = _time.hour.toString();
+        ;
+
+        if (_time.minute < 10)
+          _mm = "0" + _time.minute.toString();
+        else
+          _mm = _time.minute.toString();
+        ;
+
     }
+
+    return _hh + ":" + _mm;
   }
 
-  void _showCupertinoDateTimePicker(ctx) {
-    // showCupertinoModalPopup is a built-in function of the cupertino library
-    showCupertinoModalPopup(
-        context: ctx,
-        builder: (_) => Container(
-              height: 500,
-              color: Color.fromARGB(255, 255, 255, 255),
-              child: Column(
-                children: [
-                  Container(
-                    height: 400,
-                    child: CupertinoDatePicker(
-                        initialDateTime: (_dateDue == null)
-                            ? DateTime.now()
-                            : DateTime(
-                                _dateDue!.year,
-                                _dateDue!.month,
-                                _dateDue!.day,
-                                _timeDue!.hour,
-                                _timeDue!.minute),
-//                            : (_dateDue!.add(Duration(
-//                                hours: (_timeDue == null)
-//                                    ? DateTime.now().hour
-//                                    : _timeDue!.hour,
-//                                minutes: (_timeDue == null)
-//                                    ? DateTime.now().minute
-//                                    : _timeDue!.minute))),
-                        mode: CupertinoDatePickerMode.dateAndTime,
-                        onDateTimeChanged: (val) {
-                          setState(() {
-                            _dateDue = val;
-                            final DateFormat formatter =
-                                DateFormat('yyyy-MM-dd');
-                            final String formatted =
-                                formatter.format(_dateDue!);
-                            _todoDateController.text =
-                                formatter.format(_dateDue!);
-
-                            _timeDue = TimeOfDay.fromDateTime(val);
-                            _todoTimeController.text =
-                                _timeDue!.format(context);
-                          });
-                        }),
-                  ),
-
-                  // Close the modal
-                  CupertinoButton(
-                    child: Text('OK'),
-                    onPressed: () => Navigator.of(ctx).pop(),
-                  )
-                ],
-              ),
-            ));
-  }
-
+// from String to TimeOfDay formatting
+// device formatting - can be AMPM or 24h format
   TimeOfDay timeConvert(String s) {
     String ampm = s.substring(s.length - 2);
     int hour;
     int minute;
+    TimeOfDay _time;
     if (ampm == "AM" || ampm == "PM") {
       String result = s.substring(0, s.indexOf(' '));
       if (ampm == 'AM' && int.parse(result.split(":")[1]) != 12) {
@@ -407,38 +405,14 @@ class TaskDetailState extends State //<TaskDetail>
         }
         minute = int.parse(result.split(":")[1]);
       }
-      return TimeOfDay(hour: hour, minute: minute);
+      _time = TimeOfDay(hour: hour, minute: minute);
     } else {
-      TimeOfDay _time = TimeOfDay(
+      _time = TimeOfDay(
           hour: int.parse(s.split(":")[0]), minute: int.parse(s.split(":")[1]));
-      return _time;
     }
+
+    return _time;
   }
-
-//  TimeOfDay timeConvert(String s) {
-//    TimeOfDay _time = TimeOfDay(
-//        hour: int.parse(s.split(":")[0]), minute: int.parse(s.split(":")[1]));
-//    return _time;
-//  }
-
-//TimeOfDay timeConvert(String normTime) {
-//   int hour;
-//    int minute;
-//  String ampm = normTime.substring(normTime.length - 2);
-//    String result = normTime.substring(0, normTime.indexOf(' '));
-//    if (ampm == 'AM' && int.parse(result.split(":")[1]) != 12) {
-//      hour = int.parse(result.split(':')[0]);
-//      if (hour == 12) hour = 0;
-//      minute = int.parse(result.split(":")[1]);
-//    } else {
-//      hour = int.parse(result.split(':')[0]) - 12;
-//      if (hour <= 0) {
-//       hour = 24 + hour;
-//      }
-//      minute = int.parse(result.split(":")[1]);
-//    }
-//    return TimeOfDay(hour: hour, minute: minute);
-//  }
 
 //##################End of Drop Down Items Load from DB #################################################################
 
@@ -537,17 +511,17 @@ class TaskDetailState extends State //<TaskDetail>
                   }
 
                   task.dateDue = _todoDateController.text;
-                  task.timeDue = _todoTimeController.text;
+                  task.timeDue = _convert24hFormat(_todoTimeController.text);
 
-                  task.timeDue != ""
-                      ? {
-                          _nTitle = task.timeDue.toString() +
-                              ' reminder: ' +
-                              task.task!,
-                          notificationPlugin.scheduleNotification(
-                              _nTitle, task.note!, task.dateDue!, task.timeDue!)
-                        }
-                      : {};
+//                  task.timeDue != ""
+//                      ? {
+//                          _nTitle = task.timeDue.toString() +
+//                              ' reminder: ' +
+//                              task.task!,
+//                          notificationPlugin.scheduleNotification(
+//                              _nTitle, task.note!, task.dateDue!, task.timeDue!)
+//                        }
+//                      : {};
 
 //                  task.isDone = 0;
                   task.lastModified =
@@ -632,91 +606,6 @@ class TaskDetailState extends State //<TaskDetail>
             ),
 
 ///////////////////////////
-//  WHEN - DATE DUE
-///////////////////////////
-//            Container(
-//              margin:
-//                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
-//              decoration: BoxDecoration(
-//                shape: BoxShape.rectangle,
-//                color: Colors.blue[100],
-//              ),
-//              child: Column(
-//                children: [
-//                  TextField(
-//                    readOnly: true,
-//                    controller: _todoDateController,
-//                    style: _textStyleControls,
-//                    decoration: InputDecoration(
-//                      labelText: ' Due Date',
-//                      hintText: ' Pick a Date',
-//                      prefixIcon: InkWell(
-//                        onTap: () {
-//                          _selectedTodoDate(context);
-//                        },
-//                        child: Icon(Icons.calendar_today),
-//                      ),
-//                    ),
-//                  ),
-//                ],
-//              ),
-//            ),
-
-///////////////////////////
-//  WHEN - TIME DUE
-///////////////////////////
-//            Container(
-//              margin:
-//                  EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
-//              decoration: BoxDecoration(
-//                shape: BoxShape.rectangle,
-//                color: Colors.blue[100],
-//              ),
-//              child: TextField(
-//                readOnly: true,
-//                controller: _todoTimeController,
-//                style: _textStyleControls,
-//                decoration: InputDecoration(
-//                  labelText: ' Due Time',
-//                  hintText: ' Pick a Time',
-//                  prefixIcon: InkWell(
-//                    onTap: () {
-////                      _showCupertinoDateTimePicker(context);
-//                      DatePicker.showDateTimePicker(context,
-//                         showTitleActions: true,
-//                          minTime: DateTime(2020, 5, 5, 20, 50),
-//                          maxTime: DateTime(2020, 6, 7, 05, 09),
-//                          onChanged: (date) {
-//                        print('change $date in time zone ' +
-//                            date.timeZoneOffset.inHours.toString());
-//                      }, onConfirm: (date) {
-//                        _dateDue = date;
-//                        final DateFormat formatter = DateFormat('yyyy-MM-dd');
-//                        final String formatted = formatter.format(_dateDue!);
-//                        _todoDateController.text = formatter.format(_dateDue!);
-//
-//                        _timeDue = TimeOfDay.fromDateTime(date);
-//                        _todoTimeController.text = _timeDue!.format(context);
-//
-//                        print('confirm $date');
-////                      }, locale: LocaleType.zh);
-//                      },
-//                          currentTime: (_dateDue == null)
-//                              ? DateTime.now()
-//                              : DateTime(
-//                                  _dateDue!.year,
-//                                  _dateDue!.month,
-//                                  _dateDue!.day,
-//                                  _timeDue!.hour,
-//                                  _timeDue!.minute));
-//                    },
-//                    child: Icon(Icons.access_time),
-//                  ),
-//                ),
-//              ),
-//            ),
-
-///////////////////////////
 //  Combined: Date Time Clear
 ///////////////////////////
             Container(
@@ -726,12 +615,10 @@ class TaskDetailState extends State //<TaskDetail>
                 shape: BoxShape.rectangle,
                 color: Colors.blue[100],
               ),
-//                child: Flexible(
               child: Row(children: [
                 Expanded(
                   child: TextField(
                     readOnly: true,
-//                        maxLength: 15,
                     controller: _todoDateController,
                     style: _textStyleControls,
                     decoration: InputDecoration(
@@ -934,8 +821,7 @@ class TaskDetailState extends State //<TaskDetail>
                           ),
                         ),
                       ),
-                    ]
-                    )),
+                    ])),
 
 ///////////////////////////
 //  CATEGORY
