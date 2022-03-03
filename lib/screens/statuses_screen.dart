@@ -233,7 +233,10 @@ class _StatusesScreenState extends State<StatusesScreen> {
                     var result =
                         await _statusService.deleteStatusesbyID(statusId);
                     print(result);
-                    if (result > 0) {
+                    result =
+                        await _statusService.deleteStatusFromTasks(statusId);
+                    print(result);
+                    if (result >= 0) {
                       Navigator.pop(context);
                       getAllStatuses();
                     }
@@ -322,11 +325,11 @@ class _StatusesScreenState extends State<StatusesScreen> {
                       child: Text(_statusList[index].name!,
                           overflow: TextOverflow.ellipsis),
                     ),
-//                    IconButton(
-//                        icon: Icon(Icons.delete, color: Colors.grey),
-//                        onPressed: () {
-//                          _deleteFormDialogue(context, _statusList[index].id);
-//                        })
+                    IconButton(
+                        icon: Icon(Icons.delete, color: Colors.grey),
+                        onPressed: () {
+                          _deleteFormDialogue(context, _statusList[index].id);
+                        })
                   ],
                 ),
 //                subtitle: Text(_statusList[index].description),

@@ -235,7 +235,11 @@ class _PrioritiesScreenState extends State<PrioritiesScreen> {
                     var result =
                         await _priorityService.deletePrioritiesbyID(priorityId);
                     print(result);
-                    if (result > 0) {
+                    result = await _priorityService
+                        .deletePriorityFromTasks(priorityId);
+                    print(result);
+
+                    if (result >= 0) {
                       Navigator.pop(context);
                       getAllPriorities();
                       //                   );
@@ -325,11 +329,11 @@ class _PrioritiesScreenState extends State<PrioritiesScreen> {
                       child: Text(_priorityList[index].name!,
                           overflow: TextOverflow.ellipsis),
                     ),
-//                    IconButton(
-//                        icon: Icon(Icons.delete, color: Colors.grey),
-//                        onPressed: () {
-//                          _deleteFormDialogue(context, _priorityList[index].id);
-//                        })
+                    IconButton(
+                        icon: Icon(Icons.delete, color: Colors.grey),
+                        onPressed: () {
+                          _deleteFormDialogue(context, _priorityList[index].id);
+                        })
                   ],
                 ),
 //                subtitle: Text(_priorityList[index].description),

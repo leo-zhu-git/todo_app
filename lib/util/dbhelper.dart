@@ -888,6 +888,15 @@ Plan C - USD 24 | 12 month
     int result;
     Database? db = await this.db;
     result = await db!.rawDelete('DELETE FROM categories WHERE id = $id');
+    deleteCategoryFromTasks(id);
+    return result;
+  }
+
+  Future<int> deleteCategoryFromTasks(int id) async {
+    int result;
+    Database? db = await this.db;
+    result = await db!
+        .rawUpdate("update $tblTodo set category = '' where category = $id");
     return result;
   }
 
@@ -933,6 +942,14 @@ Plan C - USD 24 | 12 month
     int result;
     Database? db = await this.db;
     result = await db!.rawDelete('DELETE FROM statuses WHERE id = $id');
+    return result;
+  }
+
+  Future<int> deleteStatusFromTasks(int id) async {
+    int result;
+    Database? db = await this.db;
+    result = await db!
+        .rawUpdate("update $tblTodo set status = '' where status = $id");
     return result;
   }
 
@@ -982,6 +999,14 @@ Plan C - USD 24 | 12 month
     return result;
   }
 
+  Future<int> deletePriorityFromTasks(int id) async {
+    int result;
+    Database? db = await this.db;
+    result = await db!
+        .rawUpdate("update $tblTodo set priority = '' where priority = $id");
+    return result;
+  }
+
   Future<int> deleteAllPriorities() async {
     int result;
     Database? db = await this.db;
@@ -989,149 +1014,7 @@ Plan C - USD 24 | 12 month
     return result;
   }
 
-//######################### ENd of Priorities ##########################################
-
-//#########################Action ##########################################
-
-  Future<int> insertAction1s(Action1 action1) async {
-    Database? db = await this.db;
-
-    var result = await db!.insert('action1s', action1.action1Map());
-    return result;
-  }
-
-  Future<List> getAction1s() async {
-    var result;
-    try {
-      Database? db = await this.db;
-      result = await db!.query("action1s");
-      result = await db.rawQuery("SELECT * FROM action1s");
-      return result;
-    } catch (e) {
-      print(e);
-    }
-    return result;
-  }
-
-  Future<List> getAction1sbyID(int action1Id) async {
-    Database? db = await this.db;
-    var result =
-        await db!.rawQuery("SELECT * FROM action1s WHERE id=$action1Id");
-    return result;
-  }
-
-  Future<int> updateAction1s(Action1 action1) async {
-    Database? db = await this.db;
-    var result = await db!.update("action1s", action1.action1Map(),
-        where: "$colId =?", whereArgs: [action1.id]);
-    return result;
-  }
-
-  Future<int> deleteAction1s(int id) async {
-    int result;
-    Database? db = await this.db;
-    result = await db!.rawDelete('DELETE FROM action1s WHERE id = $id');
-    return result;
-  }
-
-  Future<int> deleteAllAction1s() async {
-    int result;
-    Database? db = await this.db;
-    result = await db!.rawDelete('DELETE FROM action1s WHERE id <> 0');
-    return result;
-  }
-
-//######################### ENd of Action ##########################################
-
-//#########################Context ##########################################
-
-  Future<int> insertContext1s(Context1 context1) async {
-    Database? db = await this.db;
-
-    var result = await db!.insert('context1s', context1.context1Map());
-    return result;
-  }
-
-  Future<List> getContext1s() async {
-    Database? db = await this.db;
-    var result = await db!.rawQuery("SELECT * FROM context1s");
-    return result;
-  }
-
-  Future<List> getContext1sbyID(int context1ID) async {
-    Database? db = await this.db;
-    var result =
-        await db!.rawQuery("SELECT * FROM context1s WHERE id=$context1ID");
-    return result;
-  }
-
-  Future<int> updateContext1s(Context1 context1) async {
-    Database? db = await this.db;
-    var result = await db!.update("context1s", context1.context1Map(),
-        where: "$colId =?", whereArgs: [context1.id]);
-    return result;
-  }
-
-  Future<int> deleteContext1sbyID(int id) async {
-    int result;
-    Database? db = await this.db;
-    result = await db!.rawDelete('DELETE FROM context1s WHERE id = $id');
-    return result;
-  }
-
-  Future<int> deleteAllContext1s() async {
-    int result;
-    Database? db = await this.db;
-    result = await db!.rawDelete('DELETE FROM context1s WHERE id <> 0');
-    return result;
-  }
-
-//######################### ENd of Contexts ##########################################
-
-//#########################Locations ##########################################
-
-  Future<int> insertLocation1s(Location1 location1s) async {
-    Database? db = await this.db;
-
-    var result = await db!.insert('location1s', location1s.location1Map());
-    return result;
-  }
-
-  Future<List> getLocation1s() async {
-    Database? db = await this.db;
-    var result = await db!.rawQuery("SELECT * FROM location1s");
-    return result;
-  }
-
-  Future<List> getLocation1sbyID(int location1s) async {
-    Database? db = await this.db;
-    var result =
-        await db!.rawQuery("SELECT * FROM location1s WHERE id=$location1s");
-    return result;
-  }
-
-  Future<int> updateLocation1s(Location1 location1s) async {
-    Database? db = await this.db;
-    var result = await db!.update("location1s", location1s.location1Map(),
-        where: "$colId =?", whereArgs: [location1s.id]);
-    return result;
-  }
-
-  Future<int> deleteLocation1sbyID(int id) async {
-    int result;
-    Database? db = await this.db;
-    result = await db!.rawDelete('DELETE FROM location1s WHERE id = $id');
-    return result;
-  }
-
-  Future<int> deleteAllLocation1s() async {
-    int result;
-    Database? db = await this.db;
-    result = await db!.rawDelete('DELETE FROM location1s WHERE id <> 0');
-    return result;
-  }
-
-//######################### ENd of locations ##########################################
+//######################### ENd of Priorities #########################################
 
 //#########################Tag ##########################################
 
@@ -1165,6 +1048,14 @@ Plan C - USD 24 | 12 month
     int result;
     Database? db = await this.db;
     result = await db!.rawDelete('DELETE FROM tag1s WHERE id = $id');
+    return result;
+  }
+
+  Future<int> deleteTag1FromTasks(int id) async {
+    int result;
+    Database? db = await this.db;
+    result =
+        await db!.rawUpdate("update $tblTodo set tag1 = '' where tag1 = $id");
     return result;
   }
 

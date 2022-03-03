@@ -229,7 +229,10 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
                   onPressed: () async {
                     var result = await _tag1Service.deleteTag1sbyID(tag1Id);
                     print(result);
-                    if (result > 0) {
+                    result = await _tag1Service.deleteTag1FromTasks(tag1Id);
+                    print(result);
+
+                    if (result >= 0) {
                       Navigator.pop(context);
                       getAllTag1s();
                     }
@@ -316,11 +319,11 @@ class _Tag1sScreenState extends State<Tag1sScreen> {
                       child: Text(_tag1List[index].name!,
                           overflow: TextOverflow.ellipsis),
                     ),
-//                    IconButton(
-//                        icon: Icon(Icons.delete, color: Colors.grey),
-//                        onPressed: () {
-//                          _deleteFormDialogue(context, _tag1List[index].id);
-//                        }),
+                    IconButton(
+                        icon: Icon(Icons.delete, color: Colors.grey),
+                        onPressed: () {
+                          _deleteFormDialogue(context, _tag1List[index].id);
+                        }),
                   ],
                 ),
 //                subtitle: Text(_tag1List[index].description),
