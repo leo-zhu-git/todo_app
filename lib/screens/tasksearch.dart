@@ -76,7 +76,7 @@ class TaskSearchState extends State {
   int? _sortOrder3 = globals.sortOrder3 != null ? globals.sortOrder3 : 0;
   int? _sortOrder4 = globals.sortOrder4 != null ? globals.sortOrder4 : 0;
 
-  late FocusNode myFocusNode;
+  FocusNode focusNode = FocusNode();
 
   @override
   void initState() {
@@ -89,8 +89,10 @@ class TaskSearchState extends State {
     _loadTag1s();
   }
 
+
   @override
   void dispose() {
+    focusNode.dispose();
     super.dispose();
   }
 
@@ -224,8 +226,6 @@ class TaskSearchState extends State {
 
   @override
   Widget build(BuildContext context) {
-//    Future.delayed(const Duration(), () => SystemChannels.textInput.invokeMethod('TextInput.hide'));
-
     return Scaffold(
       backgroundColor: Colors.teal[50],
       appBar: AppBar(
@@ -271,6 +271,7 @@ class TaskSearchState extends State {
                   Expanded(
                     child: TextField(
                       autofocus: true,
+                      focusNode: focusNode,
                       style: _textStyleControls,
                       controller: searchController,
                       onChanged: (value) {
@@ -396,20 +397,20 @@ class TaskSearchState extends State {
 //                      ),
 //####################################end of Show completed
 
-              Container(
-                margin: EdgeInsets.only(
-                    left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
-                decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.blue[100]),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Switch(
-                      value: (_includeIsDone == 0) ? false : true,
-                      onChanged: (value) {
-                        setState(() {
-                          _includeIsDone = (value == true) ? 1 : 0;
-                                                            searchData(
+                      Container(
+                        margin: EdgeInsets.only(
+                            left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+                        decoration: BoxDecoration(
+                            shape: BoxShape.rectangle, color: Colors.blue[100]),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Switch(
+                              value: (_includeIsDone == 0) ? false : true,
+                              onChanged: (value) {
+                                setState(() {
+                                  _includeIsDone = (value == true) ? 1 : 0;
+                                  searchData(
                                       _searchText,
                                       _searchDateDue,
                                       _includeIsStar,
@@ -418,17 +419,16 @@ class TaskSearchState extends State {
                                       _selectedStatus,
                                       _selectedPriority,
                                       _selectedTag1);
+                                });
+                              },
+                            ),
+                            Text('Include Completed Tasks',
+                                style: _textStyleControls),
+                          ],
+                        ),
+                      ),
 
-                        });
-                      },
-                    ),
-                    Text('Include Completed Tasks', style: _textStyleControls),
-                  ],
-                ),
-              ),
-
-
-//################################# Focus2 #####################################################
+//################################# isStar #####################################################
 
                       Container(
                         margin: EdgeInsets.only(
@@ -465,54 +465,6 @@ class TaskSearchState extends State {
                           ],
                         ),
                       ),
-//####################################Show Focus Tasks Task Check box
-
-//                      Container(
-//                        margin: EdgeInsets.only(
-//                            left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
-//                        decoration: BoxDecoration(
-//                          shape: BoxShape.rectangle,
-//                          color: Colors.blue[100],
-//                        ),
-//                        child: TextField(
-//                          readOnly: true,
-//                          style: _textStyleControls,
-//                          decoration: InputDecoration(
-//                            labelText: ' Focus Tasks Only ',
-//                            labelStyle: _textStyleControls,
-//                            hintText: '',
-//                            border: InputBorder.none,
-//                            prefixIcon: InkWell(
-//                              onTap: () {
-//                                setState(() {
-//                                  if (_includeIsStar == 1) {
-//                                    _includeIsStar = 0;
-//                                    Icon(Icons.lightbulb,
-//                                        color: Colors.black38);
-//                                  } else {
-//                                    _includeIsStar = 1;
-//                                   Icon(Icons.lightbulb,
-//                                        color: Colors.amber[800]);
-//                                  }
-//                                  searchData(
-//                                      _searchText,
-//                                      _searchDateDue,
-//                                      _includeIsStar,
-//                                      _includeIsDone,
-//                                      _selectedCategory,
-//                                      _selectedStatus,
-//                                      _selectedPriority,
-//                                      _selectedTag1);
-//                                });
-//                              },
-//                              child: Icon(Icons.lightbulb,
-//                                  color: (_includeIsStar == 0)
-//                                      ? Colors.black12
-//                                      : Colors.teal),
-//                            ),
-//                          ),
-//                        ),
-//                      ),
 
 //#################################Category#####################################################
                       Container(
@@ -1295,7 +1247,7 @@ class TaskSearchState extends State {
         }
 
 //////////////////////
-        /// FOCUS, ISDONE
+        /// ISSTAR, ISDONE
 //////////////////////
         if (customSetting!.filterIsStar == 1) {
           globals.filterIsStar = 1;

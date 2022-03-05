@@ -78,7 +78,7 @@ class TaskDetailState extends State //<TaskDetail>
   void initState() {
     super.initState();
 
-    SystemChannels.textInput.invokeMethod('TextInput.hide');
+//    SystemChannels.textInput.invokeMethod('TextInput.hide');
     _loadCategories();
     _loadStatuses();
     _loadPriorities();

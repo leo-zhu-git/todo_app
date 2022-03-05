@@ -5,6 +5,8 @@ import 'package:todo_app/screens/Community.dart';
 import 'package:todo_app/screens/Cupertino_screen.dart';
 import 'package:todo_app/screens/LocalNotification_screen.dart';
 import 'package:todo_app/screens/entry.dart';
+import 'package:todo_app/screens/taskSearch2.dart';
+import 'package:todo_app/screens/tasksearch.dart';
 import 'package:todo_app/screens/wipe.dart';
 import 'package:todo_app/screens/taskhome.dart';
 import 'package:todo_app/screens/categories_screen.dart';
@@ -81,6 +83,15 @@ class _DrawerNagivation extends State<DrawerNagivation> {
                 onTap: () => Navigator.of(context)
                     .push(MaterialPageRoute(builder: (context) => TaskHome())),
               ),
+              ListTile(
+                tileColor: Colors.teal[50],
+                leading: Icon(Icons.connect_without_contact),
+                title: Text('SearchFocus [testing]',
+                    style: TextStyle(color: Colors.red)),
+                onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => TaskSearch())),
+              ),
+              Divider(),
               Divider(color: Colors.teal[50]),
               ListTile(
                 leading: Icon(Icons.settings),
@@ -98,7 +109,6 @@ class _DrawerNagivation extends State<DrawerNagivation> {
                     MaterialPageRoute(builder: (context) => WipeScreen())),
               ),
               Divider(color: Colors.teal[50]),
-
               ListTile(
                 tileColor: Colors.teal[50],
                 leading: Icon(Icons.help_outlined),
@@ -135,14 +145,11 @@ class _DrawerNagivation extends State<DrawerNagivation> {
                     context: context,
                     applicationName: 'todoMIT',
                     applicationVersion: '1.0.1',
-                    applicationLegalese: 'todoMIT will help you manage your Most Important Things / Tasks / Thoughts on [almost] any mobile device! ',
+                    applicationLegalese:
+                        'todoMIT will help you manage your Most Important Things / Tasks / Thoughts on [almost] any mobile device! ',
                   );
                 },
-
-//                onTap: () => Navigator.of(context)
-//                    .push(MaterialPageRoute(builder: (context) => TaskHome())),
               ),
-
               Divider(color: Colors.teal[50]),
               ListTile(
                 tileColor: Colors.teal[50],
@@ -152,19 +159,7 @@ class _DrawerNagivation extends State<DrawerNagivation> {
                 onTap: () => Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => LocalNotificationScreen())),
               ),
-
               Divider(),
-//            ListTile(
-//                tileColor: Colors.amber[100],
-//                leading: Icon(Icons.logout),
-//                title: Text('Logout [placeholder]'),
-//                onTap: () {
-//                  try {
-//                    Amplify.Auth.signOut();
-//                  } on AuthException catch (e) {
-//                    print(e.message);
-//                  }
-//                }),
             ],
           ),
         ),

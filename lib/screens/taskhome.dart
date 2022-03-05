@@ -12,6 +12,7 @@ import 'package:todo_app/model/tag1.dart';
 import 'package:todo_app/model/goal1.dart';
 import 'package:todo_app/model/customSettings.dart';
 import 'package:todo_app/model/taskclass.dart';
+import 'package:todo_app/screens/taskSearch2.dart';
 import 'package:todo_app/util/dbhelper.dart';
 import 'package:todo_app/screens/taskdetail.dart';
 import 'package:todo_app/screens/personalizeview.dart';
