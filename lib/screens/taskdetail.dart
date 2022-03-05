@@ -329,14 +329,10 @@ class TaskDetailState extends State //<TaskDetail>
         else
           _mm = _minute.toString();
         ;
-
-
       } else {
-
         //
         // PM format before noon
         //
-
 
         _hour = int.parse(result.split(':')[0]) - 12;
 
@@ -361,25 +357,24 @@ class TaskDetailState extends State //<TaskDetail>
       }
       _time = TimeOfDay(hour: _hour, minute: _minute);
     } else {
-        //
-        // 24 hour format
-        //
+      //
+      // 24 hour format
+      //
 
       _time = TimeOfDay(
           hour: int.parse(s.split(":")[0]), minute: int.parse(s.split(":")[1]));
 
-        if (_time.hour < 10)
-          _hh = "0" + _time.hour.toString();
-        else
-          _hh = _time.hour.toString();
-        ;
+      if (_time.hour < 10)
+        _hh = "0" + _time.hour.toString();
+      else
+        _hh = _time.hour.toString();
+      ;
 
-        if (_time.minute < 10)
-          _mm = "0" + _time.minute.toString();
-        else
-          _mm = _time.minute.toString();
-        ;
-
+      if (_time.minute < 10)
+        _mm = "0" + _time.minute.toString();
+      else
+        _mm = _time.minute.toString();
+      ;
     }
 
     return _hh + ":" + _mm;
@@ -511,8 +506,11 @@ class TaskDetailState extends State //<TaskDetail>
                   }
 
                   task.dateDue = _todoDateController.text;
-                  task.timeDue = _convert24hFormat(_todoTimeController.text);
-
+                  
+                  if (_todoTimeController.text == "")
+                    task.timeDue = "";
+                  else
+                    task.timeDue = _convert24hFormat(_todoTimeController.text);
 //                  task.timeDue != ""
 //                      ? {
 //                          _nTitle = task.timeDue.toString() +
