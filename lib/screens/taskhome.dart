@@ -265,7 +265,7 @@ class TaskHomeState extends State {
                     onTap: () {
                       navigateToDetail(this.tasklist![position]);
                     },
-                    autofocus: true,
+//                    autofocus: true,
                   )),
             ));
       },
