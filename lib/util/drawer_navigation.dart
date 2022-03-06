@@ -83,15 +83,6 @@ class _DrawerNagivation extends State<DrawerNagivation> {
                 onTap: () => Navigator.of(context)
                     .push(MaterialPageRoute(builder: (context) => TaskHome())),
               ),
-              ListTile(
-                tileColor: Colors.teal[50],
-                leading: Icon(Icons.connect_without_contact),
-                title: Text('SearchFocus [testing]',
-                    style: TextStyle(color: Colors.red)),
-                onTap: () => Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => TaskSearch())),
-              ),
-              Divider(),
               Divider(color: Colors.teal[50]),
               ListTile(
                 leading: Icon(Icons.settings),
