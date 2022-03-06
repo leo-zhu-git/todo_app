@@ -77,8 +77,6 @@ class TaskDetailState extends State //<TaskDetail>
   @override
   void initState() {
     super.initState();
-
-//    SystemChannels.textInput.invokeMethod('TextInput.hide');
     _loadCategories();
     _loadStatuses();
     _loadPriorities();
@@ -88,8 +86,6 @@ class TaskDetailState extends State //<TaskDetail>
         .setListenerForLowerVersions(onNotificationInLowerVersions);
     notificationPlugin.setOnNotificationClick(onNotificationClick);
     _initFields();
-
-//    scrollController = FixedExtentScrollController(initialItem: index);
   }
 
   @override
@@ -567,6 +563,7 @@ class TaskDetailState extends State //<TaskDetail>
                 color: Colors.yellow[200],
               ),
               child: TextField(
+                autofocus: true,
                 style: _textStyleControls,
                 controller: _todoTaskController,
                 onChanged: (value) {

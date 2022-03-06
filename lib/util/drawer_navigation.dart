@@ -5,7 +5,6 @@ import 'package:todo_app/screens/Community.dart';
 import 'package:todo_app/screens/Cupertino_screen.dart';
 import 'package:todo_app/screens/LocalNotification_screen.dart';
 import 'package:todo_app/screens/entry.dart';
-import 'package:todo_app/screens/taskSearch2.dart';
 import 'package:todo_app/screens/tasksearch.dart';
 import 'package:todo_app/screens/wipe.dart';
 import 'package:todo_app/screens/taskhome.dart';
